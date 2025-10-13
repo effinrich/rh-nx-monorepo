@@ -20,6 +20,6 @@
     "@faker-js/faker": "^8.1.0",
     "@playwright/test": "^1.38.0",
     "@reportportal/agent-js-playwright": "^5.1.4",
-    "axios": "^1.5.1"
+    "axios": "^1.12.2"
   }
 }
