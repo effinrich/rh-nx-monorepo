@@ -125,5 +125,6 @@
     "editor.defaultFormatter": "ms-python.autopep8",
     "editor.formatOnSave": true
   },
-  "explorerExclude.backup": {}
+  "explorerExclude.backup": {},
+  "java.compile.nullAnalysis.mode": "automatic"
 }
