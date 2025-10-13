@@ -1,14 +1,14 @@
-name: 'Playwright Tests - Company API - localhost'
+name: "Playwright Tests - Company API - localhost"
 
 on:
   workflow_dispatch:
     inputs:
       tags:
-        description: 'Test scenario tags'
+        description: "Test scenario tags"
         required: true
-        default: 'manual'
+        default: "manual"
   schedule:
-    - cron: '15 9 * * 1-5'
+    - cron: "15 9 * * 1-5"
   # pull_request:
   #   paths:
   #     - 'apps/company-api/**'
@@ -21,7 +21,7 @@ jobs:
       matrix:
         browser: [chromium]
     runs-on:
-      group: rh-design-system-large
+      group: rh-design-system
       labels: ubuntu-latest-8cpu-32gb
 
     steps:
@@ -38,7 +38,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
+          cache: "npm"
 
       - id: cache-node-modules
         uses: actions/cache@v3
@@ -54,8 +54,8 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v3.6.0
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: "temurin"
+          java-version: "17"
           cache: maven
 
       - name: Build Server and Dependencies

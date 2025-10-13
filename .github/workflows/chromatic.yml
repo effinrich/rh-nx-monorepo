@@ -3,13 +3,13 @@ name: Chromatic
 on:
   pull_request:
     paths:
-      - 'libs/portal/ui/**'
-      - 'libs/shared/ui/**'
-      - 'package.json'
-      - '.github/workflows/chromatic.yml'
+      - "libs/portal/ui/**"
+      - "libs/shared/ui/**"
+      - "package.json"
+      - ".github/workflows/chromatic.yml"
   push:
     branches:
-      - 'main'
+      - "main"
   workflow_dispatch:
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
 
     name: Deploy Storybook To Chromatic
     runs-on:
-      group: rh-design-system-large
+      group: rh-design-system
       labels: ubuntu-latest-8cpu-32gb
 
     steps:
@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
+          cache: "npm"
 
       - id: cache-node-modules
         uses: actions/cache@v3
@@ -57,7 +57,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           onlyChanged: true
           exitZeroOnChanges: true
-          autoAcceptChanges: 'main'
+          autoAcceptChanges: "main"
           zip: true
 
       - uses: actions/github-script@v6

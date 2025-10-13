@@ -1,14 +1,14 @@
-name: 'Playwright UI Tests (dev-platform)'
+name: "Playwright UI Tests (dev-platform)"
 on:
   workflow_call:
   workflow_dispatch:
     inputs:
       tags:
-        description: 'Test scenario tags'
+        description: "Test scenario tags"
         required: true
-        default: 'manual'
+        default: "manual"
   schedule:
-    - cron: '30 9 * * 1-5'
+    - cron: "30 9 * * 1-5"
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
         browser: [chromium]
         os: [ubuntu-latest]
     runs-on:
-      group: rh-design-system-large
+      group: rh-design-system
       labels: ubuntu-latest-8cpu-32gb
 
     steps:

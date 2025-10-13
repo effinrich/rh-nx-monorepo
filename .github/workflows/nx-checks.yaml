@@ -14,7 +14,7 @@ permissions:
 jobs:
   checks:
     runs-on:
-      group: rh-design-system-large
+      group: rh-design-system
       labels: ubuntu-latest-8cpu-32gb
     env:
       NUMBER_OF_CPUS: 8
@@ -29,7 +29,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
+          cache: "npm"
 
       - id: cache-node-modules
         uses: actions/cache@v3
@@ -44,9 +44,9 @@ jobs:
 
       - uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'maven'
+          java-version: "17"
+          distribution: "temurin"
+          cache: "maven"
 
       - name: Add affected project labels
         env:
