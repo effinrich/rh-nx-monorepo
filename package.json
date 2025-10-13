@@ -29,7 +29,6 @@
     "update": "nx migrate latest && npm install --legacy-peer-deps && nx migrate --run-migrations=migrations.json && npm run format:write && npm run test",
     "chromatic": "npx chromatic --only-changed --exit-zero-on-changes --exit-once-uploaded --debug --trace-changed=expanded",
     "graph": "nx graph",
-    "prepare": "husky install .husky",
     "reset": "nx reset",
     "repair": "nx repair",
     "help": "nx help",
