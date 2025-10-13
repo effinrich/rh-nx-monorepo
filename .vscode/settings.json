@@ -82,7 +82,7 @@
     "**/.tamagui": true,
     "**/.eslintrc.js": true,
     "**/next-env.d.ts": true,
-    "**/.vscode": true,
+    "**/.vscode": false,
     "**/.turbo": true,
     "**/out": true,
     "SECURITY.md": true,
