@@ -5,9 +5,13 @@ import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
+  root: __dirname,
   cacheDir: '../../../node_modules/.vite/portal-ui',
 
   build: {
+    outDir: '../../../dist/libs/portal/ui',
+    reportCompressedSize: true,
+    commonjsOptions: { transformMixedEsModules: true },
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',

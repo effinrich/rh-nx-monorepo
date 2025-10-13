@@ -1,9 +1,17 @@
 /// <reference types="vitest" />
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  root: __dirname,
+  build: {
+    outDir: '../../dist/apps/parser-playground',
+    reportCompressedSize: true,
+    commonjsOptions: {
+      transformMixedEsModules: true
+    }
+  },
   cacheDir: '../../node_modules/.vite/parser-playground',
 
   server: {
@@ -16,10 +24,7 @@ export default defineConfig({
     host: 'localhost'
   },
 
-  plugins: [
-    react(),
-    nxViteTsPaths()
-  ],
+  plugins: [react(), nxViteTsPaths()],
 
   // Uncomment this if you are using workers.
   // worker: {
@@ -31,6 +36,11 @@ export default defineConfig({
   // },
 
   test: {
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../coverage/apps/parser-playground',
+      provider: 'v8'
+    },
     globals: true,
     cache: {
       dir: '../../node_modules/.vitest'

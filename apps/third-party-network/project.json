@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/third-party-network/src",
   "projectType": "application",
+  "tags": ["scope:third-party-network"],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
@@ -53,9 +54,6 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/third-party-network/**/*.{ts,tsx,js,jsx}"]
-      },
       "defaultConfiguration": "default",
       "configurations": {
         "default": {
@@ -75,6 +73,5 @@
         "tags": ["${NX_CONTAINER_IMAGE_TAG}"]
       }
     }
-  },
-  "tags": ["scope:third-party-network"]
+  }
 }

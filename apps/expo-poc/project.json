@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/expo-poc/src",
   "projectType": "application",
+  "tags": ["scope:expo-poc"],
   "targets": {
     "start": {
       "executor": "@nx/expo:start",
@@ -122,10 +123,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/expo-poc/**/*.{ts,tsx,js,jsx}"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
@@ -143,6 +141,5 @@
         }
       }
     }
-  },
-  "tags": ["scope:expo-poc"]
+  }
 }

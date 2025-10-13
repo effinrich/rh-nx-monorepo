@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/portal/src",
   "projectType": "application",
+  "tags": ["scope:portal", "type:app"],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
@@ -49,9 +50,6 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/portal/**/*.{ts,tsx,js,jsx}"]
-      },
       "defaultConfiguration": "default",
       "configurations": {
         "default": {
@@ -133,6 +131,5 @@
         }
       }
     }
-  },
-  "tags": ["scope:portal", "type:app"]
+  }
 }

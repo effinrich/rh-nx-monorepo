@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/../libs/portal/ui-e2e",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "e2e": {
       "executor": "@ns3/nx-playwright:playwright",
@@ -17,9 +18,11 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/../libs/portal/ui-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": [
+          "libs/portal/ui-e2e",
+          "apps/../libs/portal/ui-e2e/**/*.{js,ts}"
+        ]
       }
     }
-  },
-  "tags": []
+  }
 }

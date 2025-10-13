@@ -4,6 +4,14 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  root: __dirname,
+  build: {
+    outDir: '../../../dist/apps/chat-pocs/sendbird-poc',
+    reportCompressedSize: true,
+    commonjsOptions: {
+      transformMixedEsModules: true
+    }
+  },
   cacheDir: '../../../node_modules/.vite/sendbird-poc',
 
   server: {

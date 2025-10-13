@@ -15,9 +15,6 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/shared/hooks/**/*.{ts,tsx,js,jsx}"]
-      },
       "defaultConfiguration": "default",
       "configurations": {
         "default": {

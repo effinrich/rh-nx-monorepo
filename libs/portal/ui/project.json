@@ -15,9 +15,6 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/portal/ui/**/*.{ts,tsx,js,jsx}"]
-      },
       "defaultConfiguration": "default",
       "configurations": {
         "default": {

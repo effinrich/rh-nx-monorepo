@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/third-party-network-e2e",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "e2e": {
       "executor": "@ns3/nx-playwright:playwright",
@@ -36,9 +37,6 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/third-party-network-e2e/**/*.{js,ts}"]
-      },
       "defaultConfiguration": "default",
       "configurations": {
         "default": {
@@ -49,6 +47,5 @@
         }
       }
     }
-  },
-  "tags": []
+  }
 }

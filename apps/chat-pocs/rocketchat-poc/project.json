@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/chat-pocs/rocketchat-poc/src",
   "projectType": "application",
+  "tags": ["scope:rocketchat-poc"],
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
@@ -67,12 +68,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "apps/chat-pocs/rocketchat-poc/**/*.{ts,tsx,js,jsx}"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "build-image": {
       "executor": "@nx-tools/nx-container:build",
@@ -83,6 +79,5 @@
         "tags": ["${NX_CONTAINER_IMAGE_TAG}"]
       }
     }
-  },
-  "tags": ["scope:rocketchat-poc"]
+  }
 }

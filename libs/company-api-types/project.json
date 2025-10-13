@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/company-api-types/src",
   "projectType": "library",
+  "tags": ["scope:portal"],
   "targets": {
     "openapi-generator": {
       "executor": "nx:run-commands",
@@ -15,11 +16,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/company-api-types/**/*.ts"]
-      }
+      "outputs": ["{options.outputFile}"]
     }
-  },
-  "tags": ["scope:portal"]
+  }
 }

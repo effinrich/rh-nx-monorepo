@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/portal-e2e",
   "projectType": "application",
+  "tags": ["scope:portal"],
   "targets": {
     "e2e": {
       "executor": "@ns3/nx-playwright:playwright",
@@ -14,11 +15,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/portal-e2e/**/*.{js,ts}"]
-      }
+      "outputs": ["{options.outputFile}"]
     }
-  },
-  "tags": ["scope:portal"]
+  }
 }

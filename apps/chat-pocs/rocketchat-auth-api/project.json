@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/chat-pocs/rocketchat-auth-api/src",
   "projectType": "application",
+  "tags": ["scope:rocketchat-poc"],
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
@@ -40,11 +41,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/chat-pocs/rocketchat-auth-api/**/*.ts"]
-      }
+      "outputs": ["{options.outputFile}"]
     }
-  },
-  "tags": ["scope:rocketchat-poc"]
+  }
 }
