@@ -144,6 +144,7 @@
     "@chromaui/addon-visual-tests": "^0.0.105",
     "@emotion/babel-plugin": "11.11.0",
     "@expo/cli": "0.16.8",
+    "@expo/metro-runtime": "~3.1.1",
     "@faker-js/faker": "^8.0.2",
     "@hookform/devtools": "4.3.1",
     "@ns3/nx-playwright": "4.2.0",
@@ -168,7 +169,7 @@
     "@nx/web": "18.3.5",
     "@nx/webpack": "18.3.5",
     "@nx/workspace": "18.3.5",
-    "@nxrocks/nx-spring-boot": "9.0.0",
+    "@nxrocks/nx-spring-boot": "^11.0.1",
     "@parcel/watcher": "2.0.7",
     "@playwright/test": "1.36.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
@@ -295,8 +296,7 @@
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "0.34.6",
     "webpack": "5.89.0",
-    "webpack-merge": "5.8.0",
-    "@expo/metro-runtime": "~3.1.1"
+    "webpack-merge": "5.8.0"
   },
   "engines": {
     "node": ">=18.17.1",
