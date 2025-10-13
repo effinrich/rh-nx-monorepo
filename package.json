@@ -250,7 +250,7 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "eslint-plugin-storybook": "0.6.15",
     "eslint-plugin-unicorn": "43.0.2",
-    "expo-cli": "^4.0.17",
+    "expo-cli": "^4.13.0",
     "google-spreadsheet": "^5.0.2",
     "html-webpack-plugin": "5.5.0",
     "husky": "8.0.1",
