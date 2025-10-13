@@ -29,7 +29,6 @@
     "update": "nx migrate latest && npm install --legacy-peer-deps && nx migrate --run-migrations=migrations.json && npm run format:write && npm run test",
     "chromatic": "npx chromatic --only-changed --exit-zero-on-changes --exit-once-uploaded --debug --trace-changed=expanded",
     "graph": "nx graph",
-    "prepare": "husky install .husky",
     "reset": "nx reset",
     "repair": "nx repair",
     "help": "nx help",
@@ -253,7 +252,7 @@
     "expo-cli": "6.3.2",
     "google-spreadsheet": "3.3.0",
     "html-webpack-plugin": "5.5.0",
-    "husky": "8.0.1",
+    
     "jest": "^29.4.1",
     "jest-axe": "6.0.0",
     "jest-circus": "28.1.3",
