@@ -1,0 +1,88 @@
+{
+  "name": "oauth-jwt-generator",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/oauth-jwt-generator/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/oauth-jwt-generator",
+        "bundle": false,
+        "main": "apps/oauth-jwt-generator/src/index.ts",
+        "tsConfig": "apps/oauth-jwt-generator/tsconfig.json",
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "dev": {},
+        "prod": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "oauth-jwt-generator:build"
+      },
+      "configurations": {
+        "dev": {
+          "buildTarget": "oauth-jwt-generator:build:development"
+        },
+        "prod": {
+          "buildTarget": "oauth-jwt-generator:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/oauth-jwt-generator/**/*.ts"]
+      }
+    },
+    "build-image": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "load": true,
+        "platforms": ["${NX_CONTAINER_IMAGE_ARCH}"],
+        "tags": ["${NX_CONTAINER_IMAGE_TAG}"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "defaultConfiguration": "ci",
+      "configurations": {
+        "ci": {
+          "options": {
+            "runInBand": true,
+            "ci": true,
+            "codeCoverage": true
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}

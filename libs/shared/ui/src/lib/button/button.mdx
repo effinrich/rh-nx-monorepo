@@ -1,0 +1,38 @@
+import { Figma } from '@storybook/addon-designs/blocks'
+import { Description, Meta, Stories, Markdown } from '@storybook/blocks'
+import { TabsState } from '@storybook/components'
+// import ReadMe from './README.md?raw'
+import * as ButtonStories from './button.stories'
+
+# Button
+
+<Meta of={ButtonStories} />
+<Description of={ButtonStories} />
+
+> The button component is used to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
+
+# Usage
+
+To use this button. please install the following packages:
+
+```
+npm install] @redesignhealth/ui
+```
+
+Then use it in your application such as:
+
+```jsx
+import { Button } from '@redesignhealth/ui'
+
+export const Page = () => {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const getFood = () => {}
+  return <Button onClick={getFood}>Click me</Button>
+}
+```
+
+<Stories />
+
+### Design specs
+
+<Figma url="https://www.figma.com/file/3Q1HTCalD0lJnNvcMoEw1x/Mealdrop?node-id=1005%3A2974&t=8pzYUq8GyzmMGjJ2-4" />

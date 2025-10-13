@@ -1,0 +1,48 @@
+{
+  "name": "third-party-network-features-authentication",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/third-party-network/features/authentication/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/third-party-network/features/authentication/**/*.{ts,tsx,js,jsx}"
+        ]
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "fix": false
+        },
+        "format": {
+          "fix": true
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/third-party-network/features/authentication"
+      ],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../../coverage/libs/third-party-network/features/authentication"
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "watch": false,
+          "reporters": ["default"]
+        },
+        "watch": {
+          "watch": true,
+          "reporters": ["verbose"]
+        }
+      }
+    }
+  }
+}

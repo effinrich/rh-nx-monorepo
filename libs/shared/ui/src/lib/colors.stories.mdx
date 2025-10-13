@@ -1,0 +1,51 @@
+import { ColorItem, ColorPalette, Meta } from '@storybook/blocks'
+
+import { theme } from './theme'
+// import { getColors } from './utils'
+
+<Meta title="Foundation / Colors" />
+
+<ColorPalette>
+  <ColorItem
+    title="Primary"
+    colors={theme.colors.primary}
+
+/>
+
+  <ColorItem
+    title="Secondary"
+   colors={theme.colors.secondary}
+  />
+  <ColorItem
+    title="Zap"
+    colors={theme.colors.zap}
+  />
+  <ColorItem
+    title="Galaxy"
+    colors={theme.colors.galaxy}
+  />
+  <ColorItem
+    title="Flame"
+    colors={theme.colors.flame}
+  />
+   <ColorItem
+    title="Gray"
+    colors={theme.colors.gray}
+  />
+  <ColorItem
+    title="Purple"
+    colors={theme.colors.purple}
+  />
+   <ColorItem
+    title="error"
+    colors={theme.colors.error}
+  />
+   <ColorItem
+    title="warning"
+    colors={theme.colors.warning}
+  />
+   <ColorItem
+    title="success"
+    colors={theme.colors.success}
+  />
+</ColorPalette>

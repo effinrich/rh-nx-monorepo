@@ -1,0 +1,61 @@
+{
+  "name": "portal-features-infrastructure",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/portal/features/infrastructure/src",
+  "projectType": "library",
+  "tags": ["scope:portal"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/portal/features/infrastructure/**/*.{ts,tsx,js,jsx}"
+        ]
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "fix": false
+        },
+        "format": {
+          "fix": true
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "defaultConfiguration": "ci",
+      "options": {
+        "jestConfig": "libs/portal/features/infrastructure/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "runInBand": true,
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/portal/features/infrastructure"
+      ]
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/portal/features/infrastructure"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    }
+  }
+}

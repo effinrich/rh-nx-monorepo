@@ -1,0 +1,18 @@
+{
+  "name": "km-docs-lambda",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/km-docs-lambda/src",
+  "tags": [],
+  "targets": {
+    "build-image": {
+      "executor": "@nx-tools/nx-container:build",
+      "options": {
+        "load": true,
+        "platforms": ["${NX_CONTAINER_IMAGE_ARCH}"],
+        "tags": ["${NX_CONTAINER_IMAGE_TAG}"],
+        "context": "apps/km-docs-lambda"
+      }
+    }
+  }
+}

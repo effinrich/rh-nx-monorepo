@@ -1,0 +1,87 @@
+{
+  "name": "shared-ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/ui/src",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "options": {
+        "outputPath": "dist/libs/shared/ui"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "build-storybook": {
+      "executor": "@nx/storybook:build",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "framework": "@storybook/react-vite",
+        "outputDir": "dist/storybook/shared-ui",
+        "configDir": "libs/shared/ui/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/ui/**/*.{ts,tsx,js,jsx}"]
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "fix": false
+        },
+        "format": {
+          "fix": true
+        }
+      }
+    },
+    "check-types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx tsc --noEmit -p libs/shared/ui/tsconfig.lib.json"]
+      }
+    },
+    "storybook": {
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      },
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "port": 4400,
+        "open": true,
+        "configDir": "libs/shared/ui/.storybook"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/shared/ui/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "defaultConfiguration": "ci",
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "runInBand": true,
+          "codeCoverage": true
+        }
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/ui"]
+    },
+    "test-storybook": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "test-storybook"
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+name: 'Playwright UI Tests (dev-platform)'
+on:
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test scenario tags'
+        required: true
+        default: 'manual'
+  schedule:
+    - cron: '30 9 * * 1-5'
+
+jobs:
+  test:
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium]
+        os: [ubuntu-latest]
+    runs-on:
+      group: rh-design-system-large
+      labels: ubuntu-latest-8cpu-32gb
+
+    steps:
+      - name: Set up environment
+        run: echo $PATH
+        shell: bash
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --version
+
+      - name: Install npm
+        run: |
+          cd playwright
+          npm install --legacy-peer-deps
+
+      - name: Install dependencies
+        run: |
+          cd playwright
+          npm ci --legacy-peer-deps
+
+      - name: Install Playwright Browsers
+        run: |
+          cd playwright
+          npx playwright install --with-deps chromium firefox
+
+      - name: Run Playwright solo tests
+        run: |
+          cd playwright
+          export PWD_UNREGISTERED_USER=${{ secrets.PWD_UNREGISTERED_USER }}
+          export PLAYWRIGHT_CLIENT_ID=${{ secrets.PLAYWRIGHT_CLIENT_ID }}
+          export PLAYWRIGHT_CLIENT_SECRET=${{ secrets.PLAYWRIGHT_CLIENT_SECRET }}
+          export PLAYWRIGHT_REFRESH_TOKEN=${{ secrets.PLAYWRIGHT_REFRESH_TOKEN }}
+          export PLAYWRIGHT_HTML_REPORT='solo-report'
+          npx playwright test --workers 1 --grep @dev-solo ./tests/platform/ui -c playwright.config.platform-ui.ts --ignore-snapshots
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-solo-report
+          path: |
+            playwright/solo-report/
+          retention-days: 7
+
+      - name: Run Playwright UI local full suite
+        run: |
+          cd playwright
+          export PWD_UNREGISTERED_USER=${{ secrets.PWD_UNREGISTERED_USER }}
+          export PLAYWRIGHT_CLIENT_ID=${{ secrets.PLAYWRIGHT_CLIENT_ID }}
+          export PLAYWRIGHT_CLIENT_SECRET=${{ secrets.PLAYWRIGHT_CLIENT_SECRET }}
+          export PLAYWRIGHT_REFRESH_TOKEN=${{ secrets.PLAYWRIGHT_REFRESH_TOKEN }}
+          export PLAYWRIGHT_HTML_REPORT='ui-report'
+          npx playwright test --grep-invert @dev-solo ./tests/platform/ui/dashboard ./tests/platform/ui/root -c playwright.config.platform-ui.ts --ignore-snapshots
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-UI-reports
+          path: |
+            playwright/ui-report/
+          retention-days: 7
+
+      - name: Run Playwright UI CEO Directory tests
+        run: |
+          cd playwright
+          export PWD_UNREGISTERED_USER=${{ secrets.PWD_UNREGISTERED_USER }}
+          export PLAYWRIGHT_CLIENT_ID=${{ secrets.PLAYWRIGHT_CLIENT_ID }}
+          export PLAYWRIGHT_CLIENT_SECRET=${{ secrets.PLAYWRIGHT_CLIENT_SECRET }}
+          export PLAYWRIGHT_REFRESH_TOKEN=${{ secrets.PLAYWRIGHT_REFRESH_TOKEN }}
+          export PLAYWRIGHT_HTML_REPORT='ceo-directory-report'
+          npx playwright test --workers 1 ./tests/platform/ui/ceo-directory/ -c playwright.config.platform-ui.ts --ignore-snapshots
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-ceo-directory-report
+          path: |
+            playwright/ceo-directory-report/
+          retention-days: 7
+
+      - uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

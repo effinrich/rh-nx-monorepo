@@ -1,0 +1,37 @@
+name: Company API Test Coverage
+on:
+  pull_request:
+    paths:
+      - 'apps/company-api/**'
+
+jobs:
+  build:
+    # https://github.com/Madrapps/jacoco-report/issues/24#issuecomment-1292316368
+    permissions:
+      # Access Repository files
+      contents: read
+      # Allow jacoco-report to write comments on PR
+      pull-requests: write
+      # Allow download of maven artifacts from Github Packages
+      packages: read
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/company-api
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Run tests
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: mvn --batch-mode --update-snapshots install
+      - name: Add coverage to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.5
+        with:
+          paths: ${{ github.workspace }}/apps/company-api/application/target/site/jacoco/jacoco.xml
+          token: ${{ github.token }}
+          min-coverage-overall: 50

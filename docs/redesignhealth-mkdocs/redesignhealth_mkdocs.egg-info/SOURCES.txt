@@ -1,0 +1,8 @@
+LambdaFunctionUrlFetcher.py
+setup.py
+redesignhealth_mkdocs.egg-info/PKG-INFO
+redesignhealth_mkdocs.egg-info/SOURCES.txt
+redesignhealth_mkdocs.egg-info/dependency_links.txt
+redesignhealth_mkdocs.egg-info/entry_points.txt
+redesignhealth_mkdocs.egg-info/requires.txt
+redesignhealth_mkdocs.egg-info/top_level.txt

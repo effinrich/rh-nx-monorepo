@@ -1,0 +1,54 @@
+{
+  "name": "third-party-network-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/third-party-network-e2e",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@ns3/nx-playwright:playwright",
+      "options": {
+        "command": "playwright test",
+        "config": "apps/third-party-network-e2e/playwright.config.ts",
+        "devServerTarget": "third-party-network:serve"
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {},
+        "debug": {
+          "command": "playwright test --debug"
+        },
+        "dev": {
+          "baseUrl": "https://third-party-network.dev.redesignhealth.com/",
+          "skipServe": true
+        }
+      }
+    },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": true,
+        "commands": [
+          "npx nx serve third-party-network",
+          "npx playwright codegen http://localhost:4200 --load-storage apps/third-party-network-e2e/storage-state.json"
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/third-party-network-e2e/**/*.{js,ts}"]
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "fix": false
+        },
+        "format": {
+          "fix": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

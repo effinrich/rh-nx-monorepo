@@ -1,0 +1,49 @@
+=== Company Vendor
+Information about how a xref:company.adoc[Company] uses a xref:vendor.adoc[Vendor]
+
+==== Query
+Retrieve information about how a Company uses Vendors.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::company-vendor/query[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Get
+Get information about how a Company uses a specific vendor.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::company-vendor/get[snippets='http-request,response-fields,http-response']
+
+==== Create
+Add information about how a Company uses a specific Vendor
+
+NOTE: If the Vendor does not exist, it will be created when the Company Vendor is created.
+
+===== Notifications
+
+* If the Vendor does not exist, a notification is sent to our vendor management team.
+* If the categories/subcategories do not match the Vendor's categories/subcategories, a notification is sent to our vendor management team.
+
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::company-vendor/create[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Update
+Update information about how a Company uses a specific Vendor
+
+Role requirement: `ROLE_OP_CO_USER`
+
+===== Notifications
+
+* If the categories/subcategories do not match the Vendor's categories/subcategories, a notification is sent to our vendor management team.
+
+operation::company-vendor/update[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Delete
+Delete a Company Vendor
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::company-vendor/delete[snippets='http-request,http-response']

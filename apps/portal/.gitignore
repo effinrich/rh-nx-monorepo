@@ -1,0 +1,7 @@
+# Don't ignore environment specific .env files
+# Examples: .env.development, .env.build.development, etc.
+!.env.*
+
+# Ignore specific .env files
+.env
+.env.local

@@ -1,0 +1,60 @@
+{
+  "name": "portal-features-users",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/portal/features/users/src",
+  "projectType": "library",
+  "tags": ["scope:portal"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/portal/features/users/**/*.{ts,tsx,js,jsx}"]
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "fix": false
+        },
+        "format": {
+          "fix": true
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/portal/features/users"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../../coverage/libs/portal/features/users"
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "watch": false,
+          "reporters": ["default"]
+        },
+        "watch": {
+          "watch": true,
+          "reporters": ["verbose"]
+        }
+      }
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/portal/features/users"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    }
+  }
+}

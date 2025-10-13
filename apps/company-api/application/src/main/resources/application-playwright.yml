@@ -1,0 +1,23 @@
+# Profile for running tests with Playwright on GitHub Actions
+
+# Pipe logs to a file. By default, logs are only piped to stdout.
+logging:
+  file:
+    name: app.log
+
+spring:
+  datasource:
+    url: jdbc:postgresql://cockroachdb:26257/defaultdb
+    username: root
+    password:
+    driver-class-name: org.postgresql.Driver
+
+db:
+  seed:
+    emails: devops-test@redesignhealth.com, RhDevOpsTest2@gmail.com
+
+search:
+  hostname: opensearch
+
+prometheus-service:
+  base-url: https://www.example.com

@@ -1,0 +1,9 @@
+# Tech Stack
+
+[# th:each="option : ${options}"]
+## [(${option.type})]
+* Tool: [(${option.name})]
+* Opt In: [(${option.optIn} ? Yes : No)]
+[# th:if="${option.comment != null}"]* Comment: [(${option.comment})] [/]
+
+[/]

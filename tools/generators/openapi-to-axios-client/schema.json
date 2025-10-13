@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "openapi-to-axios-client",
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "What project is this for?",
+      "x-prompt": "What project is this for?"
+    },
+    "location": {
+      "type": "string",
+      "description": "Provide a path (starting with '/') within the projet where the generated files should go.",
+      "x-prompt": "Provide a path (starting with '/') within the projet where the generated files should go."
+    },
+    "url": {
+      "type": "string",
+      "description": "Provide a openapi spec url.",
+      "x-prompt": "Provide a openapi spec url."
+    },
+    "clientName": {
+      "type": "string",
+      "description": "Please provide a name for the client in Pascal Case.",
+      "x-prompt": "Please provide a name for the client in Pascal Case."
+    }
+  },
+  "required": ["projectName", "location", "url", "clientName"]
+}

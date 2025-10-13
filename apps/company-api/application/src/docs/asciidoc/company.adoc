@@ -1,0 +1,98 @@
+=== Company
+A portfolio company that Redesign Health helps develop and launch and its associated entities(members, vendors, conflicts).
+
+==== Query
+Retrieve a paginated list of companies.
+
+Role requirement: none
+
+operation::company/list[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Get
+Retrieve a single company.
+
+Role requirement: `ROLE_OP_CO_CONTRACTOR`
+
+operation::company/get[snippets='query-parameters,response-fields,links,http-request,http-response']
+
+==== Create
+Create a company.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::company/create[snippets='response-fields,links,http-request,http-response']
+
+==== Update
+Make updates to a company.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+WARNING: `null` and `undefined` fields will delete data from the Company
+
+operation::company/update[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Get members
+Retrieve a list of people with company access.
+
+Role requirement: `ROLE_OP_CO_CONTRACTOR`
+
+operation::company/get-members[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Add member
+Grant access to a person.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::company/add-member[snippets='http-request,http-response']
+
+==== Remove member
+Revoke access from a person.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::company/remove-member[snippets='http-request,http-response']
+
+==== Delete
+Remove company and all related child entities. Clients should use this endpoint with caution.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+Child entities include:
+
+* Company Members - removes membership to company
+* Infrastructure Request - removes request and forms
+* Person Request - removes company from request
+
+operation::company/delete[snippets='http-request,http-response']
+
+==== Conflicts
+This api establishes the conflicts of a company with other companies, this will be used by other resources to return the value of the attribute `canAccess`.
+The conflicts are bidirectional (Company A has conflict with Company B, so Company B has conflicts withCompany A).
+
+===== Create
+Establish the conflicts. The payload sent is the source of the truth, this endpoint does an upsert with the payload (insert new ones and remove persisted not existent in the payload)
+
+Role requirement: `ROLE_RH_ADMIN`
+
+====== Rules:
+
+ * Companies With Members In Common Should Fail (HTTP Forbidden)
+ * Non-existing companies will be ignored.
+ * Duplicated companies will be ignored.
+ * If a company doesn't have conflicts, an empty payload will be ignored.
+ * If a company has conflicts, an empty payload will remove them.
+
+operation::company/create-conflicts[snippets='http-request,http-response']
+
+==== Query
+ Get the list of the companies with which one this comnpany has conflicts.
+
+Role requirement: `ROLE_OP_CO_CONTRACTOR`
+
+operation::company/get-conflicts[snippets='http-request,http-response']
+
+
+
+== APIs associated
+include::company-vendor.adoc[]
+

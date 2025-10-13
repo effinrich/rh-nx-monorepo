@@ -1,0 +1,409 @@
+{
+  "cookies": [
+    {
+      "name": "_ga",
+      "value": "GA1.1.918139608.1687916726",
+      "domain": ".redesignhealth.com",
+      "path": "/",
+      "expires": 1750988726,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "_hjSessionUser_3521396",
+      "value": "eyJpZCI6ImIyYzcxMjU2LTQwZjQtNTZhMi1hNTliLWRiMjM1Y2QxNzBmZSIsImNyZWF0ZWQiOjE2ODc5MTY3MjY0NjcsImV4aXN0aW5nIjpmYWxzZX0=",
+      "domain": ".redesignhealth.com",
+      "path": "/",
+      "expires": 1719452726,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_hjIncludedInSessionSample_3521396",
+      "value": "1",
+      "domain": ".redesignhealth.com",
+      "path": "/",
+      "expires": 1687916906,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "g_state",
+      "value": "{\"i_l\":0}",
+      "domain": "dev-platform.redesignhealth.com",
+      "path": "/",
+      "expires": 1703468793,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "_ga_0H9BGPRMQY",
+      "value": "GS1.1.1687916726.1.1.1687916797.58.0.0",
+      "domain": ".redesignhealth.com",
+      "path": "/",
+      "expires": 1750988797,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "_hjAbsoluteSessionInProgress",
+      "value": "1",
+      "domain": ".redesignhealth.com",
+      "path": "/",
+      "expires": 1687918601,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_hjSession_3521396",
+      "value": "eyJpZCI6IjAzMDA3NTQ0LTkyZmEtNGQ2Ny1iMmU0LTZkYzI1MzEzODUxMiIsImNyZWF0ZWQiOjE2ODc5MTY3MjY0NjgsImluU2FtcGxlIjp0cnVlfQ==",
+      "domain": ".redesignhealth.com",
+      "path": "/",
+      "expires": 1687918601,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_hjFirstSeen",
+      "value": "1",
+      "domain": ".redesignhealth.com",
+      "path": "/",
+      "expires": 1687918601,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "CheckConnectionTempCookie962",
+      "value": "728932",
+      "domain": "accounts.youtube.com",
+      "path": "/accounts",
+      "expires": 1687916739,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "CheckConnectionTempCookie52",
+      "value": "845759",
+      "domain": "accounts.youtube.com",
+      "path": "/accounts",
+      "expires": 1687916768,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "CheckConnectionTempCookie76",
+      "value": "14546",
+      "domain": "accounts.youtube.com",
+      "path": "/accounts",
+      "expires": 1687916789,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "SID",
+      "value": "YAjgJGF6KeD_6usHZEXc2UZf5FhUuK049PEhF5tTV3KRPcf_M2l1M_0HBwYL_hJ6Pq44bw.",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-1PSID",
+      "value": "YAjgJGF6KeD_6usHZEXc2UZf5FhUuK049PEhF5tTV3KRPcf_JAHEjHiVhkNbcv4dTUMZsA.",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-3PSID",
+      "value": "YAjgJGF6KeD_6usHZEXc2UZf5FhUuK049PEhF5tTV3KRPcf_i1UyiUPKI3Oeif7SUaYcRQ.",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "HSID",
+      "value": "A-bZEyJeT4H2DbrLL",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "SSID",
+      "value": "AP0D8nLQz7RGncuK_",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "APISID",
+      "value": "IKlOURdV_eDrPb8V/AK3ZoQqqH60eED2VB",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "SAPISID",
+      "value": "HBBxzLoHnlNyG1Jo/ARCeZAZ0ck6pCoiPd",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-1PAPISID",
+      "value": "HBBxzLoHnlNyG1Jo/ARCeZAZ0ck6pCoiPd",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-3PAPISID",
+      "value": "HBBxzLoHnlNyG1Jo/ARCeZAZ0ck6pCoiPd",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "OTZ",
+      "value": "7093545_84_88_104280_84_446940",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1690508729,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "NID",
+      "value": "511=Gvh2wqhsnDmyG9xWwNJZMRuZYyt-Mrh67OcCsXbL6zKxyPQYdG9ryGOGlXjF-sVFdXVjfjjLs4QhKZfOnp6UDSkLmCXd1U9RxsuoOe4V2TkdpzULmTc4Y8k6tePXWjL4TBewAOgCxV1oZB7BoVurIpBrkpe7USEsEzU0xRMuZxeNpALmYUZVDTzl_KHpLpBJL7NrjINcm8R32O1p2ZSAIzzJYLl5dIaUqjcG1Y03mPl2z2x8Fm9HPcZYwm8G-WdxIErDZOWLEa2yzBE1fy7JqgkDfkYBo6zs5Q",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1703727992,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SID",
+      "value": "YAjgJGF6KeD_6usHZEXc2UZf5FhUuK049PEhF5tTV3KRPcf_M2l1M_0HBwYL_hJ6Pq44bw.",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-1PSID",
+      "value": "YAjgJGF6KeD_6usHZEXc2UZf5FhUuK049PEhF5tTV3KRPcf_JAHEjHiVhkNbcv4dTUMZsA.",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-3PSID",
+      "value": "YAjgJGF6KeD_6usHZEXc2UZf5FhUuK049PEhF5tTV3KRPcf_i1UyiUPKI3Oeif7SUaYcRQ.",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "LSID",
+      "value": "s.youtube:YAjgJIjKzPnuPst6qNsSCWJ-oiN22hEOaI68g1pEkinRgvmOXup-fRQrYXdytC4aaSnk2Q.",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Host-1PLSID",
+      "value": "s.youtube:YAjgJIjKzPnuPst6qNsSCWJ-oiN22hEOaI68g1pEkinRgvmOlnTgMTqDjKeVGBnHp3b2aQ.",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Host-3PLSID",
+      "value": "s.youtube:YAjgJIjKzPnuPst6qNsSCWJ-oiN22hEOaI68g1pEkinRgvmORAh7OZKAJABtgY69ESd7Sw.",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "HSID",
+      "value": "AxtQONi-L1mC5Co2a",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "SSID",
+      "value": "A_QpyxiAWeqv3v5fF",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "APISID",
+      "value": "IKlOURdV_eDrPb8V/AK3ZoQqqH60eED2VB",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "SAPISID",
+      "value": "HBBxzLoHnlNyG1Jo/ARCeZAZ0ck6pCoiPd",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-1PAPISID",
+      "value": "HBBxzLoHnlNyG1Jo/ARCeZAZ0ck6pCoiPd",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-3PAPISID",
+      "value": "HBBxzLoHnlNyG1Jo/ARCeZAZ0ck6pCoiPd",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "ACCOUNT_CHOOSER",
+      "value": "AFx_qI4seuSXpFD6La-XOTmC-XUelOwgP9vugtc544fQJU5fuurEk63i5IWMOjwNdwhqMJi_5HpSLX14r_mpB48Vi3yOa5xAdFwnhAQqlKXsVZLhXmnRiGgBGV9bZK9tlkFgnUzLCdL_l6u7_NxStL11WZaZxwj0LXXvp1nr9kbc6fHuhZnyv22pXnKRIZAr5-v9IDKmVu05aDLlmay8hV2iwxVkpozmueHjYLFv7kmFMrIgkZNeOMlC77DMfD8wST68hbYTkN2SkNQ8kGvnIPzx4A4D7KEWiTBVI_vIgPaACUChaH7G_o4",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Host-GAPS",
+      "value": "1:nChToNW6ya9lz-pjgeISMXM7wiR7xi4-jFRH0zoAeHuDX0s__Ml9tkNGb6ZajKR9VnIcLXqEhAp2Q7wS12oq9_U6AwSTUQ:-TulCNr2PoW5CkIW",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1750988792,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SIDCC",
+      "value": "AP8dLtxuOENg0vGJPiiGIRX2LYJNbKd0pDX0uGHuzEtiAvLzYRJk9qVnwai0ivI1YFl6gPmvZQ",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1719452804,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-1PSIDCC",
+      "value": "AP8dLtxvJcMXfPQRLd3OJB93CkElKq5hj1MhDAXM63UKEv39S_6PakuunfYnpEA0kck_9jUNMA",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1719452804,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-3PSIDCC",
+      "value": "AP8dLtzU5V0gsGj1Gq82A6fgZmobV414yH17EpUn5Q-ndfPvBXHoPc1G_PDfpjQOpR0gvC7F",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1719452804,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://dev-platform.redesignhealth.com",
+      "localStorage": [
+        {
+          "name": "hjActiveViewportIds",
+          "value": "[{\"id\":\"8d5ea7f5-dd9b-4d21-8f46-1250ca05fe95\",\"expireTimestamp\":1687938329213}]"
+        },
+        {
+          "name": "so-color-mode",
+          "value": "light"
+        }
+      ]
+    }
+  ]
+}

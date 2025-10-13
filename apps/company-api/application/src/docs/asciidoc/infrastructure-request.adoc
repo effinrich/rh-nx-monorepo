@@ -1,0 +1,60 @@
+=== Infrastructure Request
+
+==== Get
+Retrieve information about an infrastructure request.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+Infrastructure requests have one of the following statuses:
+
+* `AWAITING_SUBMISSION` - Infrastructure request has not been submitted via xref:infrastructure-request.adoc#_submit[Submit]
+* `PENDING` - Request has been submitted but DevOps has not begun work on the request
+* `IN_PROGRESS` - DevOps is currently working on this request
+* `DONE` - Infrastructure is ready for use
+
+operation::infrastructure-request/get[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Update
+Update general information about the request.
+
+WARNING: Avoid updating the `status` field through this endpoint. While it is possible to update the status, this should only be used for debugging and fixing requests in bad states. The status will automatically be updated when a request is submitted or the Jira ticket is updated.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::infrastructure-request/update[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Update Form
+Create or update a form related to a request.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+The following forms are available:
+
+* `TECH_STACK` - Provide AWS infrastructure requirements
+* `PRIVACY_QUESTIONNAIRE` - Document how sensitive data will be used in the infrastructure
+
+WARNING: xref:form-definition.adoc[Form definitions] must be defined before form data can be submitted.
+
+Forms can have any of the following publication statuses:
+
+* `NOT_STARTED` - the initial state of the form data
+* `DRAFT` - information has been filled in, but isn't ready
+* `DONE` - form has been finalized and is ready for submission
+
+operation::infrastructure-request/update-form[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Submit
+Submit an infrastructure request.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+It is required that the following forms have a status of `DONE`:
+
+* `PRIVACY_QUESTIONNAIRE`
+* `TECH_STACK`.
+
+This will automatically set `status=PENDING` (learn more about request statuses xref:infrastructure-request.adoc#_get[here]).
+
+This will automatically create a Jira ticket.
+
+operation::infrastructure-request/submit[snippets='http-request,http-response']

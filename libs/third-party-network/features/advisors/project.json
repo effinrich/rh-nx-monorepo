@@ -1,0 +1,48 @@
+{
+  "name": "third-party-network-features-advisors",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/third-party-network/features/advisors/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/third-party-network/features/advisors/**/*.{ts,tsx,js,jsx}"
+        ]
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "fix": false
+        },
+        "format": {
+          "fix": true
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/third-party-network/features/advisors"
+      ],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../../coverage/libs/third-party-network/features/advisors"
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "watch": false,
+          "reporters": ["default"]
+        },
+        "watch": {
+          "watch": true,
+          "reporters": ["verbose"]
+        }
+      }
+    }
+  }
+}

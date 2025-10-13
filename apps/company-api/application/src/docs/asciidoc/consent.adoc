@@ -1,0 +1,21 @@
+=== Consent
+Handle legal consent forms and acceptance tracking
+
+==== Get
+Get a consent acceptance
+
+Role requirement: none
+
+NOTE: The person's account is inferred based on the bearer token provided.
+
+operation::consent/get[snippets='response-fields,links,http-request,http-response']
+
+
+==== Upsert
+Update acceptance to a legal form.
+
+Role requirement: none
+
+NOTE: The person's account is inferred based on the bearer token provided.
+
+operation::consent/upsert[snippets='request-fields,response-fields,links,http-request,http-response']

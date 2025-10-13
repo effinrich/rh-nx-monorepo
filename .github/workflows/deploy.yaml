@@ -1,0 +1,157 @@
+---
+name: Deploy to EKS
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        description: 'AWS Account'
+        required: true
+        default: dev
+      region:
+        type: string
+        description: 'AWS Region'
+        required: true
+        default: us-east-1
+      serviceName:
+        type: string
+        description: Service Name
+        required: false
+        default: company-api
+      tag:
+        type: string
+        description: Docker Tag
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: 'AWS Account'
+        required: true
+        default: dev
+        options:
+          - dev
+          - staging
+          - prod
+      region:
+        type: choice
+        description: 'AWS Region'
+        required: true
+        default: us-east-1
+        options:
+          - us-east-1
+      serviceName:
+        type: choice
+        description: Service Name
+        required: true
+        default: company-api
+        options:
+          - company-api
+          - portal
+          - oauth-jwt-generator
+          - third-party-network
+      tag:
+        type: string
+        description: Docker Tag
+
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      pull-requests: write
+      repository-projects: read
+      packages: read
+      id-token: write
+    runs-on: ubuntu-latest
+    environment: ${{inputs.serviceName }} - ${{ inputs.environment}} - ${{ inputs.region}}
+    steps:
+      - name: Calculate short SHA
+        id: short-sha
+        if: inputs.tag == ''
+        uses: benjlevesque/short-sha@v2.2
+        with:
+          length: 7
+
+      - uses: actions/checkout@v3
+
+      - name: Login to AWS
+        uses: ./.github/actions/configure-aws
+        with:
+          aws-region: ${{ inputs.region }}
+          aws-account: ${{ inputs.environment }}
+
+      - name: Docker image exists
+        run: |
+          if aws ecr describe-images --repository-name ${{ inputs.environment }}-${{ inputs.serviceName }} --region ${{ inputs.region }} --image-ids imageTag=${{ steps.short-sha.outputs.sha || inputs.tag }}; then
+            exit 0
+          else
+            echo "::error::The container ${{ inputs.environment }}-${{ inputs.serviceName }}:${{ steps.short-sha.outputs.sha || inputs.tag }} does not exist."
+            exit 1
+          fi
+
+      - name: Update the tag and in repository in values.
+        uses: actions/checkout@v3
+        with:
+          repository: redesignhealth/developers-infra
+          path: developers-infra
+          token: ${{ secrets.EKS_DEPLOYMENT_GH_TOKEN }}
+          ref: "main"
+          persist-credentials: true
+
+      # Updating tag and image repository.
+      - name: Update Image Version in the related HelmChart values.yaml (Dev)
+        uses: fjogeleit/yaml-update-action@v0.13.2
+        if: inputs.environment == 'dev'
+        with:
+          valueFile: '${{ inputs.environment }}/${{ inputs.region }}/developers/design-system/helm/values.yaml'
+          workDir: developers-infra
+          masterBranchName: "main"
+          branch: "main"
+          commitChange: true
+          commitUserName: devops-rh
+          commitUserEmail: devops@redesignhealth.com
+          message: 'deploy: design-system (${{ inputs.environment }}) (${{ inputs.serviceName }}) (${{ steps.short-sha.outputs.sha || inputs.tag }})'
+          repository: redesignhealth/developers-infra
+          token: ${{ secrets.EKS_DEPLOYMENT_GH_TOKEN }}
+          changes: |
+            {
+            "services[?(@.name=='${{ inputs.serviceName }}')].tag" : "${{ steps.short-sha.outputs.sha || inputs.tag }}"
+            }
+
+      # Updating tag and image repository.
+      - name: Update Image Version in the related HelmChart values.yaml
+        uses: fjogeleit/yaml-update-action@v0.13.2
+        if: inputs.environment == 'staging' || inputs.environment == 'prod'
+        with:
+          valueFile: '${{ inputs.environment }}/${{ inputs.region }}/developers/design-system/helm/values.yaml'
+          workDir: developers-infra
+          masterBranchName: "main"
+          branch: deploy/design-system-${{ inputs.environment }}-${{ inputs.tag }}
+          commitChange: true
+          commitUserName: devops-rh
+          commitUserEmail: devops@redesignhealth.com
+          createPR: true
+          title: "deploy: design-system ${{ inputs.environment }}"
+          targetBranch: "main"
+          labels: "${{ inputs.environment }}, design-system"
+          message: 'deploy: design-system (${{ inputs.environment }}) (${{ steps.short-sha.outputs.sha || inputs.tag }})'
+          repository: redesignhealth/developers-infra
+          token: ${{ secrets.EKS_DEPLOYMENT_GH_TOKEN }}
+          changes: |
+            {
+            "services[?(@.name=='company-api')].tag" : "${{ steps.short-sha.outputs.sha || inputs.tag }}",
+            "services[?(@.name=='third-party-network')].tag" : "${{ steps.short-sha.outputs.sha || inputs.tag }}",
+            "services[?(@.name=='oauth-jwt-generator')].tag" : "${{ steps.short-sha.outputs.sha || inputs.tag }}",
+            "services[?(@.name=='portal')].tag" : "${{ steps.short-sha.outputs.sha || inputs.tag }}"
+            }
+
+      - name: Failure slack notification
+        uses: rtCamp/action-slack-notify@v2
+        if: failure() && inputs.environment != 'dev'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: "#ff0000"
+          SLACK_MESSAGE: "${{ inputs.environment }} deployment failed."
+          SLACK_TITLE: "ERROR: @here"
+          SLACK_FOOTER: ""

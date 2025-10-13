@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="change" type="com.redesignhealth.company.api.dto.command.vendor.CompanyVendorChangeCommand" */-->
+<head>
+  <title>Welcome to Redesign Health!</title>
+  <style>
+    body {
+      max-width: 576px;
+    }
+
+    .text {
+      font-size: 16px;
+      font-family: Helvetica, sans-serif;
+      color: #344054;
+      line-height: 24px;
+      margin-top: 0;
+      margin-bottom: 32px;
+    }
+
+    /*a needed to override gmail specificity*/
+    a.link {
+      color: #631487;
+      font-weight: 500;
+    }
+
+    .footer .text {
+      font-size: 14px;
+      color: #98A2B3;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <p class="text">
+    Hello, <br/>
+    This is an automated email to inform you that new vendor information was submitted by an OpCo that might need your
+    review.
+  </p>
+  <p
+    class="text"
+    th:text="|Type: ${change.type}|"
+  >
+  </p>
+
+  <p
+    class="text"
+    th:text="|Opco: ${change.companyName}|"
+  >
+  </p>
+
+  <p
+    class="text"
+    th:text="|User: ${change.createdByName}|"
+  >
+  </p>
+
+  <p
+    class="text"
+    th:text="|Date: ${change.changedOn}|"
+  >
+  </p>
+
+
+  <p
+    class="text"
+    th:text="|Vendor: ${change.name}|"
+  >
+  </p>
+
+  <p class="text">
+    Categories:
+  </p>
+  <ul th:each="category: ${change.categories}">
+    <li th:text=|${category}|></li>
+  </ul>
+
+
+  <p class="text">
+    Subcategories:
+  </p>
+  <ul th:each="subcategory: ${change.subcategories}">
+    <li th:text=|${subcategory}|></li>
+  </ul>
+
+  <p class="text">
+    Please review to determine if any updates to the master vendor list are required.
+  </p>
+
+  <div class="signature">
+    <p class="text">
+      Thanks,<br>
+      The team
+    </p>
+  </div>
+
+  <p class="text">
+    Need help? Send us an email at <a class="link" href="mailto:platform-support@redesignhealth.com">platform-support@redesignhealth.com</a>.
+  </p>
+</main>
+<footer class="footer">
+  <p class="text">
+    This is an automatically generated message from Redesign Health. Replies are not monitored or answered.
+  </p>
+</footer>
+</body>
+</html>

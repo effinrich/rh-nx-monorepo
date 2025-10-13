@@ -1,0 +1,5 @@
+{
+  "database": "SERVING",
+  "schema": "FINANCE",
+  "statement": "SELECT * from NS_KPI"
+}

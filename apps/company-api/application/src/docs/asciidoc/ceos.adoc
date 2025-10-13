@@ -1,0 +1,58 @@
+=== Ceos
+Set of operations to admin the CEO directory
+
+==== Create
+Create a CEO.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::ceos/create[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Update
+Create a CEO.
+
+Role requirement: `ROLE_OPCO_USER`
+
+Ony the ceo can update its info in the `ROLE_OPCO_USER` level, Admins can edit the info for any CEO.
+
+operation::ceos/update[snippets='request-fields,response-fields,http-request,http-response']
+
+===== Get
+Get a CEO by its id.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::ceos/get-ceo-id[snippets='response-fields,http-request,http-response']
+
+===== Query
+Get a CEO List from OpenSearch.
+If the CEO OPT_OUT its profile, it be hidden for `ROLE_OP_CO_USER` role, higher roles could see it.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::ceos/query[snippets='response-fields,http-request,http-response']
+
+===== Filters
+Returns the below elements:
+
+Business type
+
+Company Fundraising Stage
+
+Customer Segment
+
+Healthcare Sector
+
+Business Focus Area
+ as a FilterSummary List
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::ceos/filters[snippets='response-fields,http-request,http-response']
+
+==== Delete
+Delete a call note
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::ceos/delete[snippets='response-fields,http-request,http-response']

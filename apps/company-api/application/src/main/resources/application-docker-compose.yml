@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://cockroachdb:26257/defaultdb
+    username: root
+    password:
+    driver-class-name: org.postgresql.Driver
+search:
+  hostname: opensearch
+prometheus-service:
+  base-url: https://www.example.com

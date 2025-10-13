@@ -1,0 +1,99 @@
+{
+  "name": "portal-ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/portal/ui/src",
+  "projectType": "library",
+  "tags": ["scope:portal"],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/portal/ui"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/portal/ui/**/*.{ts,tsx,js,jsx}"]
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "fix": false
+        },
+        "format": {
+          "fix": true
+        }
+      }
+    },
+    "check-types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx tsc --noEmit -p libs/portal/ui/tsconfig.lib.json"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/portal/ui/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "defaultConfiguration": "ci",
+      "configurations": {
+        "ci": {
+          "runInBand": true,
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/portal/ui"]
+    },
+    "storybook": {
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "port": 4401,
+        "open": true,
+        "configDir": "libs/portal/ui/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nx/storybook:build",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "framework": "@storybook/react-vite",
+        "outputDir": "dist/storybook/portal-ui",
+        "configDir": "libs/portal/ui/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "test-storybook"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "portal-ui:build-storybook",
+        "staticFilePath": "dist/storybook/portal-ui"
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "portal-ui:build-storybook:ci"
+        }
+      }
+    }
+  }
+}

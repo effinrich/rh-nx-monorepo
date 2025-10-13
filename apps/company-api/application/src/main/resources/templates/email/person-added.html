@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="person" type="com.redesignhealth.company.api.entity.Person"*/-->
+<!--/*@thymesVar id="portalHostname" type="java.net.URI"*/-->
+<!--/*@thymesVar id="adviseHostname" type="java.net.URI"*/-->
+<!--/*@thymesVar id="showAdviseLink" type="boolean"*/-->
+<head>
+    <title>Welcome to Redesign Health!</title>
+    <style>
+        body {
+            max-width: 576px;
+        }
+
+        .text {
+            font-size: 16px;
+            font-family: Helvetica, sans-serif;
+            color: #344054;
+            line-height: 24px;
+            margin-top: 0;
+            margin-bottom: 32px;
+        }
+
+        /*a needed to override gmail specificity*/
+        a.link {
+            color: #631487;
+            font-weight: 500;
+        }
+
+        .footer .text {
+            font-size: 14px;
+            color: #98A2B3;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <p class="text" th:text="|Hi ${person.givenName},|"></p>
+
+    <p class="text">
+        Welcome to the Redesign Health Platform! Your system administrator has created an account for you.
+    </p>
+    <p class="text">
+        <!-- nofollow used to prevent email clients from generating a hyperlink for email -->
+        Your username is <a style="text-decoration: none" class="text" rel="nofollow" th:text="${person.email}"></a>
+    </p>
+    <p class="text">
+      <a class="link" th:href="|${portalHostname}/sign-in|">
+        Sign into the Portal →
+      </a>
+    </p>
+
+   <p class="text" th:if="${showAdviseLink}">
+      <a class="link" th:href="${adviseHostname}">
+        Sign into the Advise database →
+      </a>
+   </p>
+
+    <div class="signature">
+        <p class="text">
+            Thanks,<br>
+            The team
+        </p>
+    </div>
+
+  <p class="text">
+    Need help? Send us an email at <a class="link" href="mailto:platform-support@redesignhealth.com">platform-support@redesignhealth.com</a>.
+  </p>
+</main>
+<footer class="footer">
+    <p class="text">
+        This is an automatically generated message from Redesign Health. Replies are not monitored or answered.
+    </p>
+</footer>
+</body>
+</html>

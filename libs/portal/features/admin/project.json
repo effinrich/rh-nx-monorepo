@@ -1,0 +1,56 @@
+{
+  "name": "portal-features-admin",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/portal/features/admin/src",
+  "projectType": "library",
+  "tags": ["scope:portal"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/portal/features/admin/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "check-types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx tsc --noEmit -p libs/portal/features/admin/tsconfig.lib.json"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/portal/features/admin"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/portal/features/admin/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "defaultConfiguration": "ci",
+      "configurations": {
+        "ci": {
+          "runInBand": true,
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/portal/features/admin"]
+    }
+  }
+}

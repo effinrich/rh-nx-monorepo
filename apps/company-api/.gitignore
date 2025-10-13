@@ -1,0 +1,18 @@
+# Maven
+target
+## Relase generated files
+pom.xml.*
+release.properties
+
+# Mac
+.DS_Store
+
+# IDE
+.vscode
+.settings
+.project
+.classpath
+.idea
+
+# Generated
+jira-rest-client/src

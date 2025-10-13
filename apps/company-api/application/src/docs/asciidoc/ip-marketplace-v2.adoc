@@ -1,0 +1,14 @@
+=== Ip Marketplace V2
+Set of operation to process communication into buyer and sellers using chat
+
+==== Release contact info
+Allow to the seller create a chat room where talk with the buyer what has requested info about an specific ip record.
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::ip-marketplace-v2/process-contact-info-release[snippets='response-fields,http-request,http-response']
+
+==== Request contact info
+Allow to the buyer requests a chat with the seller.
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::ip-marketplace-v2/process-contact-info-request[snippets='response-fields,http-request,http-response']

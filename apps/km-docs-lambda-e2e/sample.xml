@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<bodyContentArray>
+	<item>
+		<endIndex>1</endIndex>
+		<sectionBreak>
+			<sectionStyle>
+				<columnSeparatorStyle>NONE</columnSeparatorStyle>
+				<contentDirection>LEFT_TO_RIGHT</contentDirection>
+				<sectionType>CONTINUOUS</sectionType>
+			</sectionStyle>
+		</sectionBreak>
+	</item>
+	<item>
+		<startIndex>1</startIndex>
+		<endIndex>12</endIndex>
+		<paragraph>
+			<elements>
+				<item>
+					<startIndex>1</startIndex>
+					<endIndex>12</endIndex>
+					<textRun>
+						<content>Sample doc
+</content>
+						<textStyle/>
+					</textRun>
+				</item>
+			</elements>
+			<paragraphStyle>
+				<namedStyleType>NORMAL_TEXT</namedStyleType>
+				<direction>LEFT_TO_RIGHT</direction>
+				<pageBreakBefore>False</pageBreakBefore>
+			</paragraphStyle>
+		</paragraph>
+	</item>
+</bodyContentArray>
+

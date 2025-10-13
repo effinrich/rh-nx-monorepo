@@ -1,0 +1,22 @@
+{
+  "properties": {
+    "content": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "id": {
+      "type": "keyword"
+    },
+    "libraryId": {
+      "type": "keyword"
+    },
+    "title": {
+      "type": "text"
+    },
+    "type": {
+      "type": "keyword"
+    }
+  }
+}

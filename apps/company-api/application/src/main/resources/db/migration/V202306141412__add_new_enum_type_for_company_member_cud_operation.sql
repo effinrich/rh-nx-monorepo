@@ -1,0 +1,1 @@
+ALTER TYPE company_members_cud_operation ADD VALUE 'UPDATE_BY_COMPANY' AFTER 'DELETE_BY_COMPANY';

@@ -1,0 +1,21 @@
+CREATE TYPE company_ip_marketplace_type AS ENUM(
+'ENTERPRISE_SELLER',
+'ENTERPRISE_BUYER'
+);
+
+CREATE TYPE company_ip_marketplace_organization_type AS ENUM(
+'DN_HEALTH_SYSTEM',
+'ACADEMIC_MEDICAL_CENTER',
+'LIFE_SCIENCE_PHARMA',
+'STARTUP',
+'MEDICAL_DEVICE_COMPANY'
+);
+
+CREATE TYPE company_ip_marketplace_region AS ENUM(
+'NORTHEAST',
+'SOUTHEAST',
+'MIDWEST',
+'SOUTHWEST',
+'WEST',
+'INTERNATIONAL'
+);

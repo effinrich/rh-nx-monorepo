@@ -1,0 +1,25 @@
+{
+  "name": "company-api-types",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/company-api-types/src",
+  "projectType": "library",
+  "targets": {
+    "openapi-generator": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "docker run --rm -v \"${PWD}/libs/company-api-types:/local\" openapitools/openapi-generator-cli generate -i https://company-api.dev.redesignhealth.com/public/open-api -g typescript-axios -o /local/src"
+        ],
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/company-api-types/**/*.ts"]
+      }
+    }
+  },
+  "tags": ["scope:portal"]
+}

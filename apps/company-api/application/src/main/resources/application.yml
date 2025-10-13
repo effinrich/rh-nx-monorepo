@@ -1,0 +1,615 @@
+spring:
+  security:
+    # TODO remove basic auth along with this
+    user:
+      username: aerith
+      password: tifa
+  data:
+    web:
+      pageable:
+        default-page-size: 20
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  hateoas:
+    # Allows us to swap between hal/vanilla json formats via Accept header.
+    # Without this application/json returns the same results as application/hal+json.
+    use-hal-as-default-json-media-type: false
+  jpa:
+    hibernate:
+      ddl-auto: none
+    # Silences "Method org.postgresql.jdbc.PgConnection.createClob()" exception
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    # Forces us to use @Transactional to control sessions
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+
+server:
+  # Leverage Spring's ForwardedHeaderFilter instead of underlying servlet container for X-Forwarded-* headers
+  # Helps us with things like Open API and HATEOAS url generation
+  forward-headers-strategy: framework
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus
+
+springdoc:
+  swagger-ui:
+    path: /public/swagger
+  api-docs:
+    path: /public/open-api
+  default-produces-media-type: 'application/json'
+
+aws:
+  enabled: false
+  region: us-east-1
+  secret:
+    name: none
+  sqs:
+    jiraIssueQueue: https://sqs.us-east-1.amazonaws.com/082533342824/JiraWebhook0.fifo
+  search:
+    service: aoss
+
+google:
+  app:
+    allowList: 510999103231-emldsjte0kvs5oee7gtleoqsfhtqc3ge.apps.googleusercontent.com, 1047555093750-d31i7i33ron6ckpjufjiqf0cbij515jv.apps.googleusercontent.com, 510999103231-qmlqd4q4k0lljmfmj6e36lglh9splrte.apps.googleusercontent.com
+  docs:
+    hostname: https://docs.google.com
+  service:
+    email: km-docs-svc@redesign-os.iam.gserviceaccount.com
+  drive:
+    hostname: https://drive.google.com
+    # Used for storing company-specific documentation
+    companySharedDrive: 0APxg-0d7QZ22Uk9PVA
+    onboardTemplate: 11DafORGTHoJeZcPAuHTLtMGxHDVb4v2v9vWNgAQ1I3Y
+
+jira:
+  enabled: false
+  host: https://redesignhealth.atlassian.net
+  request:
+    user:
+      project: 10115 # DPT (DevOps Platform Test)
+      issue:
+        type: 10006 # Subtask
+    infrastructure:
+      project: 10115 # DPT (DevOps Platform Test)
+      parent-issue:
+        type: 10000 # Epic
+        fields:
+          sso: customfield_10260
+          github: customfield_10257
+          epicName: customfield_10011
+      child-issue:
+        type: 10055 # Service Request
+        fields:
+          requestedResourceType: customfield_10259
+      status-ids:
+        TO_DO: 10004
+        IN_PROGRESS: 3
+        DONE: 10005
+
+build:
+  version: '@project.version@' # pom.xml version
+
+cors:
+  allowedOriginPatterns: http://localhost:[*], https://*.redesignhealth.com
+  allowedMethods: PUT,GET,DELETE,POST
+  allowedHeaders: Authorization,Content-Type,Accept,RH-Impersonation-Email,RH-Google-Access-Token
+
+db:
+  seed:
+    emails: kyle.copeland@redesignhealth.com, antonio.bastardo@redesignhealth.com, matt.stephenson@redesignhealth.com, nancy.heiss@redesignhealth.com, rich.tillman@redesignhealth.com, antonio.bastardo@redesignhealth.com, stephanie.velazquez@redesignhealth.com, rhdevopstest2@gmail.com, rebecca.poch@redesignhealth.com, devops-test@redesignhealth.com
+
+notification:
+  portal:
+    hostname: https://platform.dev.redesignhealth.com
+    routes:
+      infrastructure: ${notification.portal.hostname}/companies/{companyId}/infrastructure
+  advise:
+    hostname: https://third-party-network.dev.redesignhealth.com
+
+google-drive-lambda:
+  hostname: https://hwqysdq6fmb2ox5j7ezvvzvske0lpxjf.lambda-url.us-east-1.on.aws
+mkdocs-lambda:
+  hostname: https://hwqysdq6fmb2ox5j7ezvvzvske0lpxjf.lambda-url.us-east-1.on.aws
+
+research-entity-converter:
+  api-to-search:
+    title: sprint_name
+    authors: authors.name
+    created: created_at
+    report: url_spr
+    entity: opco_spr_new
+    objectives: research_objectives
+    services: research_services
+    methods: research_methods_sub
+    specializedMethods: research_methods_sub
+    sampleSize: research_sample_size
+    segments: topline_segments
+    additionalSegments: patient_segments
+    taxonomyTags: TODO
+    supportingFiles: other_documents
+    taxonomyTag1: taxonomy_term_1
+    taxonomyTag2: taxonomy_term_2
+    taxonomyTag3: taxonomy_term_3
+    content: document_text
+
+research-external-content-converter:
+  api-to-search:
+    createdBy: note_taker
+    companies: associated_entities
+    additionalTags: tags
+    taxonomyTag1: taxonomy_term_1
+    taxonomyTag2: taxonomy_term_2
+    taxonomyTag3: taxonomy_term_3
+    title: name
+
+expert-note-entity-converter:
+  api-to-search:
+    intervieweeName: interviewee_name
+    intervieweeCompany: interviewee_company
+    intervieweeEmail: interviewee_email
+    noteTaker: note_taker
+    created: created_at
+    type: type
+    sourceOfInterview: interview_source
+    companies: associated_entities
+    linkedInProfileHref: profile_url
+    additionalTags: tags
+    attachments: attachments
+    taxonomyTag1: taxonomy_term_1
+    taxonomyTag2: taxonomy_term_2
+    taxonomyTag3: taxonomy_term_3
+    noteRaw: note_raw
+
+ceo-directory-entity-converter:
+  api-to-search:
+    member:
+      company:
+        name: member.company.name
+        fundraiseStatus: member.company.fundraise_status
+      givenName: member.given_name
+      familyName: member.family_name
+    bio: bio
+    additionalInfo: additional_info
+    businessType: business_type
+    customerSegment: customer_segment
+    healthcareSector: healthcare_sector
+    businessFocusArea: business_focus_area
+
+ip-marketplace-entity-converter:
+  api-to-search:
+    createdDate: created_date
+    disease: disease
+    executiveSummary: executive_summary
+    name: name
+    organOfFocus: organ_of_focus
+    organizationType: organization_type
+    region: region
+    speciality: specialities
+    technologyType: technology_type
+    companyId: company_id
+    status: status
+
+company-vendor-change:
+  recipients: antonio.bastardo@redesignhealth.com, kyle.copeland@redesignhealth.com
+
+library-feedback:
+  recipients: matt.stephenson@redesignhealth.com, vickey.morrow@redesignhealth.com
+
+# Set max concurrency for Mono/Flux related calls
+rate-limit:
+  infra-request:
+    create-sub-issues: 3
+
+company-taxonomy:
+  taxonomy:
+    - id: CARE_DELIVERY
+      name: 'Care Delivery'
+      children:
+        - id: CLINICAL_OPERATIONS
+          name: 'Clinical Operations'
+          children:
+            - id: CARE_TEAM_COORDINATION
+              name: 'Care Team Coordination'
+            - id: CLINICAL_DECISION_SUPPORT
+              name: 'Clinical Decision Support'
+            - id: CLINICAL_DOCUMENTATION
+              name: 'Clinical Documenation'
+            - id: CLINICAL_POD_DELIVERY
+              name: 'Clinical Pod Delivery'
+            - id: CLINICAL_WORKFLOW_MANAGEMENT
+              name: 'Clinical Workflow Management'
+            - id: LAST_MILE_CARE
+              name: 'Last Mile Care'
+            - id: ONSITE_CARE_DELIVERY_SOLUTIONS
+              name: 'Onsite Care Delivery Solutions'
+        - id: VIRTUAL_CARE_OPERATIONS
+          name: 'Virtual Care Operations'
+          children:
+            - id: REMOTE_PATIENT_MONITORING
+              name: 'Remote Patient Monitoring'
+            - id: TELEHEALTH_PLATFORM
+              name: 'Telehealth Platform'
+            - id: VIRTUAL_PROVIDER_NETWORK
+              name: 'Virtual Provider Network'
+            - id: THERAPEUTICS
+              name: 'Therapeutics'
+        - id: PATIENT_SUPPORT_COMMUNICATIONS
+          name: 'Patient Support and Communications'
+          children:
+            - id: PATIENT_ENROLLMENT_AND_ACTIVATION
+              name: 'Patient Enrollment and Activation'
+            - id: CARE_PLAN_MANAGEMENT
+              name: 'Care Plan Management'
+            - id: SECURE_PATIENT_MESSAGING
+              name: 'Secure Patient Messaging'
+            - id: COORDINATION_AND_NAVIGATION
+              name: 'Coordination and Navigation'
+            - id: EXPERIENCE
+              name: 'Experience'
+            - id: PROFILE_AND_STRATIFICATION
+              name: 'Profile and Stratification'
+        - id: ANCILLARY_SERVICES_TREATMENT
+          name: 'Ancillary Services / Treatment'
+          children:
+            - id: DURABLE_MEDICAL_EQUIPMENT
+              name: 'Durable Medical Equipment'
+            - id: IMAGING
+              name: 'IMAGING'
+            - id: LABS
+              name: 'Labs'
+            - id: PRESCRIPTIONS
+              name: 'Prescriptions'
+            - id: THERAPY_INTERVENTIONS
+              name: 'Therapy / Interventions'
+        - id: REFERRALS_AND_SPECIALTY_NETWORKS
+          name: 'Referrals and Specialty Networks'
+          children:
+            - id: PRIOR_AUTHORIZATION
+              name: 'Prior Authorization'
+            - id: ELECTRONIC_CONSULTS
+              name: 'Electronic Consults'
+            - id: REFERALS
+              name: 'Referrals'
+            - id: SOCIAL_CARE
+              name: 'Social Care'
+            - id: CENTER_OF_EXCELLENCE
+              name: 'Center of Excellence'
+            - id: COLLABORATION_COMMUNICATION
+              name: 'Collaboration and Communication'
+        - id: ECOSYSTEM
+          name: 'Ecosystem'
+          children:
+            - id: TRANSITIONS_IN_CARE
+              name: 'Transitions in Care'
+            - id: UTILIZATION_MANAGEMENT
+              name: 'Utilization Management'
+            - id: POST_ACUTE_PARTNERS
+              name: 'Post Acute Partners'
+            - id: SPECIALTY_CARE_CENTERS
+              name: 'Specialty Care Centers'
+            - id: ACUTE_NEEDS
+              name: 'Acute Needs'
+    - id: HEALTHCARE_ADMIN
+      name: 'Healthcare Admin'
+      children:
+        - id: PATIENT_MEMBER_ADMIN
+          name: 'Patient or Member Admin'
+          children:
+            - id: CONSENT_SCREENERS_AIDS_FORM_BUILDING
+              name: 'Consent, Screeners, AIDs and Form Building'
+            - id: IDENTITY_VERIFICATION
+              name: 'Identity Verification'
+            - id: PATIENT_INTAKE_ASSESSMENT
+              name: 'Patient Intake and Assessment'
+            - id: PATIENT_SCHEDULING
+              name: 'Patient Scheduling'
+            - id: ATTRIBUTION_AND_ASSIGNMENT
+              name: 'Attribution and Assignment'
+            - id: BENEFITS_EDUCATION
+              name: 'Benefits Education'
+            - id: RISK_STRATIFICATION_LOGIC
+              name: 'Risk Stratification Logic'
+        - id: PERSONNEL_RECRUITMENT_AND_STAFFING
+          name: 'Personnel Recruitment and Staffing'
+          children:
+            - id: LOCUMS_TENENS
+              name: 'Locums Tenes'
+            - id: AGENCY
+              name: 'Agency'
+            - id: PER_DIEM
+              name: 'Per Diem'
+            - id: PERSONNEL_MANAGEMENT
+              name: 'Personnel Management'
+            - id: RECRUITMENT
+              name: 'Recruitment'
+        - id: PHYSICIAN_AND_PRACTICE_ADMIN
+          name: 'Physician and Practice Admin'
+          children:
+            - id: PROVIDER_WORKFLOW_TOOLS
+              name: 'Provider Workflow Tools'
+            - id: ANCILLARY_SERVICE_EXPANSION
+              name: 'Ancillary Service Expansion'
+            - id: EHR_DATA_POC_INSIGHTS
+              name: 'EHR Data POC Insights'
+            - id: EXPENSE_MGMT_SOLUTION_EFFICIENCY
+              name: 'Expense Management and Solution Efficiency'
+            - id: PATIENT_ACQUISITION_GROW
+              name: 'Patient Acquisition and Growth'
+            - id: ADMINISTRATIVE_TASK_MGMT
+              name: 'Administrative Task Management'
+            - id: PROVIDER_NETWORK_MGMT
+              name: 'Provider Network Management'
+            - id: CREDENTIALING
+              name: 'Credentialing'
+            - id: CONTRACTING
+              name: 'Contracting'
+        - id: PAYOR_ADMIN
+          name: 'Payor Admin'
+          children:
+            - id: PRODUCT_DEVELOPMENT_MGMT
+              name: 'Product Development/Management'
+            - id: REGULATORY_CHANGE_READINESS_PLATFORM_PERFORMANCE
+              name: 'Regulatory Change Readiness and Platform Performance'
+            - id: PROVIDER_NETWORKS
+              name: 'Provider Networks'
+            - id: MARKETING
+              name: 'Marketing'
+            - id: SALES
+              name: 'Sales'
+            - id: ENROLLMENT
+              name: 'Enrollment'
+            - id: CUSTOMER_EXPERIENCE
+              name: 'Customer Experience'
+            - id: COMPLIANCE
+              name: 'Compliance'
+            - id: QUALITY_MANAGEMENT
+              name: 'Quality Management'
+            - id: HEALTH_MANAGEMENT
+              name: 'Health Management'
+            - id: CLAIMS_REIMBURSEMENT
+              name: 'Claims/Reimbursement'
+            - id: REPORTING_AND_ANALYTICS
+              name: 'Reporting and Analytics'
+            - id: VERTICAL_INTEGRATION
+              name: 'Vertical Integration'
+        - id: FINANCIAL_SERVICES
+          name: 'Financial Services'
+          children:
+            - id: CLEARINGHOUSE
+              name: 'Clearinghouse'
+            - id: CODING
+              name: 'Coding'
+            - id: ELIGIBILITY_COPAY
+              name: 'Eligibility and Copay'
+            - id: MEDICAL_BILLING
+              name: 'Medical Billing'
+            - id: PATIENT_BILLING_COLLECTION
+              name: 'Patient Billing and Collection'
+            - id: CAPITATION_PAYMENT_PROCESSING
+              name: 'Capitation Payment Processing'
+            - id: REVENUE_CYCLE_MGMT
+              name: 'Revenue Cycle Management'
+            - id: FUNDS_FLOW_MGMT
+              name: 'Funds Flow Management'
+            - id: FACTORING
+              name: 'Factoring'
+            - id: REVENUE_MAXIMIZATION
+              name: 'Revenue Maximization'
+        - id: CENTRALIZED_RESOURCE_MGMT
+          name: 'Centralized Resource Management'
+          children:
+            - id: BENEFITS_ADMINISTRATION
+              name: 'Benefits Administration'
+            - id: PATIENT_ASSIGNMENT
+              name: 'Patient Assignment'
+            - id: ALERTS_NOTIFICATIONS
+              name: 'Alerts and Notifications'
+            - id: TRAINING_DEVELOPMENT
+              name: 'Training and Development'
+    - id: DATA_ANALYTICS
+      name: 'Data Analytics'
+      children:
+        - id: INTEROPERABILITY
+          name: 'Interoperability'
+          children:
+            - id: CLAIMS_DATA
+              name: 'Claims Data'
+            - id: CLINICAL_DATA
+              name: 'Clinical Data'
+            - id: ENCOUNTER_NOTIFICATION_SERVICES
+              name: 'Encounter Notification Services'
+            - id: PATIENT_GENERATED_HEALTH_DATA
+              name: 'Patient Generated Health Data'
+            - id: ENTITY_ENTITY_DATA_SHARING
+              name: 'Entity-entity data sharing'
+            - id: QUALIFIED_HEALTH_INFORMATION_NETWORK
+              name: 'Qualified Health Information Network'
+            - id: ACCESS_ENABLEMENT
+              name: 'Access Enablement'
+            - id: EXTRACT_TRANSFORM_LOAD
+              name: 'Extract, Transform and Load (ETL)'
+        - id: ANALYTICS
+          name: 'Analytics'
+          children:
+            - id: PATIENT_PRACTICE_INSIGHTS
+              name: 'Patient and Practice Insights'
+            - id: DATA_QUALITY
+              name: 'Data Quality'
+            - id: DATA_WAREHOUSING
+              name: 'Data Warehousing'
+            - id: EPISODE_GROUPERS
+              name: 'Episode Groupers'
+            - id: ACTUARIAL_SERVICES
+              name: 'Actuarial Services'
+        - id: AUTOMATION
+          name: 'Automation'
+          children:
+            - id: MACHINE_LEARNING
+              name: 'Machine Learning'
+            - id: ARTIFICIAL_INTELLIGENCE_NLP
+              name: 'Artificial Intelligence / NLP'
+            - id: ROBOTIC_PROCESS_AUTOMATION
+              name: 'Robotic Process Automation'
+        - id: HEALTHCARE_ECONOMICS
+          name: 'Healthcare Economics'
+          children:
+            - id: COST_OF_CARE_MODELING
+              name: 'Cost of Care Modeling'
+            - id: CONTRACT_PERFORMANCE_STRATEGIC_PLANNING
+              name: 'Contract Performance and Strategic Planning'
+            - id: UNDERWRITING
+              name: 'Underwriting'
+    - id: REGULATORY_COMPLIANCE
+      name: 'Regulatory and Compliance'
+      children:
+        - id: GOVT_AND_COMMERCIAL_PROGRAMS
+          name: 'Government and Commercial Programs'
+          children:
+            - id: GRANT_WRITING
+              name: 'Grant Writing'
+            - id: CMMI_MODEL_EVALUATION
+              name: 'CMMI Model Evaluation'
+            - id: TRAINING_EDUCATION
+              name: 'Training and Education'
+        - id: SECURITY
+          name: 'Security'
+        - id: PRIVACY_CONFIDENTIALITY
+          name: 'Privacy and Confidentiality'
+        - id: CYBERSECURITY
+          name: 'Cybersecurity'
+        - id: AUDITS_AND_COMPLIANCE
+          name: 'Audits and Compliance'
+          children:
+            - id: CLINICAL_SITE_VISITS
+              name: 'Clinical Site Visits'
+            - id: PAYER_FINANCIAL_COMPLIANCE_AUDITS
+              name: 'Payer Financial/Compliance Audits'
+            - id: PAYOR_CLINICAL_AUDITS
+              name: 'Payor Clinical Audits'
+        - id: PLAN_SUBMISSION
+          name: 'Plan Submission'
+          children:
+            - id: BENEFITS
+              name: 'Benefits'
+            - id: PRICING
+              name: 'Pricing'
+            - id: SERVICE_AUTHORIZATION_RULES
+              name: 'Service Authorization Rules'
+            - id: NETWORK_DEVELOPMENT
+              name: 'Network Development'
+        - id: LICENSURE
+          name: 'Licensure'
+          children:
+            - id: FACILITY_LICENSURE
+              name: 'Facility Licensure'
+            - id: FACILITY_COMPLIANCE
+              name: 'Facility Compliance'
+            - id: PROVIDER_LICENSURE
+              name: 'Provider Licensure'
+            - id: PROVIDER_COMPLIANCE
+              name: 'Provider Compliance'
+        - id: PRICE_TRANSPARENCY
+          name: 'Price Transparency'
+          children:
+            - id: FEE_SCHEDULE_REGISTERS
+              name: 'Fee Schedule Registers'
+            - id: PRICE_ESTIMATION
+              name: 'Price Estimation'
+            - id: REAL_TIME_ADJUDICATION
+              name: 'Real Time Adjudication'
+    - id: ENABLING_INFRASTRUCTURE
+      name: 'Enabling Infrastructure'
+      children:
+        - id: VALUE_BASED_CARE_SUPPORT
+          name: 'Value Based Care Support'
+          children:
+            - id: CONVENER_PROVIDER_ENABLEMENT
+              name: 'Convener Provider Enablement'
+            - id: RISK_ADJUSTMENT_DOCUMENTATION
+              name: 'Risk Adjustment and Documentation'
+            - id: QUALITY_MEASURES_STAR_MEASURES
+              name: 'Quality Measures and Star Measures'
+            - id: OPTIMIZED_MEDICATION_MGMT
+              name: 'Optimized Medication Management'
+            - id: MERGERS_ACQUISITIONS_AGGREGATION
+              name: 'Mergers, Acquisitions, and Aggregation'
+        - id: OPTIMIZING_PERFORMANCE
+          name: 'Optimizing Performance'
+          children:
+            - id: MGMT_SERVICES_ORGANIZATION
+              name: 'Management Services Organization'
+            - id: FINANCIAL_INCENTIVES_REWARDS
+              name: 'Financial Incentives Rewards'
+            - id: SALES_CRM_TOOLS
+              name: 'Sales CRM Tools'
+            - id: CONTRACT_MGMT_SOLUTION
+              name: 'Contract Management Solution'
+        - id: MARKETPLACE
+          name: 'Marketplace'
+          children:
+            - id: CUSTOMER_ACQUISITION_GROWTH
+              name: 'Customer Acquisition and Growth'
+            - id: CONSUMER_GOODS
+              name: 'Consumer Goods'
+            - id: PRODUCT_SERVICES
+              name: 'Product and Services'
+        - id: PATIENT_COORDINATION
+          name: 'Patient Coordination'
+          children:
+            - id: DIRECT_TO_CONSUMER_MODELS
+              name: 'Direct to Consumer Models'
+            - id: PATIENT_ACTIVATION
+              name: 'Patient Activation'
+            - id: DIRECT_TO_PROVIDER_MODELS
+              name: 'Direct to Provider Models'
+            - id: ADDRESSING_SDOH
+              name: 'Addressing SDOH'
+        - id: NETWORK_MGMT
+          name: 'Network Management'
+          children:
+            - id: POST_ACUTE_SERVICES
+              name: 'Post Acute Services'
+            - id: SERVICE_UTILIZATION_MGMT
+              name: 'Service Utilization Management'
+            - id: SECOND_OPINIONS
+              name: 'Second Opinions'
+            - id: CURBSIDE_CONSULTATION
+              name: 'Curbside Consultation'
+            - id: APPROPRIATE_SITE_OF_SERVICE
+              name: 'Appropriate Site of Service'
+
+ceo-data:
+  valid-locations: atlanta,austin,boise,boston,denver/boulder,indianapolis,minneapolis,nyc,orlando/jacksonville,philadelphia,portland,reno,san francisco,seattle,st. louis,tampa,washington dc,raleigh
+
+gdrive-revoke-permission-notification:
+  recipients: antonio.bastardo@redesignhealth.com, kyle.copeland@redesignhealth.com, nancy.heiss@redesignhealth.com
+
+xcloud:
+  url: https://redesignhealth--uat.sandbox.my.site.com/OpCo/
+  only-offer-to: >
+    q4mFw6H5,
+    u8RYypOd,
+    RsDChALm,
+    6a26GLoT,
+    QtCXCoJk
+prometheus-service:
+  base-url: https://mimir.core.redesignhealth.com/prometheus
+  instance: "company-api.dev.redesignhealth.com:80"
+rocket-chat-service:
+  base-url:
+  notifications:
+    username:
+    password:
+    schedule: 5

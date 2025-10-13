@@ -1,0 +1,40 @@
+snowflake:
+  account: EGA88532
+  login: OCC_EXT_CONSUMER 
+  host: ega88532.us-east-1.snowflakecomputing.com
+  public: classpath:rsa_key.pub
+  private: arn:aws:secretsmanager:us-east-1:082533342824:secret:dev/opcofin/snowflake-priv-DzGCGi
+  passphrase: arn:aws:secretsmanager:us-east-1:082533342824:secret:dev/opcofin/snowflake-priv-pass-OLFm4r
+  transaction-table: NS_TRANSACTION_DETAIL_DUMMY
+
+webhook:
+  endpoint: arn:aws:secretsmanager:us-east-1:082533342824:secret:dev/opcofin/brooklyndata-overalls-transactions-6P3h0Q
+  state: redesignhealth-opcofin-dev
+
+subsidiaries:
+  disallow: 1, 4
+  overalls: 6
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.cache: INFO
+    org.springframework.web: INFO
+    rhsp.opcofin: DEBUG
+
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+server:
+  error:
+    include-message: always

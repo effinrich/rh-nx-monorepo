@@ -1,0 +1,81 @@
+version: '3'
+services:
+  company-api:
+    build: .
+    environment:
+      - 'SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-docker-compose}'
+      # uncomment below lines to run locally aws commands
+      # - 'AWS_ACCESS_KEY_ID=<Info from aws console>
+      # - 'AWS_SECRET_ACCESS_KEY=<Info from aws console>
+      # - 'AWS_SESSION_TOKEN=<Info from aws console>
+    ports:
+      - '8080:8080'
+      #- '5005:5005' uncomment to debug the application with the IDE
+    depends_on:
+      - cockroachdb
+      - opensearch
+  cockroachdb:
+    image: cockroachdb/cockroach:v22.2.6
+    ports:
+      - '26257:26257'
+      - '8081:8080'
+    volumes:
+      - cockroachdb-data:/cockroach/cockroach-data
+    command: start-single-node --insecure
+  opensearch:
+    image: opensearchproject/opensearch:latest
+    environment:
+      - discovery.type=single-node # Nodes to look for when discovering the cluster
+      - bootstrap.memory_lock=true # Disable JVM heap memory swapping
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx2g # Set min and max JVM heap sizes to at least 50% of system RAM
+      - DISABLE_INSTALL_DEMO_CONFIG=true # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
+      - DISABLE_SECURITY_PLUGIN=true # Disables security plugin
+    ulimits:
+      memlock:
+        soft: -1 # Set memlock to unlimited (no soft or hard limit)
+        hard: -1
+      nofile:
+        soft: 65536 # Maximum number of open files for the opensearch user - set to at least 65536
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data # Creates volume called opensearch-data1 and mounts it to the container
+    ports:
+      - '9200:9200' # REST API
+  rocketchat:
+    platform: linux/amd64
+    image: registry.rocket.chat/rocketchat/rocket.chat:6.4.8
+    restart: always
+    environment:
+      MONGO_URL: 'mongodb://mongodb:27017/rocketchat?replicaSet=rs0&directConnection=true'
+      MONGO_OPLOG_URL: 'mongo://mongodb:27017/local?replicaSet=rs0&directConnection=true'
+      ROOT_URL: 'http://localhost:3000'
+      PORT: 3000
+      DEPLOY_METHOD: docker
+      DEPLOY_PLATFORM: ${DEPLOY_PLATFORM:-}
+      REG_TOKEN: ${REG_TOKEN:-}
+    depends_on:
+      - mongodb
+    expose:
+      - '3000'
+    ports:
+      - '0.0.0.0:3000:3000'
+
+  mongodb:
+    image: zcube/bitnami-compat-mongodb:${MONGODB_VERSION:-5.0}
+    platform: linux/arm64
+    volumes:
+      - mongodb_data:/bitnami/mongodb
+    environment:
+      MONGODB_REPLICA_SET_MODE: primary
+      MONGODB_REPLICA_SET_NAME: 'rs0'
+      MONGODB_PORT_NUMBER: 27017
+      MONGODB_INITIAL_PRIMARY_HOST: 'mongodb'
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: 27017
+      MONGODB_ADVERTISED_HOSTNAME: 'mongodb'
+      MONGODB_ENABLE_JOURNAL: 'true'
+      ALLOW_EMPTY_PASSWORD: 'yes'
+
+volumes:
+  opensearch-data:
+  cockroachdb-data:
+  mongodb_data:

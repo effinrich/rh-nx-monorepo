@@ -1,0 +1,28 @@
+=== Library
+A collection of xref:library-content.adoc#_library_content[Library Content]
+
+==== Query
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::library/query[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Get
+Retrieve a single library.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::library/library-id[snippets='response-fields,http-request,http-response']
+
+==== Create
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::library/create[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Query contents
+Role requirement: `ROLE_OP_CO_USER`
+
+Retrieve content from a specific library (with full text search).
+If it is sent "q" parameter the API will do a full text search using our OpenSearch index.
+
+operation::library/query-content[snippets='query-parameters,response-fields,http-request,http-response']
+

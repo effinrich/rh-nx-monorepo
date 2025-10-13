@@ -1,0 +1,77 @@
+cockroach:
+  host: free-tier14.aws-us-east-1.cockroachlabs.cloud
+  db: defaultdb
+  cluster: prod-plat-ds-6343
+  ## Folder location is the same locally and in Docker image
+  sslRootCert: ./certs/prod-plat-ds.crt
+
+spring:
+  jpa:
+    show-sql: false
+  datasource:
+    url: jdbc:postgresql://${cockroach.host}:26257/${cockroach.db}?sslmode=verify-full&sslrootcert=${cockroach.sslRootCert}&options=--cluster=${cockroach.cluster}
+    username: opco-service
+    # password supplied through secret manager
+
+aws:
+  enabled: true
+  secret:
+    name: prod/company-api
+  sqs:
+    jiraIssueQueue: https://sqs.us-east-1.amazonaws.com/745072323837/jirawebhook.fifo
+  search:
+    service: es
+  s3:
+    assets:
+      bucket: rh-prod-assets
+      url: https://assets.redesignhealth.com
+
+jira:
+  enabled: true
+  username: jiraplatformservice@redesignhealth.com
+  request:
+    user:
+      project: 10106 # DP (DevOps Platform)
+    infrastructure:
+      project: 10106 # DP (DevOps Platform)
+
+search:
+  hostname: vpc-search-migrated-gybmh4pxlmuim56q25oq5oox2e.us-east-1.es.amazonaws.com
+
+notification:
+  portal:
+    hostname: https://platform.redesignhealth.com
+  advise:
+    hostname: https://third-party-network.redesignhealth.com
+
+google-drive-lambda:
+  hostname: https://v4dpmmyj5axaperrq3bug3pi7y0ogflc.lambda-url.us-east-1.on.aws
+mkdocs-lambda:
+  hostname: https://v4dpmmyj5axaperrq3bug3pi7y0ogflc.lambda-url.us-east-1.on.aws
+
+company-vendor-change:
+  recipients: vendors@redesignhealth.com
+
+library-feedback:
+  recipients: platform-library-feedback@redesignhealth.com
+
+xcloud:
+  url: https://redesignhealth.my.site.com/OpCo
+  only-offer-to: >
+    HVflLrdo,
+    317XU0m2,
+    RsDChALm,
+    6a26GLoT,
+    QtCXCoJk,
+    5eEUtJTi,
+    2QNF7QTh,
+    h1T4217k,
+    rgQr3jTs,
+    knrl3AvX,
+    HRQlJcI6,
+    WS8QTSZW,
+    dv9m79mK,
+    M6yABxYZ
+
+prometheus-service:
+  instance: company-api.redesignhealth.com:80

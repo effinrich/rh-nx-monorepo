@@ -1,0 +1,35 @@
+cockroach:
+  host: free-tier14.aws-us-east-1.cockroachlabs.cloud
+  db: defaultdb
+  cluster: dev-plat-ds-5227
+  ## Folder location is the same locally and in Docker image
+  sslRootCert: ./certs/dev-plat-ds.crt
+
+spring:
+  jpa:
+    show-sql: false
+  datasource:
+    url: jdbc:postgresql://${cockroach.host}:26257/${cockroach.db}?sslmode=verify-full&sslrootcert=${cockroach.sslRootCert}&options=--cluster=${cockroach.cluster}
+    username: opco-service
+    # password supplied through secret manager
+
+aws:
+  secret:
+    name: dev/company-api
+  enabled: true
+  s3:
+    assets:
+      bucket: rh-core-assets
+      url: https://assets.core.redesignhealth.com
+jira:
+  enabled: true
+  username: jiraplatformservice@redesignhealth.com
+  # password supplied through secret manager
+
+search:
+  hostname: x6d6visv1vt2zsszw2i7.us-east-1.aoss.amazonaws.com
+
+google-drive-lambda:
+  hostname: https://jr5xrr4ma4bnuiwoc6dqylgrym0rmfun.lambda-url.us-east-1.on.aws
+mkdocs-lambda:
+  hostname: https://jr5xrr4ma4bnuiwoc6dqylgrym0rmfun.lambda-url.us-east-1.on.aws

@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  pull_request:
+    types:
+      - synchronize
+      - opened
+    paths:
+      - 'apps/**'
+
+jobs:
+  get-projects:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v3
+      - id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Install jq
+        run: |
+          sudo apt update -y
+          sudo apt install jq -y
+
+      - name: Get affected projects
+        id: projects
+        run: |
+          projects="$(npx nx show projects --affected -t build-image --exclude='opcofin' --json | jq -c '.')"
+          echo \'$projects\'
+          echo "matrix=$projects" >> $GITHUB_OUTPUT
+
+    outputs:
+      projects: ${{ steps.projects.outputs.matrix }}
+
+  build:
+    uses: ./.github/workflows/push-to-ecr.yaml
+    needs: [get-projects]
+    permissions:
+      contents: read
+      pull-requests: write
+      repository-projects: read
+      packages: read
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJSON(needs.get-projects.outputs.projects) }}
+    with:
+      region: us-east-1
+      environment: dev
+      serviceName: ${{ matrix.project }}
+      tag: ${{ github.event.pull_request.number }}
+    secrets: inherit

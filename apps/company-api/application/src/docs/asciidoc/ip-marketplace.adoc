@@ -1,0 +1,81 @@
+=== Ip Marketplace
+Set of operation to admin the IP records information in a marketplace
+
+==== Create
+Create an IP record in the marketplace
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::ip-marketplace/create[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Update
+Update an IP record in the marketplace
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::ip-marketplace/update[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Query
+Get results from OpenSearch by the below attributes
+
+* name
+* executive summary
+* disease applying
+
+Filters:
+
+* organOfFocus
+* organizationType,
+* region
+* specialities
+* technologyType.
+
+The results are filtered by seller or buyer depending on the user type requester to the endpoint
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::ip-marketplace/query[snippets='response-fields,http-request,http-response']
+
+===== Query with request contact info
+Added  the query parameter 'expand' with the value 'requests' to get the info related to the requests (Buyer)
+
+operation::ip-marketplace/query-with-request-contact-info[snippets='response-fields,http-request,http-response']
+
+==== Query with metrics
+Added  the query parameter 'expand' with the value 'metrics' to get the info related to the requests (Seller)
+
+operation::ip-marketplace/query-with-metrics[snippets='response-fields,http-request,http-response']
+
+==== Get
+Obtains the details for a IP record. If the requester is a buyer creates a metric for prometheus
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::ip-marketplace/get-ip-marketplace-by-id[snippets='response-fields,http-request,http-response']
+
+==== Get with metrics and request contact info
+Obtains metrics for the IP record and who has requested info of this.
+
+operation::ip-marketplace/get-ip-marketplace-by-id-with-metrics-and-requests[snippets='response-fields,http-request,http-response']
+
+
+==== Request/Release contact info
+Create an entry to track if for an IP record was requested or released the seller contact info
+
+The buyerEmail is required if the requested is a SELLER
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::ip-marketplace/process-contact-info[snippets='response-fields,http-request,http-response']
+
+==== Filters
+Returns the filters used in the main page for the feature
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::ip-marketplace/filters[snippets='response-fields,http-request,http-response']
+
+==== Delete
+Remove a IP record from Database and OpenSearch
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::ip-marketplace/delete[snippets='response-fields,http-request,http-response']

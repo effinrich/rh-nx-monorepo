@@ -1,0 +1,43 @@
+{
+"version": "2.0",
+"routeKey": "$default",
+"rawPath": "/",
+"rawQueryString": "arg1=val1&arg2=val2",
+"headers": {
+    "sec-fetch-mode": "navigate",
+    "x-amzn-tls-version": "TLSv1.2",
+    "sec-fetch-site": "none",
+    "accept-language": "en-US,en;q=0.5",
+    "x-forwarded-proto": "https",
+    "x-forwarded-port": "443",
+    "x-forwarded-for": "2600:1700:6b0:2500:3004:9ac7:fbae:49ab",
+    "sec-fetch-user": "?1",
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "x-amzn-tls-cipher-suite": "ECDHE-RSA-AES128-GCM-SHA256",
+    "x-amzn-trace-id": "Root=1-635aad80-2dbaa2d901c269331682a582",
+    "host": "ylo4ar2bbu4hxs54qxbl62kim40omifc.lambda-url.us-east-1.on.aws",
+    "upgrade-insecure-requests": "1",
+    "accept-encoding": "gzip, deflate, br",
+    "sec-fetch-dest": "document",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:106.0) Gecko/20100101 Firefox/106.0"
+},
+"requestContext": {
+    "accountId": "anonymous",
+    "apiId": "ylo4ar2bbu4hxs54qxbl62kim40omifc",
+    "domainName": "ylo4ar2bbu4hxs54qxbl62kim40omifc.lambda-url.us-east-1.on.aws",
+    "domainPrefix": "ylo4ar2bbu4hxs54qxbl62kim40omifc",
+    "http": {
+    "method": "GET",
+    "path": "/",
+    "protocol": "HTTP/1.1",
+    "sourceIp": "2600:1700:6b0:2500:3004:9ac7:fbae:49ab",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:106.0) Gecko/20100101 Firefox/106.0"
+    },
+    "requestId": "c07b9f36-460b-49a1-aaa7-8a1fff5422e5",
+    "routeKey": "$default",
+    "stage": "$default",
+    "time": "27/Oct/2022:16:10:40 +0000",
+    "timeEpoch": 1666887040060
+},
+"isBase64Encoded": false
+}

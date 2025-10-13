@@ -1,0 +1,88 @@
+{
+  "properties": {
+    "name": {
+      "type": "text",
+      "fields": {
+        "raw": {
+          "type": "search_as_you_type"
+        }
+      }
+    },
+    "executive_summary": {
+      "type": "text",
+      "fields": {
+        "raw": {
+          "type": "search_as_you_type"
+        }
+      }
+    },
+    "disease": {
+      "type": "text",
+      "fields": {
+        "raw": {
+          "type": "search_as_you_type"
+        }
+      }
+    },
+    "organization_type": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "region": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "specialities": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "technology_area": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "organ_of_focus": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "company_id": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "created_date": {
+      "type": "date",
+      "format": "strict_date_optional_time||epoch_millis"
+    },
+    "status": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,329 @@
+site_name: 'Knowledge Hub'
+use_directory_urls: false
+nav:
+  - Expert Knowledge Library:
+      - Company Foundations:
+          - Corporate Governance:
+              - Overview: expert-knowledge-library/company-foundations/corporate-governance/0-corporate-governance-overview.md
+              - Introduction to Redesign Governance: expert-knowledge-library/company-foundations/corporate-governance/introduction-to-redesign-governance.md
+              - Best Practices for Managing Your Cap Table Post Financing: expert-knowledge-library/company-foundations/corporate-governance/cap-table-best-practices.md
+              - "Managing Your Company's Treasury Strategy": expert-knowledge-library/company-foundations/corporate-governance/managing-company-treasury-strategy.md
+              - Governance Playbook: expert-knowledge-library/company-foundations/corporate-governance/acceleration-governance-playbook.md
+              - 'Actions Requiring Board Approval Tool': expert-knowledge-library/company-foundations/corporate-governance/actions-requiring-board-approval.md
+              - 'Option Grants Checklist Tool': expert-knowledge-library/company-foundations/corporate-governance/option-grant-checklist-resource.md
+              - 'Board Meeting (with Option Grants) Template': expert-knowledge-library/company-foundations/corporate-governance/skeleton-board-meeting.md
+              - 'Board of Directors Meeting Presentation (Acceleration) Template': expert-knowledge-library/templates/board-of-directors-presentation.md
+              - 'Video: Donna Wells presents to the Corp Governance CEO Pod': expert-knowledge-library/videos/corp-governance-ceo-pod-wells.md
+          - Tax Considerations:
+              - Overview: expert-knowledge-library/company-foundations/tax-considerations/0-tax-considerations-overview.md
+              - Tax Playbook: expert-knowledge-library/company-foundations/tax-considerations/tax-considerations-playbook.md
+              - Address Change Toolkit: expert-knowledge-library/company-foundations/tax-considerations/opco-hq-toolkit.md
+              - Section 174 Costs Guidance: expert-knowledge-library/company-foundations/tax-considerations/tax-174-research-experimental-costs.md
+              - 'Section 174 Costs Calculation Template': expert-knowledge-library/company-foundations/tax-considerations/tax-174-worksheet.md
+          - Legal Considerations:
+              - Overview: expert-knowledge-library/company-foundations/legal-considerations/0-legal-considerations-overview.md
+              - Advertising and Marketing of Health Care Services: expert-knowledge-library/company-foundations/legal-considerations/advertising-marketing-healthcare.md
+              - How to Approach Intellectual Property at Your Company: expert-knowledge-library/company-foundations/legal-considerations/intellectual-property.md
+              - Joint Ventures White Paper: expert-knowledge-library/company-foundations/legal-considerations/joint-ventures-white-paper.md
+              - 'Eliminating Kickbacks in Recovery Act (EKRA): An Additional Fraud and Abuse Consideration Related to Drug Treatment and Laboratory Services': expert-knowledge-library/company-foundations/legal-considerations/ekra-white-paper.md
+              - Value Based Care Billing Codes Analysis: expert-knowledge-library/company-foundations/legal-considerations/value-based-care-billing-codes-analysis.md
+              - Best Practices for Using Legal Document Templates: expert-knowledge-library/company-foundations/legal-considerations/best-practices-using-doc-templates.md
+              - Business Associate Agreements Guide: expert-knowledge-library/company-foundations/legal-considerations/business-associate-agreements-guide.md
+              - 'Business Associate Agreement Template': expert-knowledge-library/templates/baa-covered-entity.md
+              - 'Subcontractor Business Associate Agreement Template': expert-knowledge-library/templates/baa-subcontractor.md
+              - 'Consulting Agreement Template': expert-knowledge-library/templates/consulting-agreement-template.md
+              - 'Advisor Agreement Template': expert-knowledge-library/templates/advisor-agreement-template.md
+              - 'MSO Compliance Plan (short form) Template': expert-knowledge-library/templates/mso-compliance-plan-short.md
+              - 'MSO Compliance Plan (long form) Template': expert-knowledge-library/templates/mso-compliance-plan-long.md
+              - 'OpCo One-Way NDA for Individuals Template': expert-knowledge-library/templates/nda-one-way-for-individuals.md
+              - 'OpCo One-Way NDA for Outside Entities Template': expert-knowledge-library/templates/nda-one-way-for-outside-entities.md
+              - 'OpCo Two-Way NDA for Individuals Template': expert-knowledge-library/templates/nda-two-way-for-individuals.md
+              - 'OpCo Two-Way NDA for Outside Entities Template': expert-knowledge-library/templates/nda-two-way-for-outside-entities.md
+              - 'Partnership Term Sheet Template': expert-knowledge-library/templates/partnership-term-sheet.md
+              - 'Patient Consent to Treatment Template': expert-knowledge-library/templates/patient-consent-for-treatment.md
+              - 'PC Compliance Plan Template': expert-knowledge-library/templates/pc-compliance-plan.md
+              - 'Pilot Agreement Template': expert-knowledge-library/templates/pilot-agreement.md
+              - 'Pilot Agreement MSO/PC Template': expert-knowledge-library/templates/pilot-agreement-msopc.md
+              - 'Pilot Letter of Intent Template': expert-knowledge-library/templates/pilot-letter-of-intent.md
+              - 'Strategic Collaboration Agreement Template': expert-knowledge-library/templates/strategic-collaboration-agreement.md
+              - 'Vendor Agreements Template': expert-knowledge-library/templates/vendor-agreement.md
+              - 'Website Terms and Conditions Template': expert-knowledge-library/templates/website-terms-and-conditions.md
+              - 'Website Privacy Policy Template': expert-knowledge-library/templates/website-privacy-policy.md
+              - 'Employee Handbook Template': expert-knowledge-library/templates/employee-handbook-template.md
+              - 'Managing Outside Counsel Relationships': expert-knowledge-library/company-foundations/legal-considerations/guide-managing-outside-counsel-relationships.md
+              - 'Outside Counsel Evaluation Form Template': expert-knowledge-library/templates/outside-counsel-eval-form.md
+          - Privacy and Security:
+              - Overview: expert-knowledge-library/company-foundations/privacy-and-security/0-privacy-and-security.md
+              - 'Impersonation Attacks: How To Recognize them and Stay Safe': expert-knowledge-library/company-foundations/privacy-and-security/impersonation-recognize.md
+              - 'Impersonation Attacks: Issues, Risks, and Mitigation Strategies': expert-knowledge-library/company-foundations/privacy-and-security/impersonation-mitigation.md
+              - 'Hiring a Chief Information Security Officer': expert-knowledge-library/third-party-resources/open-web/hiring-a-chief-information-security-officer.md
+              - 'Toolkit: Analyzing Telehealth Claims to Assess Program Integrity Risks': expert-knowledge-library/third-party-resources/open-web/analyzing-telehealth-claims.md
+              - '(May 2023) Redrawing the Blueprints for Privacy Compliance in Health Care': expert-knowledge-library/company-foundations/privacy-and-security/redrawing-the-blueprints.md
+              - '(July 2023) Redrawing the Blueprints for Privacy Compliance in Health Care': expert-knowledge-library/company-foundations/privacy-and-security/redrawing-the-blueprints-july-2003.md
+              - 'Video: Promotion vs. Privacy': expert-knowledge-library/videos/growing-healthcare-health-tech-in-a-hipaa-world.md
+              - Guide to Health System Pilots with Bethany Vick: expert-knowledge-library/third-party-resources/paywall-content/guide-to-health-system-pilots.md
+              - 'HIPAA Privacy and Security Policies Template': expert-knowledge-library/templates/hipaa-privacy-and-security-polices.md
+          - Advertising and Marketing Considerations:
+              - Overview: expert-knowledge-library/company-foundations/advertising-and-marketing/0-advertising-and-marketing-overview.md
+              - Best Pratices for Patient Engagement Activities: expert-knowledge-library/company-foundations/advertising-and-marketing/best-practices-for-patient-engagement-activities.md
+              - Best Practices for Securing Dedicated Comms Support: expert-knowledge-library/company-foundations/advertising-and-marketing/best-practices-dedicated-comms-support.md
+              - Advertising and Marketing of Health Care Services: expert-knowledge-library/company-foundations/advertising-and-marketing/advertising-and-marketing-of-health-care-services.md
+              - 'Customer/Patient Endorsement Release Form Template': expert-knowledge-library/templates/endorsement-release-form.md
+      - Go To Market:
+          - Launching Your Market Engagement Journey:
+              - Overview: expert-knowledge-library/go-to-market/launching-market-journey/0-marketing-website-overview.md
+              - Building Your First Marketing Website: expert-knowledge-library/go-to-market/launching-market-journey/building-your-first-marketing-website.md
+              - 'Using a No-Code/Low-Code Website Builder: Squarespace': expert-knowledge-library/go-to-market/launching-market-journey/squarespace.md
+              - 'Legal & Compliance: Setting Up Your Website': expert-knowledge-library/go-to-market/launching-market-journey/setting-up-your-website.md
+              - Pitching Your First B2B Customer: expert-knowledge-library/go-to-market/launching-market-journey/pitching-first-b2b-customer.md
+              - Developing Your Pitch Deck: expert-knowledge-library/go-to-market/launching-market-journey/pitching-b2b-deck.md
+              - 'Beyond the Pitch Checklist Tool': expert-knowledge-library/go-to-market/launching-market-journey/pitch-checklist.md
+              - Crafting Your Own Branded Letterhead and Email Signature: expert-knowledge-library/go-to-market/launching-market-journey/letterhead-and-email-signatures.md
+              - 'RH Branded Letterhead Template': expert-knowledge-library/templates/rh-branded-letterhead-template.md
+              - Crafting Your Value Proposition for Small-to-Medium Provider Practices: expert-knowledge-library/go-to-market/gtm-strategy/crafting-your-value-props-for-smb-practices.md
+              - 'Value Proposition Canvas Exercise Tool': expert-knowledge-library/go-to-market/gtm-strategy/tool-value-proposition-canvas-exercise.md
+              - 'Value Proposition Canvas Template (Google Slide)': expert-knowledge-library/templates/template-value-prop-google-slides.md
+              - Mapping the Landscape of Small-to-Medium Provider Practices: expert-knowledge-library/go-to-market/gtm-strategy/mapping-small-to-medium-provider-practices.md
+              - Mastering a Prospecting Approach for Small-to-Medium Provider Practices: expert-knowledge-library/go-to-market/gtm-strategy/mastering-a-prospecting-approach.md
+              - Integrating with Your Pilot Partner: expert-knowledge-library/go-to-market/gtm-strategy/integrating-with-pilot-partner.md
+              - 'Pilot Tracking and Measures Tool': expert-knowledge-library/templates/tool-pilot-tracking-and-measures.md
+              - "Selling to SMBs, a Founder's Playbook": expert-knowledge-library/third-party-resources/open-web/selling-to-smbs.md
+              - 'User Persona Creator Template(Google Docs)': expert-knowledge-library/templates/template-user-persona-doc.md
+              - 'User Persona Creator Template (Google Slides)': expert-knowledge-library/templates/template-user-persona-slide.md
+              - 'Video: Shawn Mobley Presents to the Go to Market CEO Pod': expert-knowledge-library/videos/gtm-guest-speaker-mobley.md
+              - 'Video: Shai Idelson & Michael Cuello discuss Go To Market Strategy': expert-knowledge-library/videos/gtm-strategy-idelson-cuello.md
+              - 'Video: Rishi Sikka Presents to the Enterprise CEO Pod': expert-knowledge-library/videos/rishi-sikka-presents.md
+              - 'Video: Driving Repeat Referrals -  A Discussion with Kins': expert-knowledge-library/videos/driving-repeat-referrals.md
+              - 'Messaging Ladder Template': expert-knowledge-library/templates/messaging-ladder-template.md
+              - Creating LinkedIn Content to Drive Engagement With Your Company Page: expert-knowledge-library/go-to-market/launching-market-journey/creating-linkedin-content-to-drive-engagement.md
+              - Getting Started with Search Engine Optimization (SEO): expert-knowledge-library/go-to-market/launching-market-journey/getting-started-with-search-engine-optimization.md
+          - Crafting and Executing Your Go-to-Market Strategy:
+              - Overview: expert-knowledge-library/go-to-market/gtm-strategy/0-gtm-strategy-overview.md
+              - Lifcycle CRM Marketing Campaign Set-Up: expert-knowledge-library/go-to-market/gtm-strategy/lifecycle-crm-marketing-campaign.md
+              - Online Reputation Management 101: expert-knowledge-library/go-to-market/gtm-strategy/online-reputation-management.md
+              - Choosing the Right CRM Tool: expert-knowledge-library/go-to-market/gtm-strategy/choosing-right-crm-tool.md
+              - Configuring Your CRM Tool: expert-knowledge-library/go-to-market/gtm-strategy/configuring-crm-tool.md
+              - Mantaining Good Data Hygiene in Your CRM Platform: expert-knowledge-library/go-to-market/gtm-strategy/maintaining-data-in-crm.md
+              - Operationalizing a B2B Sales Funnel: expert-knowledge-library/go-to-market/gtm-strategy/operationalizing-a-b2b-sales-funnel.md
+              - 'Video: CEO Conversations - Incentivizing B2B BD Advisors': expert-knowledge-library/videos/incentivising-b2b-advisors.md
+              - 'OpCo CRM Template': expert-knowledge-library/templates/opco-crm-template.md
+              - Direct Mail Playbook: expert-knowledge-library/go-to-market/gtm-strategy/direct-mail-playbook.md
+              - Cold Email Marketing: expert-knowledge-library/go-to-market/gtm-strategy/cold-email-marketing.md
+              - Local SEO Playbook for Companies: expert-knowledge-library/go-to-market/gtm-strategy/local-seo-playbook.md
+              - Four-Wall Field and Local Marketing Playbook: expert-knowledge-library/go-to-market/gtm-strategy/four-wall-playbook.md
+              - Technical SEO Brief Checklist: expert-knowledge-library/go-to-market/gtm-strategy/technical-brief-seo-checklist.md
+              - Crafting Your Value Proposition for Small-to-Medium Provider Practices: expert-knowledge-library/go-to-market/gtm-strategy/crafting-your-value-props-for-smb-practices.md
+              - 'Value Proposition Canvas Exercise Tool': expert-knowledge-library/go-to-market/gtm-strategy/tool-value-proposition-canvas-exercise.md
+              - 'Value Proposition Canvas Template (Google Slide)': expert-knowledge-library/templates/template-value-prop-google-slides.md
+              - Mapping the Landscape of Small-to-Medium Provider Practices: expert-knowledge-library/go-to-market/gtm-strategy/mapping-small-to-medium-provider-practices.md
+              - Mastering a Prospecting Approach for Small-to-Medium Provider Practices: expert-knowledge-library/go-to-market/gtm-strategy/mastering-a-prospecting-approach.md
+              - Optimizing Your Sales Pipeline for Small-to-Medium Provider Practices: expert-knowledge-library/go-to-market/gtm-strategy/optimizing-your-sales-pipeline.md
+              - 'Expanding Your Small-to-Medium Provider Practice Network': expert-knowledge-library/go-to-market/gtm-strategy/expanding-your-small-to-medium-provider-practice-network.md
+              - Taking Ownership of the Sales Process: expert-knowledge-library/go-to-market/gtm-strategy/taking-ownership-of-sales-process.md
+              - Targeting Your First Customer Segment: expert-knowledge-library/go-to-market/gtm-strategy/targeting-your-first-customer-segment.md
+              - Building a Business Development/Sales Function: expert-knowledge-library/go-to-market/gtm-strategy/building-a-businsess-development-sales-function-2.md
+              - Incentivizing Early Stage Business Development/Sales Hires: expert-knowledge-library/go-to-market/gtm-strategy/incentivizing-early-stage-business2.md
+              - Navigating the Transition to Enterprise Prospects from Small-to-Medium Provider Practices: expert-knowledge-library/go-to-market/gtm-strategy/navigating-the-transition-to-enterprise-prospects.md
+              - "Selling to SMBs, a Founder's Playbook": expert-knowledge-library/third-party-resources/open-web/selling-to-smbs.md
+              - 'User Persona Creator Template (Google Docs)': expert-knowledge-library/templates/template-user-persona-doc.md
+              - 'User Persona Creator Template (Google Slides)': expert-knowledge-library/templates/template-user-persona-slide.md
+              - Guide to Health System Pilots with Bethany Vick: expert-knowledge-library/third-party-resources/paywall-content/guide-to-health-system-pilots.md
+              - 'Social Media Handles Set-Up Tool': expert-knowledge-library/go-to-market/gtm-strategy/social-media-handles-set-up.md
+              - Managing the Pilot Partner Relationship: expert-knowledge-library/go-to-market/gtm-strategy/managing-the-pilot-partner-relationship.md
+              - Implementing Your First Pilot: expert-knowledge-library/go-to-market/gtm-strategy/implementing-your-first-pilot.md
+              - Designing and Planning Your First Pilot: expert-knowledge-library/go-to-market/gtm-strategy/designing-and-planning-your-first-pilot.md
+              - Integrating with Your Pilot Partner: expert-knowledge-library/go-to-market/gtm-strategy/integrating-with-pilot-partner.md
+              - 'Pilot Tracking and Measures Tool': expert-knowledge-library/templates/tool-pilot-tracking-and-measures.md
+              - 'Early Partner Contribution Scorecard Template': expert-knowledge-library/templates/early-partner-contribution.md
+              - How to analyze public healthcare datasets (even if you're non-technical): expert-knowledge-library/third-party-resources/open-web/analyze-publish-healthcare-datasets.md
+              - 'Commercializing AI in Healthcare: The Jobs to be Done': expert-knowledge-library/third-party-resources/open-web/commericializing-ai-in-healthcare.md
+              - 'Video: How to Get Noticed by Research Analysts and Why it Matters': expert-knowledge-library/videos/how-to-get-noticed-by-research-analysts.md
+              - 2023 Product Benchmarks (OpenView Advisors): expert-knowledge-library/third-party-resources/open-web/2023-product-benchmark-openview-advisors.md
+              - 'Pipeline Performance and Tracking Tool': expert-knowledge-library/go-to-market/gtm-strategy/pipeline-performance-tracking.md
+              - "Video: Product Strategy Lunch and Learn Series: Jasper's Go-To-Market Strategy": expert-knowledge-library/videos/product-strategy-lunch-and-learn-series-jaspers-go-to-market-strategy.md
+          - MSO/PC Resources:
+              - Overview: expert-knowledge-library/go-to-market/mso-pc/0-mso-pc-overview.md
+              - MSO/PC Threshold Questions: expert-knowledge-library/go-to-market/mso-pc/mso-pc-questions.md
+              - MSO/PC Best Practices: expert-knowledge-library/go-to-market/mso-pc/mso-pc-best-practices.md
+              - MSO/PC Formation: expert-knowledge-library/go-to-market/mso-pc/mso-pc-formation.md
+              - MSO/PC Checklist: expert-knowledge-library/templates/mso-checklist.md
+              - 'MSO Compliance Plan Template (short form)': expert-knowledge-library/templates/mso-compliance-plan-short-a.md
+              - 'PC Compliance Plan Template': expert-knowledge-library/templates/pc-compliance-plan-a.md
+              - 'MSO Compliance Plan Template(long form)': expert-knowledge-library/templates/mso-compliance-plan-long-a.md
+              - 'Video: MSO/PC Structure "Fireside Chat" for CEOs': expert-knowledge-library/videos/mso-pc-structure-fireside-chat.md
+              - 'Video: Corporate Practice of Medicine': expert-knowledge-library/videos/corporate-practice-of-medicine.md
+      - Team Construction and Management:
+          - Constructing Your Founding Team:
+              - Overview: expert-knowledge-library/team-construction-management/constructing-your-founding-team/0-constructing-your-founding-team.md
+              - Building Your Founding Team: expert-knowledge-library/team-construction-management/constructing-your-founding-team/building-your-founding-team.md
+              - Founding Chief of Staff Job Family Reference Guide: expert-knowledge-library/team-construction-management/constructing-your-founding-team/founding-chief-of-staff-job-family-guide.md
+              - 'Business Development/Sales Job Family Reference Guide': expert-knowledge-library/team-construction-management/constructing-your-founding-team/business-development-job-family-reference-guide.md
+              - Clinical Operations Job Family Reference Guide: expert-knowledge-library/team-construction-management/constructing-your-founding-team/clinical-operations-job-family-reference-guide.md
+              - Operations Job Family Reference Guide: expert-knowledge-library/team-construction-management/constructing-your-founding-team/operations-job-family-reference-guide.md
+              - Product Job Family Reference Guide: expert-knowledge-library/team-construction-management/constructing-your-founding-team/product-job-family-reference-guide.md
+              - Founding Team Design Exercise: expert-knowledge-library/templates/founding-team-design-exercise.md
+              - Founding Team Member Onboarding Plan: expert-knowledge-library/templates/founding-team-onboarding-plan.md
+              - People Experience Onboarding Items: expert-knowledge-library/team-construction-management/kickstarting-your-team-building-journey/people-experience-onboarding-items.md
+              - How to Hire a 1099 Consultant: expert-knowledge-library/team-construction-management/kickstarting-your-team-building-journey/hire-1099-consultant.md
+              - Deciding to Work with a Creative Freelancer: expert-knowledge-library/team-construction-management/kickstarting-your-team-building-journey/deciding-to-work-with-creative-freelancer-a.md
+              - Sourcing the Right Creative Freelance Talent: expert-knowledge-library/team-construction-management/kickstarting-your-team-building-journey/sourcing-the-right-creative-freelance-talentt-a.md
+              - Talent Acquisition 101: expert-knowledge-library/team-construction-management/kickstarting-your-team-building-journey/talent-acquisition-101.md
+              - Managing Creative Freelancers: expert-knowledge-library/team-construction-management/constructing-your-founding-team/managing-creative-freelancers.md
+              - 'Scope of Work Template': expert-knowledge-library/templates/scope-of-work.md
+              - 'Creative Brief Template': expert-knowledge-library/templates/creative-brief.md
+              - '1-1 Agenda and Guidance Template': expert-knowledge-library/templates/one-on-one-guidance.md
+          - Growing Your Team and Operations:
+              - Overview: expert-knowledge-library/team-construction-management/growing-your-team-and-operations/0-growing-your-team-and-operations-overview.md
+              - "Navigating Workforce Decisions: Contractors vs. Employees FAQs": expert-knowledge-library/team-construction-management/growing-your-team-and-operations/navigating-workforce-decisions.md
+              - Building a Performance Framework: expert-knowledge-library/team-construction-management/growing-your-team-and-operations/build-performance-framework.md
+              - Performance Reviews 101: expert-knowledge-library/team-construction-management/growing-your-team-and-operations/performance-review-101.md
+              - Building a Business Development/Sales Function: expert-knowledge-library/team-construction-management/growing-your-team-and-operations/building-a-businsess-development-sales-function.md
+              - Incentivizing Early Stage Business Development/Sales Hires: expert-knowledge-library/team-construction-management/growing-your-team-and-operations/incentivizing-early-stage-business.md
+              - Clinical Recruiting Enablement: expert-knowledge-library/team-construction-management/constructing-your-founding-team/clinical-recruiting-enablement.md
+              - 'Channels of Growth: The Ultimate Guide to Building & Structuring a Sales Team': expert-knowledge-library/third-party-resources/open-web/channels-of-growth.md
+              - Notification Regarding Upcoming Immigration Form I-9 Changes: expert-knowledge-library/team-construction-management/growing-your-team-and-operations/notification-about-i9.md
+              - 'Fireside chat: Provider Staffing - 1099 vs. W2s with Kurt Knight, COO of Amwell': expert-knowledge-library/videos/fireside-chat-1099-vs-w2.md
+              - "Lessons from One of the World's Top Executive Recruiters": expert-knowledge-library/third-party-resources/open-web/lessons-from-one-of-the-world-top-executive-recruiters.md
+              - 'OpCo Employee Onboarding Welcome Deck Template': expert-knowledge-library/templates/opco-employee-onboarding-welcome-deck.md
+              - 'Development and Growth Plans Template': expert-knowledge-library/templates/development-and-growth-plans.md
+              - 'Performance Review Cycles Template': expert-knowledge-library/templates/performance-review-cycles.md
+              - 'Peformance Review for People Leaders Template': expert-knowledge-library/templates/performance-review-cycles-people-leaders.md
+          - Job Post Templates and At-Home Exercises:
+              - Overview: expert-knowledge-library/team-construction-management/job-post-templates/0-job-post-templates-overview.md
+              - "Job Description Basic Template": expert-knowledge-library/templates/job-description-basic-template.md
+              - "Director of Business Development/Sales Job Post Template": expert-knowledge-library/templates/director-of-business-development-job-template.md
+              - 'Director of Business Development/Sales At-Home Exercise Template': expert-knowledge-library/templates/director-of-business-development-at-home-exercise.md
+              - "Chief Medical Officer/Medical Director Job Post Template": expert-knowledge-library/templates/chief-medical-officer-job-post.md
+              - Medical Director Whiteboard Exercise Template: expert-knowledge-library/templates/medical-director-whiteboard-exercise.md
+              - Head of Clinical Operations Job Post Template: expert-knowledge-library/templates/head-of-clinical-operations-job-post.md
+              - Director of Clinical Operations Job Post Template: expert-knowledge-library/templates/director-of-clinical-operations-job-post.md
+              - Head of Clinical Operations At-Home Exercise Template: expert-knowledge-library/templates/head-of-clinical-operations-at-home-exercise.md
+              - Director of Engineering Job Post Template: expert-knowledge-library/templates/director-of-engineering-job-post.md
+              - Lead Engineer Job Post Template: expert-knowledge-library/templates/lead-engineer-job-post.md
+              - Head of Operations Job Post Template: expert-knowledge-library/templates/head-of-operations-job-post.md
+              - Head of Operations At-Home Exercise Template: expert-knowledge-library/templates/head-of-operations-at-home-exercise-template.md
+              - Director of Operations Job Post Template: expert-knowledge-library/templates/director-of-operations-job-post.md
+              - Director of Operations At-Home Exercise Template: expert-knowledge-library/templates/director-of-operations-at-home-exercise.md
+              - Head of Product (Non-Technical) Job Post Template: expert-knowledge-library/templates/head-of-product-nontech-job-post.md
+              - Director of Product (Technical) Job Post Template: expert-knowledge-library/templates/director-of-product-technical.md
+              - Head of Product (Technical) Job Post Template: expert-knowledge-library/templates/head-of-product-tech-job-post.md
+              - Head/Director of Product At-Home Exercise Template: expert-knowledge-library/templates/head-of-product-at-home-exercise.md
+              - Founding Chief of Staff Job Post Template: expert-knowledge-library/templates/founding-chief-of-staff-job-template.md
+              - Founding Chief of Staff At-Home Exercise: expert-knowledge-library/templates/founding-chief-of-staff-at-home-exercise.md
+              - Director of Finance At-Home Exercise Template: expert-knowledge-library/templates/director-of-finance-at-home-exercise.md
+      - MVP Product Build:
+          - Beginning Your Product Journey:
+              - Overview: expert-knowledge-library/mvp-product-build/beginning-your-product-journey/0-beginning-your-product-journey.md
+              - AI/ML Considerations for Seed stage Ventures: expert-knowledge-library/mvp-product-build/ai-ml-considerations.md
+              - Choosing the Right Product Partner: expert-knowledge-library/mvp-product-build/beginning-your-product-journey/choosing-right-product-partner.md
+              - Developing Your Executive MVP Strategy: expert-knowledge-library/mvp-product-build/beginning-your-product-journey/developing-executive-mvp-strategy.md
+              - Executive MVP Strategy Worksheet: expert-knowledge-library/templates/executive-strategy-worksheet.md
+              - Crafting Your Executive Product Vision: expert-knowledge-library/mvp-product-build/beginning-your-product-journey/crafting-executive-product-vision.md
+              - "CEO Conversations: Integrating AI into the Product Roadmap": expert-knowledge-library/videos/ceo-conversations-integrating-ai-into-product-roadmap.md
+              - 'Product Vision Worksheet Template': expert-knowledge-library/templates/product-vision-worksheet.md
+              - 'Product Partner Blueprint Template': expert-knowledge-library/templates/product-partner-blueprint.md
+          - Building Blocks of Your Product:
+              - Overview: expert-knowledge-library/mvp-product-build/0-building-mvp-overview.md
+              - Building your Minimal Viable Product (MVP): expert-knowledge-library/mvp-product-build/building-mvp.md
+              - Developing Your Initial Engineering Resource: expert-knowledge-library/mvp-product-build/developing-initial-engineering-strategy.md
+              - Finding an Engineering Agency: expert-knowledge-library/mvp-product-build/finding-an-engineering-agency.md
+              - 'MVP Engineering Resourcing Calculator Tool': expert-knowledge-library/mvp-product-build/mvp-engineering-resourcing-calculator.md
+              - 'Video: Artificial Intelligence: Considerations for Early-Stage Healthcare Companies Fireside Chat': expert-knowledge-library/videos/ai-considerations-for-early-stage-health-startups.md
+      - Fundraising:
+          - Beginning Your Fundraising Journey:
+              - Overview: expert-knowledge-library/fundraising/beginning-your-fundraising-journey/0-beginning-your-fundraising-journey.md
+              - "Channel Partnerships in Healthcare: A Founder's Playbook": expert-knowledge-library/third-party-resources/open-web/channel-partnerships.md
+              - Guide to Health System Pilots with Bethany Vick: expert-knowledge-library/third-party-resources/paywall-content/guide-to-health-system-pilots.md
+              - Tracking and Achieving KPIs & Milestones: expert-knowledge-library/fundraising/beginning-your-fundraising-journey/tracking-and-achieving-kpis-and-milestones.md
+              - "Series A Fundraising in Today's Market": expert-knowledge-library/videos/series-a-fundraising-in-todays-market.md
+              - "Data Room Template": expert-knowledge-library/templates/data-room-template.md
+              - "Email Newsletter Template": expert-knowledge-library/templates/email-newsletter-template.md
+              - "Email Header Template": expert-knowledge-library/templates/email-header-template.md
+              - How To Engage Investors with Quarterly Newsletters: expert-knowledge-library/fundraising/beginning-your-fundraising-journey/how-to-engage-investors-with-quarterly-newsletters.md
+              - "PDF Attachment Newsletter Template": expert-knowledge-library/templates/pdf-attachment-newsletter-template.md
+          - Crafting Your Financial Strategy and Controls:
+              - Overview: expert-knowledge-library/fundraising/crafting-your-financial-strategy-and-controls/0-crafting-your-financial-strategy-and-controls.md
+              - Managing Your Cash Burn to Extend Cash Runway: expert-knowledge-library/fundraising/crafting-your-financial-strategy-and-controls/managing-your-cash-burn.md
+              - Crafting Your Narrative for Investors: expert-knowledge-library/fundraising/crafting-your-financial-strategy-and-controls/crafting-your-narrative-for-investors.md
+              - Delivering a Fundraising Pitch to Investors: expert-knowledge-library/fundraising/crafting-your-financial-strategy-and-controls/delivering-a-fundraiser-pitch-to-investors.md
+              - 'Video: Ajit Singh Presents to the Fundraising CEO Pod': expert-knowledge-library/videos/ajit-singh-presents.md
+              - 'Video: Public Funding for Early-Stage Healthcare Companies "Fireside Chat"': expert-knowledge-library/videos/public-funding-for-early-stage-healthcare-companies.md
+              - 'Sample Due Diligence Request List Template': expert-knowledge-library/fundraising/sample-due-diligence-report.md
+              - 'Investor Pitch Deck Template': expert-knowledge-library/templates/investor-pitch-deck.md
+      - CEO and OpCo Community:
+          - CEO Summit 2023 Videos:
+              - Overview: expert-knowledge-library/videos/0-ceo-summit-videos.md
+              - 'CEO Summit: Introduction': expert-knowledge-library/videos/ceo-summit-introduction.md
+              - 'CEO Summit: Partnering with Healthcare Incumbents & Buyer Appetite for Digital Health Solutions': expert-knowledge-library/videos/ceo-summit-partneing-with-healthcare-incumbents.md
+              - 'CEO Summit: Industry Perspectives on Generative AI and LLM in Healthcare': expert-knowledge-library/videos/ceo-summit-industry-perspectives-on-gernerative-ai.md
+              - 'CEO Summit: Strategies for Growth: Mastering Customer Acquisition and Retention': expert-knowledge-library/videos/ceo-summit-strategies-for-growth.md
+              - 'CEO Summit: A Candid Conversation About the Market Landscape': expert-knowledge-library/videos/ceo-summit-conversation-about-market-landscape.md
+              - 'CEO Summit: Increasing Customer Delight and Employee Surplus to Maximize Profit': expert-knowledge-library/videos/ceo-summit-increasing-customer-delight.md
+              - 'CEO Summit: Partner Panel - Seeking Partner Insights for Success': expert-knowledge-library/videos/ceo-summit-partner-insights.md
+          - CEO Community Resources:
+              - Overview: expert-knowledge-library/ceo-opco-community/0-ceo-community.md
+              - OpCos One Page Overviews: expert-knowledge-library/ceo-opco-community/opco-descriptions.md
+              - 'CEO Conversations: Compensation Plans for B2B Salespeople': expert-knowledge-library/videos/ceo-conversations-compensation-plans-for-b2b-salespeople.md
+              - 'CEO Conversations: Value-Based Care 101 with Syntax Leaders': expert-knowledge-library/videos/ceo-conversations-value-based-care.md
+              - 'Video: CEO Conversations: Lead Generation and Marketing': expert-knowledge-library/videos/ceo-conversations-lead-generation-and-marketing.md
+              - 'Video: CEO Conversations: Professional Employer Organizations (PEOs), Alternatives to PEOs, and Providing Benefits': expert-knowledge-library/videos/ceo-conversations-professional-employer-organizations.md
+  - Platform Developer Library:
+      - Setting Up Your Infrastructure:
+          - Setting Up Your Infrastructure:
+              - Overview: 'infrastructure-doc/00-overview.md'
+              - Getting Started: 'infrastructure-doc/00-starting.md'
+              - Create Your AWS Account: 'infrastructure-doc/01-create-account.md'
+              - Terraform Remote State: 'infrastructure-doc/02-tf-remote-state.md'
+              - IAM Module: 'infrastructure-doc/03-iam.md'
+              - Network Module: 'infrastructure-doc/04-network.md'
+              - WAF Module: 'infrastructure-doc/05-waf.md'
+              - DNS-ACM Modules: 'infrastructure-doc/06-dns-acm.md'
+              - VPN Module: 'infrastructure-doc/07-vpn.md'
+              - GuardDuty-ECR Module: 'infrastructure-doc/08-guardduty-ecr.md'
+              - RDS-ECS Module: 'infrastructure-doc/09-rds-ecs.md'
+              - Vault Module: 'infrastructure-doc/10-vault.md'
+
+theme:
+  name: material
+  palette:
+    primary: deep purple
+
+  features:
+    - navigation.tabs
+    - navigation.sections
+  extra:
+    copyright: test
+
+  icon:
+    admonition:
+      note: fontawesome/solid/note-sticky
+      abstract: fontawesome/solid/book
+      info: fontawesome/solid/circle-info
+      tip: fontawesome/solid/bullhorn
+      success: fontawesome/solid/check
+      question: fontawesome/solid/circle-question
+      warning: fontawesome/solid/triangle-exclamation
+      failure: fontawesome/solid/bomb
+      danger: fontawesome/solid/skull
+      bug: fontawesome/solid/robot
+      example: fontawesome/solid/flask
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.highlight:
+      anchor_linenums: false
+  - pymdownx.snippets:
+      url_download: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - render_swagger
+  - search
+  - redesignhealth-mkdocs
+  - mkdocs-video:
+      is_video: True

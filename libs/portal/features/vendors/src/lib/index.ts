@@ -1,0 +1,6 @@
+export * from './add-company-vendor/add-company-vendor'
+export { default as AddVendor } from './add-vendor/add-vendor'
+export * from './edit-company-vendor/edit-company-vendor'
+export { default as EditVendor } from './edit-vendor/edit-vendor'
+export { default as VendorDetails } from './vendor-details/vendor-details'
+export * from './vendors'

@@ -1,0 +1,50 @@
+{
+  "name": "portal-features-companies",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/portal/features/companies/src",
+  "projectType": "library",
+  "tags": ["scope:portal"],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/portal/features/companies"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/portal/features/companies/**/*.{ts,tsx,js,jsx}"
+        ]
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "fix": false
+        },
+        "format": {
+          "fix": true
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "defaultConfiguration": "ci",
+      "options": {
+        "jestConfig": "libs/portal/features/companies/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "runInBand": true,
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/portal/features/companies"]
+    }
+  }
+}

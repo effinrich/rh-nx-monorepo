@@ -1,0 +1,43 @@
+// .storybook/test-runner.ts
+
+/**
+ * NOTE: This config tests a11y for all stories. It's on 'hold', as this was simply for testing our ability to do so.
+ * TODO: Remove the hold after the UI has been synced to our Figma theme.
+ * /
+
+import { checkA11y, configureAxe, injectAxe } from 'axe-playwright'
+
+import { type TestRunnerConfig, getStoryContext } from '@storybook/test-runner'
+
+/*
+ * See https://storybook.js.org/docs/react/writing-tests/test-runner#test-hook-api-experimental
+ * to learn more about the test-runner hooks API.
+ */
+const a11yConfig: TestRunnerConfig = {
+  async preRender(page) {
+    await injectAxe(page)
+  },
+  async postRender(page, context) {
+    // Get the entire context of a story, including parameters, args, argTypes, etc.
+    const storyContext = await getStoryContext(page, context)
+
+    // Apply story-level a11y rules
+    await configureAxe(page, {
+      rules: storyContext.parameters?.a11y?.config?.rules
+    })
+
+    await checkA11y(page, '#storybook-root', {
+      detailedReport: true,
+      detailedReportOptions: {
+        html: true
+      }
+    })
+
+    // Enable snapshots: the #root element wraps the story
+    const elementHandler = await page.$('#root')
+    const innerHTML = await elementHandler.innerHTML()
+    expect(innerHTML).toMatchSnapshot()
+  }
+}
+
+module.exports = a11yConfig

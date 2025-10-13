@@ -1,0 +1,144 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+  "name": "rh-design-system-devcontainer",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "build": {
+    "dockerfile": "./Dockerfile",
+    "context": "."
+  },
+  // this mount only works for mac, so if windows is having trouble, comment this out
+  "mounts": [
+    // Access local AWS credentials, maven repository, and npm cache
+    "source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.m2,target=/home/vscode/.m2,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.npm,target=/home/vscode/.npm,type=bind,consistency=cached"
+  ],
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "installMaven": true,
+      "version": "17",
+      "jdkDistro": "tem",
+      "mavenVersion": "latest"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "os-provided"
+    },
+    "ghcr.io/devcontainers-contrib/features/nx-npm:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/aws-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "moby": false
+    }
+  },
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "nrwl.angular-console",
+        "esbenp.prettier-vscode",
+        "firsttris.vscode-jest-runner",
+        "dbaeumer.vscode-eslint",
+        "ms-python.autopep8",
+        "ms-azuretools.vscode-docker",
+        "GitHub.vscode-pull-request-github"
+      ],
+      "settings": {
+        "editor.codeActionsOnSave": {
+          // "source.formatDocument": true,
+          "source.fixAll.markdownlint": true,
+          "source.fixAll.eslint": true
+        },
+        "eslint.options": {
+          "extensions": [".js", ".jsx", ".md", ".mdx", ".ts", ".tsx"]
+        },
+
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[jsonc]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "eslint.validate": [
+          "markdown",
+          "mdx",
+          "md",
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
+        ],
+        "eslint.codeAction.showDocumentation": {
+          "enable": false
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "search.exclude": {
+          "**/.git": true,
+          "**/node_modules": true,
+          "/node_modules": true,
+          "**/coverage": true,
+          "**/dist": true,
+          "**/tmp": true,
+          "**/package-lock.lock": true
+        },
+        "files.exclude": {
+          "**/.git": true,
+          "**/.svn": true,
+          "**/.hg": true,
+          "**/CVS": true,
+          "**/.DS_Store": true,
+          "**/Thumbs.db": true,
+          "**/.classpath": true,
+          "**/.project": true,
+          "**/.settings": true,
+          "**/.factorypath": true
+        },
+        "remark.preview.showPreviewOptionInMenuBar": true,
+        "remark.preview.scrollPreviewWithEditor": true,
+        "workbench.colorCustomizations": {
+          "statusBar.noFolderBackground": "#222225",
+          "statusBar.debuggingBackground": "#511f1f",
+          "editor.lineHighlightBackground": "#1073cf2d",
+          "editorBracketMatch.border": "#575B5F",
+          "editor.lineHighlightBorder": "#9fced11f"
+        },
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "typescript.enablePromptUseWorkspaceTsdk": true,
+        "mdx.experimentalLanguageServer": true,
+        "json.schemas": [
+          {
+            "fileMatch": ["/package.json"],
+            "url": "https://json.schemastore.org/package",
+            "schema": true
+          }
+        ]
+      }
+    }
+  }
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}

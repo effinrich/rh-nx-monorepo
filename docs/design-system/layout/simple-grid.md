@@ -1,0 +1,89 @@
+---
+id: simple-grid
+category: layout
+title: SimpleGrid
+package: '@redesignhealth/ui'
+description:
+  SimpleGrid provides a friendly interface to create responsive grid layouts
+  with ease.
+---
+
+# Simple Grid
+
+The `SimpleGrid` component provides a friendly interface to create responsive grid layouts
+with ease.
+
+## Import
+
+```js
+import { SimpleGrid } from '@redesignhealth/ui'
+```
+
+<div style="display:none">## Example
+
+<iframe src="https://dev-design.redesignhealth.com/storybook/shared-ui/iframe.html?id=components-layout-simplegrid--auto-responsive&viewMode=story" width="100%" style="border:1px solid black;"></iframe></div>
+
+## Usage
+
+Specifying the number of columns for the grid layout.
+
+```jsx
+<SimpleGrid columns={2} spacing={10}>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+</SimpleGrid>
+```
+
+You can also make it responsive by passing array or object values into the
+`columns` prop.
+
+```jsx
+// Passing `columns={[2, null, 3]}` and `columns={{sm: 2, md: 3}}`
+// will have the same effect.
+
+<SimpleGrid columns={[2, null, 3]} spacing="40px">
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+</SimpleGrid>
+```
+
+### Auto-responsive grid
+
+To make the grid responsive and adjust automatically without passing `columns`,
+simply pass the `minChildWidth` prop to specify the `min-width` a child should
+have before adjusting the layout.
+
+This uses css grid `auto-fit` and `minmax()` internally.
+
+```jsx
+<SimpleGrid minChildWidth="120px" spacing="40px">
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+</SimpleGrid>
+```
+
+### Changing the spacing for columns and rows
+
+Simply pass the `spacing` prop to change the row and column spacing between the
+grid items. `SimpleGrid` also allows you pass `spacingX` and `spacingY` to
+define the space between columns and rows respectively.
+
+```jsx
+<SimpleGrid columns={2} spacingX="40px" spacingY="20px">
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+  <Box bg="tomato" height="80px"></Box>
+</SimpleGrid>
+```

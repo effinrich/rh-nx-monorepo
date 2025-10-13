@@ -1,0 +1,73 @@
+{
+  "name": "company-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "namedInputs": {
+    "jira-rest-client-src": [
+      "{projectRoot}/jira-rest-client/jira-v2-open-api-v3-spec.json",
+      "{projectRoot}/jira-rest-client/pom.xml"
+    ],
+    "application-src": [
+      "{projectRoot}/application/src",
+      "{projectRoot}/application/pom.xml"
+    ]
+  },
+  "targets": {
+    "build": {
+      "executor": "@nxrocks/nx-spring-boot:install",
+      "options": {
+        "root": "apps/company-api",
+        "ignoreWrapper": true
+      },
+      "inputs": ["application-src", "jira-rest-client-src"],
+      "outputs": [
+        "{projectRoot}/application/target",
+        "{projectRoot}/jira-rest-client/target"
+      ],
+      "dependsOn": ["^install"]
+    },
+    "install": {
+      "executor": "@nxrocks/nx-spring-boot:install",
+      "options": {
+        "root": "apps/company-api",
+        "ignoreWrapper": true
+      },
+      "inputs": ["application-src", "jira-rest-client-src"],
+      "outputs": [
+        "{projectRoot}/application/target",
+        "{projectRoot}/jira-rest-client/target"
+      ],
+      "dependsOn": ["^install"]
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["mvn verify"],
+        "cwd": "apps/company-api"
+      }
+    },
+    "build-image": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "load": true,
+        "context": "apps/company-api",
+        "platforms": ["${NX_CONTAINER_IMAGE_ARCH}"],
+        "tags": ["${NX_CONTAINER_IMAGE_TAG}"]
+      }
+    },
+    "serve": {
+      "executor": "@nxrocks/nx-spring-boot:serve",
+      "options": {
+        "root": "apps/company-api",
+        "ignoreWrapper": true,
+        "args": [
+          "-pl application -Dspring-boot.run.arguments=\"--spring.profiles.active=dev\""
+        ]
+      },
+      "dependsOn": ["install"]
+    }
+  },
+  "implicitDependencies": ["aws-secrets-manager-property-source"],
+  "tags": []
+}

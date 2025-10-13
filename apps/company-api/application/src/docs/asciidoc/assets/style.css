@@ -1,0 +1,68 @@
+/**
+ * Scaffolding from https://github.com/darshandsoni/asciidoctor-skins
+ */
+/**
+ * Required to load fonts
+ */
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+/**
+ * Import base styles
+ */
+@import url(https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css); /* Default asciidoc style framework - important */
+
+:root{
+  --tocTitle: #B9F94E;
+  --link: #9425C9;
+  --linkHover: #a35bcd;
+  --sidebarbackground:#3F1046;
+  --tocLink: #FF7A41;
+  --tocLinkHover: #FC9F77;
+  --heading: #F43D7F;
+  --title: #9425C9;
+}
+
+#header>h1:first-child {
+  color: var(--title);
+}
+
+h1, h2, h3, #toctitle, .sidebarblock>.content>.title, h4, h5, h6 {
+  color: var(--heading);
+}
+
+/* Hack to add Redesign Logo */
+#toc:before {
+  content: ' ';
+  background: url("/public/docs/assets/logo.png");
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+#toc.toc2 #toctitle {
+  margin-top: 120px;
+}
+
+#toc.toc2{
+  background-color:var(--sidebarbackground);
+  /* prevent snapping on differing screen sizes */
+  width: initial;
+}
+
+a {
+  color: var(--link);
+}
+
+a:hover {
+  color: var(--linkHover);
+}
+
+#toc a {
+  color: var(--tocLink)
+}
+
+#toc a:hover {
+  color: var(--tocLinkHover)
+}
+

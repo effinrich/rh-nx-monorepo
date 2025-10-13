@@ -1,0 +1,69 @@
+{
+  "name": "portal-features-research-hub",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/portal/features/research-hub/src",
+  "projectType": "library",
+  "tags": ["scope:portal"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/portal/features/research-hub/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "check-types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx tsc --noEmit -p libs/portal/features/research-hub/tsconfig.lib.json"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "main": "libs/portal/features/research-hub/src/index.ts",
+        "outputPath": "dist/libs/portal/features/research-hub",
+        "outputFileName": "main.js",
+        "tsConfig": "libs/portal/features/research-hub/tsconfig.lib.json",
+        "assets": [
+          {
+            "glob": "libs/portal/features/research-hub/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ],
+        "platform": "node"
+      },
+      "configurations": {
+        "development": {
+          "minify": false
+        },
+        "production": {
+          "minify": true
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/portal/features/research-hub/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "defaultConfiguration": "ci",
+      "configurations": {
+        "ci": {
+          "runInBand": true,
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/portal/features/research-hub"]
+    }
+  }
+}

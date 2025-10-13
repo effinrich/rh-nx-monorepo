@@ -1,0 +1,12 @@
+=== Asset
+Manage assets stored in our CDN.
+
+==== Upload
+Upload assets to our CDN.
+
+When uploading via https://developer.mozilla.org/en-US/docs/Web/API/FormData[form-data], name the key `file`.
+You can upload multiple files by utilizing the `file` key multiple times.
+
+Role requirement: `ROLE_RH_USER`
+
+operation::asset/create[snippets='response-fields,http-request,http-response']

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <!--/*@thymesVar id="person" type="com.redesignhealth.company.api.entity.Person"*/-->
+  <head>
+    <title>You've received feedback on an item in Library</title>
+    <style>
+      body {
+        max-width: 576px;
+      }
+
+      .text {
+        font-size: 16px;
+        font-family: Helvetica, sans-serif;
+        color: #344054;
+        line-height: 24px;
+        margin-top: 0;
+        margin-bottom: 32px;
+      }
+
+      .footer .text {
+        font-size: 14px;
+        color: #98a2b3;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="text">Hello,</p>
+
+      <p
+        class="text"
+        th:text="|A user submitted feedback for ${feedback.title}:|"
+      ></p>
+
+      <p class="text">How can we improve this article?</p>
+      <p class="text" th:text="|${feedback.improvements}|"></p>
+
+      <p class="text">Additional comments</p>
+      <p class="text" th:text="|${feedback.comments}|"></p>
+
+      <p class="text">
+        Need help? Send us an email at <a class="link" href="mailto:platform-support@redesignhealth.com">platform-support@redesignhealth.com</a>.
+      </p>
+    </main>
+    <footer class="footer">
+      <p class="text">
+        This is an automatically generated message from Redesign Health. Replies
+        are not monitored or answered.
+      </p>
+    </footer>
+  </body>
+</html>

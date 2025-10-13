@@ -1,0 +1,25 @@
+{
+  "name": "playwright",
+  "version": "1.0.0",
+  "description": "Playwright e2e tests",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test:platform-portal": "npx playwright test ./tests/platform/ui -c playwright.config.platform-ui.ts",
+    "test:company-api": "npx playwright test ./tests/platform/api -c playwright.config.company-api.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redesignhealth/rh-design-system"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.1.0",
+    "@playwright/test": "^1.38.0",
+    "@reportportal/agent-js-playwright": "^5.1.4",
+    "axios": "^1.5.1"
+  }
+}

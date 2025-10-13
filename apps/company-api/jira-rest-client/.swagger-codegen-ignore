@@ -1,0 +1,13 @@
+# Swagger Codegen Ignore
+# Prevents Codegen tool from generating these files we don't care about
+gradle
+.gitignore
+.travis.yml
+build.gradle
+build.sbt
+git_push.sh
+gradle.properties
+gradlew
+gradlew.bat
+README.md
+settings.gradle

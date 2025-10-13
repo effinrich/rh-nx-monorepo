@@ -1,0 +1,41 @@
+=== Expert Note
+Redesign Health pays to interview experts and records those calls as notes.
+This API is responsible for managing those reports.
+
+==== Query
+Search across all call notes
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::expert-note/query[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Filter Options
+Request available filter options to use in `?filter=key,option`.
+
+In the example below we can filter by `?filter=stakeholders,Government` in xref:research.adoc#_query[]
+
+Role requirement: `ROLE_RH_USER`
+
+operation::expert-note/filters[snippets='response-fields,http-request,http-response']
+
+==== Get
+Get a call note
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::expert-note/get[snippets='response-fields,http-request,http-response']
+
+==== Create
+Create a set of call notes
+
+Role requirement: `ROLE_RH_USER`
+
+operation::expert-note/create[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Delete
+Delete a call note
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::expert-note/delete[snippets='response-fields,http-request,http-response']
+

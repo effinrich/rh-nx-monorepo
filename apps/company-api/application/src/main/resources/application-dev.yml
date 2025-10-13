@@ -1,0 +1,40 @@
+cockroach:
+  host: free-tier14.aws-us-east-1.cockroachlabs.cloud
+  db: dev_company_api
+  cluster: dev-plat-ds-5227
+  ## Folder location is the same locally and in Docker image
+  sslRootCert: ./certs/dev-plat-ds.crt
+
+spring:
+  jpa:
+    show-sql: false
+  datasource:
+    url: jdbc:postgresql://${cockroach.host}:26257/${cockroach.db}?sslmode=verify-full&sslrootcert=${cockroach.sslRootCert}&options=--cluster=${cockroach.cluster}
+    username: opco-service
+    # password supplied through secret manager
+
+aws:
+  secret:
+    name: dev/company-api
+  enabled: true
+  sqs:
+    jiraIssueQueue: https://sqs.us-east-1.amazonaws.com/743449432646/JiraInfrastructureWebhook.fifo
+  search:
+    service: es
+  s3:
+    assets:
+      bucket: rh-dev-company-api-assets
+      url: https://company-api-assets.dev.redesignhealth.com
+
+jira:
+  enabled: true
+  username: jiraplatformservice@redesignhealth.com
+  # password supplied through secret manager
+
+search:
+  hostname: vpc-search-migrated-nz4hln4tgzdsn6l3lmtyp3oq2m.us-east-1.es.amazonaws.com
+
+library-feedback:
+  recipients: stephanie.velazquez@redesignhealth.com, matt.stephenson@redesignhealth.com, vickey.morrow@redesignhealth.com
+rocket-chat-service:
+  base-url: https://rocketchat-poc.dev.redesignhealth.com

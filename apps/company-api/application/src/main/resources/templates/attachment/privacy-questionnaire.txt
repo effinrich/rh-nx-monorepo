@@ -1,0 +1,8 @@
+# Privacy Questionnaire
+
+[# th:each="answer : ${answers}"]
+[(${answer.question})]
+[# th:if="${answer.answer != null}"]* Selected: [(${answer.answer})] [/]
+[# th:if="${answer.comment != null}"]* Comment: [(${answer.comment})] [/]
+
+[/]

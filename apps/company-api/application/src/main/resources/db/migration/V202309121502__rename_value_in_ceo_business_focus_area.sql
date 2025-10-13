@@ -1,0 +1,1 @@
+ALTER TYPE ceo_business_focus_area RENAME VALUE 'PSYCHEDELIC' TO 'PSYCHEDELICS';

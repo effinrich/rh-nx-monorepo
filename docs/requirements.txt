@@ -1,0 +1,6 @@
+mkdocs
+mkdocs-material
+mkdocs-render-swagger-plugin
+mkdocs-video==1.3.0
+boto3
+google-api-python-client

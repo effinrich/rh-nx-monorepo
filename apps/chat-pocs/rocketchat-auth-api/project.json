@@ -1,0 +1,50 @@
+{
+  "name": "rocketchat-auth-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/chat-pocs/rocketchat-auth-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/chat-pocs/rocketchat-auth-api",
+        "main": "apps/chat-pocs/rocketchat-auth-api/src/main.ts",
+        "tsConfig": "apps/chat-pocs/rocketchat-auth-api/tsconfig.app.json",
+        "assets": ["apps/chat-pocs/rocketchat-auth-api/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/chat-pocs/rocketchat-auth-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "rocketchat-auth-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "rocketchat-auth-api:build:development"
+        },
+        "production": {
+          "buildTarget": "rocketchat-auth-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/chat-pocs/rocketchat-auth-api/**/*.ts"]
+      }
+    }
+  },
+  "tags": ["scope:rocketchat-poc"]
+}

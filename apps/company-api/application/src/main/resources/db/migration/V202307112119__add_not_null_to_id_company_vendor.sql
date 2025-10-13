@@ -1,0 +1,2 @@
+ALTER TABLE company_vendor
+  ALTER COLUMN id SET NOT NULL;

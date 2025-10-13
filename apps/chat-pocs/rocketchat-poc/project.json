@@ -1,0 +1,88 @@
+{
+  "name": "rocketchat-poc",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/chat-pocs/rocketchat-poc/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/chat-pocs/rocketchat-poc",
+        "index": "apps/chat-pocs/rocketchat-poc/src/index.html",
+        "baseHref": "/",
+        "main": "apps/chat-pocs/rocketchat-poc/src/main.tsx",
+        "tsConfig": "apps/chat-pocs/rocketchat-poc/tsconfig.app.json",
+        "assets": [
+          "apps/chat-pocs/rocketchat-poc/src/favicon.ico",
+          "apps/chat-pocs/rocketchat-poc/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/chat-pocs/rocketchat-poc/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/chat-pocs/rocketchat-poc/src/environments/environment.ts",
+              "with": "apps/chat-pocs/rocketchat-poc/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "rocketchat-poc:build",
+        "hmr": true,
+        "proxyConfig": "apps/chat-pocs/rocketchat-poc/proxy.conf.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "rocketchat-poc:build:development"
+        },
+        "production": {
+          "buildTarget": "rocketchat-poc:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/chat-pocs/rocketchat-poc/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "build-image": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "load": true,
+        "platforms": ["${NX_CONTAINER_IMAGE_ARCH}"],
+        "tags": ["${NX_CONTAINER_IMAGE_TAG}"]
+      }
+    }
+  },
+  "tags": ["scope:rocketchat-poc"]
+}

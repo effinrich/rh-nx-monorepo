@@ -1,0 +1,25 @@
+{
+  "name": "prometheus",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/prometheus"
+      },
+      "defaultConfiguration": "core",
+      "configurations": {
+        "core": {
+          "command": "./scripts/core.sh"
+        },
+        "dev": {
+          "command": "./scripts/dev.sh"
+        },
+        "prod": {
+          "command": "./scripts/prod.sh"
+        }
+      }
+    }
+  }
+}

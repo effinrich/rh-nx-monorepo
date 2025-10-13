@@ -1,0 +1,30 @@
+=== Categories
+Set of operations to admin the category resource
+
+==== Create
+Create a category.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::category/create[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Update
+Update a category.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::category/update[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Query
+get all categories.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::category/query[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Get
+get one category.
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::category/get[snippets='response-fields,http-request,http-response']

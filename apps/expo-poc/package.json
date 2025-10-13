@@ -1,0 +1,13 @@
+{
+  "name": "expo-poc",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "eas-build-pre-install": "cd ../../ && cp package-lock.json ./apps/expo-poc/",
+    "postinstall": "rm -r node_modules && cd ../../ && npm install && npx nx sync-deps expo-poc && npx nx ensure-symlink expo-poc",
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo-cli start --web"
+  }
+}

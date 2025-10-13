@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 15s
+  external_labels:
+    monitor: 'prometheus'
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'company-api'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['{{COMPANY_API_HOSTNAME}}']
+
+remote_write:
+  - url: '{{REMOTE_WRITE_PROMETHEUS_URL}}'
+    queue_config:
+      max_samples_per_send: 1000
+      max_shards: 200
+      capacity: 2500
+    sigv4:
+      region: us-east-1

@@ -1,0 +1,27 @@
+=== Research Article
+Redesign Health collect articles to share the improving in the health market.
+This API is responsible for managing those documents.
+
+==== Query
+Search articles collected
+
+Role requirement: `ROLE_RH_USER`
+
+operation::research-article/query[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Create
+Create a new article
+
+Role requirement: `ROLE_RH_USER`
+
+operation::research-article/create[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Filter Options
+Request available filter options to use in `?filter=key,option`.
+
+In the example below we can filter by `?filter=stakeholders,Government` in xref:research-article.adoc#_query[]
+
+Role requirement: `ROLE_RH_USER`
+
+operation::research-article/filters[snippets='response-fields,http-request,http-response']
+

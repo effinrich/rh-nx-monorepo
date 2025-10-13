@@ -1,0 +1,23 @@
+{
+  "name": "@redesignhealth/portal/ui",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "scripts": {
+    "test-storybook": "test-storybook --coverage --url http://localhost:4401 --watch"
+  },
+  "version": "0.0.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redesignhealth/rh-design-system",
+    "directory": "libs/portal/ui"
+  },
+  "msw": {
+    "workerDirectory": "public"
+  }
+}

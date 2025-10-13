@@ -1,0 +1,61 @@
+{
+  "properties": {
+    "member": {
+      "properties": {
+        "email": {
+          "type": "keyword"
+        },
+        "given_name": {
+          "type": "text"
+        },
+        "family_name": {
+          "type": "text"
+        },
+        "company": {
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "name": {
+              "type": "text"
+            },
+            "fundraise_status": {
+              "type": "keyword"
+            }
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "keyword"
+    },
+    "business_type": {
+      "type": "keyword"
+    },
+    "market_service_area": {
+      "type": "keyword"
+
+    },
+    "healthcare_sector": {
+      "type": "keyword"
+    },
+    "visible": {
+      "type": "keyword"
+    },
+    "business_focus_area": {
+      "type": "keyword"
+    },
+    "customer_segment": {
+      "type": "keyword"
+    },
+    "bio": {
+      "type": "text"
+    },
+    "additional_info": {
+      "type": "text"
+    },
+    "picture_href": {
+      "type": "keyword"
+    }
+  }
+}

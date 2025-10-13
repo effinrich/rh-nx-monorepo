@@ -1,0 +1,41 @@
+=== Research
+Redesign Health conducts research to inform new company ideas.
+This API is responsible for managing those reports.
+
+==== Query
+Search research sprint reports
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::research/query[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Filter Options
+Request available filter options to use in `?filter=key,option`.
+
+In the example below we can filter by `?filter=services,General insights` in xref:research.adoc#_query[]
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::research/filters[snippets='response-fields,http-request,http-response']
+
+==== Get
+Role requirement: `ROLE_OP_CO_USER`
+
+Retrieve a research sprint
+
+operation::research/get[snippets='response-fields,http-request,http-response']
+
+==== Create
+Create a new research report
+
+Role requirement: `ROLE_RH_USER`
+
+operation::research/create[snippets='request-fields,response-fields,http-request,http-response']
+
+
+==== Delete
+Delete a new research report
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::research/delete[snippets='http-request,http-response']

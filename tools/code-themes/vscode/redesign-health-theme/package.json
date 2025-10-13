@@ -1,0 +1,23 @@
+{
+  "name": "redesign-health-theme",
+  "displayName": "Redesign Health Theme",
+  "description": "A Visual Studios Code theme",
+  "publisher": "Redesign Health",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "icon": "assets/icon.png",
+  "contributes": {
+    "themes": [
+      {
+        "label": "Redesign Health",
+        "uiTheme": "vs-dark",
+        "path": "./themes/rh-color-theme.json"
+      }
+    ]
+  }
+}

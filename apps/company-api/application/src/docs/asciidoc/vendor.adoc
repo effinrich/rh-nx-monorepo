@@ -1,0 +1,43 @@
+=== Vendor
+Redesign Health has a list with the vendors being created by the different OP_COs.
+This API is responsible for managing those information.
+
+==== Create
+Create vendor data
+Role requirement: `ROLE_RH_ADMIN`
+
+===== Rules
+
+* A new vendor will be rejected if the name already exists in the system.
+* A name could be copied from the legacy data to the new vendor data.
+* A vendor could have multiple categories and subcategories but only the category is required for creation.
+* After creation an e-mail is sent to the master data owner to be checked.
+
+operation::vendor/create-vendor-data[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Update
+Update vendor data
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::vendor/update-vendor-data[snippets='request-fields,response-fields,http-request,http-response']
+
+
+==== Query
+Search vendor information
+
+Role requirement: `ROLE_OP_CO_USER`
+
+operation::vendor/query[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Get
+Get vendor information
+ole requirement: `ROLE_RH_ADMIN`
+
+operation::vendor/get[snippets='response-fields,http-request,http-response']
+
+==== Delete
+Delete a Company Vendor
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::vendor/delete[snippets='http-request,http-response']

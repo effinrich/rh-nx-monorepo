@@ -1,0 +1,53 @@
+{
+  "name": "portal-features-library",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/portal/features/library/src",
+  "projectType": "library",
+  "tags": ["scope:portal"],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/portal/features/library"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/portal/features/library/**/*.{ts,tsx,js,jsx}"
+        ]
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "fix": false
+        },
+        "format": {
+          "fix": true
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/portal/features/library"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../../coverage/libs/portal/features/library"
+      },
+      "defaultConfiguration": "default",
+      "configurations": {
+        "default": {
+          "watch": false,
+          "reporters": ["default"]
+        },
+        "watch": {
+          "watch": true,
+          "reporters": ["verbose"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+=== Person
+A person registered with the application (also referred to as an account or user)
+
+==== Query
+Retrieve a paginated list of people.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::person/list[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Get
+Retrieve information about a person.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::person/get[snippets='query-parameters,response-fields,http-request,http-response']
+
+==== Create
+Create a person.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::person/create[snippets='response-fields,http-request,http-response']
+
+==== Update
+Make updates to a person.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+WARNING: `null` and `undefined` fields will delete data from a person
+
+operation::person/update[snippets='request-fields,response-fields,http-request,http-response']
+
+==== Add role
+Grant a role. Without a role the person won't be able to perform any action in the API.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+Check out the xref:index.adoc#_access_control[Access Control] section for more information.
+
+TIP: Use this in combination with xref:company.adoc#_add_member[Add Member] to grant access to a company.
+
+NOTE: Only people with the `ROLE_SUPER_ADMIN` role can grant `ROLE_SUPER_ADMIN` to others.
+
+operation::person/add-role[snippets='http-request,http-response']
+
+==== Remove role
+Revoke a role.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+operation::person/remove-role[snippets='http-request,http-response']
+
+A person registered with the application (also referred to as an account or user)
+
+==== Delete
+Remove (including all related associations). Clients should use this endpoint with caution.
+
+Role requirement: `ROLE_RH_ADMIN`
+
+Associations include:
+
+* Company Membership - removes membership to OpCo
+* Roles - removes roles associated with person
+
+operation::person/delete[snippets='http-request,http-response']
