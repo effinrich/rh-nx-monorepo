@@ -127,3 +127,6 @@ build-storybook.log
 /build-storybook.log
 
 .nx/cache
+.nx/workspace-data
+
+storybook-static

@@ -15,7 +15,7 @@ import { theme } from '@chakra-ui/theme'
 import { pick } from '@chakra-ui/utils'
 import { motion } from 'framer-motion'
 
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react-vite'
 
 import { IconButton } from '../icon-button/icon-button'
 

@@ -18,14 +18,13 @@
     "prettier"
   ],
   "settings": {
-    "react": { "version": "detect" },
+    "react": {
+      "version": "detect"
+    },
     "import/resolver": {
       "typescript": {}
     },
     "mdx/code-blocks": true
-    // optional, if you want to disable language mapper, set it to `false`
-    // if you want to override the default language mapper inside, you can provide your own
-    // "mdx/language-mapper": {}
   },
   "parserOptions": {
     "ecmaFeatures": {
@@ -38,7 +37,12 @@
     "testing-library/no-container": "warn",
     "testing-library/prefer-screen-queries": "warn",
     "testing-library/no-node-access": ["warn"],
-    "react/no-multi-comp": ["warn", { "ignoreStateless": false }],
+    "react/no-multi-comp": [
+      "warn",
+      {
+        "ignoreStateless": false
+      }
+    ],
     "no-console": "warn",
     "no-restricted-syntax": [
       "error",
@@ -66,10 +70,12 @@
     ],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
-    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": [
       "error",
-      { "enableDangerousAutofixThisMayCauseInfiniteLoops": true }
+      {
+        "enableDangerousAutofixThisMayCauseInfiniteLoops": true
+      }
     ],
     "import/default": "off",
     "import/no-named-as-default-member": "off",
@@ -157,7 +163,6 @@
             "noSortAlphabetically": false
           }
         ],
-
         "react/jsx-curly-brace-presence": [
           "warn",
           {
@@ -182,13 +187,18 @@
               "props": ["href", "to"]
             }
           ]
-        ]
+        ],
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
       }
     },
     {
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nx/javascript"],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
+      }
     },
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -197,19 +207,13 @@
           "error",
           {
             "groups": [
-              // Side effect imports.
               ["^\\u0000", "^\\.\\u0000"],
-              // Packages `react` related packages come first.
               ["^react", "^@?\\w"],
-              // Internal packages. Add project/app specific directories as needed.
               [
                 "^(@|components|libs|lib|assets|utils|.storybook|hooks|ui|partials)(/.*|$)"
               ],
-              // Parent imports. Put `..` last.
               ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
-              // Other relative imports. Put same-folder imports and `.` last.
               ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
-              // Style imports.
               ["^.+\\.?(css)$"]
             ]
           }

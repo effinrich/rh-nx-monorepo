@@ -1,6 +1,6 @@
 import { MdChat, MdMoreHoriz, MdShare, MdThumbUp } from 'react-icons/md'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import {
   Avatar,

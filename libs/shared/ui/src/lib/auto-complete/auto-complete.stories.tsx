@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import AutoComplete from './auto-complete'
 import filters from './filters'
@@ -20,8 +20,7 @@ type Story = StoryObj<typeof AutoComplete>
 
 export const Default: Story = {
   decorators: [],
-  // name: 'Default',
-  parameters: {},
+
   args: {
     isAsync: true,
     options: filters,

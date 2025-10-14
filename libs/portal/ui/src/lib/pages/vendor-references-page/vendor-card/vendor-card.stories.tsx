@@ -1,7 +1,7 @@
 import { Button } from '@redesignhealth/ui'
 
-import { action } from '@storybook/addon-actions'
-import type { Meta } from '@storybook/react'
+import { action } from 'storybook/actions'
+import type { Meta } from '@storybook/react-vite'
 
 import { VendorCard, VendorCardProps } from './vendor-card'
 

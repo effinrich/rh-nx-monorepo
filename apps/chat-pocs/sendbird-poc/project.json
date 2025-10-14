@@ -51,7 +51,8 @@
         "production": {
           "buildTarget": "sendbird-poc:build:production"
         }
-      }
+      },
+      "dependsOn": ["build"]
     },
     "lint": {
       "executor": "@nx/eslint:lint",

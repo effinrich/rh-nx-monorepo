@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared-java/data-access-aws-secrets-manager-property-source/src",
   "projectType": "library",
+  "tags": ["shared"],
   "targets": {
     "install": {
       "executor": "@nxrocks/nx-spring-boot:install",
@@ -10,19 +11,9 @@
         "root": "libs/shared-java/data-access-aws-secrets-manager-property-source",
         "ignoreWrapper": true
       },
-      "dependsOn": [
-        "^install"
-      ],
-      "inputs": [
-        "default",
-        "!{projectRoot}/target"
-      ],
-      "outputs": [
-        "{projectRoot}/target"
-      ]
+      "dependsOn": ["^install"],
+      "inputs": ["default", "!{projectRoot}/target"],
+      "outputs": ["{projectRoot}/target"]
     }
-  },
-  "tags": [
-    "shared"
-  ]
+  }
 }

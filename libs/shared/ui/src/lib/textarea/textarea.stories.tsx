@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Radio, RadioGroup } from '@chakra-ui/react'
 import { ResponsiveValue } from '@chakra-ui/system'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import {
   Box,

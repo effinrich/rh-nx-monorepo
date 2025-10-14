@@ -1,7 +1,7 @@
 import { ThemeProvider, useTheme } from '@chakra-ui/system'
 import { mergeWith } from '@chakra-ui/utils'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import { Box } from '../box/box'
 

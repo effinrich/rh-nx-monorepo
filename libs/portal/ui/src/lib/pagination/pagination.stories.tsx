@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Box } from '@redesignhealth/ui'
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import Pagination from './pagination'
 

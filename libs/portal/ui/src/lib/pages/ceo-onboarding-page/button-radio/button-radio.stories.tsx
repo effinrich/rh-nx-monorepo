@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { RadioGroup, Stack } from '@redesignhealth/ui'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
-import type { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/react-vite'
 
 import ButtonRadio from './button-radio'
 

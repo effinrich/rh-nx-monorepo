@@ -1,8 +1,8 @@
 import { VendorFormProps } from '@redesignhealth/portal/data-assets'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
-import { action } from '@storybook/addon-actions'
-import type { Meta } from '@storybook/react'
+import { action } from 'storybook/actions'
+import type { Meta } from '@storybook/react-vite'
 
 import AddVendorPage from './add-vendor-page'
 

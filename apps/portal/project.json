@@ -129,7 +129,8 @@
         "production": {
           "buildTarget": "portal:build:production"
         }
-      }
+      },
+      "dependsOn": ["build"]
     }
   }
 }

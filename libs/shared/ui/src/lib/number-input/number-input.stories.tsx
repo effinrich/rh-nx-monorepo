@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { LoremIpsum } from 'react-lorem-ipsum'
 
-import { Meta, StoryFn, StoryObj } from '@storybook/react'
+import { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
 
 import {
   Button,

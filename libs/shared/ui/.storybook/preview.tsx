@@ -1,7 +1,7 @@
 import { createLocalStorageManager } from '@chakra-ui/react'
+import { INITIAL_VIEWPORTS } from 'storybook/viewport'
 
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-import { DocsContainer, DocsContainerProps } from '@storybook/blocks'
+import { DocsContainer, DocsContainerProps } from '@storybook/addon-docs/blocks'
 
 import { theme, ThemeProvider } from '../src/index'
 
@@ -48,7 +48,7 @@ export const parameters = {
     }
   },
   viewport: {
-    viewports: {
+    options: {
       ...breakpointViewports,
       ...INITIAL_VIEWPORTS
     }
@@ -56,3 +56,4 @@ export const parameters = {
   chromatic: { disableSnapshot: true },
   chakra: { colorModeManager: storageManager, theme }
 }
+export const tags = ['autodocs']

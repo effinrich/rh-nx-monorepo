@@ -10,7 +10,7 @@ import {
   Tr
 } from '@redesignhealth/ui'
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { ListCard } from '../list-card/list-card'
 import { ListCardHeader } from '../list-card/list-card-header'

@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react'
 import { useDisclosure } from '@chakra-ui/react'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import {
   AddIcon,

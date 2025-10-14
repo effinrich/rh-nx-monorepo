@@ -1,6 +1,6 @@
 import { Avatar, Button, Text } from '@redesignhealth/ui'
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { ListCard } from './list-card'
 import { ListCardHeader } from './list-card-header'

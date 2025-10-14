@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import { Button, Container, HStack, Input } from '../../index'
 

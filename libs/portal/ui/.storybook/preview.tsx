@@ -3,7 +3,7 @@ import { theme } from '@redesignhealth/ui'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 
-import { StoryFn } from '@storybook/react'
+import { StoryFn } from '@storybook/react-vite'
 
 // Initialize MSW
 initialize()
@@ -42,3 +42,4 @@ export const decorators = [
     </QueryClientProvider>
   )
 ]
+export const tags = ['autodocs'];

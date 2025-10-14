@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/react-vite'
 
 import { Button } from '../button/button'
 import { IconButton } from '../icon-button/icon-button'

@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import RootBoundary from '../root-boundary/root-boundary'
 

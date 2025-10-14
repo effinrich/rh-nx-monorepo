@@ -1,7 +1,7 @@
 import { MdLock, MdWarning } from 'react-icons/md'
 import { Button, HStack, Link, Text } from '@redesignhealth/ui'
 
-import type { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/react-vite'
 
 import { BannerAlert } from './banner-alert'
 

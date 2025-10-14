@@ -2,7 +2,7 @@ import { MdAlternateEmail } from 'react-icons/md'
 import { Button, Tab, TabList, Tabs, Text } from '@redesignhealth/ui'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
-import type { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/react-vite'
 
 import { ListCardTags } from '../list-card/list-card-tags'
 

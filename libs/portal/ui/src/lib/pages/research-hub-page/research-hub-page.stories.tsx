@@ -1,6 +1,6 @@
 import { withRouter } from 'storybook-addon-react-router-v6'
 
-import type { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/react-vite'
 
 import { callNoteFilterOptions, notes } from './mocks/notes'
 import { researchSprintFilterOptions, sprints } from './mocks/sprints'

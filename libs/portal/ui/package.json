@@ -9,7 +9,7 @@
     }
   },
   "scripts": {
-    "test-storybook": "test-storybook --coverage --url http://localhost:4401 --watch"
+    "test-storybook": "nx test:storybook --coverage --url http://localhost:4401 --watch"
   },
   "version": "0.0.4",
   "repository": {

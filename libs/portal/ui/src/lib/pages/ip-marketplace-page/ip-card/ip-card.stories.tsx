@@ -2,7 +2,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { Button } from '@redesignhealth/ui'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
-import type { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/react-vite'
 
 import { BuyerSellerDetailsReleaseView } from '../partials/buyer-seller-details-release-view'
 import { DetailsOfRequestReleaseView } from '../partials/details-of-request-release-view'

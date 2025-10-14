@@ -2,7 +2,7 @@ import { mockConsent, mockRhUser } from '@redesignhealth/portal/data-assets'
 import { rest } from 'msw'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import SupportPage from './support-page'
 

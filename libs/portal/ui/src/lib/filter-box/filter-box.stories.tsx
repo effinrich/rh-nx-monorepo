@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/react-vite'
 
 import Filter from './filter'
 import { FilterBox, FilterBoxProps } from './filter-box'

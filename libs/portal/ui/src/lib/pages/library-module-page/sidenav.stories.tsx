@@ -1,6 +1,6 @@
 import { withRouter } from 'storybook-addon-react-router-v6'
 
-import type { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/react-vite'
 
 import { modules } from './mocks/modules'
 import { SideNav } from './sidenav'

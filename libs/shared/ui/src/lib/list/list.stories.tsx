@@ -1,6 +1,6 @@
 import { MdCheckCircle, MdSettings } from 'react-icons/md'
 
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { List, ListIcon, ListItem, OrderedList, UnorderedList } from './list'
 

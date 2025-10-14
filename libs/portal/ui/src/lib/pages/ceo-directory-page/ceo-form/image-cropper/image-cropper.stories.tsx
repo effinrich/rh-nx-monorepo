@@ -1,7 +1,7 @@
 import { Button, useDisclosure } from '@redesignhealth/ui'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import ImageCropper, { ImageCropperProps } from './image-cropper'
 

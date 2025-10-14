@@ -1,5 +1,5 @@
 import { addons } from '@storybook/addons'
-import { create } from '@storybook/theming'
+import { create } from 'storybook/theming'
 
 import Logo from '../src/lib/assets/RH_Logo_Single_Ultraviolet.png'
 

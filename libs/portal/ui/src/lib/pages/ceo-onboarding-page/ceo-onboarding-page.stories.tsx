@@ -1,7 +1,7 @@
 import { rest } from 'msw'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import CeoDirectoryOnboardingPage from './ceo-onboarding-page'
 import { ceo, person, userInfo } from './mocks'

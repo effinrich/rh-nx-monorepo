@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { LoremIpsum } from 'react-lorem-ipsum'
 import { DarkMode } from '@chakra-ui/system'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import { Box, rh, Stack, Text } from '../../index'
 

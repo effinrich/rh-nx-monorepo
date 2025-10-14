@@ -1,17 +1,27 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "affected": { "defaultBase": "main" },
-  "tasksRunnerOptions": { "default": { "options": {} } },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "options": {}
+    }
+  },
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
-    "e2e": { "inputs": ["default", "^production"] },
+    "e2e": {
+      "inputs": ["default", "^production"]
+    },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
-    "lint": { "inputs": ["default", "{workspaceRoot}/.eslintrc.json"] },
+    "lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    },
     "build-storybook": {
       "inputs": [
         "default",
@@ -30,7 +40,10 @@
         "{projectRoot}/tsconfig.storybook.json"
       ]
     },
-    "@nx/vite:test": { "cache": true, "inputs": ["default", "^production"] }
+    "@nx/vite:test": {
+      "cache": true,
+      "inputs": ["default", "^production"]
+    }
   },
   "generators": {
     "@nx/react": {
@@ -40,7 +53,9 @@
         "bundler": "webpack",
         "babel": true
       },
-      "component": { "style": "@emotion/styled" },
+      "component": {
+        "style": "@emotion/styled"
+      },
       "library": {
         "style": "@emotion/styled",
         "linter": "eslint",
@@ -48,7 +63,10 @@
       }
     },
     "@nx/next": {
-      "application": { "style": "@emotion/styled", "linter": "eslint" }
+      "application": {
+        "style": "@emotion/styled",
+        "linter": "eslint"
+      }
     },
     "@nx/web:application": {
       "style": "css",
@@ -63,7 +81,18 @@
     }
   },
   "defaultProject": "portal",
-  "plugins": ["@nxrocks/nx-spring-boot"],
+  "plugins": [
+    "@nxrocks/nx-spring-boot",
+    {
+      "plugin": "@nx/storybook/plugin",
+      "options": {
+        "serveStorybookTargetName": "serve:storybook",
+        "buildStorybookTargetName": "build:storybook",
+        "testStorybookTargetName": "test:storybook",
+        "staticStorybookTargetName": "static:storybook"
+      }
+    }
+  ],
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/babel.config.json"],

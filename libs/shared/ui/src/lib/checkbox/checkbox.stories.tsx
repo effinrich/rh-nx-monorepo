@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { chakra } from '@chakra-ui/system'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import {
   Box,

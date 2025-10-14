@@ -1,6 +1,6 @@
 import { MdPhone } from 'react-icons/md'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import { Box, EmailIcon, PhoneIcon, SearchIcon } from '../../index'
 

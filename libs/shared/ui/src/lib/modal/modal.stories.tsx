@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { LoremIpsum } from 'react-lorem-ipsum'
 import { FocusableElement } from '@chakra-ui/utils'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import { Button } from '../button/button'
 import { useDisclosure } from '../hooks/use-disclosure/use-disclosure'

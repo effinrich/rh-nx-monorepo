@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useRef, useState } from 'react'
 
-import { Meta } from '@storybook/react'
+import { Meta } from '@storybook/react-vite'
 
 import { Box, Stack } from '../../index'
 

@@ -3,90 +3,68 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/opcofin/src",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nxrocks/nx-spring-boot:build",
       "options": {
         "root": "apps/opcofin",
-        "args": [
-          "-Dspring.profiles.active=dev"
-        ]
+        "args": ["-Dspring.profiles.active=dev"]
       },
-      "dependsOn": [
-        "^install"
-      ],
-      "outputs": [
-        "{projectRoot}/target"
-      ]
+      "dependsOn": ["^install"],
+      "outputs": ["{projectRoot}/target"]
     },
     "install": {
       "executor": "@nxrocks/nx-spring-boot:install",
       "options": {
         "root": "apps/opcofin",
-        "args": [
-          "-Dspring.profiles.active=dev"
-        ]
+        "args": ["-Dspring.profiles.active=dev"]
       },
-      "outputs": [
-        "{projectRoot}/target"
-      ]
+      "outputs": ["{projectRoot}/target"]
     },
     "clean": {
       "executor": "@nxrocks/nx-spring-boot:clean",
       "options": {
         "root": "apps/opcofin",
-        "args": [
-          "-Dspring.profiles.active=dev"
-        ]
+        "args": ["-Dspring.profiles.active=dev"]
       }
     },
     "run": {
       "executor": "@nxrocks/nx-spring-boot:run",
       "options": {
         "root": "apps/opcofin",
-        "args": [
-          "-Dspring-boot.run.arguments=\"--spring.profiles.active=dev\""
-        ]
+        "args": ["-Dspring-boot.run.arguments=\"--spring.profiles.active=dev\""]
       }
     },
     "serve": {
       "executor": "@nxrocks/nx-spring-boot:serve",
       "options": {
         "root": "apps/opcofin",
-        "args": [
-          "-Dspring.profiles.active=dev"
-        ]
+        "args": ["-Dspring.profiles.active=dev"]
       }
     },
     "build-info": {
       "executor": "@nxrocks/nx-spring-boot:build-info",
       "options": {
         "root": "apps/opcofin",
-        "args": [
-          "-Dspring.profiles.active=dev"
-        ]
+        "args": ["-Dspring.profiles.active=dev"]
       }
     },
     "build-image": {
       "executor": "@nx-tools/nx-container:build",
       "options": {
         "load": true,
-        "tags": [
-          "opcofin:latest"
-        ],
+        "tags": ["opcofin:latest"],
         "context": "apps/opcofin"
       }
     },
     "build-and-push": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "bash ./scripts/build_and_push.sh"
-        ],
+        "commands": ["bash ./scripts/build_and_push.sh"],
         "cwd": "apps/opcofin",
         "parallel": false
       }
     }
-  },
-  "tags": []
+  }
 }

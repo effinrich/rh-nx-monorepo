@@ -12,7 +12,7 @@ import {
   withRouter
 } from 'storybook-addon-react-router-v6'
 
-import type { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/react-vite'
 
 import IpListingIpDetails from './ip-listing-ip-details/ip-listing-ip-details'
 import IpListingRequests from './ip-listing-requests/ip-listing-requests'

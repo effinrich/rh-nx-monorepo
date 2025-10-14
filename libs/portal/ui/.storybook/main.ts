@@ -1,42 +1,32 @@
-import path from 'path'
+import { createRequire } from "node:module";
+import path, { dirname, join } from 'path';
 import { mergeConfig } from 'vite'
 import turbosnap from 'vite-plugin-turbosnap'
 
 import type { StorybookConfig } from '@storybook/react-vite'
+
+const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: [
     '../src/**/*.mdx',
     '../src/lib/**/*.stories.@(js|jsx|mjs|ts|tsx|mdx)'
   ],
-  addons: [
-    // eslint-disable-next-line storybook/no-uninstalled-addons
-    '@nx/react/plugins/storybook',
-    '@chakra-ui/storybook-addon',
-    '@storybook/addon-essentials',
-    '@storybook/addon-a11y',
-    '@storybook/addon-links',
-    '@storybook/instrumenter',
-    '@storybook/addon-interactions',
-    'storybook-addon-react-router-v6',
-    '@storybook/addon-designs',
-    '@chromaui/addon-visual-tests',
-    {
-      name: '@storybook/addon-coverage',
-      options: {
-        istanbul: {
-          include: ['**/src/lib/**/*.stories.{ts,tsx}']
-        }
+
+  addons: [getAbsolutePath("@nx/react/plugins/storybook"), getAbsolutePath("@chakra-ui/storybook-addon"), getAbsolutePath("@storybook/addon-a11y"), getAbsolutePath("@storybook/addon-links"), getAbsolutePath("storybook/internal/instrumenter"), getAbsolutePath("storybook-addon-react-router-v6"), getAbsolutePath("@storybook/addon-designs"), getAbsolutePath("@chromaui/addon-visual-tests"), {
+    name: getAbsolutePath("@storybook/addon-coverage"),
+    options: {
+      istanbul: {
+        include: ['**/src/lib/**/*.stories.{ts,tsx}']
       }
     }
-  ],
+  }, getAbsolutePath("@storybook/addon-docs")],
+
   staticDirs: ['../public'],
+
   framework: {
-    name: '@storybook/react-vite',
+    name: getAbsolutePath("@storybook/react-vite"),
     options: {}
-  },
-  docs: {
-    autodocs: true
   },
 
   /**
@@ -81,3 +71,7 @@ const config: StorybookConfig = {
 }
 
 export default config
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, "package.json")));
+}

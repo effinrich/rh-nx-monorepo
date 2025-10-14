@@ -51,7 +51,8 @@
         "production": {
           "buildTarget": "chat-pocs-comet-chat-poc:build:production"
         }
-      }
+      },
+      "dependsOn": ["build"]
     },
     "test": {
       "executor": "@nx/vite:test",
