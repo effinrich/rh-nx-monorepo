@@ -1,7 +1,7 @@
 package com.redesignhealth.company.api.client.message;
 
-import com.redesignhealth.jira.rest.client.model.Changelog;
-import com.redesignhealth.jira.rest.client.model.IssueBean;
+import com.redesignhealth.company.api.client.jira.Changelog;
+import com.redesignhealth.company.api.client.jira.IssueBean;
 
 /**
  * Represents a Webhook response from Jira More info:

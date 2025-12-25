@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redesignhealth.company.api.assembler.PersonRequestAssembler;
 import com.redesignhealth.company.api.assembler.jira.JiraLinkGenerator;
+import com.redesignhealth.company.api.client.jira.IssueCreated;
 import com.redesignhealth.company.api.client.jira.JiraClient;
 import com.redesignhealth.company.api.dto.command.PersonRequestCommand;
 import com.redesignhealth.company.api.entity.Company;
@@ -20,15 +21,12 @@ import com.redesignhealth.company.api.entity.ref.CompanyRef;
 import com.redesignhealth.company.api.entity.request.RoleAuthority;
 import com.redesignhealth.company.api.exception.InvalidFieldException;
 import com.redesignhealth.company.api.property.JiraRequestProperties;
-import com.redesignhealth.company.api.property.JiraRequestProperties.User;
 import com.redesignhealth.company.api.repository.CompanyRepository;
 import com.redesignhealth.company.api.repository.PersonRequestRepository;
 import com.redesignhealth.company.api.scaffolding.CommonTestConfig;
 import com.redesignhealth.company.api.scaffolding.WithRedesignUser;
 import com.redesignhealth.company.api.service.PersonRequestService;
-import com.redesignhealth.jira.rest.client.model.CreatedIssue;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -118,11 +116,9 @@ public class PersonRequestControllerTests {
     when(companyRepository.findAllByApiIdIn(
             companiesRequested.stream().map(CompanyRef::of).collect(Collectors.toSet())))
         .thenReturn(Set.of(Company.from(CompanyRef.of("ever-body"))));
-    when(jiraRequestProperties.getUser())
-        .thenReturn(new User("12345", new JiraRequestProperties.Issue("1234", Map.of())));
-    var createdIssueMock = Mockito.mock(CreatedIssue.class);
-    when(createdIssueMock.getKey()).thenReturn("TICKET-1");
-    when(jiraClient.createIssue(any())).thenReturn(Mono.just(createdIssueMock));
+    var issueCreatedMock = Mockito.mock(IssueCreated.class);
+    when(issueCreatedMock.getKey()).thenReturn("TICKET-1");
+    when(jiraClient.createIssue(any())).thenReturn(Mono.just(issueCreatedMock));
     when(personRequestRepository.save(any(PersonRequest.class))).then(returnsFirstArg());
     mockMvc
         .perform(

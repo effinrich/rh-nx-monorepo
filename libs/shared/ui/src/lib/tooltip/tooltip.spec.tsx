@@ -189,7 +189,7 @@ test.skip('should call onClose prop on pointerleave', async () => {
   await screen.findByRole('tooltip')
 
   expect(screen.getByRole('tooltip')).toBeInTheDocument()
-  expect(onClose).not.toBeCalled()
+  expect(onClose).not.toHaveBeenCalled()
 
   fireEvent.pointerLeave(screen.getByText(buttonLabel))
 

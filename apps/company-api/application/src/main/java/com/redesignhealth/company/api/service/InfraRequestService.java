@@ -25,8 +25,8 @@ import com.redesignhealth.company.api.repository.RequestFormRepository;
 import com.redesignhealth.company.api.template.TemplateGenerator;
 import com.redesignhealth.company.api.template.data.FormAnswer;
 import com.redesignhealth.company.api.template.data.TechStackOption;
+import com.redesignhealth.company.api.client.jira.IssueCreated;
 import com.redesignhealth.company.api.util.JsonSchemaUtils;
-import com.redesignhealth.jira.rest.client.model.CreatedIssue;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -134,7 +134,7 @@ public class InfraRequestService {
             generateTechStackAttachment(techStackOptions),
             generatePrivacyAttachment(privacyQuestionnaireAnswers));
 
-    Mono<CreatedIssue> parent = createParentIssue(infraRequest);
+    Mono<IssueCreated> parent = createParentIssue(infraRequest);
 
     // TODO Jira issue clean up in case any of this fails
     return parent
@@ -153,7 +153,7 @@ public class InfraRequestService {
             });
   }
 
-  private Mono<CreatedIssue> createParentIssue(InfrastructureRequest infraRequest) {
+  private Mono<IssueCreated> createParentIssue(InfrastructureRequest infraRequest) {
     String title =
         String.format("Infrastructure requested for %s", infraRequest.getCompany().getName());
 
@@ -181,7 +181,7 @@ public class InfraRequestService {
             .build());
   }
 
-  private Flux<CreatedIssue> createSubIssues(
+  private Flux<IssueCreated> createSubIssues(
       String parentKey, List<TechStackOption> techStackOptions) {
     var requests = techStackOptions.stream().map((o) -> createSubIssueRequest(parentKey, o));
     return Flux.fromStream(requests).flatMap(client::createIssue, createSubIssuesRateLimit);
