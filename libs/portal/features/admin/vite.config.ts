@@ -33,7 +33,7 @@ export default defineConfig({
     nxViteTsPaths(),
     dts({
       entryRoot: 'src',
-      tsConfigFilePath: joinPathFragments(__dirname, 'tsconfig.lib.json'),
+      tsconfigPath: joinPathFragments(__dirname, 'tsconfig.lib.json'),
       skipDiagnostics: true
     })
   ],
