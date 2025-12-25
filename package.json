@@ -229,7 +229,7 @@
     "css-loader": "6.4.0",
     "cypress": "14.5.4",
     "detox": "20.31.0",
-    "eas-cli": "5.2.0",
+    "eas-cli": "16.22.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-config-react-app": "7.0.1",
