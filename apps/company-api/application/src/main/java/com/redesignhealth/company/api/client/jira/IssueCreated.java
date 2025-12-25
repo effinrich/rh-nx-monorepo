@@ -1,10 +1,40 @@
 package com.redesignhealth.company.api.client.jira;
 
+/**
+ * Represents the response from Jira when an issue is created.
+ */
 public class IssueCreated {
+  private String id;
+  private String key;
+  private String self;
 
-  public String getKey() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getKey'");
+  public IssueCreated() {}
+
+  public IssueCreated(String key) {
+    this.key = key;
   }
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getKey() {
+    return key;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
+  }
+
+  public String getSelf() {
+    return self;
+  }
+
+  public void setSelf(String self) {
+    this.self = self;
+  }
 }

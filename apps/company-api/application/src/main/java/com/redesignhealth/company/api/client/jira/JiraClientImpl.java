@@ -2,9 +2,6 @@ package com.redesignhealth.company.api.client.jira;
 
 import com.redesignhealth.company.api.exception.InvalidJiraCredentialsException;
 import com.redesignhealth.company.api.exception.JiraClientException;
-import com.redesignhealth.jira.rest.client.model.Attachment;
-import com.redesignhealth.jira.rest.client.model.CreatedIssue;
-import com.redesignhealth.jira.rest.client.model.ErrorCollection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +21,7 @@ public class JiraClientImpl implements JiraClient {
     this.client = client;
   }
 
-  public Mono<CreatedIssue> createIssue(CreateIssueRequest request) {
+  public Mono<IssueCreated> createIssue(CreateIssueRequest request) {
 
     Map<String, Object> fields = new HashMap<>();
     Map<String, Object> issuetype = new HashMap<>();
@@ -59,7 +56,7 @@ public class JiraClientImpl implements JiraClient {
         .post()
         .uri("/rest/api/2/issue")
         .bodyValue(body)
-        .exchangeToMono(response -> handleResponse(response, CreatedIssue.class));
+        .exchangeToMono(response -> handleResponse(response, IssueCreated.class));
   }
 
   @Override
