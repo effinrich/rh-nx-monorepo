@@ -163,7 +163,7 @@ test('should call onChange on value change', async () => {
 
   await user.click(upBtn)
 
-  expect(onChange).toBeCalled()
+  expect(onChange).toHaveBeenCalled()
   expect(onChange).toBeCalledWith('1', 1)
 })
 
