@@ -7,13 +7,13 @@
     "dockerfile": "./Dockerfile",
     "context": "."
   },
-  // this mount only works for mac, so if windows is having trouble, comment this out
-  // "mounts": [
-  //   // Access local AWS credentials, maven repository, and npm cache
-  //   "source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
-  //   "source=${localEnv:HOME}/.m2,target=/home/vscode/.m2,type=bind,consistency=cached",
-  //   "source=${localEnv:HOME}/.npm,target=/home/vscode/.npm,type=bind,consistency=cached"
-  // ],
+  // Access local AWS credentials, maven repository, and npm cache
+  // Uses HOME on Mac/Linux, falls back to USERPROFILE on Windows
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.m2,target=/home/vscode/.m2,type=bind,consistency=cached",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.npm,target=/home/vscode/.npm,type=bind,consistency=cached"
+  ],
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
