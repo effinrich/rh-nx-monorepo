@@ -40,7 +40,11 @@
     "build-storybook-portal-ui": "nx run portal-ui:build-storybook",
     "storybook-all": "nx run-many --targets=storybook --projects=portal-ui,shared-ui",
     "theme": "chakra-cli tokens ./libs/shared/ui/src/lib/theme/index.ts",
-    "theme:watch": "chakra-cli tokens ./libs/shared/ui/src/lib/theme/index.ts --watch"
+    "theme:watch": "chakra-cli tokens ./libs/shared/ui/src/lib/theme/index.ts --watch",
+    "mcp:storybook:install": "cd tools/storybook-mcp && npm install",
+    "mcp:storybook:build": "cd tools/storybook-mcp && npm run build",
+    "mcp:storybook:dev": "cd tools/storybook-mcp && npm run dev",
+    "mcp:setup": "npm run mcp:storybook:install && npm run mcp:storybook:build"
   },
   "lint-staged": {
     "**/*.{ts,tsx,js,jsx}": [
