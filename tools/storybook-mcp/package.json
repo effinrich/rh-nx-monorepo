@@ -1,0 +1,26 @@
+{
+  "name": "@rh-design-system/storybook-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Storybook component generation in the RH Design System",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "storybook-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "glob": "^10.3.10",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.99"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

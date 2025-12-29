@@ -1,3 +1,12 @@
 {
-  "servers": {}
+  "servers": {
+    "storybook-mcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["tools/storybook-mcp/dist/index.js"],
+      "env": {
+        "WORKSPACE_ROOT": "${workspaceFolder}"
+      }
+    }
+  }
 }
