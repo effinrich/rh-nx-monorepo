@@ -1,7 +1,5 @@
 package com.redesignhealth.company.api.client.jira;
 
-import com.redesignhealth.jira.rest.client.model.Attachment;
-import com.redesignhealth.jira.rest.client.model.CreatedIssue;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +10,10 @@ public class NoopJiraClient implements JiraClient {
   Logger logger = LoggerFactory.getLogger(NoopJiraClient.class);
 
   @Override
-  public Mono<CreatedIssue> createIssue(CreateIssueRequest request) {
+  public Mono<IssueCreated> createIssue(CreateIssueRequest request) {
     logger.info(
         "Mocked call to create Jira issue. Enable Jira interactions through 'jira.enabled' property.");
-    return Mono.just(new CreatedIssue());
+    return Mono.just(new IssueCreated());
   }
 
   @Override

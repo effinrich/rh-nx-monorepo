@@ -126,6 +126,5 @@
     "editor.formatOnSave": true
   },
   "explorerExclude.backup": {},
-  "java.compile.nullAnalysis.mode": "automatic",
-  "vitest.disableWorkspaceWarning": true
+  "java.compile.nullAnalysis.mode": "automatic"
 }

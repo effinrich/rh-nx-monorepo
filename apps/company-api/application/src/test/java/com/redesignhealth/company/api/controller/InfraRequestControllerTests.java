@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redesignhealth.company.api.assembler.InfraRequestAssembler;
 import com.redesignhealth.company.api.assembler.jira.JiraLinkGenerator;
+import com.redesignhealth.company.api.client.jira.IssueCreated;
 import com.redesignhealth.company.api.client.jira.JiraClient;
 import com.redesignhealth.company.api.entity.request.*;
 import com.redesignhealth.company.api.exception.InfraRequestAlreadySubmittedException;
@@ -40,7 +41,6 @@ import com.redesignhealth.company.api.scaffolding.CommonTestConfig;
 import com.redesignhealth.company.api.scaffolding.WithRedesignUser;
 import com.redesignhealth.company.api.service.InfraRequestService;
 import com.redesignhealth.company.api.template.TemplateGenerator;
-import com.redesignhealth.jira.rest.client.model.CreatedIssue;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -391,9 +391,9 @@ public class InfraRequestControllerTests {
     mockProperties();
     when(infraRequestRepository.findByCompanyApiId(company.getApiId(), FORMS))
         .thenReturn(Optional.of(infraRequest));
-    when(jiraClient.createIssue(any())).thenReturn(Mono.just(new CreatedIssue()));
+    when(jiraClient.createIssue(any())).thenReturn(Mono.just(new IssueCreated()));
     when(jiraClient.attachFilesToIssue(any(), any())).thenReturn(Mono.just(List.of()));
-    when(infraRequestRepository.save(infraRequest)).thenReturn(infraRequest);
+    when(infraRequestRepository.save(any(InfrastructureRequest.class))).thenReturn(infraRequest);
     when(templateGenerator.createTechStackAttachment(anyList())).thenReturn("GENERATED HTML");
     when(templateGenerator.createPrivacyAttachment(anyList())).thenReturn("GENERATED HTML");
 
