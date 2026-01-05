@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run storybook)",
+      "Bash(npx storybook@latest doctor:*)",
+      "Bash(npm view:*)",
+      "Bash(npm install:*)"
+    ]
+  }
+}

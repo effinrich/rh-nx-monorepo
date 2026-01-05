@@ -1,59 +1,60 @@
-import { createLocalStorageManager } from '@chakra-ui/react'
-import { INITIAL_VIEWPORTS } from 'storybook/viewport'
+import { ChakraProvider, createSystem, defaultConfig } from '@chakra-ui/react'
 
-import { DocsContainer, DocsContainerProps } from '@storybook/addon-docs/blocks'
+import { withThemeByClassName } from '@storybook/addon-themes'
+import type { Preview, ReactRenderer } from '@storybook/react-vite'
 
-import { theme, ThemeProvider } from '../src/index'
+import { ColorModeProvider } from '../apps/compositions/src/ui/color-mode'
 
-import { viewports as breakpoints } from './viewports'
-
-// Create custom viewports using widths defined in design tokens
-const breakpointViewports = Object.keys(breakpoints).reduce(
-  (breakpoint, key) => {
-    breakpoint[`breakpoint${key}`] = {
-      name: `Breakpoint - ${key}`,
-      styles: {
-        width: `${breakpoints[key as keyof typeof breakpoints]}px`,
-        // Account for padding and border around viewport preview
-        height: 'calc(100% - 20px)'
-      },
-      type: 'other'
+const system = createSystem(defaultConfig, {
+  theme: {
+    tokens: {
+      fonts: {
+        heading: { value: 'Inter, sans-serif' },
+        body: { value: 'Inter, sans-serif' },
+        mono: { value: 'Roboto Mono, monospace' }
+      }
     }
-    return breakpoint
-  },
-  {} as typeof INITIAL_VIEWPORTS
-)
+  }
+})
 
-const storageManager = createLocalStorageManager('sb-color-mode')
-
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  docs: {
-    toc: true,
-    source: {
-      excludeDecorators: true
-    },
-    container: (props: DocsContainerProps) => (
-      <ThemeProvider theme={theme}>
-        <DocsContainer {...props} />
-      </ThemeProvider>
-    )
-  },
-  controls: {
-    // expanded: true,
-    hideNoControlsWarning: true,
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/
-    }
-  },
-  viewport: {
+const preview: Preview = {
+  parameters: {
     options: {
-      ...breakpointViewports,
-      ...INITIAL_VIEWPORTS
-    }
+      storySort: {
+        method: 'alphabetical',
+        order: [
+          'Layout',
+          'Typography',
+          'Components',
+          'Charts',
+          'Rich Text Editor'
+        ]
+      }
+    },
+    actions: { disable: true },
+    controls: { disable: true }
   },
-  chromatic: { disableSnapshot: true },
-  chakra: { colorModeManager: storageManager, theme }
+  decorators: [
+    withThemeByClassName<ReactRenderer>({
+      defaultTheme: 'light',
+      themes: {
+        light: 'light',
+        dark: 'dark'
+      }
+    }),
+    (Story: React.ComponentType, context: { globals: { theme: string } }) => {
+      return (
+        <ColorModeProvider
+          forcedTheme={context.globals.theme}
+          enableSystem={false}
+        >
+          <ChakraProvider value={system}>
+            <Story />
+          </ChakraProvider>
+        </ColorModeProvider>
+      )
+    }
+  ]
 }
-export const tags = ['autodocs']
+
+export default preview

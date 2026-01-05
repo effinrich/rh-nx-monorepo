@@ -1,10 +1,10 @@
 import { render } from '@redesignhealth/shared-utils-jest'
 
-import { Link } from './link-overlay'
+import { LinkBox } from './link-overlay'
 
-describe('Link', () => {
+describe('LinkBox', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Link />)
+    const { baseElement } = render(<LinkBox />)
     expect(baseElement).toBeTruthy()
   })
 })

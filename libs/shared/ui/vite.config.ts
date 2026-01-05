@@ -1,7 +1,7 @@
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import react from '@vitejs/plugin-react'
 import { join } from 'path'
-import { defineConfig, splitVendorChunkPlugin } from 'vite'
+import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
@@ -35,7 +35,7 @@ export default defineConfig({
       skipDiagnostics: true
     }),
     react(),
-    nxViteTsPaths(),
-    splitVendorChunkPlugin()
+    nxViteTsPaths()
+    // splitVendorChunkPlugin() removed - built-in in Vite 5+
   ]
 })
