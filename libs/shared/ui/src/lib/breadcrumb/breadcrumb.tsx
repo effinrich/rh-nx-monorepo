@@ -1,6 +1,18 @@
+// Chakra UI v3: Breadcrumb uses compound component pattern
+// See: https://chakra-ui.com/docs/get-started/migration
+
+export { Breadcrumb } from '@chakra-ui/react'
+
+// Export Breadcrumb compound components (v3 recommended pattern)
 export {
-  Breadcrumb,
+  BreadcrumbRoot,
+  BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator
+  BreadcrumbSeparator,
+  BreadcrumbCurrentLink,
+  BreadcrumbEllipsis
 } from '@chakra-ui/react'
+
+// Export types
+export type { BreadcrumbRootProps, BreadcrumbLinkProps } from '@chakra-ui/react'

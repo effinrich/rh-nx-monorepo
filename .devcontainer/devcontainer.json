@@ -25,7 +25,7 @@
     "ghcr.io/devcontainers/features/python:1": {
       "version": "os-provided"
     },
-    "ghcr.io/devcontainers-contrib/features/nx-npm:1": {
+    "ghcr.io/devcontainers-extra/features/nx-npm:1": {
       "version": "latest"
     },
     "ghcr.io/devcontainers/features/aws-cli:1": {
@@ -54,9 +54,9 @@
       ],
       "settings": {
         "editor.codeActionsOnSave": {
-          // "source.formatDocument": true,
-          "source.fixAll.markdownlint": true,
-          "source.fixAll.eslint": true
+          // "source.formatDocument": "explicit",
+          "source.fixAll.markdownlint": "explicit",
+          "source.fixAll.eslint": "explicit"
         },
         "eslint.options": {
           "extensions": [".js", ".jsx", ".md", ".mdx", ".ts", ".tsx"]

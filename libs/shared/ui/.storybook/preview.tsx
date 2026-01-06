@@ -1,21 +1,9 @@
-import { ChakraProvider, createSystem, defaultConfig } from '@chakra-ui/react'
-
+import { ChakraProvider } from '@chakra-ui/react'
 import { withThemeByClassName } from '@storybook/addon-themes'
-import type { Preview, ReactRenderer } from '@storybook/react-vite'
+import type { Preview, ReactRenderer } from '@storybook/react'
+import { ThemeProvider } from 'next-themes'
 
-import { ColorModeProvider } from '../apps/compositions/src/ui/color-mode'
-
-const system = createSystem(defaultConfig, {
-  theme: {
-    tokens: {
-      fonts: {
-        heading: { value: 'Inter, sans-serif' },
-        body: { value: 'Inter, sans-serif' },
-        mono: { value: 'Roboto Mono, monospace' }
-      }
-    }
-  }
-})
+import { system } from '../src/lib/theme'
 
 const preview: Preview = {
   parameters: {
@@ -31,29 +19,28 @@ const preview: Preview = {
         ]
       }
     },
-    actions: { disable: true },
-    controls: { disable: true }
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i
+      }
+    }
   },
   decorators: [
     withThemeByClassName<ReactRenderer>({
       defaultTheme: 'light',
       themes: {
-        light: 'light',
+        light: '',
         dark: 'dark'
       }
     }),
-    (Story: React.ComponentType, context: { globals: { theme: string } }) => {
-      return (
-        <ColorModeProvider
-          forcedTheme={context.globals.theme}
-          enableSystem={false}
-        >
-          <ChakraProvider value={system}>
-            <Story />
-          </ChakraProvider>
-        </ColorModeProvider>
-      )
-    }
+    (Story) => (
+      <ThemeProvider attribute="class" disableTransitionOnChange defaultTheme="light">
+        <ChakraProvider value={system}>
+          <Story />
+        </ChakraProvider>
+      </ThemeProvider>
+    )
   ]
 }
 

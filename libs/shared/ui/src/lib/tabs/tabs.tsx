@@ -1,8 +1,26 @@
+// Chakra UI v3: Tabs uses compound component pattern
+// See: https://chakra-ui.com/docs/get-started/migration
+
+export { Tabs } from '@chakra-ui/react'
+
+// Export Tabs compound components (v3 recommended pattern)
 export {
-  Tab,
-  TabIndicator,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs
+  TabsRoot,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  TabsIndicator
 } from '@chakra-ui/react'
+
+// Re-export with v2 names for backward compatibility during migration
+// These are deprecated - use Tabs.* components instead
+export {
+  TabsTrigger as Tab,
+  TabsList as TabList,
+  TabsContent as TabPanel,
+  TabsIndicator as TabIndicator,
+  TabsRoot as TabsContainer
+} from '@chakra-ui/react'
+
+// v2 TabPanels is no longer needed - content goes directly in Tabs.Root
+// Use Tabs.Content with value prop instead

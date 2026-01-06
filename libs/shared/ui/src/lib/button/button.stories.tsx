@@ -1,18 +1,14 @@
 import { ReactNode, useState } from 'react'
 import { MdBuild, MdCall, MdFacebook } from 'react-icons/md'
-import { BeatLoader } from 'react-spinners'
 import {
-  ArrowForwardIcon,
-  ChevronDownIcon,
-  EmailIcon,
-  PhoneIcon,
-  SearchIcon
-} from '@chakra-ui/icons'
-import { Box, HStack, Stack, Wrap, WrapItem } from '@chakra-ui/layout'
-import { getThemingArgTypes } from '@chakra-ui/storybook-addon'
-import { ThemingProps } from '@chakra-ui/system'
-import { theme } from '@chakra-ui/theme'
-import { pick } from '@chakra-ui/utils'
+  LuArrowRight,
+  LuChevronDown,
+  LuMail,
+  LuPhone,
+  LuSearch
+} from 'react-icons/lu'
+import { BeatLoader } from 'react-spinners'
+import { Box, HStack, Stack, Wrap, WrapItem } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 import { Meta, StoryObj } from '@storybook/react-vite'
@@ -76,8 +72,11 @@ export default {
   // ]
 } as Meta<typeof Button>
 
-interface StoryProps extends ThemingProps<'Button'> {
+interface StoryProps {
   children?: ReactNode
+  colorScheme?: string
+  variant?: string
+  size?: string
 }
 
 export const Basic: StoryObj<StoryProps> = {
@@ -105,7 +104,10 @@ export const Outlines: StoryObj<StoryProps> = {
   ),
 
   argTypes: {
-    ...pick(getThemingArgTypes(theme, 'Button') ?? {}, ['size'])
+    size: {
+      options: ['xs', 'sm', 'md', 'lg'],
+      control: { type: 'radio' }
+    }
   },
 
   args: {
@@ -237,11 +239,11 @@ export const WithSizes = () => (
 
 export const WithIcon = () => (
   <Stack direction="row" spacing={4}>
-    <Button leftIcon={<EmailIcon />} colorScheme="teal" variant="solid">
+    <Button leftIcon={<LuMail />} colorScheme="teal" variant="solid">
       Email
     </Button>
     <Button
-      rightIcon={<ArrowForwardIcon />}
+      rightIcon={<LuArrowRight />}
       colorScheme="teal"
       variant="outline"
     >
@@ -341,16 +343,16 @@ export const CustomComposition = () => (
 
 export const ButtonWithIcon = () => (
   <Stack direction="row">
-    <IconButton aria-label="Search database" icon={<SearchIcon />} />
+    <IconButton aria-label="Search database" icon={<LuSearch />} />
 
     <IconButton
       colorScheme="blue"
       aria-label="Search database"
-      icon={<SearchIcon />}
+      icon={<LuSearch />}
     />
 
     <IconButton colorScheme="teal" aria-label="Call Segun" size="lg">
-      <PhoneIcon />
+      <LuPhone />
     </IconButton>
   </Stack>
 )
@@ -369,7 +371,7 @@ export const WithAttachedButtons = () => (
     <IconButton
       fontSize="2xl"
       aria-label="Add to friends"
-      icon={<ChevronDownIcon />}
+      icon={<LuChevronDown />}
     />
   </ButtonGroup>
 )
