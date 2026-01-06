@@ -18,7 +18,7 @@
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.1.0",
-    "@playwright/test": "^1.38.0",
+    "@playwright/test": "^1.57.0",
     "@reportportal/agent-js-playwright": "^5.1.4",
     "axios": "^1.5.1"
   }
