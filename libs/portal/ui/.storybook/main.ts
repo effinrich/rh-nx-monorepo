@@ -1,9 +1,10 @@
 import { createRequire } from "node:module";
-import path, { dirname, join } from 'path';
-import { mergeConfig } from 'vite'
-import turbosnap from 'vite-plugin-turbosnap'
+import path from 'path';
+import { mergeConfig } from 'vite';
+import turbosnap from 'vite-plugin-turbosnap';
 
-import type { StorybookConfig } from '@storybook/react-vite'
+import type { StorybookConfig } from '@storybook/react-vite';
+
 
 const require = createRequire(import.meta.url);
 

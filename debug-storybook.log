@@ -1,126 +1,96 @@
-[20:12:39.866] [INFO] Storybook Upgrade - v9.1.10
-[20:12:39.879] [INFO] detect-projects-spinner-start: Detecting projects...
-[20:12:39.881] [DEBUG] Finding Storybook projects...
-[20:12:41.470] [DEBUG] Found 2 Storybook projects
-[20:12:41.471] [INFO] detect-projects-spinner: Detecting projects: 1 projects
-[20:12:41.471] [DEBUG] Getting Storybook data...
-[20:12:41.471] [DEBUG] Getting Storybook info...
-[20:12:41.472] [DEBUG] Loading main config...
-[20:12:41.475] [INFO] detect-projects-spinner: Detecting projects: 2 projects
-[20:12:41.475] [DEBUG] Getting Storybook data...
-[20:12:41.475] [DEBUG] Getting Storybook info...
-[20:12:41.476] [DEBUG] Loading main config...
-[20:12:41.769] [DEBUG] Error: Unable to find or evaluate /Users/richtillman/Desktop/Redesign_Health/github/rh-design-system/libs/portal/ui/.storybook/main.ts: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/portal/ui/.storybook/main.ts file.
+[23:46:29.336] [INFO] Storybook upgrade - v10.1.11
+[23:46:29.338] [INFO] Detecting projects...
+[23:46:29.339] [DEBUG] Finding Storybook projects...
+[23:46:29.724] [DEBUG] Found 2 Storybook projects
+[23:46:29.727] [INFO] Detecting projects: 1 projects
+[23:46:29.727] [DEBUG] Getting Storybook data...
+[23:46:29.727] [DEBUG] Getting Storybook info...
+[23:46:29.733] [INFO] Detecting projects: 2 projects
+[23:46:29.733] [DEBUG] Getting Storybook data...
+[23:46:29.733] [DEBUG] Getting Storybook info...
+[23:46:30.065] [DEBUG] SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs\portal\ui\.storybook\main.ts file.
 
 Original error:
-Error: Cannot find module '@nx/react/plugins/storybook/package.json'
-Require stack:
-- /libs/portal/ui/.storybook/main.ts
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
-    at Function.resolve (node:internal/modules/helpers:157:19)
-    at getAbsolutePath (/libs/portal/ui/.storybook/main.ts:76:26)
-    at Object.<anonymous> (/libs/portal/ui/.storybook/main.ts:16:12)
-    at Module._compile (node:internal/modules/cjs/loader:1706:14)
-    at Module._compile (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/esbuild-register/dist/node.js:2258:26)
-    at node:internal/modules/cjs/loader:1839:10
-    at Object.newLoader [as .ts] (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/esbuild-register/dist/node.js:2262:9)
-    at Module.load (node:internal/modules/cjs/loader:1441:32)
-    at Function._load (node:internal/modules/cjs/loader:1263:12)
-[20:12:41.775] [DEBUG] Error: Unable to find or evaluate /Users/richtillman/Desktop/Redesign_Health/github/rh-design-system/libs/shared/ui/.storybook/main.ts: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/shared/ui/.storybook/main.ts file.
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'vite' imported from \libs\portal\ui\.storybook\main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:271:30)
+    at handleMessage (node:internal/modules/esm/worker:251:24)
+    at Immediate.checkForMessages (node:internal/modules/esm/worker:193:28)
+    at process.processImmediate (node:internal/timers:504:21)
+[23:46:30.065] [DEBUG] Loading main config...
+[23:46:30.065] [DEBUG] Getting stories paths...
+[23:46:30.089] [DEBUG] Getting package manager...
+[23:46:30.951] [DEBUG] Getting package.json info for D:/documents-from-c/GitHub/rh-nx-monorepo/package.json...
+[23:46:30.951] [DEBUG] Getting Storybook version...
+[23:46:30.951] [DEBUG] D:/documents-from-c/GitHub/rh-nx-monorepo/libs/shared/ui/.storybook - Validating before version... undefined
+[23:46:30.952] [DEBUG] SB_CLI_UPGRADE_0005 (UpgradeStorybookUnknownCurrentVersionError): We couldn't determine the current version of Storybook in your project.
+
+Are you running the Storybook CLI in a project without Storybook?
+It might help if you specify your Storybook config directory with the --config-dir flag.
+[23:46:30.952] [INFO] 2 projects detected
+[23:46:30.952] [DEBUG] Found 0 valid projects and 2 error projects
+[23:46:30.953] [ERROR] Failed to get projects
+[23:46:30.954] [ERROR] [38;2;241;97;97mError: ❌ Storybook found errors while collecting data for the following projects:
+D:/documents-from-c/GitHub/rh-nx-monorepo/libs/portal/ui/.storybook:
+SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs\portal\ui\.storybook\main.ts file.
 
 Original error:
-Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: Package subpath './internal/instrumenter/package.json' is not defined by "exports" in /node_modules/storybook/package.json
-    at exportsNotFound (node:internal/modules/esm/resolve:313:10)
-    at packageExportsResolve (node:internal/modules/esm/resolve:660:9)
-    at resolveExports (node:internal/modules/cjs/loader:650:36)
-    at Function._findPath (node:internal/modules/cjs/loader:717:31)
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1369:27)
-    at Function.resolve (node:internal/modules/helpers:157:19)
-    at getAbsolutePath (/libs/shared/ui/.storybook/main.ts:116:26)
-    at Object.<anonymous> (/libs/shared/ui/.storybook/main.ts:22:5)
-    at Module._compile (node:internal/modules/cjs/loader:1706:14)
-    at Module._compile (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/esbuild-register/dist/node.js:2258:26)
-[20:12:41.775] [INFO] detect-projects-spinner-stop: 2 projects detected
-[20:12:41.775] [DEBUG] Found 0 valid projects and 2 error projects
-[20:12:41.776] [ERROR] Failed to get projects
-[20:12:41.787] [ERROR] Error: ❌ Storybook found errors while collecting data for the following projects:
-/libs/portal/ui/.storybook:
-Error: Unable to find or evaluate ./libs/portal/ui/.storybook/main.ts: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/portal/ui/.storybook/main.ts file.
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'vite' imported from \libs\portal\ui\.storybook\main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:271:30)
+    at handleMessage (node:internal/modules/esm/worker:251:24)
+    at Immediate.checkForMessages (node:internal/modules/esm/worker:193:28)
+    at process.processImmediate (node:internal/timers:504:21)
+    at loadMainConfig (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11701:11)
+    at async getStorybookInfo (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11790:59)
+    at async getStorybookData (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:165:7)
+    at async processProject (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:296:9)
+D:/documents-from-c/GitHub/rh-nx-monorepo/libs/shared/ui/.storybook:
+SB_CLI_UPGRADE_0005 (UpgradeStorybookUnknownCurrentVersionError): We couldn't determine the current version of Storybook in your project.
+
+Are you running the Storybook CLI in a project without Storybook?
+It might help if you specify your Storybook config directory with the --config-dir flag.
+    at validateVersion (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:252:11)
+    at processProject (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:297:82)
+Please fix the errors and run the upgrade command again.[39m
+    at getProjects (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:468:13)
+    at async upgrade (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/run-4UWMWJJE.js:9360:24)
+    at async file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/run-4UWMWJJE.js:9558:70
+    at async withTelemetry (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-2372JZ52.js:209:12)
+    at async Command.<anonymous> (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/run-4UWMWJJE.js:9554:3)
+[23:46:30.959] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
+[23:46:31.364] [ERROR] Error: ❌ Storybook found errors while collecting data for the following projects:
+D:/documents-from-c/GitHub/rh-nx-monorepo/libs/portal/ui/.storybook:
+SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs\portal\ui\.storybook\main.ts file.
 
 Original error:
-Error: Cannot find module '@nx/react/plugins/storybook/package.json'
-Require stack:
-- /libs/portal/ui/.storybook/main.ts
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
-    at Function.resolve (node:internal/modules/helpers:157:19)
-    at getAbsolutePath (/libs/portal/ui/.storybook/main.ts:76:26)
-    at Object.<anonymous> (/libs/portal/ui/.storybook/main.ts:16:12)
-    at Module._compile (node:internal/modules/cjs/loader:1706:14)
-    at Module._compile (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/esbuild-register/dist/node.js:2258:26)
-    at node:internal/modules/cjs/loader:1839:10
-    at Object.newLoader [as .ts] (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/esbuild-register/dist/node.js:2262:9)
-    at Module.load (node:internal/modules/cjs/loader:1441:32)
-    at Function._load (node:internal/modules/cjs/loader:1263:12)
-    at getStorybookData (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:78:2455)
-    at async processProject (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:71:5434)
-/libs/shared/ui/.storybook:
-Error: Unable to find or evaluate ./libs/shared/ui/.storybook/main.ts: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/shared/ui/.storybook/main.ts file.
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'vite' imported from \libs\portal\ui\.storybook\main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:271:30)
+    at handleMessage (node:internal/modules/esm/worker:251:24)
+    at Immediate.checkForMessages (node:internal/modules/esm/worker:193:28)
+    at process.processImmediate (node:internal/timers:504:21)
+    at loadMainConfig (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11701:11)
+    at async getStorybookInfo (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11790:59)
+    at async getStorybookData (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:165:7)
+    at async processProject (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:296:9)
+D:/documents-from-c/GitHub/rh-nx-monorepo/libs/shared/ui/.storybook:
+SB_CLI_UPGRADE_0005 (UpgradeStorybookUnknownCurrentVersionError): We couldn't determine the current version of Storybook in your project.
 
-Original error:
-Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: Package subpath './internal/instrumenter/package.json' is not defined by "exports" in /node_modules/storybook/package.json
-    at exportsNotFound (node:internal/modules/esm/resolve:313:10)
-    at packageExportsResolve (node:internal/modules/esm/resolve:660:9)
-    at resolveExports (node:internal/modules/cjs/loader:650:36)
-    at Function._findPath (node:internal/modules/cjs/loader:717:31)
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1369:27)
-    at Function.resolve (node:internal/modules/helpers:157:19)
-    at getAbsolutePath (/libs/shared/ui/.storybook/main.ts:116:26)
-    at Object.<anonymous> (/libs/shared/ui/.storybook/main.ts:22:5)
-    at Module._compile (node:internal/modules/cjs/loader:1706:14)
-    at Module._compile (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/esbuild-register/dist/node.js:2258:26)
-    at getStorybookData (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:78:2455)
-    at async processProject (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:71:5434)
-Please fix the errors and run the upgrade command again.
-    at getProjects (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:76:10)
-    at async /Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:285:1637
-    at async withTelemetry (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/storybook/dist/core-server/index.cjs:42279:12)
-    at async upgrade (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:285:1361)
-    at async Command.<anonymous> (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:291:3312)
-[20:12:42.126] [ERROR] Error: ❌ Storybook found errors while collecting data for the following projects:
-/libs/portal/ui/.storybook:
-Error: Unable to find or evaluate ./libs/portal/ui/.storybook/main.ts: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/portal/ui/.storybook/main.ts file.
-
-Original error:
-Error: Cannot find module '@nx/react/plugins/storybook/package.json'
-Require stack:
-- /libs/portal/ui/.storybook/main.ts
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
-    at Function.resolve (node:internal/modules/helpers:157:19)
-    at getAbsolutePath (/libs/portal/ui/.storybook/main.ts:76:26)
-    at Object.<anonymous> (/libs/portal/ui/.storybook/main.ts:16:12)
-    at Module._compile (node:internal/modules/cjs/loader:1706:14)
-    at Module._compile (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/esbuild-register/dist/node.js:2258:26)
-    at node:internal/modules/cjs/loader:1839:10
-    at Object.newLoader [as .ts] (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/esbuild-register/dist/node.js:2262:9)
-    at Module.load (node:internal/modules/cjs/loader:1441:32)
-    at Function._load (node:internal/modules/cjs/loader:1263:12)
-    at getStorybookData (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:78:2455)
-    at async processProject (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:71:5434)
-/libs/shared/ui/.storybook:
-Error: Unable to find or evaluate ./libs/shared/ui/.storybook/main.ts: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/shared/ui/.storybook/main.ts file.
-
-Original error:
-Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: Package subpath './internal/instrumenter/package.json' is not defined by "exports" in /node_modules/storybook/package.json
-    at exportsNotFound (node:internal/modules/esm/resolve:313:10)
-    at packageExportsResolve (node:internal/modules/esm/resolve:660:9)
-    at resolveExports (node:internal/modules/cjs/loader:650:36)
-    at Function._findPath (node:internal/modules/cjs/loader:717:31)
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1369:27)
-    at Function.resolve (node:internal/modules/helpers:157:19)
-    at getAbsolutePath (/libs/shared/ui/.storybook/main.ts:116:26)
-    at Object.<anonymous> (/libs/shared/ui/.storybook/main.ts:22:5)
-    at Module._compile (node:internal/modules/cjs/loader:1706:14)
-    at Module._compile (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/esbuild-register/dist/node.js:2258:26)
-    at getStorybookData (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:78:2455)
-    at async processProject (/Users/richtillman/.npm/_npx/f997e0db94fb5ab5/node_modules/@storybook/cli/dist/bin/index.cjs:71:5434)
+Are you running the Storybook CLI in a project without Storybook?
+It might help if you specify your Storybook config directory with the --config-dir flag.
+    at validateVersion (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:252:11)
+    at processProject (file:///C:/Users/Rich/AppData/Local/npm-cache/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:297:82)
 Please fix the errors and run the upgrade command again.
