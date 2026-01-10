@@ -1,9 +1,10 @@
-import { createLocalStorageManager } from '@chakra-ui/react'
-import { theme } from '@redesignhealth/ui'
+import * as React from 'react'
+import { ChakraProvider, createSystem, defaultConfig } from '@chakra-ui/react'
+import { ColorModeProvider, theme } from '@redesignhealth/ui'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 
-import { StoryFn } from '@storybook/react-vite'
+import type { Preview, StoryContext } from '@storybook/react'
 
 // Initialize MSW
 initialize()
@@ -15,31 +16,59 @@ const queryClient = new QueryClient({
   }
 })
 
-const storageManager = createLocalStorageManager('sb-color-mode')
+const system = createSystem(defaultConfig, {
+  theme: {
+    tokens: {
+      fonts: {
+        heading: { value: 'Inter, sans-serif' },
+        body: { value: 'Inter, sans-serif' },
+        mono: { value: 'Roboto Mono, monospace' }
+      }
+    }
+  }
+})
 
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  docs: {
-    toc: true // 👈 Enables the table of contents
-  },
-  controls: {
-    // expanded: true,
-    hideNoControlsWarning: true,
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/
+const preview: Preview = {
+  parameters: {
+    actions: { disable: true },
+    docs: {
+      toc: true // 👈 Enables the table of contents
+    },
+    controls: {
+      // expanded: true,
+      hideNoControlsWarning: true,
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/
+      }
     }
   },
-  chromatic: { disableSnapshot: true },
-  chakra: { colorModeManager: storageManager, theme }
+  loaders: [mswLoader],
+  decorators: [
+    (Story: React.ComponentType, context: StoryContext) => {
+      return (
+        <ColorModeProvider
+          forcedTheme={context.globals.theme}
+          enableSystem={false}
+        >
+          <QueryClientProvider client={queryClient}>
+            <ChakraProvider value={system}>
+              <Story />
+            </ChakraProvider>
+          </QueryClientProvider>
+        </ColorModeProvider>
+      )
+    }
+  ]
+  // (Story: React.ComponentType) => {
+  //   return (
+  //     <ChakraProvider value={system}>
+  //       <QueryClientProvider client={queryClient}>
+  //         <Story />
+  //       </QueryClientProvider>
+  //     </ChakraProvider>
+  //   )
+  // }
 }
 
-export const loaders = [mswLoader]
-export const decorators = [
-  (Story: StoryFn) => (
-    <QueryClientProvider client={queryClient}>
-      <Story />
-    </QueryClientProvider>
-  )
-]
-export const tags = ['autodocs'];
+export default preview
