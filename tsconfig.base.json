@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "strict": true,
     "ignoreDeprecations": "5.0",
     "rootDir": ".",
     "sourceMap": true,

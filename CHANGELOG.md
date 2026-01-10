@@ -1,6 +1,6 @@
 # 2.0.0 (2026-01-10)
 
-# 🚀 Features
+## 🚀 Features
 
 - added nx agents ([dcc8bda](https://github.com/effinrich/rh-nx-monorepo/commit/dcc8bda))
 - Devcontainer baseline ([#20](https://github.com/effinrich/rh-nx-monorepo/pull/20))

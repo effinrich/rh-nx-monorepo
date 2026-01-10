@@ -20,4 +20,4 @@ jobs:
         run: npm ci
 
       - name: Run shared-ui tests
-        run: npx nx run portal-ui:test-storybook
+        run: npx nx run shared-ui:test-storybook
