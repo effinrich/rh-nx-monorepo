@@ -55,8 +55,8 @@
       "settings": {
         "editor.codeActionsOnSave": {
           // "source.formatDocument": "explicit",
-          "source.fixAll.markdownlint": "explicit",
-          "source.fixAll.eslint": "explicit"
+          "source.fixAll.markdownlint": true,
+          "source.fixAll.eslint": true
         },
         "eslint.options": {
           "extensions": [".js", ".jsx", ".md", ".mdx", ".ts", ".tsx"]
