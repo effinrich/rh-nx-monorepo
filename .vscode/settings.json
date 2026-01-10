@@ -91,5 +91,6 @@
   },
   "explorerExclude.backup": {},
   "java.compile.nullAnalysis.mode": "automatic",
-  "vitest.disableWorkspaceWarning": true
+  "vitest.disableWorkspaceWarning": true,
+  "nxConsole.nxWorkspacePath": ""
 }
