@@ -19,6 +19,7 @@
     "resolveJsonModule": true,
     "suppressImplicitAnyIndexErrors": true,
     "baseUrl": ".",
+    "strict": true,
     "paths": {
       "@redesignhealth/analytics": ["libs/shared/analytics/src/index.ts"],
       "@redesignhealth/assets": ["libs/shared/assets/src/index.ts"],

@@ -65,7 +65,6 @@
     "@hotjar/browser": "1.0.7",
     "@lukemorales/query-key-factory": "1.0.3",
     "@mdx-js/react": "2.1.5",
-    "@modelcontextprotocol/sdk": "^1.0.0",
     "@nikolovlazar/chakra-ui-prose": "1.2.1",
     "@react-oauth/google": "^0.11.1",
     "@swc/helpers": "0.5.17",
@@ -74,6 +73,7 @@
     "@tsconfig/node16-strictest-esm": "^1.0.3",
     "@types/debounce-promise": "3.1.6",
     "@types/react-helmet": "^6.1.11",
+    "@types/node": "^18.19.99",
     "axios": "1.9.0",
     "chakra-react-select": "^4.7.6",
     "core-js": "3.36.1",
@@ -118,7 +118,9 @@
     "use-count-up": "^3.0.1",
     "yup": "^1.3.2",
     "zod": "3.22.3",
-    "zustand": "4.3.8"
+    "zustand": "4.3.8",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "typescript": "^5.1.6"
   },
   "devDependencies": {
     "@babel/core": "7.22.5",
