@@ -11,7 +11,7 @@
   "scripts": {
     "test-storybook": "nx test:storybook --coverage --url http://localhost:4401 --watch"
   },
-  "version": "0.0.4",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/redesignhealth/rh-design-system",
