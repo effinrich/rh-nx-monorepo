@@ -1,4 +1,4 @@
-import 'focus-visible/dist/focus-visible'
+// import 'focus-visible/dist/focus-visible'
 
 import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
 

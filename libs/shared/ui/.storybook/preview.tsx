@@ -1,7 +1,8 @@
 import { ChakraProvider } from '@chakra-ui/react'
+import { ThemeProvider } from 'next-themes'
+
 import { withThemeByClassName } from '@storybook/addon-themes'
 import type { Preview, ReactRenderer } from '@storybook/react'
-import { ThemeProvider } from 'next-themes'
 
 import { system } from '../src/lib/theme'
 
@@ -34,8 +35,12 @@ const preview: Preview = {
         dark: 'dark'
       }
     }),
-    (Story) => (
-      <ThemeProvider attribute="class" disableTransitionOnChange defaultTheme="light">
+    Story => (
+      <ThemeProvider
+        attribute="class"
+        disableTransitionOnChange
+        defaultTheme="light"
+      >
         <ChakraProvider value={system}>
           <Story />
         </ChakraProvider>
