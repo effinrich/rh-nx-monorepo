@@ -60,15 +60,6 @@ const preview: Preview = {
       )
     }
   ]
-  // (Story: React.ComponentType) => {
-  //   return (
-  //     <ChakraProvider value={system}>
-  //       <QueryClientProvider client={queryClient}>
-  //         <Story />
-  //       </QueryClientProvider>
-  //     </ChakraProvider>
-  //   )
-  // }
 }
 
 export default preview
