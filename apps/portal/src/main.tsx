@@ -1,4 +1,4 @@
-import * as ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom/client'
 import ReactGA from 'react-ga4'
 import Hotjar from '@hotjar/browser'
 import { GoogleOAuthProvider } from '@react-oauth/google'
@@ -28,7 +28,7 @@ root.render(
   <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
     <QueryClientProvider client={directQueryClient()}>
       <ReactQueryDevtools buttonPosition="bottom-right" />
-      <RhProvider theme={theme}>
+      <RhProvider>
         <App />
       </RhProvider>
     </QueryClientProvider>
