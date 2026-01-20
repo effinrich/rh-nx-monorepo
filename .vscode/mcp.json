@@ -1,5 +1,5 @@
 {
-  "servers": {
+  "mcpServers": {
     "chakra-ui": {
       "command": "npx",
       "args": ["-y", "@chakra-ui/react-mcp"],
@@ -8,7 +8,6 @@
       }
     },
     "storybook-mcp": {
-      "type": "stdio",
       "command": "node",
       "args": ["tools/storybook-mcp/dist/index.js"],
       "env": {

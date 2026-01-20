@@ -1,6 +1,7 @@
 {
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
+    "suppressImplicitAnyIndexErrors": false,
     "target": "ES2021",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -30,8 +31,6 @@
     {
       "path": "./tsconfig.storybook.json"
     }
-  ]
-      "path": "./tsconfig.storybook.json"
-    }
-  ]
+  ],
+  "extends": "../../../tsconfig.base.json"
 }
