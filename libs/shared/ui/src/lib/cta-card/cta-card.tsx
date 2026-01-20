@@ -16,7 +16,7 @@ export interface CtaCardProps extends CardProps {
   headingcolor?: string
   headingWeight?: string
   ctaVariant?: string
-  ctaColorScheme?: string
+  ctacolorPalette?: string
   to?: string
   href?: string
   hasButtonAction?: boolean
@@ -33,7 +33,7 @@ export const CtaCard = ({
   ctaText,
   helpText,
   ctaVariant = 'solid',
-  ctaColorScheme = 'primary',
+  ctacolorPalette = 'primary',
   bgColor = 'gray.50',
   headingcolor = 'gray.500',
   headingWeight = 'normal',
@@ -75,7 +75,7 @@ export const CtaCard = ({
               as={RouterLink}
               to={to}
               variant={ctaVariant}
-              colorScheme={ctaColorScheme}
+              colorPalette={ctacolorPalette}
               data-id="add-entity"
             >
               {ctaText}
@@ -86,7 +86,7 @@ export const CtaCard = ({
               href={href}
               target="_blank"
               variant={ctaVariant}
-              colorScheme={ctaColorScheme}
+              colorPalette={ctacolorPalette}
               data-id="add-entity"
             >
               {ctaText}
@@ -95,7 +95,7 @@ export const CtaCard = ({
             <Button
               onClick={onClick}
               variant={ctaVariant}
-              colorScheme={ctaColorScheme}
+              colorPalette={ctacolorPalette}
               data-id="add-entity"
             >
               {ctaText}

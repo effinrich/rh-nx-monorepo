@@ -61,7 +61,7 @@ const accessibleColorMap: { [key: string]: AccessibleColor } = {
 
 const variants = {
   solid: (props: StyleFunctionProps) => {
-    const { colorScheme: c } = props
+    const { colorPalette: c } = props
 
     if (c === 'gray') {
       const bg = mode(`gray.100`, `whiteAlpha.200`)(props)
@@ -120,7 +120,7 @@ const variants = {
     props.theme.components['Button']['variants']['solid']({
       ...props,
       variant: 'solid',
-      colorScheme: 'primary'
+      colorPalette: 'primary'
     }),
   'primary-on-accent': () => ({
     fontWeight: 'medium',
@@ -140,7 +140,7 @@ const variants = {
     props.theme.components['Button']['variants']['outline']({
       ...props,
       variant: 'outline',
-      colorScheme: 'gray'
+      colorPalette: 'gray'
     }),
   'secondary-on-accent': {
     color: 'white',
@@ -166,7 +166,7 @@ const variants = {
   //   }
   // }),
   ghost: (props: StyleFunctionProps) => {
-    const { colorScheme: c, theme } = props
+    const { colorPalette: c, theme } = props
 
     if (c === 'gray') {
       return {
@@ -203,7 +203,7 @@ const variants = {
     }
   }),
   link: (props: StyleFunctionProps) => {
-    if (props.colorScheme === 'gray') {
+    if (props.colorPalette === 'gray') {
       return {
         color: 'muted',
         _hover: {
@@ -217,20 +217,20 @@ const variants = {
     }
     return {
       color: mode(
-        `${props.colorScheme}.600`,
-        `${props.colorScheme}.200`
+        `${props.colorPalette}.600`,
+        `${props.colorPalette}.200`
       )(props),
       _hover: {
         color: mode(
-          `${props.colorScheme}.700`,
-          `${props.colorScheme}.300`
+          `${props.colorPalette}.700`,
+          `${props.colorPalette}.300`
         )(props),
         textDecoration: 'none'
       },
       _active: {
         color: mode(
-          `${props.colorScheme}.700`,
-          `${props.colorScheme}.300`
+          `${props.colorPalette}.700`,
+          `${props.colorPalette}.300`
         )(props)
       }
     }

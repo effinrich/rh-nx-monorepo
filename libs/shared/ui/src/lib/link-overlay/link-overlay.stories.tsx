@@ -52,7 +52,7 @@ export const WithImage: StoryFn<typeof LinkBox> = () => (
 
 export const WithAvatar: StoryFn<typeof LinkBox> = () => (
   <LinkBox as="article" p="5" borderWidth="1px" rounded="md">
-    <HStack spacing="3" mb="3">
+    <HStack gap="3" mb="3">
       <Avatar name="John Doe" src="https://bit.ly/dan-abramov" />
       <Box>
         <Text fontWeight="semibold">John Doe</Text>

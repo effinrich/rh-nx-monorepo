@@ -6,7 +6,7 @@ export { Dialog } from '@chakra-ui/react'
 // Re-export with v2 names for backward compatibility during migration
 // These are deprecated - use Dialog.* components instead
 export {
-  Dialog as Modal,
+  DialogRoot as Modal,
   DialogBody as ModalBody,
   DialogCloseTrigger as ModalCloseButton,
   DialogContent as ModalContent,

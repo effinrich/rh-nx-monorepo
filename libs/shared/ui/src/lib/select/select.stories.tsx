@@ -28,13 +28,13 @@ export const BasicUsage = () => (
 
 export const SelectStates = () => (
   <Stack>
-    <Select placeholder="Select option" isInvalid mb={4}>
+    <Select placeholder="Select option" invalid mb={4}>
       <option value="Option 1">Option 1</option>
       <option value="Option 2">Option 2</option>
       <option value="Option 3">Option 3</option>
     </Select>
 
-    <Select placeholder="Select option" isDisabled>
+    <Select placeholder="Select option" disabled>
       <option value="Option 1">Option 1</option>
       <option value="Option 2">Option 2</option>
       <option value="Option 3">Option 3</option>
@@ -71,7 +71,7 @@ export const SelectVariants = () => (
 )
 
 export const SelectSizes = () => (
-  <Stack spacing={6}>
+  <Stack gap={6}>
     {['xs', 'sm', 'md', 'lg'].map(size => (
       <Select placeholder={`${size} size`} size={size} key={size} />
     ))}
@@ -124,13 +124,13 @@ export const FocusAndErrorColors = () => (
     />
 
     <Select
-      isInvalid
+      invalid
       errorBorderColor="red.300"
       placeholder="Here is a sample placeholder"
     />
 
     <Select
-      isInvalid
+      invalid
       errorBorderColor="crimson"
       placeholder="Here is a sample placeholder"
     />

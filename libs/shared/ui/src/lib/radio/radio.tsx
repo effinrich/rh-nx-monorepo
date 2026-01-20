@@ -1,24 +1,28 @@
-// Chakra UI v3: RadioGroup uses compound component pattern
-// See: https://chakra-ui.com/docs/get-started/migration
+import { RadioGroup as ChakraRadioGroup } from '@chakra-ui/react'
+import { forwardRef } from 'react'
 
-export { RadioGroup } from '@chakra-ui/react'
+export const RadioGroup = ChakraRadioGroup
 
-// Export RadioGroup compound components (v3 recommended pattern)
-export {
-  RadioGroupRoot,
-  RadioGroupItem,
-  RadioGroupItemControl,
-  RadioGroupItemText,
-  RadioGroupItemIndicator,
-  RadioGroupItemHiddenInput,
-  RadioGroupLabel
-} from '@chakra-ui/react'
+export interface RadioProps extends ChakraRadioGroup.ItemProps {
+  children?: React.ReactNode
+}
 
-// Re-export with v2 names for backward compatibility
-export { RadioGroupItem as Radio } from '@chakra-ui/react'
+export const Radio = forwardRef<HTMLDivElement, RadioProps>(function Radio(
+  { children, ...props },
+  ref
+) {
+  return (
+    <ChakraRadioGroup.Item ref={ref} {...props}>
+      <ChakraRadioGroup.ItemHiddenInput />
+      <ChakraRadioGroup.ItemControl>
+        <ChakraRadioGroup.ItemIndicator />
+      </ChakraRadioGroup.ItemControl>
+      {children && (
+        <ChakraRadioGroup.ItemText>{children}</ChakraRadioGroup.ItemText>
+      )}
+    </ChakraRadioGroup.Item>
+  )
+})
 
-// Export hooks
 export { useRadioGroup } from '@chakra-ui/react'
-
-// Export types
 export type { RadioGroupRootProps, RadioGroupItemProps } from '@chakra-ui/react'

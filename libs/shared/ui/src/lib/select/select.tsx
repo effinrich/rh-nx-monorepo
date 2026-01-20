@@ -2,7 +2,10 @@
 // For custom selects, use the Select component with compound pattern
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { NativeSelect, Select } from '@chakra-ui/react'
+export {
+  NativeSelectRoot as NativeSelect,
+  SelectRoot as Select
+} from '@chakra-ui/react'
 
 // Export NativeSelect compound components
 export {

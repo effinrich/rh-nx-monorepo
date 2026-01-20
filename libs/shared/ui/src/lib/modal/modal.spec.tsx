@@ -10,9 +10,9 @@ import {
 
 describe('Modal', () => {
   it('should render successfully', () => {
-    const onClose = jest.fn()
+    const onOpenChange = jest.fn()
     const { baseElement } = render(
-      <Modal isOpen onClose={onClose}>
+      <Modal open onOpenChange={onOpenChange}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Modal header</ModalHeader>

@@ -49,7 +49,7 @@ export const WithRightElement = {
         onClick={() => {
           'clicked'
         }}
-        colorScheme="primary"
+        colorPalette="primary"
       >
         Add OpCo
       </Button>

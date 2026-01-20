@@ -34,6 +34,6 @@ const variants = {
 export default {
   variants,
   defaultProps: {
-    colorScheme: 'primary'
+    colorPalette: 'primary'
   }
 }

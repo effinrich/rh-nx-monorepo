@@ -18,7 +18,7 @@ export interface AccordionItemProps
     UseAccordionItemProps {
   children?:
     | React.ReactNode
-    | ((props: { isExpanded: boolean; isDisabled: boolean }) => React.ReactNode)
+    | ((props: { isExpanded: boolean; disabled: boolean }) => React.ReactNode)
 }
 /**
  * AccordionItem is a single accordion that provides the open-close
@@ -50,8 +50,8 @@ export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
         >
           {typeof children === 'function'
             ? children({
-                isExpanded: !!context.isOpen,
-                isDisabled: !!context.isDisabled
+                isExpanded: !!context.open,
+                disabled: !!context.disabled
               })
             : children}
         </chakra.div>

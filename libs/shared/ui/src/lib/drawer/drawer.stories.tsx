@@ -1,5 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import { useRef, useState } from 'react'
+import { JSX } from 'react/jsx-runtime'
+import { JSX } from 'react/jsx-runtime'
 import { useDisclosure } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
@@ -30,7 +32,8 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay
+  DrawerOverlay,
+  DrawerRootProps
 } from './drawer'
 
 export default {
@@ -38,7 +41,7 @@ export default {
   title: 'Components / Overlay / Drawer',
   argTypes: {
     placement: {
-      options: ['top', 'right', 'bottom', 'left'],
+      options: ['top', 'end', 'bottom', 'start'],
       control: { type: 'radio' }
     },
     size: {
@@ -72,22 +75,24 @@ export default {
   },
   args: {
     size: 'sm',
-    placement: 'right'
+    placement: 'end'
   }
 } as Meta<typeof Drawer>
 
-const DrawerExampleHooks = args => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+const DrawerExampleHooks = (
+  args: JSX.IntrinsicAttributes & DrawerRootProps
+) => {
+  const { open, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
   return (
     <>
-      <Button ref={btnRef} colorScheme="primary" onClick={onOpen} maxW="150px">
+      <Button ref={btnRef} colorPalette="primary" onClick={onOpen} maxW="150px">
         Open
       </Button>
       <Drawer
-        isOpen={isOpen}
-        placement="right"
+        open={open}
+        placement="end"
         onClose={onClose}
         finalFocusRef={btnRef}
         {...args}
@@ -106,11 +111,11 @@ const DrawerExampleHooks = args => {
               variant="outline"
               mr={3}
               onClick={onClose}
-              colorScheme="red"
+              colorPalette="red"
             >
               Cancel
             </Button>
-            <Button colorScheme="blue">Save</Button>
+            <Button colorPalette="blue">Save</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
@@ -119,25 +124,21 @@ const DrawerExampleHooks = args => {
 }
 
 export const DrawerExample = {
-  render: (args) => <DrawerExampleHooks {...args} />
+  render: (args: any) => <DrawerExampleHooks {...args} />
 }
 
-const WithFormHooks = args => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+const WithFormHooks = (args: JSX.IntrinsicAttributes & DrawerRootProps) => {
+  const { open, onOpen, onClose } = useDisclosure()
   const firstField = useRef()
   return (
     <>
-      <Button
-        leftIcon={<AddIcon />}
-        colorScheme="teal"
-        onClick={onOpen}
-        maxW="150px"
-      >
+      <Button colorPalette="teal" onClick={onOpen} maxW="150px">
+        <AddIcon mr={2} />
         Create user
       </Button>
       <Drawer
-        isOpen={isOpen}
-        placement="right"
+        open={open}
+        placement="end"
         initialFocusRef={firstField}
         onClose={onClose}
         {...args}
@@ -150,7 +151,7 @@ const WithFormHooks = args => {
           </DrawerHeader>
 
           <DrawerBody>
-            <Stack spacing="24px">
+            <Stack gap="24px">
               <Box>
                 <FormLabel htmlFor="username">Name</FormLabel>
                 <Input
@@ -193,11 +194,11 @@ const WithFormHooks = args => {
               variant="outline"
               mr={3}
               onClick={onClose}
-              colorScheme="red"
+              colorPalette="red"
             >
               Cancel
             </Button>
-            <Button colorScheme="brand">Submit</Button>
+            <Button colorPalette="brand">Submit</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
@@ -210,7 +211,7 @@ export const WithForm = {
 }
 
 const WithFormLibraryHooks = (args: any) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Container maxW="600px">
@@ -219,16 +220,21 @@ const WithFormLibraryHooks = (args: any) => {
           form validation library like react-hook-form or formik. Here's the
           recommended way to do it:
         </Text>
-        <Alert status="warning" variant="left-accent" mb={6}>
+        <Alert status="warning" variant="subtle" mb={6}>
           Because the button is located outside the form, you can leverage its
           native HTML form attribute and refer to the id of the form.
         </Alert>
-        <Button leftIcon={<AddIcon />} onClick={onOpen} maxW="150px">
+        <Button onClick={onOpen} maxW="150px">
+          <AddIcon mr={2} />
           Open
         </Button>
       </Container>
 
-      <Drawer isOpen={isOpen} onClose={onClose} {...args}>
+      <Drawer
+        open={open}
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
+        {...args}
+      >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
@@ -262,11 +268,11 @@ export const WithFormLibrary = {
   render: (args: any) => <WithFormLibraryHooks {...args} />
 }
 
-const WithSizeHooks = (args: any) => {
-  const [size, setSize] = useState('')
-  const { isOpen, onOpen, onClose } = useDisclosure()
+const WithSizeHooks = (args: unknown) => {
+  const [size, setSize] = useState<DrawerRootProps['size']>('xs')
+  const { open, onOpen, onClose } = useDisclosure()
 
-  const handleClick = (newSize: string) => {
+  const handleClick = (newSize: DrawerRootProps['size']) => {
     setSize(newSize)
     onOpen()
   }
@@ -279,13 +285,17 @@ const WithSizeHooks = (args: any) => {
         {sizes.map(size => (
           <WrapItem key={size}>
             <Button
-              onClick={() => handleClick(size)}
+              onClick={() => handleClick(size as DrawerRootProps['size'])}
               m={4}
             >{`Open ${size} Drawer`}</Button>
           </WrapItem>
         ))}
       </Wrap>
-      <Drawer onClose={onClose} isOpen={isOpen} size={size}>
+      <Drawer
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
+        open={open}
+        size={size}
+      >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
@@ -318,23 +328,9 @@ const WithCustomMotionHooks = (args: any) => {
       <Button onClick={() => setOpen(!open)} maxW="150px">
         Open
       </Button>
-      <Drawer isOpen={open} onClose={() => setOpen(false)} {...args}>
+      <Drawer open={open} onOpenChange={e => setOpen(e.open)} {...args}>
         <DrawerOverlay />
-        <DrawerContent
-          alignItems="center"
-          motionProps={{
-            variants: {
-              enter: {
-                x: '0%',
-                transition: { duration: 0.2 }
-              },
-              exit: {
-                x: '100%',
-                transition: { duration: 0.1 }
-              }
-            }
-          }}
-        >
+        <DrawerContent alignItems="center">
           <Box my={6}>This is the drawer content</Box>
           <Button maxW="150px">This is a button</Button>
         </DrawerContent>
@@ -348,7 +344,7 @@ export const WithCustomMotion = {
 }
 
 const WithLongContentHooks = (args: any) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -357,8 +353,8 @@ const WithLongContentHooks = (args: any) => {
       </Button>
       <Drawer
         placement="bottom"
-        onClose={onClose}
-        isOpen={isOpen}
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
+        open={open}
         size="md"
         {...args}
       >
@@ -490,5 +486,5 @@ const WithLongContentHooks = (args: any) => {
 }
 
 export const WithLongContent = {
-  render: args => <WithLongContentHooks {...args} />
+  render: (args: any) => <WithLongContentHooks {...args} />
 }

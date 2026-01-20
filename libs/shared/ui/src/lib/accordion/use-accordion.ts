@@ -105,37 +105,37 @@ export function useAccordion(props: UseAccordionProps) {
   })
 
   /**
-   * Gets the `isOpen` and `onChange` props for a child accordion item based on
+   * Gets the `open` and `onChange` props for a child accordion item based on
    * the child's index.
    *
    * @param idx {number} The index of the child accordion item
    */
   const getAccordionItemProps = (idx: number | null) => {
-    let isOpen = false
+    let open = false
 
     if (idx !== null) {
-      isOpen = Array.isArray(index) ? index.includes(idx) : index === idx
+      open = Array.isArray(index) ? index.includes(idx) : index === idx
     }
 
-    const onChange = (isOpen: boolean) => {
+    const onChange = (open: boolean) => {
       if (idx === null) return
 
       if (allowMultiple && Array.isArray(index)) {
         //
-        const nextState = isOpen
+        const nextState = open
           ? index.concat(idx)
           : index.filter(i => i !== idx)
 
         setIndex(nextState)
         //
-      } else if (isOpen) {
+      } else if (open) {
         setIndex(idx)
       } else if (allowToggle) {
         setIndex(-1)
       }
     }
 
-    return { isOpen, onChange }
+    return { open, onChange }
   }
 
   return {
@@ -177,7 +177,7 @@ export interface UseAccordionItemProps {
    *
    * @default false
    */
-  isDisabled?: boolean
+  disabled?: boolean
   /**
    * If `true`, the accordion item will be focusable.
    *
@@ -197,7 +197,7 @@ export interface UseAccordionItemProps {
  * for an accordion item and its children
  */
 export function useAccordionItem(props: UseAccordionItemProps) {
-  const { isDisabled, isFocusable, id, ...htmlProps } = props
+  const { disabled, isFocusable, id, ...htmlProps } = props
   const { getAccordionItemProps, setFocusedIndex } = useAccordionContext()
 
   const buttonRef = useRef<HTMLElement>(null)
@@ -218,14 +218,14 @@ export function useAccordionItem(props: UseAccordionItemProps) {
    * with its parent `useAccordion`
    */
   const { register, index, descendants } = useAccordionDescendant({
-    disabled: isDisabled && !isFocusable
+    disabled: disabled && !isFocusable
   })
 
-  const { isOpen, onChange } = getAccordionItemProps(
+  const { open, onChange } = getAccordionItemProps(
     index === -1 ? null : index
   )
 
-  warnIfOpenAndDisabled({ isOpen, isDisabled })
+  warnIfOpenAndDisabled({ open, disabled })
 
   const onOpen = () => {
     onChange?.(true)
@@ -239,9 +239,9 @@ export function useAccordionItem(props: UseAccordionItemProps) {
    * Toggle the visibility of the accordion item
    */
   const onClick = useCallback(() => {
-    onChange?.(!isOpen)
+    onChange?.(!open)
     setFocusedIndex(index)
-  }, [index, setFocusedIndex, isOpen, onChange])
+  }, [index, setFocusedIndex, open, onChange])
 
   /**
    * Manage keyboard navigation between accordion items.
@@ -295,8 +295,8 @@ export function useAccordionItem(props: UseAccordionItemProps) {
         type: 'button',
         ref: mergeRefs(register, buttonRef, ref),
         id: buttonId,
-        disabled: !!isDisabled,
-        'aria-expanded': !!isOpen,
+        disabled: !!disabled,
+        'aria-expanded': !!open,
         'aria-controls': panelId,
         onClick: callAllHandlers(props.onClick, onClick),
         onFocus: callAllHandlers(props.onFocus, onFocus),
@@ -305,8 +305,8 @@ export function useAccordionItem(props: UseAccordionItemProps) {
     },
     [
       buttonId,
-      isDisabled,
-      isOpen,
+      disabled,
+      open,
       onClick,
       onFocus,
       onKeyDown,
@@ -326,15 +326,15 @@ export function useAccordionItem(props: UseAccordionItemProps) {
         role: 'region',
         id: panelId,
         'aria-labelledby': buttonId,
-        hidden: !isOpen
+        hidden: !open
       }
     },
-    [buttonId, isOpen, panelId]
+    [buttonId, open, panelId]
   )
 
   return {
-    isOpen,
-    isDisabled,
+    open,
+    disabled,
     isFocusable,
     onOpen,
     onClose,
@@ -370,18 +370,18 @@ function allowMultipleAndAllowToggleWarning(props: UseAccordionProps) {
 
 function focusableNotDisabledWarning(props: UseAccordionItemProps) {
   warn({
-    condition: !!(props.isFocusable && !props.isDisabled),
-    message: `Using only 'isFocusable', this prop is reserved for situations where you pass 'isDisabled' but you still want the element to receive focus (A11y). Either remove it or pass 'isDisabled' as well.
+    condition: !!(props.isFocusable && !props.disabled),
+    message: `Using only 'isFocusable', this prop is reserved for situations where you pass 'disabled' but you still want the element to receive focus (A11y). Either remove it or pass 'disabled' as well.
     `
   })
 }
 
 function warnIfOpenAndDisabled(props: {
-  isOpen: boolean
-  isDisabled?: boolean
+  open: boolean
+  disabled?: boolean
 }) {
   warn({
-    condition: props.isOpen && !!props.isDisabled,
+    condition: props.open && !!props.disabled,
     message: 'Cannot open a disabled accordion item'
   })
 }

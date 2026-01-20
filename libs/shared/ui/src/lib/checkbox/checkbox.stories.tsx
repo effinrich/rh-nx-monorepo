@@ -1,13 +1,10 @@
 /* eslint-disable no-console */
 import * as React from 'react'
-import { chakra } from '@chakra-ui/system'
 
 import { Meta } from '@storybook/react-vite'
 
 import {
-  Box,
   Divider,
-  Flex,
   FormControl,
   FormLabel,
   Heading,
@@ -17,45 +14,26 @@ import {
   Text
 } from '../../index'
 
-import {
-  Checkbox,
-  CheckboxGroup,
-  useCheckbox,
-  useCheckboxGroup
-} from './checkbox'
+import { Checkbox, CheckboxGroup } from './checkbox'
 
 export default {
   title: 'Components / Forms / Checkbox',
   component: Checkbox
 } as Meta
 
-export const Basic = () => <Checkbox colorScheme="red">Hello</Checkbox>
+export const Basic = () => <Checkbox colorPalette="red">Hello</Checkbox>
 
-export const Disabled = () => <Checkbox isDisabled>Disabled</Checkbox>
+export const Disabled = () => <Checkbox disabled>Disabled</Checkbox>
 
-export const Readonly = () => <Checkbox isReadOnly>Readonly</Checkbox>
+export const Readonly = () => <Checkbox readOnly>Readonly</Checkbox>
 
-export const Invalid = () => <Checkbox isInvalid>Invalid</Checkbox>
-export const NotFocusable = () => (
-  <Box maxW="300px">
-    <Checkbox isFocusable={false}>not focusable</Checkbox>
-    <Checkbox isFocusable={false} isDisabled>
-      disabled and not focusable (truly disabled)
-    </Checkbox>
-    <Checkbox tabIndex={-1} isFocusable={false}>
-      Not Focusable with provided tabIndex
-    </Checkbox>
-  </Box>
-)
+export const Invalid = () => <Checkbox invalid>Invalid</Checkbox>
+// NotFocusable and WithIconColor stories removed as props are deprecated in v3
 
-export const WithIconColor = () => (
-  <Checkbox iconColor="yellow.400">I love Redesign Health</Checkbox>
-)
-
-export const WithColorScheme = () => {
+export const WithColorPalette = () => {
   return (
     <Stack>
-      <Checkbox defaultChecked colorScheme="red">
+      <Checkbox defaultChecked colorPalette="red">
         Hello world
       </Checkbox>
       <Checkbox defaultChecked>Hello world</Checkbox>
@@ -63,7 +41,13 @@ export const WithColorScheme = () => {
   )
 }
 
-const CustomIcon = (props: any) => {
+// ... existing code ...
+
+type CustomIconProps = React.ComponentProps<typeof Icon> & {
+  isIndeterminate?: boolean
+}
+
+const CustomIcon = (props: CustomIconProps) => {
   const { isIndeterminate, ...rest } = props
 
   const d = isIndeterminate
@@ -86,7 +70,7 @@ export const WithCustomIcon = () => {
   return (
     <>
       <Heading>Default</Heading>
-      <Checkbox icon={<CustomIcon />} colorScheme="red">
+      <Checkbox icon={<CustomIcon />} colorPalette="red">
         Hello world
       </Checkbox>
 
@@ -94,23 +78,29 @@ export const WithCustomIcon = () => {
 
       <Heading>Indeterminate</Heading>
       <Checkbox
-        isChecked={allChecked}
+        checked={allChecked}
         isIndeterminate={isIndeterminate}
-        onChange={e => setCheckedItems([e.target.checked, e.target.checked])}
+        onCheckedChange={({ checked }) =>
+          setCheckedItems([!!checked, !!checked])
+        }
         icon={<CustomIcon />}
       >
         Parent Checkbox
       </Checkbox>
       <Stack ml="6" mt="2" align="start">
         <Checkbox
-          isChecked={checkedItems[0]}
-          onChange={e => setCheckedItems([e.target.checked, checkedItems[1]])}
+          checked={checkedItems[0]}
+          onCheckedChange={({ checked }) =>
+            setCheckedItems([!!checked, checkedItems[1]])
+          }
         >
           Child Checkbox 1
         </Checkbox>
         <Checkbox
-          isChecked={checkedItems[1]}
-          onChange={e => setCheckedItems([checkedItems[0], e.target.checked])}
+          checked={checkedItems[1]}
+          onCheckedChange={({ checked }) =>
+            setCheckedItems([checkedItems[0], !!checked])
+          }
         >
           Child Checkbox 2
         </Checkbox>
@@ -120,7 +110,7 @@ export const WithCustomIcon = () => {
 }
 
 export const Sizes = () => {
-  const sizes = ['sm', 'md', 'lg']
+  const sizes = ['sm', 'md', 'lg'] as const
 
   return (
     <Stack direction="row">
@@ -140,22 +130,28 @@ export const Indeterminate = () => {
   return (
     <>
       <Checkbox
-        isChecked={allChecked}
+        checked={allChecked}
         isIndeterminate={isIndeterminate}
-        onChange={e => setCheckedItems([e.target.checked, e.target.checked])}
+        onCheckedChange={({ checked }) =>
+          setCheckedItems([!!checked, !!checked])
+        }
       >
         Parent Checkbox
       </Checkbox>
       <Stack ml="6" mt="2" align="start">
         <Checkbox
-          isChecked={checkedItems[0]}
-          onChange={e => setCheckedItems([e.target.checked, checkedItems[1]])}
+          checked={checkedItems[0]}
+          onCheckedChange={({ checked }) =>
+            setCheckedItems([!!checked, checkedItems[1]])
+          }
         >
           Child Checkbox 1
         </Checkbox>
         <Checkbox
-          isChecked={checkedItems[1]}
-          onChange={e => setCheckedItems([checkedItems[0], e.target.checked])}
+          checked={checkedItems[1]}
+          onCheckedChange={({ checked }) =>
+            setCheckedItems([checkedItems[0], !!checked])
+          }
         >
           Child Checkbox 2
         </Checkbox>
@@ -167,20 +163,21 @@ export const Indeterminate = () => {
 export const Controlled = () => {
   const [value, setValue] = React.useState(false)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.checked)
-  }
-
-  return <Checkbox isChecked={value} onChange={handleChange} />
+  return (
+    <Checkbox
+      checked={value}
+      onCheckedChange={({ checked }) => setValue(!!checked)}
+    />
+  )
 }
 
 export const CheckboxGroupExample = () => {
   return (
     <CheckboxGroup
       defaultValue={['one', 'two']}
-      onChange={value => console.log(value)}
+      onValueChange={value => console.log(value)}
     >
-      <Stack align="start" direction={['column', 'row']} spacing={[2, 4, 6]}>
+      <Stack align="start" direction={['column', 'row']} gap={[2, 4, 6]}>
         <Checkbox value="one">One</Checkbox>
         <Checkbox value="two">Two</Checkbox>
         <Checkbox value="three">Three</Checkbox>
@@ -193,9 +190,9 @@ export const ResponsiveCheckboxGroup = () => {
   return (
     <CheckboxGroup
       defaultValue={['one', 'two']}
-      onChange={value => console.log(value)}
+      onValueChange={value => console.log(value)}
     >
-      <Stack spacing={[2, 4, 6]} direction={['column', 'row']}>
+      <Stack gap={[2, 4, 6]} direction={['column', 'row']}>
         <Checkbox value="one">One</Checkbox>
         <Checkbox value="two">Two</Checkbox>
         <Checkbox value="three">Three</Checkbox>
@@ -204,20 +201,17 @@ export const ResponsiveCheckboxGroup = () => {
   )
 }
 
-type Value = string | number
-type ArrayOfValue = Value[]
-
 export const ControlledCheckboxGroup = () => {
-  const [value, setValue] = React.useState<ArrayOfValue>(['one', 'two'])
+  const [value, setValue] = React.useState<string[]>(['one', 'two'])
   return (
     <CheckboxGroup
       value={value}
-      onChange={value => {
+      onValueChange={(value: string[]) => {
         console.log(value)
         setValue(value)
       }}
     >
-      <Stack direction="row" spacing="40px">
+      <Stack direction="row" gap="40px">
         <Checkbox value="one">One</Checkbox>
         <Checkbox value="two">Two</Checkbox>
         <Checkbox value="three">Three</Checkbox>
@@ -227,54 +221,27 @@ export const ControlledCheckboxGroup = () => {
 }
 
 export const CustomCheckboxGroup = () => {
-  function CustomCheckbox(props: any) {
-    const { state, getCheckboxProps, getInputProps, getLabelProps, htmlProps } =
-      useCheckbox(props)
-
-    return (
-      <chakra.label
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        gridColumnGap={2}
-        maxW="40"
-        bg="green.50"
-        border="1px solid"
-        borderColor="green.500"
-        rounded="lg"
-        px={3}
-        py={1}
-        cursor="pointer"
-        {...htmlProps}
-      >
-        <input {...getInputProps()} hidden />
-        <Flex
-          alignItems="center"
-          justifyContent="center"
-          border="2px solid"
-          borderColor="green.500"
-          w={4}
-          h={4}
-          {...getCheckboxProps()}
-        >
-          {state.isChecked && <Box w={2} h={2} bg="green.500" />}
-        </Flex>
-        <Text {...getLabelProps()}>Click me for {props.value}</Text>
-      </chakra.label>
-    )
-  }
-
-  const { value, getCheckboxProps } = useCheckboxGroup({
-    defaultValue: [2]
-  })
-
   return (
-    <Stack>
-      <Text>The selected checkboxes are: {value.sort().join(' and ')}</Text>
-      <CustomCheckbox {...getCheckboxProps({ value: 1 })} />
-      <CustomCheckbox {...getCheckboxProps({ value: 2 })} />
-      <CustomCheckbox {...getCheckboxProps({ value: 3 })} />
-    </Stack>
+    <CheckboxGroup defaultValue={['2']} onValueChange={console.log}>
+      <Stack>
+        <Text>The selected checkboxes are: (Use console to see value)</Text>
+        {[1, 2, 3].map(val => (
+          <Checkbox
+            key={val}
+            value={String(val)}
+            variant="outline"
+            px={3}
+            py={1}
+            cursor="pointer"
+            borderWidth="1px"
+            borderColor="green.500"
+            _checked={{ bg: 'green.50', borderColor: 'green.500' }}
+          >
+            Click me for {val}
+          </Checkbox>
+        ))}
+      </Stack>
+    </CheckboxGroup>
   )
 }
 export const WithFormControl = () => {
@@ -291,10 +258,10 @@ export const WithFormControl = () => {
         </CheckboxGroup>
       </FormControl>
 
-      <FormControl id="optInInvalid" isInvalid mt={4}>
+      <FormControl id="optInInvalid" invalid mt={4}>
         <FormLabel>Invalid Opt-in Example</FormLabel>
         <CheckboxGroup defaultValue={['2', '3']}>
-          <Stack spacing={2}>
+          <Stack gap={2}>
             <Checkbox value="1">Invalid Opt-in 1</Checkbox>
             <Checkbox value="2">Invalid Opt-in 2</Checkbox>
             <Checkbox value="3">Invalid Opt-in 3</Checkbox>
@@ -302,10 +269,10 @@ export const WithFormControl = () => {
         </CheckboxGroup>
       </FormControl>
 
-      <FormControl id="optInDisabled" isDisabled mt={4}>
+      <FormControl id="optInDisabled" disabled mt={4}>
         <FormLabel>Disabled Opt-in Example</FormLabel>
         <CheckboxGroup defaultValue={['2', '3']}>
-          <Stack spacing={2}>
+          <Stack gap={2}>
             <Checkbox value="1">Disabled Opt-in 1</Checkbox>
             <Checkbox value="2">Disabled Opt-in 2</Checkbox>
             <Checkbox value="3">Disabled Opt-in 3</Checkbox>
@@ -313,10 +280,10 @@ export const WithFormControl = () => {
         </CheckboxGroup>
       </FormControl>
 
-      <FormControl id="optInReadonly" isReadOnly mt={4}>
+      <FormControl id="optInReadonly" readOnly mt={4}>
         <FormLabel>Readonly Opt-in Example</FormLabel>
         <CheckboxGroup defaultValue={['2', '3']}>
-          <Stack spacing={2}>
+          <Stack gap={2}>
             <Checkbox value="1">Readonly Opt-in 1</Checkbox>
             <Checkbox value="2">Readonly Opt-in 2</Checkbox>
             <Checkbox value="3">Readonly Opt-in 3</Checkbox>
@@ -324,10 +291,10 @@ export const WithFormControl = () => {
         </CheckboxGroup>
       </FormControl>
 
-      <FormControl id="optInRequired" isRequired mt={4}>
+      <FormControl id="optInRequired" required mt={4}>
         <FormLabel>Required Opt-in Example</FormLabel>
         <CheckboxGroup defaultValue={['2', '3']}>
-          <Stack spacing={2}>
+          <Stack gap={2}>
             <Checkbox value="1">Required Opt-in 1</Checkbox>
             <Checkbox value="2">Required Opt-in 2</Checkbox>
             <Checkbox value="3">Required Opt-in 3</Checkbox>

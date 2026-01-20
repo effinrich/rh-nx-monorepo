@@ -21,7 +21,7 @@ const variants = {
 }
 
 const defaultProps = {
-  colorScheme: 'primary',
+  colorPalette: 'primary',
   variant: 'solid'
 }
 

@@ -13,12 +13,12 @@ import {
 import { useDisclosure, UseDisclosureProps } from './use-disclosure'
 
 const DrawerExample = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
-      <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
+      <Drawer placement="right" onClose={onClose} open={open}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
@@ -37,7 +37,7 @@ export default {
   component: DrawerExample,
   title: 'Hooks / useDisclosure',
   args: {
-    isOpen: false
+    open: false
   },
   argTypes: {
     onOpen: { type: 'function' },
@@ -52,12 +52,12 @@ export const WithDrawer = {
     docs: {
       source: {
         code: `const WithDrawer = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { open, onOpen, onClose } = useDisclosure()
 
     return (
       <>
         <Button onClick={onOpen}>Open Drawer</Button>
-        <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
+        <Drawer placement="right" onClose={onClose} open={open}>
           <DrawerOverlay />
           <DrawerContent>
             <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>

@@ -8,16 +8,9 @@ import {
   useRef,
   useState
 } from 'react'
+import { Accordion } from '@chakra-ui/react'
 
 import { Container, rh } from '../../index'
-
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel
-} from './'
 
 export default {
   title: 'Components / Disclosure / Accordion',
@@ -37,128 +30,128 @@ export default {
 }
 
 export const Basic = () => (
-  <Accordion>
-    <AccordionItem>
+  <Accordion.Root collapsible defaultValue={['item-1']}>
+    <Accordion.Item value="item-1">
       <h2>
-        <AccordionButton>
+        <Accordion.ItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 1 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <Accordion.ItemIndicator />
+        </Accordion.ItemTrigger>
       </h2>
-      <AccordionPanel>Panel 1</AccordionPanel>
-    </AccordionItem>
+      <Accordion.ItemContent>Panel 1</Accordion.ItemContent>
+    </Accordion.Item>
 
-    <AccordionItem>
+    <Accordion.Item value="item-2">
       <h2>
-        <AccordionButton>
+        <Accordion.ItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 2 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <Accordion.ItemIndicator />
+        </Accordion.ItemTrigger>
       </h2>
-      <AccordionPanel>Panel 2</AccordionPanel>
-    </AccordionItem>
-  </Accordion>
+      <Accordion.ItemContent>Panel 2</Accordion.ItemContent>
+    </Accordion.Item>
+  </Accordion.Root>
 )
 
 export const AllowToggle = () => (
-  <Accordion allowToggle>
-    <AccordionItem>
+  <Accordion.Root collapsible>
+    <Accordion.Item value="item-1">
       <h2>
-        <AccordionButton>
+        <Accordion.ItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 1 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <Accordion.ItemIndicator />
+        </Accordion.ItemTrigger>
       </h2>
-      <AccordionPanel pb={4}>
+      <Accordion.ItemContent pb={4}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
-      </AccordionPanel>
-    </AccordionItem>
+      </Accordion.ItemContent>
+    </Accordion.Item>
 
-    <AccordionItem>
+    <Accordion.Item value="item-2">
       <h2>
-        <AccordionButton>
+        <Accordion.ItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 2 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <Accordion.ItemIndicator />
+        </Accordion.ItemTrigger>
       </h2>
-      <AccordionPanel pb={4}>
+      <Accordion.ItemContent pb={4}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
-      </AccordionPanel>
-    </AccordionItem>
-  </Accordion>
+      </Accordion.ItemContent>
+    </Accordion.Item>
+  </Accordion.Root>
 )
 
 export const AllowMultiple = () => (
-  <Accordion allowMultiple>
-    <AccordionItem>
+  <Accordion.Root multiple>
+    <Accordion.Item value="item-1">
       <h2>
-        <AccordionButton>
+        <Accordion.ItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 1 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <Accordion.ItemIndicator />
+        </Accordion.ItemTrigger>
       </h2>
-      <AccordionPanel pb={4}>
+      <Accordion.ItemContent pb={4}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
-      </AccordionPanel>
-    </AccordionItem>
+      </Accordion.ItemContent>
+    </Accordion.Item>
 
-    <AccordionItem>
+    <Accordion.Item value="item-2">
       <h2>
-        <AccordionButton>
+        <Accordion.ItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 2 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <Accordion.ItemIndicator />
+        </Accordion.ItemTrigger>
       </h2>
-      <AccordionPanel pb={4}>
+      <Accordion.ItemContent pb={4}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
-      </AccordionPanel>
-    </AccordionItem>
-  </Accordion>
+      </Accordion.ItemContent>
+    </Accordion.Item>
+  </Accordion.Root>
 )
 
 export const StylingExpanded = () => (
-  <Accordion allowToggle>
-    <AccordionItem>
+  <Accordion.Root collapsible>
+    <Accordion.Item value="item-1">
       <h2>
-        <AccordionButton _expanded={{ bg: 'tomato', color: 'white' }}>
+        <Accordion.ItemTrigger _expanded={{ bg: 'tomato', color: 'white' }}>
           <rh.div flex="1" textAlign="left">
             Click me to see a different style
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <Accordion.ItemIndicator />
+        </Accordion.ItemTrigger>
       </h2>
-      <AccordionPanel>
+      <Accordion.ItemContent>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
-      </AccordionPanel>
-    </AccordionItem>
-  </Accordion>
+      </Accordion.ItemContent>
+    </Accordion.Item>
+  </Accordion.Root>
 )
 
 const data = [
@@ -206,21 +199,21 @@ export function Bug_2160() {
         />
       </rh.div>
       {displayData.length > 0 && (
-        <Accordion allowToggle>
+        <Accordion.Root collapsible>
           {displayData.map((item, i) => (
-            <AccordionItem key={`accordion-item-${i}`}>
+            <Accordion.Item key={`accordion-item-${i}`} value={`item-${i}`}>
               <h2>
-                <AccordionButton>
+                <Accordion.ItemTrigger>
                   <rh.div flex="1" textAlign="left">
                     {item.title}
                   </rh.div>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
               </h2>
-              <AccordionPanel pb={4}>{item.text}</AccordionPanel>
-            </AccordionItem>
+              <Accordion.ItemContent pb={4}>{item.text}</Accordion.ItemContent>
+            </Accordion.Item>
           ))}
-        </Accordion>
+        </Accordion.Root>
       )}
     </rh.div>
   )
@@ -228,27 +221,27 @@ export function Bug_2160() {
 
 export const WithDisabledAccordionItem = () => {
   return (
-    <Accordion index={1}>
-      <AccordionItem isDisabled>
-        <AccordionButton>Button 1</AccordionButton>
-        <AccordionPanel>One Content</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem isDisabled>
-        <AccordionButton>Button 2</AccordionButton>
-        <AccordionPanel>Two Content</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem>
-        <AccordionButton>Button 3</AccordionButton>
-        <AccordionPanel>Three Content</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem isDisabled>
-        <AccordionButton>Button 4</AccordionButton>
-        <AccordionPanel>Four Content</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem>
-        <AccordionButton>Button 5</AccordionButton>
-        <AccordionPanel>Five Content</AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+    <Accordion.Root defaultValue={['1']}>
+      <Accordion.Item disabled value="1">
+        <Accordion.ItemTrigger>Button 1</Accordion.ItemTrigger>
+        <Accordion.ItemContent>One Content</Accordion.ItemContent>
+      </Accordion.Item>
+      <Accordion.Item disabled value="2">
+        <Accordion.ItemTrigger>Button 2</Accordion.ItemTrigger>
+        <Accordion.ItemContent>Two Content</Accordion.ItemContent>
+      </Accordion.Item>
+      <Accordion.Item value="3">
+        <Accordion.ItemTrigger>Button 3</Accordion.ItemTrigger>
+        <Accordion.ItemContent>Three Content</Accordion.ItemContent>
+      </Accordion.Item>
+      <Accordion.Item disabled value="4">
+        <Accordion.ItemTrigger>Button 4</Accordion.ItemTrigger>
+        <Accordion.ItemContent>Four Content</Accordion.ItemContent>
+      </Accordion.Item>
+      <Accordion.Item value="5">
+        <Accordion.ItemTrigger>Button 5</Accordion.ItemTrigger>
+        <Accordion.ItemContent>Five Content</Accordion.ItemContent>
+      </Accordion.Item>
+    </Accordion.Root>
   )
 }

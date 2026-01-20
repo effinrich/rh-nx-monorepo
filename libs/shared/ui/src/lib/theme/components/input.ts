@@ -21,7 +21,7 @@ const variants = {
     }
   }),
   filled: (props: StyleFunctionProps) => {
-    if (props.colorScheme === 'gray') {
+    if (props.colorPalette === 'gray') {
       return {
         field: {
           bg: mode('white', 'gray.800')(props),
@@ -69,6 +69,6 @@ export default {
   variants,
   sizes,
   defaultProps: {
-    colorScheme: 'primary'
+    colorPalette: 'primary'
   }
 }

@@ -25,7 +25,7 @@ const DEFAULT_MAX_VALUE = 40
 
 export const WithPropsUpdate = () => {
   const [count, setCount] = React.useState(0)
-  const [isDisabled, setIsDisabled] = React.useState(true)
+  const [disabled, setIsDisabled] = React.useState(true)
   const [max, setMax] = React.useState(DEFAULT_MAX_VALUE)
 
   React.useEffect(() => {
@@ -42,13 +42,13 @@ export const WithPropsUpdate = () => {
   return (
     <rh.div display="flex" flexDirection="column" gap="8">
       <h1>
-        Slide max value: {max}, isDisabled: {String(isDisabled)}
+        Slide max value: {max}, disabled: {String(disabled)}
       </h1>
       <Slider
         aria-label="Player Progress"
         min={0}
         max={max}
-        isDisabled={isDisabled}
+        disabled={disabled}
         defaultValue={0}
         value={count}
         onChange={setCount}
@@ -69,7 +69,7 @@ export const WithPropsUpdate = () => {
 
 export function HorizontalSlider() {
   return (
-    <Slider colorScheme="red">
+    <Slider colorPalette="red">
       <SliderTrack>
         <SliderFilledTrack />
       </SliderTrack>
@@ -83,7 +83,7 @@ export function HorizontalSlider() {
 
 export function VerticalSlider() {
   return (
-    <Slider colorScheme="red" isReversed orientation="vertical">
+    <Slider colorPalette="red" isReversed orientation="vertical">
       <SliderTrack>
         <SliderFilledTrack />
       </SliderTrack>
@@ -95,7 +95,7 @@ export function VerticalSlider() {
 
 export function rhHorizontalSlider() {
   return (
-    <Slider colorScheme="blue" defaultValue={40}>
+    <Slider colorPalette="blue" defaultValue={40}>
       <SliderTrack>
         <SliderFilledTrack />
       </SliderTrack>

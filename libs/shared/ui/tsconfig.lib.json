@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "suppressImplicitAnyIndexErrors": false,
     "outDir": "../../../dist/out-tsc",
     "types": [
       "node",
@@ -32,5 +31,5 @@
     "**/*.ts",
     "**/*.tsx",
     "../../../jest.setup.js"
-  ]
+, "src/lib/rh-provider/rh-provider-v2.tsx.old", "src/lib/theme/index-v2.ts.old"  ]
 }

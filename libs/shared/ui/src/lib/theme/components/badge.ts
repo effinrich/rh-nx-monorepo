@@ -35,7 +35,7 @@ const $fg = cssVar('badge-color')
 
 const variants = {
   subtle: defineStyle(props => {
-    const { colorScheme: c, theme } = props
+    const { colorPalette: c, theme } = props
     const dark = transparentize(`${c}.50`, 0.6)(theme)
     return {
       [$bg.variable]: `colors.${c}.50`,

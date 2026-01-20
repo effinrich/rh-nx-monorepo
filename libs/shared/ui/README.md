@@ -2,6 +2,8 @@
 
 ## Documentation
 
+[Migration Guide](./MIGRATION.md)
+
 This is the RH UI library for React. Documentation availabe at:
 
 https://dev-design.redesignhealth.com/platform-documentation-library/platform-intro.html
@@ -27,4 +29,4 @@ in this folder's `package.json`.
 
 This publishes to GitHub Packages as an npm repo at:
 
-https://github.com/redesignhealth/rh-design-system/pkgs/npm/ui
+https://github.com/effinrich/rh-nx-monorepo/pkgs/npm/ui

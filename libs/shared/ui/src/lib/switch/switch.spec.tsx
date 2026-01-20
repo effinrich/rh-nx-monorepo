@@ -17,7 +17,7 @@ test('Uncontrolled - should check and uncheck', async () => {
 })
 
 test('Uncontrolled - should not check if disabled', async () => {
-  const { container, user } = render(<Switch isDisabled />)
+  const { container, user } = render(<Switch disabled />)
   const input = container.querySelector('input') as HTMLInputElement
 
   expect(input).toBeDisabled()
@@ -31,7 +31,7 @@ test('Controlled - should check and uncheck', async () => {
     const [checked, setChecked] = React.useState(false)
     return (
       <Switch
-        isChecked={checked}
+        checked={checked}
         onChange={e => {
           onChange?.()
           setChecked(e.target.checked)
@@ -61,11 +61,11 @@ test('Controlled - should check and uncheck', async () => {
 
 test('Uncontrolled FormControl - should not check if form-control disabled', async () => {
   const { container, user } = render(
-    <FormControl isDisabled mt={4}>
+    <FormControl disabled mt={4}>
       <FormLabel>Disabled Opt-in Example</FormLabel>
       <Switch />
-      <Switch isDisabled />
-      <Switch isDisabled={false} />
+      <Switch disabled />
+      <Switch disabled={false} />
     </FormControl>
   )
 
@@ -88,11 +88,11 @@ test('Uncontrolled FormControl - should not check if form-control disabled', asy
 
 test('Uncontrolled FormControl - mark label as invalid', () => {
   const { container } = render(
-    <FormControl isInvalid mt={4}>
+    <FormControl invalid mt={4}>
       <FormLabel>Invalid Opt-in Example</FormLabel>
       <Switch>Invalid Opt-in 1</Switch>
-      <Switch isInvalid>Invalid Opt-in 2</Switch>
-      <Switch isInvalid={false}>Invalid Opt-in 3</Switch>
+      <Switch invalid>Invalid Opt-in 2</Switch>
+      <Switch invalid={false}>Invalid Opt-in 3</Switch>
     </FormControl>
   )
 
@@ -123,11 +123,11 @@ test('Uncontrolled FormControl - mark label as invalid', () => {
 
 test('Uncontrolled FormControl - mark required', () => {
   const { container } = render(
-    <FormControl isRequired mt={4}>
+    <FormControl required mt={4}>
       <FormLabel>Required Opt-in Example</FormLabel>
       <Switch />
-      <Switch isRequired />
-      <Switch isRequired={false} />
+      <Switch required />
+      <Switch required={false} />
     </FormControl>
   )
 
@@ -142,11 +142,11 @@ test('Uncontrolled FormControl - mark required', () => {
 
 test('Uncontrolled FormControl - mark readonly', () => {
   const { container } = render(
-    <FormControl isReadOnly mt={4}>
+    <FormControl readOnly mt={4}>
       <FormLabel>ReadOnly Opt-in Example</FormLabel>
       <Switch />
-      <Switch isReadOnly />
-      <Switch isReadOnly={false} />
+      <Switch readOnly />
+      <Switch readOnly={false} />
     </FormControl>
   )
 

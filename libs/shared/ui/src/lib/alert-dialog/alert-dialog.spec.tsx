@@ -11,11 +11,11 @@ import {
 } from './alert-dialog'
 
 interface BasicUsageProps {
-  isOpen?: boolean
+  open?: boolean
 }
 
 const BasicUsage = (props: BasicUsageProps) => {
-  const [isOpen, setIsOpen] = useState(props.isOpen || false)
+  const [open, setIsOpen] = useState(props.open || false)
 
   const onOpen = () => setIsOpen(true)
   const onClose = () => setIsOpen(false)
@@ -28,7 +28,7 @@ const BasicUsage = (props: BasicUsageProps) => {
         Delete something
       </button>
       <AlertDialog
-        isOpen={isOpen}
+        open={open}
         leastDestructiveRef={cancelRef}
         onClose={onClose}
       >
@@ -61,7 +61,7 @@ it('renders no ui when closed', () => {
 })
 
 it("renders an element with role='alertdialog' when opened", () => {
-  render(<BasicUsage isOpen />)
+  render(<BasicUsage open />)
 
   expect(screen.getByRole('alertdialog')).toBeInTheDocument()
 })
@@ -71,5 +71,5 @@ it('passes a11y test closed', async () => {
 })
 
 it('passes a11y test opened', async () => {
-  await testA11y(<BasicUsage isOpen />)
+  await testA11y(<BasicUsage open />)
 })

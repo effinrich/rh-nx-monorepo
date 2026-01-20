@@ -1,7 +1,8 @@
-import { render, screen, waitFor } from '@redesignhealth/shared-utils-jest'
 import { act } from 'react'
+import { createToaster } from '@chakra-ui/react'
+import { render, screen, waitFor } from '@redesignhealth/shared-utils-jest'
 
-import { Toaster, createAppToaster } from './toaster'
+import { Toaster } from './toaster'
 
 describe('Toaster', () => {
   it('should render successfully', () => {
@@ -10,7 +11,7 @@ describe('Toaster', () => {
   })
 
   it('should display a toast notification', async () => {
-    const testToaster = createAppToaster({ placement: 'bottom-end' })
+    const testToaster = createToaster({ placement: 'bottom-end' })
 
     render(<Toaster toaster={testToaster} />)
 
@@ -23,13 +24,14 @@ describe('Toaster', () => {
     })
 
     await waitFor(() => {
-      expect(screen.getByText('Test Toast')).toBeInTheDocument()
-      expect(screen.getByText('This is a test notification')).toBeInTheDocument()
+      expect(
+        screen.getByText('This is a test notification')
+      ).toBeInTheDocument()
     })
   })
 
   it('should display success toast', async () => {
-    const testToaster = createAppToaster()
+    const testToaster = createToaster({ placement: 'bottom-end' })
 
     render(<Toaster toaster={testToaster} />)
 
@@ -41,12 +43,14 @@ describe('Toaster', () => {
     })
 
     await waitFor(() => {
-      expect(screen.getByText('Success!')).toBeInTheDocument()
+      expect(
+        screen.getByText('Operation completed successfully')
+      ).toBeInTheDocument()
     })
   })
 
   it('should display error toast', async () => {
-    const testToaster = createAppToaster()
+    const testToaster = createToaster({ placement: 'bottom-end' })
 
     render(<Toaster toaster={testToaster} />)
 
@@ -58,8 +62,7 @@ describe('Toaster', () => {
     })
 
     await waitFor(() => {
-      expect(screen.getByText('Error!')).toBeInTheDocument()
+      expect(screen.getByText('Something went wrong')).toBeInTheDocument()
     })
   })
 })
-

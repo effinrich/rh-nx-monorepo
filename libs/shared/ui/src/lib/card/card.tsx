@@ -1,9 +1,9 @@
 export {
   type CardBodyProps,
   type CardHeaderProps,
-  type CardProps,
-  Card,
+  CardRoot as Card,
   CardBody,
   CardFooter,
-  CardHeader
+  CardHeader,
+  CardRootProps as CardProps
 } from '@chakra-ui/react'

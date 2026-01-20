@@ -11,7 +11,7 @@ export default {
   title: 'Components / Forms / IconButton',
   argTypes: {
     isActive: { type: 'boolean' },
-    isDisabled: { type: 'boolean' },
+    disabled: { type: 'boolean' },
     isPending: { type: 'boolean' },
     isRound: { type: 'boolean' },
     icon: { type: 'function' },
@@ -24,7 +24,7 @@ export default {
       options: ['xs', 'sm', 'md', 'lg'],
       control: { type: 'radio' }
     },
-    colorScheme: {
+    colorPalette: {
       options: [
         'primary',
         'blackAlpha',
@@ -41,7 +41,7 @@ export default {
   args: {
     'aria-label': 'icon button action',
     icon: <SearchIcon />,
-    colorScheme: 'primary',
+    colorPalette: 'primary',
     size: 'md',
     variant: 'solid'
   },
@@ -59,7 +59,7 @@ export const Default = {
 }
 
 export const WithColors = {
-  args: { colorScheme: 'blue' }
+  args: { colorPalette: 'blue' }
 }
 
 export const WithSizes = {
@@ -73,7 +73,7 @@ export const WithSizes = {
 export const WithVariants = {
   args: {
     variant: 'outline',
-    colorScheme: 'teal',
+    colorPalette: 'teal',
     icon: <EmailIcon />,
     'aria-label': 'send email'
   }
@@ -82,7 +82,7 @@ export const WithVariants = {
 export const WithCustomIcon = {
   args: {
     variant: 'outline',
-    colorScheme: 'teal',
+    colorPalette: 'teal',
     icon: <MdPhone />,
     fontSize: '20px',
     'aria-label': 'call this number'

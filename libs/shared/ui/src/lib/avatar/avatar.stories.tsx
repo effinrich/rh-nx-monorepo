@@ -1,7 +1,6 @@
-import { Stack } from '@chakra-ui/layout'
-import { PropsOf } from '@chakra-ui/system'
+import { Float, Stack } from '@chakra-ui/react'
 
-import { Avatar, AvatarBadge, AvatarGroup } from './avatar'
+import { Avatar, AvatarGroup } from './avatar'
 
 export default {
   title: 'Components / Media & Icons / Avatar'
@@ -19,7 +18,7 @@ export const Basic = () => (
  * You can use a custom generic avatar instead of
  * what we have in Redesign UI.
  */
-const GenericAvatar = (props: PropsOf<'svg'>) => (
+const GenericAvatar = (props: React.ComponentProps<'svg'>) => (
   <svg
     color="#fff"
     viewBox="0 0 30 31"
@@ -42,7 +41,7 @@ export const WithCustomIcon = () => (
 )
 
 export const WithSizes = () => (
-  <Stack direction="row" spacing="24px">
+  <Stack direction="row" gap="24px">
     {['xs', 'sm', 'md', 'lg', 'xl', '2xl'].map(size => (
       <Avatar
         key={size}
@@ -50,7 +49,16 @@ export const WithSizes = () => (
         name="Uchiha Itachi"
         src="https://uinames.com/api/photos/female/18.jpg"
       >
-        <AvatarBadge boxSize="1.25em" bg="green.500" />
+        <Float placement="bottom-end">
+          <div
+            style={{
+              width: '1.25em',
+              height: '1.25em',
+              backgroundColor: 'green',
+              borderRadius: '50%'
+            }}
+          />
+        </Float>
       </Avatar>
     ))}
   </Stack>

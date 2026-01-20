@@ -31,9 +31,9 @@ test('renders an icon by default', () => {
   expect(icon).toHaveClass('chakra-select__icon')
 })
 
-test('renders in disabled state if isDisabled is true', () => {
+test('renders in disabled state if disabled is true', () => {
   const { container } = render(
-    <Select isDisabled placeholder="Select an option" />
+    <Select disabled placeholder="Select an option" />
   )
   const select = container.querySelector('select') as HTMLElement
   const iconWrapper = container.querySelector(
@@ -43,9 +43,9 @@ test('renders in disabled state if isDisabled is true', () => {
   expect(iconWrapper).toHaveAttribute('data-disabled', '')
 })
 
-test('doesnt renders in disabled state if isDisabled is false', () => {
+test('doesnt renders in disabled state if disabled is false', () => {
   const { container } = render(
-    <Select isDisabled={false} placeholder="Select an option" />
+    <Select disabled={false} placeholder="Select an option" />
   )
   const select = container.querySelector('select') as HTMLElement
   const iconWrapper = container.querySelector(
@@ -55,9 +55,9 @@ test('doesnt renders in disabled state if isDisabled is false', () => {
   expect(iconWrapper).not.toHaveAttribute('data-disabled')
 })
 
-test('renders in disabled state if wrapped by FormControl with isDisabled=true', () => {
+test('renders in disabled state if wrapped by FormControl with disabled=true', () => {
   const { container } = render(
-    <FormControl isDisabled>
+    <FormControl disabled>
       <Select placeholder="Select an option" />,
     </FormControl>
   )

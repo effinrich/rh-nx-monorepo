@@ -185,7 +185,7 @@ export const WithSemanticTokens = () => {
 export const WithColorMode = () => {
   const styles = useStyleConfig('Badge', {
     variant: 'solid',
-    colorScheme: 'blue'
+    colorPalette: 'blue'
   })
   return (
     <>

@@ -30,7 +30,7 @@ export const NavButton = ({
           fontSize={16}
           {...rest}
         >
-          <HStack spacing="3">
+          <HStack gap="3">
             <Icon as={icon} boxSize="6" />
             <Text>{label}</Text>
           </HStack>

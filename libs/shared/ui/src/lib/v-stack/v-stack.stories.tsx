@@ -34,8 +34,8 @@ export const Basic = {
 }
 
 export const WithDifferentSpacing: StoryFn<typeof VStack> = () => (
-  <HStack spacing="8" align="start">
-    <VStack spacing="1">
+  <HStack gap="8" align="start">
+    <VStack gap="1">
       <Text fontSize="sm" fontWeight="bold" color="gray.600">
         spacing = 1
       </Text>
@@ -49,7 +49,7 @@ export const WithDifferentSpacing: StoryFn<typeof VStack> = () => (
         Item 3
       </Box>
     </VStack>
-    <VStack spacing="4">
+    <VStack gap="4">
       <Text fontSize="sm" fontWeight="bold" color="gray.600">
         spacing = 4
       </Text>
@@ -63,7 +63,7 @@ export const WithDifferentSpacing: StoryFn<typeof VStack> = () => (
         Item 3
       </Box>
     </VStack>
-    <VStack spacing="8">
+    <VStack gap="8">
       <Text fontSize="sm" fontWeight="bold" color="gray.600">
         spacing = 8
       </Text>
@@ -83,7 +83,7 @@ export const WithDifferentSpacing: StoryFn<typeof VStack> = () => (
 export const WithDivider: StoryFn<typeof VStack> = () => (
   <VStack
     divider={<Divider />}
-    spacing="4"
+    gap="4"
     align="stretch"
     maxW="md"
     p="4"
@@ -112,8 +112,8 @@ export const WithDivider: StoryFn<typeof VStack> = () => (
 )
 
 export const Alignment: StoryFn<typeof VStack> = () => (
-  <HStack spacing="8" align="start">
-    <VStack align="start" spacing="3" w="200px">
+  <HStack gap="8" align="start">
+    <VStack align="start" gap="3" w="200px">
       <Text fontSize="sm" fontWeight="bold" color="gray.600">
         align = start
       </Text>
@@ -127,7 +127,7 @@ export const Alignment: StoryFn<typeof VStack> = () => (
         Much longer content here
       </Box>
     </VStack>
-    <VStack align="center" spacing="3" w="200px">
+    <VStack align="center" gap="3" w="200px">
       <Text fontSize="sm" fontWeight="bold" color="gray.600">
         align = center
       </Text>
@@ -141,7 +141,7 @@ export const Alignment: StoryFn<typeof VStack> = () => (
         Much longer content here
       </Box>
     </VStack>
-    <VStack align="end" spacing="3" w="200px">
+    <VStack align="end" gap="3" w="200px">
       <Text fontSize="sm" fontWeight="bold" color="gray.600">
         align = end
       </Text>
@@ -160,25 +160,25 @@ export const Alignment: StoryFn<typeof VStack> = () => (
 
 export const UserProfile: StoryFn<typeof VStack> = () => (
   <VStack
-    spacing="4"
+    gap="4"
     align="start"
     p="6"
     borderWidth="1px"
     borderRadius="lg"
     maxW="sm"
   >
-    <HStack spacing="4">
+    <HStack gap="4">
       <Avatar size="lg" name="Jane Doe" src="https://bit.ly/dan-abramov" />
-      <VStack align="start" spacing="1">
+      <VStack align="start" gap="1">
         <Heading size="md">Jane Doe</Heading>
         <Text fontSize="sm" color="gray.500">
           Product Designer
         </Text>
-        <Badge colorScheme="green">Active</Badge>
+        <Badge colorPalette="green">Active</Badge>
       </VStack>
     </HStack>
     <Divider />
-    <VStack align="start" spacing="2" w="full">
+    <VStack align="start" gap="2" w="full">
       <Text fontSize="sm" fontWeight="semibold">
         About
       </Text>
@@ -188,8 +188,8 @@ export const UserProfile: StoryFn<typeof VStack> = () => (
       </Text>
     </VStack>
     <Divider />
-    <HStack spacing="3" w="full">
-      <Button flex="1" colorScheme="primary" size="sm">
+    <HStack gap="3" w="full">
+      <Button flex="1" colorPalette="primary" size="sm">
         Follow
       </Button>
       <Button flex="1" variant="outline" size="sm">
@@ -201,7 +201,7 @@ export const UserProfile: StoryFn<typeof VStack> = () => (
 
 export const NotificationList: StoryFn<typeof VStack> = () => (
   <VStack
-    spacing="0"
+    gap="0"
     align="stretch"
     maxW="md"
     borderWidth="1px"
@@ -209,9 +209,9 @@ export const NotificationList: StoryFn<typeof VStack> = () => (
     overflow="hidden"
   >
     <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
-      <HStack spacing="3">
+      <HStack gap="3">
         <Avatar size="sm" name="John Smith" />
-        <VStack align="start" spacing="1" flex="1">
+        <VStack align="start" gap="1" flex="1">
           <Text fontSize="sm" fontWeight="semibold">
             John Smith commented on your post
           </Text>
@@ -223,9 +223,9 @@ export const NotificationList: StoryFn<typeof VStack> = () => (
     </Box>
     <Divider />
     <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
-      <HStack spacing="3">
+      <HStack gap="3">
         <Avatar size="sm" name="Sarah Johnson" />
-        <VStack align="start" spacing="1" flex="1">
+        <VStack align="start" gap="1" flex="1">
           <Text fontSize="sm" fontWeight="semibold">
             Sarah Johnson started following you
           </Text>
@@ -237,9 +237,9 @@ export const NotificationList: StoryFn<typeof VStack> = () => (
     </Box>
     <Divider />
     <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
-      <HStack spacing="3">
+      <HStack gap="3">
         <Avatar size="sm" name="Mike Wilson" />
-        <VStack align="start" spacing="1" flex="1">
+        <VStack align="start" gap="1" flex="1">
           <Text fontSize="sm" fontWeight="semibold">
             Mike Wilson liked your article
           </Text>

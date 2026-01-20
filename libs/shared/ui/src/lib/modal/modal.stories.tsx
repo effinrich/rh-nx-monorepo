@@ -25,13 +25,17 @@ export default {
 } as Meta<typeof Modal>
 
 export function BasicUsage() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal
+        open={open}
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
+        placement="center"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
@@ -42,10 +46,10 @@ export function BasicUsage() {
             irure nisi.
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose} mr={3}>
+            <Button colorPalette="red" onClick={onClose} mr={3}>
               Cancel
             </Button>
-            <Button colorScheme="primary">Save</Button>
+            <Button colorPalette="primary">Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -54,7 +58,7 @@ export function BasicUsage() {
 }
 
 export function ReturnFocus() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   const finalRef = useRef<HTMLDivElement>(null)
 
   return (
@@ -67,7 +71,11 @@ export function ReturnFocus() {
         Open Modal
       </Button>
 
-      <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        finalFocusEl={() => finalRef.current}
+        open={open}
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
@@ -80,10 +88,10 @@ export function ReturnFocus() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose} mr={3}>
+            <Button colorPalette="red" onClick={onClose} mr={3}>
               Close
             </Button>
-            <Button colorScheme="primary">Secondary Action</Button>
+            <Button colorPalette="primary">Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -100,7 +108,10 @@ export function NestedModal() {
       <Button onClick={first.onOpen} maxW="300px">
         Open
       </Button>
-      <Modal isOpen={first.isOpen} onClose={first.onClose}>
+      <Modal
+        open={first.open}
+        onOpenChange={e => (e.open ? first.onOpen() : first.onClose())}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
@@ -113,23 +124,29 @@ export function NestedModal() {
           <ModalFooter>
             <rh.div flex="1" />
             <Button mr={3}>Button 2</Button>
-            <Button colorScheme="primary" onClick={second.onOpen}>
+            <Button colorPalette="primary" onClick={second.onOpen}>
               Open Nested
             </Button>
           </ModalFooter>
 
-          <Modal isOpen={second.isOpen} onClose={second.onClose}>
+          <Modal
+            open={second.open}
+            onOpenChange={e => (e.open ? second.onOpen() : second.onClose())}
+          >
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>Modal 2 Title</ModalHeader>
               <ModalFooter>
                 <rh.div flex="1" />
-                <Button colorScheme="primary" onClick={third.onOpen}>
+                <Button colorPalette="primary" onClick={third.onOpen}>
                   Open Nested 2
                 </Button>
               </ModalFooter>
 
-              <Modal isOpen={third.isOpen} onClose={third.onClose}>
+              <Modal
+                open={third.open}
+                onOpenChange={e => (e.open ? third.onOpen() : third.onClose())}
+              >
                 <ModalOverlay />
                 <ModalContent>
                   <ModalHeader tabIndex={0}>Modal 3 Title</ModalHeader>
@@ -144,7 +161,7 @@ export function NestedModal() {
 }
 
 export const InsideScroll = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
   const btnRef = useRef(null)
   return (
     <>
@@ -152,9 +169,9 @@ export const InsideScroll = () => {
         Open
       </Button>
       <Modal
-        finalFocusRef={btnRef}
-        onClose={onClose}
-        isOpen={isOpen}
+        finalFocusEl={() => btnRef.current}
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
+        open={open}
         scrollBehavior="inside"
       >
         <ModalOverlay />
@@ -165,7 +182,7 @@ export const InsideScroll = () => {
             <LoremIpsum p={5} />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose}>
+            <Button colorPalette="red" onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
@@ -176,13 +193,13 @@ export const InsideScroll = () => {
 }
 
 export const AnimationDisabled = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal onClose={onClose} isOpen={isOpen} motionPreset="none">
+      <Modal onOpenChange={e => (e.open ? onOpen() : onClose())} open={open}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
@@ -191,7 +208,7 @@ export const AnimationDisabled = () => {
             <LoremIpsum p={5} />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose}>
+            <Button colorPalette="red" onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
@@ -202,13 +219,17 @@ export const AnimationDisabled = () => {
 }
 
 export const FullWithLongContent = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal onClose={onClose} isOpen={isOpen} size="full">
+      <Modal
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
+        open={open}
+        size="full"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Modal Title2</ModalHeader>
@@ -217,7 +238,7 @@ export const FullWithLongContent = () => {
             <LoremIpsum avgWordsPerSentence={30} />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose}>
+            <Button colorPalette="red" onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
@@ -228,25 +249,19 @@ export const FullWithLongContent = () => {
 }
 
 export function WithCustomMotionProps() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal
+        open={open}
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
+        placement="center"
+      >
         <ModalOverlay />
-        <ModalContent
-          motionProps={{
-            initial: 'exit',
-            animate: 'enter',
-            exit: 'exit',
-            variants: {
-              enter: { opacity: 1, y: 10 },
-              exit: { opacity: 0, y: 0, transition: { duration: 0.1 } }
-            }
-          }}
-        >
+        <ModalContent>
           <ModalCloseButton />
           <ModalHeader>Welcome Home</ModalHeader>
           <ModalBody>
@@ -255,10 +270,10 @@ export function WithCustomMotionProps() {
             irure nisi.
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose} mr={3}>
+            <Button colorPalette="red" onClick={onClose} mr={3}>
               Cancel
             </Button>
-            <Button colorScheme="primary">Save</Button>
+            <Button colorPalette="primary">Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

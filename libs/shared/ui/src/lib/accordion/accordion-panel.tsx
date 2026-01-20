@@ -26,7 +26,7 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, 'div'>(
     const { className, motionProps, ...rest } = props
 
     const { reduceMotion } = useAccordionContext()
-    const { getPanelProps, isOpen } = useAccordionItemContext()
+    const { getPanelProps, open } = useAccordionItemContext()
 
     // remove `hidden` prop, 'coz we're using height animation
     const panelProps = getPanelProps(rest, ref)
@@ -44,7 +44,7 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, 'div'>(
 
     if (!reduceMotion) {
       return (
-        <Collapse in={isOpen} {...motionProps}>
+        <Collapse in={open} {...motionProps}>
           {child}
         </Collapse>
       )

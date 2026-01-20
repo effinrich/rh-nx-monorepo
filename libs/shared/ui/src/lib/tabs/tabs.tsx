@@ -1,6 +1,8 @@
 // Chakra UI v3: Tabs uses compound component pattern
 // See: https://chakra-ui.com/docs/get-started/migration
 
+import { Box, BoxProps } from '@chakra-ui/react'
+
 export { Tabs } from '@chakra-ui/react'
 
 // Export Tabs compound components (v3 recommended pattern)
@@ -22,5 +24,7 @@ export {
   TabsRoot as TabsContainer
 } from '@chakra-ui/react'
 
-// v2 TabPanels is no longer needed - content goes directly in Tabs.Root
-// Use Tabs.Content with value prop instead
+// v2 TabPanels backward compatibility wrapper
+// In v3, TabPanels is no longer needed - content goes directly in Tabs.Root
+// This is a simple pass-through for migration purposes
+export const TabPanels = (props: BoxProps) => <Box {...props} />

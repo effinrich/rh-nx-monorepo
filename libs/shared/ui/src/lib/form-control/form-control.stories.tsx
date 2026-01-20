@@ -42,7 +42,7 @@ export const WithRadioGroup = () => {
     <FormControl as="fieldset">
       <FormLabel as="legend">Favorite Naruto Character</FormLabel>
       <RadioGroup defaultValue="Itachi">
-        <HStack spacing="24px">
+        <HStack gap="24px">
           <Radio value="Sasuke">Sasuke</Radio>
           <Radio value="Nagato">Nagato</Radio>
           <Radio value="Itachi">Itachi</Radio>
@@ -62,7 +62,7 @@ export const WithErrorMessage = () => {
   const isError = input === ''
 
   return (
-    <FormControl isInvalid={isError}>
+    <FormControl invalid={isError}>
       <FormLabel>Email</FormLabel>
       <Input type="email" value={input} onChange={handleInputChange} />
       {!isError ? (
@@ -77,7 +77,7 @@ export const WithErrorMessage = () => {
 }
 
 export const WithRequiredField = () => (
-  <FormControl isRequired>
+  <FormControl required>
     <FormLabel>First name</FormLabel>
     <Input placeholder="First name" />
   </FormControl>
@@ -131,7 +131,7 @@ export const WithFormik = () => {
         <Form>
           <Field name="name" validate={validateName}>
             {({ field, form }: any) => (
-              <FormControl isInvalid={form.errors.name && form.touched.name}>
+              <FormControl invalid={form.errors.name && form.touched.name}>
                 <FormLabel>First name</FormLabel>
                 <Input {...field} placeholder="name" />
                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -140,8 +140,8 @@ export const WithFormik = () => {
           </Field>
           <Button
             mt={4}
-            colorScheme="primary"
-            isLoading={props.isSubmitting}
+            colorPalette="primary"
+            loading={props.isSubmitting}
             type="submit"
           >
             Submit

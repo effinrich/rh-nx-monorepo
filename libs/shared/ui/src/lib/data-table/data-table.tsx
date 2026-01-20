@@ -25,14 +25,14 @@ export type DataTableProps<Data extends object> = {
   data: Data[]
   columns: ColumnDef<Data, any>[]
   variant: string
-  colorScheme: string
+  colorPalette: string
 }
 
 export function DataTable<Data extends object>({
   data,
   columns,
   variant,
-  colorScheme
+  colorPalette
 }: DataTableProps<Data>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const table = useReactTable({
@@ -49,7 +49,7 @@ export function DataTable<Data extends object>({
 
   return (
     <TableContainer borderBottomRadius="8px">
-      <Table variant={variant} colorScheme={colorScheme}>
+      <Table variant={variant} colorPalette={colorPalette}>
         <Thead>
           {table.getHeaderGroups().map(headerGroup => (
             <Tr key={headerGroup.id}>

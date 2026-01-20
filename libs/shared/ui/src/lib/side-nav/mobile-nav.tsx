@@ -9,7 +9,7 @@ import { Nav } from './nav'
 import { ToggleButton } from './toggle-button'
 
 export const MobileNav = ({ userProfile, numOpcos, numPersons }: any) => {
-  const { isOpen, onToggle, onClose } = useDisclosure()
+  const { open, onToggle, onClose } = useDisclosure()
 
   return (
     <Box
@@ -26,12 +26,12 @@ export const MobileNav = ({ userProfile, numOpcos, numPersons }: any) => {
           alt="Redesign Health logo"
         />
         <ToggleButton
-          isOpen={isOpen}
+          open={open}
           aria-label="Open Menu"
           onClick={onToggle}
         />
         <Drawer
-          isOpen={isOpen}
+          open={open}
           placement="left"
           onClose={onClose}
           isFullHeight
