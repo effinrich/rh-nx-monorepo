@@ -46,11 +46,9 @@ export const Users = () => {
         helpText="Manage users and their account permissions here."
         rightElement={
           <Button
-            as="a"
-            href="add-user"
+            as={Link}
+            to="add-user"
             colorScheme="primary"
-            role="button"
-            component={Link}
           >
             Add user
           </Button>
