@@ -16,7 +16,6 @@
     "noPropertyAccessFromIndexSignature": false,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "suppressImplicitAnyIndexErrors": true,
     "baseUrl": ".",
     "paths": {
       "@redesignhealth/analytics": ["libs/shared/analytics/src/index.ts"],
