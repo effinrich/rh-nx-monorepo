@@ -66,7 +66,7 @@
     "@hotjar/browser": "1.0.7",
     "@lukemorales/query-key-factory": "1.0.3",
     "@mdx-js/react": "2.1.5",
-    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@modelcontextprotocol/sdk": "^1.25.3",
     "@nikolovlazar/chakra-ui-prose": "1.2.1",
     "@react-oauth/google": "^0.11.1",
     "@storybook/manager-api": "^8.6.14",
