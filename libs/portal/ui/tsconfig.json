@@ -1,7 +1,6 @@
 {
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
-    "suppressImplicitAnyIndexErrors": false,
     "target": "ES2021",
     "useDefineForClassFields": true,
     "module": "ESNext",

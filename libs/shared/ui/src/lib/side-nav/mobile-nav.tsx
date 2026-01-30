@@ -1,7 +1,7 @@
 import { useDisclosure } from '@chakra-ui/react'
 
 import { Box } from '../box/box'
-import { Drawer, DrawerContent, DrawerOverlay } from '../drawer/drawer'
+import { Drawer } from '../drawer/drawer'
 import { Flex } from '../flex/flex'
 import { RedesignLogo } from '../logos/redesign-logo/redesign-logo'
 
@@ -9,7 +9,7 @@ import { Nav } from './nav'
 import { ToggleButton } from './toggle-button'
 
 export const MobileNav = ({ userProfile, numOpcos, numPersons }: any) => {
-  const { isOpen, onToggle, onClose } = useDisclosure()
+  const { open, onToggle, onClose } = useDisclosure()
 
   return (
     <Box
@@ -26,12 +26,12 @@ export const MobileNav = ({ userProfile, numOpcos, numPersons }: any) => {
           alt="Redesign Health logo"
         />
         <ToggleButton
-          isOpen={isOpen}
+          open={open}
           aria-label="Open Menu"
           onClick={onToggle}
         />
-        <Drawer
-          isOpen={isOpen}
+        <Drawer.Root
+          open={open}
           placement="left"
           onClose={onClose}
           isFullHeight
@@ -39,15 +39,15 @@ export const MobileNav = ({ userProfile, numOpcos, numPersons }: any) => {
           closeOnEsc
         >
           <DrawerOverlay />
-          <DrawerContent>
+          <Drawer.Content>
             <Nav
               userProfile={userProfile}
               numOpcos={numOpcos}
               numPersons={numPersons}
               onClose={onClose}
             />
-          </DrawerContent>
-        </Drawer>
+          </Drawer.Content>
+        </Drawer.Root>
       </Flex>
     </Box>
   )

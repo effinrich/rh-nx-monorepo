@@ -19,5 +19,8 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
+  },
+  "devDependencies": {
+    "@chakra-ui/cli": "^3.31.0"
   }
 }

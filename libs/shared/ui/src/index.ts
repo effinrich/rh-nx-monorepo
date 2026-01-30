@@ -71,6 +71,8 @@ export * from './lib/tooltip/tooltip'
 export * from './lib/v-stack/v-stack'
 export * from './lib/visually-hidden/visually-hidden'
 export * from './lib/wrap/wrap'
+export * from './lib/portal/portal'
+
 /* hooks */
 export * from './lib/hooks/use-breakpoint/use-breakpoint'
 export * from './lib/hooks/use-disclosure/use-disclosure'

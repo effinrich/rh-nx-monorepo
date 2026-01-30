@@ -1,3 +1,6 @@
+
+
+
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import react from '@vitejs/plugin-react'
 import { join } from 'path'
@@ -31,8 +34,7 @@ export default defineConfig({
   plugins: [
     dts({
       entryRoot: 'src',
-      tsconfigPath: join(__dirname, 'tsconfig.lib.json'),
-      skipDiagnostics: true
+      tsconfigPath: join(__dirname, 'tsconfig.lib.json')
     }),
     react(),
     nxViteTsPaths()
