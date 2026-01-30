@@ -3,7 +3,7 @@ import { type IconButtonProps, IconButton } from '../icon-button/icon-button'
 import { rh } from '../rh/rh'
 
 const Bar = rh('span', {
-  baseStyle: {
+  base: {
     display: 'block',
     pos: 'absolute',
     w: '1.25rem',
