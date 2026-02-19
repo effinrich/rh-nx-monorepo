@@ -1,4 +1,5 @@
-import { Box, BoxProps, useColorModeValue } from '@chakra-ui/react'
+import { Box, BoxProps } from '@chakra-ui/react'
+import { useColorModeValue } from '../color-mode/color-mode'
 
 export const ShadowBox = (props: BoxProps) => (
   <Box

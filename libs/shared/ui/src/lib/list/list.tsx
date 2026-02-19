@@ -1,7 +1,9 @@
 // Chakra UI v3: List uses compound component pattern
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { List } from '@chakra-ui/react'
+// In Chakra v3, `List` is a namespace object (not a component).
+// Export ListRoot as List for backward compat.
+export { ListRoot as List } from '@chakra-ui/react'
 
 // Export List compound components (v3 recommended pattern)
 export {

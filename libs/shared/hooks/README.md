@@ -1,7 +1,21 @@
-# shared-hooks
+# @redesignhealth/shared-hooks
 
-This library was generated with [Nx](https://nx.dev).
+Shared React hooks for use across Redesign Health frontend applications.
 
-## Running unit tests
+## Exports
 
-Run `nx test shared-hooks` to execute the unit tests via [Jest](https://jestjs.io).
+### `usePagination`
+
+A hook for managing paginated API state — tracks current page, page size, and provides helpers for navigating between pages. Used alongside React Query list queries that return a paginated response envelope.
+
+```ts
+import { usePagination } from '@redesignhealth/shared-hooks'
+
+const { page, pageSize, setPage, setPageSize } = usePagination()
+```
+
+## Running Tests
+
+```bash
+nx test shared-hooks
+```

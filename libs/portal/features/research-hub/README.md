@@ -1,7 +1,20 @@
-# research-hub
+# portal-features-research-hub
 
-This library was generated with [Nx](https://nx.dev).
+Feature library for the **Research Hub** section of the Platform Portal. Provides research sprint reports, call notes, and associated file management.
 
-## Running unit tests
+## Key Components
 
-Run `nx test portal-features-research-hub` to execute the unit tests via [Vitest](https://vitest.dev/).
+- `ResearchHubPage` — tabbed view of research sprints and call notes
+- `ResearchSprintForm` — form for creating / editing research sprint reports
+- `CallNotesForm` — form for creating / editing call notes with drag-and-drop file upload
+- `AddResearchMenu` — dropdown to add a new research sprint or call notes entry
+
+## Consumed By
+
+`apps/portal` at the `/research-hub` route.
+
+## Running Tests
+
+```bash
+nx test portal-features-research-hub
+```

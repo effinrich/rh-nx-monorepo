@@ -3,7 +3,9 @@
 // isNumeric → textAlign='end'
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { Table } from '@chakra-ui/react'
+// In Chakra v3, `Table` is a namespace object (not a component).
+// Export TableRoot as Table for backward compat.
+export { TableRoot as Table } from '@chakra-ui/react'
 
 // Export Table compound components (v3 recommended pattern)
 export {

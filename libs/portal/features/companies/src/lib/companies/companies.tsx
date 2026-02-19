@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet'
 import { MdOutlineEdit } from 'react-icons/md'
 import { Link, Outlet } from 'react-router-dom'
-import { VisuallyHidden } from '@chakra-ui/react'
+import { VisuallyHidden } from '@redesignhealth/ui'
 import {
   CompanyCommand,
   useGetCompanies,

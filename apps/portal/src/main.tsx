@@ -12,16 +12,20 @@ import App from './app/app'
 const GA_MEASUREMENT_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || ''
 
-ReactGA.initialize(GA_MEASUREMENT_ID, {
-  gtagOptions: {
-    send_page_view: false
-  }
-})
+if (GA_MEASUREMENT_ID) {
+  ReactGA.initialize(GA_MEASUREMENT_ID, {
+    gtagOptions: {
+      send_page_view: false
+    }
+  })
+}
 
 const siteId = import.meta.env.VITE_HOTJAR_ID
 const hotjarVersion = 6
 
-Hotjar.init(siteId, hotjarVersion)
+if (siteId) {
+  Hotjar.init(siteId, hotjarVersion)
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

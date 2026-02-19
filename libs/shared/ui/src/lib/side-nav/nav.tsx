@@ -4,8 +4,7 @@ import {
   MdPeople,
   MdSupport
 } from 'react-icons/md'
-import { useColorModeValue } from '@chakra-ui/react'
-
+import { useColorModeValue } from '../color-mode/color-mode'
 import { Divider } from '../divider/divider'
 import { Flex } from '../flex/flex'
 import { RedesignLogo } from '../logos/redesign-logo/redesign-logo'

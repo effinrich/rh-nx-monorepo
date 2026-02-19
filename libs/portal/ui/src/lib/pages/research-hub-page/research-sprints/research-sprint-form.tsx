@@ -6,7 +6,7 @@ import {
   Input,
   NumberInput,
   NumberInputField
-} from '@chakra-ui/react'
+} from '@redesignhealth/ui'
 import {
   CompanySummary,
   NewSprintProps,

@@ -3,7 +3,9 @@
 
 import { Box, BoxProps } from '@chakra-ui/react'
 
-export { Tabs } from '@chakra-ui/react'
+// In Chakra v3, `Tabs` is a namespace object (not a component).
+// Export TabsRoot as Tabs for backward compat.
+export { TabsRoot as Tabs } from '@chakra-ui/react'
 
 // Export Tabs compound components (v3 recommended pattern)
 export {

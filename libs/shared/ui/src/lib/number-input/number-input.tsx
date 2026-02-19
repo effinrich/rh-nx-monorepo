@@ -2,7 +2,9 @@
 // onChange → onValueChange, onInvalid → onValueInvalid
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { NumberInput } from '@chakra-ui/react'
+// In Chakra v3, `NumberInput` is a namespace object (not a component).
+// Export NumberInputRoot as NumberInput for backward compat.
+export { NumberInputRoot as NumberInput } from '@chakra-ui/react'
 
 // Export NumberInput compound components (v3 recommended pattern)
 export {

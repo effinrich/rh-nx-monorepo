@@ -1,7 +1,9 @@
 // Chakra UI v3: Menu uses compound component pattern
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { Menu, Portal } from '@chakra-ui/react'
+// In Chakra v3, `Menu` is a namespace object (not a component).
+// Export MenuRoot as Menu for backward compat with v2 usage of <Menu>.
+export { MenuRoot as Menu, Portal } from '@chakra-ui/react'
 
 // Export Menu compound components (v3 recommended pattern)
 export {

@@ -30,6 +30,24 @@ try {
 }
 
 // Helpers
+
+/**
+ * Normalize a user record from the DB to match what the portal expects.
+ * The portal expects `roles` (array) and `memberOf` (array with {id, name}).
+ * The generated data has `role` (singular object).
+ */
+const normalizeUser = (user: any) => {
+  const roles = user.roles
+    ? user.roles
+    : user.role
+      ? [user.role]
+      : []
+  const memberOf = (user.memberOf || []).map((m: any) =>
+    typeof m === 'string' ? { id: m, name: m } : m
+  )
+  return { ...user, roles, memberOf }
+}
+
 const paginate = (items: unknown[], page = 0, size = 20) => {
   const start = page * size
   const end = start + size
@@ -141,11 +159,10 @@ app.get('/ip-marketplace', (req, res) => {
 
 // User Info / Auth
 app.get('/userinfo', (req, res) => {
-  // Return a default user or one based on a header if we wanted to be fancy
-  // returning the first super admin or user
   const user = db.users?.[0]
   if (user) {
-    res.json(user)
+    // Normalize: portal expects `roles` (array) and `memberOf` (array with {id, name})
+    res.json(normalizeUser(user))
   } else {
     res.status(401).json({ message: 'Unauthorized' })
   }
@@ -154,7 +171,7 @@ app.get('/userinfo', (req, res) => {
 app.get('/person/:email', (req, res) => {
   const user = db.users?.find((u: any) => u.email === req.params.email)
   if (user) {
-    res.json(user)
+    res.json(normalizeUser(user))
   } else {
     res.status(404).json({ message: 'User not found' })
   }
@@ -170,13 +187,54 @@ app.get('/me/role', (req, res) => {
 })
 
 // Terms / Consent
+
+// Per-user consent endpoint: GET /me/consent/:consentType
+// Portal calls this to check if the user has accepted terms
+app.get('/me/consent/:consentType', (req, res) => {
+  const { consentType } = req.params
+  const consent = db.consents?.find((c: any) => c.type?.value === consentType)
+  if (consent) {
+    res.json(consent)
+  } else {
+    // Return a pre-accepted consent that matches the expected etags, so the
+    // portal skips the terms modal in the dev environment.
+    const etags: Record<string, string> = {
+      TERMS_OF_SERVICE: 'f7170faf8d48561a00ea36adc22efc76',
+      BUYER_TERMS_OF_SERVICE: '1',
+      SELLER_TERMS_OF_SERVICE: '1',
+    }
+    res.json({
+      type: { displayName: 'Terms of service', value: consentType },
+      version: etags[consentType] ?? 'accepted',
+      accepted: new Date().toISOString(),
+      links: []
+    })
+  }
+})
+
+app.put('/me/consent/:consentType', (req, res) => {
+  const { consentType } = req.params
+  const consent = {
+    type: { value: consentType, displayName: 'Terms of service' },
+    ...req.body,
+    accepted: new Date().toISOString()
+  }
+  if (!db.consents) db.consents = []
+  const idx = db.consents.findIndex((c: any) => c.type?.value === consentType)
+  if (idx >= 0) {
+    db.consents[idx] = consent
+  } else {
+    db.consents.push(consent)
+  }
+  res.json(consent)
+})
+
 app.get('/consent', (req, res) => {
-  // Return first consent doc
   const consent = db.consents?.[0]
   if (consent) {
     res.json(consent)
   } else {
-    res.json({}) // or 404
+    res.json({})
   }
 })
 

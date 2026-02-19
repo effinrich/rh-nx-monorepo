@@ -1,0 +1,98 @@
+---
+title: AccordionButton
+description: Documentation for the AccordionButton component
+---
+
+import { ArgTypes,Canvas, Controls, Meta, Story } from 'storybook/blocks'
+
+import { AccordionButton } from '@/components/AccordionButton'
+
+import * as AccordionButtonStories from './accordion-button.stories'
+
+<Meta of={AccordionButtonStories} />
+
+# AccordionButton
+
+The `AccordionButton` component is a reusable UI element.
+
+## Import
+
+```tsx
+import { AccordionButton } from '@/components/AccordionButton'
+```
+
+## Usage
+
+### Basic Example
+
+<Canvas of={AccordionButtonStories.Default} />
+
+```tsx
+<AccordionButton>
+  Content
+</AccordionButton>
+```
+
+## Props
+
+<ArgTypes of={AccordionButton} />
+
+This component accepts standard HTML attributes.
+
+## Accessibility
+
+The `AccordionButton` component follows WAI-ARIA guidelines:
+
+- Supports keyboard navigation
+- Includes proper ARIA attributes
+- Compatible with screen readers
+
+### Keyboard Interactions
+
+| Key | Description |
+|-----|-------------|
+| `Tab` | Moves focus to the component |
+| `Enter` | Activates the component |
+| `Space` | Activates the component |
+
+## Composition
+
+### With Other Components
+
+```tsx
+import { Stack } from '@chakra-ui/react'
+
+<Stack spacing={4}>
+  <AccordionButton>
+    First item
+  </AccordionButton>
+  <AccordionButton>
+    Second item
+  </AccordionButton>
+</Stack>
+```
+
+## Responsive Design
+
+Use responsive props for different screen sizes:
+
+```tsx
+<AccordionButton
+
+  width={{ base: '100%', md: 'auto' }}
+>
+  Responsive AccordionButton
+</AccordionButton>
+```
+
+## Best Practices
+
+1. **Accessibility**: Always provide meaningful content or aria-label
+4. **Composition**: Combine with other components using Stack or Flex for layouts
+5. **Performance**: Avoid creating new callback functions on each render
+
+## Related Components
+
+- [Box](/components/box) - Base layout component
+- [Stack](/components/stack) - Layout with spacing
+- [Flex](/components/flex) - Flexbox layout
