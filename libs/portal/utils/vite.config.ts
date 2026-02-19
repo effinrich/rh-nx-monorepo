@@ -12,8 +12,6 @@ export default defineConfig({
   plugins: [
     dts({
       tsconfigPath: join(__dirname, 'tsconfig.lib.json'),
-      // Faster builds by skipping tests. Set this to false to enable type checking.
-      skipDiagnostics: true
     }),
     react(),
     nxViteTsPaths()

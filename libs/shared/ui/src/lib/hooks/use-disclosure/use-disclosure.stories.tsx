@@ -10,7 +10,7 @@ import {
   Text
 } from '../../../index'
 
-import { useDisclosure, UseDisclosureProps } from './use-disclosure'
+import { useDisclosure } from './use-disclosure'
 
 const DrawerExample = () => {
   const { open, onOpen, onClose } = useDisclosure()

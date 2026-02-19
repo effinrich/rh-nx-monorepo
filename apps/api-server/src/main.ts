@@ -356,7 +356,6 @@ app.put('/vendor/:id', (req, res) => {
 
 // Company vendor relationships
 app.get('/company/:companyId/vendor', (req, res) => {
-  // Return company-vendor relationships
   res.json({ content: [] })
 })
 
