@@ -13,7 +13,7 @@ import {
   MdWidgets
 } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { UserInfoSummary } from '@redesignhealth/portal/data-assets'
+import type { UserInfoSummary } from '@redesignhealth/portal/data-assets'
 import {
   getCompanyMemberRole,
   HasRole,
@@ -30,8 +30,7 @@ import {
   IconButton,
   RedesignLogo,
   Stack,
-  Text,
-  useDisclosure
+  Text
 } from '@redesignhealth/ui'
 import { useQueryClient } from '@tanstack/react-query'
 
@@ -41,7 +40,7 @@ import { NavButton } from './nav-button'
 export interface NavProps {
   userInfo: UserInfoSummary
   userCompanyId?: string
-  onClose?: ReturnType<typeof useDisclosure>['onClose']
+  onClose?: () => void
 }
 
 export const Nav = ({ userInfo, userCompanyId, onClose }: NavProps) => {
@@ -78,9 +77,9 @@ export const Nav = ({ userInfo, userCompanyId, onClose }: NavProps) => {
       data-testid="sidenav"
       role="navigation"
     >
-      <Stack spacing={4}>
+      <Stack gap={4}>
         <RedesignLogo w="214px" color="white" alt="Redesign Health logo" />
-        <Stack spacing={1}>
+        <Stack gap={1}>
           {!isEnterpriseBuyer && !isEnterpriseSeller && (
             <HasRole currentRole={currentRole} allowed={['ROLE_OP_CO_USER']}>
               <NavButton
@@ -193,7 +192,7 @@ export const Nav = ({ userInfo, userCompanyId, onClose }: NavProps) => {
         </Stack>
       </Stack>
 
-      <Stack spacing="4px">
+      <Stack gap="4px">
         {!isEnterpriseBuyer && !isEnterpriseSeller && (
           <NavButton to="/dev-library" icon={MdCode} onClick={onClose}>
             Developer Tools
@@ -226,14 +225,16 @@ export const Nav = ({ userInfo, userCompanyId, onClose }: NavProps) => {
             </Box>
           </Flex>
           <IconButton
-            test-id="logout"
+            data-testid="logout"
             onClick={handleLogout}
             aria-label="log out"
-            icon={<Icon as={MdLogout} />}
             color="white"
-            variant="unstyled"
+            variant="ghost"
             fontSize={22}
-          />
+            _hover={{ bg: 'whiteAlpha.200' }}
+          >
+            <Icon as={MdLogout} />
+          </IconButton>
         </Flex>
       </Stack>
     </Flex>

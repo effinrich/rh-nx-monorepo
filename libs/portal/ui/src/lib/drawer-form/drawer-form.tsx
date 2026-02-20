@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { Form } from 'react-router-dom'
 import {
   Box,
@@ -7,18 +7,18 @@ import {
   Drawer,
   DrawerContent,
   DrawerOverlay,
-  DrawerProps,
   Flex,
   IconButton,
   Loader,
   Text,
   useDisclosure
 } from '@redesignhealth/ui'
+import type { DrawerRootProps } from '@redesignhealth/ui'
 
 export const DrawerForm = (props: {
   children: ReactNode
-  onClose?: DrawerProps['onClose']
-  onCloseComplete?: DrawerProps['onCloseComplete']
+  onClose?: () => void
+  onCloseComplete?: () => void
   header: string
   description?: string
   loading?: boolean
@@ -26,36 +26,39 @@ export const DrawerForm = (props: {
   fetcherForm?: typeof Form
   action?: string
   success?: ReactNode
+  size?: DrawerRootProps['size']
 }) => {
-  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
+  const { open, onClose } = useDisclosure({ defaultOpen: true })
+
+  const handleClose = props.onClose || onClose
 
   return (
     <Drawer
-      isOpen={isOpen}
-      placement="right"
-      onClose={props.onClose || onClose}
-      onOverlayClick={props.onClose || onClose}
-      onEsc={props.onClose || onClose}
-      isFullHeight
-      preserveScrollBarGap
-      closeOnEsc
-      onCloseComplete={props.onCloseComplete}
-      size={{ base: 'full', md: 'lg' }}
+      open={open}
+      placement="end"
+      onOpenChange={e => {
+        if (!e.open) {
+          handleClose()
+          props.onCloseComplete?.()
+        }
+      }}
+      size={props.size ?? 'lg'}
     >
       <DrawerOverlay />
       <DrawerContent pt="12px">
         <Flex flexDir="column" h="100%">
           <IconButton
             aria-label="close form"
-            icon={<CloseIcon />}
-            onClick={props.onClose || onClose}
+            onClick={handleClose}
             size="md"
             w="fit-content"
             ml="auto"
-            variant="unstyled"
+            variant="ghost"
             color="gray.500"
             mr="16px"
-          />
+          >
+            <CloseIcon />
+          </IconButton>
 
           {props.success}
 

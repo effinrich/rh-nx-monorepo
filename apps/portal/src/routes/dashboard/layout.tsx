@@ -66,8 +66,7 @@ export const Layout = () => {
             h={{ lg: '100%' }}
             w={{ lg: '100%' }}
             overflowY={{ lg: 'scroll' }}
-            // p={['24px', '32px']}
-            mb={6}
+            p={['24px', '32px']}
           >
             <Outlet />
           </Box>

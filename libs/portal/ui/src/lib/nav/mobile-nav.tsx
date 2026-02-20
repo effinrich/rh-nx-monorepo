@@ -1,4 +1,4 @@
-import { UserInfoSummary } from '@redesignhealth/portal/data-assets'
+import type { UserInfoSummary } from '@redesignhealth/portal/data-assets'
 import {
   Box,
   Drawer,
@@ -35,7 +35,7 @@ const Bar = rh('span', {
 })
 
 export const MobileNav = ({ userInfo }: MobileNavProps) => {
-  const { isOpen, onToggle, onClose } = useDisclosure()
+  const { open, onToggle, onClose } = useDisclosure()
 
   return (
     <Box
@@ -43,8 +43,6 @@ export const MobileNav = ({ userInfo }: MobileNavProps) => {
       justifyContent="space-between"
       alignItems="center"
       w="100%"
-      // borderBottom="2px"
-      // borderColor="gray.200"
       borderColor="transparent"
       bg="galaxy.500"
       py={4}
@@ -58,46 +56,41 @@ export const MobileNav = ({ userInfo }: MobileNavProps) => {
       <RedesignLogo
         alt="Redesign Health logo"
         w={{ base: '225px', md: '250px' }}
-        // mt="7px"
       />
 
       <IconButton
-        aria-label={`${isOpen ? 'close' : 'open'} navigation menu`}
+        aria-label={`${open ? 'close' : 'open'} navigation menu`}
         variant="unstyled"
         onClick={onToggle}
         size="sm"
-        icon={
-          <Box
-            className="group"
-            data-active={isOpen ? '' : undefined}
-            w="1.5rem"
-            h="1.5rem"
-            pos="relative"
-            aria-hidden
-            pointerEvents="none"
-          >
-            <Bar
-              top="0.4375rem"
-              _groupActive={{ top: '0.6875rem', transform: 'rotate(45deg)' }}
-            />
-            <Bar
-              bottom="0.4375rem"
-              _groupActive={{
-                bottom: '0.6875rem',
-                transform: 'rotate(-45deg)'
-              }}
-            />
-          </Box>
-        }
-      />
+      >
+        <Box
+          className="group"
+          data-active={open ? '' : undefined}
+          w="1.5rem"
+          h="1.5rem"
+          pos="relative"
+          aria-hidden
+          pointerEvents="none"
+        >
+          <Bar
+            top="0.4375rem"
+            _groupActive={{ top: '0.6875rem', transform: 'rotate(45deg)' }}
+          />
+          <Bar
+            bottom="0.4375rem"
+            _groupActive={{
+              bottom: '0.6875rem',
+              transform: 'rotate(-45deg)'
+            }}
+          />
+        </Box>
+      </IconButton>
 
       <Drawer
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        isFullHeight
-        preserveScrollBarGap
-        closeOnEsc
+        open={open}
+        placement="start"
+        onOpenChange={e => !e.open && onClose()}
       >
         <DrawerOverlay display={{ lg: 'none' }} />
         <DrawerContent display={{ lg: 'none' }}>
