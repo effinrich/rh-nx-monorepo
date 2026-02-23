@@ -3,7 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/ui/src",
-  "tags": ["scope:shared"],
+  "tags": ["scope:shared", "type:ui"],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
@@ -18,7 +18,8 @@
       "options": {
         "framework": "@storybook/react-vite",
         "outputDir": "dist/storybook/shared-ui",
-        "configDir": "libs/shared/ui/.storybook"
+        "configDir": "libs/shared/ui/.storybook",
+        "webpackStatsJson": true
       },
       "configurations": {
         "ci": {
@@ -78,6 +79,12 @@
       "executor": "nx:run-script",
       "options": {
         "script": "test-storybook"
+      }
+    },
+    "chromatic": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx chromatic --build-script-name=build-storybook"
       }
     }
   }

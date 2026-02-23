@@ -349,3 +349,80 @@ npm run affected:check-types
 - The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
 
 <!-- nx configuration end-->
+
+<!-- user configuration start -->
+
+# Senior Frontend Engineer Guidelines (Nx + React + Storybook)
+
+## 🛠 Core Tech Stack
+
+- **Workspace:** [Nx Monorepo](https://nx.dev) (Apps + Libs architecture)
+- **Framework:** Next.js (App Router) / React 18+
+- **State:** [TanStack Query](https://tanstack.com) (Server), [Zustand](https://zustand-demo.pmnd.rs) (Client)
+- **Styling:** Tailwind CSS + [CVA (Class Variance Authority)](https://cva.style)
+- **Testing:** [Vitest](https://vitest.dev) (Unit), [Playwright](https://playwright.dev) (E2E), [Storybook](https://storybook.js.org) (Visual/Interaction)
+
+## 🏗 Architectural Guardrails (Nx & Monorepo)
+
+- **Library First:** 80% of code belongs in `libs/`. Apps are minimal shells.
+- **Boundary Enforcement:** `ui` libs cannot import `feature` libs. `util` libs cannot import `ui`.
+- **Generators Only:** Never manually create project folders. Use Nx Generators.
+  - **Create Lib:** `nx g @nx/react:lib libs/shared/ui-components --directory=libs/shared/ui-components --tags=scope:shared,type:ui --importPath=@my-org/shared-ui`
+  - **Create Component:** `nx g @nx/react:component my-button --project=shared-ui-components --export`
+
+## 🎨 Storybook & Visual Regression (Chromatic)
+
+- **Mandatory Stories:** Every UI component MUST have a `*.stories.tsx` file using [Storybook Controls](https://storybook.js.orgdocs/essentials/controls).
+- **Interaction Testing:** Use the `play` function for behavioral assertions (clicks, form fills).
+
+  ```typescript
+  export const SubmittedForm: Story = {
+    play: async ({ canvasElement, step }) => {
+      const canvas = within(canvasElement)
+      await step('Submit', async () => {
+        await userEvent.type(canvas.getByTestId('email'), 'senior@dev.com')
+        await userEvent.click(canvas.getByRole('button'))
+      })
+      await expect(canvas.getByText('Success')).toBeInTheDocument()
+    }
+  }
+  ```
+
+  <!-- user configuration end -->
+
+  <!-- repo configuration start -->
+
+# 🚨 CI/CD Quality Gates
+
+- **Missing Story Check:** CI fails if any `.tsx` in a `type:ui` lib lacks a corresponding `.stories.tsx` file.
+- **Visual Regression:** UI changes in `type:ui` projects trigger Chromatic. PRs cannot merge until changes are **Accepted** in the Chromatic Dashboard.
+
+---
+
+# 🚦 Execution Rules (MANDATORY)
+
+- **Zero Fallbacks:** Code must fail loudly. No silent catch blocks or "dummy" data.
+- **RSC Patterns:** Components are Server Components by default. Use `'use client'` strictly for interactivity or browser APIs.
+- **No Sequential Awaits:** Use `Promise.all()` for concurrent fetching to avoid waterfalls.
+- **Full Output:** Never use `// ... existing code`. Always provide the full file content to maintain context.
+
+---
+
+# 🔄 Senior Workflow Protocol
+
+1.  **Explore:** Use `Nx Graph` to visualize dependencies before adding a new library.
+2.  **Plan:** State which Nx Generator and tags will be used before execution.
+3.  **Verify:** Run `nx affected -t lint,test,build` and `nx run <project>:storybook` to verify changes.
+
+---
+
+# ⌨️ Common Commands
+
+| Action              | Command                                                                   |
+| :------------------ | :------------------------------------------------------------------------ |
+| **Create Lib**      | `nx g @nx/react:lib <path> --tags=scope:<scope>,type:<type>`              |
+| **Add Storybook**   | `nx g @nx/storybook:configuration <project-name> --interactionTests=true` |
+| **Verify Affected** | `nx affected -t lint,test`                                                |
+| **Run Chromatic**   | `nx run <project>:chromatic --project-token=<token> --only-changed`       |
+
+  <!-- repo configuration end -->
