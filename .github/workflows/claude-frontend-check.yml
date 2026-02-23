@@ -1,0 +1,70 @@
+name: Claude Frontend Standards
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  validate-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Linting & Types
+        # Enforces the "Zero-Tolerance Quality" rule
+        run: |
+          pnpm run lint
+          pnpm run type-check
+
+  claude-review:
+    runs-on: ubuntu-latest
+    # Run on PRs or when @claude is mentioned in a PR comment
+    if: |
+      (github.event_name == 'pull_request') ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request &&
+       contains(github.event.comment.body, '@claude'))
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Claude AI Review
+        # Automated PR review guided by CLAUDE.md standards
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Scope the review to frontend standards defined in CLAUDE.md
+          direct_prompt: |
+            Review this pull request against the standards defined in CLAUDE.md.
+            Focus on:
+            - Chakra UI v3 migration rules (correct prop names, import sources)
+            - Nx monorepo boundary violations (ui cannot import feature libs)
+            - Missing Storybook stories for new UI components
+            - TanStack Query usage for server state
+            - CVA patterns for component variants

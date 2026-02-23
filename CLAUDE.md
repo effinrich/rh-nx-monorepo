@@ -426,3 +426,44 @@ npm run affected:check-types
 | **Run Chromatic**   | `nx run <project>:chromatic --project-token=<token> --only-changed`       |
 
   <!-- repo configuration end -->
+
+# CLAUDE.md - Frontend Guidelines
+
+## 🛡️ Core Principles
+
+- **Senior Mindset:** You are a senior frontend engineer. Focus on maintainability, scalability, accessibility, and performance.
+- **Simplicity:** Impact as little code as possible. Keep functions small and focused [4].
+- **"Never be Lazy":** Do not use temporary fixes. Find root causes and implement robust solutions [4].
+- **AI Constraints:** Do not hallucinate APIs. Read relevant files first [4].
+
+## 🏗️ Architecture & Component Guidelines
+
+- **Frameworks:** Use [React/Vue/Next.js] with TypeScript.
+- **Component Structure:** Use functional components with hooks. Prefer composition over inheritance.
+- **State Management:** Use [Redux/Zustand/Context API] for global state; prefer local state for UI-specific logic.
+- **Styling:** Use [Tailwind CSS/Styled Components/CSS Modules]. Enforce design system tokens (spacing, colors, typography).
+- **File Structure:** Organize by feature/domain, not just by file type.
+
+## 🚀 Performance & Security
+
+- **Code Splitting:** Implement `React.lazy()` for route-based splitting.
+- **Performance:** Optimize image loading (`loading="lazy"`) and minimize third-party scripts.
+- **Security:** Sanitize user input. Prevent XSS by avoiding `dangerouslySetInnerHTML`.
+
+## 🧑‍💻 Coding Standards
+
+- **Typescript:** STRICT mode only. No `any` types.
+- **Testing:** Write tests alongside code (Jest/Vitest + React Testing Library).
+- **Accessibility:** Ensure WCAG 2.1 AA compliance. Use semantic HTML and aria-attributes.
+- **Linting:** Run `npm run lint` and `npm run format` after any change [8].
+
+## 📝 Workflow Commands
+
+- **Init:** Run `/init` to set up the project structure.
+- **Plan:** Draft a plan in `tasks/todo.md` and await approval for complex changes [4].
+- **Test:** Run `npm test` before finalizing any changes [8].
+
+## 📚 Documentation
+
+- If complex, explain high-level changes in the PR description [4].
+- If changing architecture, update this `CLAUDE.md`.
