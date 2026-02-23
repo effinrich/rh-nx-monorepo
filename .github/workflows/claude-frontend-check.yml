@@ -20,25 +20,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          run_install: false
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
+          cache: 'npm'
 
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci --legacy-peer-deps
 
       - name: Run Linting & Types
         # Enforces the "Zero-Tolerance Quality" rule
         run: |
-          pnpm run lint
-          pnpm run type-check
+          npm run lint
+          npm run type-check
 
   claude-review:
     runs-on: ubuntu-latest
