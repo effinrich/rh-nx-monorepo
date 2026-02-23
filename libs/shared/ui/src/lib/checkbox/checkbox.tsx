@@ -38,7 +38,6 @@ export type {
   CheckboxRootProps
 } from '@chakra-ui/react'
 
-// CheckboxGroupProps was removed in v3 — derive from component
-import type { CheckboxGroup } from '@chakra-ui/react'
+// CheckboxGroupProps was removed in v3 — derive from the exported CheckboxGroup component
 import type { ComponentProps } from 'react'
 export type CheckboxGroupProps = ComponentProps<typeof CheckboxGroup>
