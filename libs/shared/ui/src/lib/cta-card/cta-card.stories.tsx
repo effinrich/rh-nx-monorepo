@@ -24,7 +24,7 @@ export default {
     title: 'Set up services, answer questionnaires, and assign users',
     ctaText: 'Add OpCo',
     ctaVariant: 'solid',
-    ctacolorPalette: 'primary'
+    ctaColorPalette: 'primary'
   },
   argTypes: {
     onClick: { action: 'clicked' },
@@ -32,7 +32,7 @@ export default {
       options: ['solid', 'outline', 'ghost', 'link'],
       control: { type: 'radio' }
     },
-    ctacolorPalette: {
+    ctaColorPalette: {
       options: [
         'primary',
         'gray',
@@ -56,7 +56,7 @@ export default {
         'title',
         'ctaText',
         'ctaVariant',
-        'ctacolorPalette',
+        'ctaColorPalette',
         'helpText',
         'bgColor',
         'headingcolor'
@@ -157,7 +157,7 @@ export const WithCustonCta: StoryObj<typeof CtaCard> = {
           <MenuButton
             as={Button}
             rightIcon={<Icon as={MdExpandMore} />}
-            colorPalette={args.ctacolorPalette}
+            colorPalette={args.ctaColorPalette}
           >
             Custom CTA
           </MenuButton>

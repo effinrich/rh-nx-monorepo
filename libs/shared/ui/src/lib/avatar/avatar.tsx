@@ -31,8 +31,9 @@ export {
 } from '@chakra-ui/react'
 
 // Re-export with v2 names for backward compatibility
-// v3 Avatar.Indicator is roughly usage ofBadge, though usually distinct position.
-// Assuming AvatarBadge maps to absolute positioned element, or use plain Box/Float
-export { AvatarRoot as AvatarBadge } from '@chakra-ui/react' // This mapping might be wrong, v3 doesn't have AvatarBadge. It uses absolute positioning.
+/**
+ * @deprecated Use `Avatar.Indicator` from Chakra UI v3 instead.
+ */
+export const AvatarBadge = ChakraAvatar.Indicator
 
 export type { AvatarRootProps, AvatarGroupProps } from '@chakra-ui/react'

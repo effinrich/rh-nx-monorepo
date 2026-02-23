@@ -32,7 +32,7 @@ root.render(
   <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
     <QueryClientProvider client={directQueryClient()}>
       <ReactQueryDevtools buttonPosition="bottom-right" />
-      <RhProvider value={theme} enablecolorPalette={undefined}>
+      <RhProvider value={theme}>
         <App />
       </RhProvider>
     </QueryClientProvider>
