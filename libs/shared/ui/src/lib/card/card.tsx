@@ -11,6 +11,6 @@ export type {
 } from '@chakra-ui/react'
 
 // CardRootProps is not exported by @chakra-ui/react - derive it from the component
-import type { CardRoot } from '@chakra-ui/react'
+import { CardRoot } from '@chakra-ui/react'
 import type { ComponentProps } from 'react'
 export type CardProps = ComponentProps<typeof CardRoot>
