@@ -19,7 +19,7 @@ This library is being migrated from Chakra UI v2 to v3.
 ### Component Changes
 
 - **Modal** is now **Dialog** (re-exported as Modal for backwards compatibility)
-- **Drawer** uses new parts (Root, Backtrop, Positioner, Content, etc.)
+- **Drawer** uses new parts (Root, Backdrop, Positioner, Content, etc.)
 - **Tooltip** uses new positioning props (`positioning={{ placement: 'top' }}`) instead of `placement="top"`
 - **Stack** uses `gap` instead of `spacing`
 
