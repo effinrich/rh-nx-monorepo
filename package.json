@@ -211,7 +211,7 @@
     "babel-preset-expo": "54.0.9",
     "chromatic": "^7.6.0",
     "css-loader": "6.4.0",
-    "cypress": "15.8.0",
+    "cypress": "15.10.0",
     "detox": "20.43.0",
     "eas-cli": "5.2.0",
     "esbuild": "^0.19.2",
