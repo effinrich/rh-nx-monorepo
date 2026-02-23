@@ -16,7 +16,7 @@ export interface RhProviderProps
     | 'attribute'
     | 'storageKey'
     | 'enableSystem'
-    | 'enablecolorPalette'
+    | 'enableColorScheme'
     | 'disableTransitionOnChange'
     | 'themes'
     | 'nonce'
