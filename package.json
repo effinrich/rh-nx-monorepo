@@ -100,7 +100,7 @@
     "lodash.escape": "^4.0.1",
     "next-themes": "^0.4.6",
     "openapi-backend": "^5.10.5",
-    "qs": "6.11.0",
+    "qs": "6.14.2",
     "react": "19.1.0",
     "react-datepicker": "^4.25.0",
     "react-dom": "19.1.0",
