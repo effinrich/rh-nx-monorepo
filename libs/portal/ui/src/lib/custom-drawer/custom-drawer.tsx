@@ -1,5 +1,6 @@
-import { forwardRef, ReactElement, useImperativeHandle } from 'react'
-import { FieldErrors } from 'react-hook-form'
+import { forwardRef, useImperativeHandle } from 'react'
+import type { ReactElement } from 'react'
+import type { FieldErrors } from 'react-hook-form'
 import {
   Button,
   Drawer,
@@ -44,7 +45,7 @@ export const CustomDrawer = forwardRef(
     }: CustomDrawerProps,
     ref
   ) => {
-    const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
+    const { open, onClose } = useDisclosure({ defaultOpen: true })
 
     useImperativeHandle(ref, () => ({
       handleOnClose() {
@@ -54,14 +55,15 @@ export const CustomDrawer = forwardRef(
 
     return (
       <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        closeOnEsc
-        isFullHeight
-        preserveScrollBarGap
-        onCloseComplete={handleOnCloseComplete}
-        size={{ base: 'full', md: 'lg' }}
+        open={open}
+        placement="end"
+        onOpenChange={e => {
+          if (!e.open) {
+            onClose()
+            handleOnCloseComplete?.()
+          }
+        }}
+        size="lg"
       >
         <DrawerOverlay />
         <DrawerContent pt={6}>
@@ -96,14 +98,14 @@ export const CustomDrawer = forwardRef(
               variant="outline"
               mr={3}
               onClick={onClose}
-              isDisabled={isLoading}
+              disabled={isLoading}
             >
               Cancel
             </Button>
             <Button
-              colorScheme="brand"
-              isDisabled={isLoading || !isValid}
-              isLoading={isLoading}
+              colorPalette="primary"
+              disabled={isLoading || !isValid}
+              loading={isLoading}
               type="submit"
               onClick={() => handleOnSubmit()}
             >
@@ -111,8 +113,6 @@ export const CustomDrawer = forwardRef(
             </Button>
           </DrawerFooter>
         </DrawerContent>
-
-        {/* <DevTool control={control} /> */}
       </Drawer>
     )
   }

@@ -43,11 +43,11 @@ const ToggleIcon = (props: { active: boolean }) => {
 }
 
 interface ToggleButtonProps extends IconButtonProps {
-  isOpen: boolean
+  open: boolean
 }
 
 export const ToggleButton = (props: ToggleButtonProps) => {
-  const { isOpen, ...iconButtonProps } = props
+  const { open, ...iconButtonProps } = props
   return (
     <IconButton
       position="relative"
@@ -55,8 +55,9 @@ export const ToggleButton = (props: ToggleButtonProps) => {
       size="sm"
       color="on-accent"
       zIndex="skipLink"
-      icon={<ToggleIcon active={isOpen} />}
       {...iconButtonProps}
-    />
+    >
+      <ToggleIcon active={open} />
+    </IconButton>
   )
 }

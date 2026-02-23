@@ -38,7 +38,7 @@ export function AutoComplete<
     <StyledAutoComplete>
       {isAsync ? (
         <AsyncSelect
-          colorScheme="primary"
+          colorPalette="primary"
           cacheOptions
           loadOptions={loadOptions}
           defaultOptions
@@ -46,7 +46,7 @@ export function AutoComplete<
         />
       ) : (
         <Select
-          colorScheme="primary"
+          colorPalette="primary"
           // options={options?.map((t: any) => ({ value: t, label: t }))}
           {...props}
         />

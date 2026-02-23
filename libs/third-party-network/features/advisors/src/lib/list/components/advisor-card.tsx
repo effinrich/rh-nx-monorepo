@@ -1,7 +1,13 @@
 import { memo } from 'react'
 import { MdMoreHoriz } from 'react-icons/md'
 import { Link as RouterLink } from 'react-router-dom'
-import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import {
+  MenuContent,
+  MenuItem,
+  MenuRoot,
+  MenuTrigger,
+  Portal
+} from '@redesignhealth/ui'
 import { useCurrentUserQuery } from '@redesignhealth/third-party-network/features/authentication'
 import {
   Avatar,
@@ -86,29 +92,38 @@ export const AdvisorCard = memo(
               <AdvisorBio bio={bio} />
             </Flex>
           </Flex>
-          <Menu gutter={4} autoSelect={false}>
-            <MenuButton
-              as={IconButton}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              variant="ghost"
-              icon={<MdMoreHoriz fontSize="24px" />}
-            />
-            <MenuList>
-              <MenuItem as={RouterLink} to={`/${advisorId}`}>
-                See bio
-              </MenuItem>
-              <MenuItem onClick={onOpen}>Request introduction</MenuItem>
-              <MenuItem
-                as="a"
-                href={`https://5inxi4pt259.typeform.com/to/dIAXUaDn#${contractRequestParams}`}
-                target="_blank"
+          <MenuRoot>
+            <MenuTrigger asChild>
+              <IconButton
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                variant="ghost"
+                aria-label="More options"
               >
-                Request contract
-              </MenuItem>
-            </MenuList>
-          </Menu>
+                <MdMoreHoriz fontSize="24px" />
+              </IconButton>
+            </MenuTrigger>
+            <Portal>
+              <MenuContent>
+                <MenuItem value="see-bio" asChild>
+                  <RouterLink to={`/${advisorId}`}>See bio</RouterLink>
+                </MenuItem>
+                <MenuItem value="request-intro" onClick={onOpen}>
+                  Request introduction
+                </MenuItem>
+                <MenuItem value="request-contract" asChild>
+                  <a
+                    href={`https://5inxi4pt259.typeform.com/to/dIAXUaDn#${contractRequestParams}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Request contract
+                  </a>
+                </MenuItem>
+              </MenuContent>
+            </Portal>
+          </MenuRoot>
         </CardHeader>
         <CardBody py="16px" pl="77px">
           <Grid as={List} templateColumns="1.5fr 1fr 1fr" gap="32px">

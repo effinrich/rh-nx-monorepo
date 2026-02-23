@@ -1,4 +1,4 @@
-import { ListItemProps } from '@chakra-ui/react'
+import { type ListItemProps } from '@redesignhealth/ui'
 import { Box, Flex, ListItem, Text } from '@redesignhealth/ui'
 
 export interface ListCardRowProps extends ListItemProps {

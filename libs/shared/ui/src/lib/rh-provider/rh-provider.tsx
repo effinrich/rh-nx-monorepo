@@ -1,37 +1,38 @@
-// Chakra UI v3: Provider
-// - ChakraProvider now uses value prop instead of theme
-// - ColorModeManager replaced with next-themes
-// - CSSReset is built-in, no longer needed
-// See: https://chakra-ui.com/docs/get-started/migration
+'use client'
 
 import { ReactNode } from 'react'
-import { ChakraProvider } from '@chakra-ui/react'
-import { ThemeProvider } from 'next-themes'
+import { ChakraProvider, defaultSystem, SystemContext } from '@chakra-ui/react'
+import { ThemeProviderProps } from 'next-themes'
+
+import { ColorModeProvider } from './color-mode'
 
 import '@fontsource/inter/variable.css'
 
-import { system } from '../theme'
-
-interface RhProviderProps {
-  children: ReactNode
-  defaultColorMode?: 'light' | 'dark' | 'system'
+export interface RhProviderProps
+  extends Pick<
+    ThemeProviderProps,
+    | 'forcedTheme'
+    | 'defaultTheme'
+    | 'attribute'
+    | 'storageKey'
+    | 'enableSystem'
+    | 'enableColorScheme'
+    | 'disableTransitionOnChange'
+    | 'themes'
+    | 'nonce'
+  > {
+  children?: ReactNode
+  value?: SystemContext
 }
 
-export const RhProvider = ({
+export function RhProvider({
   children,
-  defaultColorMode = 'light'
-}: RhProviderProps) => {
+  value,
+  ...themeProps
+}: RhProviderProps) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme={defaultColorMode}
-      disableTransitionOnChange
-    >
-      <ChakraProvider value={system}>{children}</ChakraProvider>
-    </ThemeProvider>
+    <ChakraProvider value={value ?? defaultSystem}>
+      <ColorModeProvider {...themeProps}>{children}</ColorModeProvider>
+    </ChakraProvider>
   )
 }
-
-// Legacy provider for backward compatibility (deprecated)
-// Use RhProvider with next-themes instead
-export const LegacyRhProvider = RhProvider

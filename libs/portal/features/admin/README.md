@@ -1,7 +1,13 @@
 # portal-features-admin
 
-This library was generated with [Nx](https://nx.dev).
+Feature library for administrative views within the Platform Portal. Provides pages and components restricted to users with admin or super-admin roles.
 
-## Running unit tests
+## Consumed By
 
-Run `nx test portal-features-admin` to execute the unit tests via [Vitest](https://vitest.dev/).
+`apps/portal` at the `/admin` route.
+
+## Running Tests
+
+```bash
+nx test portal-features-admin
+```

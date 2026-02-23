@@ -40,7 +40,7 @@ export const Default = {
 
 export const ChangingFontSize = {
   render: (args: TextProps) => (
-    <Stack spacing={3}>
+    <Stack gap={3}>
       <Text fontSize="6xl">(6xl) In love with React & Next</Text>
       <Text fontSize="5xl">(5xl) In love with React & Next</Text>
       <Text fontSize="4xl">(4xl) In love with React & Next</Text>

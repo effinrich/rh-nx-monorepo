@@ -62,7 +62,7 @@ export const WithResize = () => {
   return (
     <>
       <RadioGroup defaultValue={resize} onChange={setResize} mb={6}>
-        <HStack direction="row" spacing={5}>
+        <HStack direction="row" gap={5}>
           <Radio value="horizontal">Horizontal</Radio>
           <Radio value="vertical">Vertical</Radio>
           <Radio value="none">None</Radio>
@@ -79,7 +79,7 @@ export const WithResize = () => {
 }
 
 export const WithSizes = () => (
-  <VStack align="start" spacing={8}>
+  <VStack align="start" gap={8}>
     {['xs', 'sm', 'md', 'lg'].map(size => (
       <Textarea
         key={size}
@@ -91,16 +91,16 @@ export const WithSizes = () => (
 )
 
 export const WithStates = () => (
-  <Stack align="start" spacing={8}>
+  <Stack align="start" gap={8}>
     <Textarea placeholder="Idle" />
-    <Textarea isInvalid placeholder="isInvalid" />
-    <Textarea isDisabled placeholder="isDisabled" />
-    <Textarea isReadOnly placeholder="isReadonly" />
+    <Textarea invalid placeholder="invalid" />
+    <Textarea disabled placeholder="disabled" />
+    <Textarea readOnly placeholder="readOnly" />
   </Stack>
 )
 
 export const WithVariants = () => (
-  <Stack align="start" spacing={8}>
+  <Stack align="start" gap={8}>
     <Textarea variant="outline" placeholder="Outline" />
     <Textarea variant="filled" placeholder="Filled" />
     <Textarea variant="flushed" placeholder="Flushed" />
@@ -109,7 +109,7 @@ export const WithVariants = () => (
 )
 
 export const WithFocusAndErrorColors = () => (
-  <Stack align="start" spacing={10}>
+  <Stack align="start" gap={10}>
     <Textarea
       focusBorderColor="lime"
       placeholder="Here is a sample placeholder"
@@ -121,13 +121,13 @@ export const WithFocusAndErrorColors = () => (
     />
 
     <Textarea
-      isInvalid
+      invalid
       errorBorderColor="red.300"
       placeholder="Here is a sample placeholder"
     />
 
     <Textarea
-      isInvalid
+      invalid
       errorBorderColor="crimson"
       placeholder="Here is a sample placeholder"
     />
@@ -152,7 +152,7 @@ export const WithFormControl = () => {
   const [isError, setIsError] = useState(false)
   return (
     <Stack align="start">
-      <FormControl id="first-name" isInvalid={isError}>
+      <FormControl id="first-name" invalid={isError}>
         <Box display="flex" mb="2">
           <FormLabel mb="0" lineHeight="1em">
             Amount

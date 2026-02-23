@@ -65,8 +65,8 @@ export const NavExample = {
         </Box>
         <Spacer />
         <ButtonGroup gap="2">
-          <Button colorScheme="primary">Sign Up</Button>
-          <Button colorScheme="primary">Log in</Button>
+          <Button colorPalette="primary">Sign Up</Button>
+          <Button colorPalette="primary">Log in</Button>
         </ButtonGroup>
       </>
     )

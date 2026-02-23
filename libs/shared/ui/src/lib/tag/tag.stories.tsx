@@ -1,5 +1,5 @@
 import { MdSettings } from 'react-icons/md'
-import { chakra } from '@chakra-ui/system'
+import { Box } from '@chakra-ui/react'
 
 import { AddIcon, Avatar, HStack } from '../../index'
 
@@ -17,7 +17,7 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' }
     },
-    colorScheme: {
+    colorPalette: {
       options: [
         'gray',
         'primary',
@@ -37,20 +37,20 @@ export default {
   },
   decorators: [
     (story: any) => (
-      <chakra.div maxW="600px" mx="auto" mt="40px">
+      <Box maxW="600px" mx="auto" mt="40px">
         {story()}
-      </chakra.div>
+      </Box>
     )
   ]
+} as Meta<typeof Tag>
+
+export const Basic: StoryObj<typeof Tag> = {
+  render: args => <Tag {...args}>Gray</Tag>
 }
 
-export const Basic = {
-  render: (args: any) => <Tag {...args}>Gray</Tag>
-}
-
-export const WithSizes = {
-  render: (args: any) => (
-    <HStack spacing="3">
+export const WithSizes: StoryObj<typeof Tag> = {
+  render: args => (
+    <HStack gap="3">
       <Tag size="sm" {...args}>
         Gray
       </Tag>
@@ -64,46 +64,46 @@ export const WithSizes = {
   )
 }
 
-export const ColorSchemes = {
-  render: (args: any) => (
-    <HStack spacing="3">
+export const ColorPalettes: StoryObj<typeof Tag> = {
+  render: args => (
+    <HStack gap="3">
       <Tag size="sm" {...args}>
         Default
       </Tag>
-      <Tag size="sm" colorScheme="primary" {...args}>
+      <Tag size="sm" colorPalette="primary" {...args}>
         Brand (primary)
       </Tag>
-      <Tag size="sm" colorScheme="green" {...args}>
+      <Tag size="sm" colorPalette="green" {...args}>
         Green
       </Tag>
-      <Tag size="md" colorScheme="pink" {...args}>
+      <Tag size="md" colorPalette="pink" {...args}>
         Pink
       </Tag>
-      <Tag size="lg" colorScheme="blue" {...args}>
+      <Tag size="lg" colorPalette="blue" {...args}>
         Blue
       </Tag>
     </HStack>
   )
 }
 
-export const WithLeftIcon = {
-  render: (args: any) => (
-    <Tag colorScheme="cyan" {...args}>
+export const WithLeftIcon: StoryObj<typeof Tag> = {
+  render: args => (
+    <Tag colorPalette="cyan" {...args}>
       <TagLeftIcon w="12px" h="12px" as={AddIcon} />
       <TagLabel>Cyan</TagLabel>
     </Tag>
   )
 }
 
-export const WithRightIcon = {
-  render: (args: any) => (
-    <HStack spacing="3">
-      <Tag colorScheme="cyan" {...args}>
+export const WithRightIcon: StoryObj<typeof Tag> = {
+  render: args => (
+    <HStack gap="3">
+      <Tag colorPalette="cyan" {...args}>
         <TagLabel>Cyan</TagLabel>
         <TagRightIcon w="12px" h="12px" as={AddIcon} />
       </Tag>
 
-      <Tag variant="solid" colorScheme="teal" {...args}>
+      <Tag variant="solid" colorPalette="teal" {...args}>
         <TagLabel>Teal</TagLabel>
         <TagRightIcon as={MdSettings} />
       </Tag>
@@ -111,20 +111,20 @@ export const WithRightIcon = {
   )
 }
 
-export const WithCloseButton = {
-  render: (args: any) => (
-    <HStack spacing="3">
-      <Tag variant="solid" size="sm" colorScheme="cyan" {...args}>
+export const WithCloseButton: StoryObj<typeof Tag> = {
+  render: args => (
+    <HStack gap="3">
+      <Tag variant="solid" size="sm" colorPalette="cyan" {...args}>
         <TagLabel>Tab Label</TagLabel>
         <TagCloseButton />
       </Tag>
 
-      <Tag variant="solid" size="md" colorScheme="cyan" {...args}>
+      <Tag variant="solid" size="md" colorPalette="cyan" {...args}>
         <TagLabel>Tab Label</TagLabel>
         <TagCloseButton />
       </Tag>
 
-      <Tag variant="solid" size="lg" colorScheme="cyan" {...args}>
+      <Tag variant="solid" size="lg" colorPalette="cyan" {...args}>
         <TagLabel>Tab Label</TagLabel>
         <TagCloseButton />
       </Tag>
@@ -132,9 +132,9 @@ export const WithCloseButton = {
   )
 }
 
-export const WithCustomElement = {
-  render: (args: any) => (
-    <Tag size="lg" colorScheme="red" borderRadius="full" {...args}>
+export const WithCustomElement: StoryObj<typeof Tag> = {
+  render: args => (
+    <Tag size="lg" colorPalette="red" borderRadius="full" {...args}>
       <Avatar
         src="https://bit.ly/dan-abramov"
         size="xs"

@@ -32,7 +32,7 @@ export const ErrorFallback = ({
         Check the console for an error to debug locally. If it is a server
         error, provide details to the API team.
       </AlertDescription>
-      {/* <Button onClick={resetErrorBoundary} mt={4} colorScheme="red">
+      {/* <Button onClick={resetErrorBoundary} mt={4} colorPalette="red">
         Sign out and try again
       </Button> */}
     </Alert>

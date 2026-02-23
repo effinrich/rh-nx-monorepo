@@ -30,6 +30,8 @@
     "**/*.jsx",
     "**/*.ts",
     "**/*.tsx",
-    "../../../jest.setup.js"
+    "../../../jest.setup.js",
+    "src/lib/rh-provider/rh-provider-v2.tsx.old",
+    "src/lib/theme/index-v2.ts.old"
   ]
 }

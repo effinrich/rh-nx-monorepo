@@ -1,7 +1,11 @@
 import { useDisclosure } from '@chakra-ui/react'
 
 import { Box } from '../box/box'
-import { Drawer } from '../drawer/drawer'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerOverlay
+} from '../drawer/drawer'
 import { Flex } from '../flex/flex'
 import { RedesignLogo } from '../logos/redesign-logo/redesign-logo'
 
@@ -30,24 +34,21 @@ export const MobileNav = ({ userProfile, numOpcos, numPersons }: any) => {
           aria-label="Open Menu"
           onClick={onToggle}
         />
-        <Drawer.Root
+        <Drawer
           open={open}
           placement="left"
-          onClose={onClose}
-          isFullHeight
-          preserveScrollBarGap
-          closeOnEsc
+          onOpenChange={({ open: isOpen }) => !isOpen && onClose()}
         >
           <DrawerOverlay />
-          <Drawer.Content>
+          <DrawerContent>
             <Nav
               userProfile={userProfile}
               numOpcos={numOpcos}
               numPersons={numPersons}
               onClose={onClose}
             />
-          </Drawer.Content>
-        </Drawer.Root>
+          </DrawerContent>
+        </Drawer>
       </Flex>
     </Box>
   )

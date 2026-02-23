@@ -1,25 +1,43 @@
-// Chakra UI v3: Checkbox uses compound component pattern
-// See: https://chakra-ui.com/docs/get-started/migration
-
-export { Checkbox } from '@chakra-ui/react'
-
-// Export Checkbox compound components (v3 recommended pattern)
-export {
-  CheckboxRoot,
-  CheckboxControl,
-  CheckboxIndicator,
-  CheckboxLabel,
-  CheckboxHiddenInput,
-  CheckboxGroup
+import { forwardRef } from 'react'
+import {
+  Checkbox as ChakraCheckbox,
+  CheckboxGroup as ChakraCheckboxGroup
 } from '@chakra-ui/react'
 
-// Export hooks
-export { useCheckbox, useCheckboxGroup } from '@chakra-ui/react'
+export const CheckboxGroup = ChakraCheckboxGroup
 
-// Export types
+export interface CheckboxProps extends ChakraCheckbox.RootProps {
+  icon?: React.ReactNode
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>
+  isIndeterminate?: boolean
+}
+
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  function Checkbox(
+    { children, icon, inputProps, isIndeterminate, checked, ...props },
+    ref
+  ) {
+    return (
+      <ChakraCheckbox.Root
+        checked={isIndeterminate ? 'indeterminate' : checked}
+        {...props}
+      >
+        <ChakraCheckbox.HiddenInput ref={ref} {...inputProps} />
+        <ChakraCheckbox.Control>
+          {icon || <ChakraCheckbox.Indicator />}
+        </ChakraCheckbox.Control>
+        {children && <ChakraCheckbox.Label>{children}</ChakraCheckbox.Label>}
+      </ChakraCheckbox.Root>
+    )
+  }
+)
+
 export type {
-  CheckboxRootProps,
   CheckboxControlProps,
   CheckboxLabelProps,
-  CheckboxGroupProps
+  CheckboxRootProps
 } from '@chakra-ui/react'
+
+// CheckboxGroupProps was removed in v3 — derive from the exported CheckboxGroup component
+import type { ComponentProps } from 'react'
+export type CheckboxGroupProps = ComponentProps<typeof CheckboxGroup>

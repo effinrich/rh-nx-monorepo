@@ -1,7 +1,7 @@
 import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools'
 
 const baseStyle = (props: StyleFunctionProps) => {
-  const { colorScheme: c } = props
+  const { colorPalette: c } = props
   return {
     label: {
       color: 'muted',
@@ -31,7 +31,7 @@ const sizes = {
 }
 
 const defaultProps = {
-  colorScheme: 'primary'
+  colorPalette: 'primary'
 }
 
 export default {

@@ -25,7 +25,6 @@ import {
   Icon,
   Input,
   InputGroup,
-  InputRightElement,
   Loader,
   Radio,
   RadioGroup,
@@ -72,7 +71,7 @@ const customDateInput = (
   { value, onClick, onChange }: InputProps,
   ref: LegacyRef<HTMLInputElement>
 ) => (
-  <InputGroup>
+  <InputGroup endElement={<Icon as={MdEditCalendar} boxSize={4} color="gray.600" onClick={onClick} cursor="pointer" />}>
     <Input
       autoComplete="off"
       value={value}
@@ -83,9 +82,6 @@ const customDateInput = (
       maxW="100%"
       placeholder="MM/DD/YYYY"
     />
-    <InputRightElement color="gray.600" onClick={onClick}>
-      <Icon as={MdEditCalendar} boxSize={4} />
-    </InputRightElement>
   </InputGroup>
 )
 customDateInput.displayName = 'DateInput'

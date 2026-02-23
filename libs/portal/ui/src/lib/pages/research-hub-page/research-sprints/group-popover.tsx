@@ -4,7 +4,7 @@ import {
   IconButton,
   Popover,
   PopoverBody,
-  PopoverCloseButton,
+  PopoverCloseTrigger as PopoverCloseButton,
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,

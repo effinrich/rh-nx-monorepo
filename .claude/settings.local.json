@@ -4,7 +4,30 @@
       "Bash(npm run storybook)",
       "Bash(npx storybook@latest doctor:*)",
       "Bash(npm view:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(nx *)",
+      "Bash(npm run lint *)",
+      "Bash(npm test *)",
+      "Bash(npm ci)",
+      "Bash(npx tsc *)",
+      "Bash(npx nx run *:chromatic *)",
+      "Bash(find libs -path *)",
+      "Bash(git status)",
+      "Bash(git diff *)"
+    ],
+    "deny": ["Bash(rm -rf *)", "Read(./.env*)", "Read(./secrets/**)"]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "nx affected -t lint --fix --uncommitted"
+          }
+        ]
+      }
     ]
   }
 }

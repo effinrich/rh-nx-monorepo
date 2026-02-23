@@ -1,6 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import { useRef, useState } from 'react'
-import { useDisclosure, CloseButton } from '@chakra-ui/react'
+import { JSX } from 'react/jsx-runtime'
+import { useDisclosure } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
 
@@ -22,16 +23,23 @@ import {
   Portal
 } from '../../index'
 
-import { Drawer } from './drawer'
-import { JSX } from 'react/jsx-runtime'
-import { JSX } from 'react/jsx-runtime'
+import {
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerRootProps
+} from './drawer'
 
 export default {
   component: Drawer,
   title: 'Components / Overlay / Drawer',
   argTypes: {
     placement: {
-      options: ['top', 'right', 'bottom', 'left'],
+      options: ['top', 'end', 'bottom', 'start'],
       control: { type: 'radio' }
     },
     size: {
@@ -65,60 +73,51 @@ export default {
   },
   args: {
     size: 'sm',
-    placement: 'right'
+    placement: 'end'
   }
 } as Meta<typeof Drawer>
 
 const DrawerExampleHooks = (
-  args: JSX.IntrinsicAttributes & Drawer.RootProps
+  args: JSX.IntrinsicAttributes & DrawerRootProps
 ) => {
-  const { open, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
   return (
-    <Drawer.Root
-      open={open}
-      placement="right"
-      onClose={onClose}
-      finalFocusRef={btnRef}
-      {...args}
-    >
-      <Drawer.Trigger>
-        <Button variant="outline" size="sm" asChild>
-          Open
-        </Button>
-      </Drawer.Trigger>
+    <>
+      <Button ref={btnRef} colorPalette="primary" onClick={onOpen} maxW="150px">
+        Open
+      </Button>
+      <Drawer
+        open={open}
+        placement="end"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+        {...args}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Create your account</DrawerHeader>
 
-      <Portal>
-        <Drawer.Backdrop />
-        <Drawer.Positioner>
-          <Drawer.Content>
-            <Drawer.Header>
-              <Drawer.Title>Create your account</Drawer.Title>
-            </Drawer.Header>
-            <Drawer.Body>
-              <Input placeholder="Type here..." />
-            </Drawer.Body>
+          <DrawerBody>
+            <Input placeholder="Type here..." />
+          </DrawerBody>
 
-            <Drawer.Footer>
-              <Button
-                variant="outline"
-                mr={3}
-                onClick={onClose}
-                colorScheme="red"
-              >
-                Cancel
-              </Button>
-              <Button colorScheme="blue">Save</Button>
-            </Drawer.Footer>
-
-            <Drawer.CloseTrigger>
-              <CloseButton size="sm" />
-            </Drawer.CloseTrigger>
-          </Drawer.Content>
-        </Drawer.Positioner>
-      </Portal>
-    </Drawer.Root>
+          <DrawerFooter>
+            <Button
+              variant="outline"
+              mr={3}
+              onClick={onClose}
+              colorPalette="red"
+            >
+              Cancel
+            </Button>
+            <Button colorPalette="blue">Save</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
   )
 }
 
@@ -126,35 +125,31 @@ export const DrawerExample = {
   render: (args: any) => <DrawerExampleHooks {...args} />
 }
 
-const WithFormHooks = (args: JSX.IntrinsicAttributes) => {
+const WithFormHooks = (args: JSX.IntrinsicAttributes & DrawerRootProps) => {
   const { open, onOpen, onClose } = useDisclosure()
   const firstField = useRef()
   return (
     <>
-      <Button
-        leftIcon={<AddIcon />}
-        colorScheme="teal"
-        onClick={onOpen}
-        maxW="150px"
-      >
+      <Button colorPalette="teal" onClick={onOpen} maxW="150px">
+        <AddIcon mr={2} />
         Create user
       </Button>
       <Drawer
         open={open}
-        placement="right"
+        placement="end"
         initialFocusRef={firstField}
         onClose={onClose}
         {...args}
       >
         <DrawerOverlay />
-        <Drawer.Content>
+        <DrawerContent>
           <DrawerCloseButton />
-          <Drawer.Header borderBottomWidth="1px">
+          <DrawerHeader borderBottomWidth="1px">
             Create a new account
-          </Drawer.Header>
+          </DrawerHeader>
 
-          <Drawer.Body>
-            <Stack spacing="24px">
+          <DrawerBody>
+            <Stack gap="24px">
               <Box>
                 <Form.Label htmlFor="username">Name</Form.Label>
                 <Input
@@ -190,20 +185,20 @@ const WithFormHooks = (args: JSX.IntrinsicAttributes) => {
                 <Textarea id="desc" />
               </Box>
             </Stack>
-          </Drawer.Body>
+          </DrawerBody>
 
-          <Drawer.Footer borderTopWidth="1px">
+          <DrawerFooter borderTopWidth="1px">
             <Button
               variant="outline"
               mr={3}
               onClick={onClose}
-              colorScheme="red"
+              colorPalette="red"
             >
               Cancel
             </Button>
-            <Button colorScheme="brand">Submit</Button>
-          </Drawer.Footer>
-        </Drawer.Content>
+            <Button colorPalette="brand">Submit</Button>
+          </DrawerFooter>
+        </DrawerContent>
       </Drawer>
     </>
   )
@@ -223,22 +218,27 @@ const WithFormLibraryHooks = (args: any) => {
           form validation library like react-hook-form or formik. Here's the
           recommended way to do it:
         </Text>
-        <Alert status="warning" variant="left-accent" mb={6}>
+        <Alert status="warning" variant="subtle" mb={6}>
           Because the button is located outside the form, you can leverage its
           native HTML form attribute and refer to the id of the form.
         </Alert>
-        <Button leftIcon={<AddIcon />} onClick={onOpen} maxW="150px">
+        <Button onClick={onOpen} maxW="150px">
+          <AddIcon mr={2} />
           Open
         </Button>
       </Container>
 
-      <Drawer open={open} onClose={onClose} {...args}>
+      <Drawer
+        open={open}
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
+        {...args}
+      >
         <DrawerOverlay />
-        <Drawer.Content>
+        <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Create your account</DrawerHeader>
 
-          <Drawer.Body>
+          <DrawerBody>
             <form
               id="my-form"
               onSubmit={e => {
@@ -249,14 +249,14 @@ const WithFormLibraryHooks = (args: any) => {
             >
               <Input name="nickname" placeholder="Type here..." />
             </form>
-          </Drawer.Body>
+          </DrawerBody>
 
-          <Drawer.Footer>
+          <DrawerFooter>
             <Button type="submit" form="my-form">
               Save
             </Button>
-          </Drawer.Footer>
-        </Drawer.Content>
+          </DrawerFooter>
+        </DrawerContent>
       </Drawer>
     </>
   )
@@ -266,11 +266,11 @@ export const WithFormLibrary = {
   render: (args: any) => <WithFormLibraryHooks {...args} />
 }
 
-const WithSizeHooks = (args: any) => {
-  const [size, setSize] = useState('')
+const WithSizeHooks = (args: unknown) => {
+  const [size, setSize] = useState<DrawerRootProps['size']>('xs')
   const { open, onOpen, onClose } = useDisclosure()
 
-  const handleClick = (newSize: string) => {
+  const handleClick = (newSize: DrawerRootProps['size']) => {
     setSize(newSize)
     onOpen()
   }
@@ -283,18 +283,22 @@ const WithSizeHooks = (args: any) => {
         {sizes.map(size => (
           <WrapItem key={size}>
             <Button
-              onClick={() => handleClick(size)}
+              onClick={() => handleClick(size as DrawerRootProps['size'])}
               m={4}
             >{`Open ${size} Drawer`}</Button>
           </WrapItem>
         ))}
       </Wrap>
-      <Drawer onClose={onClose} open={open} size={size}>
+      <Drawer
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
+        open={open}
+        size={size}
+      >
         <DrawerOverlay />
-        <Drawer.Content>
+        <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>{`${size} drawer contents`}</DrawerHeader>
-          <Drawer.Body>
+          <DrawerBody>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -304,8 +308,8 @@ const WithSizeHooks = (args: any) => {
               magna eget est lorem. Erat imperdiet sed euismod nisi porta.
               Lectus vestibulum mattis ullamcorper velit.
             </p>
-          </Drawer.Body>
-        </Drawer.Content>
+          </DrawerBody>
+        </DrawerContent>
       </Drawer>
     </>
   )
@@ -322,26 +326,12 @@ const WithCustomMotionHooks = (args: any) => {
       <Button onClick={() => setOpen(!open)} maxW="150px">
         Open
       </Button>
-      <Drawer open={open} onClose={() => setOpen(false)} {...args}>
+      <Drawer open={open} onOpenChange={e => setOpen(e.open)} {...args}>
         <DrawerOverlay />
-        <Drawer.Content
-          alignItems="center"
-          motionProps={{
-            variants: {
-              enter: {
-                x: '0%',
-                transition: { duration: 0.2 }
-              },
-              exit: {
-                x: '100%',
-                transition: { duration: 0.1 }
-              }
-            }
-          }}
-        >
+        <DrawerContent alignItems="center">
           <Box my={6}>This is the drawer content</Box>
           <Button maxW="150px">This is a button</Button>
-        </Drawer.Content>
+        </DrawerContent>
       </Drawer>
     </>
   )
@@ -359,17 +349,17 @@ const WithLongContentHooks = (args: any) => {
       <Button onClick={onOpen} maxW="150px">
         Open
       </Button>
-      <Drawer.Root
+      <Drawer
         placement="bottom"
-        onClose={onClose}
+        onOpenChange={e => (e.open ? onOpen() : onClose())}
         open={open}
         size="md"
         {...args}
       >
-        <Drawer.Backdrop />
-        <Drawer.Content>
-          <Drawer.Header borderBottomWidth="1px">Basic Drawer</Drawer.Header>
-          <Drawer.Body>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
+          <DrawerBody>
             <Input placeholder="Type here..." my={4} />
             <Text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -481,9 +471,9 @@ const WithLongContentHooks = (args: any) => {
               feugiat est, non ultricies mi augue non mauris. Generated 10
               paragraphs, 996 words, 6777 bytes of Lorem Ipsum
             </Text>
-          </Drawer.Body>
-        </Drawer.Content>
-      </Drawer.Root>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </>
   )
 }

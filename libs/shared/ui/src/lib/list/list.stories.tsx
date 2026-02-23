@@ -33,7 +33,7 @@ export const Ordered: StoryFn<typeof List> = () => (
 )
 
 export const WithIcons: StoryFn<typeof List> = () => (
-  <List spacing={3}>
+  <List gap={3}>
     <ListItem>
       <ListIcon as={MdCheckCircle} color="primary.500" />
       Lorem ipsum dolor sit amet, consectetur adipisicing elit

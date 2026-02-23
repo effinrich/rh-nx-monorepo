@@ -1,4 +1,4 @@
-import { As } from '@chakra-ui/react'
+import { type As } from '@redesignhealth/ui'
 import { Flex, Icon, Text } from '@redesignhealth/ui'
 
 interface SecondaryTextProps {

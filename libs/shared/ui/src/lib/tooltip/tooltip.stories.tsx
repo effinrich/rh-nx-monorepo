@@ -15,16 +15,12 @@ export default {
 }
 
 const HookTooltip = ({ children }: any) => {
-  const {
-    getTriggerProps,
-    getTooltipPositionerProps,
-    getTooltipProps,
-    isOpen
-  } = useTooltip({
-    openDelay: 100,
-    arrowSize: 8,
-    placement: 'bottom'
-  })
+  const { getTriggerProps, getTooltipPositionerProps, getTooltipProps, open } =
+    useTooltip({
+      openDelay: 100,
+      arrowSize: 8,
+      placement: 'bottom'
+    })
 
   return (
     <>
@@ -37,7 +33,7 @@ const HookTooltip = ({ children }: any) => {
               color: 'white',
               borderRadius: '4px',
               padding: '0.5em 1em',
-              visibility: isOpen ? 'visible' : 'hidden',
+              visibility: open ? 'visible' : 'hidden',
               ['--popper-arrow-bg' as string]: 'tomato'
             }
           })}
@@ -52,6 +48,7 @@ const HookTooltip = ({ children }: any) => {
   )
 }
 
+/*
 export const Basic = () => <HookTooltip>This is me</HookTooltip>
 
 export const MultipleTooltips = () => (
@@ -60,22 +57,19 @@ export const MultipleTooltips = () => (
     <HookTooltip>This is tip 2</HookTooltip>
   </>
 )
+*/
 
 export const WithTransition = () => {
-  const {
-    getTriggerProps,
-    getTooltipPositionerProps,
-    getTooltipProps,
-    isOpen
-  } = useTooltip({
-    openDelay: 100
-  })
+  const { getTriggerProps, getTooltipPositionerProps, getTooltipProps, open } =
+    useTooltip({
+      openDelay: 100
+    })
 
   return (
     <>
       <Button {...getTriggerProps()}>Hover me</Button>
       <AnimatePresence>
-        {isOpen && (
+        {open && (
           <div {...getTooltipPositionerProps()}>
             <motion.div
               initial="exit"
@@ -128,8 +122,7 @@ export const WithString = () => (
 export const WithAriaLabel = () => (
   <Tooltip
     hasArrow
-    bg="tomato"
-    color="white"
+    contentProps={{ bg: 'tomato', color: 'white' }}
     label="Notifications"
     aria-label="3 Notifications"
   >
@@ -162,7 +155,7 @@ export const WithModal = () => {
   return (
     <div>
       <Button onClick={() => setShowDialog(true)}>Show Dialog</Button>
-      <Modal isOpen={showDialog} onClose={() => setShowDialog(false)}>
+      <Modal open={showDialog} onOpenChange={e => setShowDialog(e.open)}>
         <ModalOverlay />
         <ModalContent height="300px">
           <div>
@@ -202,24 +195,26 @@ export const WithModal = () => {
 
 export const WithDisabledButton = () => (
   <Tooltip label="Oh oh oh, oh oh">
-    <Button isDisabled>Can't Touch This</Button>
+    <Button disabled>Can't Touch This</Button>
   </Tooltip>
 )
 
 export const WithWrappedDisabledButton = () => (
-  <Tooltip label="Hello world" shouldWrapChildren>
-    <Button isDisabled>Hover me</Button>
+  <Tooltip label="Hello world">
+    <span>
+      <Button disabled>Hover me</Button>
+    </span>
   </Tooltip>
 )
 
 export const WithIsOpenProp = () => (
-  <Tooltip label="Hello world" isOpen hasArrow>
+  <Tooltip label="Hello world" open hasArrow>
     <Button disabled>Can't Touch This</Button>
   </Tooltip>
 )
 
 export const WithDefaultIsOpenProp = () => (
-  <Tooltip label="Hello world" defaultIsOpen>
+  <Tooltip label="Hello world" defaultOpen>
     <Button>Can't Touch This</Button>
   </Tooltip>
 )
@@ -240,7 +235,12 @@ export const WithScroll = () => (
 
 export const WithScrollWithin = () => (
   <rh.div border="solid 1px red" pt="48" height="400px" overflow="auto">
-    <Tooltip label="Hello world" placement="auto" hasArrow closeOnScroll>
+    <Tooltip
+      label="Hello world"
+      hasArrow
+      closeOnScroll
+      contentProps={{ bg: 'red' }}
+    >
       <Button mt="180px" mb="80px">
         Can't Touch This
       </Button>
@@ -249,15 +249,16 @@ export const WithScrollWithin = () => (
 )
 
 export const WithDynamicDisabled = () => {
-  const [isDisabled, setIsDisabled] = React.useState(false)
+  const [disabled, setIsDisabled] = React.useState(false)
   const handleDisabled = () => setIsDisabled(true)
   const handleEnabled = () => setIsDisabled(false)
   return (
     <Tooltip
       label="Disabled after being triggered"
+      contentProps={{ bg: 'tomato', color: 'white' }}
       placement="bottom"
       openDelay={500}
-      isDisabled={isDisabled}
+      disabled={disabled}
       hasArrow
     >
       <rh.span

@@ -71,9 +71,9 @@ export const WithSizes = () => (
 export const WithStates = () => (
   <Stack align="start">
     <Input placeholder="Idle" />
-    <Input isInvalid placeholder="isInvalid" />
-    <Input isDisabled placeholder="isDisabled" />
-    <Input isReadOnly placeholder="isReadonly" />
+    <Input invalid placeholder="invalid" />
+    <Input disabled placeholder="disabled" />
+    <Input readOnly placeholder="readOnly" />
   </Stack>
 )
 
@@ -135,7 +135,7 @@ export function PasswordInput() {
 }
 
 export const WithFocusAndErrorColors = () => (
-  <Stack align="start" spacing="10">
+  <Stack align="start" gap="10">
     <Input focusBorderColor="lime" placeholder="Here is a sample placeholder" />
 
     <Input
@@ -144,13 +144,13 @@ export const WithFocusAndErrorColors = () => (
     />
 
     <Input
-      isInvalid
+      invalid
       errorBorderColor="red.300"
       placeholder="Here is a sample placeholder"
     />
 
     <Input
-      isInvalid
+      invalid
       errorBorderColor="crimson"
       placeholder="Here is a sample placeholder"
     />
@@ -175,7 +175,7 @@ export const WithFormControl = () => {
   const [isError, setIsError] = React.useState(false)
   return (
     <Stack align="start">
-      <FormControl id="first-name" isInvalid={isError}>
+      <FormControl id="first-name" invalid={isError}>
         <Box display="flex" mb="2">
           <FormLabel mb="0" lineHeight="1em">
             Amount
@@ -195,12 +195,12 @@ export const WithFormControl = () => {
 }
 
 export const WithInputElementBug = () => {
-  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true })
+  const { open, onToggle } = useDisclosure({ defaultOpen: true })
   return (
     <>
       <button onClick={onToggle}>Toggle element</button>
       <InputGroup>
-        {isOpen && <InputLeftElement>O</InputLeftElement>}
+        {open && <InputLeftElement>O</InputLeftElement>}
         <Input name="input" placeholder="placeholder" />
       </InputGroup>
     </>

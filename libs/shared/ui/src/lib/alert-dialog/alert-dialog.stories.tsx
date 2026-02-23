@@ -67,15 +67,15 @@ export default {
 } as Meta<typeof AlertDialog>
 
 const BasicUsageHooks = (args: any) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef<{ handleOnClose(): void }>()
   return (
     <>
-      <Button colorScheme="red" onClick={onOpen} maxW="150px">
+      <Button colorPalette="red" onClick={onOpen} maxW="150px">
         Delete Customer
       </Button>
       <AlertDialog
-        isOpen={isOpen}
+        open={open}
         leastDestructiveRef={cancelRef}
         onClose={onClose}
         {...args}
@@ -94,7 +94,7 @@ const BasicUsageHooks = (args: any) => {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={onClose} ml={3}>
+              <Button colorPalette="red" onClick={onClose} ml={3}>
                 Delete
               </Button>
             </AlertDialogFooter>
@@ -110,7 +110,7 @@ export const BasicUsage = {
 }
 
 const TransitionHooks = (args: any) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef<{ handleOnClose(): void }>()
 
   return (
@@ -123,7 +123,7 @@ const TransitionHooks = (args: any) => {
         motionPreset="slideInBottom"
         leastDestructiveRef={cancelRef}
         onClose={onClose}
-        isOpen={isOpen}
+        open={open}
         isCentered
         {...args}
       >
@@ -140,7 +140,7 @@ const TransitionHooks = (args: any) => {
             <Button ref={cancelRef} onClick={onClose}>
               No
             </Button>
-            <Button colorScheme="red" ml={3}>
+            <Button colorPalette="red" ml={3}>
               Yes
             </Button>
           </AlertDialogFooter>

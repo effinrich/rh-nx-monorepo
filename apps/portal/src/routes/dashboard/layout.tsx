@@ -30,10 +30,9 @@ export const Layout = () => {
     if (!userInfo) {
       return
     }
-    setCurrentUserRole(userInfo.roles![0].authority)
-
     const newUserProps: GA4CustomUserProps = {}
     if (userInfo.roles && userInfo.roles.length > 0) {
+      setCurrentUserRole(userInfo.roles[0].authority)
       newUserProps.user_role = userInfo.roles[0].displayName
     }
     if (userInfo.memberOf && userInfo.memberOf.length > 0) {
@@ -64,8 +63,7 @@ export const Layout = () => {
             h={{ lg: '100%' }}
             w={{ lg: '100%' }}
             overflowY={{ lg: 'scroll' }}
-            // p={['24px', '32px']}
-            mb={6}
+            p={['24px', '32px']}
           >
             <Outlet />
           </Box>

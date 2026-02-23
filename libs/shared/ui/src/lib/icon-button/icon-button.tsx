@@ -1,6 +1,6 @@
 // Chakra UI v3: IconButton
 // Props changed: icon → children, isRounded → borderRadius='full'
-// colorScheme → colorPalette, isDisabled → disabled, isLoading → loading
+// colorPalette → colorPalette, disabled → disabled, loading → loading
 // See: https://chakra-ui.com/docs/get-started/migration
 
 export { IconButton } from '@chakra-ui/react'

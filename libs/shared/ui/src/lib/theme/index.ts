@@ -1,5 +1,4 @@
 // import 'focus-visible/dist/focus-visible'
-
 import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
 
 import breakpoints from './foundations/breakpoints'
@@ -9,6 +8,17 @@ import shadows from './foundations/shadows'
 import sizes from './foundations/sizes'
 import spacing from './foundations/spacing'
 import typography from './foundations/typography'
+
+// export const system = createSystem(defaultConfig, {
+//   theme: {
+//     tokens: {
+//       fonts: {
+//         heading: { value: `'Figtree', sans-serif` },
+//         body: { value: `'Figtree', sans-serif` }
+//       }
+//     }
+//   }
+// })
 
 // Convert v2 color palette to v3 token format
 const convertColorsToTokens = (colorObj: Record<string, unknown>) => {

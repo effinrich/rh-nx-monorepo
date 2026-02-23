@@ -55,7 +55,7 @@ const Story: Meta<typeof DataTable> = {
     columns,
     data,
     variant: 'striped',
-    colorScheme: 'primary'
+    colorPalette: 'primary'
   }
 }
 export default Story

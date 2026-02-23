@@ -23,9 +23,9 @@ export default {
   component: Card,
   title: 'Patterns / Layout / Card',
   decorators: [
-    (Story: any) => (
+    (Story: React.ElementType) => (
       <Box mx="auto" mt="40px" w="100%" maxW="2xl">
-        {Story()}
+        <Story />
       </Box>
     )
   ],
@@ -73,7 +73,7 @@ export default {
 } as Meta<typeof Divider>
 
 export const Variants = () => (
-  <Stack spacing="4">
+  <Stack gap="4">
     {['elevated', 'outline', 'filled', 'unstyled'].map(variant => (
       <Card key={variant} variant={variant}>
         <CardHeader>
@@ -88,7 +88,7 @@ export const Variants = () => (
 )
 
 export const Sizes = () => (
-  <Stack spacing="4">
+  <Stack gap="4">
     {['sm', 'md', 'lg'].map(size => (
       <Card key={size} size={size}>
         <CardHeader>
@@ -120,7 +120,7 @@ export const WithDivider = () => (
     </CardHeader>
 
     <CardBody>
-      <Stack divider={<StackDivider />} spacing="4">
+      <Stack separator={<StackDivider />} gap="4">
         <Box>
           <Heading size="xs" textTransform="uppercase">
             Summary
@@ -158,7 +158,7 @@ export const WithImage = () => (
         alt="Green double couch with wooden legs"
         borderRadius="lg"
       />
-      <Stack mt="6" spacing="3">
+      <Stack mt="6" gap="3">
         <Heading size="md">Living room Sofa</Heading>
         <Text>
           This sofa is perfect for modern tropical spaces, baroque inspired
@@ -172,11 +172,11 @@ export const WithImage = () => (
     </CardBody>
     <Divider />
     <CardFooter>
-      <ButtonGroup spacing="2">
-        <Button variant="solid" colorScheme="blue">
+      <ButtonGroup gap="2">
+        <Button variant="solid" colorPalette="blue">
           Buy now
         </Button>
-        <Button variant="ghost" colorScheme="blue">
+        <Button variant="ghost" colorPalette="blue">
           Add to cart
         </Button>
       </ButtonGroup>
@@ -201,7 +201,7 @@ export const HorizontalCard = () => (
         </Text>
       </CardBody>
       <CardFooter>
-        <Button variant="solid" colorScheme="blue">
+        <Button variant="solid" colorPalette="blue">
           Buy Latte
         </Button>
       </CardFooter>
@@ -212,19 +212,16 @@ export const HorizontalCard = () => (
 export const Advanced = () => (
   <Card maxW="md">
     <CardHeader>
-      <HStack spacing="4">
+      <HStack gap="4">
         <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
 
         <Box flex="1">
           <Heading size="sm">Platform and Data Team</Heading>
           <Text>Creator, Redesign UI</Text>
         </Box>
-        <IconButton
-          variant="ghost"
-          colorScheme="gray"
-          aria-label="See menu"
-          icon={<MdMoreHoriz />}
-        />
+        <IconButton variant="ghost" colorPalette="gray" aria-label="See menu">
+          <MdMoreHoriz />
+        </IconButton>
       </HStack>
     </CardHeader>
     <CardBody>
@@ -240,15 +237,15 @@ export const Advanced = () => (
       alt="Redesign UI"
     />
 
-    <CardFooter justify="space-between">
-      <Button flex="1" variant="ghost" leftIcon={<MdThumbUp />}>
-        Like
+    <CardFooter justifyContent="space-between">
+      <Button flex="1" variant="ghost">
+        <MdThumbUp /> Like
       </Button>
-      <Button flex="1" variant="ghost" leftIcon={<MdChat />}>
-        Comment
+      <Button flex="1" variant="ghost">
+        <MdChat /> Comment
       </Button>
-      <Button flex="1" variant="ghost" leftIcon={<MdShare />}>
-        Share
+      <Button flex="1" variant="ghost">
+        <MdShare /> Share
       </Button>
     </CardFooter>
   </Card>

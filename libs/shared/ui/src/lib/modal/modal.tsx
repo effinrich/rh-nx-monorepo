@@ -1,12 +1,12 @@
 // Chakra UI v3: Modal has been renamed to Dialog
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { Dialog } from '@chakra-ui/react'
+// Dialog is a namespace object in Chakra v3 - don't export it directly as a component.
 
 // Re-export with v2 names for backward compatibility during migration
 // These are deprecated - use Dialog.* components instead
 export {
-  Dialog as Modal,
+  DialogRoot as Modal,
   DialogBody as ModalBody,
   DialogCloseTrigger as ModalCloseButton,
   DialogContent as ModalContent,

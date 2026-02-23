@@ -53,7 +53,7 @@ test('Uncontrolled - should check and uncheck', () => {
 test('Uncontrolled - should not check if disabled', () => {
   const Component = () => {
     const { htmlProps, getInputProps, getCheckboxProps } = useCheckbox({
-      isDisabled: true
+      disabled: true
     })
 
     return (
@@ -100,9 +100,9 @@ test('Controlled - should check and uncheck', () => {
   const onChange = jest.fn()
 
   const Component = (props: UseCheckboxProps) => {
-    const [isChecked, setIsChecked] = React.useState(false)
+    const [checked, setIsChecked] = React.useState(false)
     const { htmlProps, getInputProps, getCheckboxProps } = useCheckbox({
-      isChecked,
+      checked,
       onChange: event => {
         setIsChecked(event.target.checked)
         props.onChange?.(event)
@@ -188,12 +188,12 @@ test('Controlled CheckboxGroup', () => {
 
 test('Uncontrolled CheckboxGroup - should not check if group disabled', () => {
   const Component = () => (
-    <CheckboxGroup isDisabled>
+    <CheckboxGroup disabled>
       <Checkbox value="one">One</Checkbox>
-      <Checkbox value="two" isDisabled>
+      <Checkbox value="two" disabled>
         Two
       </Checkbox>
-      <Checkbox value="three" isDisabled={false}>
+      <Checkbox value="three" disabled={false}>
         Three
       </Checkbox>
     </CheckboxGroup>
@@ -234,7 +234,7 @@ test('uncontrolled CheckboxGroup handles change', () => {
 
 test('accepts custom icon', () => {
   const CustomIcon = (props: any) => {
-    const { isIndeterminate, isChecked, ...rest } = props
+    const { isIndeterminate, checked, ...rest } = props
 
     const d = isIndeterminate
       ? 'M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,19a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,19Zm1.6-6.08a1,1,0,0,0-.6.917,1,1,0,1,1-2,0,3,3,0,0,1,1.8-2.75A2,2,0,1,0,10,9.255a1,1,0,1,1-2,0,4,4,0,1,1,5.6,3.666Z'
@@ -324,23 +324,23 @@ test('useCheckboxGroup can handle both strings and numbers', () => {
 
 test('Uncontrolled FormControl - should not check if form-control disabled', () => {
   const { container } = render(
-    <FormControl isDisabled mt={4}>
+    <FormControl disabled mt={4}>
       <FormLabel>Disabled Opt-in Example</FormLabel>
       <CheckboxGroup>
         <Checkbox value="1">Disabled Opt-in 1</Checkbox>
-        <Checkbox value="2" isDisabled>
+        <Checkbox value="2" disabled>
           Disabled Opt-in 2
         </Checkbox>
-        <Checkbox value="3" isDisabled={false}>
+        <Checkbox value="3" disabled={false}>
           Disabled Opt-in 3
         </Checkbox>
       </CheckboxGroup>
-      <CheckboxGroup isDisabled={false}>
+      <CheckboxGroup disabled={false}>
         <Checkbox value="1">Disabled Opt-in 1</Checkbox>
-        <Checkbox value="2" isDisabled>
+        <Checkbox value="2" disabled>
           Disabled Opt-in 2
         </Checkbox>
-        <Checkbox value="3" isDisabled={false}>
+        <Checkbox value="3" disabled={false}>
           Disabled Opt-in 3
         </Checkbox>
       </CheckboxGroup>
@@ -383,14 +383,14 @@ test('Uncontrolled FormControl - should not check if form-control disabled', () 
 
 test('Uncontrolled FormControl - mark label as invalid', () => {
   const { container } = render(
-    <FormControl isInvalid mt={4}>
+    <FormControl invalid mt={4}>
       <FormLabel>Invalid Opt-in Example</FormLabel>
       <CheckboxGroup>
         <Checkbox value="1">Invalid Opt-in 1</Checkbox>
-        <Checkbox value="2" isInvalid>
+        <Checkbox value="2" invalid>
           Invalid Opt-in 2
         </Checkbox>
-        <Checkbox value="3" isInvalid={false}>
+        <Checkbox value="3" invalid={false}>
           Invalid Opt-in 3
         </Checkbox>
       </CheckboxGroup>
@@ -424,14 +424,14 @@ test('Uncontrolled FormControl - mark label as invalid', () => {
 
 test('Uncontrolled FormControl - mark label required', () => {
   const { container } = render(
-    <FormControl isRequired mt={4}>
+    <FormControl required mt={4}>
       <FormLabel>Required Opt-in Example</FormLabel>
       <CheckboxGroup>
         <Checkbox value="1">Required Opt-in 1</Checkbox>
-        <Checkbox value="2" isRequired>
+        <Checkbox value="2" required>
           Required Opt-in 2
         </Checkbox>
-        <Checkbox value="3" isRequired={false}>
+        <Checkbox value="3" required={false}>
           Required Opt-in 3
         </Checkbox>
       </CheckboxGroup>
@@ -449,14 +449,14 @@ test('Uncontrolled FormControl - mark label required', () => {
 
 test('Uncontrolled FormControl - mark readonly', () => {
   const { container } = render(
-    <FormControl isReadOnly mt={4}>
+    <FormControl readOnly mt={4}>
       <FormLabel>ReadOnly Opt-in Example</FormLabel>
       <CheckboxGroup>
         <Checkbox value="1">ReadOnly Opt-in 1</Checkbox>
-        <Checkbox value="2" isReadOnly>
+        <Checkbox value="2" readOnly>
           ReadOnly Opt-in 2
         </Checkbox>
-        <Checkbox value="3" isReadOnly={false}>
+        <Checkbox value="3" readOnly={false}>
           ReadOnly Opt-in 3
         </Checkbox>
       </CheckboxGroup>

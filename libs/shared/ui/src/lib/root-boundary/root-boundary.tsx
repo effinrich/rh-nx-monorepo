@@ -128,7 +128,7 @@ const ErrorFallback = ({ error }: ErrorFallbackProps) => {
           as={Link}
           to="/"
           replace
-          colorScheme="primary"
+          colorPalette="primary"
           size={{ base: 'md', md: 'lg' }}
         >
           Take me home

@@ -104,7 +104,7 @@ export const Circle = () => <SkeletonCircle />
 export const Combined = () => (
   <rh.div padding="6" boxShadow="lg" bg="white">
     <SkeletonCircle size="10" />
-    <SkeletonText mt="4" noOfLines={4} spacing="4" />
+    <SkeletonText mt="4" noOfLines={4} gap="4" />
   </rh.div>
 )
 

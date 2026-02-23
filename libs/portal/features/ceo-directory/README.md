@@ -1,7 +1,19 @@
 # portal-features-ceo-directory
 
-This library was generated with [Nx](https://nx.dev).
+Feature library for the **CEO Directory** section of the Platform Portal. Provides a searchable, filterable directory of CEOs with profile cards and detail views.
 
-## Running unit tests
+## Key Components
 
-Run `nx test portal-features-ceo-directory` to execute the unit tests via [Vitest](https://vitest.dev/).
+- `CeoDirectoryPage` — paginated CEO listing with filter sidebar
+- `CeoDetail` — full CEO profile view
+- CEO filters (industry, company size, geography, etc.)
+
+## Consumed By
+
+`apps/portal` at the `/ceo-directory` route.
+
+## Running Tests
+
+```bash
+nx test portal-features-ceo-directory
+```

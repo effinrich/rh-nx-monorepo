@@ -325,3 +325,145 @@ npm run affected:check-types
 - TypeScript: 5.1.6 (workspace version)
 - Default dev server port: 4200
 - Build output: `dist/apps/<app-name>` or `dist/libs/<lib-name>`
+
+<!-- nx configuration start-->
+<!-- Leave the start & end comments to automatically receive updates. -->
+
+# General Guidelines for working with Nx
+
+- For navigating/exploring the workspace, invoke the `nx-workspace` skill first - it has patterns for querying projects, targets, and dependencies
+- When running tasks (for example build, lint, test, e2e, etc.), always prefer running the task through `nx` (i.e. `nx run`, `nx run-many`, `nx affected`) instead of using the underlying tooling directly
+- Prefix nx commands with the workspace's package manager (e.g., `pnpm nx build`, `npm exec nx test`) - avoids using globally installed CLI
+- You have access to the Nx MCP server and its tools, use them to help the user
+- For Nx plugin best practices, check `node_modules/@nx/<plugin>/PLUGIN.md`. Not all plugins have this file - proceed without it if unavailable.
+- NEVER guess CLI flags - always check nx_docs or `--help` first when unsure
+
+## Scaffolding & Generators
+
+- For scaffolding tasks (creating apps, libs, project structure, setup), ALWAYS invoke the `nx-generate` skill FIRST before exploring or calling MCP tools
+
+## When to use nx_docs
+
+- USE for: advanced config options, unfamiliar flags, migration guides, plugin configuration, edge cases
+- DON'T USE for: basic generator syntax (`nx g @nx/react:app`), standard commands, things you already know
+- The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
+
+<!-- nx configuration end-->
+
+<!-- user configuration start -->
+
+# Senior Frontend Engineer Guidelines (Nx + React + Storybook)
+
+## 🛠 Core Tech Stack
+
+- **Workspace:** [Nx Monorepo](https://nx.dev) (Apps + Libs architecture)
+- **Framework:** Next.js (App Router) / React 18+
+- **State:** [TanStack Query](https://tanstack.com) (Server), [Zustand](https://zustand-demo.pmnd.rs) (Client)
+- **Styling:** Tailwind CSS + [CVA (Class Variance Authority)](https://cva.style)
+- **Testing:** [Vitest](https://vitest.dev) (Unit), [Playwright](https://playwright.dev) (E2E), [Storybook](https://storybook.js.org) (Visual/Interaction)
+
+## 🏗 Architectural Guardrails (Nx & Monorepo)
+
+- **Library First:** 80% of code belongs in `libs/`. Apps are minimal shells.
+- **Boundary Enforcement:** `ui` libs cannot import `feature` libs. `util` libs cannot import `ui`.
+- **Generators Only:** Never manually create project folders. Use Nx Generators.
+  - **Create Lib:** `nx g @nx/react:lib libs/shared/ui-components --directory=libs/shared/ui-components --tags=scope:shared,type:ui --importPath=@my-org/shared-ui`
+  - **Create Component:** `nx g @nx/react:component my-button --project=shared-ui-components --export`
+
+## 🎨 Storybook & Visual Regression (Chromatic)
+
+- **Mandatory Stories:** Every UI component MUST have a `*.stories.tsx` file using [Storybook Controls](https://storybook.js.orgdocs/essentials/controls).
+- **Interaction Testing:** Use the `play` function for behavioral assertions (clicks, form fills).
+
+  ```typescript
+  export const SubmittedForm: Story = {
+    play: async ({ canvasElement, step }) => {
+      const canvas = within(canvasElement)
+      await step('Submit', async () => {
+        await userEvent.type(canvas.getByTestId('email'), 'senior@dev.com')
+        await userEvent.click(canvas.getByRole('button'))
+      })
+      await expect(canvas.getByText('Success')).toBeInTheDocument()
+    }
+  }
+  ```
+
+  <!-- user configuration end -->
+
+  <!-- repo configuration start -->
+
+# 🚨 CI/CD Quality Gates
+
+- **Missing Story Check:** CI fails if any `.tsx` in a `type:ui` lib lacks a corresponding `.stories.tsx` file.
+- **Visual Regression:** UI changes in `type:ui` projects trigger Chromatic. PRs cannot merge until changes are **Accepted** in the Chromatic Dashboard.
+
+---
+
+# 🚦 Execution Rules (MANDATORY)
+
+- **Zero Fallbacks:** Code must fail loudly. No silent catch blocks or "dummy" data.
+- **RSC Patterns:** Components are Server Components by default. Use `'use client'` strictly for interactivity or browser APIs.
+- **No Sequential Awaits:** Use `Promise.all()` for concurrent fetching to avoid waterfalls.
+- **Full Output:** Never use `// ... existing code`. Always provide the full file content to maintain context.
+
+---
+
+# 🔄 Senior Workflow Protocol
+
+1.  **Explore:** Use `Nx Graph` to visualize dependencies before adding a new library.
+2.  **Plan:** State which Nx Generator and tags will be used before execution.
+3.  **Verify:** Run `nx affected -t lint,test,build` and `nx run <project>:storybook` to verify changes.
+
+---
+
+# ⌨️ Common Commands
+
+| Action              | Command                                                                   |
+| :------------------ | :------------------------------------------------------------------------ |
+| **Create Lib**      | `nx g @nx/react:lib <path> --tags=scope:<scope>,type:<type>`              |
+| **Add Storybook**   | `nx g @nx/storybook:configuration <project-name> --interactionTests=true` |
+| **Verify Affected** | `nx affected -t lint,test`                                                |
+| **Run Chromatic**   | `nx run <project>:chromatic --project-token=<token> --only-changed`       |
+
+  <!-- repo configuration end -->
+
+# CLAUDE.md - Frontend Guidelines
+
+## 🛡️ Core Principles
+
+- **Senior Mindset:** You are a senior frontend engineer. Focus on maintainability, scalability, accessibility, and performance.
+- **Simplicity:** Impact as little code as possible. Keep functions small and focused [4].
+- **"Never be Lazy":** Do not use temporary fixes. Find root causes and implement robust solutions [4].
+- **AI Constraints:** Do not hallucinate APIs. Read relevant files first [4].
+
+## 🏗️ Architecture & Component Guidelines
+
+- **Frameworks:** Use [React/Vue/Next.js] with TypeScript.
+- **Component Structure:** Use functional components with hooks. Prefer composition over inheritance.
+- **State Management:** Use [Redux/Zustand/Context API] for global state; prefer local state for UI-specific logic.
+- **Styling:** Use [Tailwind CSS/Styled Components/CSS Modules]. Enforce design system tokens (spacing, colors, typography).
+- **File Structure:** Organize by feature/domain, not just by file type.
+
+## 🚀 Performance & Security
+
+- **Code Splitting:** Implement `React.lazy()` for route-based splitting.
+- **Performance:** Optimize image loading (`loading="lazy"`) and minimize third-party scripts.
+- **Security:** Sanitize user input. Prevent XSS by avoiding `dangerouslySetInnerHTML`.
+
+## 🧑‍💻 Coding Standards
+
+- **Typescript:** STRICT mode only. No `any` types.
+- **Testing:** Write tests alongside code (Jest/Vitest + React Testing Library).
+- **Accessibility:** Ensure WCAG 2.1 AA compliance. Use semantic HTML and aria-attributes.
+- **Linting:** Run `npm run lint` and `npm run format` after any change [8].
+
+## 📝 Workflow Commands
+
+- **Init:** Run `/init` to set up the project structure.
+- **Plan:** Draft a plan in `tasks/todo.md` and await approval for complex changes [4].
+- **Test:** Run `npm test` before finalizing any changes [8].
+
+## 📚 Documentation
+
+- If complex, explain high-level changes in the PR description [4].
+- If changing architecture, update this `CLAUDE.md`.

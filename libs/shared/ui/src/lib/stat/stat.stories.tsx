@@ -1,12 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
 
+import { HStack } from '../../index'
+
 import {
   Stat,
-  StatArrow,
-  StatGroup,
+  StatDownIndicator,
   StatHelpText,
   StatLabel,
-  StatNumber
+  StatNumber,
+  StatUpIndicator
 } from './stat'
 
 export default {
@@ -26,12 +28,12 @@ export const Default: StoryObj<typeof Stat> = {
 
 export const StatWithIndicator: StoryObj<typeof Stat> = {
   render: args => (
-    <StatGroup>
+    <HStack gap="4">
       <Stat>
         <StatLabel>Sent</StatLabel>
         <StatNumber>345,670</StatNumber>
         <StatHelpText>
-          <StatArrow type="increase" />
+          <StatUpIndicator />
           23.36%
         </StatHelpText>
       </Stat>
@@ -40,10 +42,10 @@ export const StatWithIndicator: StoryObj<typeof Stat> = {
         <StatLabel>Clicked</StatLabel>
         <StatNumber>45</StatNumber>
         <StatHelpText>
-          <StatArrow type="decrease" />
+          <StatDownIndicator />
           9.05%
         </StatHelpText>
       </Stat>
-    </StatGroup>
+    </HStack>
   )
 }

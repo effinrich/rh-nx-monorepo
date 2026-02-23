@@ -1,5 +1,5 @@
 export default {
   defaultProps: {
-    colorScheme: 'primary'
+    colorPalette: 'primary'
   }
 }

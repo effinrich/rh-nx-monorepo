@@ -61,7 +61,7 @@ export const Basic: StoryFn<typeof NumberInput> = () => (
 const sizes = ['xs', 'sm', 'md', 'lg'] as const
 
 export const Sizes: StoryFn<typeof NumberInput> = () => (
-  <Stack spacing="6">
+  <Stack gap="6">
     {sizes.map(size => (
       <rh.div key={size}>
         <pre>size = {size}</pre>
@@ -242,7 +242,7 @@ export const WithFormControl = () => {
 
   return (
     <Stack align="start">
-      <FormControl id="first-name" isInvalid={isError}>
+      <FormControl id="first-name" invalid={isError}>
         <rh.div display="flex" mb="2">
           <FormLabel mb="0" lineHeight="1em">
             Amount

@@ -1,7 +1,7 @@
 import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools'
 
 const baseStyle = (props: StyleFunctionProps) => {
-  const { colorScheme: c } = props
+  const { colorPalette: c } = props
   return {
     control: {
       _checked: {
@@ -17,7 +17,7 @@ const baseStyle = (props: StyleFunctionProps) => {
 }
 
 const defaultProps = {
-  colorScheme: 'primary'
+  colorPalette: 'primary'
 }
 
 export default {

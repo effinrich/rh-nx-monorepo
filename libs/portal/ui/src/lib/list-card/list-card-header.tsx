@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardHeaderProps } from '@chakra-ui/react'
+import { type CardHeaderProps } from '@redesignhealth/ui'
 import { Box, CardHeader, Divider, Flex, Text } from '@redesignhealth/ui'
 
 interface ListCardHeaderProps extends Omit<CardHeaderProps, 'title'> {

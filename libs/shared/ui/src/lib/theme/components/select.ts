@@ -147,6 +147,6 @@ export default {
   defaultProps: {
     size: 'md',
     variant: 'outline',
-    colorScheme: 'primary'
+    colorPalette: 'primary'
   }
 }

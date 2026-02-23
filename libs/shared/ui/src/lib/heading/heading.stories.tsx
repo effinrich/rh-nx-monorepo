@@ -21,7 +21,7 @@ export const Default: StoryObj<typeof Heading> = {
 
 export const ChangingVisualSize: StoryObj<typeof Heading> = {
   render: args => (
-    <Stack spacing={6}>
+    <Stack gap={6}>
       <Heading as="h1" size="4xl" noOfLines={1}>
         (4xl) In love with React & Next
       </Heading>
@@ -77,7 +77,7 @@ export const Composition: StoryFn<typeof Heading> = () => (
       Paystack helps businesses in Africa get paid by anyone, anywhere in the
       world
     </Text>
-    <Button size="lg" colorScheme="primary" mt="24px">
+    <Button size="lg" colorPalette="primary" mt="24px">
       Create a free account
     </Button>
   </Box>
