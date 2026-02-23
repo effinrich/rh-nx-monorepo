@@ -36,7 +36,7 @@ export const Toaster: React.FC<ToasterProps> = (props: ToasterProps) => {
                 <Toast.Description>{toast.description}</Toast.Description>
               )}
             </Stack>
-            {toast.action && (
+            {toast.action && 'label' in toast.action && (
               <Toast.ActionTrigger>{toast.action.label}</Toast.ActionTrigger>
             )}
             {toast.closable && <Toast.CloseTrigger />}

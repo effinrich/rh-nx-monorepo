@@ -55,8 +55,9 @@ export const ToggleButton = (props: ToggleButtonProps) => {
       size="sm"
       color="on-accent"
       zIndex="skipLink"
-      icon={<ToggleIcon active={open} />}
       {...iconButtonProps}
-    />
+    >
+      <ToggleIcon active={open} />
+    </IconButton>
   )
 }

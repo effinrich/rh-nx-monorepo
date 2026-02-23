@@ -49,6 +49,7 @@ export const Prose = ({ children, ...rest }: BoxProps) => (
       '& th, & td': { border: '1px solid', borderColor: 'gray.200', padding: '0.5em' },
       '& th': { backgroundColor: 'gray.50', fontWeight: 'bold' },
       '& hr': { borderColor: 'gray.200', marginY: '2em' },
+      // Utility class for images that should span the full width of the prose container (e.g. CMS content)
       '& .wide-image': { width: '100%' },
     }}
     {...rest}
