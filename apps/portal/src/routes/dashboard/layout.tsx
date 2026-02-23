@@ -30,13 +30,14 @@ export const Layout = () => {
     if (!userInfo) {
       return
     }
-    if (userInfo.roles && userInfo.roles.length > 0) {
-      setCurrentUserRole(userInfo.roles[0].authority)
+    const firstRole = userInfo.roles?.[0]
+    if (firstRole) {
+      setCurrentUserRole(firstRole.authority)
     }
 
     const newUserProps: GA4CustomUserProps = {}
-    if (userInfo.roles && userInfo.roles.length > 0) {
-      newUserProps.user_role = userInfo.roles[0].displayName
+    if (firstRole) {
+      newUserProps.user_role = firstRole.displayName
     }
     if (userInfo.memberOf && userInfo.memberOf.length > 0) {
       newUserProps.user_membership = userInfo.memberOf[0].name
