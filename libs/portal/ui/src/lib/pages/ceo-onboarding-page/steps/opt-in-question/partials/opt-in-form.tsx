@@ -1,4 +1,4 @@
-import { CardBody, RadioGroup, Stack, Text } from '@redesignhealth/ui'
+import { CardBody, RadioGroupRoot, Stack, Text } from '@redesignhealth/ui'
 
 import ButtonRadio from '../../../button-radio/button-radio'
 
@@ -8,8 +8,8 @@ interface OptInFormProps {
 }
 const OptInForm = ({ isOptIn, setIsOptIn }: OptInFormProps) => (
   <CardBody>
-    <RadioGroup colorScheme="primary" value={isOptIn} onChange={setIsOptIn}>
-      <Stack spacing={4}>
+    <RadioGroupRoot colorPalette="primary" value={isOptIn} onChange={setIsOptIn}>
+      <Stack gap={4}>
         <ButtonRadio
           value="OPT_IN"
           isChecked={isOptIn === 'OPT_IN'}
@@ -30,7 +30,7 @@ const OptInForm = ({ isOptIn, setIsOptIn }: OptInFormProps) => (
           }
         />
       </Stack>
-    </RadioGroup>
+    </RadioGroupRoot>
   </CardBody>
 )
 

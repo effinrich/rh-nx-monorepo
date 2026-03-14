@@ -1,5 +1,5 @@
 import {
-  Box,
+  rh,
   Th,
   Thead,
   Tr,
@@ -13,14 +13,14 @@ const TableHeader = () => {
   return (
     <>
       {(breakpoint === 'xl' || breakpoint === '2xl') && (
-        <Box as="colgroup">
-          <Box as="col" span={1} w="28%" />
-          <Box as="col" span={1} w="20%" />
-          <Box as="col" span={1} w="20%" />
-          <Box as="col" span={1} w="20%" />
-          <Box as="col" span={1} w="6%" />
-          <Box as="col" span={1} w="6%" />
-        </Box>
+        <rh.colgroup>
+          <rh.col span={1} w="28%" />
+          <rh.col span={1} w="20%" />
+          <rh.col span={1} w="20%" />
+          <rh.col span={1} w="20%" />
+          <rh.col span={1} w="6%" />
+          <rh.col span={1} w="6%" />
+        </rh.colgroup>
       )}
       <Thead>
         <Tr>

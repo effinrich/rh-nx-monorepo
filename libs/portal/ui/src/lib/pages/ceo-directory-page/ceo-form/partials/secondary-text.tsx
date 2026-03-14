@@ -1,9 +1,9 @@
-import { As } from '@chakra-ui/react'
+import { ElementType } from 'react'
 import { Flex, Icon, Text } from '@redesignhealth/ui'
 
 interface SecondaryTextProps {
   children: React.ReactNode
-  icon: As
+  icon: ElementType
   testid?: string
 }
 

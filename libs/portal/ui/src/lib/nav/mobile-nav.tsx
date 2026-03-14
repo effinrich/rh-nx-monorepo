@@ -1,9 +1,10 @@
 import { UserInfoSummary } from '@redesignhealth/portal/data-assets'
 import {
   Box,
-  Drawer,
+  DrawerBackdrop,
   DrawerContent,
-  DrawerOverlay,
+  DrawerPositioner,
+  DrawerRoot,
   IconButton,
   RedesignLogo,
   rh,
@@ -22,7 +23,7 @@ interface MobileNavProps {
 }
 
 const Bar = rh('span', {
-  baseStyle: {
+  base: {
     display: 'block',
     pos: 'absolute',
     w: '1.25rem',
@@ -35,7 +36,7 @@ const Bar = rh('span', {
 })
 
 export const MobileNav = ({ userInfo }: MobileNavProps) => {
-  const { isOpen, onToggle, onClose } = useDisclosure()
+  const { open: isOpen, onToggle, onClose } = useDisclosure()
 
   return (
     <Box
@@ -63,47 +64,45 @@ export const MobileNav = ({ userInfo }: MobileNavProps) => {
 
       <IconButton
         aria-label={`${isOpen ? 'close' : 'open'} navigation menu`}
-        variant="unstyled"
+        variant="ghost"
         onClick={onToggle}
         size="sm"
-        icon={
-          <Box
-            className="group"
-            data-active={isOpen ? '' : undefined}
-            w="1.5rem"
-            h="1.5rem"
-            pos="relative"
-            aria-hidden
-            pointerEvents="none"
-          >
-            <Bar
-              top="0.4375rem"
-              _groupActive={{ top: '0.6875rem', transform: 'rotate(45deg)' }}
-            />
-            <Bar
-              bottom="0.4375rem"
-              _groupActive={{
-                bottom: '0.6875rem',
-                transform: 'rotate(-45deg)'
-              }}
-            />
-          </Box>
-        }
-      />
-
-      <Drawer
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        isFullHeight
-        preserveScrollBarGap
-        closeOnEsc
       >
-        <DrawerOverlay display={{ lg: 'none' }} />
-        <DrawerContent display={{ lg: 'none' }}>
-          <Nav onClose={onClose} userInfo={userInfo} />
-        </DrawerContent>
-      </Drawer>
+        <Box
+          className="group"
+          data-active={isOpen ? '' : undefined}
+          w="1.5rem"
+          h="1.5rem"
+          pos="relative"
+          aria-hidden
+          pointerEvents="none"
+        >
+          <Bar
+            top="0.4375rem"
+            _groupActive={{ top: '0.6875rem', transform: 'rotate(45deg)' }}
+          />
+          <Bar
+            bottom="0.4375rem"
+            _groupActive={{
+              bottom: '0.6875rem',
+              transform: 'rotate(-45deg)'
+            }}
+          />
+        </Box>
+      </IconButton>
+
+      <DrawerRoot
+        open={isOpen}
+        placement="start"
+        onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
+      >
+        <DrawerBackdrop display={{ lg: 'none' }} />
+        <DrawerPositioner display={{ lg: 'none' }}>
+          <DrawerContent>
+            <Nav onClose={onClose} userInfo={userInfo} />
+          </DrawerContent>
+        </DrawerPositioner>
+      </DrawerRoot>
     </Box>
   )
 }

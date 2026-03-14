@@ -13,7 +13,7 @@ export const CeoOnboardingSuccess = () => {
         </Text>
         <Stack>
           <Button
-            colorScheme="primary"
+            colorPalette="primary"
             onClick={() => navigate('/ceo-directory')}
           >
             Take me to the directory

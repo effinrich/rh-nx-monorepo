@@ -18,7 +18,7 @@ export const VendorReferencesCardsWrapper = ({
   // if (!vendors) return null
 
   return vendors.length > 0 ? (
-    <Stack spacing="6">
+    <Stack gap="6">
       {vendors.map(vendor => {
         return (
           <VendorCard
@@ -35,8 +35,8 @@ export const VendorReferencesCardsWrapper = ({
                 currentRole={userInfo?.role?.authority}
                 allowed={['ROLE_RH_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_RH_USER']}
               >
-                <Button as={Link} colorScheme="primary" to={vendor.apiId}>
-                  More details
+                <Button asChild colorPalette="primary">
+                  <Link to={vendor.apiId}>More details</Link>
                 </Button>
               </HasRole>
             }

@@ -13,7 +13,7 @@ import {
 interface SuccessConfirmationProps {
   advisorName?: string
   onClose: VoidFunction
-  isOpen: UseDisclosureReturn['isOpen']
+  isOpen: boolean
 }
 
 export const SuccessConfirmation = ({
@@ -22,8 +22,9 @@ export const SuccessConfirmation = ({
   advisorName
 }: SuccessConfirmationProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+    <Modal open={isOpen} onOpenChange={(e: { open: boolean }) => !e.open && onClose()} size="xl">
       <ModalOverlay />
+      {/* @ts-expect-error Chakra v3 DialogContent children typing */}
       <ModalContent>
         <ModalHeader>Successful Request</ModalHeader>
         <ModalCloseButton />
@@ -31,7 +32,7 @@ export const SuccessConfirmation = ({
           Your request for {advisorName ?? 'the advisor'} has been submitted.
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" onClick={onClose}>
+          <Button colorPalette="blue" onClick={onClose}>
             Close
           </Button>
         </ModalFooter>

@@ -2,14 +2,14 @@ import { MdCheckCircle, MdSettings } from 'react-icons/md'
 
 import { Meta, StoryFn } from '@storybook/react-vite'
 
-import { List, ListIcon, ListItem, OrderedList, UnorderedList } from './list'
+import { ListRoot, ListIcon, ListItem, OrderedList, UnorderedList } from './list'
 
 export default {
-  component: List,
+  component: ListRoot,
   title: 'Components / Data Display / List'
-} as Meta<typeof List>
+} as Meta<typeof ListRoot>
 
-const Template: StoryFn<typeof List> = args => (
+const Template: StoryFn<typeof ListRoot> = args => (
   <UnorderedList {...args}>
     <ListItem>Lorem ipsum dolor sit amet</ListItem>
     <ListItem>Consectetur adipiscing elit</ListItem>
@@ -23,7 +23,7 @@ export const Unordered = {
   args: {}
 }
 
-export const Ordered: StoryFn<typeof List> = () => (
+export const Ordered: StoryFn<typeof ListRoot> = () => (
   <OrderedList>
     <ListItem>Lorem ipsum dolor sit amet</ListItem>
     <ListItem>Consectetur adipiscing elit</ListItem>
@@ -32,8 +32,8 @@ export const Ordered: StoryFn<typeof List> = () => (
   </OrderedList>
 )
 
-export const WithIcons: StoryFn<typeof List> = () => (
-  <List spacing={3}>
+export const WithIcons: StoryFn<typeof ListRoot> = () => (
+  <ListRoot gap={3}>
     <ListItem>
       <ListIcon as={MdCheckCircle} color="primary.500" />
       Lorem ipsum dolor sit amet, consectetur adipisicing elit
@@ -51,5 +51,5 @@ export const WithIcons: StoryFn<typeof List> = () => (
       <ListIcon as={MdSettings} color="primary.500" />
       Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
     </ListItem>
-  </List>
+  </ListRoot>
 )

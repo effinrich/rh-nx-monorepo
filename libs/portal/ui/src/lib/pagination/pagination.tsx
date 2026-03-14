@@ -25,7 +25,7 @@ const Pagination = ({
       </Text>
       <Flex gap="2">
         <Button
-          isDisabled={currentPage === 0}
+          disabled={currentPage === 0}
           onClick={() => {
             handlePageChange(currentPage - 1)
             scrollToTop(scrollContainerId)
@@ -35,7 +35,7 @@ const Pagination = ({
           Previous
         </Button>
         <Button
-          isDisabled={currentPage + 1 >= totalPages}
+          disabled={currentPage + 1 >= totalPages}
           onClick={() => {
             handlePageChange(currentPage + 1)
             scrollToTop(scrollContainerId)

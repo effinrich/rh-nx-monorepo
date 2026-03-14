@@ -23,14 +23,14 @@ export const NavButton = ({
     <Button
       onClick={onClick}
       variant={isActive ? 'zap-on-accent' : 'ghost'}
-      colorScheme="whiteAlpha"
+      colorPalette="whiteAlpha"
       width="100%"
       justifyContent="start"
       size="sm"
       color={isActive ? undefined : 'white'}
     >
       <Flex justify="space-between" width="100%">
-        <HStack spacing="3">
+        <HStack gap="3">
           <Icon as={icon} boxSize={5} />
           <Text>{children}</Text>
         </HStack>
@@ -43,7 +43,7 @@ export const NavButton = ({
       {({ isActive }) => innerButton(isActive)}
     </NavLink>
   ) : (
-    <Link href={to} isExternal>
+    <Link href={to} target="_blank" rel="noopener noreferrer">
       {innerButton(false)}
     </Link>
   )

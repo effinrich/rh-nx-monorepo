@@ -2,7 +2,7 @@
 // Props changed: spacing → gap, divider → use Stack.Separator between items
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { Stack, HStack, VStack } from '@chakra-ui/react'
+export { Stack } from '@chakra-ui/react'
 
 // Export Stack compound components
 export { StackSeparator } from '@chakra-ui/react'

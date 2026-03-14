@@ -1,10 +1,14 @@
 import {
+  Filters,
+  Ceo,
   mockAdminUser,
   mockCEOCompanyUser,
   mockCeoFilters,
   mockCeos,
   mockCeosNoResults,
-  mockRhUser
+  mockRhUser,
+  PagedResult,
+  UserInfoSummary
 } from '@redesignhealth/portal/data-assets'
 import { rest } from 'msw'
 import { withRouter } from 'storybook-addon-react-router-v6'
@@ -25,15 +29,36 @@ const Story: Meta<typeof CeoDirectoryPage> = {
     },
     msw: {
       handlers: [
-        rest.get('/ceos/filters', (req, res, ctx) => {
-          return res(ctx.json(mockCeoFilters))
-        }),
-        rest.get('/ceos', (req, res, ctx) => {
-          return res(ctx.json(mockCeos))
-        }),
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockCEOCompanyUser))
-        })
+        rest.get(
+          '/ceos/filters',
+          (
+            req: any,
+            res: (arg0: any) => any,
+            ctx: { json: (arg0: Filters) => any }
+          ) => {
+            return res(ctx.json(mockCeoFilters))
+          }
+        ),
+        rest.get(
+          '/ceos',
+          (
+            req: any,
+            res: (arg0: any) => any,
+            ctx: { json: (arg0: PagedResult<Ceo>) => any }
+          ) => {
+            return res(ctx.json(mockCeos))
+          }
+        ),
+        rest.get(
+          '/userinfo',
+          (
+            req: any,
+            res: (arg0: any) => any,
+            ctx: { json: (arg0: UserInfoSummary) => any }
+          ) => {
+            return res(ctx.json(mockCEOCompanyUser))
+          }
+        )
       ]
     }
   }
@@ -62,12 +87,26 @@ export const AdminUser = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/ceos', (req, res, ctx) => {
-          return res(ctx.json(mockCeos))
-        }),
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockAdminUser))
-        })
+        rest.get(
+          '/ceos',
+          (
+            req: any,
+            res: (arg0: any) => any,
+            ctx: { json: (arg0: PagedResult<Ceo>) => any }
+          ) => {
+            return res(ctx.json(mockCeos))
+          }
+        ),
+        rest.get(
+          '/userinfo',
+          (
+            req: any,
+            res: (arg0: any) => any,
+            ctx: { json: (arg0: UserInfoSummary) => any }
+          ) => {
+            return res(ctx.json(mockAdminUser))
+          }
+        )
       ]
     }
   }
@@ -80,12 +119,26 @@ export const RHUser = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/ceos', (req, res, ctx) => {
-          return res(ctx.json(mockCeos))
-        }),
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockRhUser))
-        })
+        rest.get(
+          '/ceos',
+          (
+            req: any,
+            res: (arg0: any) => any,
+            ctx: { json: (arg0: PagedResult<Ceo>) => any }
+          ) => {
+            return res(ctx.json(mockCeos))
+          }
+        ),
+        rest.get(
+          '/userinfo',
+          (
+            req: any,
+            res: (arg0: any) => any,
+            ctx: { json: (arg0: UserInfoSummary) => any }
+          ) => {
+            return res(ctx.json(mockRhUser))
+          }
+        )
       ]
     }
   }
@@ -98,9 +151,16 @@ export const NoResultsFound = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/ceos', (req, res, ctx) => {
-          return res(ctx.json(mockCeosNoResults))
-        })
+        rest.get(
+          '/ceos',
+          (
+            req: any,
+            res: (arg0: any) => any,
+            ctx: { json: (arg0: PagedResult<Ceo>) => any }
+          ) => {
+            return res(ctx.json(mockCeosNoResults))
+          }
+        )
       ]
     }
   }

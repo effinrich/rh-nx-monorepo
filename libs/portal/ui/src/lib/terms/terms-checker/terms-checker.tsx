@@ -14,12 +14,12 @@ const TermsChecker = ({ children }: ConsentCheckerProps) => {
   const { data: hasUserConsented, isFetched: hasUserConsentedFetched } =
     useHasUserConsented()
 
-  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
+  const { open, onClose } = useDisclosure({ defaultOpen: true })
 
   if (!hasUserConsentedFetched) {
     return <Loader />
   } else if (!hasUserConsented) {
-    return <Terms isAskingConsent isOpen={isOpen} onClose={onClose} />
+    return <Terms isAskingConsent isOpen={open} onClose={onClose} />
   } else {
     return children
   }

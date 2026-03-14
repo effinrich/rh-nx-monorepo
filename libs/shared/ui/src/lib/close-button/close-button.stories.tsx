@@ -7,7 +7,7 @@ export default {
 
 export const Default = () => <CloseButton />
 
-export const State = () => <CloseButton isDisabled />
+export const State = () => <CloseButton disabled />
 
 export const Sizes = () => (
   <>

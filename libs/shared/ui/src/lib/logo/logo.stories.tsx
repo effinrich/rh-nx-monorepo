@@ -17,7 +17,7 @@ export const Default = {
 }
 
 export const CustomSize: StoryFn<typeof Logo> = () => (
-  <VStack spacing="6" align="start">
+  <VStack gap="6" align="start">
     <Logo height="4" />
     <Logo height="6" />
     <Logo height="8" />
@@ -27,7 +27,7 @@ export const CustomSize: StoryFn<typeof Logo> = () => (
 )
 
 export const CustomColor: StoryFn<typeof Logo> = () => (
-  <VStack spacing="6" align="start">
+  <VStack gap="6" align="start">
     <Logo color="primary.500" />
     <Logo color="secondary.500" />
     <Logo color="gray.700" />
@@ -42,7 +42,7 @@ export const OnDarkBackground: StoryFn<typeof Logo> = () => (
 )
 
 export const OnColoredBackground: StoryFn<typeof Logo> = () => (
-  <HStack spacing="4">
+  <HStack gap="4">
     <Box bg="primary.500" p="8" rounded="md">
       <Logo color="white" height="10" />
     </Box>
@@ -56,7 +56,7 @@ export const OnColoredBackground: StoryFn<typeof Logo> = () => (
 )
 
 export const WithPrismIcon: StoryFn = () => (
-  <HStack spacing="6" align="center">
+  <HStack gap="6" align="center">
     <RedesignHealthPrismIcon boxSize="8" />
     <Logo height="8" />
   </HStack>

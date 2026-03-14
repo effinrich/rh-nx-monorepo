@@ -1,11 +1,10 @@
 import { MdSearch } from 'react-icons/md'
 import { useResearchStore } from '@redesignhealth/portal/data-assets'
 import {
-  Flex,
   Input,
   InputGroup,
   InputGroupProps,
-  InputLeftElement,
+  InputElement,
   InputProps
 } from '@redesignhealth/ui'
 
@@ -22,20 +21,13 @@ export const SelectionBoxSearch = ({
   )
 
   return (
-    <InputGroup {...props}>
-      <InputLeftElement
-        as={Flex}
-        pointerEvents="none"
-        justify="center"
-        align="center"
-      >
-        <MdSearch height="16px" width="16px" />
-      </InputLeftElement>
+    <InputGroup {...props} startElement={<MdSearch height="16px" width="16px" />}>
       <Input
         placeholder="Search"
         aria-label="Search"
         name="search"
         onChange={event => setNotesSearchQuery(event.target.value)}
+        ps="10"
         {...inputProps}
       />
     </InputGroup>

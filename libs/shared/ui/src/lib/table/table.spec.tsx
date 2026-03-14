@@ -1,11 +1,11 @@
 import { testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { Table, TableCaption, Tbody, Td, Tfoot, Th, Thead, Tr } from './table'
+import { TableRoot, TableCaption, Tbody, Td, Tfoot, Th, Thead, Tr } from './table'
 
 describe('<Table />', () => {
   it('should pass a11y test', async () => {
     const simpleTable = (
-      <Table>
+      <TableRoot>
         <TableCaption>Imperial to metric conversion factors</TableCaption>
         <Thead>
           <Tr>
@@ -28,7 +28,7 @@ describe('<Table />', () => {
             <Th isNumeric>multiply by</Th>
           </Tr>
         </Tfoot>
-      </Table>
+      </TableRoot>
     )
 
     await testA11y(simpleTable)

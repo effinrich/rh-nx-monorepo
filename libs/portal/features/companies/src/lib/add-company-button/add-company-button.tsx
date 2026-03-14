@@ -2,31 +2,33 @@ import { MdExpandMore } from 'react-icons/md'
 import { Link as RouterLink } from 'react-router-dom'
 import {
   Button,
-  Icon,
-  Menu,
-  MenuButton,
+  MenuRoot,
+  MenuTrigger,
   MenuItem,
-  MenuList
+  MenuContent
 } from '@redesignhealth/ui'
 
 const AddCompanyButton = () => (
-  <Menu>
-    <MenuButton
-      as={Button}
-      colorScheme="primary"
-      rightIcon={<Icon as={MdExpandMore} />}
-    >
-      Add company
-    </MenuButton>
-    <MenuList>
-      <MenuItem as={RouterLink} to="/companies/add-company">
-        RH company
+  <MenuRoot>
+    <MenuTrigger asChild>
+      <Button
+        colorPalette="primary"
+      >
+        Add company
+        <MdExpandMore />
+      </Button>
+    </MenuTrigger>
+    <MenuContent>
+      <MenuItem value="rh-company" asChild>
+        <RouterLink to="/companies/add-company">RH company</RouterLink>
       </MenuItem>
-      <MenuItem as={RouterLink} to="/companies/add-marketplace-company">
-        Marketplace company
+      <MenuItem value="marketplace-company" asChild>
+        <RouterLink to="/companies/add-marketplace-company">
+          Marketplace company
+        </RouterLink>
       </MenuItem>
-    </MenuList>
-  </Menu>
+    </MenuContent>
+  </MenuRoot>
 )
 
 export default AddCompanyButton

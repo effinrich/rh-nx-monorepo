@@ -7,7 +7,7 @@ export interface DetailsCardRowLinkProps {
 
 const DetailsCardRowLink = ({ href, name }: DetailsCardRowLinkProps) => {
   return (
-    <Link href={href} fontWeight="500" isExternal>
+    <Link href={href} fontWeight="500" target="_blank" rel="noopener noreferrer">
       {name || href}
     </Link>
   )

@@ -1,4 +1,4 @@
-import { HStack, Tag } from '@redesignhealth/ui'
+import { HStack, TagRoot, TagLabel } from '@redesignhealth/ui'
 
 export interface ListCardTagProps {
   values?: string[]
@@ -6,11 +6,11 @@ export interface ListCardTagProps {
 
 export const ListCardTags = ({ values }: ListCardTagProps) => {
   return (
-    <HStack flex={1} spacing={4} wrap="wrap">
+    <HStack flex={1} gap={4} wrap="wrap">
       {values?.map(value => (
-        <Tag key={value} variant="solid">
-          {value}
-        </Tag>
+        <TagRoot key={value} variant="solid">
+          <TagLabel>{value}</TagLabel>
+        </TagRoot>
       ))}
     </HStack>
   )

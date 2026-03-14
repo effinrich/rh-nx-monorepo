@@ -92,7 +92,7 @@ export const SignIn = () => {
           <Image src={RedesignHealthText} />
           <Text color="gray.600">Welcome! Sign into your account.</Text>
           {/*
-          <Button onClick={() => googleLogin()} colorScheme="primary">
+          <Button onClick={() => googleLogin()} colorPalette="primary">
             Google Auth-Flow Login
           </Button>
           */}

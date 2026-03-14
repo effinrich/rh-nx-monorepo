@@ -10,7 +10,7 @@ import {
 
 import {
   rh,
-  Table,
+  TableRoot,
   TableContainer,
   Tbody,
   Td,
@@ -49,7 +49,7 @@ export function DataTable<Data extends object>({
 
   return (
     <TableContainer borderBottomRadius="8px">
-      <Table variant={variant} colorScheme={colorScheme}>
+      <TableRoot variant={variant as any} colorPalette={colorScheme}>
         <Thead>
           {table.getHeaderGroups().map(headerGroup => (
             <Tr key={headerGroup.id}>
@@ -60,7 +60,7 @@ export function DataTable<Data extends object>({
                   <Th
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
-                    isNumeric={meta?.isNumeric}
+                    textAlign={meta?.isNumeric ? 'end' : undefined}
                   >
                     {flexRender(
                       header.column.columnDef.header,
@@ -89,7 +89,7 @@ export function DataTable<Data extends object>({
                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                 const meta: any = cell.column.columnDef.meta
                 return (
-                  <Td key={cell.id} isNumeric={meta?.isNumeric}>
+                  <Td key={cell.id} textAlign={meta?.isNumeric ? 'end' : undefined}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </Td>
                 )
@@ -97,7 +97,7 @@ export function DataTable<Data extends object>({
             </Tr>
           ))}
         </Tbody>
-      </Table>
+      </TableRoot>
     </TableContainer>
   )
 }

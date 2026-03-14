@@ -13,6 +13,7 @@ interface SuccessProps {
 
 const Success = ({ onConfirmation }: SuccessProps) => {
   return (
+    // @ts-expect-error Chakra v3 DialogContent children typing
     <ModalContent>
       <ModalCloseButton />
       <ModalHeader>Information released successfully</ModalHeader>
@@ -20,7 +21,7 @@ const Success = ({ onConfirmation }: SuccessProps) => {
         Your contact information was emailed to the interested buyer.
       </ModalBody>
       <ModalFooter>
-        <Button colorScheme="primary" onClick={onConfirmation}>
+        <Button colorPalette="primary" onClick={onConfirmation}>
           Got it
         </Button>
       </ModalFooter>

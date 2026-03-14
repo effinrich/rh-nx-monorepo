@@ -1,15 +1,15 @@
 /* eslint-disable no-console */
 import * as React from 'react'
-import { chakra } from '@chakra-ui/system'
+import { chakra } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
 
 import {
   Box,
   Divider,
+  FieldLabel,
+  FieldRoot,
   Flex,
-  FormControl,
-  FormLabel,
   Heading,
   HStack,
   Icon,
@@ -18,7 +18,10 @@ import {
 } from '../../index'
 
 import {
-  Checkbox,
+  CheckboxRoot,
+  CheckboxControl,
+  CheckboxLabel,
+  CheckboxHiddenInput,
   CheckboxGroup,
   useCheckbox,
   useCheckboxGroup
@@ -26,39 +29,81 @@ import {
 
 export default {
   title: 'Components / Forms / Checkbox',
-  component: Checkbox
+  component: CheckboxRoot
 } as Meta
 
-export const Basic = () => <Checkbox colorScheme="red">Hello</Checkbox>
+export const Basic = () => (
+  <CheckboxRoot colorPalette="red">
+    <CheckboxHiddenInput />
+    <CheckboxControl />
+    <CheckboxLabel>Hello</CheckboxLabel>
+  </CheckboxRoot>
+)
 
-export const Disabled = () => <Checkbox isDisabled>Disabled</Checkbox>
+export const Disabled = () => (
+  <CheckboxRoot disabled>
+    <CheckboxHiddenInput />
+    <CheckboxControl />
+    <CheckboxLabel>Disabled</CheckboxLabel>
+  </CheckboxRoot>
+)
 
-export const Readonly = () => <Checkbox isReadOnly>Readonly</Checkbox>
+export const Readonly = () => (
+  <CheckboxRoot isReadOnly>
+    <CheckboxHiddenInput />
+    <CheckboxControl />
+    <CheckboxLabel>Readonly</CheckboxLabel>
+  </CheckboxRoot>
+)
 
-export const Invalid = () => <Checkbox isInvalid>Invalid</Checkbox>
+export const Invalid = () => (
+  <CheckboxRoot isInvalid>
+    <CheckboxHiddenInput />
+    <CheckboxControl />
+    <CheckboxLabel>Invalid</CheckboxLabel>
+  </CheckboxRoot>
+)
 export const NotFocusable = () => (
   <Box maxW="300px">
-    <Checkbox isFocusable={false}>not focusable</Checkbox>
-    <Checkbox isFocusable={false} isDisabled>
-      disabled and not focusable (truly disabled)
-    </Checkbox>
-    <Checkbox tabIndex={-1} isFocusable={false}>
-      Not Focusable with provided tabIndex
-    </Checkbox>
+    <CheckboxRoot isFocusable={false}>
+      <CheckboxHiddenInput />
+      <CheckboxControl />
+      <CheckboxLabel>not focusable</CheckboxLabel>
+    </CheckboxRoot>
+    <CheckboxRoot isFocusable={false} disabled>
+      <CheckboxHiddenInput />
+      <CheckboxControl />
+      <CheckboxLabel>disabled and not focusable (truly disabled)</CheckboxLabel>
+    </CheckboxRoot>
+    <CheckboxRoot tabIndex={-1} isFocusable={false}>
+      <CheckboxHiddenInput />
+      <CheckboxControl />
+      <CheckboxLabel>Not Focusable with provided tabIndex</CheckboxLabel>
+    </CheckboxRoot>
   </Box>
 )
 
 export const WithIconColor = () => (
-  <Checkbox iconColor="yellow.400">I love Redesign Health</Checkbox>
+  <CheckboxRoot iconColor="yellow.400">
+    <CheckboxHiddenInput />
+    <CheckboxControl />
+    <CheckboxLabel>I love Redesign Health</CheckboxLabel>
+  </CheckboxRoot>
 )
 
 export const WithColorScheme = () => {
   return (
     <Stack>
-      <Checkbox defaultChecked colorScheme="red">
-        Hello world
-      </Checkbox>
-      <Checkbox defaultChecked>Hello world</Checkbox>
+      <CheckboxRoot defaultChecked colorPalette="red">
+        <CheckboxHiddenInput />
+        <CheckboxControl />
+        <CheckboxLabel>Hello world</CheckboxLabel>
+      </CheckboxRoot>
+      <CheckboxRoot defaultChecked>
+        <CheckboxHiddenInput />
+        <CheckboxControl />
+        <CheckboxLabel>Hello world</CheckboxLabel>
+      </CheckboxRoot>
     </Stack>
   )
 }
@@ -86,34 +131,42 @@ export const WithCustomIcon = () => {
   return (
     <>
       <Heading>Default</Heading>
-      <Checkbox icon={<CustomIcon />} colorScheme="red">
-        Hello world
-      </Checkbox>
+      <CheckboxRoot icon={<CustomIcon />} colorPalette="red">
+        <CheckboxHiddenInput />
+        <CheckboxControl />
+        <CheckboxLabel>Hello world</CheckboxLabel>
+      </CheckboxRoot>
 
       <Divider />
 
       <Heading>Indeterminate</Heading>
-      <Checkbox
+      <CheckboxRoot
         isChecked={allChecked}
         isIndeterminate={isIndeterminate}
         onChange={e => setCheckedItems([e.target.checked, e.target.checked])}
         icon={<CustomIcon />}
       >
-        Parent Checkbox
-      </Checkbox>
+        <CheckboxHiddenInput />
+        <CheckboxControl />
+        <CheckboxLabel>Parent Checkbox</CheckboxLabel>
+      </CheckboxRoot>
       <Stack ml="6" mt="2" align="start">
-        <Checkbox
+        <CheckboxRoot
           isChecked={checkedItems[0]}
           onChange={e => setCheckedItems([e.target.checked, checkedItems[1]])}
         >
-          Child Checkbox 1
-        </Checkbox>
-        <Checkbox
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>Child Checkbox 1</CheckboxLabel>
+        </CheckboxRoot>
+        <CheckboxRoot
           isChecked={checkedItems[1]}
           onChange={e => setCheckedItems([checkedItems[0], e.target.checked])}
         >
-          Child Checkbox 2
-        </Checkbox>
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>Child Checkbox 2</CheckboxLabel>
+        </CheckboxRoot>
       </Stack>
     </>
   )
@@ -125,7 +178,10 @@ export const Sizes = () => {
   return (
     <Stack direction="row">
       {sizes.map(size => (
-        <Checkbox key={size} size={size} />
+        <CheckboxRoot key={size} size={size}>
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+        </CheckboxRoot>
       ))}
     </Stack>
   )
@@ -139,26 +195,32 @@ export const Indeterminate = () => {
 
   return (
     <>
-      <Checkbox
+      <CheckboxRoot
         isChecked={allChecked}
         isIndeterminate={isIndeterminate}
         onChange={e => setCheckedItems([e.target.checked, e.target.checked])}
       >
-        Parent Checkbox
-      </Checkbox>
+        <CheckboxHiddenInput />
+        <CheckboxControl />
+        <CheckboxLabel>Parent Checkbox</CheckboxLabel>
+      </CheckboxRoot>
       <Stack ml="6" mt="2" align="start">
-        <Checkbox
+        <CheckboxRoot
           isChecked={checkedItems[0]}
           onChange={e => setCheckedItems([e.target.checked, checkedItems[1]])}
         >
-          Child Checkbox 1
-        </Checkbox>
-        <Checkbox
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>Child Checkbox 1</CheckboxLabel>
+        </CheckboxRoot>
+        <CheckboxRoot
           isChecked={checkedItems[1]}
           onChange={e => setCheckedItems([checkedItems[0], e.target.checked])}
         >
-          Child Checkbox 2
-        </Checkbox>
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>Child Checkbox 2</CheckboxLabel>
+        </CheckboxRoot>
       </Stack>
     </>
   )
@@ -171,7 +233,12 @@ export const Controlled = () => {
     setValue(e.target.checked)
   }
 
-  return <Checkbox isChecked={value} onChange={handleChange} />
+  return (
+    <CheckboxRoot isChecked={value} onChange={handleChange}>
+      <CheckboxHiddenInput />
+      <CheckboxControl />
+    </CheckboxRoot>
+  )
 }
 
 export const CheckboxGroupExample = () => {
@@ -180,10 +247,22 @@ export const CheckboxGroupExample = () => {
       defaultValue={['one', 'two']}
       onChange={value => console.log(value)}
     >
-      <Stack align="start" direction={['column', 'row']} spacing={[2, 4, 6]}>
-        <Checkbox value="one">One</Checkbox>
-        <Checkbox value="two">Two</Checkbox>
-        <Checkbox value="three">Three</Checkbox>
+      <Stack align="start" direction={['column', 'row']} gap={[2, 4, 6]}>
+        <CheckboxRoot value="one">
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>One</CheckboxLabel>
+        </CheckboxRoot>
+        <CheckboxRoot value="two">
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>Two</CheckboxLabel>
+        </CheckboxRoot>
+        <CheckboxRoot value="three">
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>Three</CheckboxLabel>
+        </CheckboxRoot>
       </Stack>
     </CheckboxGroup>
   )
@@ -195,10 +274,22 @@ export const ResponsiveCheckboxGroup = () => {
       defaultValue={['one', 'two']}
       onChange={value => console.log(value)}
     >
-      <Stack spacing={[2, 4, 6]} direction={['column', 'row']}>
-        <Checkbox value="one">One</Checkbox>
-        <Checkbox value="two">Two</Checkbox>
-        <Checkbox value="three">Three</Checkbox>
+      <Stack gap={[2, 4, 6]} direction={['column', 'row']}>
+        <CheckboxRoot value="one">
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>One</CheckboxLabel>
+        </CheckboxRoot>
+        <CheckboxRoot value="two">
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>Two</CheckboxLabel>
+        </CheckboxRoot>
+        <CheckboxRoot value="three">
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>Three</CheckboxLabel>
+        </CheckboxRoot>
       </Stack>
     </CheckboxGroup>
   )
@@ -217,10 +308,22 @@ export const ControlledCheckboxGroup = () => {
         setValue(value)
       }}
     >
-      <Stack direction="row" spacing="40px">
-        <Checkbox value="one">One</Checkbox>
-        <Checkbox value="two">Two</Checkbox>
-        <Checkbox value="three">Three</Checkbox>
+      <Stack direction="row" gap="40px">
+        <CheckboxRoot value="one">
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>One</CheckboxLabel>
+        </CheckboxRoot>
+        <CheckboxRoot value="two">
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>Two</CheckboxLabel>
+        </CheckboxRoot>
+        <CheckboxRoot value="three">
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>Three</CheckboxLabel>
+        </CheckboxRoot>
       </Stack>
     </CheckboxGroup>
   )
@@ -280,60 +383,60 @@ export const CustomCheckboxGroup = () => {
 export const WithFormControl = () => {
   return (
     <>
-      <FormControl id="optIn">
-        <FormLabel>Opt-in Example</FormLabel>
+      <FieldRoot id="optIn">
+        <FieldLabel>Opt-in Example</FieldLabel>
         <CheckboxGroup defaultValue={['1', '3']}>
           <HStack>
-            <Checkbox value="1">Opt-in 1</Checkbox>
-            <Checkbox value="2">Opt-in 2</Checkbox>
-            <Checkbox value="3">Opt-in 3</Checkbox>
+            <CheckboxRoot value="1"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Opt-in 1</CheckboxLabel></CheckboxRoot>
+            <CheckboxRoot value="2"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Opt-in 2</CheckboxLabel></CheckboxRoot>
+            <CheckboxRoot value="3"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Opt-in 3</CheckboxLabel></CheckboxRoot>
           </HStack>
         </CheckboxGroup>
-      </FormControl>
+      </FieldRoot>
 
-      <FormControl id="optInInvalid" isInvalid mt={4}>
-        <FormLabel>Invalid Opt-in Example</FormLabel>
+      <FieldRoot id="optInInvalid" invalid mt={4}>
+        <FieldLabel>Invalid Opt-in Example</FieldLabel>
         <CheckboxGroup defaultValue={['2', '3']}>
-          <Stack spacing={2}>
-            <Checkbox value="1">Invalid Opt-in 1</Checkbox>
-            <Checkbox value="2">Invalid Opt-in 2</Checkbox>
-            <Checkbox value="3">Invalid Opt-in 3</Checkbox>
+          <Stack gap={2}>
+            <CheckboxRoot value="1"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Invalid Opt-in 1</CheckboxLabel></CheckboxRoot>
+            <CheckboxRoot value="2"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Invalid Opt-in 2</CheckboxLabel></CheckboxRoot>
+            <CheckboxRoot value="3"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Invalid Opt-in 3</CheckboxLabel></CheckboxRoot>
           </Stack>
         </CheckboxGroup>
-      </FormControl>
+      </FieldRoot>
 
-      <FormControl id="optInDisabled" isDisabled mt={4}>
-        <FormLabel>Disabled Opt-in Example</FormLabel>
+      <FieldRoot id="optInDisabled" disabled mt={4}>
+        <FieldLabel>Disabled Opt-in Example</FieldLabel>
         <CheckboxGroup defaultValue={['2', '3']}>
-          <Stack spacing={2}>
-            <Checkbox value="1">Disabled Opt-in 1</Checkbox>
-            <Checkbox value="2">Disabled Opt-in 2</Checkbox>
-            <Checkbox value="3">Disabled Opt-in 3</Checkbox>
+          <Stack gap={2}>
+            <CheckboxRoot value="1"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Disabled Opt-in 1</CheckboxLabel></CheckboxRoot>
+            <CheckboxRoot value="2"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Disabled Opt-in 2</CheckboxLabel></CheckboxRoot>
+            <CheckboxRoot value="3"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Disabled Opt-in 3</CheckboxLabel></CheckboxRoot>
           </Stack>
         </CheckboxGroup>
-      </FormControl>
+      </FieldRoot>
 
-      <FormControl id="optInReadonly" isReadOnly mt={4}>
-        <FormLabel>Readonly Opt-in Example</FormLabel>
+      <FieldRoot id="optInReadonly" readOnly mt={4}>
+        <FieldLabel>Readonly Opt-in Example</FieldLabel>
         <CheckboxGroup defaultValue={['2', '3']}>
-          <Stack spacing={2}>
-            <Checkbox value="1">Readonly Opt-in 1</Checkbox>
-            <Checkbox value="2">Readonly Opt-in 2</Checkbox>
-            <Checkbox value="3">Readonly Opt-in 3</Checkbox>
+          <Stack gap={2}>
+            <CheckboxRoot value="1"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Readonly Opt-in 1</CheckboxLabel></CheckboxRoot>
+            <CheckboxRoot value="2"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Readonly Opt-in 2</CheckboxLabel></CheckboxRoot>
+            <CheckboxRoot value="3"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Readonly Opt-in 3</CheckboxLabel></CheckboxRoot>
           </Stack>
         </CheckboxGroup>
-      </FormControl>
+      </FieldRoot>
 
-      <FormControl id="optInRequired" isRequired mt={4}>
-        <FormLabel>Required Opt-in Example</FormLabel>
+      <FieldRoot id="optInRequired" required mt={4}>
+        <FieldLabel>Required Opt-in Example</FieldLabel>
         <CheckboxGroup defaultValue={['2', '3']}>
-          <Stack spacing={2}>
-            <Checkbox value="1">Required Opt-in 1</Checkbox>
-            <Checkbox value="2">Required Opt-in 2</Checkbox>
-            <Checkbox value="3">Required Opt-in 3</Checkbox>
+          <Stack gap={2}>
+            <CheckboxRoot value="1"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Required Opt-in 1</CheckboxLabel></CheckboxRoot>
+            <CheckboxRoot value="2"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Required Opt-in 2</CheckboxLabel></CheckboxRoot>
+            <CheckboxRoot value="3"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Required Opt-in 3</CheckboxLabel></CheckboxRoot>
           </Stack>
         </CheckboxGroup>
-      </FormControl>
+      </FieldRoot>
     </>
   )
 }

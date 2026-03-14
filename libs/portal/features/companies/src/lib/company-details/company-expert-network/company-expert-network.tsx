@@ -1,6 +1,6 @@
 import { MdLaunch } from 'react-icons/md'
 import { OverviewCard } from '@redesignhealth/portal/ui'
-import { Button, Icon, Text } from '@redesignhealth/ui'
+import { Button, Text } from '@redesignhealth/ui'
 
 const EXPERT_NETWORK_HOSTNAME = import.meta.env.VITE_EXPERT_NETWORK_HOSTNAME
 const CompanyExpertNetwork = () => {
@@ -10,12 +10,12 @@ const CompanyExpertNetwork = () => {
       rightElement={
         <Button
           as="a"
-          colorScheme="primary"
+          colorPalette="primary"
           href={EXPERT_NETWORK_HOSTNAME}
           target="_blank"
-          rightIcon={<Icon as={MdLaunch} />}
         >
           Search the network
+          <MdLaunch />
         </Button>
       }
     >

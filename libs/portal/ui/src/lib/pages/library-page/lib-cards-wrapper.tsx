@@ -54,7 +54,7 @@ export const LibCardsWrapper = ({
                 <Heading as="h3" size="xs" pb={3} pt={8}>
                   {newDoc.categoryTitle}
                 </Heading>
-                <SimpleGrid columns={[1, 2, 3]} spacing={6}>
+                <SimpleGrid columns={[1, 2, 3]} gap={6}>
                   {newDoc.documents.map((child: LibraryDoc) => (
                     <LibCard
                       key={child.id}

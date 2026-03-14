@@ -2,7 +2,7 @@ import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { CompanyCommand } from '@redesignhealth/portal/data-assets'
 import { selectTransformer } from '@redesignhealth/portal/utils'
 import { TEXTAREA_CHARACTER_LIMIT } from '@redesignhealth/portal/utils'
-import { Input, Radio, RadioGroup, Stack, Textarea } from '@redesignhealth/ui'
+import { Input, Radio, RadioGroupRoot, Stack, Textarea } from '@redesignhealth/ui'
 import { Select } from 'chakra-react-select'
 
 import Form from '../../../form/form'
@@ -47,7 +47,7 @@ const MarketplaceCompanyForm = ({
         onCancel={onCancel}
         submitText={submitText}
       >
-        <Stack spacing={6}>
+        <Stack gap={6}>
           <Controller
             name="activityType"
             control={methods.control}
@@ -59,22 +59,22 @@ const MarketplaceCompanyForm = ({
                   isEdit ? 'Company type cannot be changed' : undefined
                 }
               >
-                <RadioGroup
+                <RadioGroupRoot
                   onChange={onChange}
                   name={name}
                   defaultValue={value}
-                  colorScheme="primary"
+                  colorPalette="primary"
                   onBlur={onBlur}
-                  isDisabled={isEdit}
+                  disabled={isEdit}
                 >
-                  <Stack spacing={4}>
+                  <Stack gap={4}>
                     {activityTypes.map(type => (
                       <Radio key={type.value} value={type.value}>
                         {type.displayName}
                       </Radio>
                     ))}
                   </Stack>
-                </RadioGroup>
+                </RadioGroupRoot>
               </FormField>
             )}
           />

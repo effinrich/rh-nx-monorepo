@@ -18,7 +18,8 @@ const preview: Preview = {
           'Charts',
           'Rich Text Editor'
         ]
-      }
+      },
+      autodocs: true
     },
     controls: {
       matchers: {

@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 
-import { Avatar } from '../avatar/avatar'
+import { AvatarRoot, AvatarImage, AvatarFallback } from '../avatar/avatar'
 import { Box } from '../box/box'
 import { Heading } from '../heading/heading'
 import { HStack } from '../h-stack/h-stack'
@@ -52,8 +52,12 @@ export const WithImage: StoryFn<typeof LinkBox> = () => (
 
 export const WithAvatar: StoryFn<typeof LinkBox> = () => (
   <LinkBox as="article" p="5" borderWidth="1px" rounded="md">
-    <HStack spacing="3" mb="3">
-      <Avatar name="John Doe" src="https://bit.ly/dan-abramov" />
+    <HStack gap="3" mb="3">
+      <AvatarRoot name="John Doe">
+        {/* @ts-expect-error Chakra v3 compound component typing */}
+        <AvatarImage src="https://bit.ly/dan-abramov" />
+        <AvatarFallback />
+      </AvatarRoot>
       <Box>
         <Text fontWeight="semibold">John Doe</Text>
         <Text fontSize="sm" color="gray.500">

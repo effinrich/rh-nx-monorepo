@@ -1,8 +1,9 @@
 export {
   type CardBodyProps,
   type CardHeaderProps,
-  type CardProps,
+  type CardRootProps as CardProps,
   Card,
+  CardRoot,
   CardBody,
   CardFooter,
   CardHeader

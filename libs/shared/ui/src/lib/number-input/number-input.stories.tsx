@@ -7,10 +7,10 @@ import { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
 
 import {
   Button,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   Input,
   rh,
   Stack
@@ -19,7 +19,7 @@ import {
 import {
   NumberDecrementStepper,
   NumberIncrementStepper,
-  NumberInput,
+  NumberInputRoot,
   NumberInputField,
   NumberInputStepper,
   useNumberInput
@@ -34,44 +34,44 @@ export default {
       </rh.div>
     )
   ]
-} as Meta<typeof NumberInput>
+} as Meta<typeof NumberInputRoot>
 
-export const Default: StoryObj<typeof NumberInput> = {
+export const Default: StoryObj<typeof NumberInputRoot> = {
   render: args => (
-    <NumberInput max={50} min={10} {...args}>
+    <NumberInputRoot max={50} min={10} {...args}>
       <NumberInputField />
       <NumberInputStepper>
         <NumberIncrementStepper />
         <NumberDecrementStepper />
       </NumberInputStepper>
-    </NumberInput>
+    </NumberInputRoot>
   )
 }
 
-export const Basic: StoryFn<typeof NumberInput> = () => (
-  <NumberInput max={50} min={10}>
+export const Basic: StoryFn<typeof NumberInputRoot> = () => (
+  <NumberInputRoot max={50} min={10}>
     <NumberInputField />
     <NumberInputStepper>
       <NumberIncrementStepper />
       <NumberDecrementStepper />
     </NumberInputStepper>
-  </NumberInput>
+  </NumberInputRoot>
 )
 
 const sizes = ['xs', 'sm', 'md', 'lg'] as const
 
-export const Sizes: StoryFn<typeof NumberInput> = () => (
-  <Stack spacing="6">
+export const Sizes: StoryFn<typeof NumberInputRoot> = () => (
+  <Stack gap="6">
     {sizes.map(size => (
       <rh.div key={size}>
         <pre>size = {size}</pre>
-        <NumberInput mt="2" size={size} defaultValue={15} min={10}>
+        <NumberInputRoot mt="2" size={size} defaultValue={15} min={10}>
           <NumberInputField />
           <NumberInputStepper>
             <NumberIncrementStepper />
             <NumberDecrementStepper />
           </NumberInputStepper>
-        </NumberInput>
+        </NumberInputRoot>
       </rh.div>
     ))}
   </Stack>
@@ -142,47 +142,47 @@ export const FormatAndParse = () => {
 }
 
 export const WithMinAndMax = () => (
-  <NumberInput defaultValue={15} min={10} max={20}>
+  <NumberInputRoot defaultValue={15} min={10} max={20}>
     <NumberInputField />
     <NumberInputStepper>
       <NumberIncrementStepper />
       <NumberDecrementStepper />
     </NumberInputStepper>
-  </NumberInput>
+  </NumberInputRoot>
 )
 
 export const WithStep = () => (
-  <NumberInput step={5} defaultValue={15} min={10} max={30}>
+  <NumberInputRoot step={5} defaultValue={15} min={10} max={30}>
     <NumberInputField />
     <NumberInputStepper>
       <NumberIncrementStepper />
       <NumberDecrementStepper />
     </NumberInputStepper>
-  </NumberInput>
+  </NumberInputRoot>
 )
 
 export const WithPrecision = () => (
-  <NumberInput defaultValue={15} precision={2} step={0.2}>
+  <NumberInputRoot defaultValue={15} precision={2} step={0.2}>
     <NumberInputField />
     <NumberInputStepper>
       <NumberIncrementStepper />
       <NumberDecrementStepper />
     </NumberInputStepper>
-  </NumberInput>
+  </NumberInputRoot>
 )
 
 export const WithClampValueDisabled = () => (
-  <NumberInput defaultValue={15} max={30} clampValueOnBlur={false}>
+  <NumberInputRoot defaultValue={15} max={30} clampValueOnBlur={false}>
     <NumberInputField />
     <NumberInputStepper>
       <NumberIncrementStepper />
       <NumberDecrementStepper />
     </NumberInputStepper>
-  </NumberInput>
+  </NumberInputRoot>
 )
 
 export const AllowOutOfRange = () => (
-  <NumberInput
+  <NumberInputRoot
     defaultValue={15}
     max={10}
     keepWithinRange={false}
@@ -193,7 +193,7 @@ export const AllowOutOfRange = () => (
       <NumberIncrementStepper />
       <NumberDecrementStepper />
     </NumberInputStepper>
-  </NumberInput>
+  </NumberInputRoot>
 )
 
 export const WithReactHookForm = () => {
@@ -207,7 +207,7 @@ export const WithReactHookForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <NumberInput
+      <NumberInputRoot
         name="sales"
         onBlur={() => {
           console.log('blurred')
@@ -218,14 +218,14 @@ export const WithReactHookForm = () => {
           <NumberIncrementStepper />
           <NumberDecrementStepper />
         </NumberInputStepper>
-      </NumberInput>
+      </NumberInputRoot>
     </form>
   )
 }
 
 function FormError(props: any) {
   return (
-    <FormErrorMessage
+    <FieldErrorText
       mt="0"
       bg="red.500"
       color="white"
@@ -242,14 +242,14 @@ export const WithFormControl = () => {
 
   return (
     <Stack align="start">
-      <FormControl id="first-name" isInvalid={isError}>
+      <FieldRoot id="first-name" invalid={isError}>
         <rh.div display="flex" mb="2">
-          <FormLabel mb="0" lineHeight="1em">
+          <FieldLabel mb="0" lineHeight="1em">
             Amount
-          </FormLabel>
+          </FieldLabel>
           <FormError>is invalid!</FormError>
         </rh.div>
-        <NumberInput
+        <NumberInputRoot
           max={50}
           min={10}
           defaultValue={20}
@@ -262,9 +262,9 @@ export const WithFormControl = () => {
             <NumberIncrementStepper />
             <NumberDecrementStepper />
           </NumberInputStepper>
-        </NumberInput>
-        <FormHelperText>Keep it very short and sweet!</FormHelperText>
-      </FormControl>
+        </NumberInputRoot>
+        <FieldHelperText>Keep it very short and sweet!</FieldHelperText>
+      </FieldRoot>
       <Button onClick={() => setIsError(s => !s)}>Toggle Invalid</Button>
     </Stack>
   )

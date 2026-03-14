@@ -34,10 +34,13 @@ const FormFieldContainer = ({
   const clientError = clientErrors[name]?.message
   const error = clientError || serverError
   return (
-    <FormControl isInvalid={error} data-testid={name}>
+    <FormControl invalid={!!error} data-testid={name}>
+      {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
       <FormLabel>{label}</FormLabel>
       {children}
+      {/* @ts-expect-error Chakra v3 FieldHelperText children typing */}
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
+      {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
       <FormErrorMessage role="alert">
         <ErrorMessage errors={clientErrors} name={name} />
       </FormErrorMessage>

@@ -6,11 +6,10 @@ import {
   Box,
   Button,
   Container,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  forwardRef,
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   InputProps,
   Stack,
   Text
@@ -72,7 +71,7 @@ export const WithStates = () => (
   <Stack align="start">
     <Input placeholder="Idle" />
     <Input isInvalid placeholder="isInvalid" />
-    <Input isDisabled placeholder="isDisabled" />
+    <Input disabled placeholder="isDisabled" />
     <Input isReadOnly placeholder="isReadonly" />
   </Stack>
 )
@@ -135,7 +134,7 @@ export function PasswordInput() {
 }
 
 export const WithFocusAndErrorColors = () => (
-  <Stack align="start" spacing="10">
+  <Stack align="start" gap="10">
     <Input focusBorderColor="lime" placeholder="Here is a sample placeholder" />
 
     <Input
@@ -159,7 +158,7 @@ export const WithFocusAndErrorColors = () => (
 
 function FormError(props: any) {
   return (
-    <FormErrorMessage
+    <FieldErrorText
       mt="0"
       bg="red.500"
       color="white"
@@ -175,11 +174,11 @@ export const WithFormControl = () => {
   const [isError, setIsError] = React.useState(false)
   return (
     <Stack align="start">
-      <FormControl id="first-name" isInvalid={isError}>
+      <FieldRoot id="first-name" invalid={isError}>
         <Box display="flex" mb="2">
-          <FormLabel mb="0" lineHeight="1em">
+          <FieldLabel mb="0" lineHeight="1em">
             Amount
-          </FormLabel>
+          </FieldLabel>
           <FormError>is invalid!</FormError>
         </Box>
         <InputGroup size="sm">
@@ -187,8 +186,8 @@ export const WithFormControl = () => {
           <Input placeholder="Enter amount" />
           <InputRightAddon children=".com" />
         </InputGroup>
-        <FormHelperText>Keep it very short and sweet!</FormHelperText>
-      </FormControl>
+        <FieldHelperText>Keep it very short and sweet!</FieldHelperText>
+      </FieldRoot>
       <button onClick={() => setIsError(s => !s)}>Toggle Invalid</button>
     </Stack>
   )
@@ -218,6 +217,6 @@ export const InputGroupCustomInputProps = () => {
   )
 }
 
-const CustomInput = forwardRef<InputProps, 'input'>((props, ref) => (
+const CustomInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
   <Input ref={ref} color="gray.600" variant="flushed" {...props} />
 ))

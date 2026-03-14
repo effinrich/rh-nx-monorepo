@@ -7,19 +7,36 @@ import {
   waitFor
 } from '@redesignhealth/shared-utils-jest'
 
-import { Tooltip, TooltipProps } from './tooltip'
+import {
+  TooltipRoot,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipPositioner
+} from './tooltip'
+import type { TooltipRootProps } from './tooltip'
 
 const buttonLabel = 'Hover me'
 const tooltipLabel = 'tooltip label'
 
 const DummyComponent = (
-  props: Omit<TooltipProps & { isButtonDisabled?: boolean }, 'children'>
+  props: Partial<TooltipRootProps> & { isButtonDisabled?: boolean; shouldWrapChildren?: boolean }
 ) => {
-  const { isButtonDisabled, ...tooltipProps } = props
+  const { isButtonDisabled, shouldWrapChildren, ...tooltipProps } = props
   return (
-    <Tooltip label={tooltipLabel} {...tooltipProps}>
-      <button disabled={isButtonDisabled || false}>{buttonLabel}</button>
-    </Tooltip>
+    <TooltipRoot {...tooltipProps}>
+      <TooltipTrigger asChild>
+        {shouldWrapChildren ? (
+          <span>
+            <button disabled={isButtonDisabled || false}>{buttonLabel}</button>
+          </span>
+        ) : (
+          <button disabled={isButtonDisabled || false}>{buttonLabel}</button>
+        )}
+      </TooltipTrigger>
+      <TooltipPositioner>
+        <TooltipContent>{tooltipLabel}</TooltipContent>
+      </TooltipPositioner>
+    </TooltipRoot>
   )
 }
 
@@ -53,7 +70,7 @@ test.skip('shows on pointerover and closes on pointerleave', async () => {
 test('should not show on pointerover if isDisabled is true', async () => {
   jest.useFakeTimers()
 
-  render(<DummyComponent isDisabled />)
+  render(<DummyComponent disabled />)
 
   fireEvent.pointerOver(screen.getByText(buttonLabel))
 
@@ -97,7 +114,7 @@ test.skip('should close on pointerleave if openDelay is set', async () => {
 })
 
 test.skip('should show on pointerover if isDisabled has a falsy value', async () => {
-  render(<DummyComponent isDisabled={false} />)
+  render(<DummyComponent disabled={false} />)
 
   fireEvent.pointerOver(screen.getByText(buttonLabel))
 
@@ -159,7 +176,7 @@ test.skip('does not show tooltip after delay when `isDisabled` prop changes to `
   jest.useFakeTimers()
 
   const { rerender } = render(
-    <DummyComponent openDelay={100} isDisabled={false} />
+    <DummyComponent openDelay={100} disabled={false} />
   )
 
   fireEvent.pointerOver(screen.getByText(buttonLabel))
@@ -168,7 +185,7 @@ test.skip('does not show tooltip after delay when `isDisabled` prop changes to `
     jest.advanceTimersByTime(50)
   })
 
-  rerender(<DummyComponent openDelay={100} isDisabled={true} />)
+  rerender(<DummyComponent openDelay={100} disabled={true} />)
 
   act(() => {
     jest.advanceTimersByTime(100)
@@ -182,7 +199,7 @@ test.skip('does not show tooltip after delay when `isDisabled` prop changes to `
 test.skip('should call onClose prop on pointerleave', async () => {
   const onClose = jest.fn()
 
-  render(<DummyComponent onClose={onClose} />)
+  render(<DummyComponent onExitComplete={onClose} />)
 
   fireEvent.pointerOver(screen.getByText(buttonLabel))
 

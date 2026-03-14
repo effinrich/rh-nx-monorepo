@@ -12,7 +12,7 @@ import {
   ModalFooter,
   ModalOverlay,
   Radio,
-  RadioGroup,
+  RadioGroupRoot,
   Textarea,
   useDisclosure
 } from '@redesignhealth/ui'
@@ -98,7 +98,7 @@ export const FeedbackModal = forwardRef(
     }
 
     return (
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal open={isOpen} onClose={onClose} placement="center">
         <ModalOverlay />
         <ModalContent w="400px">
           <ModalCloseButton mt="10px" color="gray.500" />
@@ -112,7 +112,7 @@ export const FeedbackModal = forwardRef(
                   name="improvements"
                   control={control}
                   render={({ field }) => (
-                    <RadioGroup
+                    <RadioGroupRoot
                       onChange={field.onChange}
                       value={field.value}
                       name={field.name}
@@ -120,7 +120,7 @@ export const FeedbackModal = forwardRef(
                       as={Flex}
                       flexDir="column"
                       gap="14px"
-                      colorScheme="primary"
+                      colorPalette="primary"
                       mt="14px"
                     >
                       {RADIO_OPTIONS.map((option, index) => (
@@ -132,7 +132,7 @@ export const FeedbackModal = forwardRef(
                           {option.label}
                         </Radio>
                       ))}
-                    </RadioGroup>
+                    </RadioGroupRoot>
                   )}
                 />
               </FormControl>
@@ -156,7 +156,7 @@ export const FeedbackModal = forwardRef(
             >
               Cancel
             </Button>
-            <Button onClick={handleFormSubmit} colorScheme="brand">
+            <Button onClick={handleFormSubmit} colorPalette="brand">
               Submit
             </Button>
           </ModalFooter>

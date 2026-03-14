@@ -2,7 +2,9 @@ import { MdOutlineEdit, MdOutlineTheaterComedy } from 'react-icons/md'
 import { Link as RouterLink } from 'react-router-dom'
 import { formatDate } from '@redesignhealth/portal/utils'
 import {
-  Avatar,
+  AvatarRoot,
+  AvatarFallback,
+  AvatarImage,
   Badge,
   Box,
   Flex,
@@ -40,13 +42,16 @@ const TableBody = ({
         <Tr key={user.email}>
           <Td>
             <Flex gap="12px">
-              <Avatar
-                src={user.pictureSrc}
+              <AvatarRoot
                 name={user.name}
                 boxSize="10"
                 bg="primary.200"
                 color="gray.500"
-              />
+              >
+                {/* @ts-expect-error Chakra v3 compound component typing */}
+                <AvatarImage src={user.pictureSrc} />
+                <AvatarFallback />
+              </AvatarRoot>
               <Box whiteSpace="normal">
                 <Text color="gray.900">{user.name}</Text>
                 <Text>{user.email}</Text>
@@ -64,13 +69,14 @@ const TableBody = ({
               {user?.companies?.map(co => (
                 <WrapItem key={co.id}>
                   <Badge
-                    colorScheme="primary"
+                    colorPalette="primary"
                     size="sm"
                     variant="subtle"
-                    as={RouterLink}
-                    to={`/companies/${co.id}`}
+                    asChild
                   >
-                    {co.name}
+                    <RouterLink to={`/companies/${co.id}`}>
+                      {co.name}
+                    </RouterLink>
                   </Badge>
                 </WrapItem>
               ))}
@@ -80,11 +86,12 @@ const TableBody = ({
             <IconButton
               aria-label={`Edit ${user.name}'s details`}
               onClick={() => onClickEditUser(user.email)}
-              icon={<MdOutlineEdit />}
               variant="ghost"
               title="Edit"
-              colorScheme="primary"
-            />
+              colorPalette="primary"
+            >
+              <MdOutlineEdit />
+            </IconButton>
           </Td>
           {isSuperAdmin && (
             <Td>
@@ -92,10 +99,11 @@ const TableBody = ({
                 title="Impersonate"
                 aria-label={`Impersonate ${user.name}`}
                 onClick={() => handleImpersonatedEmail(user)}
-                icon={<MdOutlineTheaterComedy />}
                 variant="ghost"
-                colorScheme="primary"
-              />
+                colorPalette="primary"
+              >
+                <MdOutlineTheaterComedy />
+              </IconButton>
             </Td>
           )}
         </Tr>

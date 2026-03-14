@@ -13,6 +13,6 @@ export const Default = {
     label: '',
     error: '',
     helperText: '',
-    isInvalid: false
+    invalid: false
   }
 }

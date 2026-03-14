@@ -21,11 +21,11 @@ export const Default: StoryObj<typeof Heading> = {
 
 export const ChangingVisualSize: StoryObj<typeof Heading> = {
   render: args => (
-    <Stack spacing={6}>
-      <Heading as="h1" size="4xl" noOfLines={1}>
+    <Stack gap={6}>
+      <Heading as="h1" size="4xl" lineClamp={1}>
         (4xl) In love with React & Next
       </Heading>
-      <Heading as="h2" size="3xl" noOfLines={1}>
+      <Heading as="h2" size="3xl" lineClamp={1}>
         (3xl) In love with React & Next
       </Heading>
       <Heading as="h2" size="2xl">
@@ -58,7 +58,7 @@ export const TruncateHeading: StoryFn<typeof Heading> = () => (
     </Heading>
     <br />
     With Truncation
-    <Heading noOfLines={1}>
+    <Heading lineClamp={1}>
       Basic text writing, including headings, body text, lists, and more.
     </Heading>
   </Box>
@@ -77,7 +77,7 @@ export const Composition: StoryFn<typeof Heading> = () => (
       Paystack helps businesses in Africa get paid by anyone, anywhere in the
       world
     </Text>
-    <Button size="lg" colorScheme="primary" mt="24px">
+    <Button size="lg" colorPalette="primary" mt="24px">
       Create a free account
     </Button>
   </Box>

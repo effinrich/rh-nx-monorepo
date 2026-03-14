@@ -14,9 +14,9 @@ import {
 import {
   Input,
   Radio,
-  RadioGroup,
+  RadioGroupRoot,
   Stack,
-  StackDivider,
+  StackSeparator,
   Textarea
 } from '@redesignhealth/ui'
 import { AxiosError } from 'axios'
@@ -94,7 +94,7 @@ export const VendorForm = ({
         submitText={submitText}
         isSticky
       >
-        <Stack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
+        <Stack gap={8} separator={<StackSeparator borderColor="gray.200" />}>
           <Controller
             name="name"
             control={control}
@@ -128,7 +128,7 @@ export const VendorForm = ({
                   getOptionValue={o => o.value}
                   name={name}
                   placeholder="Select type"
-                  colorScheme="primary"
+                  colorPalette="primary"
                 />
               </FormFieldMaster>
             )}
@@ -143,10 +143,10 @@ export const VendorForm = ({
                   onChange={onChange}
                   name={name}
                   defaultValue={value}
-                  colorScheme="primary"
+                  colorPalette="primary"
                   onBlur={onBlur}
                 >
-                  <Stack spacing={4}>
+                  <Stack gap={4}>
                     {vendorTypes.map(type => (
                       <Radio key={type.value} value={type.value}>
                         {type.displayName}
@@ -223,21 +223,21 @@ export const VendorForm = ({
                 label="Vendor signed platform agreement?"
                 optional
               >
-                <RadioGroup
+                <RadioGroupRoot
                   ref={ref}
                   onChange={nextValue =>
                     controllerOnChange(nextValue === 'true')
                   }
                   name={name}
                   defaultValue={value ? 'true' : 'false'}
-                  colorScheme="primary"
+                  colorPalette="primary"
                   onBlur={onBlur}
                 >
-                  <Stack spacing={4}>
+                  <Stack gap={4}>
                     <Radio value="true">Yes</Radio>
                     <Radio value="false">No</Radio>
                   </Stack>
-                </RadioGroup>
+                </RadioGroupRoot>
               </FormFieldMaster>
             )}
           />

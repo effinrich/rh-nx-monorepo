@@ -40,7 +40,7 @@ export const Default = {
 
 export const ChangingFontSize = {
   render: (args: TextProps) => (
-    <Stack spacing={3}>
+    <Stack gap={3}>
       <Text fontSize="6xl">(6xl) In love with React & Next</Text>
       <Text fontSize="5xl">(5xl) In love with React & Next</Text>
       <Text fontSize="4xl">(4xl) In love with React & Next</Text>
@@ -61,7 +61,7 @@ export const TruncatText = {
       <Heading as="h4" size="md">
         Truncation
       </Heading>
-      <Text noOfLines={1}>
+      <Text lineClamp={1}>
         "The quick brown fox jumps over the lazy dog" is an English-language
         pangram—a sentence that contains all of the letters of the English
         alphabet. Owing to its existence, Chakra was created.
@@ -71,7 +71,7 @@ export const TruncatText = {
         Responsive truncation (test with Storybook responsive tool in the
         toolbar)
       </Heading>
-      <Text noOfLines={[1, 2, 3]}>
+      <Text lineClamp={[1, 2, 3]}>
         "The quick brown fox jumps over the lazy dog" is an English-language
         pangram—a sentence that contains all of the letters of the English
         alphabet. Owing to its existence, Chakra was created.

@@ -118,20 +118,18 @@ const ErrorFallback = ({ error }: ErrorFallbackProps) => {
       <Flex gap="12px" mt="48px">
         <Button
           variant="outline"
-          leftIcon={<MdArrowBack />}
           onClick={() => navigate(-1)}
           size={{ base: 'md', md: 'lg' }}
         >
+          <MdArrowBack />
           Go Back
         </Button>
         <Button
-          as={Link}
-          to="/"
-          replace
-          colorScheme="primary"
+          asChild
+          colorPalette="primary"
           size={{ base: 'md', md: 'lg' }}
         >
-          Take me home
+          <Link to="/" replace>Take me home</Link>
         </Button>
       </Flex>
     </Flex>

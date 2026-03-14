@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { VisuallyHidden, VisuallyHiddenInput } from './visually-hidden'
+import { VisuallyHidden } from './visually-hidden'
 
 export default {
   title: 'Components / Disclosure / Visually Hidden'
@@ -9,10 +9,13 @@ export const HiddenSpan = () => (
 )
 
 export const HiddenInput = () => (
-  <VisuallyHiddenInput
-    defaultChecked
-    onChange={event => {
-      console.log(event.target.checked)
-    }}
-  />
+  <VisuallyHidden asChild>
+    <input
+      type="checkbox"
+      defaultChecked
+      onChange={event => {
+        console.log(event.target.checked)
+      }}
+    />
+  </VisuallyHidden>
 )

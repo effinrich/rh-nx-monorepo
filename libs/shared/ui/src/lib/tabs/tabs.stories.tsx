@@ -2,14 +2,14 @@ import * as React from 'react'
 import { useInterval } from 'react-use'
 
 import {
-  Drawer,
+  DrawerRoot,
   DrawerBody,
   DrawerContent,
   DrawerOverlay
 } from '../drawer/drawer'
 import { rh } from '../rh/rh'
 
-import { Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from './tabs'
+import { Tab, TabIndicator, TabList, TabPanel, TabsRoot } from './tabs'
 
 export default {
   title: 'Components / Disclosure / Tabs',
@@ -34,16 +34,14 @@ export const Variants = () =>
   variants.map(variant => (
     <rh.div key={variant} my="10">
       <pre>variant = {variant}</pre>
-      <Tabs variant={variant} mt="3">
+      <TabsRoot variant={variant} mt="3">
         <TabList>
           <Tab>Settings</Tab>
           <Tab>Billings</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>Settings</TabPanel>
-          <TabPanel>Billings</TabPanel>
-        </TabPanels>
-      </Tabs>
+        <TabPanel>Settings</TabPanel>
+        <TabPanel>Billings</TabPanel>
+      </TabsRoot>
     </rh.div>
   ))
 
@@ -53,77 +51,69 @@ export const Sizes = () =>
   sizes.map(size => (
     <rh.div key={size} my="10">
       <pre>size = {size}</pre>
-      <Tabs size={size} mt="3">
+      <TabsRoot size={size} mt="3">
         <TabList>
           <Tab>Settings</Tab>
           <Tab>Billings</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>Settings</TabPanel>
-          <TabPanel>Billings</TabPanel>
-        </TabPanels>
-      </Tabs>
+        <TabPanel>Settings</TabPanel>
+        <TabPanel>Billings</TabPanel>
+      </TabsRoot>
     </rh.div>
   ))
 
 export const automatic = () => (
   <>
     <p>manual</p>
-    <Tabs isManual>
+    <TabsRoot isManual>
       <TabList>
         <Tab>Settings</Tab>
-        <Tab isDisabled>Billings</Tab>
-        <Tab isDisabled>Preferences</Tab>
+        <Tab disabled>Billings</Tab>
+        <Tab disabled>Preferences</Tab>
         <Tab>Shut Down</Tab>
       </TabList>
-      <TabPanels>
-        <TabPanel>Settings</TabPanel>
-        <TabPanel>Billings</TabPanel>
-        <TabPanel>Preferences</TabPanel>
-        <TabPanel>Shut Down</TabPanel>
-      </TabPanels>
-    </Tabs>
-    <br />
-    <p>auto</p>
-    <Tabs>
-      <TabList>
-        <Tab>Settings</Tab>
-        <Tab isDisabled>Billings</Tab>
-        <Tab isDisabled>Preferences</Tab>
-        <Tab>Shut Down</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>Settings</TabPanel>
-        <TabPanel>Billings</TabPanel>
-        <TabPanel>Preferences</TabPanel>
-        <TabPanel>Shut Down</TabPanel>
-      </TabPanels>
-    </Tabs>
-  </>
-)
-
-export const manual = () => (
-  <Tabs isManual>
-    <TabList>
-      <Tab>Settings</Tab>
-      <Tab>Billings</Tab>
-      <Tab isDisabled>Preferences</Tab>
-      <Tab>Shut Down</Tab>
-    </TabList>
-    <TabPanels>
       <TabPanel>Settings</TabPanel>
       <TabPanel>Billings</TabPanel>
       <TabPanel>Preferences</TabPanel>
       <TabPanel>Shut Down</TabPanel>
-    </TabPanels>
-  </Tabs>
+    </TabsRoot>
+    <br />
+    <p>auto</p>
+    <TabsRoot>
+      <TabList>
+        <Tab>Settings</Tab>
+        <Tab disabled>Billings</Tab>
+        <Tab disabled>Preferences</Tab>
+        <Tab>Shut Down</Tab>
+      </TabList>
+      <TabPanel>Settings</TabPanel>
+      <TabPanel>Billings</TabPanel>
+      <TabPanel>Preferences</TabPanel>
+      <TabPanel>Shut Down</TabPanel>
+    </TabsRoot>
+  </>
+)
+
+export const manual = () => (
+  <TabsRoot isManual>
+    <TabList>
+      <Tab>Settings</Tab>
+      <Tab>Billings</Tab>
+      <Tab disabled>Preferences</Tab>
+      <Tab>Shut Down</Tab>
+    </TabList>
+    <TabPanel>Settings</TabPanel>
+    <TabPanel>Billings</TabPanel>
+    <TabPanel>Preferences</TabPanel>
+    <TabPanel>Shut Down</TabPanel>
+  </TabsRoot>
 )
 
 export const withIndicator = () => (
-  <Tabs variant="unstyled" isManual>
+  <TabsRoot variant="unstyled" isManual>
     <TabList>
       <Tab>Settings</Tab>
-      <Tab _disabled={{ color: 'gray.400' }} isDisabled>
+      <Tab _disabled={{ color: 'gray.400' }} disabled>
         Billings
       </Tab>
       <Tab>Preferences</Tab>
@@ -132,17 +122,15 @@ export const withIndicator = () => (
 
     <TabIndicator mt="-36px" zIndex={-1} height="34px" bg="green.200" />
 
-    <TabPanels>
-      <TabPanel>Settings</TabPanel>
-      <TabPanel>Billings</TabPanel>
-      <TabPanel>Preferences</TabPanel>
-      <TabPanel>Shut Down</TabPanel>
-    </TabPanels>
-  </Tabs>
+    <TabPanel>Settings</TabPanel>
+    <TabPanel>Billings</TabPanel>
+    <TabPanel>Preferences</TabPanel>
+    <TabPanel>Shut Down</TabPanel>
+  </TabsRoot>
 )
 
 export const withIndicatorAndLongTabText = () => (
-  <Tabs variant="unstyled" isManual>
+  <TabsRoot variant="unstyled" isManual>
     <TabList>
       <Tab>Tab with long text</Tab>
       <Tab>Billings</Tab>
@@ -150,30 +138,26 @@ export const withIndicatorAndLongTabText = () => (
       <Tab>Shut Down</Tab>
     </TabList>
     <TabIndicator mt="-36px" zIndex={-1} height="34px" bg="green.200" />
-    <TabPanels>
-      <TabPanel>Tab with long text</TabPanel>
-      <TabPanel>Billings</TabPanel>
-      <TabPanel>Preferences</TabPanel>
-      <TabPanel>Shut Down</TabPanel>
-    </TabPanels>
-  </Tabs>
+    <TabPanel>Tab with long text</TabPanel>
+    <TabPanel>Billings</TabPanel>
+    <TabPanel>Preferences</TabPanel>
+    <TabPanel>Shut Down</TabPanel>
+  </TabsRoot>
 )
 
 export const withVerticalTabs = () => (
-  <Tabs orientation="vertical">
+  <TabsRoot orientation="vertical">
     <TabList>
       <Tab>Settings</Tab>
       <Tab>Billings</Tab>
-      <Tab isDisabled>Preferences</Tab>
+      <Tab disabled>Preferences</Tab>
       <Tab>Shut Down</Tab>
     </TabList>
-    <TabPanels bg="red.200">
-      <TabPanel>Settings</TabPanel>
-      <TabPanel>Billings</TabPanel>
-      <TabPanel>Preferences</TabPanel>
-      <TabPanel>Shut Down</TabPanel>
-    </TabPanels>
-  </Tabs>
+    <TabPanel>Settings</TabPanel>
+    <TabPanel>Billings</TabPanel>
+    <TabPanel>Preferences</TabPanel>
+    <TabPanel>Shut Down</TabPanel>
+  </TabsRoot>
 )
 
 const Interval = () => {
@@ -187,41 +171,37 @@ const Interval = () => {
 }
 
 export const withLazyTabs = () => (
-  <Tabs isLazy>
+  <TabsRoot isLazy>
     <TabList>
       <Tab>Interval 1</Tab>
       <Tab>Interval 2</Tab>
     </TabList>
-    <TabPanels>
-      <TabPanel>
-        Interval 1:
-        <Interval />
-      </TabPanel>
-      <TabPanel>
-        Interval 2:
-        <Interval />
-      </TabPanel>
-    </TabPanels>
-  </Tabs>
+    <TabPanel>
+      Interval 1:
+      <Interval />
+    </TabPanel>
+    <TabPanel>
+      Interval 2:
+      <Interval />
+    </TabPanel>
+  </TabsRoot>
 )
 
 export const withLazyTabsMounted = () => (
-  <Tabs isLazy lazyBehavior="keepMounted">
+  <TabsRoot isLazy lazyBehavior="keepMounted">
     <TabList>
       <Tab>Interval 1</Tab>
       <Tab>Interval 2</Tab>
     </TabList>
-    <TabPanels>
-      <TabPanel>
-        Interval 1:
-        <Interval />
-      </TabPanel>
-      <TabPanel>
-        Interval 2:
-        <Interval />
-      </TabPanel>
-    </TabPanels>
-  </Tabs>
+    <TabPanel>
+      Interval 1:
+      <Interval />
+    </TabPanel>
+    <TabPanel>
+      Interval 2:
+      <Interval />
+    </TabPanel>
+  </TabsRoot>
 )
 
 export const WithSwappedTabs = () => {
@@ -248,7 +228,7 @@ export const WithSwappedTabs = () => {
     }
 
     return (
-      <Tabs
+      <TabsRoot
         index={tabIndex}
         onChange={onTabChange}
         orientation="vertical"
@@ -261,14 +241,12 @@ export const WithSwappedTabs = () => {
             </Tab>
           ))}
         </TabList>
-        <TabPanels>
-          {items.map(x => (
-            <TabPanel key={x.id}>
-              {x.id}: {x.value}
-            </TabPanel>
-          ))}
-        </TabPanels>
-      </Tabs>
+        {items.map(x => (
+          <TabPanel key={x.id}>
+            {x.id}: {x.value}
+          </TabPanel>
+        ))}
+      </TabsRoot>
     )
   }
 
@@ -300,11 +278,11 @@ export const WithSwappedTabs = () => {
 }
 
 export const withinDrawer = () => (
-  <Drawer isOpen onClose={console.log}>
+  <DrawerRoot open onOpenChange={console.log}>
     <DrawerOverlay>
       <DrawerContent>
         <DrawerBody>
-          <Tabs variant="unstyled" isManual>
+          <TabsRoot variant="unstyled" isManual>
             <TabList>
               <Tab>Settings</Tab>
               <Tab>Billings</Tab>
@@ -313,35 +291,31 @@ export const withinDrawer = () => (
 
             <TabIndicator zIndex={-1} height="4px" bg="green.200" />
 
-            <TabPanels>
-              <TabPanel>Settings</TabPanel>
-              <TabPanel>Billings</TabPanel>
-              <TabPanel>Preferences</TabPanel>
-            </TabPanels>
-          </Tabs>
+            <TabPanel>Settings</TabPanel>
+            <TabPanel>Billings</TabPanel>
+            <TabPanel>Preferences</TabPanel>
+          </TabsRoot>
         </DrawerBody>
       </DrawerContent>
     </DrawerOverlay>
-  </Drawer>
+  </DrawerRoot>
 )
 
 export const WithTabPanelWrapper = () => (
-  <Tabs>
+  <TabsRoot>
     <TabList>
       <Tab>FIrst Tab</Tab>
       <Tab>Second Tab</Tab>
       <Tab>Third Tab</Tab>
     </TabList>
-    <TabPanels>
-      <div>
-        <TabPanel>Tab panel 1</TabPanel>
-      </div>
-      <div>
-        <TabPanel>Tab panel 2</TabPanel>
-      </div>
-      <div>
-        <TabPanel>Tab panel 3</TabPanel>
-      </div>
-    </TabPanels>
-  </Tabs>
+    <div>
+      <TabPanel>Tab panel 1</TabPanel>
+    </div>
+    <div>
+      <TabPanel>Tab panel 2</TabPanel>
+    </div>
+    <div>
+      <TabPanel>Tab panel 3</TabPanel>
+    </div>
+  </TabsRoot>
 )

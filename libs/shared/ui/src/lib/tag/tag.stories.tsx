@@ -1,12 +1,12 @@
 import { MdSettings } from 'react-icons/md'
-import { chakra } from '@chakra-ui/system'
+import { chakra } from '@chakra-ui/react'
 
 import { AddIcon, Avatar, HStack } from '../../index'
 
-import { Tag, TagCloseButton, TagLabel, TagLeftIcon, TagRightIcon } from './tag'
+import { TagRoot, TagCloseTrigger, TagLabel, TagStartElement, TagEndElement } from './tag'
 
 export default {
-  component: Tag,
+  component: TagRoot,
   title: 'Components / Data Display / Tag',
   argTypes: {
     variant: {
@@ -17,7 +17,7 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' }
     },
-    colorScheme: {
+    colorPalette: {
       options: [
         'gray',
         'primary',
@@ -45,96 +45,96 @@ export default {
 }
 
 export const Basic = {
-  render: (args: any) => <Tag {...args}>Gray</Tag>
+  render: (args: any) => <TagRoot {...args}><TagLabel>Gray</TagLabel></TagRoot>
 }
 
 export const WithSizes = {
   render: (args: any) => (
-    <HStack spacing="3">
-      <Tag size="sm" {...args}>
-        Gray
-      </Tag>
-      <Tag size="md" {...args}>
-        Gray
-      </Tag>
-      <Tag size="lg" {...args}>
-        Gray
-      </Tag>
+    <HStack gap="3">
+      <TagRoot size="sm" {...args}>
+        <TagLabel>Gray</TagLabel>
+      </TagRoot>
+      <TagRoot size="md" {...args}>
+        <TagLabel>Gray</TagLabel>
+      </TagRoot>
+      <TagRoot size="lg" {...args}>
+        <TagLabel>Gray</TagLabel>
+      </TagRoot>
     </HStack>
   )
 }
 
 export const ColorSchemes = {
   render: (args: any) => (
-    <HStack spacing="3">
-      <Tag size="sm" {...args}>
-        Default
-      </Tag>
-      <Tag size="sm" colorScheme="primary" {...args}>
-        Brand (primary)
-      </Tag>
-      <Tag size="sm" colorScheme="green" {...args}>
-        Green
-      </Tag>
-      <Tag size="md" colorScheme="pink" {...args}>
-        Pink
-      </Tag>
-      <Tag size="lg" colorScheme="blue" {...args}>
-        Blue
-      </Tag>
+    <HStack gap="3">
+      <TagRoot size="sm" {...args}>
+        <TagLabel>Default</TagLabel>
+      </TagRoot>
+      <TagRoot size="sm" colorPalette="primary" {...args}>
+        <TagLabel>Brand (primary)</TagLabel>
+      </TagRoot>
+      <TagRoot size="sm" colorPalette="green" {...args}>
+        <TagLabel>Green</TagLabel>
+      </TagRoot>
+      <TagRoot size="md" colorPalette="pink" {...args}>
+        <TagLabel>Pink</TagLabel>
+      </TagRoot>
+      <TagRoot size="lg" colorPalette="blue" {...args}>
+        <TagLabel>Blue</TagLabel>
+      </TagRoot>
     </HStack>
   )
 }
 
 export const WithLeftIcon = {
   render: (args: any) => (
-    <Tag colorScheme="cyan" {...args}>
-      <TagLeftIcon w="12px" h="12px" as={AddIcon} />
+    <TagRoot colorPalette="cyan" {...args}>
+      <TagStartElement><AddIcon w="12px" h="12px" /></TagStartElement>
       <TagLabel>Cyan</TagLabel>
-    </Tag>
+    </TagRoot>
   )
 }
 
 export const WithRightIcon = {
   render: (args: any) => (
-    <HStack spacing="3">
-      <Tag colorScheme="cyan" {...args}>
+    <HStack gap="3">
+      <TagRoot colorPalette="cyan" {...args}>
         <TagLabel>Cyan</TagLabel>
-        <TagRightIcon w="12px" h="12px" as={AddIcon} />
-      </Tag>
+        <TagEndElement><AddIcon w="12px" h="12px" /></TagEndElement>
+      </TagRoot>
 
-      <Tag variant="solid" colorScheme="teal" {...args}>
+      <TagRoot variant="solid" colorPalette="teal" {...args}>
         <TagLabel>Teal</TagLabel>
-        <TagRightIcon as={MdSettings} />
-      </Tag>
+        <TagEndElement><MdSettings /></TagEndElement>
+      </TagRoot>
     </HStack>
   )
 }
 
 export const WithCloseButton = {
   render: (args: any) => (
-    <HStack spacing="3">
-      <Tag variant="solid" size="sm" colorScheme="cyan" {...args}>
+    <HStack gap="3">
+      <TagRoot variant="solid" size="sm" colorPalette="cyan" {...args}>
         <TagLabel>Tab Label</TagLabel>
-        <TagCloseButton />
-      </Tag>
+        <TagCloseTrigger />
+      </TagRoot>
 
-      <Tag variant="solid" size="md" colorScheme="cyan" {...args}>
+      <TagRoot variant="solid" size="md" colorPalette="cyan" {...args}>
         <TagLabel>Tab Label</TagLabel>
-        <TagCloseButton />
-      </Tag>
+        <TagCloseTrigger />
+      </TagRoot>
 
-      <Tag variant="solid" size="lg" colorScheme="cyan" {...args}>
+      <TagRoot variant="solid" size="lg" colorPalette="cyan" {...args}>
         <TagLabel>Tab Label</TagLabel>
-        <TagCloseButton />
-      </Tag>
+        <TagCloseTrigger />
+      </TagRoot>
     </HStack>
   )
 }
 
 export const WithCustomElement = {
   render: (args: any) => (
-    <Tag size="lg" colorScheme="red" borderRadius="full" {...args}>
+    <TagRoot size="lg" colorPalette="red" borderRadius="full" {...args}>
       <Avatar
         src="https://bit.ly/dan-abramov"
         size="xs"
@@ -143,7 +143,7 @@ export const WithCustomElement = {
         marginRight={2}
       />
       <TagLabel>Segun</TagLabel>
-      <TagCloseButton />
-    </Tag>
+      <TagCloseTrigger />
+    </TagRoot>
   )
 }

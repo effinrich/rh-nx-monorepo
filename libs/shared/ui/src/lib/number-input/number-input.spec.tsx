@@ -13,24 +13,24 @@ import { FormControl, FormHelperText, FormLabel } from '../../index'
 import {
   NumberDecrementStepper,
   NumberIncrementStepper,
-  NumberInput,
+  NumberInputRoot,
   NumberInputField,
-  NumberInputProps,
+  NumberInputRootProps,
   NumberInputStepper,
   useNumberInput
 } from './number-input'
 
-function renderComponent(props: NumberInputProps = {}) {
+function renderComponent(props: NumberInputRootProps = {}) {
   return render(
     <>
       <label htmlFor="input">Select number:</label>
-      <NumberInput id="input" data-testid="root" {...props}>
+      <NumberInputRoot id="input" data-testid="root" {...props}>
         <NumberInputField data-testid="input" />
         <NumberInputStepper data-testid="group">
           <NumberIncrementStepper children="+" data-testid="up-btn" />
           <NumberDecrementStepper children="-" data-testid="down-btn" />
         </NumberInputStepper>
-      </NumberInput>
+      </NumberInputRoot>
     </>
   )
 }
@@ -207,13 +207,13 @@ test('should derive values from surrounding FormControl', () => {
       onBlur={onBlur}
     >
       <FormLabel>Number</FormLabel>
-      <NumberInput data-testid="root">
+      <NumberInputRoot data-testid="root">
         <NumberInputField data-testid="input" />
         <NumberInputStepper data-testid="group">
           <NumberIncrementStepper children="+" data-testid="up-btn" />
           <NumberDecrementStepper children="-" data-testid="down-btn" />
         </NumberInputStepper>
-      </NumberInput>
+      </NumberInputRoot>
       <FormHelperText>Select a number</FormHelperText>
     </FormControl>
   )

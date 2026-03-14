@@ -4,10 +4,10 @@ import {
   Box,
   CloseIcon,
   Divider,
-  Drawer,
+  DrawerBackdrop,
   DrawerContent,
-  DrawerOverlay,
-  DrawerProps,
+  DrawerPositioner,
+  DrawerRoot,
   Flex,
   IconButton,
   Loader,
@@ -17,8 +17,8 @@ import {
 
 export const DrawerForm = (props: {
   children: ReactNode
-  onClose?: DrawerProps['onClose']
-  onCloseComplete?: DrawerProps['onCloseComplete']
+  onClose?: () => void
+  onCloseComplete?: () => void
   header: string
   description?: string
   loading?: boolean
@@ -27,35 +27,38 @@ export const DrawerForm = (props: {
   action?: string
   success?: ReactNode
 }) => {
-  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
+  const { open, onClose } = useDisclosure({ defaultIsOpen: true })
+
+  const handleClose = props.onClose ?? onClose
 
   return (
-    <Drawer
-      isOpen={isOpen}
-      placement="right"
-      onClose={props.onClose || onClose}
-      onOverlayClick={props.onClose || onClose}
-      onEsc={props.onClose || onClose}
-      isFullHeight
-      preserveScrollBarGap
-      closeOnEsc
-      onCloseComplete={props.onCloseComplete}
+    <DrawerRoot
+      open={open}
+      placement="end"
+      onOpenChange={(e: { open: boolean }) => {
+        if (!e.open) {
+          handleClose()
+          props.onCloseComplete?.()
+        }
+      }}
       size={{ base: 'full', md: 'lg' }}
     >
-      <DrawerOverlay />
+      <DrawerBackdrop />
+      <DrawerPositioner>
       <DrawerContent pt="12px">
         <Flex flexDir="column" h="100%">
           <IconButton
             aria-label="close form"
-            icon={<CloseIcon />}
-            onClick={props.onClose || onClose}
+            onClick={handleClose}
             size="md"
             w="fit-content"
             ml="auto"
-            variant="unstyled"
+            variant="ghost"
             color="gray.500"
             mr="16px"
-          />
+          >
+            <CloseIcon />
+          </IconButton>
 
           {props.success}
 
@@ -118,7 +121,8 @@ export const DrawerForm = (props: {
           )}
         </Flex>
       </DrawerContent>
-    </Drawer>
+      </DrawerPositioner>
+    </DrawerRoot>
   )
 }
 

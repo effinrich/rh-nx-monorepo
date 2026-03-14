@@ -1,4 +1,4 @@
-import { Box, Table, TableContainer } from '@redesignhealth/ui'
+import { Box, TableRoot, TableContainer } from '@redesignhealth/ui'
 
 import TableBody from './partials/table-body'
 import TableHeader from './partials/table-header'
@@ -47,10 +47,10 @@ export const UsersTable = ({
     >
       <TotalCount totalUsers={totalUsers} />
       <TableContainer borderBottomRadius="8px">
-        <Table
-          variant="striped"
-          colorScheme="gray"
-          sx={{ tableLayout: { xl: 'fixed' } }}
+        <TableRoot
+          variant={"striped" as any}
+          colorPalette="gray"
+          css={{ tableLayout: { xl: 'fixed' } }}
         >
           <TableHeader />
           <TableBody
@@ -59,7 +59,7 @@ export const UsersTable = ({
             tableData={usersTableData}
             onClickEditUser={onClickEditUser}
           />
-        </Table>
+        </TableRoot>
       </TableContainer>
     </Box>
   )

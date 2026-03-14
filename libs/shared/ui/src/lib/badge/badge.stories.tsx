@@ -10,7 +10,7 @@ export default {
       options: ['subtle', 'solid', 'outline'],
       control: { type: 'radio' }
     },
-    colorScheme: {
+    colorPalette: {
       options: [
         'gray',
         'primary',
@@ -38,6 +38,10 @@ export default {
 }
 
 export const Basic = {
+  args: {
+    variant: 'outline'
+  },
+
   render: (args: any) => <Badge {...args}>Success, man!</Badge>
 }
 
@@ -49,7 +53,7 @@ export const SolidBadge = {
           colorScheme => (
             <Badge
               key={colorScheme}
-              colorScheme={colorScheme}
+              colorPalette={colorScheme}
               variant="solid"
               mr={2}
               {...args}
@@ -69,7 +73,7 @@ export const SubtleBadges = {
       {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(colorScheme => (
         <Badge
           key={colorScheme}
-          colorScheme={colorScheme}
+          colorPalette={colorScheme}
           mr={2}
           {...args}
           variant="subtle"
@@ -87,7 +91,7 @@ export const OutlineBadges = {
       {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(colorScheme => (
         <Badge
           key={colorScheme}
-          colorScheme={colorScheme}
+          colorPalette={colorScheme}
           variant="outline"
           mr={2}
           {...args}

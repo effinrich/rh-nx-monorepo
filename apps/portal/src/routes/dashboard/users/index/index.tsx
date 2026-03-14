@@ -48,7 +48,7 @@ export const Users = () => {
           <Button
             as="a"
             href="add-user"
-            colorScheme="primary"
+            colorPalette="primary"
             role="button"
             component={Link}
           >

@@ -1,7 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import { useRef } from 'react'
 import { LoremIpsum } from 'react-lorem-ipsum'
-import { FocusableElement } from '@chakra-ui/utils'
 
 import { Meta } from '@storybook/react-vite'
 
@@ -33,6 +32,7 @@ export function BasicUsage() {
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalCloseButton />
           <ModalHeader>Welcome Home</ModalHeader>
@@ -42,10 +42,10 @@ export function BasicUsage() {
             irure nisi.
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose} mr={3}>
+            <Button colorPalette="red" onClick={onClose} mr={3}>
               Cancel
             </Button>
-            <Button colorScheme="primary">Save</Button>
+            <Button colorPalette="primary">Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -69,6 +69,7 @@ export function ReturnFocus() {
 
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
@@ -80,10 +81,10 @@ export function ReturnFocus() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose} mr={3}>
+            <Button colorPalette="red" onClick={onClose} mr={3}>
               Close
             </Button>
-            <Button colorScheme="primary">Secondary Action</Button>
+            <Button colorPalette="primary">Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -102,6 +103,7 @@ export function NestedModal() {
       </Button>
       <Modal isOpen={first.isOpen} onClose={first.onClose}>
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalBody>
@@ -113,25 +115,27 @@ export function NestedModal() {
           <ModalFooter>
             <rh.div flex="1" />
             <Button mr={3}>Button 2</Button>
-            <Button colorScheme="primary" onClick={second.onOpen}>
+            <Button colorPalette="primary" onClick={second.onOpen}>
               Open Nested
             </Button>
           </ModalFooter>
 
           <Modal isOpen={second.isOpen} onClose={second.onClose}>
             <ModalOverlay />
-            <ModalContent>
+            {/* @ts-expect-error Chakra v3 DialogContent children typing */}
+        <ModalContent>
               <ModalHeader>Modal 2 Title</ModalHeader>
               <ModalFooter>
                 <rh.div flex="1" />
-                <Button colorScheme="primary" onClick={third.onOpen}>
+                <Button colorPalette="primary" onClick={third.onOpen}>
                   Open Nested 2
                 </Button>
               </ModalFooter>
 
               <Modal isOpen={third.isOpen} onClose={third.onClose}>
                 <ModalOverlay />
-                <ModalContent>
+                {/* @ts-expect-error Chakra v3 DialogContent children typing */}
+        <ModalContent>
                   <ModalHeader tabIndex={0}>Modal 3 Title</ModalHeader>
                 </ModalContent>
               </Modal>
@@ -158,6 +162,7 @@ export const InsideScroll = () => {
         scrollBehavior="inside"
       >
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
@@ -165,7 +170,7 @@ export const InsideScroll = () => {
             <LoremIpsum p={5} />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose}>
+            <Button colorPalette="red" onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
@@ -184,6 +189,7 @@ export const AnimationDisabled = () => {
       </Button>
       <Modal onClose={onClose} isOpen={isOpen} motionPreset="none">
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
@@ -191,7 +197,7 @@ export const AnimationDisabled = () => {
             <LoremIpsum p={5} />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose}>
+            <Button colorPalette="red" onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
@@ -210,6 +216,7 @@ export const FullWithLongContent = () => {
       </Button>
       <Modal onClose={onClose} isOpen={isOpen} size="full">
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal Title2</ModalHeader>
           <ModalCloseButton />
@@ -217,7 +224,7 @@ export const FullWithLongContent = () => {
             <LoremIpsum avgWordsPerSentence={30} />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose}>
+            <Button colorPalette="red" onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
@@ -236,6 +243,7 @@ export function WithCustomMotionProps() {
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent
           motionProps={{
             initial: 'exit',
@@ -255,10 +263,10 @@ export function WithCustomMotionProps() {
             irure nisi.
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red" onClick={onClose} mr={3}>
+            <Button colorPalette="red" onClick={onClose} mr={3}>
               Cancel
             </Button>
-            <Button colorScheme="primary">Save</Button>
+            <Button colorPalette="primary">Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

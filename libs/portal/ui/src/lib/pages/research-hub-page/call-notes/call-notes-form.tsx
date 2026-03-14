@@ -14,7 +14,7 @@ import {
 import {
   Box,
   Button,
-  Checkbox,
+  CheckboxRoot,
   Flex,
   HStack,
   Icon,
@@ -311,9 +311,9 @@ export const CallNotesForm = ({
                     >
                       <MdOutlineFileUpload size={20} />
                     </Box>
-                    <HStack spacing={1}>
+                    <HStack gap={1}>
                       <Button
-                        variant="link"
+                        variant="plain"
                         fontWeight="normal"
                         textDecoration="underline"
                         fontSize={12}
@@ -387,13 +387,14 @@ export const CallNotesForm = ({
               upon the intellectual property rights, including but not limited
               to copyrights, trademarks, or patents, of any third party.
             </Text>
-            <Checkbox
+            {/* @ts-expect-error Chakra v3 compound component typing */}
+            <CheckboxRoot
               {...form.register('isAttachmentDisclaimerAccepted')}
               mt={1}
             >
               {' '}
               I confirm
-            </Checkbox>
+            </CheckboxRoot>
           </FormField>
         )}
       </FormProvider>

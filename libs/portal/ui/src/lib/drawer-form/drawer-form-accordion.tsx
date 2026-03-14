@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import {
-  Accordion,
+  AccordionRoot,
   AccordionButton,
   AccordionIcon,
   AccordionItem,
@@ -23,7 +23,7 @@ export interface DrawerFormAccordionProps {
 export const DrawerFormAccordion = (props: DrawerFormAccordionProps) => {
   const expandedTitle = props.expandedTitle ?? props.title
   return (
-    <Accordion allowToggle>
+    <AccordionRoot allowToggle>
       <AccordionItem borderWidth="0px" borderColor="transparent">
         {({ isExpanded }) => (
           <>
@@ -70,6 +70,6 @@ export const DrawerFormAccordion = (props: DrawerFormAccordionProps) => {
           </>
         )}
       </AccordionItem>
-    </Accordion>
+    </AccordionRoot>
   )
 }

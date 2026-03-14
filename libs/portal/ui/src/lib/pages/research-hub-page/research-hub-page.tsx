@@ -6,8 +6,7 @@ import {
   Stack,
   Tab,
   TabList,
-  TabPanels,
-  Tabs
+  TabsRoot
 } from '@redesignhealth/ui'
 
 import { AddResearchMenu } from './add-research-menu/add-research-menu'
@@ -22,7 +21,7 @@ export const ResearchHubPage = ({
   const tabs = useGetTabs(hideArticlesSupport)
   const activeTab = useGetActiveTab(tabs)
   return (
-    <Stack spacing="6">
+    <Stack gap="6">
       <SectionHeader
         title="Research Hub"
         isDivider={false}
@@ -30,18 +29,18 @@ export const ResearchHubPage = ({
           <AddResearchMenu hideArticlesSupport={hideArticlesSupport} />
         }
       />
-      <Tabs index={activeTab} colorScheme="primary">
+      <TabsRoot index={activeTab} colorPalette="primary">
         <TabList>
           {tabs.map(tab => (
-            <Tab key={tab.to} as={RouterLink} to={tab.to} replace>
-              {tab.label}
+            <Tab key={tab.to} asChild>
+              <RouterLink to={tab.to} replace>
+                {tab.label}
+              </RouterLink>
             </Tab>
           ))}
         </TabList>
-        <TabPanels>
-          <Outlet />
-        </TabPanels>
-      </Tabs>
+        <Outlet />
+      </TabsRoot>
     </Stack>
   )
 }

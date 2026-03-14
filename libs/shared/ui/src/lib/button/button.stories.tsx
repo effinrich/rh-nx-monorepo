@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 import { MdBuild, MdCall, MdFacebook } from 'react-icons/md'
 import {
   LuArrowRight,
@@ -9,8 +9,6 @@ import {
 } from 'react-icons/lu'
 import { BeatLoader } from 'react-spinners'
 import { Box, HStack, Stack, Wrap, WrapItem } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
-
 import { Meta, StoryObj } from '@storybook/react-vite'
 
 import { IconButton } from '../icon-button/icon-button'
@@ -43,7 +41,7 @@ export default {
       options: ['end', 'start'],
       control: { type: 'radio' }
     },
-    colorScheme: {
+    colorPalette: {
       options: [
         'primary',
         'blackAlpha',
@@ -59,7 +57,7 @@ export default {
   },
   args: {
     'aria-label': 'button action',
-    colorScheme: 'primary',
+    colorPalette: 'primary',
     size: 'md',
     variant: 'solid'
   }
@@ -82,7 +80,7 @@ interface StoryProps {
 export const Basic: StoryObj<StoryProps> = {
   args: {
     children: 'Button',
-    colorScheme: 'primary',
+    colorPalette: 'primary',
     variant: 'solid'
   }
 }
@@ -90,16 +88,16 @@ export const Basic: StoryObj<StoryProps> = {
 export const Outlines: StoryObj<StoryProps> = {
   render: props => (
     <>
-      <Button {...props} variant="outline" colorScheme="red" />
-      <Button {...props} variant="outline" colorScheme="green" />
-      <Button {...props} variant="outline" colorScheme="blue" />
-      <Button {...props} variant="outline" colorScheme="teal" />
-      <Button {...props} variant="outline" colorScheme="pink" />
-      <Button {...props} variant="outline" colorScheme="purple" />
-      <Button {...props} variant="outline" colorScheme="cyan" />
-      <Button {...props} variant="outline" colorScheme="orange" />
-      <Button {...props} variant="outline" colorScheme="yellow" />
-      <Button {...props} variant="outline" colorScheme="zap" />
+      <Button {...props} variant="outline" colorPalette="red" />
+      <Button {...props} variant="outline" colorPalette="green" />
+      <Button {...props} variant="outline" colorPalette="blue" />
+      <Button {...props} variant="outline" colorPalette="teal" />
+      <Button {...props} variant="outline" colorPalette="pink" />
+      <Button {...props} variant="outline" colorPalette="purple" />
+      <Button {...props} variant="outline" colorPalette="cyan" />
+      <Button {...props} variant="outline" colorPalette="orange" />
+      <Button {...props} variant="outline" colorPalette="yellow" />
+      <Button {...props} variant="outline" colorPalette="zap" />
     </>
   ),
 
@@ -116,27 +114,27 @@ export const Outlines: StoryObj<StoryProps> = {
 }
 
 export const WithVariants = () => (
-  <HStack spacing="24px">
-    <Button colorScheme="primary">Primary</Button>
+  <HStack gap="24px">
+    <Button colorPalette="primary">Primary</Button>
     <Button variant="primary-on-accent">Primary on accent</Button>
     <Button variant="outline">Secondary</Button>
     {/* <Button variant="secondary-on-accent">Secondary on accent</Button> */}
-    <Button colorScheme="teal" variant="solid">
+    <Button colorPalette="teal" variant="solid">
       Solid
     </Button>
-    <Button colorScheme="teal" variant="outline">
+    <Button colorPalette="teal" variant="outline">
       Outline
     </Button>
-    <Button colorScheme="teal" variant="ghost">
+    <Button colorPalette="teal" variant="ghost">
       Ghost
     </Button>
-    {/* <Button colorScheme="teal" variant="ghost-on-accent">
+    {/* <Button colorPalette="teal" variant="ghost-on-accent">
       Ghost on accent
     </Button> */}
-    <Button colorScheme="teal" variant="link">
+    <Button colorPalette="teal" variant="plain">
       Link
     </Button>
-    <Button colorScheme="teal" variant="unstyled">
+    <Button colorPalette="teal" variant="unstyled">
       Unstyled
     </Button>
   </HStack>
@@ -156,65 +154,65 @@ export const WithColors = () => (
       mb={2}
     >
       <ButtonGroup gap="4">
-        <Button colorScheme="whiteAlpha">WhiteAlpha</Button>
-        <Button colorScheme="blackAlpha">BlackAlpha</Button>
+        <Button colorPalette="whiteAlpha">WhiteAlpha</Button>
+        <Button colorPalette="blackAlpha">BlackAlpha</Button>
       </ButtonGroup>
     </Box>
 
-    <Wrap spacing={4}>
+    <Wrap gap={4}>
       <WrapItem>
-        <Button colorScheme="gray">Gray</Button>
+        <Button colorPalette="gray">Gray</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="primary">Primary</Button>
+        <Button colorPalette="primary">Primary</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="zap">Zap</Button>
+        <Button colorPalette="zap">Zap</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="red">Red</Button>
+        <Button colorPalette="red">Red</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="orange">Orange</Button>
+        <Button colorPalette="orange">Orange</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="yellow">Yellow</Button>
+        <Button colorPalette="yellow">Yellow</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="green">Green</Button>
+        <Button colorPalette="green">Green</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="teal">Teal</Button>
+        <Button colorPalette="teal">Teal</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="blue">Blue</Button>
+        <Button colorPalette="blue">Blue</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="cyan">Cyan</Button>
+        <Button colorPalette="cyan">Cyan</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="purple">Purple</Button>
+        <Button colorPalette="purple">Purple</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="pink">Pink</Button>
+        <Button colorPalette="pink">Pink</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="linkedin">Linkedin</Button>
+        <Button colorPalette="linkedin">Linkedin</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="facebook">Facebook</Button>
+        <Button colorPalette="facebook">Facebook</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="messenger">Messenger</Button>
+        <Button colorPalette="messenger">Messenger</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="whatsapp">Whatsapp</Button>
+        <Button colorPalette="whatsapp">Whatsapp</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="twitter">Twitter</Button>
+        <Button colorPalette="twitter">Twitter</Button>
       </WrapItem>
       <WrapItem>
-        <Button colorScheme="telegram">Telegram</Button>
+        <Button colorPalette="telegram">Telegram</Button>
       </WrapItem>
     </Wrap>
   </Stack>
@@ -222,56 +220,59 @@ export const WithColors = () => (
 
 export const WithSizes = () => (
   <HStack>
-    <Button colorScheme="blue" size="xs">
+    <Button colorPalette="blue" size="xs">
       Button
     </Button>
-    <Button colorScheme="blue" size="sm">
+    <Button colorPalette="blue" size="sm">
       Button
     </Button>
-    <Button colorScheme="blue" size="md">
+    <Button colorPalette="blue" size="md">
       Button
     </Button>
-    <Button colorScheme="blue" size="lg">
+    <Button colorPalette="blue" size="lg">
       Button
     </Button>
   </HStack>
 )
 
 export const WithIcon = () => (
-  <Stack direction="row" spacing={4}>
-    <Button leftIcon={<LuMail />} colorScheme="teal" variant="solid">
+  <Stack direction="row" gap={4}>
+    <Button colorPalette="teal" variant="solid">
+      <LuMail />
       Email
     </Button>
     <Button
-      rightIcon={<LuArrowRight />}
-      colorScheme="teal"
+      colorPalette="teal"
       variant="outline"
     >
       Call us
+      <LuArrowRight />
     </Button>
   </Stack>
 )
 
 export const WithReactIcons = () => (
-  <Stack direction="row" spacing={4} align="center">
-    <Button leftIcon={<MdBuild />} colorScheme="pink" variant="solid">
+  <Stack direction="row" gap={4} align="center">
+    <Button colorPalette="pink" variant="solid">
+      <MdBuild />
       Settings
     </Button>
-    <Button rightIcon={<MdCall />} colorScheme="blue" variant="outline">
+    <Button colorPalette="blue" variant="outline">
       Call us
+      <MdCall />
     </Button>
   </Stack>
 )
 
 export const WithLoadingState = () => (
-  <Stack direction="row" spacing={4}>
-    <Button isLoading colorScheme="teal" variant="solid">
+  <Stack direction="row" gap={4}>
+    <Button loading colorPalette="teal" variant="solid">
       Email
     </Button>
     <Button
-      isLoading
+      loading
       loadingText="Submitting"
-      colorScheme="teal"
+      colorPalette="teal"
       variant="outline"
     >
       Submit
@@ -281,8 +282,8 @@ export const WithLoadingState = () => (
 
 export const WithCustomLoadingState = () => (
   <Button
-    isLoading
-    colorScheme="blue"
+    loading
+    colorPalette="blue"
     spinner={<BeatLoader size={8} color="white" />}
   >
     Click me
@@ -290,20 +291,20 @@ export const WithCustomLoadingState = () => (
 )
 
 export const WithLoadingSpinnerPlacement = () => (
-  <Stack direction="row" spacing={4} align="center">
+  <Stack direction="row" gap={4} align="center">
     <Button
-      isLoading
+      loading
       loadingText="Loading"
-      colorScheme="teal"
+      colorPalette="teal"
       variant="outline"
       spinnerPlacement="start"
     >
       Submit
     </Button>
     <Button
-      isLoading
+      loading
       loadingText="Loading"
-      colorScheme="teal"
+      colorPalette="teal"
       variant="outline"
       spinnerPlacement="end"
     >
@@ -313,17 +314,17 @@ export const WithLoadingSpinnerPlacement = () => (
 )
 
 export const WithDisabled = () => (
-  <HStack spacing="24px">
-    <Button isDisabled colorScheme="teal" variant="solid">
+  <HStack gap="24px">
+    <Button disabled colorPalette="teal" variant="solid">
       Button
     </Button>
-    <Button isDisabled colorScheme="teal" variant="outline">
+    <Button disabled colorPalette="teal" variant="outline">
       Button
     </Button>
-    <Button isDisabled colorScheme="teal" variant="ghost">
+    <Button disabled colorPalette="teal" variant="ghost">
       Button
     </Button>
-    <Button isDisabled colorScheme="teal" variant="link">
+    <Button disabled colorPalette="teal" variant="plain">
       Button
     </Button>
   </HStack>
@@ -343,15 +344,16 @@ export const CustomComposition = () => (
 
 export const ButtonWithIcon = () => (
   <Stack direction="row">
-    <IconButton aria-label="Search database" icon={<LuSearch />} />
+    <IconButton aria-label="Search database"><LuSearch /></IconButton>
 
     <IconButton
-      colorScheme="blue"
+      colorPalette="blue"
       aria-label="Search database"
-      icon={<LuSearch />}
-    />
+    >
+      <LuSearch />
+    </IconButton>
 
-    <IconButton colorScheme="teal" aria-label="Call Segun" size="lg">
+    <IconButton colorPalette="teal" aria-label="Call Segun" size="lg">
       <LuPhone />
     </IconButton>
   </Stack>
@@ -359,60 +361,30 @@ export const ButtonWithIcon = () => (
 
 export const WithButtonGroup = () => (
   <ButtonGroup variant="outline">
-    <Button colorScheme="blue">Save</Button>
+    <Button colorPalette="blue">Save</Button>
     <Button>Cancel</Button>
   </ButtonGroup>
 )
 
 export const WithAttachedButtons = () => (
-  <ButtonGroup size="sm" isAttached variant="outline">
+  <ButtonGroup size="sm" attached variant="outline">
     <Button>Save</Button>
     <Button>Cancel</Button>
     <IconButton
       fontSize="2xl"
       aria-label="Add to friends"
-      icon={<LuChevronDown />}
-    />
+    >
+      <LuChevronDown />
+    </IconButton>
   </ButtonGroup>
 )
 
 export const WithSocialButton = () => (
   <Stack direction="row">
-    <Button colorScheme="facebook" leftIcon={<MdFacebook />}>
+    <Button colorPalette="facebook">
+      <MdFacebook />
       Facebook
     </Button>
   </Stack>
 )
 
-const motionConfig = {
-  initial: false,
-  transition: {
-    type: 'spring',
-    duration: 2,
-    bounce: 0
-  }
-}
-
-const MotionButton = motion(Button)
-const BG_GRADIENT_SOFT = `linear-gradient(to right, #fa8080, #F40000)`
-const BG_GRADIENT_SOFT_REVERSED = `linear-gradient(to right, #F40000, #fa8080)`
-
-export const WithMotion = () => {
-  const [binary, setBinary] = useState(false)
-  return (
-    <>
-      <Button onClick={() => setBinary(binary => !binary)}>
-        Toggle binary state: {String(binary)}
-      </Button>
-      <MotionButton
-        {...motionConfig}
-        animate={{
-          scale: binary ? 1.2 : 1,
-          backgroundImage: binary ? BG_GRADIENT_SOFT : BG_GRADIENT_SOFT_REVERSED
-        }}
-      >
-        ({String(binary)}) Doesn't work
-      </MotionButton>
-    </>
-  )
-}

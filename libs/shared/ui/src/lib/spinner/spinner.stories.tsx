@@ -1,6 +1,3 @@
-import { ThemeProvider, useTheme } from '@chakra-ui/system'
-import { mergeWith } from '@chakra-ui/utils'
-
 import { Meta } from '@storybook/react-vite'
 
 import { Box } from '../box/box'
@@ -38,20 +35,5 @@ export const EmptyColor = () => (
 )
 
 export const WithCustomStyleConfig = () => {
-  const theme = useTheme()
-  return (
-    <ThemeProvider
-      theme={mergeWith(theme, {
-        components: {
-          Spinner: {
-            baseStyle: {
-              color: 'blue.300'
-            }
-          }
-        }
-      })}
-    >
-      <Spinner color="red.500" />
-    </ThemeProvider>
-  )
+  return <Spinner color="red.500" />
 }

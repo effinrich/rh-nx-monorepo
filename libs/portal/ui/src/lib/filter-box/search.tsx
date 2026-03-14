@@ -6,8 +6,6 @@ import {
   IconButton,
   Input,
   InputGroup,
-  InputLeftAddon,
-  InputRightElement,
   SearchIcon
 } from '@redesignhealth/ui'
 import { useDebounce } from 'rooks'
@@ -33,10 +31,24 @@ export const Search = ({
   const debouncedOnChange = useDebounce(onChange, 500)
   return (
     <FormControl py={4}>
-      <InputGroup>
-        <InputLeftAddon>
-          <SearchIcon color="gray.800" w="16px" h="16px" />
-        </InputLeftAddon>
+      <InputGroup
+        startElement={<SearchIcon color="gray.800" w="16px" h="16px" />}
+        endElement={
+          <IconButton
+            size="sm"
+            variant="ghost"
+            aria-label="clear search"
+            onClick={() => {
+              setValue(DEFAULT_VALUE)
+              // no need to debounce clearing since it's a single action
+              onChange(DEFAULT_VALUE)
+            }}
+            visibility={value ? 'visible' : 'hidden'}
+          >
+            <CloseIcon />
+          </IconButton>
+        }
+      >
         <Input
           size="md"
           placeholder={placeholder}
@@ -46,22 +58,10 @@ export const Search = ({
             debouncedOnChange(newValue)
           }}
           value={value}
+          ps="10"
+          pe="10"
           {...inputProps}
         />
-        <InputRightElement>
-          <IconButton
-            size="sm"
-            variant="ghost"
-            icon={<CloseIcon />}
-            aria-label="clear search"
-            onClick={() => {
-              setValue(DEFAULT_VALUE)
-              // no need to debounce clearing since it's a single action
-              onChange(DEFAULT_VALUE)
-            }}
-            visibility={value ? 'visible' : 'hidden'}
-          />
-        </InputRightElement>
       </InputGroup>
     </FormControl>
   )

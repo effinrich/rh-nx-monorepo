@@ -12,7 +12,7 @@ import {
 import { Container, rh } from '../../index'
 
 import {
-  Accordion,
+  AccordionRoot,
   AccordionButton,
   AccordionIcon,
   AccordionItem,
@@ -37,7 +37,7 @@ export default {
 }
 
 export const Basic = () => (
-  <Accordion>
+  <AccordionRoot>
     <AccordionItem>
       <h2>
         <AccordionButton>
@@ -61,11 +61,11 @@ export const Basic = () => (
       </h2>
       <AccordionPanel>Panel 2</AccordionPanel>
     </AccordionItem>
-  </Accordion>
+  </AccordionRoot>
 )
 
 export const AllowToggle = () => (
-  <Accordion allowToggle>
+  <AccordionRoot allowToggle>
     <AccordionItem>
       <h2>
         <AccordionButton>
@@ -99,11 +99,11 @@ export const AllowToggle = () => (
         commodo consequat.
       </AccordionPanel>
     </AccordionItem>
-  </Accordion>
+  </AccordionRoot>
 )
 
 export const AllowMultiple = () => (
-  <Accordion allowMultiple>
+  <AccordionRoot allowMultiple>
     <AccordionItem>
       <h2>
         <AccordionButton>
@@ -137,11 +137,11 @@ export const AllowMultiple = () => (
         commodo consequat.
       </AccordionPanel>
     </AccordionItem>
-  </Accordion>
+  </AccordionRoot>
 )
 
 export const StylingExpanded = () => (
-  <Accordion allowToggle>
+  <AccordionRoot allowToggle>
     <AccordionItem>
       <h2>
         <AccordionButton _expanded={{ bg: 'tomato', color: 'white' }}>
@@ -158,7 +158,7 @@ export const StylingExpanded = () => (
         commodo consequat.
       </AccordionPanel>
     </AccordionItem>
-  </Accordion>
+  </AccordionRoot>
 )
 
 const data = [
@@ -206,7 +206,7 @@ export function Bug_2160() {
         />
       </rh.div>
       {displayData.length > 0 && (
-        <Accordion allowToggle>
+        <AccordionRoot allowToggle>
           {displayData.map((item, i) => (
             <AccordionItem key={`accordion-item-${i}`}>
               <h2>
@@ -220,7 +220,7 @@ export function Bug_2160() {
               <AccordionPanel pb={4}>{item.text}</AccordionPanel>
             </AccordionItem>
           ))}
-        </Accordion>
+        </AccordionRoot>
       )}
     </rh.div>
   )
@@ -228,12 +228,12 @@ export function Bug_2160() {
 
 export const WithDisabledAccordionItem = () => {
   return (
-    <Accordion index={1}>
-      <AccordionItem isDisabled>
+    <AccordionRoot index={1}>
+      <AccordionItem disabled>
         <AccordionButton>Button 1</AccordionButton>
         <AccordionPanel>One Content</AccordionPanel>
       </AccordionItem>
-      <AccordionItem isDisabled>
+      <AccordionItem disabled>
         <AccordionButton>Button 2</AccordionButton>
         <AccordionPanel>Two Content</AccordionPanel>
       </AccordionItem>
@@ -241,7 +241,7 @@ export const WithDisabledAccordionItem = () => {
         <AccordionButton>Button 3</AccordionButton>
         <AccordionPanel>Three Content</AccordionPanel>
       </AccordionItem>
-      <AccordionItem isDisabled>
+      <AccordionItem disabled>
         <AccordionButton>Button 4</AccordionButton>
         <AccordionPanel>Four Content</AccordionPanel>
       </AccordionItem>
@@ -249,6 +249,6 @@ export const WithDisabledAccordionItem = () => {
         <AccordionButton>Button 5</AccordionButton>
         <AccordionPanel>Five Content</AccordionPanel>
       </AccordionItem>
-    </Accordion>
+    </AccordionRoot>
   )
 }

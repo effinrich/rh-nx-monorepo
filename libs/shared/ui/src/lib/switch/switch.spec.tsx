@@ -65,7 +65,7 @@ test('Uncontrolled FormControl - should not check if form-control disabled', asy
       <FormLabel>Disabled Opt-in Example</FormLabel>
       <Switch />
       <Switch isDisabled />
-      <Switch isDisabled={false} />
+      <Switch disabled={false} />
     </FormControl>
   )
 

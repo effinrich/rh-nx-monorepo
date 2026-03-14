@@ -1,4 +1,4 @@
-import { useDisclosure } from '@chakra-ui/react'
+import { useDisclosure } from '../hooks/use-disclosure/use-disclosure'
 
 import { Box } from '../box/box'
 import { Drawer } from '../drawer/drawer'
@@ -32,21 +32,22 @@ export const MobileNav = ({ userProfile, numOpcos, numPersons }: any) => {
         />
         <Drawer.Root
           open={open}
-          placement="left"
-          onClose={onClose}
-          isFullHeight
-          preserveScrollBarGap
-          closeOnEsc
+          placement="start"
+          onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
         >
-          <DrawerOverlay />
-          <Drawer.Content>
-            <Nav
-              userProfile={userProfile}
-              numOpcos={numOpcos}
-              numPersons={numPersons}
-              onClose={onClose}
-            />
-          </Drawer.Content>
+          <Drawer.Backdrop />
+          {/* @ts-expect-error Chakra v3 Drawer.Positioner children type mismatch */}
+          <Drawer.Positioner>
+            {/* @ts-expect-error Chakra v3 Drawer.Content children type mismatch */}
+            <Drawer.Content>
+              <Nav
+                userProfile={userProfile}
+                numOpcos={numOpcos}
+                numPersons={numPersons}
+                onClose={onClose}
+              />
+            </Drawer.Content>
+          </Drawer.Positioner>
         </Drawer.Root>
       </Flex>
     </Box>

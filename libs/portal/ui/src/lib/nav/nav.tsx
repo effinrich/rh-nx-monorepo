@@ -78,9 +78,9 @@ export const Nav = ({ userInfo, userCompanyId, onClose }: NavProps) => {
       data-testid="sidenav"
       role="navigation"
     >
-      <Stack spacing={4}>
+      <Stack gap={4}>
         <RedesignLogo w="214px" color="white" alt="Redesign Health logo" />
-        <Stack spacing={1}>
+        <Stack gap={1}>
           {!isEnterpriseBuyer && !isEnterpriseSeller && (
             <HasRole currentRole={currentRole} allowed={['ROLE_OP_CO_USER']}>
               <NavButton
@@ -193,7 +193,7 @@ export const Nav = ({ userInfo, userCompanyId, onClose }: NavProps) => {
         </Stack>
       </Stack>
 
-      <Stack spacing="4px">
+      <Stack gap="4px">
         {!isEnterpriseBuyer && !isEnterpriseSeller && (
           <NavButton to="/dev-library" icon={MdCode} onClick={onClose}>
             Developer Tools

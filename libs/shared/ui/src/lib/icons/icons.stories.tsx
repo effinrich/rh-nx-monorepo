@@ -22,7 +22,7 @@ export const Icons = () => (
 
       return (
         <Fragment key={key}>
-          <VStack spacing="3">
+          <VStack gap="3">
             <IconComponent boxSize="40px" />
             <Text>{key}</Text>
           </VStack>

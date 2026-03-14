@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import {
   type BoxProps,
   Box,
-  Card,
+  CardRoot,
   Divider,
   SectionHeader
 } from '@redesignhealth/ui'
@@ -22,7 +22,7 @@ const OverviewCard = ({
   ...props
 }: OverviewCardProps) => {
   return (
-    <Card variant="outline" as="section" {...props}>
+    <CardRoot variant="outline" as="section" {...props}>
       <SectionHeader
         p="24px 24px 0 24px"
         title={title}
@@ -35,7 +35,7 @@ const OverviewCard = ({
       />
       <Divider mt="20px" />
       <Box p="24px">{children}</Box>
-    </Card>
+    </CardRoot>
   )
 }
 

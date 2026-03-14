@@ -9,7 +9,10 @@ import {
 import { FormControl, FormLabel, Icon } from '../../index'
 
 import {
-  Checkbox,
+  CheckboxRoot,
+  CheckboxControl,
+  CheckboxLabel,
+  CheckboxHiddenInput,
   CheckboxGroup,
   CheckboxGroupProps,
   useCheckbox,
@@ -18,7 +21,13 @@ import {
 } from './checkbox'
 
 it('passes a11y test', async () => {
-  await testA11y(<Checkbox>label</Checkbox>)
+  await testA11y(
+    <CheckboxRoot>
+      <CheckboxHiddenInput />
+      <CheckboxControl />
+      <CheckboxLabel>label</CheckboxLabel>
+    </CheckboxRoot>
+  )
 })
 
 test('Uncontrolled - should check and uncheck', () => {
@@ -132,9 +141,9 @@ test('Controlled - should check and uncheck', () => {
 test('CheckboxGroup Uncontrolled - default values should be check', () => {
   const Component = () => (
     <CheckboxGroup defaultValue={['one', 'two']}>
-      <Checkbox value="one">One</Checkbox>
-      <Checkbox value="two">Two</Checkbox>
-      <Checkbox value="three">Three</Checkbox>
+      <CheckboxRoot value="one"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>One</CheckboxLabel></CheckboxRoot>
+      <CheckboxRoot value="two"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Two</CheckboxLabel></CheckboxRoot>
+      <CheckboxRoot value="three"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Three</CheckboxLabel></CheckboxRoot>
     </CheckboxGroup>
   )
   const { container } = render(<Component />)
@@ -161,9 +170,9 @@ test('Controlled CheckboxGroup', () => {
 
   const Component = (props: CheckboxGroupProps) => (
     <CheckboxGroup {...props}>
-      <Checkbox value="one">One</Checkbox>
-      <Checkbox value="two">Two</Checkbox>
-      <Checkbox value="three">Three</Checkbox>
+      <CheckboxRoot value="one"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>One</CheckboxLabel></CheckboxRoot>
+      <CheckboxRoot value="two"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Two</CheckboxLabel></CheckboxRoot>
+      <CheckboxRoot value="three"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Three</CheckboxLabel></CheckboxRoot>
     </CheckboxGroup>
   )
   const { container, rerender } = render(
@@ -189,13 +198,9 @@ test('Controlled CheckboxGroup', () => {
 test('Uncontrolled CheckboxGroup - should not check if group disabled', () => {
   const Component = () => (
     <CheckboxGroup isDisabled>
-      <Checkbox value="one">One</Checkbox>
-      <Checkbox value="two" isDisabled>
-        Two
-      </Checkbox>
-      <Checkbox value="three" isDisabled={false}>
-        Three
-      </Checkbox>
+      <CheckboxRoot value="one"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>One</CheckboxLabel></CheckboxRoot>
+      <CheckboxRoot value="two" isDisabled><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Two</CheckboxLabel></CheckboxRoot>
+      <CheckboxRoot value="three" disabled={false}><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Three</CheckboxLabel></CheckboxRoot>
     </CheckboxGroup>
   )
   const { container } = render(<Component />)
@@ -220,9 +225,9 @@ test('uncontrolled CheckboxGroup handles change', () => {
   const onChange = jest.fn()
   render(
     <CheckboxGroup defaultValue={['A', 'C']} onChange={onChange}>
-      <Checkbox value="A">A</Checkbox>
-      <Checkbox value="B">B</Checkbox>
-      <Checkbox value="C">C</Checkbox>
+      <CheckboxRoot value="A"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>A</CheckboxLabel></CheckboxRoot>
+      <CheckboxRoot value="B"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>B</CheckboxLabel></CheckboxRoot>
+      <CheckboxRoot value="C"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>C</CheckboxLabel></CheckboxRoot>
     </CheckboxGroup>
   )
 
@@ -248,9 +253,11 @@ test('accepts custom icon', () => {
   }
 
   render(
-    <Checkbox defaultChecked icon={<CustomIcon data-testid="custom-icon" />}>
-      hello world
-    </Checkbox>
+    <CheckboxRoot defaultChecked icon={<CustomIcon data-testid="custom-icon" />}>
+      <CheckboxHiddenInput />
+      <CheckboxControl />
+      <CheckboxLabel>hello world</CheckboxLabel>
+    </CheckboxRoot>
   )
 
   expect(screen.getByTestId('custom-icon')).toBeInTheDocument()
@@ -259,10 +266,16 @@ test('accepts custom icon', () => {
 test('can pass tabIndex directly to input component', () => {
   const { container } = render(
     <>
-      <Checkbox tabIndex={-1} isFocusable={false}>
-        Not Focusable with provided tabIndex
-      </Checkbox>
-      <Checkbox isFocusable={false}>Not Focusable</Checkbox>
+      <CheckboxRoot tabIndex={-1} isFocusable={false}>
+        <CheckboxHiddenInput />
+        <CheckboxControl />
+        <CheckboxLabel>Not Focusable with provided tabIndex</CheckboxLabel>
+      </CheckboxRoot>
+      <CheckboxRoot isFocusable={false}>
+        <CheckboxHiddenInput />
+        <CheckboxControl />
+        <CheckboxLabel>Not Focusable</CheckboxLabel>
+      </CheckboxRoot>
     </>
   )
   const [checkboxOne, checkboxTwo] = Array.from(
@@ -282,9 +295,9 @@ test('useCheckboxGroup can handle both strings and numbers', () => {
     return (
       <div>
         <p id="value">{value.sort().join(', ')}</p>
-        <Checkbox {...getCheckboxProps({ value: 1 })} />
-        <Checkbox {...getCheckboxProps({ value: '2' })} />
-        <Checkbox {...getCheckboxProps({ value: 3 })} />
+        <CheckboxRoot {...getCheckboxProps({ value: 1 })}><CheckboxHiddenInput /><CheckboxControl /></CheckboxRoot>
+        <CheckboxRoot {...getCheckboxProps({ value: '2' })}><CheckboxHiddenInput /><CheckboxControl /></CheckboxRoot>
+        <CheckboxRoot {...getCheckboxProps({ value: 3 })}><CheckboxHiddenInput /><CheckboxControl /></CheckboxRoot>
       </div>
     )
   }
@@ -327,22 +340,14 @@ test('Uncontrolled FormControl - should not check if form-control disabled', () 
     <FormControl isDisabled mt={4}>
       <FormLabel>Disabled Opt-in Example</FormLabel>
       <CheckboxGroup>
-        <Checkbox value="1">Disabled Opt-in 1</Checkbox>
-        <Checkbox value="2" isDisabled>
-          Disabled Opt-in 2
-        </Checkbox>
-        <Checkbox value="3" isDisabled={false}>
-          Disabled Opt-in 3
-        </Checkbox>
+        <CheckboxRoot value="1"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Disabled Opt-in 1</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot value="2" isDisabled><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Disabled Opt-in 2</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot value="3" disabled={false}><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Disabled Opt-in 3</CheckboxLabel></CheckboxRoot>
       </CheckboxGroup>
-      <CheckboxGroup isDisabled={false}>
-        <Checkbox value="1">Disabled Opt-in 1</Checkbox>
-        <Checkbox value="2" isDisabled>
-          Disabled Opt-in 2
-        </Checkbox>
-        <Checkbox value="3" isDisabled={false}>
-          Disabled Opt-in 3
-        </Checkbox>
+      <CheckboxGroup disabled={false}>
+        <CheckboxRoot value="1"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Disabled Opt-in 1</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot value="2" isDisabled><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Disabled Opt-in 2</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot value="3" disabled={false}><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Disabled Opt-in 3</CheckboxLabel></CheckboxRoot>
       </CheckboxGroup>
     </FormControl>
   )
@@ -386,13 +391,9 @@ test('Uncontrolled FormControl - mark label as invalid', () => {
     <FormControl isInvalid mt={4}>
       <FormLabel>Invalid Opt-in Example</FormLabel>
       <CheckboxGroup>
-        <Checkbox value="1">Invalid Opt-in 1</Checkbox>
-        <Checkbox value="2" isInvalid>
-          Invalid Opt-in 2
-        </Checkbox>
-        <Checkbox value="3" isInvalid={false}>
-          Invalid Opt-in 3
-        </Checkbox>
+        <CheckboxRoot value="1"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Invalid Opt-in 1</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot value="2" isInvalid><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Invalid Opt-in 2</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot value="3" isInvalid={false}><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Invalid Opt-in 3</CheckboxLabel></CheckboxRoot>
       </CheckboxGroup>
     </FormControl>
   )
@@ -427,13 +428,9 @@ test('Uncontrolled FormControl - mark label required', () => {
     <FormControl isRequired mt={4}>
       <FormLabel>Required Opt-in Example</FormLabel>
       <CheckboxGroup>
-        <Checkbox value="1">Required Opt-in 1</Checkbox>
-        <Checkbox value="2" isRequired>
-          Required Opt-in 2
-        </Checkbox>
-        <Checkbox value="3" isRequired={false}>
-          Required Opt-in 3
-        </Checkbox>
+        <CheckboxRoot value="1"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Required Opt-in 1</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot value="2" isRequired><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Required Opt-in 2</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot value="3" isRequired={false}><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>Required Opt-in 3</CheckboxLabel></CheckboxRoot>
       </CheckboxGroup>
     </FormControl>
   )
@@ -452,13 +449,9 @@ test('Uncontrolled FormControl - mark readonly', () => {
     <FormControl isReadOnly mt={4}>
       <FormLabel>ReadOnly Opt-in Example</FormLabel>
       <CheckboxGroup>
-        <Checkbox value="1">ReadOnly Opt-in 1</Checkbox>
-        <Checkbox value="2" isReadOnly>
-          ReadOnly Opt-in 2
-        </Checkbox>
-        <Checkbox value="3" isReadOnly={false}>
-          ReadOnly Opt-in 3
-        </Checkbox>
+        <CheckboxRoot value="1"><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>ReadOnly Opt-in 1</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot value="2" isReadOnly><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>ReadOnly Opt-in 2</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot value="3" isReadOnly={false}><CheckboxHiddenInput /><CheckboxControl /><CheckboxLabel>ReadOnly Opt-in 3</CheckboxLabel></CheckboxRoot>
       </CheckboxGroup>
     </FormControl>
   )
@@ -488,9 +481,11 @@ test('Uncontrolled FormControl - calls all onFocus EventHandler', () => {
     <FormControl mt={4} onFocus={formControlOnFocusMock}>
       <FormLabel>onFocus xample</FormLabel>
       <CheckboxGroup>
-        <Checkbox value="1" onFocus={checkboxOnFocusMock}>
-          onFocus Opt-in 1
-        </Checkbox>
+        <CheckboxRoot value="1" onFocus={checkboxOnFocusMock}>
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>onFocus Opt-in 1</CheckboxLabel>
+        </CheckboxRoot>
       </CheckboxGroup>
     </FormControl>
   )
@@ -509,9 +504,11 @@ test('Uncontrolled FormControl - calls all onBlur EventHandler', () => {
     <FormControl mt={4} onBlur={formControlOnBlurMock}>
       <FormLabel>onBlur Example</FormLabel>
       <CheckboxGroup>
-        <Checkbox value="1" onBlur={checkboxOnBlurMock}>
-          onBlur EOpt-in 1
-        </Checkbox>
+        <CheckboxRoot value="1" onBlur={checkboxOnBlurMock}>
+          <CheckboxHiddenInput />
+          <CheckboxControl />
+          <CheckboxLabel>onBlur EOpt-in 1</CheckboxLabel>
+        </CheckboxRoot>
       </CheckboxGroup>
     </FormControl>
   )
@@ -527,7 +524,7 @@ test('On reseting form, checkbox should reset to its default state i.e., checked
   const { getByRole } = render(
     <form>
       <label htmlFor="myCheckbox">My Checkbox</label>
-      <Checkbox id="myCheckbox" defaultChecked />
+      <CheckboxRoot id="myCheckbox" defaultChecked><CheckboxHiddenInput /><CheckboxControl /></CheckboxRoot>
       <button type="reset">Reset</button>
     </form>
   )
@@ -542,7 +539,7 @@ test('On reseting form, checkbox should reset to its default state i.e., uncheck
   const { getByRole } = render(
     <form>
       <label htmlFor="myCheckbox">My Checkbox</label>
-      <Checkbox id="myCheckbox" />
+      <CheckboxRoot id="myCheckbox"><CheckboxHiddenInput /><CheckboxControl /></CheckboxRoot>
       <button type="reset" name="resetBtn">
         Reset
       </button>

@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom'
-import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
-import { Button, ChevronDownIcon } from '@redesignhealth/ui'
+import {
+  Button,
+  ChevronDownIcon,
+  MenuRoot,
+  MenuTrigger,
+  MenuItem,
+  MenuContent
+} from '@redesignhealth/ui'
 
 export const AddResearchMenu = ({
   hideArticlesSupport
@@ -8,24 +14,25 @@ export const AddResearchMenu = ({
   hideArticlesSupport?: boolean
 }) => {
   return (
-    <Menu>
-      <MenuButton
-        as={Button}
-        rightIcon={<ChevronDownIcon />}
-        colorScheme="primary"
-        variant="solid"
-      >
-        Add research
-      </MenuButton>
-      <MenuList>
-        <MenuItem as={Link} to="/research-hub/research-sprints/add">
-          Research report
+    <MenuRoot>
+      <MenuTrigger asChild>
+        <Button
+          colorPalette="primary"
+          variant="solid"
+        >
+          Add research
+          <ChevronDownIcon />
+        </Button>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItem value="research-report" asChild>
+          <Link to="/research-hub/research-sprints/add">Research report</Link>
         </MenuItem>
-        <MenuItem as={Link} to="/research-hub/call-notes/add">
-          Call notes
+        <MenuItem value="call-notes" asChild>
+          <Link to="/research-hub/call-notes/add">Call notes</Link>
         </MenuItem>
-        {!hideArticlesSupport && <MenuItem>External content</MenuItem>}
-      </MenuList>
-    </Menu>
+        {!hideArticlesSupport && <MenuItem value="external">External content</MenuItem>}
+      </MenuContent>
+    </MenuRoot>
   )
 }

@@ -115,7 +115,7 @@ export const CompanyInfra = () => {
           <Button
             as={Link}
             to={developerLibraryInfraLink}
-            variant="link"
+            variant="plain"
             textDecoration="underline"
             size="14px"
             fontWeight="normal"
@@ -150,7 +150,7 @@ export const CompanyInfra = () => {
               <Spacer />
               <Box>
                 <Badge
-                  colorScheme={`${
+                  colorPalette={`${
                     BADGE_COLOR_SCHEME[infraRequestStatus as string]
                   }`}
                   size="sm"
@@ -183,8 +183,8 @@ export const CompanyInfra = () => {
           <>
             <Button
               type="button"
-              colorScheme="primary"
-              isDisabled={!canInfraRequestBeSubmitted}
+              colorPalette="primary"
+              disabled={!canInfraRequestBeSubmitted}
               onClick={onOpen}
               display="block"
               mt="16px"
@@ -195,9 +195,9 @@ export const CompanyInfra = () => {
 
             <Modal
               finalFocusRef={cardRef}
-              isOpen={isOpen && !actionData?.success}
+              open={isOpen && !actionData?.success}
               onClose={onClose}
-              isCentered
+              placement="center"
             >
               <ModalOverlay />
               <ModalContent w="400px">
@@ -216,7 +216,7 @@ export const CompanyInfra = () => {
                     <Box as={Form} method="post" flex="1">
                       <Button
                         type="submit"
-                        colorScheme="primary"
+                        colorPalette="primary"
                         w="full"
                         isLoading={formState === 'submitting'}
                       >

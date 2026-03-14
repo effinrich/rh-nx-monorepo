@@ -1,7 +1,7 @@
 // Chakra UI v3: Menu uses compound component pattern
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { Menu, Portal } from '@chakra-ui/react'
+export { Menu } from '@chakra-ui/react'
 
 // Export Menu compound components (v3 recommended pattern)
 export {

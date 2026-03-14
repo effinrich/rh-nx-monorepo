@@ -11,7 +11,7 @@ import {
 } from '@redesignhealth/portal/data-assets'
 import {
   Button,
-  Card,
+  CardRoot,
   CardBody,
   CardFooter,
   Divider,
@@ -59,7 +59,7 @@ const OptInConfirmation = ({ handleCancel }: OptInConfirmationProps) => {
   })
 
   return (
-    <Card variant="outline">
+    <CardRoot variant="outline">
       {isPending && <Loader />}
       {ceo && (
         <>
@@ -74,16 +74,16 @@ const OptInConfirmation = ({ handleCancel }: OptInConfirmationProps) => {
               Back
             </Button>
             <Button
-              variant="primary"
+              variant="solid" colorPalette="primary"
               onClick={handleContinue}
-              isLoading={updateCeoIsLoading}
+              loading={updateCeoIsLoading}
             >
               Continue
             </Button>
           </CardFooter>
         </>
       )}
-    </Card>
+    </CardRoot>
   )
 }
 

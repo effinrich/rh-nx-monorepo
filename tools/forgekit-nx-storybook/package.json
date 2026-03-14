@@ -1,0 +1,26 @@
+{
+  "name": "forgekit-nx-storybook",
+  "version": "0.1.0",
+  "description": "Nx plugin for automated Storybook story generation with interaction tests",
+  "main": "./src/index.ts",
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "storybook",
+    "react",
+    "testing",
+    "code-generation"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@nx/devkit": ">=19.0.0",
+    "nx": ">=19.0.0",
+    "storybook": ">=8.0.0",
+    "typescript": ">=5.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

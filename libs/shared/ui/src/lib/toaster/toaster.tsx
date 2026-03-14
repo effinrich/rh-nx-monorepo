@@ -71,24 +71,27 @@ export const Toaster = ({
 }: ToasterProps) => {
   return (
     <Portal>
+      {/* @ts-expect-error Chakra v3 Toaster typing issue with children render prop */}
       <ChakraToaster toaster={toasterInstance} insetInline={insetInline}>
-        {toast => (
+        {(toast: any) => (
           <Toast.Root width={{ md: 'sm' }}>
             {toast.type === 'loading' ? (
               <Spinner size="sm" color="blue.solid" />
             ) : (
+              // @ts-expect-error Chakra v3 compound component typing
               <Toast.Indicator />
             )}
             <Stack gap="1" flex="1" maxWidth="100%">
+              {/* @ts-expect-error Chakra v3 compound component typing */}
               {toast.title && <Toast.Title>{toast.title}</Toast.Title>}
               {toast.description && (
+                // @ts-expect-error Chakra v3 compound component typing
                 <Toast.Description>{toast.description}</Toast.Description>
               )}
             </Stack>
             {toast.action && (
-              <Toast.ActionTrigger>
-                {(toast.action as ToastActionTriggerProps).label}
-              </Toast.ActionTrigger>
+              // @ts-expect-error Chakra v3 compound component typing
+              <Toast.ActionTrigger>{toast.action.label}</Toast.ActionTrigger>
             )}
             {toast.closable && <Toast.CloseTrigger />}
           </Toast.Root>

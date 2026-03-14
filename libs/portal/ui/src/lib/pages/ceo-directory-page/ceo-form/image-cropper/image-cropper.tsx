@@ -39,8 +39,9 @@ const ImageCropper = ({
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>()
 
   return (
-    <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
+    <Modal size="3xl" open={isOpen} onOpenChange={(e: { open: boolean }) => !e.open && onClose()}>
       <ModalOverlay />
+      {/* @ts-expect-error Chakra v3 DialogContent children typing */}
       <ModalContent>
         <ModalHeader>Adjust photo</ModalHeader>
         <Divider />
@@ -63,7 +64,7 @@ const ImageCropper = ({
           <HStack gap={6} pt={4} pb={8}>
             <Icon as={MdImage} boxSize={6} />
             <Slider
-              colorScheme="primary"
+              colorPalette="primary"
               aria-label="slider-ex-1"
               value={zoom}
               min={1}
@@ -85,7 +86,7 @@ const ImageCropper = ({
             Cancel
           </Button>
           <Button
-            colorScheme="primary"
+            colorPalette="primary"
             onClick={async () => {
               if (croppedAreaPixels) {
                 const croppedFile = await getCroppedImg(

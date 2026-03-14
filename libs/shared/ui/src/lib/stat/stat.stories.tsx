@@ -1,49 +1,51 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
 
+import { HStack } from '../../index'
+
 import {
-  Stat,
-  StatArrow,
-  StatGroup,
-  StatHelpText,
+  StatRoot,
   StatLabel,
-  StatNumber
+  StatValueText,
+  StatHelpText,
+  StatUpIndicator,
+  StatDownIndicator
 } from './stat'
 
 export default {
-  component: Stat,
+  component: StatRoot,
   title: 'Components / Data Display / Stat'
-} as Meta<typeof Stat>
+} as Meta<typeof StatRoot>
 
-export const Default: StoryObj<typeof Stat> = {
-  render: args => (
-    <Stat>
+export const Default: StoryObj<typeof StatRoot> = {
+  render: () => (
+    <StatRoot>
       <StatLabel>Collected Fees</StatLabel>
-      <StatNumber>$0.00</StatNumber>
+      <StatValueText>$0.00</StatValueText>
       <StatHelpText>Feb 12 - Feb 28</StatHelpText>
-    </Stat>
+    </StatRoot>
   )
 }
 
-export const StatWithIndicator: StoryObj<typeof Stat> = {
-  render: args => (
-    <StatGroup>
-      <Stat>
+export const StatWithIndicator: StoryObj<typeof StatRoot> = {
+  render: () => (
+    <HStack>
+      <StatRoot>
         <StatLabel>Sent</StatLabel>
-        <StatNumber>345,670</StatNumber>
+        <StatValueText>345,670</StatValueText>
         <StatHelpText>
-          <StatArrow type="increase" />
+          <StatUpIndicator />
           23.36%
         </StatHelpText>
-      </Stat>
+      </StatRoot>
 
-      <Stat>
+      <StatRoot>
         <StatLabel>Clicked</StatLabel>
-        <StatNumber>45</StatNumber>
+        <StatValueText>45</StatValueText>
         <StatHelpText>
-          <StatArrow type="decrease" />
+          <StatDownIndicator />
           9.05%
         </StatHelpText>
-      </Stat>
-    </StatGroup>
+      </StatRoot>
+    </HStack>
   )
 }

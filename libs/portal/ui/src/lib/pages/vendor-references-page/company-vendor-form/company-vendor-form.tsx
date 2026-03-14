@@ -28,7 +28,7 @@ import {
   InputRightElement,
   Loader,
   Radio,
-  RadioGroup,
+  RadioGroupRoot,
   Spacer,
   Stack,
   Text
@@ -177,18 +177,19 @@ export const CompanyVendorForm = ({
                   onChange={newValue => {
                     onChange(selectTransformer.output(newValue))
                   }}
-                  isDisabled={isEdit}
+                  disabled={isEdit}
                 />
               </FormFieldMaster>
             )}
           />
 
           <FormControl
-            isInvalid={Boolean(errors.subcategories)}
-            isDisabled={isPending}
+            invalid={Boolean(errors.subcategories)}
+            disabled={isPending}
           >
             <Flex direction={['column', 'column', 'row']}>
               <Box w={['100%', '100%', '25%']} mr={4}>
+                {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
                 <FormLabel color="gray.800">Tags</FormLabel>
               </Box>
               <Spacer />
@@ -239,6 +240,7 @@ export const CompanyVendorForm = ({
                     )
                   }}
                 />
+                {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
                 <FormErrorMessage role="alert">
                   <ErrorMessage errors={errors} name="subcategories" />
                 </FormErrorMessage>
@@ -262,7 +264,7 @@ export const CompanyVendorForm = ({
                   getOptionValue={o => o.value}
                   name={name}
                   placeholder="Select engagement status"
-                  colorScheme="primary"
+                  colorPalette="primary"
                   onBlur={onBlur}
                 />
               </FormFieldMaster>
@@ -270,11 +272,12 @@ export const CompanyVendorForm = ({
           />
 
           <FormControl
-            isInvalid={Boolean(errors.startDate)}
-            isDisabled={isPending}
+            invalid={Boolean(errors.startDate)}
+            disabled={isPending}
           >
             <Flex direction={['column', 'column', 'row']}>
               <Box w={['100%', '100%', '25%']} mr={4}>
+                {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
                 <FormLabel color="gray.800">Engagement start</FormLabel>
               </Box>
               <Spacer />
@@ -301,6 +304,7 @@ export const CompanyVendorForm = ({
                     />
                   )}
                 />
+                {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
                 <FormErrorMessage role="alert">
                   <ErrorMessage errors={errors} name="startDate" />
                 </FormErrorMessage>
@@ -309,12 +313,13 @@ export const CompanyVendorForm = ({
           </FormControl>
 
           <FormControl
-            isInvalid={Boolean(errors.endDate)}
-            isDisabled={isPending}
+            invalid={Boolean(errors.endDate)}
+            disabled={isPending}
             mb={2}
           >
             <Flex direction={['column', 'column', 'row']}>
               <Box w={['100%', '100%', '25%']} mr={4}>
+                {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
                 <FormLabel color="gray.800">Engagement end</FormLabel>
               </Box>
               <Spacer />
@@ -342,6 +347,7 @@ export const CompanyVendorForm = ({
                     />
                   )}
                 />
+                {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
                 <FormErrorMessage role="alert">
                   <ErrorMessage errors={errors} name="endDate" />
                 </FormErrorMessage>
@@ -357,7 +363,7 @@ export const CompanyVendorForm = ({
                 name={field.name}
                 label="Are you willing to discuss your engagement with other founders?"
               >
-                <RadioGroup
+                <RadioGroupRoot
                   {...field}
                   value={
                     field.value === undefined ? '' : field.value ? 'yes' : 'no'
@@ -368,7 +374,7 @@ export const CompanyVendorForm = ({
                 >
                   <Radio value="yes">Yes</Radio>
                   <Radio value="no">No</Radio>
-                </RadioGroup>
+                </RadioGroupRoot>
               </FormFieldMaster>
             )}
           />

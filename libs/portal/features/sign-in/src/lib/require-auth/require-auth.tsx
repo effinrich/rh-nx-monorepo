@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom'
 import { getUserAccessToken } from '@redesignhealth/portal/utils'
 
-export const RequireAuth = ({ children }: { children: JSX.Element }) => {
+export const RequireAuth = ({ children }: { children: React.ReactElement }) => {
   const accessToken = getUserAccessToken()
   const location = useLocation()
 

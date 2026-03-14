@@ -1,12 +1,13 @@
 import { forwardRef, ReactNode, useImperativeHandle } from 'react'
 import {
   Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner,
+  DialogRoot,
   useDisclosure
 } from '@redesignhealth/ui'
 
@@ -18,7 +19,7 @@ export interface DisclaimerModalProps {
 
 export const DisclaimerModal = forwardRef(
   ({ children, header, buttonText }: DisclaimerModalProps, ref) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { open, onOpen, onClose } = useDisclosure()
 
     useImperativeHandle(ref, () => ({
       handleOnOpen() {
@@ -27,18 +28,26 @@ export const DisclaimerModal = forwardRef(
     }))
 
     return (
-      <Modal isOpen={isOpen} onClose={onClose} isCentered size={['full', 'md']}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{header}</ModalHeader>
-          <ModalBody color="gray.500">{children}</ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose} colorScheme="primary">
-              {buttonText}
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <DialogRoot
+        open={open}
+        onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
+        placement="center"
+        size={{ base: 'full', md: 'md' }}
+      >
+        <DialogBackdrop />
+        <DialogPositioner>
+          {/* @ts-expect-error Chakra v3 DialogContent children typing */}
+          <DialogContent>
+            <DialogHeader>{header}</DialogHeader>
+            <DialogBody color="gray.500">{children}</DialogBody>
+            <DialogFooter>
+              <Button onClick={onClose} colorPalette="primary">
+                {buttonText}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     )
   }
 )

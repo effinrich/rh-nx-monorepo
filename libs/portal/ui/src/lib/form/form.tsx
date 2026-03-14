@@ -1,10 +1,10 @@
 import {
   Button,
-  Card,
+  CardRoot,
   CardBody,
   CardFooter,
-  Stack,
-  StackDivider
+  Separator,
+  Stack
 } from '@redesignhealth/ui'
 
 interface FormProps {
@@ -23,21 +23,21 @@ const Form = ({
   submitText = 'Save changes'
 }: FormProps) => {
   return (
-    <Card variant="unstyled" maxWidth="6xl">
+    <CardRoot variant={"unstyled" as any} maxWidth="6xl">
       <form onSubmit={onSubmit} name={submitText}>
-        <Stack divider={<StackDivider />} spacing={5}>
+        <Stack separator={<Separator />} gap={5}>
           <CardBody>{children}</CardBody>
         </Stack>
         <CardFooter gap={3} justify="end" mt={4}>
           <Button variant="outline" onClick={onCancel}>
             Cancel
           </Button>
-          <Button isDisabled={disabled} colorScheme="primary" type="submit">
+          <Button disabled={disabled} colorPalette="primary" type="submit">
             {submitText}
           </Button>
         </CardFooter>
       </form>
-    </Card>
+    </CardRoot>
   )
 }
 

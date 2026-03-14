@@ -4,10 +4,10 @@ import { Meta } from '@storybook/react-vite'
 
 import { Container, Stack } from '../../index'
 
-import { Select } from './select'
+import { NativeSelectRoot, NativeSelectField } from './select'
 
 export default {
-  component: Select,
+  component: NativeSelectRoot,
   title: 'Components / Forms / Select',
   decorators: [
     story => (
@@ -19,61 +19,77 @@ export default {
 } as Meta
 
 export const BasicUsage = () => (
-  <Select color="primary.600" placeholder="Select option">
-    <option value="Option 1">Option 1</option>
-    <option value="Option 2">Option 2</option>
-    <option value="Option 3">Option 3</option>
-  </Select>
+  <NativeSelectRoot color="primary.600">
+    <NativeSelectField placeholder="Select option">
+      <option value="Option 1">Option 1</option>
+      <option value="Option 2">Option 2</option>
+      <option value="Option 3">Option 3</option>
+    </NativeSelectField>
+  </NativeSelectRoot>
 )
 
 export const SelectStates = () => (
   <Stack>
-    <Select placeholder="Select option" isInvalid mb={4}>
-      <option value="Option 1">Option 1</option>
-      <option value="Option 2">Option 2</option>
-      <option value="Option 3">Option 3</option>
-    </Select>
+    <NativeSelectRoot invalid mb={4}>
+      <NativeSelectField placeholder="Select option">
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+      </NativeSelectField>
+    </NativeSelectRoot>
 
-    <Select placeholder="Select option" isDisabled>
-      <option value="Option 1">Option 1</option>
-      <option value="Option 2">Option 2</option>
-      <option value="Option 3">Option 3</option>
-    </Select>
+    <NativeSelectRoot disabled>
+      <NativeSelectField placeholder="Select option">
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+      </NativeSelectField>
+    </NativeSelectRoot>
   </Stack>
 )
 
 export const SelectVariants = () => (
   <Stack>
-    <Select placeholder="Select option outline" variant="outline" mb={4}>
-      <option value="Option 1">Option 1</option>
-      <option value="Option 2">Option 2</option>
-      <option value="Option 3">Option 3</option>
-    </Select>
+    <NativeSelectRoot variant="outline" mb={4}>
+      <NativeSelectField placeholder="Select option outline">
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+      </NativeSelectField>
+    </NativeSelectRoot>
 
-    <Select placeholder="Select option filled" variant="filled" mb={4}>
-      <option value="Option 1">Option 1</option>
-      <option value="Option 2">Option 2</option>
-      <option value="Option 3">Option 3</option>
-    </Select>
+    <NativeSelectRoot variant="filled" mb={4}>
+      <NativeSelectField placeholder="Select option filled">
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+      </NativeSelectField>
+    </NativeSelectRoot>
 
-    <Select placeholder="Select option flushed" variant="flushed" mb={4}>
-      <option value="Option 1">Option 1</option>
-      <option value="Option 2">Option 2</option>
-      <option value="Option 3">Option 3</option>
-    </Select>
+    <NativeSelectRoot variant="flushed" mb={4}>
+      <NativeSelectField placeholder="Select option flushed">
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+      </NativeSelectField>
+    </NativeSelectRoot>
 
-    <Select placeholder="Select option unstyled" variant="unstyled" mt={4}>
-      <option value="Option 1">Option 1</option>
-      <option value="Option 2">Option 2</option>
-      <option value="Option 3">Option 3</option>
-    </Select>
+    <NativeSelectRoot variant="unstyled" mt={4}>
+      <NativeSelectField placeholder="Select option unstyled">
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+      </NativeSelectField>
+    </NativeSelectRoot>
   </Stack>
 )
 
 export const SelectSizes = () => (
-  <Stack spacing={6}>
+  <Stack gap={6}>
     {['xs', 'sm', 'md', 'lg'].map(size => (
-      <Select placeholder={`${size} size`} size={size} key={size} />
+      <NativeSelectRoot size={size} key={size}>
+        <NativeSelectField placeholder={`${size} size`} />
+      </NativeSelectRoot>
     ))}
   </Stack>
 )
@@ -85,64 +101,34 @@ export const SelectControlled = () => {
   }
 
   return (
-    <Select
-      value={value}
-      onChange={handleChange}
-      placeholder="Controlled select"
-    >
-      <option value="Option 1">Option 1</option>
-      <option value="Option 2">Option 2</option>
-      <option value="Option 3">Option 3</option>
-    </Select>
+    <NativeSelectRoot>
+      <NativeSelectField
+        value={value}
+        onChange={handleChange}
+        placeholder="Controlled select"
+      >
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+      </NativeSelectField>
+    </NativeSelectRoot>
   )
 }
 
-const UpDownIcon = (props: any) => (
-  <svg viewBox="0 0 6 15" fill="none" stroke="currentColor" {...props}>
-    <path d="M5 5.5L3 3.5L1 5.5" strokeLinecap="round" strokeLinejoin="round" />
-    <path
-      d="M5 9.5L3 11.5L1 9.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-)
-
-export const SelectIcon = () => (
-  <Select icon={<UpDownIcon />} placeholder="Placeholder" size="md" />
-)
-
 export const FocusAndErrorColors = () => (
   <Stack>
-    <Select
-      focusBorderColor="lime"
-      placeholder="Here is a sample placeholder"
-    />
-    <Select
-      focusBorderColor="pink.400"
-      placeholder="Here is a sample placeholder"
-    />
+    <NativeSelectRoot>
+      <NativeSelectField placeholder="Here is a sample placeholder" />
+    </NativeSelectRoot>
 
-    <Select
-      isInvalid
-      errorBorderColor="red.300"
-      placeholder="Here is a sample placeholder"
-    />
-
-    <Select
-      isInvalid
-      errorBorderColor="crimson"
-      placeholder="Here is a sample placeholder"
-    />
+    <NativeSelectRoot invalid>
+      <NativeSelectField placeholder="Here is a sample placeholder" />
+    </NativeSelectRoot>
   </Stack>
 )
 
 export const OverrideStyles = () => (
-  <Select
-    color="white"
-    height="60px"
-    borderColor="tomato"
-    bg="tomato"
-    placeholder="Woohoo! A new background color!"
-  />
+  <NativeSelectRoot color="white" height="60px" bg="tomato">
+    <NativeSelectField placeholder="Woohoo! A new background color!" />
+  </NativeSelectRoot>
 )

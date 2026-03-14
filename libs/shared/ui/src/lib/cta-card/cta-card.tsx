@@ -1,8 +1,8 @@
+import { ElementType } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import { As } from '@chakra-ui/react'
 
 import { Button } from '../button/button'
-import { type CardProps, Card } from '../card/card'
+import { type CardProps, CardRoot } from '../card/card'
 import { Flex } from '../flex/flex'
 import { Icon } from '../icon/icon'
 import { Text } from '../text/text'
@@ -10,13 +10,13 @@ import { Text } from '../text/text'
 export interface CtaCardProps extends CardProps {
   title: string
   ctaText?: string
-  icon?: As
+  icon?: ElementType
   helpText?: string
   bgColor?: string
   headingcolor?: string
   headingWeight?: string
   ctaVariant?: string
-  ctaColorScheme?: string
+  ctaColorPalette?: string
   to?: string
   href?: string
   hasButtonAction?: boolean
@@ -33,7 +33,7 @@ export const CtaCard = ({
   ctaText,
   helpText,
   ctaVariant = 'solid',
-  ctaColorScheme = 'primary',
+  ctaColorPalette = 'primary',
   bgColor = 'gray.50',
   headingcolor = 'gray.500',
   headingWeight = 'normal',
@@ -46,7 +46,7 @@ export const CtaCard = ({
   ...props
 }: CtaCardProps) => {
   return (
-    <Card as="section" p="36px" bg={bgColor} {...props}>
+    <CardRoot as="section" p="36px" bg={bgColor} {...props}>
       <Flex flexDir="column" justify="center" align="center">
         {icon && (
           <Icon
@@ -72,30 +72,27 @@ export const CtaCard = ({
             ctaButton
           ) : to ? (
             <Button
-              as={RouterLink}
-              to={to}
-              variant={ctaVariant}
-              colorScheme={ctaColorScheme}
+              asChild
+              variant={ctaVariant as any}
+              colorPalette={ctaColorPalette}
               data-id="add-entity"
             >
-              {ctaText}
+              <RouterLink to={to}>{ctaText}</RouterLink>
             </Button>
           ) : href ? (
             <Button
-              as="a"
-              href={href}
-              target="_blank"
-              variant={ctaVariant}
-              colorScheme={ctaColorScheme}
+              asChild
+              variant={ctaVariant as any}
+              colorPalette={ctaColorPalette}
               data-id="add-entity"
             >
-              {ctaText}
+              <a href={href} target="_blank">{ctaText}</a>
             </Button>
           ) : (
             <Button
               onClick={onClick}
-              variant={ctaVariant}
-              colorScheme={ctaColorScheme}
+              variant={ctaVariant as any}
+              colorPalette={ctaColorPalette}
               data-id="add-entity"
             >
               {ctaText}
@@ -110,7 +107,7 @@ export const CtaCard = ({
           </Text>
         )}
       </Flex>
-    </Card>
+    </CardRoot>
   )
 }
 

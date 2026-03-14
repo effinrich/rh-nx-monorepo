@@ -19,7 +19,7 @@ export const Default = {
 export const Colors = () => (
   <Stack direction="row">
     <Code children="console.log(welcome)" />
-    <Code colorScheme="red" children="var chakra = 'awesome!'" />
-    <Code colorScheme="yellow" children="npm install chakra" />
+    <Code colorPalette="red" children="var chakra = 'awesome!'" />
+    <Code colorPalette="yellow" children="npm install chakra" />
   </Stack>
 )

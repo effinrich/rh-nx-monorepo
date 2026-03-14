@@ -26,7 +26,7 @@ export const NoSearchResults = ({
 }: NoSearchResultsProps) => {
   return (
     <Flex direction="row" alignItems="center" justifyContent="center" h="50vh">
-      <VStack w="sm" spacing={4}>
+      <VStack w="sm" gap={4}>
         <Circle
           bg="primary.200"
           borderColor="primary.100"

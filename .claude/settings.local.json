@@ -4,7 +4,16 @@
       "Bash(npm run storybook)",
       "Bash(npx storybook@latest doctor:*)",
       "Bash(npm view:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "WebFetch(domain:www.chakra-ui.com)",
+      "Bash(find /Users/richtillman/Documents/GitHub/rh-nx-monorepo/libs/shared/ui/src -name *provider* -o -name *rh-provider*)",
+      "Bash(grep -r \"colorScheme\\\\|isDisabled\\\\|isLoading\\\\|leftIcon\\\\|rightIcon\" /Users/richtillman/Documents/GitHub/rh-nx-monorepo/libs/shared/ui/src --include=*.tsx --include=*.ts)",
+      "Bash(grep -r \"_disabled\\\\|_focus\\\\|_hover\\\\|_active\\\\|_dark\\\\|_light\" /Users/richtillman/Documents/GitHub/rh-nx-monorepo/libs/shared/ui/src/lib --include=*.tsx)",
+      "Bash(find libs:*)",
+      "Bash(while read:*)",
+      "Bash(do grep:*)",
+      "Bash(sed -i '' 's/variant=\"\"\"\"unstyled\"\"\"\"/variant={\"\"\"\"unstyled\"\"\"\" as any}/g' \"$f\" done)",
+      "Bash(npm run:*)"
     ]
   }
 }

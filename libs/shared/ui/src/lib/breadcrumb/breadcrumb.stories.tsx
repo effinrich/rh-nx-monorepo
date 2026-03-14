@@ -15,10 +15,12 @@ export default {
 
 export const Basic = () => (
   <BrowserRouter>
-    <Breadcrumb spacing="4">
+    <Breadcrumb gap="4">
       <BreadcrumbItem>
-        <BreadcrumbLink as={Link} to="/home" replace>
-          Breadcrumb 1
+        <BreadcrumbLink asChild>
+          <Link to="/home" replace>
+            Breadcrumb 1
+          </Link>
         </BreadcrumbLink>
       </BreadcrumbItem>
 
@@ -51,7 +53,7 @@ export const WithSeparator = () => (
 )
 
 export const WithCustomSeparator = () => (
-  <Breadcrumb spacing="8px" separator={<LuChevronRight color="gray.300" />}>
+  <Breadcrumb gap="8px" separator={<LuChevronRight color="gray.300" />}>
     <BreadcrumbItem>
       <BreadcrumbLink href="/">Home</BreadcrumbLink>
     </BreadcrumbItem>

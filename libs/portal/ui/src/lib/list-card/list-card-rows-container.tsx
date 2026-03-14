@@ -1,7 +1,7 @@
-import { List, ListProps } from '@redesignhealth/ui'
+import { ListRoot, type ListRootProps } from '@redesignhealth/ui'
 
-type ListCardRowsContainerProps = ListProps
+type ListCardRowsContainerProps = ListRootProps
 
 export const ListCardRowsContainer = (props: ListCardRowsContainerProps) => {
-  return <List variant="striped" {...props} />
+  return <ListRoot variant="striped" {...props} />
 }

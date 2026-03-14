@@ -1,8 +1,11 @@
-import { Box, Flex, FlexProps, Grid, GridProps, theme } from '../index'
+import { Box, Flex, FlexProps, Grid, GridProps, system } from '../index'
 
-import '@fontsource/inter/variable.css'
+import '@fontsource-variable/inter'
 
 type ColorPaletteProps = FlexProps & { color?: string; name?: string }
+
+// Access resolved token colors from the system
+const resolvedColors = (system as any)?._config?.theme?.tokens?.colors ?? {}
 
 export const ColorPalette = (props: ColorPaletteProps) => {
   const { color, name, ...rest } = props
@@ -10,12 +13,12 @@ export const ColorPalette = (props: ColorPaletteProps) => {
   let colorCode = color
   const [shade, hue] = color!.split('.')
 
-  if (shade && hue) {
-    colorCode = theme.colors[shade][hue]
+  if (shade && hue && resolvedColors[shade]?.[hue]) {
+    colorCode = resolvedColors[shade][hue]
   }
 
-  if (color! in theme.colors && typeof theme.colors[color!] === 'string') {
-    colorCode = theme.colors[color!]
+  if (color! in resolvedColors && typeof resolvedColors[color!] === 'string') {
+    colorCode = resolvedColors[color!]
   }
 
   return (
@@ -47,7 +50,7 @@ export const ColorPalette = (props: ColorPaletteProps) => {
 export const ColorPalettes = (props: { color: string }) => {
   const { color } = props
 
-  const keys = Object.keys(theme.colors[color])
+  const keys = Object.keys(resolvedColors[color] ?? {})
 
   return keys.map(item => (
     <ColorPalette
