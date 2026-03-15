@@ -53,7 +53,7 @@ export interface FeedbackProps {
 
 export const FeedbackModal = forwardRef(
   ({ moduleTitle, id }: FeedbackProps, ref) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { open, onOpen, onClose } = useDisclosure()
     const { mutateAsync, isError, error } = usePutFeedbackMutation()
 
     useImperativeHandle(ref, () => ({

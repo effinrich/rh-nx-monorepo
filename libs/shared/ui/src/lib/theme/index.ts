@@ -182,3 +182,32 @@ export const system = createSystem(defaultConfig, customConfig)
 
 // Export theme as alias for backward compatibility
 export const theme = system
+
+/**
+ * Resolve a color token path (e.g. 'gray.500') to its raw value
+ * using the public system.token() API.
+ */
+export function resolveColorToken(colorToken: string): string {
+  const resolved = system.token(`colors.${colorToken}`)
+  if (resolved == null && process.env['NODE_ENV'] === 'development') {
+    console.warn(
+      `[resolveColorToken] No token found for "colors.${colorToken}". Check your theme configuration.`
+    )
+  }
+  // Fall back to the token string so Chakra can still attempt CSS-layer resolution
+  return resolved ?? colorToken
+}
+
+/**
+ * Return all shade keys for a top-level color name (e.g. 'gray' → ['25','50','100',...]).
+ *
+ * Note: system.token() resolves individual token values but does not support enumeration
+ * of child keys under a palette. The colors foundations file is the canonical source of
+ * palette structure, so it is read directly here for shade enumeration only.
+ */
+export function getColorShades(colorName: string): string[] {
+  const colorValue = (colors as Record<string, unknown>)[colorName]
+  return typeof colorValue === 'object' && colorValue !== null
+    ? Object.keys(colorValue)
+    : []
+}

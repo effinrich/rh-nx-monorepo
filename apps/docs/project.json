@@ -1,0 +1,33 @@
+{
+  "name": "docs",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/docs",
+  "projectType": "application",
+  "tags": ["scope:shared", "type:docs"],
+  "targets": {
+    "serve": {
+      "command": "npx mint dev",
+      "options": {
+        "cwd": "apps/docs"
+      }
+    },
+    "build": {
+      "command": "npx mint build",
+      "options": {
+        "cwd": "apps/docs"
+      }
+    },
+    "lint-docs": {
+      "command": "npx mint broken-links",
+      "options": {
+        "cwd": "apps/docs"
+      }
+    },
+    "validate": {
+      "command": "npx mint validate",
+      "options": {
+        "cwd": "apps/docs"
+      }
+    }
+  }
+}
