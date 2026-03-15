@@ -23,7 +23,7 @@ export const GroupPopover = ({ description }: GroupPopoverProps) => {
         <IconButton
           aria-label="Info"
           color="gray.600"
-          css={{ '& svg': { h: '24px', w: '24px' } }}
+          css={{ '& svg': { height: '24px', width: '24px' } }}
           variant="plain"
         >
           <MdInfoOutline />
