@@ -1,0 +1,244 @@
+---
+title: "API reference"
+description: "Company API REST endpoints, authentication, and error handling."
+---
+
+## Overview
+
+The Company API exposes a RESTful interface described by an **OpenAPI 3.0.1** specification. All endpoints (except public paths) require authentication via a Google ID token passed as a Bearer JWT in the `Authorization` header.
+
+## Authentication
+
+### Bearer JWT
+
+Include a Google ID token in every request:
+
+```bash
+curl -H "Authorization: Bearer <google-id-token>" \
+     https://api.example.com/company
+```
+
+### Impersonation
+
+Super admins (`ROLE_SUPER_ADMIN`) can impersonate another user by including the `RH-Impersonation-Email` header:
+
+```bash
+curl -H "Authorization: Bearer <google-id-token>" \
+     -H "RH-Impersonation-Email: user@redesignhealth.com" \
+     https://api.example.com/person
+```
+
+<Warning>
+  Impersonation is restricted to users with `ROLE_SUPER_ADMIN`. Requests with this header from non-super-admin users will be processed under the original user's identity.
+</Warning>
+
+## CORS configuration
+
+Cross-origin requests are configured per environment through application properties:
+
+| Property | Description |
+| :--- | :--- |
+| `cors.allowedOriginPatterns` | Allowed origin patterns (e.g., `https://*.redesignhealth.com`) |
+| `cors.allowedMethods` | Allowed HTTP methods |
+| `cors.allowedHeaders` | Allowed request headers |
+
+## Person API
+
+| Method | Path | Description | Min role |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/person` | List all people (paginated) | `ROLE_RH_USER` |
+| `GET` | `/person/{email}` | Get person by email | `ROLE_RH_USER` |
+| `POST` | `/person` | Create a new person | `ROLE_RH_ADMIN` |
+| `PUT` | `/person/{email}` | Update person details | `ROLE_RH_USER` (self or admin) |
+| `PUT` | `/person/{email}/role/{authority}` | Assign a role to a person | `ROLE_RH_ADMIN` |
+| `DELETE` | `/person/{email}/role/{authority}` | Remove a role from a person | `ROLE_RH_ADMIN` |
+| `DELETE` | `/person/{email}` | Delete a person | `ROLE_RH_ADMIN` |
+| `GET` | `/person/{email}/changes` | Get change history for a person | `ROLE_RH_USER` |
+
+## Vendor API
+
+| Method | Path | Description | Min role |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/vendor` | List all vendors (paginated) | `ROLE_RH_USER` |
+| `GET` | `/vendor/filters` | Get available vendor filter options | `ROLE_RH_USER` |
+| `POST` | `/vendor` | Create a new vendor | `ROLE_RH_ADMIN` |
+| `PUT` | `/vendor/{vendorId}` | Update a vendor | `ROLE_RH_ADMIN` |
+| `GET` | `/vendor/{vendorId}` | Get vendor by ID | `ROLE_RH_USER` |
+| `DELETE` | `/vendor/{vendorId}` | Delete a vendor | `ROLE_RH_ADMIN` |
+
+## Company API
+
+| Method | Path | Description | Min role |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/company` | List all companies (paginated) | `ROLE_RH_USER` |
+| `GET` | `/company/{companyId}` | Get company by ID | `ROLE_RH_USER` |
+| `POST` | `/company` | Create a new company | `ROLE_RH_ADMIN` |
+| `PUT` | `/company/{companyId}` | Update a company | `ROLE_RH_ADMIN` |
+| `GET` | `/company/{companyId}/members` | List company members | `ROLE_OP_CO_USER` (member) |
+| `PUT` | `/company/{companyId}/member/{email}` | Add or update a company member | `ROLE_RH_ADMIN` |
+| `PUT` | `/company/{companyId}/conflicts` | Add company conflicts | `ROLE_RH_ADMIN` |
+| `GET` | `/company/{companyId}/conflicts` | Get company conflicts | `ROLE_RH_USER` |
+| `DELETE` | `/company/{companyId}/member/{email}` | Remove a company member | `ROLE_RH_ADMIN` |
+| `DELETE` | `/company/{companyId}` | Delete a company | `ROLE_SUPER_ADMIN` |
+
+<Note>
+  Company member endpoints enforce membership checks in addition to role requirements. You must be a member of the company (or an admin) to access member-specific data.
+</Note>
+
+## Role API
+
+| Method | Path | Description | Min role |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/role` | List all available roles | Authenticated |
+| `GET` | `/me/role` | List roles you can assign to others | Authenticated |
+
+## Additional APIs
+
+The Company API also exposes endpoints for the following domains. Each follows the same authentication and RBAC patterns:
+
+<Cards>
+  <Card title="CEO directory" icon="user">
+    Manage CEO profiles with business type, healthcare sector, customer segments, and visibility controls.
+  </Card>
+  <Card title="Library" icon="book">
+    Create and manage content libraries and library content items.
+  </Card>
+  <Card title="IP marketplace" icon="store">
+    Browse and manage intellectual property listings, sellers, and tracks.
+  </Card>
+  <Card title="Expert notes" icon="pen">
+    Create and manage expert notes linked to companies and research topics.
+  </Card>
+  <Card title="Research" icon="flask">
+    Manage research articles and external research content.
+  </Card>
+  <Card title="Infrastructure requests" icon="server">
+    Submit and track infrastructure setup requests for companies.
+  </Card>
+  <Card title="Forms" icon="file">
+    Manage dynamic form definitions (tech stack, privacy questionnaire) stored as JSONB schemas.
+  </Card>
+  <Card title="Consent" icon="shield">
+    Track user consent records.
+  </Card>
+</Cards>
+
+## Response codes
+
+| Code | Meaning | When returned |
+| :--- | :--- | :--- |
+| `200` | OK | Successful GET or PUT |
+| `201` | Created | Successful POST that creates a resource |
+| `204` | No Content | Successful DELETE |
+| `400` | Bad Request | Malformed request or invalid parameters |
+| `401` | Unauthorized | Missing or invalid JWT |
+| `403` | Forbidden | Insufficient role or not a member of the target company |
+| `404` | Not Found | Resource does not exist |
+| `409` | Conflict | Resource state conflict (e.g., duplicate, stage conflict) |
+| `422` | Unprocessable Entity | Validation error with structured field errors |
+| `429` | Too Many Requests | CockroachDB serializable retry required |
+| `500` | Internal Server Error | Unexpected server error |
+
+## Error handling
+
+The `GlobalExceptionHandler` maps all exceptions to structured JSON error responses:
+
+<Tabs>
+  <Tab title="Standard error">
+    ```json
+    {
+      "timestamp": "2024-01-15T10:30:00Z",
+      "status": 404,
+      "error": "Not Found",
+      "message": "Company not found: acme-corp",
+      "path": "/company/acme-corp"
+    }
+    ```
+  </Tab>
+  <Tab title="Field validation error">
+    ```json
+    {
+      "timestamp": "2024-01-15T10:30:00Z",
+      "status": 422,
+      "error": "422 UNPROCESSABLE_ENTITY",
+      "message": "Invalid field values",
+      "errors": [
+        {
+          "field": "email",
+          "type": "UNIQUE",
+          "message": "must be unique"
+        },
+        {
+          "field": "name",
+          "type": "NOT_BLANK",
+          "message": "must not be blank"
+        }
+      ],
+      "path": "/person"
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Exception hierarchy
+
+| Exception category | HTTP status | Example |
+| :--- | :--- | :--- |
+| `NotFoundException` | 404 | `CompanyNotFoundException`, `PersonNotFoundException`, `VendorNotFoundException` |
+| `BadRequestException` | 400 | Invalid request parameters |
+| `ForbiddenException` | 403 | `ForbiddenAddMemberException`, `ForbiddenDeleteCompanyException`, `ForbiddenRoleAssignmentException` |
+| `ConflictException` | 409 | `StageConflictException`, `LinkedCompanyException` |
+| `UnprocessableEntityException` | 422 | `InvalidFieldException`, `RequiredFormsMissingException` |
+| `InternalServerErrorException` | 500 | `SearchServerException`, `GoogleDriveException` |
+
+## API documentation endpoints
+
+The Company API serves its own API documentation at public (unauthenticated) paths:
+
+| Path | Description |
+| :--- | :--- |
+| `/public/swagger` | Swagger UI interactive documentation |
+| `/public/open-api` | Raw OpenAPI 3.0.1 JSON specification |
+| `/public/docs` | Rendered API documentation |
+
+## Pagination and HATEOAS
+
+List endpoints return paginated responses using Spring HATEOAS. Responses include:
+
+- **`_embedded`** -- The array of resources for the current page
+- **`_links`** -- Navigation links (`self`, `first`, `prev`, `next`, `last`)
+- **`page`** -- Pagination metadata (`size`, `totalElements`, `totalPages`, `number`)
+
+```bash
+GET /company?page=0&size=20&sort=name,asc
+```
+
+<Tip>
+  Use the `expand` query parameter on supported endpoints to eagerly load related entities in a single request. For example, `GET /company?expand=members` returns companies with their member lists pre-loaded.
+</Tip>
+
+## Rate limiting
+
+<Note>
+  The Company API does not implement application-level rate limiting. However, CockroachDB may return `RETRY_SERIALIZABLE` errors (mapped to HTTP 429) under high write contention. Implement exponential backoff retry logic in your client to handle these responses gracefully.
+</Note>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="401 Unauthorized on every request">
+    Verify your Google ID token is valid and not expired. Tokens typically expire after 1 hour. Re-authenticate through the OAuth JWT Generator to obtain a fresh token.
+  </Accordion>
+  <Accordion title="403 Forbidden when accessing company data">
+    Check that your user has the required role and is an active member of the target company. Admins (`ROLE_RH_ADMIN` and above) bypass membership checks.
+  </Accordion>
+  <Accordion title="422 with field validation errors">
+    Inspect the `errors` array in the response body. Each entry includes the field name, error type, and a human-readable message. Common causes include duplicate emails, missing required fields, and invalid enum values.
+  </Accordion>
+  <Accordion title="429 Too Many Requests">
+    This indicates a CockroachDB serializable transaction retry. Wait briefly and retry the request. Implement exponential backoff in your HTTP client.
+  </Accordion>
+  <Accordion title="CORS errors in the browser">
+    Verify that your origin matches one of the patterns in `cors.allowedOriginPatterns`. Check the browser developer tools network tab for the actual CORS error message.
+  </Accordion>
+</AccordionGroup>

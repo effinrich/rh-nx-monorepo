@@ -1,0 +1,87 @@
+---
+title: "Routing system"
+description: "React Router v6 data router pattern and route protection."
+---
+
+The Portal uses React Router v6 with the data router pattern, providing loader-based data fetching and a centralized route configuration.
+
+## Data router pattern
+
+Routes are defined in `apps/portal/src/router.tsx` using `createBrowserRouter` and `createRoutesFromElements`:
+
+```tsx
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
+
+export const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route errorElement={<RootBoundary logout={logout} />}>
+      <Route path="sign-in" element={<SignIn />} />
+      <Route element={<Layout />} id="dashboard-layout" loader={async () => getUserInfo()}>
+        {/* Protected routes */}
+      </Route>
+    </Route>
+  )
+)
+```
+
+The `RouterProvider` renders the router in the App component with a loading fallback:
+
+```tsx
+<RouterProvider router={router} fallbackElement={<Loader size="lg" />} />
+```
+
+## Route protection
+
+The dashboard layout route uses a `loader` that calls `getUserInfo()` to fetch the authenticated user. If the user is not authenticated, the loader redirects to the sign-in page. All child routes under the layout are automatically protected.
+
+<Note>
+  The `RootBoundary` component at the top level catches errors across the entire route tree and provides a logout option for recovery.
+</Note>
+
+## Route organization
+
+Routes are organized into feature groups under the dashboard layout:
+
+| Route | Feature | Library |
+|---|---|---|
+| `/` | Dashboard home | `apps/portal/src/routes/dashboard` |
+| `/companies/*` | Company management | `@redesignhealth/portal/features/companies` |
+| `/ceo-directory/*` | CEO directory | `@redesignhealth/portal/features/ceo-directory` |
+| `/ip-marketplace/*` | IP marketplace | `@redesignhealth/portal/features/ip-marketplace` |
+| `/research-hub/*` | Research hub | `@redesignhealth/portal/features/research-hub` |
+| `/library/*` | Solution library | `@redesignhealth/portal/features/library` |
+| `/dev-library/*` | Developer library | `apps/portal/src/routes/dashboard/dev-library` |
+| `/vendors/*` | Vendor management | `@redesignhealth/portal/features/vendors` |
+| `/users/*` | User management | `@redesignhealth/portal/features/users` |
+| `/support` | Support | `@redesignhealth/portal/features/support` |
+| `/environment` | Environment details | `@redesignhealth/portal/features/admin` |
+
+## Nested routes
+
+Several routes use nested routing with `Outlet` components for tabbed interfaces:
+
+- **Company details** — Nested routes for overview, users, IP listings, infrastructure, vendors, and expert network
+- **Research hub** — Nested routes for research sprints, call notes, and external content
+- **IP marketplace details** — Nested routes for IP details and requests
+
+## Route actions
+
+Some routes use React Router v6 actions for form submissions:
+
+```tsx
+<Route
+  index
+  element={<CompanyInfra />}
+  action={CompanyInfraAction(directQueryClient())}
+/>
+```
+
+Actions receive the query client as a parameter, allowing them to invalidate caches after mutations.
+
+## Error handling
+
+The root route wraps all routes with a `RootBoundary` error element from `@redesignhealth/ui`. This catches unhandled errors and provides a consistent error recovery experience with a logout option.
+
+<Tip>
+  When adding new routes, place the route element in the appropriate feature library and import it into `router.tsx`. Keep route components thin — delegate business logic to hooks and data-assets.
+</Tip>

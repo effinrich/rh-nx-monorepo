@@ -48,7 +48,7 @@ export const UsersTable = ({
       <TotalCount totalUsers={totalUsers} />
       <TableContainer borderBottomRadius="8px">
         <TableRoot
-          variant={"striped" as any}
+          variant="striped"
           colorPalette="gray"
           css={{ tableLayout: { xl: 'fixed' } }}
         >

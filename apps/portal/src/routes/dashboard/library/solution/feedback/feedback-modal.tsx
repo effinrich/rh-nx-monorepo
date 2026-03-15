@@ -53,7 +53,7 @@ export interface FeedbackProps {
 
 export const FeedbackModal = forwardRef(
   ({ moduleTitle, id }: FeedbackProps, ref) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { open, onOpen, onClose } = useDisclosure()
     const { mutateAsync, isError, error } = usePutFeedbackMutation()
 
     useImperativeHandle(ref, () => ({
@@ -98,7 +98,7 @@ export const FeedbackModal = forwardRef(
     }
 
     return (
-      <Modal open={isOpen} onClose={onClose} placement="center">
+      <Modal open={isOpen} onOpenChange={(e: { open: boolean }) => !e.open && handleOnCloseComplete()} placement="center">
         <ModalOverlay />
         <ModalContent w="400px">
           <ModalCloseButton mt="10px" color="gray.500" />
