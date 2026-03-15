@@ -2,6 +2,32 @@
 
 <p style="text-align: center;"><img src="./libs/shared/ui/src/lib/assets/RH_Logo_Single_Ultraviolet.png" width="450"></p>
 
+## Recent Highlights
+
+### Chakra UI v3 Migration (March 2026)
+
+Full migration from Chakra UI v2 to v3 across ~180+ files in `libs/` and `apps/`. All component APIs updated to v3 patterns:
+- Compound components (`CardRoot`, `StatRoot`, `CheckboxRoot`, `FieldRoot`, `StepsRoot`, etc.)
+- `colorPalette` replaces `colorScheme`, `variant="plain"` replaces `variant="link"`
+- Boolean props: `disabled`, `open`, `invalid`, `required`, `readOnly` (no `is`-prefix)
+- `asChild` pattern, icons as children, `lineClamp` instead of `noOfLines`
+- Both Storybook instances (shared-ui and portal-ui) build and render correctly
+
+### forgekit-nx-storybook Plugin
+
+A publishable Nx plugin at `tools/forgekit-nx-storybook/` that auto-generates Storybook stories, interaction tests, Playwright component tests, and accessibility audits from component analysis.
+
+| Generator | Command | Description |
+|---|---|---|
+| `story` | `nx g forgekit-nx-storybook:story --componentPath=<path>` | Generate story + interaction tests for one component |
+| `stories` | `nx g forgekit-nx-storybook:stories --project=<name>` | Bulk generate for entire project with A-F coverage scoring |
+| `component-test` | `nx g forgekit-nx-storybook:component-test --componentPath=<path>` | Co-located Playwright `.ct.tsx` with visual regression + a11y |
+| `init` | `nx g forgekit-nx-storybook:init` | Interactive setup with @nx/storybook prerequisite checks |
+
+Also includes a `watch` executor for auto-generating stories on file changes. See [plugin README](tools/forgekit-nx-storybook/README.md) for full documentation.
+
+---
+
 ## Important Notes
 
 - Only add new packages to root. Nx will go up the nodes until the required module is found, so no need to CD into a specific app or lib to intall a package. On build/deploy Nx is smart enough to include only the packages imported into your app and prune the remaining from the root package.json.
@@ -131,11 +157,13 @@ Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
 
 Run `nx affected:test` to execute the unit tests affected by a change.
 
-## Running end-to-end tests
+## Running component tests
 
-Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+Playwright component tests are co-located with components as `.ct.tsx` files. Generate them with:
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+```bash
+npx nx g forgekit-nx-storybook:component-test --componentPath=libs/shared/ui/src/lib/button/button.tsx
+```
 
 ## Understand your workspace
 
