@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { MdLaunch } from 'react-icons/md'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { Prose } from '@nikolovlazar/chakra-ui-prose'
 import { axiosApi, LibraryDoc } from '@redesignhealth/portal/data-assets'
 import {
   Box,
   Button,
   Link as ChakraLink,
+  Prose,
   SectionHeader
 } from '@redesignhealth/ui'
 import parse, {

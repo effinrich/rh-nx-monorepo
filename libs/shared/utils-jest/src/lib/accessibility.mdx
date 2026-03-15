@@ -1,0 +1,94 @@
+---
+title: Accessibility
+description: Documentation for the Accessibility component
+---
+
+import { Accessibility } from '@/components/Accessibility'
+import { Canvas, Meta, Story, Controls, ArgTypes } from 'storybook/blocks'
+import * as AccessibilityStories from './accessibility.stories'
+
+<Meta of={AccessibilityStories} />
+
+# Accessibility
+
+The `Accessibility` component is a reusable UI element.
+
+## Import
+
+```tsx
+import { Accessibility } from '@/components/Accessibility'
+```
+
+## Usage
+
+### Basic Example
+
+<Canvas of={AccessibilityStories.Default} />
+
+```tsx
+<Accessibility>
+  Content
+</Accessibility>
+```
+
+## Props
+
+<ArgTypes of={Accessibility} />
+
+This component accepts standard HTML attributes.
+
+## Accessibility
+
+The `Accessibility` component follows WAI-ARIA guidelines:
+
+- Supports keyboard navigation
+- Includes proper ARIA attributes
+- Compatible with screen readers
+
+### Keyboard Interactions
+
+| Key | Description |
+|-----|-------------|
+| `Tab` | Moves focus to the component |
+| `Enter` | Activates the component |
+| `Space` | Activates the component |
+
+## Composition
+
+### With Other Components
+
+```tsx
+import { Stack } from '@chakra-ui/react'
+
+<Stack spacing={4}>
+  <Accessibility>
+    First item
+  </Accessibility>
+  <Accessibility>
+    Second item
+  </Accessibility>
+</Stack>
+```
+
+## Responsive Design
+
+Use responsive props for different screen sizes:
+
+```tsx
+<Accessibility
+  
+  width={{ base: '100%', md: 'auto' }}
+>
+  Responsive Accessibility
+</Accessibility>
+```
+
+## Best Practices
+
+1. **Accessibility**: Always provide meaningful content or aria-label
+4. **Composition**: Combine with other components using Stack or Flex for layouts
+5. **Performance**: Avoid creating new callback functions on each render
+
+## Related Components
+
+- See your design system documentation for related components

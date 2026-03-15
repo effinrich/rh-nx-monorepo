@@ -3,7 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/portal/ui/src",
   "projectType": "library",
-  "tags": ["scope:portal"],
+  "tags": ["scope:portal", "type:ui"],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
@@ -66,7 +66,8 @@
       "options": {
         "framework": "@storybook/react-vite",
         "outputDir": "dist/storybook/portal-ui",
-        "configDir": "libs/portal/ui/.storybook"
+        "configDir": "libs/portal/ui/.storybook",
+        "webpackStatsJson": true
       },
       "configurations": {
         "ci": {
@@ -80,11 +81,10 @@
         "script": "test-storybook"
       }
     },
-    "static-storybook": {
-      "executor": "@nx/web:file-server",
+    "chromatic": {
+      "executor": "nx:run-commands",
       "options": {
-        "buildTarget": "portal-ui:build-storybook",
-        "staticFilePath": "dist/storybook/portal-ui"
+        "command": "npx chromatic --build-script-name=build-storybook"
       },
       "configurations": {
         "ci": {

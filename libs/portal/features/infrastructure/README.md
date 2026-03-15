@@ -1,7 +1,13 @@
 # portal-features-infrastructure
 
-This library was generated with [Nx](https://nx.dev).
+Feature library providing cross-cutting infrastructure concerns for the Platform Portal: authentication guards, layout wrappers, error boundaries, and routing utilities shared across all feature areas.
 
-## Running unit tests
+## Consumed By
 
-Run `nx test portal-features-infrastructure` to execute the unit tests via [Vitest](https://vitest.dev/).
+`apps/portal` — used internally by all feature routes and the dashboard layout.
+
+## Running Tests
+
+```bash
+nx test portal-features-infrastructure
+```

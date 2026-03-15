@@ -20,7 +20,6 @@ import {
   Icon,
   IconButton,
   Input,
-  InputGroup,
   Spacer,
   Text
 } from '@redesignhealth/ui'
@@ -274,7 +273,7 @@ export const CallNotesForm = ({
             control={form.control}
             render={({ field: { onChange, name, ref } }) => (
               <>
-                <InputGroup
+                <Box
                   onDragEnter={preventBubbling}
                   onDragOver={preventBubbling}
                   onDrop={e => {
@@ -328,7 +327,7 @@ export const CallNotesForm = ({
                       <Text fontSize="xs">or drag and drop</Text>
                     </HStack>
                   </Flex>
-                </InputGroup>
+                </Box>
                 {fileArray &&
                   fileArray?.map((file: File, index: number) => (
                     <Flex

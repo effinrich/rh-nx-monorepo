@@ -1,7 +1,9 @@
 // Chakra UI v3: FormControl has been renamed to Field
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { Field } from '@chakra-ui/react'
+// In Chakra v3, `Field` is a namespace object (not a component).
+// Export FieldRoot as Field for backward compat.
+export { FieldRoot as Field } from '@chakra-ui/react'
 
 // Export Field compound components (v3 recommended pattern)
 export {

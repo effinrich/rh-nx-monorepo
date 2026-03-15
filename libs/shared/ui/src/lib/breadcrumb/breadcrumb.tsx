@@ -1,7 +1,9 @@
 // Chakra UI v3: Breadcrumb uses compound component pattern
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { Breadcrumb } from '@chakra-ui/react'
+// In Chakra v3, `Breadcrumb` is a namespace object (not a component).
+// Export BreadcrumbRoot as Breadcrumb for backward compat with v2.
+export { BreadcrumbRoot as Breadcrumb } from '@chakra-ui/react'
 
 // Export Breadcrumb compound components (v3 recommended pattern)
 export {

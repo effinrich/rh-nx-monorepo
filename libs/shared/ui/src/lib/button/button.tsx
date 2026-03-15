@@ -1,5 +1,5 @@
 // Chakra UI v3: Button
-// Props changed: colorScheme → colorPalette, isDisabled → disabled, isLoading → loading
+// Props changed: colorPalette → colorPalette, disabled → disabled, loading → loading
 // leftIcon/rightIcon → pass icons as children
 // See: https://chakra-ui.com/docs/get-started/migration
 

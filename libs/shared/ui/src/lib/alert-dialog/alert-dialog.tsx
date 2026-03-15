@@ -1,8 +1,7 @@
 // Chakra UI v3: AlertDialog is now part of Dialog with role="alertdialog"
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { Dialog } from '@chakra-ui/react'
-
+// Dialog is a namespace object in Chakra v3 - don't export it directly as a component.
 // Export Dialog compound components as AlertDialog for v2 compatibility
 export {
   DialogRoot as AlertDialog,

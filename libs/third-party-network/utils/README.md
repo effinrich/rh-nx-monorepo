@@ -1,7 +1,15 @@
 # third-party-network-utils
 
-This library was generated with [Nx](https://nx.dev).
+Utility functions specific to the Third-Party Network (advisor-facing) application.
 
-## Running unit tests
+## Exports
 
-Run `nx test third-party-network-utils` to execute the unit tests via [Vitest](https://vitest.dev/).
+| Module | Description |
+|--------|-------------|
+| `authentication` | Auth token helpers and session utilities for the advisor network |
+
+## Running Tests
+
+```bash
+nx test third-party-network-utils
+```

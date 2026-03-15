@@ -1,5 +1,5 @@
 // Chakra UI v3: Input
-// Props changed: isDisabled → disabled, isInvalid → invalid, isReadOnly → readOnly
+// Props changed: disabled → disabled, invalid → invalid, readOnly → readOnly
 // See: https://chakra-ui.com/docs/get-started/migration
 
 export { Input, InputGroup, InputAddon } from '@chakra-ui/react'

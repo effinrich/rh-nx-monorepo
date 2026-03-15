@@ -25,9 +25,11 @@ const CompanyCtaCard = ({
   }
   return (
     <CtaCard
+      variant="filled"
       icon={AddCompanyIcon}
       headingWeight="bold"
       title="No companies assigned yet"
+      hasButtonAction={false}
       ctaTextAlternative="Contact your admin to get access to your companies"
       data-testid="no-companies-cta"
     />

@@ -1,7 +1,13 @@
 # portal-features-support
 
-This library was generated with [Nx](https://nx.dev).
+Feature library for the **Support** section of the Platform Portal. Provides help resources, documentation links, and support request flows for platform users.
 
-## Running unit tests
+## Consumed By
 
-Run `nx test portal-features-support` to execute the unit tests via [Vitest](https://vitest.dev/).
+`apps/portal` at the `/support` route.
+
+## Running Tests
+
+```bash
+nx test portal-features-support
+```

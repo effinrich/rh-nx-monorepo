@@ -1,0 +1,97 @@
+
+Chromatic CLI v7.6.0
+https://www.chromatic.com/docs/cli
+
+Authenticating with Chromatic
+    → Connecting to https://index.chromatic.com
+Authenticated with Chromatic
+    → Using project token '****************6876'
+Retrieving git information
+git info: {"commit":{"commit":"83bae748255b590cd8a240a12f47e174e11a5db5","committedAt":1768891467000,"committerEmail":"effinrich@pm.me","committerName":"Rich Tillman"},"branch":"feat--big-cleanup-and-MCP-integrations","fromCI":false}
+‼ Using outdated package
+You are using an outdated version of the Chromatic CLI (v7.6.0).
+A new major version is available (v13.3.5).
+Run yarn upgrade chromatic --latest to upgrade.
+App firstBuild: %o, lastBuild: %o, pullRequest: %o null null null
+App has no builds, returning []
+Found parentCommits: 
+Retrieved git information
+    → Commit '83bae74' on branch 'feat--big-cleanup-and-MCP-integrations'; no ancestor found
+Collecting Storybook metadata
+[{"status":"fulfilled","value":{"addons":[{"name":"unknown","packageName":"unknown","packageVersion":"0"}]}},{"status":"fulfilled","value":{}},{"status":"fulfilled","value":{"viewLayer":"react","version":"10.1.0"}},{"status":"fulfilled","value":{"builder":{"name":"unknown","packageVersion":"0"}}}]
+Collected Storybook metadata
+    → Storybook 10.1.0 for React; using the unknown builder (0); supported addons found: Unknown
+Initializing build
+Got environment:
+{}
+Initialized build
+    → Build 2 initialized
+Building your Storybook
+    → Running command: npm run build-storybook-portal-ui -- --output-dir C:\Users\Rich\AppData\Local\Temp\chromatic--93260-CNFtXfWFxVGd
+Running build command: npm run build-storybook-portal-ui -- --output-dir C:\Users\Rich\AppData\Local\Temp\chromatic--93260-CNFtXfWFxVGd
+Runtime metadata: {
+  "nodePlatform": "win32",
+  "nodeVersion": "24.11.1",
+  "packageManager": "npm",
+  "packageManagerVersion": "11.6.2"
+}
+The CLI tried to run your build-storybook-portal-ui script, but the command failed. This indicates a problem with your Storybook. Here's what to do:
+
+- Check the Storybook build log printed below.
+- Run npm run build-storybook-portal-ui or yarn build-storybook-portal-ui yourself and make sure it outputs a valid Storybook by opening the generated index.html in your browser.
+- Review the build-storybook CLI options at https://storybook.js.org/docs/configurations/cli-options/#for-build-storybook
+
+Command failed with exit code 1: npm run build-storybook-portal-ui -- --output-dir C:\Users\Rich\AppData\Local\Temp\chromatic--93260-CNFtXfWFxVGd
+
+i Build command:
+npm run build-storybook-portal-ui -- --output-dir C:\Users\Rich\AppData\Local\Temp\chromatic--93260-CNFtXfWFxVGd
+
+i Runtime metadata:
+{
+  "nodePlatform": "win32",
+  "nodeVersion": "24.11.1",
+  "packageManager": "npm",
+  "packageManagerVersion": "11.6.2"
+}
+
+i Storybook build output:
+D:\documents-from-c\GitHub\rh-nx-monorepo\build-storybook.log
+
+
+> rh-design-system@0.0.0 build-storybook-portal-ui
+> nx run portal-ui:build-storybook --output-dir C:\Users\Rich\AppData\Local\Temp\chromatic--93260-CNFtXfWFxVGd
+
+
+> nx run portal-ui:build-storybook --output-dir C:\Users\Rich\AppData\Local\Temp\chromatic--93260-CNFtXfWFxVGd
+ NX  Storybook builder starting ...
+│
+◇  Cleaning outputDir:
+│  C:/Users/Rich/AppData/Local/Temp/chromatic--93260-CNFtXfWFxVGd
+│
+◇  Loading presets
+│
+◇  Building manager..
+│
+●  Building preview..
+│
+▲  No story files found for the specified pattern:
+│  libs\portal\ui\src\**\*.mdx
+▲ [WARNING] Duplicate key "extends" in object literal
+ [duplicate-object-key]
+    libs/portal/ui/tsconfig.json:34:2:
+      34 │   "extends": "../../../tsconfig.base.json"
+         ╵   ~~~~~~~~~
+  The original key "extends" is here:
+    libs/portal/ui/tsconfig.json:2:2:
+      2 │   "extends": "../../../tsconfig.base.json",
+        ╵   ~~~~~~~~~
+failed to load config from D:\documents-from-c\GitHub\rh-nx-monorepo\libs\portal\ui\vite.config.ts
+│
+■  Failed to build the preview
+ NX   (0 , import_vite.splitVendorChunkPlugin) is not a function
+Pass --verbose to see the stacktrace.
+ NX   Running target build-storybook for project portal-ui failed
+Failed tasks:
+- portal-ui:build-storybook
+Hint: run the command with --verbose for more details.
+View structured, searchable error logs at https://cloud.nx.app/runs/P6iGu83GlX

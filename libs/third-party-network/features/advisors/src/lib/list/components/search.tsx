@@ -4,9 +4,7 @@ import {
   FormControl,
   FormLabel,
   Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement
+  InputGroup
 } from '@redesignhealth/ui'
 import debounce from 'debounce-promise'
 
@@ -35,14 +33,15 @@ export const Search = memo(({ onChange }: SearchProps) => {
         onReset={() => onChange('')}
         onSubmit={e => e.preventDefault()}
       >
-        <InputGroup>
-          <InputLeftElement color="gray.400">
-            <MdSearch />
-          </InputLeftElement>
+        <InputGroup
+          startElement={<MdSearch color="gray.400" />}
+          endElement={
+            <button type="reset">
+              <MdClose />
+            </button>
+          }
+        >
           <Input onChange={handleChange} />
-          <InputRightElement as="button" type="reset">
-            <MdClose />
-          </InputRightElement>
         </InputGroup>
       </form>
     </FormControl>

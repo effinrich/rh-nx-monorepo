@@ -1,0 +1,96 @@
+---
+title: AccordionItem
+description: Documentation for the AccordionItem component
+---
+
+import { AccordionItem } from '@/components/AccordionItem'
+import { Canvas, Meta, Story, Controls, ArgTypes } from 'storybook/blocks'
+import * as AccordionItemStories from './accordion-item.stories'
+
+<Meta of={AccordionItemStories} />
+
+# AccordionItem
+
+The `AccordionItem` component is a reusable UI element.
+
+## Import
+
+```tsx
+import { AccordionItem } from '@/components/AccordionItem'
+```
+
+## Usage
+
+### Basic Example
+
+<Canvas of={AccordionItemStories.Default} />
+
+```tsx
+<AccordionItem>
+  Content
+</AccordionItem>
+```
+
+## Props
+
+<ArgTypes of={AccordionItem} />
+
+This component accepts standard HTML attributes.
+
+## Accessibility
+
+The `AccordionItem` component follows WAI-ARIA guidelines:
+
+- Supports keyboard navigation
+- Includes proper ARIA attributes
+- Compatible with screen readers
+
+### Keyboard Interactions
+
+| Key | Description |
+|-----|-------------|
+| `Tab` | Moves focus to the component |
+| `Enter` | Activates the component |
+| `Space` | Activates the component |
+
+## Composition
+
+### With Other Components
+
+```tsx
+import { Stack } from '@chakra-ui/react'
+
+<Stack spacing={4}>
+  <AccordionItem>
+    First item
+  </AccordionItem>
+  <AccordionItem>
+    Second item
+  </AccordionItem>
+</Stack>
+```
+
+## Responsive Design
+
+Use responsive props for different screen sizes:
+
+```tsx
+<AccordionItem
+  
+  width={{ base: '100%', md: 'auto' }}
+>
+  Responsive AccordionItem
+</AccordionItem>
+```
+
+## Best Practices
+
+1. **Accessibility**: Always provide meaningful content or aria-label
+4. **Composition**: Combine with other components using Stack or Flex for layouts
+5. **Performance**: Avoid creating new callback functions on each render
+
+## Related Components
+
+- [Box](/components/box) - Base layout component
+- [Stack](/components/stack) - Layout with spacing
+- [Flex](/components/flex) - Flexbox layout

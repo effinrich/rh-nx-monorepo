@@ -1,7 +1,18 @@
 # portal-features-users
 
-This library was generated with [Nx](https://nx.dev).
+Feature library for the **Users** section of the Platform Portal. Provides the users listing page and user profile management.
 
-## Running unit tests
+## Key Components
 
-Run `nx test portal-features-users` to execute the unit tests via [Vitest](https://vitest.dev/).
+- `UsersPage` — paginated, searchable list of all platform users
+- `UserDetail` — view and edit a user's profile, role, and company membership
+
+## Consumed By
+
+`apps/portal` at the `/users` route.
+
+## Running Tests
+
+```bash
+nx test portal-features-users
+```

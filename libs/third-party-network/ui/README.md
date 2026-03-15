@@ -1,7 +1,11 @@
 # third-party-network-ui
 
-This library was generated with [Nx](https://nx.dev).
+UI component library for the Third-Party Network (advisor-facing) application. Contains presentational components specific to the advisor network that are not shared with the main portal.
 
-## Running unit tests
+Built on `@redesignhealth/ui` (Chakra v3).
 
-Run `nx test third-party-network-ui` to execute the unit tests via [Vitest](https://vitest.dev/).
+## Running Tests
+
+```bash
+nx test third-party-network-ui
+```

@@ -199,10 +199,10 @@ test('should derive values from surrounding FormControl', () => {
   render(
     <FormControl
       id="input"
-      isRequired
-      isInvalid
-      isDisabled
-      isReadOnly
+      required
+      invalid
+      disabled
+      readOnly
       onFocus={onFocus}
       onBlur={onBlur}
     >

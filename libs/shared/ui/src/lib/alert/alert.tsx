@@ -1,7 +1,7 @@
 // Chakra UI v3: Alert uses compound component pattern
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { Alert } from '@chakra-ui/react'
+export { AlertRoot as Alert } from '@chakra-ui/react'
 
 // Re-export with v2 names for backward compatibility during migration
 // These are deprecated - use Alert.* components instead

@@ -4,7 +4,9 @@
 // onChange → onValueChange
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { Accordion } from '@chakra-ui/react'
+// In Chakra v3, `Accordion` is a namespace object (not a component).
+// Export AccordionRoot as Accordion for backward compat with v2 usage of <Accordion>.
+export { AccordionRoot as Accordion } from '@chakra-ui/react'
 
 // Export Accordion compound components (v3 recommended pattern)
 export {

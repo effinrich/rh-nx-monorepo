@@ -1,17 +1,14 @@
-# Redesign Health Design System
+# Redesign Health — Nx Monorepo
 
-<p style="text-align: center;"><img src="./libs/shared/ui/src/lib/assets/RH_Logo_Single_Ultraviolet.png" width="450"></p>
+<p align="center"><img src="./libs/shared/ui/src/lib/assets/RH_Logo_Single_Ultraviolet.png" width="380"></p>
+
+A full-stack Nx monorepo containing the Platform Portal frontend, mock API server, shared design system, and supporting libraries for Redesign Health.
 
 ## Recent Highlights
 
 ### Chakra UI v3 Migration (March 2026)
 
-Full migration from Chakra UI v2 to v3 across ~180+ files in `libs/` and `apps/`. All component APIs updated to v3 patterns:
-- Compound components (`CardRoot`, `StatRoot`, `CheckboxRoot`, `FieldRoot`, `StepsRoot`, etc.)
-- `colorPalette` replaces `colorScheme`, `variant="plain"` replaces `variant="link"`
-- Boolean props: `disabled`, `open`, `invalid`, `required`, `readOnly` (no `is`-prefix)
-- `asChild` pattern, icons as children, `lineClamp` instead of `noOfLines`
-- Both Storybook instances (shared-ui and portal-ui) build and render correctly
+Full migration from Chakra UI v2 to v3 across ~180+ files in `libs/` and `apps/`. All component APIs updated to v3 patterns: compound components, `colorPalette`, `asChild`, non-`is`-prefixed boolean props. Both Storybook instances build and render correctly.
 
 ### forgekit-nx-storybook Plugin
 
@@ -28,159 +25,142 @@ Also includes a `watch` executor for auto-generating stories on file changes. Se
 
 ---
 
-## Important Notes
+## Tech Stack
 
-- Only add new packages to root. Nx will go up the nodes until the required module is found, so no need to CD into a specific app or lib to intall a package. On build/deploy Nx is smart enough to include only the packages imported into your app and prune the remaining from the root package.json.
-- Run all scripts from the root. This will result in a large scripts oject, but again, no need to CD into subdirectories, app, or libs. When the commands aren't automatically generated in the root packages.json, simply look at your app's project.json file for the relavent commands, then hoist them to package.json scripts. For example, if an app named 'java-backend' is created a default serve command of `nx run java-backend:serve' will be added to that project's project.json. To add and run from root, you would simply add the following to the root package.json and Nx would know where to run the command (script can be named whatever you think is most descriptive):
+| Layer | Technology |
+|-------|-----------|
+| Build System | [Nx 22](https://nx.dev) |
+| Frontend | [React 19](https://react.dev) + [Vite](https://vitejs.dev) |
+| UI Library | [Chakra UI v3](https://www.chakra-ui.com) |
+| Language | [TypeScript 5](https://www.typescriptlang.org) |
+| API Server | [Express](https://expressjs.com) via `tsx` |
+| Unit Tests | [Jest](https://jestjs.io) / [Vitest](https://vitest.dev) |
+| E2E Tests | [Playwright](https://playwright.dev) |
+| Linting | [ESLint](https://eslint.org) + [Prettier](https://prettier.io) |
+
+## Repository Structure
 
 ```
-"scripts": {
-  ...
-  "serve": "nx run java-backend:serve"
-}
+rh-nx-monorepo/
+├── apps/
+│   ├── portal/               # Platform Portal React app (Vite, port 4200)
+│   ├── api-server/           # Mock Express API server (port 8080)
+│   └── company-api/          # Spring Boot Company API
+├── libs/
+│   ├── shared/
+│   │   ├── ui/               # @redesignhealth/ui — shared Chakra v3 component library
+│   │   ├── analytics/        # Google Analytics 4 event helpers
+│   │   ├── hooks/            # Shared React hooks
+│   │   ├── utils/            # General-purpose utilities
+│   │   └── utils-jest/       # Jest/Vitest test utilities
+│   ├── portal/
+│   │   ├── data-assets/      # API clients, hooks, types, and mock data for portal
+│   │   ├── ui/               # Portal-specific UI components
+│   │   ├── utils/            # Portal-specific utilities
+│   │   └── features/         # Feature-sliced pages (companies, users, library, …)
+│   ├── third-party-network/
+│   │   ├── features/         # Advisor network feature pages
+│   │   ├── ui/               # Third-party network UI components
+│   │   ├── utils/            # Third-party network utilities
+│   │   └── data-assets/      # API clients and data for advisor network
+│   └── company-api-types/    # OpenAPI-generated TypeScript types for Company API
+├── tools/                    # Storybook MCP server, VS Code theme
+├── playwright/               # End-to-end test suite
+└── docs/                     # MkDocs documentation site
 ```
 
-## Style guide (WIP)
+## Quick Start
 
-Using VS Code is strongly encouraged, as Nx has an extension and VS support that is extremely helpful. Your .vscode settings.json and extensions.json should contain the following, or the linting, prettier and other formatting tools won't work as expected:
+> All commands should be run from the **repo root**. Nx resolves the correct project automatically.
 
-[settings.json](.vscode/settings.json)
-
-[extensions.json](.vscode/extensions.json)
-
-### Testing
-
-- Nx generates test files in the format \*.spec.{file extension}, which should be adhered to for those tests created manually by Redesign Health engineers in this repo.
-
-### Devcontainer setup
-
-First time Local Environment Devcontainer Setup
-
-1. Install [VSCode](https://code.visualstudio.com/download)
-2. Install [VSCode Remote Development Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
-3. Install [Rancher Desktop](https://rancherdesktop.io/)
-   - container runtime: dockerd
-   - kubernetes version: stable (1.24.4 at time of writing)
-   - When installed, go to Preferences to set 16GB memory, 4 CPUs, _VZ_ virtual machine type and _virtiofs_ mount type (experimental as of v1.10)
-   - check that it works by going to the Rancher Dashboard
-   - open up a terminal on your local machine and check `docker` and `kubectl` -- you should see the help messages if everything installed correctly. If you see command not found, then please reach out to the team.
-   - See [confluence page](https://redesignhealth.atlassian.net/wiki/spaces/DevOps/pages/98304013/Set+up+local+docker+env+using+Rancher+Desktop) for more detailed info, including a video walkthrough
-4. Clone github repo by using the VSCode command `Clone Repository in Container Volume` - This can be accessed by clicking on the green `><` icon in the bottom left. Then enter the github URL (go to the github repo -> Code -> HTTPS -> Copy URL button)
-   - If you have already cloned the repository locally, you can also reopen it in a container by choosing the `Reopen in container` command instead.
-   - You can run `ssh-add` on your host to broker git ssh credentials into the dev container via `ssh-agent`. The VSCode extension supports this well.
-5. The devcontainer will be built following instructions defined in the [Dockerfile](./.devcontainer/Dockerfile) and the [devcontainer.json](./.devcontainer/Dockerfile) file specifies additional setup such as post install steps and VSCode extensions
-   - `~/.m2` and `~/.npm` are bind mounts, make sure they exist in your local filesystem
-   - `~/.m2/settings` will need some [configuration to authenticate with GitHub Packages](https://github.com/redesignhealth/rh-design-system/blob/main/libs/shared-java/data-access-aws-secrets-manager-property-source/README.md#authenticating-with-github-packages)
-   - GitHub Access Tokens may need to be explicitly authorized for the @redesignhealth GitHub organization
-6. Open up a bash terminal in VS Code (Terminal -> New Terminal) and start using!
-
-Note: If there is a new change to the Dockerfile or devcontainer.json file (whether by your edits or from a merged PR), you can rebuild the container and see the changes by clicking the green icon at the bottom `>< Dev Container` > `Rebuild Container`.
-
-Additional Reading/tutorial information on devcontainers:
-
-- https://code.visualstudio.com/docs/remote/containers
-- https://code.visualstudio.com/docs/remote/containers-tutorial
-
-### Typescript VSCode setup
-
-Note: When setting up the repository for the first time in VSCode, you should see a prompt asking if the workspace's typescript version should be used. Select the workspace option so that vscode uses the right one. Also see bell icon in the bottom right.
-
-Alternative setup instructions
-
-- open up any typescript file (.ts)
-- type command + shift + P
-- enter `TypeScript: Select TypeScript Version``
-- choose workspace
-
----
-
-### This project was generated using [Nx](https://nx.dev)
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
-
-🔎 **Smart, Fast and Extensible Build System**
-
-## Adding capabilities to your workspace
-
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
-
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are our core plugins:
-
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nx/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nx/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nx/node`
-
-There are also many [community plugins](https://nx.dev/community) you could add.
-
-## Generate an application
-
-Run `nx g @nx/react:app my-app` to generate an application.
-
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `nx g @nx/react:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are shareable across libraries and applications. They can be imported from `@redesignhealth/libName`.
-
-## Development server
-
-Run `nx serve my-app` for a dev server. Navigate to <http://localhost:4200/>. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `nx g @nx/react:component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running component tests
-
-Playwright component tests are co-located with components as `.ct.tsx` files. Generate them with:
+### 1. Install dependencies
 
 ```bash
-npx nx g forgekit-nx-storybook:component-test --componentPath=libs/shared/ui/src/lib/button/button.tsx
+npm install
 ```
 
-## Understand your workspace
+### 2. Start the API server
 
-Run `nx graph` to see a diagram of the dependencies of your projects.
+```bash
+npm run start:api
+# Starts Express mock server on http://localhost:8080
+```
 
-## Further help
+### 3. Start the Portal
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+```bash
+npm run start:portal
+# Starts Vite dev server on http://localhost:4200
+```
 
-## ☁ Nx Cloud
+### Environment Variables
 
-### Distributed Computation Caching & Distributed Task Execution
+Create `apps/portal/.env.local` (use `.env.local.example` as a template):
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+```ini
+VITE_COMPANY_API_HOSTNAME=http://localhost:8080
+VITE_GOOGLE_CLIENT_ID=<your-google-client-id>.apps.googleusercontent.com
+VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX   # optional
+VITE_HOTJAR_ID=XXXXXXX                  # optional
+```
 
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
+## Common Commands
 
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+| Task | Command |
+|------|---------|
+| Serve portal | `nx run portal:serve` |
+| Serve API server | `nx run api-server:serve` |
+| Build portal | `nx build portal` |
+| Run all tests | `nx run-many -t test` |
+| Run portal tests | `nx test portal` |
+| Lint all projects | `nx run-many -t lint` |
+| Run E2E tests | `nx e2e portal-e2e` |
+| View dependency graph | `nx graph` |
+| Run Storybook | `npm run storybook` |
 
-Visit [Nx Cloud](https://nx.app/) to learn more.
+## Workspace Notes
+
+- **One root `package.json`** — install all packages here. Nx pulls only what each app needs during build.
+- **Affected commands** — `nx affected -t test` or `nx affected -t build` run only on projects changed since the last commit, keeping CI fast.
+- **Path aliases** — libraries are imported as `@redesignhealth/<lib>` (e.g., `@redesignhealth/ui`, `@redesignhealth/portal/data-assets`).
+- **Shared UI is on Chakra v3** — components that were renamed or restructured in the v2→v3 migration have backward-compatible shims in `libs/shared/ui/src/lib/`.
+
+## VS Code Setup
+
+Using VS Code with the [Nx Console extension](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console) is strongly recommended.
+
+On first open you should see a prompt to use the **workspace TypeScript version** — accept it, or set it manually:
+
+1. Open any `.ts` file
+2. `Ctrl+Shift+P` → **TypeScript: Select TypeScript Version**
+3. Choose **Use Workspace Version**
+
+Refer to [`.vscode/settings.json`](.vscode/settings.json) and [`.vscode/extensions.json`](.vscode/extensions.json) for the recommended editor config.
+
+## Devcontainer Setup
+
+A devcontainer is available for a reproducible local environment.
+
+**Prerequisites**
+
+1. [VS Code](https://code.visualstudio.com/download) + [Remote Development Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+2. [Rancher Desktop](https://rancherdesktop.io/) (container runtime: `dockerd`, ≥16 GB RAM, 4 CPUs)
+
+**Steps**
+
+1. In VS Code click the `><` icon (bottom-left) → **Clone Repository in Container Volume**
+2. Enter the GitHub HTTPS URL for this repo
+3. The devcontainer builds from [`.devcontainer/Dockerfile`](.devcontainer/Dockerfile)
+   - `~/.m2` and `~/.npm` are bind-mounted — ensure they exist locally
+   - Authenticate GitHub Packages via `~/.m2/settings.xml` (see [shared-java README](./libs/shared-java/data-access-aws-secrets-manager-property-source/README.md))
+
+After changes to `Dockerfile` or `devcontainer.json`, click `>< Dev Container` → **Rebuild Container**.
+
+Additional reading: [VS Code Containers docs](https://code.visualstudio.com/docs/remote/containers)
+
+## Further Reading
+
+- [Nx Documentation](https://nx.dev)
+- [Chakra UI v3 Docs](https://www.chakra-ui.com)
+- [Platform Documentation](https://dev-design.redesignhealth.com/platform-documentation-library/platform-intro.html)
+- [Storybook](https://dev-design.redesignhealth.com/storybook/shared-ui/index.html)
