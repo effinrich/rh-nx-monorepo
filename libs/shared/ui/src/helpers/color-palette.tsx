@@ -5,8 +5,8 @@ import '@fontsource-variable/inter'
 
 type ColorPaletteProps = FlexProps & { color?: string; name?: string }
 
-// Access color values from the theme foundations (public API)
-const resolvedColors = colors as Record<string, string | Record<string, string>>
+// Access color values from the theme foundations (public API, avoids brittle internal _config access)
+const resolvedColors = colors
 
 export const ColorPalette = (props: ColorPaletteProps) => {
   const { color, name, ...rest } = props
