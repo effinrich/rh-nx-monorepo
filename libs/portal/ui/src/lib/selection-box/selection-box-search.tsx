@@ -4,7 +4,6 @@ import {
   Input,
   InputGroup,
   InputGroupProps,
-  InputElement,
   InputProps
 } from '@redesignhealth/ui'
 

@@ -2,9 +2,9 @@ import { FormControl, Input, Select, styled, Text } from '@redesignhealth/ui'
 
 export const DrawerFormHeader = styled(Text, {
   base: {
-    fontsize: '14px',
-    lineheight: '20px',
-    fontweight: 'medium',
+    fontSize: '14px',
+    lineHeight: '20px',
+    fontWeight: 'medium',
     margin: '0px',
     color: 'gray.700'
   }

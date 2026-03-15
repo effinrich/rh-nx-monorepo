@@ -18,7 +18,7 @@ const SupportPage = () => {
     'https://docs.google.com/forms/d/e/1FAIpQLSfvVGv18OYYthjB6Z5BCRuxbESpC4YwAQvDviE42MzYQ-YYWQ/viewform'
   const { data: consent } = useGetMeConsent()
 
-  const { onOpen, open, onClose } = useDisclosure({ defaultIsOpen: false })
+  const { onOpen, open, onClose } = useDisclosure()
 
   return (
     <Box as="section" w="full">

@@ -1,11 +1,12 @@
-import { Box, Flex, FlexProps, Grid, GridProps, system } from '../index'
+import { Box, Flex, FlexProps, Grid, GridProps } from '../index'
+import colors from '../lib/theme/foundations/colors'
 
 import '@fontsource-variable/inter'
 
 type ColorPaletteProps = FlexProps & { color?: string; name?: string }
 
-// Access resolved token colors from the system
-const resolvedColors = (system as any)?._config?.theme?.tokens?.colors ?? {}
+// Access color values from the theme foundations (public API)
+const resolvedColors = colors as Record<string, string | Record<string, string>>
 
 export const ColorPalette = (props: ColorPaletteProps) => {
   const { color, name, ...rest } = props
@@ -13,12 +14,11 @@ export const ColorPalette = (props: ColorPaletteProps) => {
   let colorCode = color
   const [shade, hue] = color!.split('.')
 
-  if (shade && hue && resolvedColors[shade]?.[hue]) {
-    colorCode = resolvedColors[shade][hue]
-  }
-
-  if (color! in resolvedColors && typeof resolvedColors[color!] === 'string') {
-    colorCode = resolvedColors[color!]
+  const shadeValue = resolvedColors[shade]
+  if (shade && hue && typeof shadeValue === 'object' && shadeValue !== null && hue in shadeValue) {
+    colorCode = (shadeValue as Record<string, string>)[hue] ?? colorCode
+  } else if (color! in resolvedColors && typeof resolvedColors[color!] === 'string') {
+    colorCode = resolvedColors[color!] as string
   }
 
   return (
@@ -50,7 +50,10 @@ export const ColorPalette = (props: ColorPaletteProps) => {
 export const ColorPalettes = (props: { color: string }) => {
   const { color } = props
 
-  const keys = Object.keys(resolvedColors[color] ?? {})
+  const colorValue = resolvedColors[color]
+  const keys = typeof colorValue === 'object' && colorValue !== null
+    ? Object.keys(colorValue)
+    : []
 
   return keys.map(item => (
     <ColorPalette
