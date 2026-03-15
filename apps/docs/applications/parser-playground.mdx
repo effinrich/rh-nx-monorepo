@@ -1,0 +1,54 @@
+---
+title: "Parser playground"
+description: "A tool for testing and debugging parsers."
+---
+
+The Parser Playground is a lightweight frontend application for testing and debugging parser logic during development.
+
+## Overview
+
+Use the Parser Playground to validate parsing rules, inspect output, and iterate on parser configurations before integrating them into production applications. It provides an interactive interface for experimenting with different inputs and viewing parsed results in real time.
+
+## Running the application
+
+Start the dev server from the monorepo root:
+
+```bash
+nx serve parser-playground
+```
+
+The application runs with Vite and supports hot module replacement in development mode.
+
+## Available targets
+
+| Target | Command | Description |
+|---|---|---|
+| `serve` | `nx serve parser-playground` | Start dev server with HMR |
+| `build` | `nx build parser-playground` | Build for production |
+| `preview` | `nx preview parser-playground` | Preview production build |
+| `lint` | `nx lint parser-playground` | Run ESLint |
+
+## Build configuration
+
+The Parser Playground uses `@nx/vite:build` and `@nx/vite:dev-server` executors, consistent with the other frontend applications in the monorepo. Build output goes to `dist/apps/parser-playground`.
+
+<Tabs>
+  <Tab title="Development">
+    ```bash
+    nx serve parser-playground
+    ```
+    Starts the Vite dev server with HMR enabled.
+  </Tab>
+  <Tab title="Production build">
+    ```bash
+    nx build parser-playground --configuration=production
+    ```
+    Creates an optimized production build.
+  </Tab>
+  <Tab title="Preview">
+    ```bash
+    nx preview parser-playground
+    ```
+    Serves the production build locally for verification.
+  </Tab>
+</Tabs>

@@ -1,0 +1,53 @@
+---
+title: "Redesign Health platform"
+description: "Technical documentation for the Redesign Health Nx monorepo — applications, shared libraries, backend services, and developer tooling."
+---
+
+The Redesign Health platform is a healthcare-focused monorepo built on **Nx 22**. It powers a suite of applications for company building, advisor networking, and internal tooling — all backed by a unified design system and shared infrastructure.
+
+The frontend runs on **React 19 + Vite** with **Chakra UI v3** for the component layer. The backend is a **Spring Boot** service (Java 17) with an Express mock server for local development. Everything is organized as Nx projects with enforced module boundaries, distributed caching, and automated code generation.
+
+## Platform overview
+
+<CardGroup cols={2}>
+  <Card title="Portal" icon="browser" href="/applications/portal/overview">
+    The main application for managing companies, CEO directories, IP marketplace, and knowledge management. Built with React 19 + Vite and react-router v6.
+  </Card>
+  <Card title="Third-party network" icon="network-wired" href="/applications/third-party-network">
+    Advisor network application for third-party consultants and subject-matter experts. Shares data access patterns with the portal.
+  </Card>
+  <Card title="Shared UI library" icon="palette" href="/shared-libraries">
+    Chakra UI v3 design system with reusable components, theme tokens, and accessibility baked in. Used across all frontend applications.
+  </Card>
+  <Card title="Company API" icon="server" href="/backend/services">
+    Spring Boot backend service providing REST endpoints for company data, authentication, and business logic. Runs on Java 17.
+  </Card>
+</CardGroup>
+
+## Technology stack
+
+| Layer | Technology |
+| :--- | :--- |
+| Build system | Nx 22 with distributed caching |
+| Frontend | React 19 + Vite |
+| UI components | Chakra UI v3 |
+| Language | TypeScript 5 (strict mode) |
+| Backend | Spring Boot (Java 17), Express mock server |
+| State management | TanStack Query (server), Zustand (client) |
+| Testing | Jest/Vitest, Playwright, Storybook + Chromatic |
+| Linting | ESLint + Prettier |
+| CI/CD | Nx Cloud, Chromatic visual regression |
+
+## Quick links
+
+<CardGroup cols={3}>
+  <Card title="Getting started" icon="rocket" href="/getting-started">
+    Set up your local environment and run the platform.
+  </Card>
+  <Card title="Architecture" icon="sitemap" href="/architecture">
+    Understand the layered design, module boundaries, and integration points.
+  </Card>
+  <Card title="API reference" icon="code" href="/backend/api-reference">
+    Explore the Company API endpoints and data models.
+  </Card>
+</CardGroup>

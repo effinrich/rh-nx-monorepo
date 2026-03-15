@@ -44,7 +44,11 @@
     "mcp:storybook:install": "cd tools/storybook-mcp && npm install",
     "mcp:storybook:build": "cd tools/storybook-mcp && npm run build",
     "mcp:storybook:dev": "cd tools/storybook-mcp && npm run dev",
-    "mcp:setup": "npm run mcp:storybook:install && npm run mcp:storybook:build"
+    "mcp:setup": "npm run mcp:storybook:install && npm run mcp:storybook:build",
+    "docs:dev": "nx run docs:serve",
+    "docs:build": "nx run docs:build",
+    "docs:validate": "nx run docs:validate",
+    "docs:lint": "nx run docs:lint-docs"
   },
   "lint-staged": {
     "**/*.{ts,tsx,js,jsx}": [

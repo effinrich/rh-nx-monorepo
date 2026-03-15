@@ -1,0 +1,150 @@
+---
+title: "Development workflow"
+description: "Day-to-day development commands and workflows for the Portal."
+---
+
+This page covers the common commands and workflows you will use when developing the Portal application.
+
+## Common commands
+
+| Task | Command |
+|---|---|
+| Start dev server | `nx serve portal` or `npm start` |
+| Build for production | `nx build portal` |
+| Preview production build | `nx preview portal` |
+| Run tests | `nx test portal` |
+| Run tests in watch mode | `nx test portal --watch` |
+| Lint with auto-fix | `nx lint portal --fix` |
+| Type check | `nx check-types portal` |
+| Run Storybook (shared UI) | `npm run storybook` |
+| Run Storybook (portal UI) | `npm run storybook-portal-ui` |
+
+## Adding a new feature
+
+<Steps>
+  <Step title="Generate the feature library">
+    Use the Nx generator to scaffold a new feature library:
+    ```bash
+    nx g @nx/react:lib my-feature --directory=libs/portal/features/my-feature
+    ```
+  </Step>
+  <Step title="Add exports to the public API">
+    Export your feature components from `libs/portal/features/my-feature/src/index.ts`:
+    ```tsx
+    export { MyFeature } from './lib/my-feature/my-feature'
+    ```
+  </Step>
+  <Step title="Verify the path alias">
+    Confirm the path alias exists in `tsconfig.base.json`. Nx generators usually add this automatically:
+    ```json
+    {
+      "@redesignhealth/portal/features/my-feature": [
+        "libs/portal/features/my-feature/src/index.ts"
+      ]
+    }
+    ```
+  </Step>
+  <Step title="Add routes">
+    Import the feature component in `apps/portal/src/router.tsx` and add the route:
+    ```tsx
+    import { MyFeature } from '@redesignhealth/portal/features/my-feature'
+
+    <Route path="my-feature" element={<MyFeature />} />
+    ```
+  </Step>
+  <Step title="Write tests">
+    Add test files alongside your components using the `*.spec.tsx` convention:
+    ```bash
+    nx test portal-features-my-feature
+    ```
+  </Step>
+  <Step title="Lint and verify">
+    ```bash
+    nx lint portal-features-my-feature --fix
+    nx check-types portal
+    ```
+  </Step>
+</Steps>
+
+## Working with shared UI components
+
+Shared components live in `libs/shared/ui/src/lib/`. To use or modify them:
+
+1. Browse the component in Storybook: `npm run storybook`
+2. Edit the component in `libs/shared/ui/src/lib/<component-name>/`
+3. Export new components from `libs/shared/ui/src/index.ts`
+4. Build the library: `npm run build:ui`
+
+<Tip>
+  Every UI component must have a corresponding `*.stories.tsx` file. CI will fail if a component in a `type:ui` library is missing its story.
+</Tip>
+
+## Running affected tests
+
+Test only the projects impacted by your changes:
+
+```bash
+# Test affected projects
+npm run affected:test
+
+# Lint affected projects
+npm run affected:lint
+
+# Build affected projects
+npm run affected:build
+```
+
+## Type checking before commit
+
+Run type checking across all projects or just the affected ones:
+
+```bash
+# All projects
+npm run check-types:all
+
+# Affected only
+npm run affected:check-types
+```
+
+## OpenAPI client generation
+
+Generate or regenerate the Company API TypeScript client from the OpenAPI specification:
+
+<Tabs>
+  <Tab title="From dev environment">
+    ```bash
+    nx generate-company-api-client portal
+    ```
+    Pulls the OpenAPI spec from `https://company-api.dev.redesignhealth.com/public/open-api`.
+  </Tab>
+  <Tab title="From local backend">
+    ```bash
+    nx generate-company-api-client-local portal
+    ```
+    Pulls the OpenAPI spec from `http://localhost:8080/public/open-api`. You need the Company API running locally.
+  </Tab>
+</Tabs>
+
+Both commands automatically format the generated files with Prettier.
+
+## Container image
+
+Build a Docker container image for deployment:
+
+```bash
+nx build-image portal
+```
+
+This depends on the `build` target, so it builds the app first if needed. The image tag is set via the `NX_CONTAINER_IMAGE_TAG` environment variable.
+
+## Dependency graph
+
+Visualize the Portal's dependency graph to understand how libraries relate:
+
+```bash
+npm run graph
+```
+
+<Note>
+  Use the dependency graph before adding new library dependencies to avoid circular imports and boundary violations.
+</Note>
