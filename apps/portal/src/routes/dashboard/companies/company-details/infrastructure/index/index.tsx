@@ -196,7 +196,7 @@ export const CompanyInfra = () => {
             <Modal
               finalFocusRef={cardRef}
               open={isOpen && !actionData?.success}
-              onClose={onClose}
+              onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
               placement="center"
             >
               <ModalOverlay />
@@ -218,7 +218,7 @@ export const CompanyInfra = () => {
                         type="submit"
                         colorPalette="primary"
                         w="full"
-                        isLoading={formState === 'submitting'}
+                        loading={formState === 'submitting'}
                       >
                         Yes, Submit
                       </Button>

@@ -98,7 +98,7 @@ export const FeedbackModal = forwardRef(
     }
 
     return (
-      <Modal open={isOpen} onClose={onClose} placement="center">
+      <Modal open={isOpen} onOpenChange={(e: { open: boolean }) => !e.open && handleOnCloseComplete()} placement="center">
         <ModalOverlay />
         <ModalContent w="400px">
           <ModalCloseButton mt="10px" color="gray.500" />

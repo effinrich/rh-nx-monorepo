@@ -23,7 +23,7 @@ const Form = ({
   submitText = 'Save changes'
 }: FormProps) => {
   return (
-    <CardRoot variant={"unstyled" as any} maxWidth="6xl">
+    <CardRoot variant="unstyled" maxWidth="6xl">
       <form onSubmit={onSubmit} name={submitText}>
         <Stack separator={<Separator />} gap={5}>
           <CardBody>{children}</CardBody>
