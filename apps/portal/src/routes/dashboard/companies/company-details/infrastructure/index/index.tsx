@@ -58,7 +58,7 @@ const BADGE_COLOR_SCHEME = {
 }
 
 export const CompanyInfra = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open: isOpen, onOpen, onClose } = useDisclosure()
   const cardRef = useRef(null)
   const {
     Form,
@@ -196,7 +196,9 @@ export const CompanyInfra = () => {
             <Modal
               finalFocusRef={cardRef}
               open={isOpen && !actionData?.success}
-              onClose={onClose}
+              onOpenChange={(details: { open: boolean }) => {
+                if (!details.open) onClose()
+              }}
               placement="center"
             >
               <ModalOverlay />
