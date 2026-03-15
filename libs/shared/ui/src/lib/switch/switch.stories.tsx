@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { chakra } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
 
 import {
   Container,
-  FormControl,
-  FormLabel,
+  FieldLabel,
+  FieldRoot,
   HStack,
   SimpleGrid,
   Stack
@@ -33,18 +34,18 @@ export const Disabled = () => (
 )
 
 export const Readonly = () => (
-  <Switch readOnly size="md" colorPalette="primary" margin="20px" />
+  <Switch isReadOnly size="md" colorPalette="primary" margin="20px" />
 )
 
 export const Invalid = () => (
-  <Switch invalid size="md" colorPalette="primary" margin="20px" />
+  <Switch isInvalid size="md" colorPalette="primary" margin="20px" />
 )
 
 export const Usage = () => (
   <Container display="flex" justifyContent="center" alignItems="center">
-    <FormLabel htmlFor="email-alerts" mr="16px" mb="0">
+    <chakra.label htmlFor="email-alerts" mr="16px">
       Enable email alerts?
-    </FormLabel>
+    </chakra.label>
     <Switch id="email-alerts" />
   </Container>
 )
@@ -66,9 +67,9 @@ export const Controlled = () => {
     <>
       {checked ? 'Checked' : 'Unchecked'}{' '}
       <Switch
-        checked={checked}
+        isChecked={checked}
         colorPalette="green"
-        onCheckedChange={({ checked }) => setChecked(!!checked)}
+        onChange={e => setChecked(e.target.checked)}
       />
     </>
   )
@@ -76,26 +77,25 @@ export const Controlled = () => {
 
 export const StateDependingBehavior = () => {
   return (
-    <FormControl as={SimpleGrid} columns={{ base: 2, lg: 4 }}>
-      <FormLabel htmlFor="checked">checked:</FormLabel>
-      <Switch id="checked" checked />
+    <FieldRoot as={SimpleGrid} columns={{ base: 2, lg: 4 }}>
+      <FieldLabel htmlFor="isChecked">isChecked:</FieldLabel>
+      <Switch id="isChecked" isChecked />
 
-      <FormLabel htmlFor="disabled">disabled:</FormLabel>
-      <Switch id="disabled" disabled defaultChecked />
+      <FieldLabel htmlFor="isDisabled">isDisabled:</FieldLabel>
+      <Switch id="isDisabled" disabled defaultChecked />
 
-      {/* isFocusable prop is removed in v3 */}
-      <FormLabel htmlFor="isFocusable">disabled (focusable?):</FormLabel>
-      <Switch id="isFocusable" disabled />
+      <FieldLabel htmlFor="isFocusable">isFocusable:</FieldLabel>
+      <Switch id="isFocusable" isFocusable disabled />
 
-      <FormLabel htmlFor="invalid">invalid:</FormLabel>
-      <Switch id="invalid" invalid />
+      <FieldLabel htmlFor="isInvalid">isInvalid:</FieldLabel>
+      <Switch id="isInvalid" isInvalid />
 
-      <FormLabel htmlFor="readOnly">readOnly:</FormLabel>
-      <Switch id="readOnly" readOnly />
+      <FieldLabel htmlFor="isReadOnly">isReadOnly:</FieldLabel>
+      <Switch id="isReadOnly" isReadOnly />
 
-      <FormLabel htmlFor="required">required:</FormLabel>
-      <Switch id="required" required />
-    </FormControl>
+      <FieldLabel htmlFor="isRequired">isRequired:</FieldLabel>
+      <Switch id="isRequired" isRequired />
+    </FieldRoot>
   )
 }
 
@@ -110,10 +110,7 @@ export const WithReactHookForm = () => {
     defaultValues
   })
 
-  const onSubmit: SubmitHandler<{
-    name: string
-    boolean: boolean
-  }> = values => {
+  const onSubmit: SubmitHandler<any> = values => {
     alert(JSON.stringify(values, null, 2))
   }
 
@@ -130,50 +127,50 @@ export const WithReactHookForm = () => {
 export const WithFormControl = () => {
   return (
     <>
-      <FormControl id="optIn">
-        <FormLabel>Opt-in Example</FormLabel>
+      <FieldRoot id="optIn">
+        <FieldLabel>Opt-in Example</FieldLabel>
         <Stack>
           <Switch value="1">Opt-in 1</Switch>
           <Switch value="2">Opt-in 2</Switch>
           <Switch value="3">Opt-in 3</Switch>
         </Stack>
-      </FormControl>
+      </FieldRoot>
 
-      <FormControl id="optInInvalid" invalid mt={4}>
-        <FormLabel>Invalid Opt-in Example</FormLabel>
+      <FieldRoot id="optInInvalid" invalid mt={4}>
+        <FieldLabel>Invalid Opt-in Example</FieldLabel>
         <Stack gap={2}>
           <Switch value="1">Invalid Opt-in 1</Switch>
           <Switch value="2">Invalid Opt-in 2</Switch>
           <Switch value="3">Invalid Opt-in 3</Switch>
         </Stack>
-      </FormControl>
+      </FieldRoot>
 
-      <FormControl id="optInDisabled" disabled mt={4}>
-        <FormLabel>Disabled Opt-in Example</FormLabel>
+      <FieldRoot id="optInDisabled" disabled mt={4}>
+        <FieldLabel>Disabled Opt-in Example</FieldLabel>
         <Stack gap={2}>
           <Switch value="1">Disabled Opt-in 1</Switch>
           <Switch value="2">Disabled Opt-in 2</Switch>
           <Switch value="3">Disabled Opt-in 3</Switch>
         </Stack>
-      </FormControl>
+      </FieldRoot>
 
-      <FormControl id="optInReadonly" readOnly mt={4}>
-        <FormLabel>Readonly Opt-in Example</FormLabel>
+      <FieldRoot id="optInReadonly" readOnly mt={4}>
+        <FieldLabel>Readonly Opt-in Example</FieldLabel>
         <Stack gap={2}>
           <Switch value="1">Readonly Opt-in 1</Switch>
           <Switch value="2">Readonly Opt-in 2</Switch>
           <Switch value="3">Readonly Opt-in 3</Switch>
         </Stack>
-      </FormControl>
+      </FieldRoot>
 
-      <FormControl id="optInRequired" required mt={4}>
-        <FormLabel>Required Opt-in Example</FormLabel>
+      <FieldRoot id="optInRequired" required mt={4}>
+        <FieldLabel>Required Opt-in Example</FieldLabel>
         <Stack gap={2}>
           <Switch value="1">Required Opt-in 1</Switch>
           <Switch value="2">Required Opt-in 2</Switch>
           <Switch value="3">Required Opt-in 3</Switch>
         </Stack>
-      </FormControl>
+      </FieldRoot>
     </>
   )
 }

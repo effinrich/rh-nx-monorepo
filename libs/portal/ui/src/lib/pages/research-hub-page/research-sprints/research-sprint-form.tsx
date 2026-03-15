@@ -1,23 +1,21 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Controller, FormProvider, UseFormReturn } from 'react-hook-form'
 import {
-  Box,
-  Flex,
-  Input,
-  NumberInput,
-  NumberInputField
-} from '@redesignhealth/ui'
-import {
   CompanySummary,
   NewSprintProps,
   PersonSummary,
   TaxonomySummary
 } from '@redesignhealth/portal/data-assets'
 import {
-  Alert,
+  AlertRoot,
   AlertDescription,
   AlertIcon,
   AlertTitle,
+  Box,
+  Flex,
+  Input,
+  NumberInputRoot,
+  NumberInputField,
   Text,
   Textarea
 } from '@redesignhealth/ui'
@@ -285,12 +283,12 @@ export const ResearchSprintForm = ({
         {showAddtlFields && (
           <>
             <FormField name="sampleSize" label="n=">
-              <NumberInput>
+              <NumberInputRoot>
                 <NumberInputField {...form.register('sampleSize')} />
-              </NumberInput>
+              </NumberInputRoot>
             </FormField>
 
-            <Alert status="info">
+            <AlertRoot status="info">
               <AlertIcon />
               <AlertTitle>Reminder: Ensure Link Integrity</AlertTitle>
               <AlertDescription>
@@ -298,7 +296,7 @@ export const ResearchSprintForm = ({
                 Venture Insights Google Drive. Be sure to use a shareable link
                 instead of a shortcut.
               </AlertDescription>
-            </Alert>
+            </AlertRoot>
 
             <FormField
               name="SOW"

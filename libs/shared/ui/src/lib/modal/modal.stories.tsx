@@ -1,7 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import { useRef } from 'react'
 import { LoremIpsum } from 'react-lorem-ipsum'
-import { FocusableElement } from '@chakra-ui/utils'
 
 import { Meta } from '@storybook/react-vite'
 
@@ -25,18 +24,15 @@ export default {
 } as Meta<typeof Modal>
 
 export function BasicUsage() {
-  const { open, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal
-        open={open}
-        onOpenChange={e => (e.open ? onOpen() : onClose())}
-        placement="center"
-      >
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalCloseButton />
           <ModalHeader>Welcome Home</ModalHeader>
@@ -58,7 +54,7 @@ export function BasicUsage() {
 }
 
 export function ReturnFocus() {
-  const { open, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const finalRef = useRef<HTMLDivElement>(null)
 
   return (
@@ -71,12 +67,9 @@ export function ReturnFocus() {
         Open Modal
       </Button>
 
-      <Modal
-        finalFocusEl={() => finalRef.current}
-        open={open}
-        onOpenChange={e => (e.open ? onOpen() : onClose())}
-      >
+      <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
@@ -108,11 +101,9 @@ export function NestedModal() {
       <Button onClick={first.onOpen} maxW="300px">
         Open
       </Button>
-      <Modal
-        open={first.open}
-        onOpenChange={e => (e.open ? first.onOpen() : first.onClose())}
-      >
+      <Modal isOpen={first.isOpen} onClose={first.onClose}>
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalBody>
@@ -129,12 +120,10 @@ export function NestedModal() {
             </Button>
           </ModalFooter>
 
-          <Modal
-            open={second.open}
-            onOpenChange={e => (e.open ? second.onOpen() : second.onClose())}
-          >
+          <Modal isOpen={second.isOpen} onClose={second.onClose}>
             <ModalOverlay />
-            <ModalContent>
+            {/* @ts-expect-error Chakra v3 DialogContent children typing */}
+        <ModalContent>
               <ModalHeader>Modal 2 Title</ModalHeader>
               <ModalFooter>
                 <rh.div flex="1" />
@@ -143,12 +132,10 @@ export function NestedModal() {
                 </Button>
               </ModalFooter>
 
-              <Modal
-                open={third.open}
-                onOpenChange={e => (e.open ? third.onOpen() : third.onClose())}
-              >
+              <Modal isOpen={third.isOpen} onClose={third.onClose}>
                 <ModalOverlay />
-                <ModalContent>
+                {/* @ts-expect-error Chakra v3 DialogContent children typing */}
+        <ModalContent>
                   <ModalHeader tabIndex={0}>Modal 3 Title</ModalHeader>
                 </ModalContent>
               </Modal>
@@ -161,7 +148,7 @@ export function NestedModal() {
 }
 
 export const InsideScroll = () => {
-  const { open, onClose, onOpen } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
   const btnRef = useRef(null)
   return (
     <>
@@ -169,12 +156,13 @@ export const InsideScroll = () => {
         Open
       </Button>
       <Modal
-        finalFocusEl={() => btnRef.current}
-        onOpenChange={e => (e.open ? onOpen() : onClose())}
-        open={open}
+        finalFocusRef={btnRef}
+        onClose={onClose}
+        isOpen={isOpen}
         scrollBehavior="inside"
       >
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
@@ -193,14 +181,15 @@ export const InsideScroll = () => {
 }
 
 export const AnimationDisabled = () => {
-  const { open, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal onOpenChange={e => (e.open ? onOpen() : onClose())} open={open}>
+      <Modal onClose={onClose} isOpen={isOpen} motionPreset="none">
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
@@ -219,18 +208,15 @@ export const AnimationDisabled = () => {
 }
 
 export const FullWithLongContent = () => {
-  const { open, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal
-        onOpenChange={e => (e.open ? onOpen() : onClose())}
-        open={open}
-        size="full"
-      >
+      <Modal onClose={onClose} isOpen={isOpen} size="full">
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal Title2</ModalHeader>
           <ModalCloseButton />
@@ -249,19 +235,26 @@ export const FullWithLongContent = () => {
 }
 
 export function WithCustomMotionProps() {
-  const { open, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal
-        open={open}
-        onOpenChange={e => (e.open ? onOpen() : onClose())}
-        placement="center"
-      >
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
+        <ModalContent
+          motionProps={{
+            initial: 'exit',
+            animate: 'enter',
+            exit: 'exit',
+            variants: {
+              enter: { opacity: 1, y: 10 },
+              exit: { opacity: 0, y: 0, transition: { duration: 0.1 } }
+            }
+          }}
+        >
           <ModalCloseButton />
           <ModalHeader>Welcome Home</ModalHeader>
           <ModalBody>

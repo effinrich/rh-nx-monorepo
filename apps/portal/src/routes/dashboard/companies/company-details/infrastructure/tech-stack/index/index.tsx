@@ -88,7 +88,7 @@ export const CompanyInfraTechStack = () => {
               type="submit"
               name="_action"
               value="complete"
-              colorScheme="primary"
+              colorPalette="primary"
             >
               Done
             </Button>
@@ -132,7 +132,7 @@ export const CompanyInfraTechStack = () => {
                           techStackForm?.form?.[commentInputName]
                         }
                         error={fieldErrors?.[radioInputName]?.[0]}
-                        isReadOnly={infraRequestSubmitted}
+                        readOnly={infraRequestSubmitted}
                         key={index}
                       />
                     )

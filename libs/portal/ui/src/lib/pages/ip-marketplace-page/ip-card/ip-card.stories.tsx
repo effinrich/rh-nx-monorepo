@@ -121,13 +121,10 @@ export const WithRightElementAsTertiaryButton = {
   args: {
     ...Default.args,
     rightElement: (
-      <Button
-        as={RouterLink}
-        to={`/ip-marketplace/${Story.args?.id}`}
-        size="sm"
-        variant="outline"
-      >
-        View details
+      <Button asChild size="sm" variant="outline">
+        <RouterLink to={`/ip-marketplace/${Story.args?.id}`}>
+          View details
+        </RouterLink>
       </Button>
     )
   }

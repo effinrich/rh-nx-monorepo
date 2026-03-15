@@ -1,25 +1,21 @@
 import { memo } from 'react'
 import { MdMoreHoriz } from 'react-icons/md'
 import { Link as RouterLink } from 'react-router-dom'
-import {
-  MenuContent,
-  MenuItem,
-  MenuRoot,
-  MenuTrigger,
-  Portal
-} from '@redesignhealth/ui'
+import { MenuRoot, MenuTrigger, MenuItem, MenuContent } from '@chakra-ui/react'
 import { useCurrentUserQuery } from '@redesignhealth/third-party-network/features/authentication'
 import {
-  Avatar,
-  Card,
+  AvatarRoot,
+  AvatarFallback,
+  CardRoot,
   CardBody,
   CardHeader,
   Flex,
   Grid,
   IconButton,
   Link,
-  List,
-  Tag,
+  ListRoot,
+  TagRoot,
+  TagLabel,
   Text,
   useDisclosure
 } from '@redesignhealth/ui'
@@ -54,7 +50,7 @@ export const AdvisorCard = memo(
     bio
   }: AdvisorCardProps) => {
     const { data: currentUser } = useCurrentUserQuery()
-    const { isOpen, onClose, onOpen } = useDisclosure()
+    const { open, onClose, onOpen } = useDisclosure()
 
     const contractRequestParams = new URLSearchParams({
       email: currentUser?.email ?? '',
@@ -64,7 +60,7 @@ export const AdvisorCard = memo(
     }).toString()
 
     return (
-      <Card variant="outline" boxShadow="md" aria-label="card">
+      <CardRoot variant="outline" boxShadow="md" aria-label="card">
         <CardHeader
           as={Flex}
           justifyContent="space-between"
@@ -73,13 +69,15 @@ export const AdvisorCard = memo(
           pb="0"
         >
           <Flex align="center" gap="16px">
-            <Avatar
+            <AvatarRoot
               bg="gray.100"
               color="gray.500"
               name={name}
               height="40px"
               width="40px"
-            />
+            >
+              <AvatarFallback />
+            </AvatarRoot>
             <Flex align="center" gap="10px">
               <Text
                 as="span"
@@ -104,29 +102,24 @@ export const AdvisorCard = memo(
                 <MdMoreHoriz fontSize="24px" />
               </IconButton>
             </MenuTrigger>
-            <Portal>
-              <MenuContent>
-                <MenuItem value="see-bio" asChild>
-                  <RouterLink to={`/${advisorId}`}>See bio</RouterLink>
-                </MenuItem>
-                <MenuItem value="request-intro" onClick={onOpen}>
-                  Request introduction
-                </MenuItem>
-                <MenuItem value="request-contract" asChild>
-                  <a
-                    href={`https://5inxi4pt259.typeform.com/to/dIAXUaDn#${contractRequestParams}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Request contract
-                  </a>
-                </MenuItem>
-              </MenuContent>
-            </Portal>
+            <MenuContent>
+              <MenuItem value="see-bio" asChild>
+                <RouterLink to={`/${advisorId}`}>See bio</RouterLink>
+              </MenuItem>
+              <MenuItem value="request-intro" onClick={onOpen}>Request introduction</MenuItem>
+              <MenuItem value="request-contract" asChild>
+                <a
+                  href={`https://5inxi4pt259.typeform.com/to/dIAXUaDn#${contractRequestParams}`}
+                  target="_blank"
+                >
+                  Request contract
+                </a>
+              </MenuItem>
+            </MenuContent>
           </MenuRoot>
         </CardHeader>
         <CardBody py="16px" pl="77px">
-          <Grid as={List} templateColumns="1.5fr 1fr 1fr" gap="32px">
+          <Grid as={ListRoot} templateColumns="1.5fr 1fr 1fr" gap="32px">
             <AdvisorAttribute attribute="Current Organization & Role">
               {organization}
               {organization && advisorRole && ' - '}
@@ -149,24 +142,24 @@ export const AdvisorCard = memo(
 
           <Flex gap="8px" mt="24px">
             {categories?.map(category => (
-              <Tag aria-label="category" colorScheme="blue" key={category}>
-                {category}
-              </Tag>
+              <TagRoot aria-label="category" colorPalette="blue" key={category}>
+                <TagLabel>{category}</TagLabel>
+              </TagRoot>
             ))}
             {tags?.map(tag => (
-              <Tag aria-label="tag" colorScheme="green" key={tag}>
-                {tag}
-              </Tag>
+              <TagRoot aria-label="tag" colorPalette="green" key={tag}>
+                <TagLabel>{tag}</TagLabel>
+              </TagRoot>
             ))}
           </Flex>
         </CardBody>
         <IntroductionRequestForm
           advisorId={advisorId}
           advisorName={name}
-          isOpen={isOpen}
+          isOpen={open}
           onClose={onClose}
         />
-      </Card>
+      </CardRoot>
     )
   }
 )

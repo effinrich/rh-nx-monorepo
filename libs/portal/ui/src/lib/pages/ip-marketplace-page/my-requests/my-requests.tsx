@@ -77,7 +77,7 @@ export const MyRequestsPage = () => {
                   Results: {ips?.page.totalElements}
                 </Text>
               </VStack>
-              <HStack spacing={4}>
+              <HStack gap={4}>
                 <Text whiteSpace="nowrap" color="gray.600" fontSize={14}>
                   Sort by
                 </Text>
@@ -110,12 +110,13 @@ export const MyRequestsPage = () => {
                   name={ip.name}
                   rightElement={
                     <Button
-                      as={RouterLink}
-                      to={`/ip-marketplace/${ip.id}`}
+                      asChild
                       variant="outline"
                       width={['100%', '100%', 'initial']}
                     >
-                      View details
+                      <RouterLink to={`/ip-marketplace/${ip.id}`}>
+                        View details
+                      </RouterLink>
                     </Button>
                   }
                   organizationType={

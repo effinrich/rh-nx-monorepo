@@ -5,52 +5,48 @@ import {
   testA11y
 } from '@redesignhealth/shared-utils-jest'
 
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from './tabs'
+import { Tab, TabList, TabPanel, TabsRoot } from './tabs'
 
 describe('Tabs', () => {
   test('should no accessibility issues', async () => {
     await testA11y(
-      <Tabs>
+      <TabsRoot>
         <TabList>
           <Tab>Tab 1</Tab>
           <Tab>Tab 2</Tab>
           <Tab>Tab 3</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>
-            <p>Panel 1</p>
-          </TabPanel>
-          <TabPanel>
-            <p>Panel 2</p>
-          </TabPanel>
-          <TabPanel>
-            <p>Panel 3</p>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+        <TabPanel>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel>
+          <p>Panel 2</p>
+        </TabPanel>
+        <TabPanel>
+          <p>Panel 3</p>
+        </TabPanel>
+      </TabsRoot>
     )
   })
 
   test('selects the correct tab with keyboard navigation', async () => {
     const { user } = render(
-      <Tabs>
+      <TabsRoot>
         <TabList>
           <Tab>Tab 1</Tab>
           <Tab>Tab 2</Tab>
           <Tab>Tab 3</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>
-            <p>Panel 1</p>
-          </TabPanel>
-          <TabPanel>
-            <p>Panel 2</p>
-          </TabPanel>
-          <TabPanel>
-            <p>Panel 3</p>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+        <TabPanel>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel>
+          <p>Panel 2</p>
+        </TabPanel>
+        <TabPanel>
+          <p>Panel 3</p>
+        </TabPanel>
+      </TabsRoot>
     )
 
     const tabList = screen.getByRole('tablist')
@@ -99,24 +95,22 @@ describe('Tabs', () => {
 
   test('focuses the correct tab with manual keyboard navigation', async () => {
     const { user } = render(
-      <Tabs isManual>
+      <TabsRoot isManual>
         <TabList>
           <Tab>Tab 1</Tab>
           <Tab>Tab 2</Tab>
           <Tab>Tab 3</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>
-            <p>Panel 1</p>
-          </TabPanel>
-          <TabPanel>
-            <p>Panel 2</p>
-          </TabPanel>
-          <TabPanel>
-            <p>Panel 3</p>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+        <TabPanel>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel>
+          <p>Panel 2</p>
+        </TabPanel>
+        <TabPanel>
+          <p>Panel 3</p>
+        </TabPanel>
+      </TabsRoot>
     )
 
     const tabList = screen.getByRole('tablist')
@@ -143,20 +137,18 @@ describe('Tabs', () => {
 
   test('renders only the currently active tab panel if isLazy', async () => {
     const { user } = render(
-      <Tabs isLazy>
+      <TabsRoot isLazy>
         <TabList>
           <Tab>Tab 1</Tab>
           <Tab>Tab 2</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>
-            <p>Panel 1</p>
-          </TabPanel>
-          <TabPanel>
-            <p>Panel 2</p>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+        <TabPanel>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel>
+          <p>Panel 2</p>
+        </TabPanel>
+      </TabsRoot>
     )
 
     expect(screen.getByText('Panel 1')).toBeInTheDocument()
@@ -170,20 +162,18 @@ describe('Tabs', () => {
 
   test('renders the currently active tab panel and previously-selected tabs if isLazy and lazy behavior is keepMounted', async () => {
     const { user } = render(
-      <Tabs isLazy lazyBehavior="keepMounted">
+      <TabsRoot isLazy lazyBehavior="keepMounted">
         <TabList>
           <Tab>Tab 1</Tab>
           <Tab>Tab 2</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>
-            <p>Panel 1</p>
-          </TabPanel>
-          <TabPanel>
-            <p>Panel 2</p>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+        <TabPanel>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel>
+          <p>Panel 2</p>
+        </TabPanel>
+      </TabsRoot>
     )
 
     expect(screen.getByText('Panel 1')).toBeInTheDocument()

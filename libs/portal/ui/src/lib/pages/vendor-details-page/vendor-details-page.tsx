@@ -45,12 +45,14 @@ const VendorDetailsPage = ({
         rightAddon={
           canEdit && (
             <IconButton
-              as={RouterLink}
-              to="edit"
+              asChild
               variant="outline"
               aria-label="Edit vendor"
-              icon={<Icon as={MdEdit} />}
-            />
+            >
+              <RouterLink to="edit">
+                <Icon as={MdEdit} />
+              </RouterLink>
+            </IconButton>
           )
         }
       />
@@ -64,7 +66,7 @@ const VendorDetailsPage = ({
           />
         </DetailsCardRow>
         <DetailsCardRow title="Who to contact">
-          <HStack wrap="wrap" spacing={6} flex={1}>
+          <HStack wrap="wrap" gap={6} flex={1}>
             {contacts?.map(contact => (
               <VendorContactInfo
                 key={contact.email}

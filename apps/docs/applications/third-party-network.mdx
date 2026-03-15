@@ -1,0 +1,87 @@
+---
+title: "Third-party network"
+description: "Advisor network portal for stakeholder engagement."
+---
+
+The Third-Party Network is a standalone frontend application that provides an interface for external advisors and stakeholders to engage with the Redesign Health ecosystem.
+
+## Overview
+
+The Third-Party Network application serves as the portal for third-party advisors, enabling them to interact with Redesign Health's portfolio companies and participate in advisory activities.
+
+<Note>
+  This application is separate from the main Portal and has its own authentication, routing, and deployment pipeline.
+</Note>
+
+## Tech stack
+
+| Layer | Technology |
+|---|---|
+| Framework | React + Vite |
+| Build executor | `@nx/vite:build` |
+| Dev server | `@nx/vite:dev-server` |
+| Testing | Vitest |
+| Linting | ESLint via `@nx/eslint:lint` |
+| Deployment | Nginx container |
+
+## Library organization
+
+The Third-Party Network has its own set of scoped libraries:
+
+```
+libs/third-party-network/
+├── features/       # Feature modules
+├── data-assets/    # API clients and hooks
+├── ui/             # App-specific UI components
+└── utils/          # Shared utilities
+```
+
+Libraries are imported via the `@redesignhealth/third-party-network/*` path alias.
+
+## Build configurations
+
+The application supports multiple environment configurations:
+
+| Configuration | Mode | Usage |
+|---|---|---|
+| `dev` | Development | Local development (default) |
+| `staging` | Staging | Pre-production testing |
+| `prod` | Production | Production deployment |
+
+```bash
+# Serve locally
+nx serve third-party-network
+
+# Build for staging
+nx build third-party-network --configuration=staging
+
+# Build for production
+nx build third-party-network --configuration=prod
+```
+
+## Project tags
+
+The project is tagged with `scope:third-party-network`, which enforces module boundary rules. Libraries under this scope can only import from:
+
+- Other `scope:third-party-network` libraries
+- `scope:shared` libraries
+
+## Available targets
+
+| Target | Command | Description |
+|---|---|---|
+| `serve` | `nx serve third-party-network` | Start dev server with HMR |
+| `build` | `nx build third-party-network` | Build for specified configuration |
+| `test` | `nx test third-party-network` | Run Vitest tests |
+| `lint` | `nx lint third-party-network` | Lint (no auto-fix by default) |
+| `build-image` | `nx build-image third-party-network` | Build Nginx container image |
+
+## Container deployment
+
+The application is containerized using an Nginx image, similar to the Portal. The `build-image` target builds the app first, then packages the static output into a container:
+
+```bash
+nx build-image third-party-network
+```
+
+The image platform defaults to `linux/arm64`, and the tag is set via the `NX_CONTAINER_IMAGE_TAG` environment variable.

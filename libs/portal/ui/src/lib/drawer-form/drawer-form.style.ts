@@ -1,17 +1,17 @@
 import { FormControl, Input, Select, styled, Text } from '@redesignhealth/ui'
 
 export const DrawerFormHeader = styled(Text, {
-  baseStyle: {
-    fontsize: '14px',
-    lineheight: '20px',
-    fontweight: 'medium',
+  base: {
+    fontSize: '14px',
+    lineHeight: '20px',
+    fontWeight: 'medium',
     margin: '0px',
     color: 'gray.700'
   }
 })
 
 export const DrawerFormDescription = styled(Text, {
-  baseStyle: {
+  base: {
     fontSize: '14px',
     lineHeight: '20px',
     fontWeight: 'normal',
@@ -20,15 +20,15 @@ export const DrawerFormDescription = styled(Text, {
 })
 
 export const DrawerFormInput = styled(Input, {
-  baseStyle: { _placeholder: { color: 'gray.500' } }
+  base: { _placeholder: { color: 'gray.500' } }
 })
 
 export const DrawerFormSelect = styled(Select, {
-  baseStyle: { _placeholder: { color: 'gray.500' } }
+  base: { _placeholder: { color: 'gray.500' } }
 })
 
 export const DrawerFormControl = styled(FormControl, {
-  baseStyle: {
+  base: {
     display: 'flex',
     flexDir: 'column',
     gap: '3px'

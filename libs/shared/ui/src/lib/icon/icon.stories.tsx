@@ -1,4 +1,4 @@
-import { Md3DRotation } from 'react-icons/md'
+import { MdOutline3dRotation } from 'react-icons/md'
 
 import { createIcon, Icon, IconProps } from './icon'
 
@@ -21,7 +21,7 @@ const ArrowIcon = (props: IconProps) => (
 export const CustomIcon = () => <ArrowIcon boxSize="40px" color="red.100" />
 
 export const UsingReactIcon = () => (
-  <Icon as={Md3DRotation} boxSize="40px" color="tomato" />
+  <Icon as={MdOutline3dRotation} boxSize="40px" color="tomato" />
 )
 
 const HeartIcon = createIcon({

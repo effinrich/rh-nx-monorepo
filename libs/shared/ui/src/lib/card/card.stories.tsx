@@ -3,7 +3,9 @@ import { MdChat, MdMoreHoriz, MdShare, MdThumbUp } from 'react-icons/md'
 import { Meta } from '@storybook/react-vite'
 
 import {
-  Avatar,
+  AvatarRoot,
+  AvatarImage,
+  AvatarFallback,
   Box,
   Button,
   ButtonGroup,
@@ -17,15 +19,15 @@ import {
   Text
 } from '../../index'
 
-import { Card, CardBody, CardFooter, CardHeader } from './card'
+import { CardRoot, CardBody, CardFooter, CardHeader } from './card'
 
 export default {
-  component: Card,
+  component: CardRoot,
   title: 'Patterns / Layout / Card',
   decorators: [
-    (Story: React.ElementType) => (
+    (Story: any) => (
       <Box mx="auto" mt="40px" w="100%" maxW="2xl">
-        <Story />
+        {Story()}
       </Box>
     )
   ],
@@ -75,14 +77,14 @@ export default {
 export const Variants = () => (
   <Stack gap="4">
     {['elevated', 'outline', 'filled', 'unstyled'].map(variant => (
-      <Card key={variant} variant={variant}>
+      <CardRoot key={variant} variant={variant}>
         <CardHeader>
           <Heading size="md"> {variant}</Heading>
         </CardHeader>
         <CardBody>
           <Text>variant = {variant}</Text>
         </CardBody>
-      </Card>
+      </CardRoot>
     ))}
   </Stack>
 )
@@ -90,37 +92,37 @@ export const Variants = () => (
 export const Sizes = () => (
   <Stack gap="4">
     {['sm', 'md', 'lg'].map(size => (
-      <Card key={size} size={size}>
+      <CardRoot key={size} size={size}>
         <CardHeader>
           <Heading size="md"> {size}</Heading>
         </CardHeader>
         <CardBody>
           <Text>size = {size}</Text>
         </CardBody>
-      </Card>
+      </CardRoot>
     ))}
   </Stack>
 )
 
 export const Basic = () => (
-  <Card>
+  <CardRoot>
     <CardHeader>
       <Heading size="md"> Customer dashboard</Heading>
     </CardHeader>
     <CardBody>
       <Text>View a summary of all your customers over the last month.</Text>
     </CardBody>
-  </Card>
+  </CardRoot>
 )
 
 export const WithDivider = () => (
-  <Card>
+  <CardRoot>
     <CardHeader>
       <Heading size="md">Client Report</Heading>
     </CardHeader>
 
     <CardBody>
-      <Stack separator={<StackDivider />} gap="4">
+      <Stack divider={<StackDivider />} gap="4">
         <Box>
           <Heading size="xs" textTransform="uppercase">
             Summary
@@ -147,11 +149,11 @@ export const WithDivider = () => (
         </Box>
       </Stack>
     </CardBody>
-  </Card>
+  </CardRoot>
 )
 
 export const WithImage = () => (
-  <Card maxW="sm">
+  <CardRoot maxW="sm">
     <CardBody>
       <Image
         src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
@@ -181,11 +183,11 @@ export const WithImage = () => (
         </Button>
       </ButtonGroup>
     </CardFooter>
-  </Card>
+  </CardRoot>
 )
 
 export const HorizontalCard = () => (
-  <Card direction="row" overflow="hidden" variant="outline">
+  <CardRoot direction="row" overflow="hidden" variant="outline">
     <Image
       objectFit="cover"
       maxW="200px"
@@ -206,22 +208,29 @@ export const HorizontalCard = () => (
         </Button>
       </CardFooter>
     </Stack>
-  </Card>
+  </CardRoot>
 )
 
 export const Advanced = () => (
-  <Card maxW="md">
+  <CardRoot maxW="md">
     <CardHeader>
       <HStack gap="4">
-        <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+        <AvatarRoot name="Dan Abramov">
+          {/* @ts-expect-error Chakra v3 compound component typing */}
+          <AvatarImage src="https://bit.ly/dan-abramov" />
+          <AvatarFallback />
+        </AvatarRoot>
 
         <Box flex="1">
           <Heading size="sm">Platform and Data Team</Heading>
           <Text>Creator, Redesign UI</Text>
         </Box>
-        <IconButton variant="ghost" colorPalette="gray" aria-label="See menu">
-          <MdMoreHoriz />
-        </IconButton>
+        <IconButton
+          variant="ghost"
+          colorPalette="gray"
+          aria-label="See menu"
+          icon={<MdMoreHoriz />}
+        />
       </HStack>
     </CardHeader>
     <CardBody>
@@ -237,16 +246,19 @@ export const Advanced = () => (
       alt="Redesign UI"
     />
 
-    <CardFooter justifyContent="space-between">
+    <CardFooter justify="space-between">
       <Button flex="1" variant="ghost">
-        <MdThumbUp /> Like
+        <MdThumbUp />
+        Like
       </Button>
       <Button flex="1" variant="ghost">
-        <MdChat /> Comment
+        <MdChat />
+        Comment
       </Button>
       <Button flex="1" variant="ghost">
-        <MdShare /> Share
+        <MdShare />
+        Share
       </Button>
     </CardFooter>
-  </Card>
+  </CardRoot>
 )

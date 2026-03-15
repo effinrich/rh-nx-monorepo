@@ -1,4 +1,4 @@
-import type { IconType } from 'react-icons/lib'
+import { IconType } from 'react-icons/lib'
 import { NavLink } from 'react-router-dom'
 import { Button, Flex, HStack, Icon, Link, Text } from '@redesignhealth/ui'
 
@@ -22,15 +22,12 @@ export const NavButton = ({
   const innerButton = (isActive: boolean) => (
     <Button
       onClick={onClick}
-      variant="ghost"
+      variant={isActive ? 'zap-on-accent' : 'ghost'}
+      colorPalette="whiteAlpha"
       width="100%"
       justifyContent="start"
       size="sm"
-      color="white"
-      bg={isActive ? 'whiteAlpha.300' : 'transparent'}
-      fontWeight={isActive ? 'semibold' : 'medium'}
-      _hover={{ bg: 'whiteAlpha.200' }}
-      _active={{ bg: 'whiteAlpha.300' }}
+      color={isActive ? undefined : 'white'}
     >
       <Flex justify="space-between" width="100%">
         <HStack gap="3">
@@ -41,7 +38,6 @@ export const NavButton = ({
       </Flex>
     </Button>
   )
-
   return isInternalLink ? (
     <NavLink to={to} end={to === '/'}>
       {({ isActive }) => innerButton(isActive)}

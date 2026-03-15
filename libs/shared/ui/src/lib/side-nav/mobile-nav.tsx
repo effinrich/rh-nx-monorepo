@@ -1,11 +1,7 @@
-import { useDisclosure } from '@chakra-ui/react'
+import { useDisclosure } from '../hooks/use-disclosure/use-disclosure'
 
 import { Box } from '../box/box'
-import {
-  Drawer,
-  DrawerContent,
-  DrawerOverlay
-} from '../drawer/drawer'
+import { Drawer } from '../drawer/drawer'
 import { Flex } from '../flex/flex'
 import { RedesignLogo } from '../logos/redesign-logo/redesign-logo'
 
@@ -34,21 +30,25 @@ export const MobileNav = ({ userProfile, numOpcos, numPersons }: any) => {
           aria-label="Open Menu"
           onClick={onToggle}
         />
-        <Drawer
+        <Drawer.Root
           open={open}
-          placement="left"
-          onOpenChange={({ open: isOpen }) => !isOpen && onClose()}
+          placement="start"
+          onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
         >
-          <DrawerOverlay />
-          <DrawerContent>
-            <Nav
-              userProfile={userProfile}
-              numOpcos={numOpcos}
-              numPersons={numPersons}
-              onClose={onClose}
-            />
-          </DrawerContent>
-        </Drawer>
+          <Drawer.Backdrop />
+          {/* @ts-expect-error Chakra v3 Drawer.Positioner children type mismatch */}
+          <Drawer.Positioner>
+            {/* @ts-expect-error Chakra v3 Drawer.Content children type mismatch */}
+            <Drawer.Content>
+              <Nav
+                userProfile={userProfile}
+                numOpcos={numOpcos}
+                numPersons={numPersons}
+                onClose={onClose}
+              />
+            </Drawer.Content>
+          </Drawer.Positioner>
+        </Drawer.Root>
       </Flex>
     </Box>
   )

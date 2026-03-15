@@ -9,10 +9,10 @@ import {
   Button,
   CheckCircleIcon,
   Icon,
-  Menu,
-  MenuButton,
+  MenuRoot,
+  MenuTrigger,
   MenuItem,
-  MenuList
+  MenuContent
 } from '../../index'
 
 import { CtaCard } from './cta-card'
@@ -32,7 +32,7 @@ export default {
       options: ['solid', 'outline', 'ghost', 'link'],
       control: { type: 'radio' }
     },
-    ctaColorPalette: {
+    ctaColorScheme: {
       options: [
         'primary',
         'gray',
@@ -56,7 +56,7 @@ export default {
         'title',
         'ctaText',
         'ctaVariant',
-        'ctaColorPalette',
+        'ctaColorScheme',
         'helpText',
         'bgColor',
         'headingcolor'
@@ -153,19 +153,18 @@ export const WithCustonCta: StoryObj<typeof CtaCard> = {
     <CtaCard
       icon={CheckCircleIcon}
       ctaButton={
-        <Menu>
-          <MenuButton
-            as={Button}
-            rightIcon={<Icon as={MdExpandMore} />}
-            colorPalette={args.ctaColorPalette}
-          >
-            Custom CTA
-          </MenuButton>
-          <MenuList>
-            <MenuItem>Option 1</MenuItem>
-            <MenuItem>Option 2</MenuItem>
-          </MenuList>
-        </Menu>
+        <MenuRoot>
+          <MenuTrigger asChild>
+            <Button colorPalette={args.ctaColorPalette}>
+              Custom CTA
+              <Icon as={MdExpandMore} />
+            </Button>
+          </MenuTrigger>
+          <MenuContent>
+            <MenuItem value="option1">Option 1</MenuItem>
+            <MenuItem value="option2">Option 2</MenuItem>
+          </MenuContent>
+        </MenuRoot>
       }
       boxShadow="sm"
       borderWidth={1}

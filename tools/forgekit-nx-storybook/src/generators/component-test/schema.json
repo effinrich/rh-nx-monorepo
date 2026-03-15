@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "id": "ComponentTest",
+  "title": "Generate Playwright Component Test",
+  "description": "Generate a co-located Playwright component test for a React component",
+  "type": "object",
+  "properties": {
+    "componentPath": {
+      "type": "string",
+      "description": "Path to the component file (relative to workspace root)",
+      "x-prompt": "What is the path to the component file?"
+    },
+    "project": {
+      "type": "string",
+      "description": "The project the component belongs to"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "description": "Overwrite existing test file"
+    },
+    "dryRun": {
+      "type": "boolean",
+      "default": false,
+      "description": "Preview the generated test without writing to disk"
+    }
+  },
+  "required": ["componentPath"]
+}

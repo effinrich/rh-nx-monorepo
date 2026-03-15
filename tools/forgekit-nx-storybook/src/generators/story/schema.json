@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Story",
+  "title": "Generate Storybook Story",
+  "description": "Generate a Storybook story file with interaction tests for a React component",
+  "type": "object",
+  "properties": {
+    "componentPath": {
+      "type": "string",
+      "description": "Path to the component file (relative to workspace root)",
+      "x-prompt": "What is the path to the component file?"
+    },
+    "project": {
+      "type": "string",
+      "description": "The project that the component belongs to"
+    },
+    "storyTitle": {
+      "type": "string",
+      "description": "Custom title for the story (defaults to auto-generated from path)"
+    },
+    "skipInteractionTests": {
+      "type": "boolean",
+      "description": "Skip generating interaction test play functions",
+      "default": false
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Overwrite existing story file if it exists",
+      "default": false
+    },
+    "dryRun": {
+      "type": "boolean",
+      "description": "Preview the generated story without writing to disk",
+      "default": false
+    }
+  },
+  "required": ["componentPath"]
+}

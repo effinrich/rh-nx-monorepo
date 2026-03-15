@@ -19,7 +19,7 @@ import {
 import { getErrorsFromValidation } from '@redesignhealth/portal/utils'
 import {
   Button,
-  Checkbox,
+  CheckboxRoot,
   CheckboxGroupProps,
   Divider,
   Flex,
@@ -146,7 +146,7 @@ export const CompanyInfraPrivacy = () => {
               type="submit"
               name="_action"
               value="complete"
-              colorScheme="primary"
+              colorPalette="primary"
             >
               Done
             </Button>
@@ -157,7 +157,7 @@ export const CompanyInfraPrivacy = () => {
       <Flex flexDir="column" gap="16px">
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q1-a'])}
+            invalid={Boolean(fieldErrors?.['q1-a'])}
             flexDir="column"
             gap="16px"
           >
@@ -173,7 +173,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q1-a"
               defaultValue={privacyForm?.form?.['q1-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
             <FormErrorMessage>{fieldErrors?.['q1-a']}</FormErrorMessage>
@@ -182,7 +182,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q1-a-comment"
               defaultValue={privacyForm?.form?.['q1-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -197,7 +197,7 @@ export const CompanyInfraPrivacy = () => {
         <Divider />
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q2-a'])}
+            invalid={Boolean(fieldErrors?.['q2-a'])}
             flexDir="column"
             gap="16px"
           >
@@ -212,7 +212,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q2-a"
               defaultValue={privacyForm?.form?.['q2-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
             <FormErrorMessage>{fieldErrors?.['q2-a']}</FormErrorMessage>
@@ -221,7 +221,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q2-a-comment"
               defaultValue={privacyForm?.form?.['q2-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -238,7 +238,7 @@ export const CompanyInfraPrivacy = () => {
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q3-a'])}
+            invalid={Boolean(fieldErrors?.['q3-a'])}
             flexDir="column"
             gap="16px"
           >
@@ -253,7 +253,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q3-a"
               defaultValue={privacyForm?.form?.['q3-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
             <FormErrorMessage>{fieldErrors?.['q3-a']}</FormErrorMessage>
@@ -262,7 +262,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q3-a-comment"
               defaultValue={privacyForm?.form?.['q3-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -276,7 +276,7 @@ export const CompanyInfraPrivacy = () => {
         </Flex>
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q3-b'])}
+            invalid={Boolean(fieldErrors?.['q3-b'])}
             flexDir="column"
             gap="16px"
           >
@@ -287,7 +287,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q3-b"
               defaultValue={privacyForm?.form?.['q3-b']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
           </DrawerFormControl>
@@ -295,7 +295,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q3-b-comment"
               defaultValue={privacyForm?.form?.['q3-b-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -308,11 +308,12 @@ export const CompanyInfraPrivacy = () => {
             <Flex flexDir="column" gap="16px" pb="16px">
               <Stack spacing={[1, 5]} direction="column">
                 {q3cCheckboxes.map((value, index) => (
-                  <Checkbox
+                  // @ts-expect-error Chakra v3 compound component typing
+                  <CheckboxRoot
                     key={index}
                     name={`q3-c${index}`}
                     value={value}
-                    isReadOnly={infraRequestSubmitted}
+                    readOnly={infraRequestSubmitted}
                     isChecked={q3checked.includes(value)}
                     onChange={() => {
                       const wasChecked = q3checked.includes(value)
@@ -337,7 +338,7 @@ export const CompanyInfraPrivacy = () => {
                     }}
                   >
                     {value}
-                  </Checkbox>
+                  </CheckboxRoot>
                 ))}
               </Stack>
               <FormErrorMessage>
@@ -352,7 +353,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q3-c-comment"
               defaultValue={privacyForm?.form?.['q3-c-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder='Add a comment if your response was "Other or not sure"'
               aria-label={TEXTAREA_LABEL}
             />
@@ -361,7 +362,7 @@ export const CompanyInfraPrivacy = () => {
           {/* <DrawerFormRadioGroup
               name="q3-c"
               defaultValue={privacyForm?.form?.['q3-c']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               direction="column"
               options={[
                 { value: 'Processing In Memory Only' },
@@ -378,7 +379,7 @@ export const CompanyInfraPrivacy = () => {
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q4-a'])}
+            invalid={Boolean(fieldErrors?.['q4-a'])}
             flexDir="column"
             gap="16px"
           >
@@ -394,7 +395,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q4-a"
               defaultValue={privacyForm?.form?.['q4-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
             <FormErrorMessage>{fieldErrors?.['q4-a']}</FormErrorMessage>
@@ -403,7 +404,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q4-a-comment"
               defaultValue={privacyForm?.form?.['q4-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -420,7 +421,7 @@ export const CompanyInfraPrivacy = () => {
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q5-a'])}
+            invalid={Boolean(fieldErrors?.['q5-a'])}
             flexDir="column"
             gap="16px"
           >
@@ -434,7 +435,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q5-a"
               defaultValue={privacyForm?.form?.['q5-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
             <FormErrorMessage>{fieldErrors?.['q5-a']}</FormErrorMessage>
@@ -443,7 +444,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q5-a-comment"
               defaultValue={privacyForm?.form?.['q5-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -456,7 +457,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q5-b-comment"
               defaultValue={privacyForm?.form?.['q5-b-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder="Add a comment with details"
               aria-label={TEXTAREA_LABEL}
             />
@@ -475,7 +476,7 @@ export const CompanyInfraPrivacy = () => {
           <DrawerFormControl
             flexDir="column"
             gap="16px"
-            isInvalid={Boolean(fieldErrors?.['q6-a'])}
+            invalid={Boolean(fieldErrors?.['q6-a'])}
           >
             <DrawerFormHeader as={FormLabel} data-testid="s6">
               6. Sharing data with third parties
@@ -487,7 +488,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q6-a"
               defaultValue={privacyForm?.form?.['q6-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
             <FormErrorMessage>{fieldErrors?.['q6-a']}</FormErrorMessage>
@@ -496,7 +497,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q6-a-comment"
               defaultValue={privacyForm?.form?.['q6-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -515,7 +516,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q6-b-comment"
               defaultValue={privacyForm?.form?.['q6-b-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder="Add a comment with details"
               aria-label={TEXTAREA_LABEL}
             />
@@ -541,11 +542,12 @@ export const CompanyInfraPrivacy = () => {
             </DrawerFormDescription>
             <Stack spacing={[1, 5]} direction="column">
               {q7cCheckboxes.map((value, index) => (
-                <Checkbox
+                // @ts-expect-error Chakra v3 compound component typing
+                <CheckboxRoot
                   key={index}
                   name={`q7-a${index}`}
                   value={value}
-                  isReadOnly={infraRequestSubmitted}
+                  readOnly={infraRequestSubmitted}
                   defaultChecked={Object.keys(privacyForm?.form || {}).includes(
                     `q7-a${index}`
                   )}
@@ -573,11 +575,11 @@ export const CompanyInfraPrivacy = () => {
                   }}
                 >
                   {value}
-                </Checkbox>
+                </CheckboxRoot>
               ))}
             </Stack>
             {/* <DrawerFormRadioGroup
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               name="q7-a"
               defaultValue={privacyForm?.form?.['q7-a']}
               direction="column"
@@ -599,7 +601,7 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q7-a-comment"
               defaultValue={privacyForm?.form?.['q7-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder='Add a comment if your response was "Other or not sure"'
               aria-label={TEXTAREA_LABEL}
             />

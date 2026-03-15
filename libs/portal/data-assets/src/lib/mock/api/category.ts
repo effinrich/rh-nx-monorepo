@@ -1,4 +1,4 @@
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { SetupServer } from 'msw/node'
 
 import { VendorCategory } from '../../vendors/types'
@@ -8,5 +8,5 @@ export const mockGetCategories = (
   categories: VendorCategory[]
 ) =>
   server.use(
-    rest.get('/categories', (req, res, ctx) => res(ctx.json(categories)))
+    http.get('/categories', () => HttpResponse.json(categories))
   )

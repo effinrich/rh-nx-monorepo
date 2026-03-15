@@ -1,12 +1,16 @@
 import {
+  Filters,
+  Ceo,
   mockAdminUser,
   mockCEOCompanyUser,
   mockCeoFilters,
   mockCeos,
   mockCeosNoResults,
-  mockRhUser
+  mockRhUser,
+  PagedResult,
+  UserInfoSummary
 } from '@redesignhealth/portal/data-assets'
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
 import type { Meta } from '@storybook/react-vite'
@@ -25,14 +29,14 @@ const Story: Meta<typeof CeoDirectoryPage> = {
     },
     msw: {
       handlers: [
-        rest.get('/ceos/filters', (req, res, ctx) => {
-          return res(ctx.json(mockCeoFilters))
+        http.get('/ceos/filters', () => {
+          return HttpResponse.json(mockCeoFilters)
         }),
-        rest.get('/ceos', (req, res, ctx) => {
-          return res(ctx.json(mockCeos))
+        http.get('/ceos', () => {
+          return HttpResponse.json(mockCeos)
         }),
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockCEOCompanyUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockCEOCompanyUser)
         })
       ]
     }
@@ -62,11 +66,11 @@ export const AdminUser = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/ceos', (req, res, ctx) => {
-          return res(ctx.json(mockCeos))
+        http.get('/ceos', () => {
+          return HttpResponse.json(mockCeos)
         }),
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockAdminUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockAdminUser)
         })
       ]
     }
@@ -80,11 +84,11 @@ export const RHUser = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/ceos', (req, res, ctx) => {
-          return res(ctx.json(mockCeos))
+        http.get('/ceos', () => {
+          return HttpResponse.json(mockCeos)
         }),
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockRhUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockRhUser)
         })
       ]
     }
@@ -98,8 +102,8 @@ export const NoResultsFound = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/ceos', (req, res, ctx) => {
-          return res(ctx.json(mockCeosNoResults))
+        http.get('/ceos', () => {
+          return HttpResponse.json(mockCeosNoResults)
         })
       ]
     }

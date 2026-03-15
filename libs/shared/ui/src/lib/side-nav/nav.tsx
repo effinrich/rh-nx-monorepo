@@ -5,6 +5,7 @@ import {
   MdSupport
 } from 'react-icons/md'
 import { useColorModeValue } from '../color-mode/color-mode'
+
 import { Divider } from '../divider/divider'
 import { Flex } from '../flex/flex'
 import { RedesignLogo } from '../logos/redesign-logo/redesign-logo'
@@ -49,7 +50,7 @@ export const Nav = ({
       borderColor={borderColor}
     >
       <Stack justify="space-between" gap="1">
-        <Stack gap={{ base: '5', sm: '6' }} shouldWrapChildren>
+        <Stack gap={{ base: '5', sm: '6' }}>
           <RedesignLogo maxW="250px" />
           <Stack gap="1">
             {routes.length > 0 &&

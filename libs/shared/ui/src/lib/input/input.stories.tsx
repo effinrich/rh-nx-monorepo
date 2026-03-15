@@ -6,11 +6,10 @@ import {
   Box,
   Button,
   Container,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  forwardRef,
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   InputProps,
   Stack,
   Text
@@ -71,9 +70,9 @@ export const WithSizes = () => (
 export const WithStates = () => (
   <Stack align="start">
     <Input placeholder="Idle" />
-    <Input invalid placeholder="invalid" />
-    <Input disabled placeholder="disabled" />
-    <Input readOnly placeholder="readOnly" />
+    <Input isInvalid placeholder="isInvalid" />
+    <Input disabled placeholder="isDisabled" />
+    <Input isReadOnly placeholder="isReadonly" />
   </Stack>
 )
 
@@ -144,13 +143,13 @@ export const WithFocusAndErrorColors = () => (
     />
 
     <Input
-      invalid
+      isInvalid
       errorBorderColor="red.300"
       placeholder="Here is a sample placeholder"
     />
 
     <Input
-      invalid
+      isInvalid
       errorBorderColor="crimson"
       placeholder="Here is a sample placeholder"
     />
@@ -159,7 +158,7 @@ export const WithFocusAndErrorColors = () => (
 
 function FormError(props: any) {
   return (
-    <FormErrorMessage
+    <FieldErrorText
       mt="0"
       bg="red.500"
       color="white"
@@ -175,11 +174,11 @@ export const WithFormControl = () => {
   const [isError, setIsError] = React.useState(false)
   return (
     <Stack align="start">
-      <FormControl id="first-name" invalid={isError}>
+      <FieldRoot id="first-name" invalid={isError}>
         <Box display="flex" mb="2">
-          <FormLabel mb="0" lineHeight="1em">
+          <FieldLabel mb="0" lineHeight="1em">
             Amount
-          </FormLabel>
+          </FieldLabel>
           <FormError>is invalid!</FormError>
         </Box>
         <InputGroup size="sm">
@@ -187,20 +186,20 @@ export const WithFormControl = () => {
           <Input placeholder="Enter amount" />
           <InputRightAddon children=".com" />
         </InputGroup>
-        <FormHelperText>Keep it very short and sweet!</FormHelperText>
-      </FormControl>
+        <FieldHelperText>Keep it very short and sweet!</FieldHelperText>
+      </FieldRoot>
       <button onClick={() => setIsError(s => !s)}>Toggle Invalid</button>
     </Stack>
   )
 }
 
 export const WithInputElementBug = () => {
-  const { open, onToggle } = useDisclosure({ defaultOpen: true })
+  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true })
   return (
     <>
       <button onClick={onToggle}>Toggle element</button>
       <InputGroup>
-        {open && <InputLeftElement>O</InputLeftElement>}
+        {isOpen && <InputLeftElement>O</InputLeftElement>}
         <Input name="input" placeholder="placeholder" />
       </InputGroup>
     </>
@@ -218,6 +217,6 @@ export const InputGroupCustomInputProps = () => {
   )
 }
 
-const CustomInput = forwardRef<InputProps, 'input'>((props, ref) => (
+const CustomInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
   <Input ref={ref} color="gray.600" variant="flushed" {...props} />
 ))

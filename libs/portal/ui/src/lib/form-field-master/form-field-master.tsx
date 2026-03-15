@@ -47,11 +47,12 @@ export const FormFieldMaster = ({
     <Tooltip
       label={disabledHelpText}
       placement="top-start"
-      isDisabled={!disabledHelpText}
+      disabled={!disabledHelpText}
     >
-      <FormControl data-testid={testid} isInvalid={isInvalid}>
+      <FormControl data-testid={testid} invalid={isInvalid}>
         <Flex direction={['column', 'column', 'row']}>
           <Box w={['100%', '100%', '25%']} mr={4}>
+            {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
             <FormLabel color="gray.800">
               {optional ? label : <StyledReqInput>{label}</StyledReqInput>}
             </FormLabel>
@@ -61,8 +62,10 @@ export const FormFieldMaster = ({
           <Box w={['100%', '100%', '75%']}>
             {children}
             {isInvalid ? (
+              // @ts-expect-error Chakra v3 FieldErrorText children typing
               <FormErrorMessage>{errorMessage}</FormErrorMessage>
             ) : (
+              // @ts-expect-error Chakra v3 FieldHelperText children typing
               <FormHelperText>{helper}</FormHelperText>
             )}
           </Box>

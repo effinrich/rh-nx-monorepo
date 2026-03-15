@@ -1,6 +1,6 @@
 import { Box, Container } from '../../index'
 
-import { Alert, AlertDescription, AlertIcon, AlertTitle } from './alert'
+import { AlertRoot, AlertDescription, AlertIcon, AlertTitle } from './alert'
 
 export default {
   title: 'Components / Feedback / Alert',
@@ -8,35 +8,35 @@ export default {
 }
 
 export const Basic = () => (
-  <Alert status="error" variant="solid" borderRadius="md">
+  <AlertRoot status="error" variant="solid" borderRadius="md">
     <AlertIcon />
     <AlertTitle mr={2}>Outdated</AlertTitle>
     <AlertDescription>Your Chakra experience may be degraded.</AlertDescription>
-  </Alert>
+  </AlertRoot>
 )
 
 export const Subtle = () => (
-  <Alert status="success" mx="auto" alignItems="start">
+  <AlertRoot status="success" mx="auto" alignItems="start">
     <AlertIcon />
     <Box flex="1">
       <AlertTitle>Holy Smokes</AlertTitle>
       <AlertDescription>Something just happened!</AlertDescription>
     </Box>
-  </Alert>
+  </AlertRoot>
 )
 
 export const LeftAccent = () => (
-  <Alert variant="left-accent" mx="auto" alignItems="start">
+  <AlertRoot variant="left-accent" mx="auto" alignItems="start">
     <AlertIcon />
     <Box flex="1">
       <AlertTitle>Holy Smokes</AlertTitle>
       <AlertDescription>Something just happened!</AlertDescription>
     </Box>
-  </Alert>
+  </AlertRoot>
 )
 
 export const TopAccent = () => (
-  <Alert
+  <AlertRoot
     variant="top-accent"
     mx="auto"
     alignItems="flex-start"
@@ -50,32 +50,32 @@ export const TopAccent = () => (
       </AlertTitle>
       <AlertDescription>Something just happened!</AlertDescription>
     </Box>
-  </Alert>
+  </AlertRoot>
 )
 
 export const DocsExample = () => {
   return (
-    <Alert status="error">
+    <AlertRoot status="error">
       <AlertIcon />
       There was an error processing your request
-    </Alert>
+    </AlertRoot>
   )
 }
 
 export const LoadingExample = () => {
   return (
-    <Alert status="loading">
+    <AlertRoot status="loading">
       <AlertIcon />
       We are loading something
-    </Alert>
+    </AlertRoot>
   )
 }
 
 export const WarningExample = () => {
   return (
-    <Alert status="warning">
+    <AlertRoot status="warning">
       <AlertIcon />
       Warning! Something isn't quite right
-    </Alert>
+    </AlertRoot>
   )
 }

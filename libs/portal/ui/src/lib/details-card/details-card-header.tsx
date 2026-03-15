@@ -31,14 +31,14 @@ const DetailsCardHeader = ({
 }: DetailsCardHeaderProps) => {
   return (
     <CardHeader p={0} {...rest}>
-      <Stack spacing={6}>
+      <Stack gap={6}>
         <BackButton>{backButtonText}</BackButton>
         <Flex
           direction={['column', 'column', 'row']}
           justify="space-between"
           gap={2}
         >
-          <HStack spacing={6} wrap="wrap">
+          <HStack gap={6} wrap="wrap">
             {leftAddon && leftAddon}
             <Stack gap={2}>
               <HStack>

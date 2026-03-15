@@ -17,7 +17,7 @@ import {
   FormLabel,
   Input,
   Radio,
-  RadioGroup
+  RadioGroupRoot
 } from '@redesignhealth/ui'
 import { Select as MultiSelect } from 'chakra-react-select'
 import * as yup from 'yup'
@@ -116,7 +116,7 @@ export const AddUser = () => {
       title="Add User"
       description="Enter their information below."
       errors={errors}
-      isLoading={isPending}
+      loading={isPending}
       isError={isError}
       ctaText="Add user"
       isValid={isValid}
@@ -125,20 +125,21 @@ export const AddUser = () => {
     >
       <form>
         <Flex direction={['column', 'column', 'row']} gap="6" mb={6}>
-          <FormControl isInvalid={Boolean(errors.role)} isDisabled={isPending}>
+          <FormControl invalid={Boolean(errors.role)} disabled={isPending}>
+            {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
             <FormLabel htmlFor="role">User Type</FormLabel>
             <Controller
               name="role"
               control={control}
               render={({ field: { onChange, name, ref } }) => (
-                <RadioGroup
+                <RadioGroupRoot
                   onChange={onChange}
                   as={Flex}
                   name={name}
                   ref={ref}
                   flexDir="column"
                   gap="24px"
-                  colorScheme="primary"
+                  colorPalette="primary"
                   mt="24px"
                 >
                   {USER_TYPE_OPTIONS.filter(role =>
@@ -150,9 +151,10 @@ export const AddUser = () => {
                       {role.label}
                     </Radio>
                   ))}
-                </RadioGroup>
+                </RadioGroupRoot>
               )}
             />
+            {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
             <FormErrorMessage role="alert">
               {errors.role?.message}
             </FormErrorMessage>
@@ -160,32 +162,39 @@ export const AddUser = () => {
         </Flex>
         {userType !== undefined && (
           <Flex flexDir="column" mt="24px" gap="24px">
-            <FormControl isDisabled={isPending}>
+            <FormControl disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input
                 placeholder="jane.doe@example.com"
                 {...register('email')}
               />
+              {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
               <FormErrorMessage role="alert">
                 {errors.email?.message}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isDisabled={isPending}>
+            <FormControl disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="givenName">First Name</FormLabel>
               <Input placeholder="Jane" {...register('givenName')} />
+              {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
               <FormErrorMessage role="alert">
                 {errors.givenName?.message}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isDisabled={isPending}>
+            <FormControl disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="familyName">Last name</FormLabel>
               <Input placeholder="Doe" {...register('familyName')} />
+              {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
               <FormErrorMessage role="alert">
                 {errors.familyName?.message}
               </FormErrorMessage>
             </FormControl>
 
-            <FormControl isDisabled={isPending}>
+            <FormControl disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="memberOf">Company assignment</FormLabel>
               {isGetSuccess && (
                 <Controller
@@ -202,7 +211,7 @@ export const AddUser = () => {
                       }}
                       closeMenuOnSelect={false}
                       blurInputOnSelect={false}
-                      colorScheme="primary"
+                      colorPalette="primary"
                     />
                   )}
                 />

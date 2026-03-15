@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 
 import {
   Button,
-  Drawer,
+  DrawerRoot,
   DrawerBody,
   DrawerContent,
   DrawerHeader,
@@ -18,7 +18,7 @@ const DrawerExample = () => {
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
-      <Drawer placement="right" onClose={onClose} open={open}>
+      <DrawerRoot placement="right" onOpenChange={({ open: isOpen }) => { if (!isOpen) onClose() }} open={open}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
@@ -28,7 +28,7 @@ const DrawerExample = () => {
             <p>Some contents...</p>
           </DrawerBody>
         </DrawerContent>
-      </Drawer>
+      </DrawerRoot>
     </>
   )
 }
@@ -57,7 +57,7 @@ export const WithDrawer = {
     return (
       <>
         <Button onClick={onOpen}>Open Drawer</Button>
-        <Drawer placement="right" onClose={onClose} open={open}>
+        <DrawerRoot placement="right" onOpenChange={({ open: isOpen }) => { if (!isOpen) onClose() }} open={open}>
           <DrawerOverlay />
           <DrawerContent>
             <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
@@ -67,7 +67,7 @@ export const WithDrawer = {
               <p>Some contents...</p>
             </DrawerBody>
           </DrawerContent>
-        </Drawer>
+        </DrawerRoot>
       </>
     )
   }`,

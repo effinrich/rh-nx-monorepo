@@ -130,3 +130,4 @@ build-storybook.log
 .nx/workspace-data
 
 storybook-static
+.nx/polygraph

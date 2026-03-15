@@ -15,8 +15,7 @@ import {
   Loader,
   Tab,
   TabList,
-  TabPanels,
-  Tabs,
+  TabsRoot,
   useDisclosure
 } from '@redesignhealth/ui'
 
@@ -48,7 +47,7 @@ const IpListingDetailsPage = () => {
   )
   const tabs = useGetTabs(companyRole)
   const activeTab = useGetActiveTab(tabs)
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
 
   if (!ipListing) {
     return <Loader />
@@ -83,21 +82,21 @@ const IpListingDetailsPage = () => {
             )
           }
         />
-        <Tabs index={activeTab} colorScheme="primary">
+        <TabsRoot index={activeTab} colorPalette="primary">
           <TabList>
             {tabs.length > 1 &&
               tabs.map(tab => (
-                <Tab key={tab.to} as={RouterLink} to={tab.to} replace>
-                  {tab.label}
+                <Tab key={tab.to} asChild>
+                  <RouterLink to={tab.to} replace>
+                    {tab.label}
+                  </RouterLink>
                 </Tab>
               ))}
           </TabList>
-          <TabPanels>
-            <Outlet />
-          </TabPanels>
-        </Tabs>
+          <Outlet />
+        </TabsRoot>
       </DetailsCard>
-      <BuyerRequestModal onClose={onClose} isOpen={isOpen} />
+      <BuyerRequestModal onClose={onClose} isOpen={open} />
     </Box>
   )
 }

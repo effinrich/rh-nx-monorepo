@@ -15,6 +15,7 @@ interface DisclaimerProps {
 }
 const Disclaimer = ({ onCancel, onSubmit, isSubmitting }: DisclaimerProps) => {
   return (
+    // @ts-expect-error Chakra v3 DialogContent children typing
     <ModalContent>
       <ModalCloseButton />
       <ModalHeader>
@@ -26,8 +27,8 @@ const Disclaimer = ({ onCancel, onSubmit, isSubmitting }: DisclaimerProps) => {
           Cancel
         </Button>
         <Button
-          isLoading={isSubmitting}
-          colorScheme="primary"
+          loading={isSubmitting}
+          colorPalette="primary"
           onClick={onSubmit}
         >
           Accept & release info

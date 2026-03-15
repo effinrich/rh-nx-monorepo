@@ -5,7 +5,7 @@ import { Meta } from '@storybook/react-vite'
 
 import { Box, Stack } from '../../index'
 
-import { Image, ImageProps, Img } from './image'
+import { Image, ImageProps } from './image'
 
 const Story: Meta<typeof Image> = {
   component: Image,
@@ -101,7 +101,7 @@ export const WithSrcSet = () => {
         onError={firstLog}
         onLoad={firstLog}
       />
-      <Img
+      <Image
         ref={secondRef}
         srcSet="//lorempixel.com/100/100/ 1x"
         onError={secondLog}

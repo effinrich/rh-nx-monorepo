@@ -1,5 +1,6 @@
-import { type BoxProps, Box } from '../box/box'
 import { useColorModeValue } from '../color-mode/color-mode'
+
+import { type BoxProps, Box } from '../box/box'
 
 export const Card = (props: BoxProps) => (
   <Box

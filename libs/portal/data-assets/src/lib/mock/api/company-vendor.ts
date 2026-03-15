@@ -1,4 +1,4 @@
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { SetupServer } from 'msw/node'
 
 import { CompanyVendor } from '../../vendors'
@@ -8,7 +8,7 @@ export const mockGetCompanyVendors = (
   vendors: CompanyVendor[]
 ) =>
   server.use(
-    rest.get('/company/:companyId/vendor', (req, res, ctx) =>
-      res(ctx.json({ content: vendors }))
+    http.get('/company/:companyId/vendor', () =>
+      HttpResponse.json({ content: vendors })
     )
   )

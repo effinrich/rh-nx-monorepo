@@ -29,9 +29,9 @@ export const Filters = ({ children, handleClear, ...props }: FiltersProps) => {
           width={['100%', '100%', 'initial']}
           type="reset"
           onClick={handleClear}
-          variant="link"
+          variant="plain"
           size="sm"
-          colorScheme="primary"
+          colorPalette="primary"
         >
           Clear filters
         </Button>

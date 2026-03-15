@@ -16,7 +16,8 @@ export const SupportingFile = ({
     <Link
       display="flex"
       href={link}
-      isExternal
+      target="_blank"
+      rel="noopener noreferrer"
       pointerEvents={isConflict ? 'none' : 'auto'}
       color={isConflict ? 'gray.500' : 'primary.700'}
       textDecoration={isConflict ? 'none' : 'auto'}

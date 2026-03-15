@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { useDisclosure } from '@chakra-ui/hooks'
+import { useDisclosure } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
 
@@ -26,40 +26,15 @@ export default {
         'md',
         'lg',
         'xl',
-        '2xl',
-        '3xl',
-        '4xl',
-        '5xl',
-        '6xl',
         'full'
       ],
       control: { type: 'radio' }
     },
-    motionPreset: {
-      options: ['scale', 'slideInBottom', 'slideInRight'],
+    placement: {
+      options: ['center', 'top', 'bottom'],
       control: { type: 'radio' }
     },
-    returnFocusOnClose: {
-      options: [true, false],
-      control: { type: 'boolean' }
-    },
-    preserveScrollBarGap: {
-      options: [true, false],
-      control: { type: 'boolean' }
-    },
-    closeOnOverlayClick: {
-      options: [true, false],
-      control: { type: 'boolean' }
-    },
-    autoFocus: {
-      options: [true, false],
-      control: { type: 'boolean' }
-    },
-    allowPinchZoom: {
-      options: [true, false],
-      control: { type: 'boolean' }
-    },
-    isCentered: {
+    closeOnInteractOutside: {
       options: [true, false],
       control: { type: 'boolean' }
     }
@@ -68,38 +43,40 @@ export default {
 
 const BasicUsageHooks = (args: any) => {
   const { open, onOpen, onClose } = useDisclosure()
-  const cancelRef = useRef<{ handleOnClose(): void }>()
+  const cancelRef = useRef<HTMLButtonElement>(null)
   return (
     <>
       <Button colorPalette="red" onClick={onOpen} maxW="150px">
         Delete Customer
       </Button>
       <AlertDialog
+        role="alertdialog"
         open={open}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
+        onOpenChange={(e: { open: boolean }) => {
+          if (!e.open) onClose()
+        }}
         {...args}
       >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Customer
-            </AlertDialogHeader>
+        <AlertDialogOverlay />
+        {/* @ts-expect-error Chakra v3 compound component typing */}
+        <AlertDialogContent>
+          <AlertDialogHeader fontSize="lg" fontWeight="bold">
+            Delete Customer
+          </AlertDialogHeader>
 
-            <AlertDialogBody>
-              Are you sure? You can't undo this action afterwards.
-            </AlertDialogBody>
+          <AlertDialogBody>
+            Are you sure? You can&apos;t undo this action afterwards.
+          </AlertDialogBody>
 
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
-                Cancel
-              </Button>
-              <Button colorPalette="red" onClick={onClose} ml={3}>
-                Delete
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
+          <AlertDialogFooter>
+            <Button ref={cancelRef} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorPalette="red" onClick={onClose} ml={3}>
+              Delete
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
       </AlertDialog>
     </>
   )
@@ -111,7 +88,7 @@ export const BasicUsage = {
 
 const TransitionHooks = (args: any) => {
   const { open, onOpen, onClose } = useDisclosure()
-  const cancelRef = useRef<{ handleOnClose(): void }>()
+  const cancelRef = useRef<HTMLButtonElement>(null)
 
   return (
     <>
@@ -120,15 +97,17 @@ const TransitionHooks = (args: any) => {
       </Button>
 
       <AlertDialog
-        motionPreset="slideInBottom"
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
+        role="alertdialog"
+        onOpenChange={(e: { open: boolean }) => {
+          if (!e.open) onClose()
+        }}
         open={open}
-        isCentered
+        placement="center"
         {...args}
       >
         <AlertDialogOverlay />
 
+        {/* @ts-expect-error Chakra v3 compound component typing */}
         <AlertDialogContent>
           <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
           <AlertDialogCloseButton />

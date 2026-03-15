@@ -6,8 +6,7 @@ import {
   Stack,
   Tab,
   TabList,
-  TabPanels,
-  Tabs
+  TabsRoot
 } from '@redesignhealth/ui'
 
 import BackButton from '../../back-button/back-button'
@@ -24,7 +23,7 @@ const CompanyDetailsPage = () => {
   const activeTab = useGetActiveTab(tabs)
 
   return company ? (
-    <Stack spacing={6}>
+    <Stack gap={6}>
       <BackButton to="/companies">Back to companies</BackButton>
       {company.isMarketplaceCompany ? (
         <MarketplaceHeader
@@ -39,18 +38,18 @@ const CompanyDetailsPage = () => {
           number={company.number}
         />
       )}
-      <Tabs index={activeTab} colorScheme="primary">
+      <TabsRoot index={activeTab} colorPalette="primary">
         <TabList>
           {tabs.map(tab => (
-            <Tab key={tab.to} as={RouterLink} to={tab.to} replace>
-              {tab.label}
+            <Tab key={tab.to} asChild>
+              <RouterLink to={tab.to} replace>
+                {tab.label}
+              </RouterLink>
             </Tab>
           ))}
         </TabList>
-        <TabPanels>
-          <Outlet />
-        </TabPanels>
-      </Tabs>
+        <Outlet />
+      </TabsRoot>
     </Stack>
   ) : (
     <Loader />

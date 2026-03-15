@@ -14,5 +14,37 @@
         "WORKSPACE_ROOT": "${workspaceFolder}"
       }
     }
+  },
+  "mcpServers": {
+    "chakra-ui": {
+      "command": "npx",
+      "args": ["-y", "@chakra-ui/react-mcp"],
+      "env": {
+        "CHAKRA_PRO_API_KEY": "chakra-zjOBSnhSvyAOFDvCkEUlBeCJLwQuDrBLvnkKevFJOuUnsfTSIDTujOQIrVlDbtlS"
+      }
+    },
+    "storybook-mcp": {
+      "command": "node",
+      "args": ["tools/storybook-mcp/dist/index.js"],
+      "env": {
+        "WORKSPACE_ROOT": "${workspaceFolder}"
+      }
+    }
+  },
+  "servers": {
+    "chakra-ui": {
+      "command": "npx",
+      "args": ["-y", "@chakra-ui/react-mcp"],
+      "env": {
+        "CHAKRA_PRO_API_KEY": "chakra-zjOBSnhSvyAOFDvCkEUlBeCJLwQuDrBLvnkKevFJOuUnsfTSIDTujOQIrVlDbtlS"
+      }
+    },
+    "storybook-mcp": {
+      "command": "node",
+      "args": ["tools/storybook-mcp/dist/index.js"],
+      "env": {
+        "WORKSPACE_ROOT": "${workspaceFolder}"
+      }
+    }
   }
 }

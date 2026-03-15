@@ -76,7 +76,7 @@ const IPFilterBox = () => {
                 control={control}
                 render={({ field: { name, value, onChange } }) => (
                   <Filter
-                    isLoading={isPending}
+                    loading={isPending}
                     isMulti
                     name={name}
                     options={filters[filterConfig.keyForApi]}

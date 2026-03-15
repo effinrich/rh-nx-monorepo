@@ -39,7 +39,7 @@ const CompanyHeader = ({
             <Box>
               <Badge
                 ml={[0, 1]}
-                colorScheme={status === 'ACTIVE' ? 'green' : 'red'}
+                colorPalette={status === 'ACTIVE' ? 'green' : 'red'}
                 variant="outline"
               >
                 {status}
@@ -66,12 +66,14 @@ const CompanyHeader = ({
         >
           <Flex flexDir={{ base: 'column', md: 'row' }} gap="16px">
             <IconButton
-              as={RouterLink}
-              to={`/companies/${companyId}/overview/edit`}
+              asChild
               variant="outline"
               aria-label="Edit company"
-              icon={<Icon as={MdEdit} />}
-            />
+            >
+              <RouterLink to={`/companies/${companyId}/overview/edit`}>
+                <Icon as={MdEdit} />
+              </RouterLink>
+            </IconButton>
           </Flex>
         </HasRole>
       ) : (

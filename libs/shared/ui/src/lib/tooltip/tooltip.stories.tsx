@@ -1,138 +1,65 @@
 import * as React from 'react'
 import { MdInfoOutline } from 'react-icons/md'
-import { AnimatePresence, motion } from 'framer-motion'
 
 import { Button } from '../button/button'
-import { useTooltip } from '../hooks/use-tooltip/use-tooltip'
 import { Icon } from '../icon/icon'
 import { Modal, ModalContent, ModalOverlay } from '../modal/modal'
 import { rh } from '../rh/rh'
 
-import { Tooltip } from './tooltip'
+import {
+  TooltipRoot,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipArrow,
+  TooltipPositioner
+} from './tooltip'
 
 export default {
   title: 'Components / Overlay / Tooltip'
 }
 
-const HookTooltip = ({ children }: any) => {
-  const { getTriggerProps, getTooltipPositionerProps, getTooltipProps, open } =
-    useTooltip({
-      openDelay: 100,
-      arrowSize: 8,
-      placement: 'bottom'
-    })
-
-  return (
-    <>
-      <Button {...getTriggerProps()}>Hover me</Button>
-      <div {...getTooltipPositionerProps()}>
-        <div
-          {...getTooltipProps({
-            style: {
-              background: 'tomato',
-              color: 'white',
-              borderRadius: '4px',
-              padding: '0.5em 1em',
-              visibility: open ? 'visible' : 'hidden',
-              ['--popper-arrow-bg' as string]: 'tomato'
-            }
-          })}
-        >
-          {children}
-          <div data-popper-arrow>
-            <div data-popper-arrow-inner />
-          </div>
-        </div>
-      </div>
-    </>
-  )
-}
-
-/*
-export const Basic = () => <HookTooltip>This is me</HookTooltip>
-
-export const MultipleTooltips = () => (
-  <>
-    <HookTooltip>This is tip 1</HookTooltip>
-    <HookTooltip>This is tip 2</HookTooltip>
-  </>
-)
-*/
-
-export const WithTransition = () => {
-  const { getTriggerProps, getTooltipPositionerProps, getTooltipProps, open } =
-    useTooltip({
-      openDelay: 100
-    })
-
-  return (
-    <>
-      <Button {...getTriggerProps()}>Hover me</Button>
-      <AnimatePresence>
-        {open && (
-          <div {...getTooltipPositionerProps()}>
-            <motion.div
-              initial="exit"
-              animate="enter"
-              exit="exit"
-              {...(getTooltipProps() as any)}
-            >
-              <motion.div
-                transition={{
-                  duration: 0.12,
-                  ease: [0.4, 0, 0.2, 1],
-                  bounce: 0.5
-                }}
-                variants={{
-                  exit: { scale: 0.9, opacity: 0 },
-                  enter: { scale: 1, opacity: 1 }
-                }}
-                style={{
-                  transformOrigin: 'var(--popper-transform-origin)',
-                  background: 'tomato',
-                  ['--popper-arrow-bg' as string]: 'tomato',
-                  color: 'white',
-                  borderRadius: '4px',
-                  padding: '0.5em 1em'
-                }}
-              >
-                Fade! This is tooltip
-                <div data-popper-arrow>
-                  <div data-popper-arrow-inner />
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-    </>
-  )
-}
-
 export const WithButton = () => (
-  <Tooltip label="This is a rh tooltip" placement="bottom" hasArrow>
-    <Button>Hover me</Button>
-  </Tooltip>
+  <TooltipRoot positioning={{ placement: 'bottom' }}>
+    <TooltipTrigger asChild>
+      <Button>Hover me</Button>
+    </TooltipTrigger>
+    <TooltipPositioner>
+      <TooltipContent>
+        <TooltipArrow />
+        This is a rh tooltip
+      </TooltipContent>
+    </TooltipPositioner>
+  </TooltipRoot>
 )
 
 export const WithString = () => (
-  <Tooltip label="This is a rh tooltip">Hover me</Tooltip>
+  <TooltipRoot>
+    <TooltipTrigger asChild>
+      <span>Hover me</span>
+    </TooltipTrigger>
+    <TooltipPositioner>
+      <TooltipContent>This is a rh tooltip</TooltipContent>
+    </TooltipPositioner>
+  </TooltipRoot>
 )
 
 export const WithAriaLabel = () => (
-  <Tooltip
-    hasArrow
-    contentProps={{ bg: 'tomato', color: 'white' }}
-    label="Notifications"
-    aria-label="3 Notifications"
-  >
-    <Button style={{ fontSize: 25 }}>
-      <span role="img" aria-label="notification">
-        🔔
-      </span>
-      <span>3</span>
-    </Button>
-  </Tooltip>
+  <TooltipRoot>
+    <TooltipTrigger asChild>
+      <Button style={{ fontSize: 25 }}>
+        <span role="img" aria-label="notification">
+          🔔
+        </span>
+        <span>3</span>
+      </Button>
+    </TooltipTrigger>
+    <TooltipPositioner>
+      <TooltipContent bg="tomato" color="white" aria-label="3 Notifications">
+        <TooltipArrow />
+        Notifications
+      </TooltipContent>
+    </TooltipPositioner>
+  </TooltipRoot>
 )
 
 export const WithinFixedContainer = () => (
@@ -144,9 +71,14 @@ export const WithinFixedContainer = () => (
       width: '200px'
     }}
   >
-    <Tooltip label="Hello" aria-label="hello">
-      Hi
-    </Tooltip>
+    <TooltipRoot>
+      <TooltipTrigger asChild>
+        <span>Hi</span>
+      </TooltipTrigger>
+      <TooltipPositioner>
+        <TooltipContent aria-label="hello">Hello</TooltipContent>
+      </TooltipPositioner>
+    </TooltipRoot>
   </div>
 )
 
@@ -155,36 +87,59 @@ export const WithModal = () => {
   return (
     <div>
       <Button onClick={() => setShowDialog(true)}>Show Dialog</Button>
-      <Modal open={showDialog} onOpenChange={e => setShowDialog(e.open)}>
+      <Modal isOpen={showDialog} onClose={() => setShowDialog(false)}>
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent height="300px">
           <div>
             <Button onClick={() => setShowDialog(false)}>Close Dialog</Button>
-            <Tooltip label="Notifications">
-              <Button>
-                <span aria-hidden>🔔</span>
-              </Button>
-            </Tooltip>
-            <Tooltip label="Settings">
-              <Button>
-                <span aria-hidden>⚙️</span>
-              </Button>
-            </Tooltip>
-            <Tooltip label="Your files are safe with us">
-              <Button>
-                <span aria-hidden>💾</span> Save
-              </Button>
-            </Tooltip>
+            <TooltipRoot>
+              <TooltipTrigger asChild>
+                <Button>
+                  <span aria-hidden>🔔</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipPositioner>
+                <TooltipContent>Notifications</TooltipContent>
+              </TooltipPositioner>
+            </TooltipRoot>
+            <TooltipRoot>
+              <TooltipTrigger asChild>
+                <Button>
+                  <span aria-hidden>⚙️</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipPositioner>
+                <TooltipContent>Settings</TooltipContent>
+              </TooltipPositioner>
+            </TooltipRoot>
+            <TooltipRoot>
+              <TooltipTrigger asChild>
+                <Button>
+                  <span aria-hidden>💾</span> Save
+                </Button>
+              </TooltipTrigger>
+              <TooltipPositioner>
+                <TooltipContent>Your files are safe with us</TooltipContent>
+              </TooltipPositioner>
+            </TooltipRoot>
 
             <div style={{ float: 'right' }}>
-              <Tooltip label="Notifications" aria-label="3 Notifications">
-                <Button>
-                  <span role="img" aria-label="Bell">
-                    🔔
-                  </span>
-                  <span>3</span>
-                </Button>
-              </Tooltip>
+              <TooltipRoot>
+                <TooltipTrigger asChild>
+                  <Button>
+                    <span role="img" aria-label="Bell">
+                      🔔
+                    </span>
+                    <span>3</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipPositioner>
+                  <TooltipContent aria-label="3 Notifications">
+                    Notifications
+                  </TooltipContent>
+                </TooltipPositioner>
+              </TooltipRoot>
             </div>
           </div>
         </ModalContent>
@@ -194,96 +149,148 @@ export const WithModal = () => {
 }
 
 export const WithDisabledButton = () => (
-  <Tooltip label="Oh oh oh, oh oh">
-    <Button disabled>Can't Touch This</Button>
-  </Tooltip>
+  <TooltipRoot>
+    <TooltipTrigger asChild>
+      <Button disabled>Can't Touch This</Button>
+    </TooltipTrigger>
+    <TooltipPositioner>
+      <TooltipContent>Oh oh oh, oh oh</TooltipContent>
+    </TooltipPositioner>
+  </TooltipRoot>
 )
 
 export const WithWrappedDisabledButton = () => (
-  <Tooltip label="Hello world">
-    <span>
-      <Button disabled>Hover me</Button>
-    </span>
-  </Tooltip>
+  <TooltipRoot>
+    <TooltipTrigger asChild>
+      <span>
+        <Button disabled>Hover me</Button>
+      </span>
+    </TooltipTrigger>
+    <TooltipPositioner>
+      <TooltipContent>Hello world</TooltipContent>
+    </TooltipPositioner>
+  </TooltipRoot>
 )
 
 export const WithIsOpenProp = () => (
-  <Tooltip label="Hello world" open hasArrow>
-    <Button disabled>Can't Touch This</Button>
-  </Tooltip>
+  <TooltipRoot open>
+    <TooltipTrigger asChild>
+      <Button disabled>Can't Touch This</Button>
+    </TooltipTrigger>
+    <TooltipPositioner>
+      <TooltipContent>
+        <TooltipArrow />
+        Hello world
+      </TooltipContent>
+    </TooltipPositioner>
+  </TooltipRoot>
 )
 
 export const WithDefaultIsOpenProp = () => (
-  <Tooltip label="Hello world" defaultOpen>
-    <Button>Can't Touch This</Button>
-  </Tooltip>
+  <TooltipRoot defaultOpen>
+    <TooltipTrigger asChild>
+      <Button>Can't Touch This</Button>
+    </TooltipTrigger>
+    <TooltipPositioner>
+      <TooltipContent>Hello world</TooltipContent>
+    </TooltipPositioner>
+  </TooltipRoot>
 )
 
 export const WithAutoPlacement = () => (
-  <Tooltip label="Hello world" placement="auto" hasArrow>
-    <Button>Can't Touch This</Button>
-  </Tooltip>
+  <TooltipRoot positioning={{ placement: 'bottom' }}>
+    <TooltipTrigger asChild>
+      <Button>Can't Touch This</Button>
+    </TooltipTrigger>
+    <TooltipPositioner>
+      <TooltipContent>
+        <TooltipArrow />
+        Hello world
+      </TooltipContent>
+    </TooltipPositioner>
+  </TooltipRoot>
 )
 
 export const WithScroll = () => (
   <rh.div border="solid 1px red" h="200vh" pt="48">
-    <Tooltip label="Hello world" placement="auto" hasArrow closeOnScroll>
-      <Button mt="300px">Can't Touch This</Button>
-    </Tooltip>
+    <TooltipRoot closeOnScroll positioning={{ placement: 'bottom' }}>
+      <TooltipTrigger asChild>
+        <Button mt="300px">Can't Touch This</Button>
+      </TooltipTrigger>
+      <TooltipPositioner>
+        <TooltipContent>
+          <TooltipArrow />
+          Hello world
+        </TooltipContent>
+      </TooltipPositioner>
+    </TooltipRoot>
   </rh.div>
 )
 
 export const WithScrollWithin = () => (
   <rh.div border="solid 1px red" pt="48" height="400px" overflow="auto">
-    <Tooltip
-      label="Hello world"
-      hasArrow
-      closeOnScroll
-      contentProps={{ bg: 'red' }}
-    >
-      <Button mt="180px" mb="80px">
-        Can't Touch This
-      </Button>
-    </Tooltip>
+    <TooltipRoot closeOnScroll positioning={{ placement: 'bottom' }}>
+      <TooltipTrigger asChild>
+        <Button mt="180px" mb="80px">
+          Can't Touch This
+        </Button>
+      </TooltipTrigger>
+      <TooltipPositioner>
+        <TooltipContent>
+          <TooltipArrow />
+          Hello world
+        </TooltipContent>
+      </TooltipPositioner>
+    </TooltipRoot>
   </rh.div>
 )
 
 export const WithDynamicDisabled = () => {
-  const [disabled, setIsDisabled] = React.useState(false)
+  const [isDisabled, setIsDisabled] = React.useState(false)
   const handleDisabled = () => setIsDisabled(true)
   const handleEnabled = () => setIsDisabled(false)
   return (
-    <Tooltip
-      label="Disabled after being triggered"
-      contentProps={{ bg: 'tomato', color: 'white' }}
-      placement="bottom"
+    <TooltipRoot
+      positioning={{ placement: 'bottom' }}
       openDelay={500}
-      disabled={disabled}
-      hasArrow
+      disabled={isDisabled}
     >
-      <rh.span
-        draggable
-        onDragStart={handleDisabled}
-        onDragEnd={handleEnabled}
-        cursor="grab"
-      >
-        Drag me, and you won't see
-      </rh.span>
-    </Tooltip>
+      <TooltipTrigger asChild>
+        <rh.span
+          draggable
+          onDragStart={handleDisabled}
+          onDragEnd={handleEnabled}
+          cursor="grab"
+        >
+          Drag me, and you won't see
+        </rh.span>
+      </TooltipTrigger>
+      <TooltipPositioner>
+        <TooltipContent>
+          <TooltipArrow />
+          Disabled after being triggered
+        </TooltipContent>
+      </TooltipPositioner>
+    </TooltipRoot>
   )
 }
 
 // https://chakra-ui.com/docs/components/tooltip#with-an-icon
 export const WithExternalIcon = () => {
   return (
-    <Tooltip
-      hasArrow
-      label="Hello I am a tooltip with an external icon. Please wrap the Icon in a span so that I appear next to the Icon."
-      placement="right"
-    >
-      <span>
-        <Icon as={MdInfoOutline} boxSize={6} color="gray.500" />
-      </span>
-    </Tooltip>
+    <TooltipRoot positioning={{ placement: 'right' }}>
+      <TooltipTrigger asChild>
+        <span>
+          <Icon as={MdInfoOutline} boxSize={6} color="gray.500" />
+        </span>
+      </TooltipTrigger>
+      <TooltipPositioner>
+        <TooltipContent>
+          <TooltipArrow />
+          Hello I am a tooltip with an external icon. Please wrap the Icon in a
+          span so that I appear next to the Icon.
+        </TooltipContent>
+      </TooltipPositioner>
+    </TooltipRoot>
   )
 }

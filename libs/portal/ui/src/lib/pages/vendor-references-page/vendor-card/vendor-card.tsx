@@ -43,7 +43,7 @@ export const VendorCard = ({
           <ListCardTags values={tags} />
         </ListCardRow>
         <ListCardRow title="Who to talk to?">
-          <HStack wrap="wrap" spacing={6}>
+          <HStack wrap="wrap" gap={6}>
             {contacts?.map(contact => (
               <VendorContactInfo
                 key={contact.email}

@@ -1,0 +1,138 @@
+---
+title: "State management"
+description: "Server state with TanStack Query and client-side state patterns."
+---
+
+The Portal separates server state from client state. TanStack React Query handles all data fetching, caching, and synchronization with the backend, while local React state manages UI-specific concerns.
+
+## Server state with TanStack Query
+
+The `QueryClientProvider` wraps the application in `main.tsx`, providing a shared query client to all components:
+
+```tsx
+<QueryClientProvider client={directQueryClient()}>
+  <ReactQueryDevtools buttonPosition="bottom-right" />
+  {/* App */}
+</QueryClientProvider>
+```
+
+<Tip>
+  React Query Devtools are included in development builds. Open them from the bottom-right corner to inspect queries, mutations, and cache state.
+</Tip>
+
+## Query key management
+
+The Portal uses `@lukemorales/query-key-factory` to define structured, type-safe query keys. This ensures consistency across the codebase and simplifies cache invalidation.
+
+```tsx
+import { createQueryKeys } from '@lukemorales/query-key-factory'
+
+export const companyKeys = createQueryKeys('companies', {
+  list: (filters) => ({ queryKey: [filters] }),
+  detail: (companyId) => ({ queryKey: [companyId] }),
+})
+```
+
+## Data-assets libraries
+
+All API clients, React Query hooks, and TypeScript types live in data-assets libraries:
+
+```
+libs/portal/data-assets/src/lib/
+├── companies/
+│   ├── api.ts          # Axios API client functions
+│   ├── hooks.ts        # React Query hooks (useQuery, useMutation)
+│   └── types.ts        # TypeScript interfaces
+├── users/
+│   ├── api.ts
+│   ├── hooks.ts
+│   └── types.ts
+└── ...
+```
+
+<Columns>
+  <Column>
+    ### API layer (`api.ts`)
+    Plain Axios functions that call the Company API. These are framework-agnostic and can be used in loaders or utilities.
+  </Column>
+  <Column>
+    ### Hook layer (`hooks.ts`)
+    React Query wrappers (`useQuery`, `useMutation`) that provide caching, loading states, and error handling to components.
+  </Column>
+</Columns>
+
+## Data fetching patterns
+
+### Queries
+
+Use `useQuery` hooks from data-assets for reading data:
+
+```tsx
+import { useCompanies } from '@redesignhealth/portal/data-assets'
+
+function CompaniesList() {
+  const { data, isLoading, error } = useCompanies(filters)
+  // ...
+}
+```
+
+### Mutations
+
+Use `useMutation` hooks for creating, updating, or deleting data:
+
+```tsx
+import { useCreateCompany } from '@redesignhealth/portal/data-assets'
+
+function AddCompanyForm() {
+  const mutation = useCreateCompany()
+
+  const handleSubmit = (data) => {
+    mutation.mutate(data, {
+      onSuccess: () => {
+        // Navigate or show success
+      },
+    })
+  }
+}
+```
+
+### Route loaders
+
+React Router loaders use the API layer directly (not hooks) to prefetch data:
+
+```tsx
+loader={async () => {
+  return getUserInfo()
+}}
+```
+
+## Caching and invalidation
+
+<AccordionGroup>
+  <Accordion title="Automatic caching">
+    TanStack Query caches all query results by their query key. Subsequent requests for the same data are served from cache while revalidating in the background.
+  </Accordion>
+  <Accordion title="Invalidation after mutations">
+    After a successful mutation, invalidate related queries to trigger a refetch:
+    ```tsx
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: companyKeys.list.queryKey })
+    }
+    ```
+  </Accordion>
+  <Accordion title="Route action invalidation">
+    Route actions receive the query client as a parameter, allowing them to invalidate caches after form submissions within the React Router data flow.
+  </Accordion>
+</AccordionGroup>
+
+## Client-side state
+
+For UI-specific state that does not come from the server (modals, form state, filters, toggles), use standard React state:
+
+- `useState` for simple local state
+- `useReducer` for complex state logic
+- React Context for state shared across a component subtree
+
+<Warning>
+  Avoid duplicating server state in client state. If data comes from the API, manage it through TanStack Query — not `useState` or a global store.
+</Warning>

@@ -23,7 +23,7 @@ import {
   Input,
   Loader,
   Radio,
-  RadioGroup
+  RadioGroupRoot
 } from '@redesignhealth/ui'
 import { Select as MultiSelect } from 'chakra-react-select'
 import * as yup from 'yup'
@@ -151,7 +151,7 @@ export const EditUser = () => {
       title="Edit User"
       description="Update their information below."
       errors={errors}
-      isLoading={isPending}
+      loading={isPending}
       isError={isError}
       ctaText="Edit user"
       isValid={isValid}
@@ -169,7 +169,7 @@ export const EditUser = () => {
                 name="role"
                 control={control}
                 render={({ field: { onChange, name, ref } }) => (
-                  <RadioGroup
+                  <RadioGroupRoot
                     onChange={onChange}
                     defaultValue={personData.role?.authority}
                     as={Flex}
@@ -177,9 +177,9 @@ export const EditUser = () => {
                     ref={ref}
                     flexDir="column"
                     gap="24px"
-                    colorScheme="primary"
+                    colorPalette="primary"
                     mt="24px"
-                    isDisabled={currentUserRole !== 'ROLE_SUPER_ADMIN'}
+                    disabled={currentUserRole !== 'ROLE_SUPER_ADMIN'}
                   >
                     {USER_TYPE_OPTIONS.filter(role =>
                       isSuperAdminRole(currentUserRole)
@@ -189,25 +189,25 @@ export const EditUser = () => {
                       <Radio
                         key={role.value}
                         value={role.value}
-                        isReadOnly={currentUserRole !== 'ROLE_SUPER_ADMIN'}
+                        readOnly={currentUserRole !== 'ROLE_SUPER_ADMIN'}
                       >
                         {role.label}
                       </Radio>
                     ))}
-                  </RadioGroup>
+                  </RadioGroupRoot>
                 )}
               />
             </FormControl>
           </Flex>
           <Flex flexDir="column" mt="24px" gap="24px">
-            <FormControl isDisabled={isPending}>
+            <FormControl disabled={isPending}>
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input defaultValue={personData.email} {...register('email')} />
               <FormErrorMessage role="alert">
                 {errors.email?.message}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isDisabled={isPending}>
+            <FormControl disabled={isPending}>
               <FormLabel htmlFor="givenName">First Name</FormLabel>
               <Input
                 defaultValue={personData.givenName}
@@ -217,7 +217,7 @@ export const EditUser = () => {
                 {errors.givenName?.message}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isDisabled={isPending}>
+            <FormControl disabled={isPending}>
               <FormLabel htmlFor="familyName">Last name</FormLabel>
               <Input
                 defaultValue={personData.familyName}
@@ -228,7 +228,7 @@ export const EditUser = () => {
               </FormErrorMessage>
             </FormControl>
 
-            <FormControl isDisabled={isPending}>
+            <FormControl disabled={isPending}>
               <FormLabel htmlFor="memberOf">Company assignment</FormLabel>
               {isGetOpCosSuccess && isGetSuccess && defaultOpCoValues && (
                 <Controller
@@ -246,7 +246,7 @@ export const EditUser = () => {
                       }}
                       closeMenuOnSelect={false}
                       blurInputOnSelect={false}
-                      colorScheme="primary"
+                      colorPalette="primary"
                     />
                   )}
                 />

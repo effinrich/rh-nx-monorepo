@@ -20,7 +20,7 @@ const Story: Meta<typeof VendorCard> = {
         email: 'terra.branford@example.com'
       }
     ],
-    rightAddon: <Button colorScheme="primary">View Profile</Button>
+    rightAddon: <Button colorPalette="primary">View Profile</Button>
   }
 }
 export default Story
@@ -33,7 +33,7 @@ export const WithCustomRightAddon = {
   args: {
     ...Default.args,
     rightAddon: (
-      <Button onClick={action('rightAddon-clicked')} colorScheme="whatsapp">
+      <Button onClick={action('rightAddon-clicked')} colorPalette="whatsapp">
         Click Me
       </Button>
     )
@@ -48,7 +48,7 @@ export const WithoutContacts = {
   render: (args: VendorCardProps) => (
     <VendorCard
       {...args}
-      rightAddon={<Button colorScheme="primary">View Profile</Button>}
+      rightAddon={<Button colorPalette="primary">View Profile</Button>}
     />
   )
 }
@@ -76,6 +76,6 @@ export const ManyValuesWithManyContacts = {
       { givenName: 'John', familyName: 'Doe', email: 'johndoe@example.com' },
       { givenName: 'Jane', familyName: 'Doe', email: 'janedoe@example.com' }
     ],
-    rightAddon: <Button colorScheme="primary">View Profile</Button>
+    rightAddon: <Button colorPalette="primary">View Profile</Button>
   }
 }

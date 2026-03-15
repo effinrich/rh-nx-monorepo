@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Watch",
+  "title": "Watch for Component Changes",
+  "description": "Watch component files and auto-generate/update Storybook stories",
+  "type": "object",
+  "properties": {
+    "watchPaths": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Glob patterns for directories to watch for component changes"
+    },
+    "ignore": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Glob patterns for files to ignore",
+      "default": ["*.spec.*", "*.test.*", "*.stories.*", "index.ts", "index.tsx"]
+    },
+    "debounceMs": {
+      "type": "number",
+      "description": "Debounce interval in milliseconds for file change events",
+      "default": 300
+    },
+    "skipInteractionTests": {
+      "type": "boolean",
+      "description": "Skip generating interaction test play functions",
+      "default": false
+    }
+  },
+  "required": ["watchPaths"]
+}

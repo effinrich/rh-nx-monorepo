@@ -13,6 +13,8 @@ export {
   AlertTitle
 } from '@chakra-ui/react'
 
+export type { AlertRootProps } from '@chakra-ui/react'
+
 // v2 compatibility aliases (deprecated)
 export {
   AlertIndicator as AlertIcon,

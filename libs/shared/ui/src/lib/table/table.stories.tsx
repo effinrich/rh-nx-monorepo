@@ -1,8 +1,8 @@
 import {
-  Table,
+  TableRoot,
   TableCaption,
   TableContainer,
-  TableProps,
+  TableRootProps,
   Tbody,
   Td,
   Th,
@@ -14,8 +14,8 @@ export default {
   title: 'Components / Data Display / Table / Simple'
 }
 
-const SimpleTable = (props: TableProps) => (
-  <Table {...props}>
+const SimpleTable = (props: TableRootProps) => (
+  <TableRoot {...props}>
     <TableCaption>Imperial to metric conversion factors</TableCaption>
     <Thead>
       <Tr>
@@ -88,7 +88,7 @@ const SimpleTable = (props: TableProps) => (
         <Td isNumeric>0.159</Td>
       </Tr>
     </Tbody>
-  </Table>
+  </TableRoot>
 )
 
 export const SimpleSM = () => <SimpleTable size="sm" />

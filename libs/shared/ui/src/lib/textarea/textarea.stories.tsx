@@ -1,17 +1,17 @@
 /* eslint-disable react/no-children-prop */
 import { useState } from 'react'
-import { Radio, RadioGroup } from '@chakra-ui/react'
-import { ResponsiveValue } from '@chakra-ui/system'
+import { RadioGroupRoot, RadioGroupItem, RadioGroupItemControl, RadioGroupItemText, RadioGroupItemHiddenInput } from '@chakra-ui/react'
+import { ConditionalValue } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
 
 import {
   Box,
   Container,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   HStack,
   Stack,
   Text,
@@ -57,17 +57,17 @@ export const WithControlled = () => {
 }
 
 export const WithResize = () => {
-  const [resize, setResize] = useState<ResponsiveValue<any>>('horizontal')
+  const [resize, setResize] = useState<ConditionalValue<any>>('horizontal')
 
   return (
     <>
-      <RadioGroup defaultValue={resize} onChange={setResize} mb={6}>
+      <RadioGroupRoot defaultValue={resize} onChange={setResize} mb={6}>
         <HStack direction="row" gap={5}>
-          <Radio value="horizontal">Horizontal</Radio>
-          <Radio value="vertical">Vertical</Radio>
-          <Radio value="none">None</Radio>
+          <RadioGroupItem value="horizontal"><RadioGroupItemHiddenInput /><RadioGroupItemControl /><RadioGroupItemText>Horizontal</RadioGroupItemText></RadioGroupItem>
+          <RadioGroupItem value="vertical"><RadioGroupItemHiddenInput /><RadioGroupItemControl /><RadioGroupItemText>Vertical</RadioGroupItemText></RadioGroupItem>
+          <RadioGroupItem value="none"><RadioGroupItemHiddenInput /><RadioGroupItemControl /><RadioGroupItemText>None</RadioGroupItemText></RadioGroupItem>
         </HStack>
-      </RadioGroup>
+      </RadioGroupRoot>
 
       <Textarea
         placeholder="Here is a sample placeholder"
@@ -93,9 +93,9 @@ export const WithSizes = () => (
 export const WithStates = () => (
   <Stack align="start" gap={8}>
     <Textarea placeholder="Idle" />
-    <Textarea invalid placeholder="invalid" />
-    <Textarea disabled placeholder="disabled" />
-    <Textarea readOnly placeholder="readOnly" />
+    <Textarea isInvalid placeholder="isInvalid" />
+    <Textarea disabled placeholder="isDisabled" />
+    <Textarea isReadOnly placeholder="isReadonly" />
   </Stack>
 )
 
@@ -121,13 +121,13 @@ export const WithFocusAndErrorColors = () => (
     />
 
     <Textarea
-      invalid
+      isInvalid
       errorBorderColor="red.300"
       placeholder="Here is a sample placeholder"
     />
 
     <Textarea
-      invalid
+      isInvalid
       errorBorderColor="crimson"
       placeholder="Here is a sample placeholder"
     />
@@ -136,7 +136,7 @@ export const WithFocusAndErrorColors = () => (
 
 function FormError(props: any) {
   return (
-    <FormErrorMessage
+    <FieldErrorText
       mt="0"
       bg="red.500"
       color="white"
@@ -152,16 +152,16 @@ export const WithFormControl = () => {
   const [isError, setIsError] = useState(false)
   return (
     <Stack align="start">
-      <FormControl id="first-name" invalid={isError}>
+      <FieldRoot id="first-name" invalid={isError}>
         <Box display="flex" mb="2">
-          <FormLabel mb="0" lineHeight="1em">
+          <FieldLabel mb="0" lineHeight="1em">
             Amount
-          </FormLabel>
+          </FieldLabel>
           <FormError>is invalid!</FormError>
         </Box>
         <Textarea placeholder="Enter amount" />
-        <FormHelperText>Keep it very short and sweet!</FormHelperText>
-      </FormControl>
+        <FieldHelperText>Keep it very short and sweet!</FieldHelperText>
+      </FieldRoot>
       <button onClick={() => setIsError(s => !s)}>Toggle Invalid</button>
     </Stack>
   )

@@ -3,7 +3,16 @@ import {
   Link as LinkType,
   RoleAuthorityEnum
 } from '@redesignhealth/portal/data-assets'
-import { Flex, Icon, Text, Tooltip } from '@redesignhealth/ui'
+import {
+  Flex,
+  Icon,
+  Text,
+  TooltipRoot,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipArrow,
+  TooltipPositioner
+} from '@redesignhealth/ui'
 
 import DetailsCard from '../../details-card/details-card'
 import DetailsCardBody from '../../details-card/details-card-body'
@@ -77,11 +86,19 @@ export const CeoProfileDetailsPage = ({
               )}
 
               {companyDescription && (
-                <Tooltip hasArrow label={companyDescription} placement="right">
-                  <span>
-                    <Icon as={MdInfoOutline} boxSize={6} color="gray.500" />
-                  </span>
-                </Tooltip>
+                <TooltipRoot positioning={{ placement: 'right' }}>
+                  <TooltipTrigger asChild>
+                    <span>
+                      <Icon as={MdInfoOutline} boxSize={6} color="gray.500" />
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipPositioner>
+                    <TooltipContent>
+                      <TooltipArrow />
+                      {companyDescription}
+                    </TooltipContent>
+                  </TooltipPositioner>
+                </TooltipRoot>
               )}
             </Flex>
           </DetailsCardRow>

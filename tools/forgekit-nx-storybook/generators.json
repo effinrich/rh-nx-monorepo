@@ -1,0 +1,24 @@
+{
+  "generators": {
+    "init": {
+      "factory": "./src/generators/init/generator",
+      "schema": "./src/generators/init/schema.json",
+      "description": "Initialize forgekit-nx-storybook plugin in your workspace"
+    },
+    "story": {
+      "factory": "./src/generators/story/generator",
+      "schema": "./src/generators/story/schema.json",
+      "description": "Generate Storybook stories with interaction tests for a React component"
+    },
+    "stories": {
+      "factory": "./src/generators/stories/generator",
+      "schema": "./src/generators/stories/schema.json",
+      "description": "Bulk generate stories for all components in a project missing them"
+    },
+    "component-test": {
+      "factory": "./src/generators/component-test/generator",
+      "schema": "./src/generators/component-test/schema.json",
+      "description": "Generate a co-located Playwright component test for a React component"
+    }
+  }
+}

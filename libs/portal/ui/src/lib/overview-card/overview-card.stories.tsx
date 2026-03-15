@@ -2,7 +2,7 @@ import {
   Button,
   Center,
   Stack,
-  Table,
+  TableRoot,
   Tbody,
   Td,
   Th,
@@ -26,7 +26,7 @@ const Story: Meta<typeof OverviewCard> = {
     title: 'Title',
     description: 'More information',
     rightElement: (
-      <Button colorScheme="primary" onClick={() => alert('Clicked')}>
+      <Button colorPalette="primary" onClick={() => alert('Clicked')}>
         CTA
       </Button>
     )
@@ -52,7 +52,7 @@ export const WithCards: StoryObj<typeof OverviewCard> = {
   args: {},
   render: args => (
     <OverviewCard {...args}>
-      <Stack spacing={6}>
+      <Stack gap={6}>
         {new Array(2).fill(mockItem).map(item => (
           <ListCard key={item.type}>
             <ListCardHeader title="Item" />
@@ -72,7 +72,7 @@ export const WithTable: StoryObj<typeof OverviewCard> = {
   args: {},
   render: args => (
     <OverviewCard {...args}>
-      <Table>
+      <TableRoot>
         <Thead>
           <Tr>
             <Th>Type</Th>
@@ -89,7 +89,7 @@ export const WithTable: StoryObj<typeof OverviewCard> = {
             </Tr>
           ))}
         </Tbody>
-      </Table>
+      </TableRoot>
     </OverviewCard>
   )
 }

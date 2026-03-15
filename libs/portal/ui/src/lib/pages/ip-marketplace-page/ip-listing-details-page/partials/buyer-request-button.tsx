@@ -20,7 +20,7 @@ const BuyerRequestButton = ({
     )
   }
   return (
-    <Button onClick={onClick} colorScheme="primary">
+    <Button onClick={onClick} colorPalette="primary">
       Request contact info
     </Button>
   )

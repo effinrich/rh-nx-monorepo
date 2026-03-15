@@ -23,13 +23,15 @@ export const FormField = ({ field, label, type = 'input' }: FormFieldProps) => {
   const isInvalid = Boolean(errorMessage)
 
   return (
-    <FormControl isInvalid={isInvalid} as={Grid} gridTemplateColumns="1fr 3fr">
+    <FormControl invalid={isInvalid} as={Grid} gridTemplateColumns="1fr 3fr">
+      {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
       <FormLabel whiteSpace="pre-line">{label}</FormLabel>
       <Box>
         {type === 'input' && <Input {...register(field)} />}
         {type === 'textarea' && (
           <Textarea {...register(field)} resize="none" minH="150px" />
         )}
+        {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
         <FormErrorMessage>{errorMessage}</FormErrorMessage>
       </Box>
     </FormControl>

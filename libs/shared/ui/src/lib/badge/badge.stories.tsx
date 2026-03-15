@@ -38,6 +38,10 @@ export default {
 }
 
 export const Basic = {
+  args: {
+    variant: 'outline'
+  },
+
   render: (args: any) => <Badge {...args}>Success, man!</Badge>
 }
 
@@ -46,15 +50,15 @@ export const SolidBadge = {
     return (
       <>
         {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(
-          colorPalette => (
+          colorScheme => (
             <Badge
-              key={colorPalette}
-              colorPalette={colorPalette}
+              key={colorScheme}
+              colorPalette={colorScheme}
               variant="solid"
               mr={2}
               {...args}
             >
-              {colorPalette}
+              {colorScheme}
             </Badge>
           )
         )}
@@ -66,15 +70,15 @@ export const SolidBadge = {
 export const SubtleBadges = {
   render: (args: any) => (
     <>
-      {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(colorPalette => (
+      {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(colorScheme => (
         <Badge
-          key={colorPalette}
-          colorPalette={colorPalette}
+          key={colorScheme}
+          colorPalette={colorScheme}
           mr={2}
           {...args}
           variant="subtle"
         >
-          {colorPalette}
+          {colorScheme}
         </Badge>
       ))}
     </>
@@ -84,15 +88,15 @@ export const SubtleBadges = {
 export const OutlineBadges = {
   render: (args: any) => (
     <>
-      {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(colorPalette => (
+      {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(colorScheme => (
         <Badge
-          key={colorPalette}
-          colorPalette={colorPalette}
+          key={colorScheme}
+          colorPalette={colorScheme}
           variant="outline"
           mr={2}
           {...args}
         >
-          {colorPalette}
+          {colorScheme}
         </Badge>
       ))}
     </>
