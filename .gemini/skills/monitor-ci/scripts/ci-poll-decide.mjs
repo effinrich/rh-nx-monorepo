@@ -117,7 +117,7 @@ function hasStateChanged() {
     return true
   if (
     prevFailureClassification &&
-    failureClassification !== prevFailureClassification
+    failureClassification !== prevFailureClassification.toLowerCase()
   )
     return true
   return false
@@ -361,9 +361,9 @@ const resetProgressCodes = new Set([
   'fix_needs_local_verify'
 ])
 
-function formatMessage(msg) {
+function formatMessage(msg, action, code) {
   if (verbosity === 'minimal') {
-    const currentStatus = `${cipeStatus}|${selfHealingStatus}|${verificationStatus}`
+    const currentStatus = `${action}:${code}`
     if (currentStatus === (prevStatus || '')) return null
     return msg
   }
@@ -386,7 +386,7 @@ function buildOutput(decision) {
 
   const msgFn = messages[code]
   const rawMsg = msgFn ? msgFn(extra) : `Unknown: ${code}`
-  const message = formatMessage(rawMsg)
+  const message = formatMessage(rawMsg, action, code)
 
   const result = {
     action,
