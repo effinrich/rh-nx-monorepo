@@ -3,7 +3,7 @@ import {
   mockEnterpriseSellerUser,
   mockRhUser
 } from '@redesignhealth/portal/data-assets'
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
 import type { Meta } from '@storybook/react-vite'
@@ -28,8 +28,8 @@ export const RhUserFirstTime = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockRhUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockRhUser)
         })
       ]
     }
@@ -43,8 +43,8 @@ export const RhUserViewing = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockRhUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockRhUser)
         })
       ]
     }
@@ -58,8 +58,8 @@ export const CompanyBuyerFirstTime = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockEnterpriseBuyerUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockEnterpriseBuyerUser)
         })
       ]
     }
@@ -73,8 +73,8 @@ export const CompanyBuyerViewing = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockEnterpriseBuyerUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockEnterpriseBuyerUser)
         })
       ]
     }
@@ -88,8 +88,8 @@ export const CompanySellerFirstTime = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockEnterpriseSellerUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockEnterpriseSellerUser)
         })
       ]
     }
@@ -103,8 +103,8 @@ export const CompanySellerViewing = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockEnterpriseSellerUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockEnterpriseSellerUser)
         })
       ]
     }

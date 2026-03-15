@@ -1,24 +1,22 @@
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { SetupServer } from 'msw/node'
 
 import { Vendor } from '../../vendors/types'
 
 export const mockGetVendors = (server: SetupServer, vendors: Vendor[]) => {
   server.use(
-    rest.get('/vendor', (req, res, ctx) => res(ctx.json({ content: vendors })))
+    http.get('/vendor', () => HttpResponse.json({ content: vendors }))
   )
   server.use(
-    rest.get('/vendor/filters', (req, res, ctx) =>
-      res(
-        ctx.json({
-          content: [
-            {
-              key: 'names',
-              options: vendors.map(v => ({ keyword: v.name, count: 1 }))
-            }
-          ]
-        })
-      )
+    http.get('/vendor/filters', () =>
+      HttpResponse.json({
+        content: [
+          {
+            key: 'names',
+            options: vendors.map(v => ({ keyword: v.name, count: 1 }))
+          }
+        ]
+      })
     )
   )
 }

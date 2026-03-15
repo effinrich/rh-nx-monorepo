@@ -1,6 +1,6 @@
 import { mockVendor } from '@redesignhealth/portal/data-assets'
 import { getVendorCategories } from '@redesignhealth/portal/data-assets'
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
 import type { Meta } from '@storybook/react-vite'
@@ -24,8 +24,8 @@ const Story: Meta<typeof EditVendorPage> = {
     },
     msw: {
       handlers: [
-        rest.get(`/vendor/${mockVendor.apiId}`, (req, res, ctx) => {
-          return res(ctx.json(mockVendor))
+        http.get(`/vendor/${mockVendor.apiId}`, () => {
+          return HttpResponse.json(mockVendor)
         })
       ]
     }

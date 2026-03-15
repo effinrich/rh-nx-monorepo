@@ -9,7 +9,7 @@ import {
   mockRhUser,
   mockSuperAdminUser
 } from '@redesignhealth/portal/data-assets'
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
 import type { Meta } from '@storybook/react-vite'
@@ -61,8 +61,8 @@ export const EnterpriseBuyerUser = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/ip-marketplace', (req, res, ctx) => {
-          return res(ctx.json(mockIpMarketplaceWithRequests))
+        http.get('/ip-marketplace', () => {
+          return HttpResponse.json(mockIpMarketplaceWithRequests)
         })
       ]
     }
@@ -76,20 +76,18 @@ export const EnterpriseSellerUser = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/ip-marketplace', (req, res, ctx) => {
-          return res(
-            ctx.json({
-              ...mockIpMarketplaceWithRequests,
-              content: [
-                {
-                  ...mockIpListingWithUnreleasedIPRequest,
-                  owner: {
-                    email: 'sazh.katzroy@redesignhealth.com'
-                  }
+        http.get('/ip-marketplace', () => {
+          return HttpResponse.json({
+            ...mockIpMarketplaceWithRequests,
+            content: [
+              {
+                ...mockIpListingWithUnreleasedIPRequest,
+                owner: {
+                  email: 'sazh.katzroy@redesignhealth.com'
                 }
-              ]
-            })
-          )
+              }
+            ]
+          })
         })
       ]
     }

@@ -1,4 +1,4 @@
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { SetupServer } from 'msw/node'
 
 import {
@@ -22,7 +22,7 @@ export const mockGetIpMarketplace = (
     links: []
   }
   return server.use(
-    rest.get('/ip-marketplace', (req, res, ctx) => res(ctx.json(response)))
+    http.get('/ip-marketplace', () => HttpResponse.json(response))
   )
 }
 
@@ -31,7 +31,7 @@ export const mockGetIpListing = (
   response: IpMarketplaceSummary
 ) =>
   server.use(
-    rest.get('/ip-marketplace/:id', (req, res, ctx) => res(ctx.json(response)))
+    http.get('/ip-marketplace/:id', () => HttpResponse.json(response))
   )
 
 export const mockGetIpMarketplaceFilters = (
@@ -39,8 +39,8 @@ export const mockGetIpMarketplaceFilters = (
   response: Filters
 ) =>
   server.use(
-    rest.get('/ip-marketplace/filters', (req, res, ctx) =>
-      res(ctx.json(response))
+    http.get('/ip-marketplace/filters', () =>
+      HttpResponse.json(response)
     )
   )
 
@@ -49,7 +49,7 @@ export const mockPutMeIpMarketplaceContactInfo = (
   response: IpMarketplaceRequestContactInfoSummary
 ) =>
   server.use(
-    rest.put('/me/ip-marketplace/:id/contact-info', (req, res, ctx) =>
-      res(ctx.json(response))
+    http.put('/me/ip-marketplace/:id/contact-info', () =>
+      HttpResponse.json(response)
     )
   )

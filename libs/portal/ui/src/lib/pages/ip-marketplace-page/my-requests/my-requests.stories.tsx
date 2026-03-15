@@ -8,7 +8,7 @@ import {
   mockIpMarketplaceFilters,
   mockIpMarketplaceNoResults
 } from '@redesignhealth/portal/data-assets'
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
 import type { Meta } from '@storybook/react-vite'
@@ -23,8 +23,8 @@ const Story: Meta<typeof MyRequestsPage> = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/ip-marketplace/filters', (req, res, ctx) => {
-          return res(ctx.json(mockIpMarketplaceFilters))
+        http.get('/ip-marketplace/filters', () => {
+          return HttpResponse.json(mockIpMarketplaceFilters)
         })
       ]
     }
@@ -39,25 +39,23 @@ export const BuyerView = {
     msw: {
       handlers: [
         ...(Story.parameters?.msw?.handlers ?? null),
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockEnterpriseBuyerUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockEnterpriseBuyerUser)
         }),
-        rest.get('/ip-marketplace', (req, res, ctx) => {
-          return res(
-            ctx.json({
-              content: [
-                mockIpListing,
-                { ...mockIpListingWithReleasedIPRequest, id: '123abc' },
-                { ...mockIpListingWithUnreleasedIPRequest, id: '456abc' }
-              ],
-              page: {
-                size: 1000,
-                totalElements: 2,
-                totalPages: 1,
-                number: 0
-              }
-            })
-          )
+        http.get('/ip-marketplace', () => {
+          return HttpResponse.json({
+            content: [
+              mockIpListing,
+              { ...mockIpListingWithReleasedIPRequest, id: '123abc' },
+              { ...mockIpListingWithUnreleasedIPRequest, id: '456abc' }
+            ],
+            page: {
+              size: 1000,
+              totalElements: 2,
+              totalPages: 1,
+              number: 0
+            }
+          })
         })
       ]
     }
@@ -70,66 +68,64 @@ export const SellerView = {
     msw: {
       handlers: [
         ...(Story.parameters?.msw?.handlers ?? null),
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockEnterpriseSellerUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockEnterpriseSellerUser)
         }),
-        rest.get('/ip-marketplace', (req, res, ctx) => {
-          return res(
-            ctx.json({
-              content: [
-                {
-                  ...mockIpListingWithReleasedIPRequest,
-                  owner: {
-                    email: 'lighting.mcfaron@example.com'
-                  },
-                  metrics: {
-                    viewCount: 10,
-                    requestCount: 1
-                  }
-                }, // this will not be shown because owner does not match
-                {
-                  ...mockIpListingWithReleasedIPRequest,
-                  id: '123abc',
-                  owner: {
-                    email: 'sazh.katzroy@redesignhealth.com'
-                  },
-                  metrics: {
-                    viewCount: 21,
-                    requestCount: 1
-                  }
+        http.get('/ip-marketplace', () => {
+          return HttpResponse.json({
+            content: [
+              {
+                ...mockIpListingWithReleasedIPRequest,
+                owner: {
+                  email: 'lighting.mcfaron@example.com'
                 },
-                {
-                  ...mockIpListingWithUnreleasedIPRequest,
-                  id: '456abc',
-                  owner: {
-                    email: 'sazh.katzroy@redesignhealth.com'
-                  },
-                  metrics: {
-                    viewCount: 5,
-                    requestCount: 1
-                  }
-                },
-                {
-                  ...mockIpListingWithRequests,
-                  id: '789abc',
-                  name: 'Marvelous Idea with Multiple Buyer Requests',
-                  owner: {
-                    email: 'sazh.katzroy@redesignhealth.com'
-                  },
-                  metrics: {
-                    viewCount: 300,
-                    requestCount: 3
-                  }
+                metrics: {
+                  viewCount: 10,
+                  requestCount: 1
                 }
-              ],
-              page: {
-                size: 1000,
-                totalElements: 2,
-                totalPages: 1,
-                number: 0
+              }, // this will not be shown because owner does not match
+              {
+                ...mockIpListingWithReleasedIPRequest,
+                id: '123abc',
+                owner: {
+                  email: 'sazh.katzroy@redesignhealth.com'
+                },
+                metrics: {
+                  viewCount: 21,
+                  requestCount: 1
+                }
+              },
+              {
+                ...mockIpListingWithUnreleasedIPRequest,
+                id: '456abc',
+                owner: {
+                  email: 'sazh.katzroy@redesignhealth.com'
+                },
+                metrics: {
+                  viewCount: 5,
+                  requestCount: 1
+                }
+              },
+              {
+                ...mockIpListingWithRequests,
+                id: '789abc',
+                name: 'Marvelous Idea with Multiple Buyer Requests',
+                owner: {
+                  email: 'sazh.katzroy@redesignhealth.com'
+                },
+                metrics: {
+                  viewCount: 300,
+                  requestCount: 3
+                }
               }
-            })
-          )
+            ],
+            page: {
+              size: 1000,
+              totalElements: 2,
+              totalPages: 1,
+              number: 0
+            }
+          })
         })
       ]
     }
@@ -142,11 +138,11 @@ export const NoResults = {
     msw: {
       handlers: [
         ...(Story.parameters?.msw?.handlers ?? null),
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockEnterpriseSellerUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockEnterpriseSellerUser)
         }),
-        rest.get('/ip-marketplace', (req, res, ctx) => {
-          return res(ctx.json(mockIpMarketplaceNoResults))
+        http.get('/ip-marketplace', () => {
+          return HttpResponse.json(mockIpMarketplaceNoResults)
         })
       ]
     }
