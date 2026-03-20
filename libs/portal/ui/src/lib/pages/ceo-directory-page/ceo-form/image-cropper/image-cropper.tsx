@@ -39,7 +39,7 @@ const ImageCropper = ({
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>()
 
   return (
-    <Modal size="3xl" open={isOpen} onOpenChange={(e: { open: boolean }) => !e.open && onClose()}>
+    <Modal size="xl" open={isOpen} onOpenChange={(e: { open: boolean }) => !e.open && onClose()}>
       <ModalOverlay />
       {/* @ts-expect-error Chakra v3 DialogContent children typing */}
       <ModalContent>
@@ -72,6 +72,7 @@ const ImageCropper = ({
               max={3}
               onChange={setZoom}
             >
+              {/* @ts-expect-error Chakra v3 SliderTrack children typing */}
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>

@@ -96,8 +96,11 @@ export const MobileNav = ({ userInfo }: MobileNavProps) => {
         placement="start"
         onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
       >
+        {/* @ts-expect-error Chakra v3 DrawerBackdrop props typing */}
         <DrawerBackdrop display={{ lg: 'none' }} />
+        {/* @ts-expect-error Chakra v3 DrawerPositioner children typing */}
         <DrawerPositioner display={{ lg: 'none' }}>
+          {/* @ts-expect-error Chakra v3 DrawerContent children typing */}
           <DrawerContent>
             <Nav onClose={onClose} userInfo={userInfo} />
           </DrawerContent>

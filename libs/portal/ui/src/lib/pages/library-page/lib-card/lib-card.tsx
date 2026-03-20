@@ -24,7 +24,7 @@ export const LibCard = ({
 }: LibCardProps) => {
   return (
     <CardRoot
-      {...props}
+      {...(props as Record<string, unknown>)}
       cursor="pointer"
       borderWidth="1px"
       borderColor="gray.200"
@@ -33,7 +33,7 @@ export const LibCard = ({
         bg: 'primary.50',
         borderColor: 'primary.700'
       }}
-      _activeLink={{ bg: 'primary.50', borderColor: 'primary.700' }}
+      css={{ '&[aria-current="page"]': { bg: 'primary.50', borderColor: 'primary.700' } }}
     >
       <CardHeader display="flex" justifyContent="space-between" pb={3}>
         <Box>

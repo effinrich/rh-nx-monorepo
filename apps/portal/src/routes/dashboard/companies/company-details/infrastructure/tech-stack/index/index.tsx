@@ -55,7 +55,7 @@ export const CompanyInfraTechStack = () => {
     state: formState
   } = useFetcher<ReturnType<typeof CompanyInfraTechStackAction>>()
 
-  const fieldErrors = actionData?.fieldErrors
+  const fieldErrors = actionData?.fieldErrors as Record<string, string | string[] | undefined> | undefined
 
   const infraRequestSubmitted =
     infraRequest?.status?.value === InfraRequestCommandStatusEnum['Pending'] ||
@@ -64,6 +64,7 @@ export const CompanyInfraTechStack = () => {
   const techStackForm = infraRequest?.forms?.find(
     f => f.type?.value === 'TECH_STACK'
   )
+  const tsFormData = (techStackForm?.form ?? {}) as Record<string, string>
 
   return (
     <DrawerForm
@@ -126,13 +127,13 @@ export const CompanyInfraTechStack = () => {
                         serviceName={serviceName}
                         learnMoreItems={learnMoreItems}
                         radioDefaultValue={
-                          techStackForm?.form?.[radioInputName]
+                          tsFormData[radioInputName]
                         }
                         commentDefaultValue={
-                          techStackForm?.form?.[commentInputName]
+                          tsFormData[commentInputName]
                         }
                         error={fieldErrors?.[radioInputName]?.[0]}
-                        readOnly={infraRequestSubmitted}
+                        isReadOnly={infraRequestSubmitted}
                         key={index}
                       />
                     )
@@ -154,7 +155,7 @@ const formSchema = z
       Object.entries(formItems).flatMap(([, groupValue]) =>
         groupValue.groupItems.map(service => [
           getInputName(service.categoryName, service.serviceName),
-          z.string({ required_error: 'This field is required' })
+          z.string({ message: 'This field is required' })
         ])
       )
     )

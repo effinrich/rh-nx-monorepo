@@ -41,13 +41,13 @@ export const Module = ({ libraryId, libraryRoute }: ModuleProps) => {
         </Helmet>
       )}
       {isPending || !linkMap ? (
-        <Loader w="full" />
+        <Loader />
       ) : (
         <Parser
           data={data}
           libraryId={libraryId}
           libraryRoute={libraryRoute}
-          linkMap={linkMap}
+          linkMap={linkMap as Record<string, string>}
         />
       )}
     </Box>

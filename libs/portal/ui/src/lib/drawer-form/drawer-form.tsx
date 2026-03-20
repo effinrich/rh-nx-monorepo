@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ElementType, ReactNode } from 'react'
 import { Form } from 'react-router-dom'
 import {
   Box,
@@ -14,6 +14,10 @@ import {
   Text,
   useDisclosure
 } from '@redesignhealth/ui'
+
+// Cast Drawer compound components to avoid Chakra v3 typing issues
+const Positioner = DrawerPositioner as ElementType
+const Content = DrawerContent as ElementType
 
 export const DrawerForm = (props: {
   children: ReactNode
@@ -34,6 +38,9 @@ export const DrawerForm = (props: {
     props.onClose?.()
   }
 
+  // Cast Flex to allow polymorphic `as` prop with Form
+  const FormFlex = Flex as ElementType
+
   return (
     <DrawerRoot
       open={open}
@@ -47,8 +54,8 @@ export const DrawerForm = (props: {
       size={{ base: 'full', md: 'lg' }}
     >
       <DrawerBackdrop />
-      <DrawerPositioner>
-      <DrawerContent pt="12px">
+      <Positioner>
+      <Content pt="12px">
         <Flex flexDir="column" h="100%">
           <IconButton
             aria-label="close form"
@@ -95,7 +102,7 @@ export const DrawerForm = (props: {
                 <Divider mt="24px" />
               </Box>
 
-              <Flex
+              <FormFlex
                 as={props.fetcherForm ?? Form}
                 method="post"
                 noValidate
@@ -119,12 +126,12 @@ export const DrawerForm = (props: {
                     {props.footer}
                   </Box>
                 )}
-              </Flex>
+              </FormFlex>
             </>
           )}
         </Flex>
-      </DrawerContent>
-      </DrawerPositioner>
+      </Content>
+      </Positioner>
     </DrawerRoot>
   )
 }

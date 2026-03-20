@@ -77,16 +77,15 @@ export const CallNoteCard = ({
           </Flex>
         ) : isValidUrl(noteLink) ? (
           <Button
-            as="a"
-            target="_blank"
-            sx={{ textDecoration: 'none' }}
-            href={noteLink}
+            asChild
             colorPalette="primary"
             variant="solid"
             width={['100%', '100%', 'initial']}
           >
-            Read notes
-            <MdOpenInNew />
+            <a href={noteLink} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+              Read notes
+              <MdOpenInNew />
+            </a>
           </Button>
         ) : (
           <AlertRoot
@@ -110,14 +109,13 @@ export const CallNoteCard = ({
         <ListCard.Row title="LinkedIn">
           {linkedInProfileHref ? (
             <Button
-              as="a"
-              target="_blank"
+              asChild
               variant="plain"
-              href={linkedInProfileHref}
               colorPalette="primary"
-              cursor="pointer"
             >
-              {linkedInProfileHref ? linkedInProfileHref : ''}
+              <a href={linkedInProfileHref} target="_blank" rel="noreferrer" style={{ cursor: 'pointer' }}>
+                {linkedInProfileHref ? linkedInProfileHref : ''}
+              </a>
             </Button>
           ) : (
             ''
@@ -160,14 +158,13 @@ export const CallNoteCard = ({
             <ListCard.Row title="Email">
               {intervieweeEmail ? (
                 <Button
-                  as="a"
-                  target="_blank"
+                  asChild
                   variant="plain"
-                  href={`mailto:${intervieweeEmail}`}
                   colorPalette="primary"
-                  cursor="pointer"
                 >
-                  {intervieweeEmail ? intervieweeEmail : ''}
+                  <a href={`mailto:${intervieweeEmail}`} target="_blank" rel="noreferrer" style={{ cursor: 'pointer' }}>
+                    {intervieweeEmail ? intervieweeEmail : ''}
+                  </a>
                 </Button>
               ) : (
                 ''

@@ -28,6 +28,7 @@ const Form = ({
         <Stack separator={<Separator />} gap={5}>
           <CardBody>{children}</CardBody>
         </Stack>
+        {/* @ts-expect-error Chakra v3 CardFooter children typing */}
         <CardFooter gap={3} justify="end" mt={4}>
           <Button variant="outline" onClick={onCancel}>
             Cancel

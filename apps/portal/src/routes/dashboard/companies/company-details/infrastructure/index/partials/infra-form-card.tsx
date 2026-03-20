@@ -6,7 +6,7 @@ import {
   RequestFormSummary
 } from '@redesignhealth/company-api-types'
 import { useGetInfraRequest } from '@redesignhealth/portal/data-assets'
-import { Box, Button, Card, Flex, Icon, Text } from '@redesignhealth/ui'
+import { Box, Button, CardRoot, Flex, Icon, Text } from '@redesignhealth/ui'
 
 export const InfraFormCard = ({
   form,
@@ -42,7 +42,7 @@ export const InfraFormCard = ({
       if (
         infraRequestStatus === InfraRequestCommandStatusEnum['Done'] ||
         infraRequestStatus === InfraRequestCommandStatusEnum['Pending'] ||
-        infraRequestStatus === InfraRequestCommandStatusEnum['In Progress']
+        infraRequestStatus === InfraRequestCommandStatusEnum['InProgress']
       ) {
         buttonText = 'View submission'
         formStatusText = 'Submitted'
@@ -56,7 +56,7 @@ export const InfraFormCard = ({
   }
 
   return (
-    <Card as="section" mt="20px" p="16px" data-id={restProps['data-id']}>
+    <CardRoot as="section" mt="20px" p="16px" data-id={restProps['data-id']}>
       <Flex flexDir={{ base: 'column', lg: 'row' }} align={{ lg: 'center' }}>
         <Box>
           <Text
@@ -100,14 +100,13 @@ export const InfraFormCard = ({
         </Flex>
 
         <Button
-          as={Link}
-          to={to}
+          asChild
           variant="outline"
           mt={{ base: '16px', lg: '0px' }}
         >
-          {buttonText}
+          <Link to={to}>{buttonText}</Link>
         </Button>
       </Flex>
-    </Card>
+    </CardRoot>
   )
 }

@@ -6,20 +6,28 @@ A full-stack Nx monorepo containing the Platform Portal frontend, mock API serve
 
 ## Recent Highlights
 
+### React 19 useTransition (March 2026)
+
+Added `useTransition` for non-blocking UI updates on paginated filter pages (IP Marketplace, CEO Directory) and library filter components (Categories, Content Type). Pagination and filter changes now keep the old content visible while new data loads.
+
 ### Chakra UI v3 Migration (March 2026)
 
-Full migration from Chakra UI v2 to v3 across ~180+ files in `libs/` and `apps/`. All component APIs updated to v3 patterns: compound components, `colorPalette`, `asChild`, non-`is`-prefixed boolean props. Both Storybook instances build and render correctly.
+Full migration from Chakra UI v2 to v3 across ~180+ files in `libs/` and `apps/`. All component APIs updated to v3 patterns: compound components, `colorPalette`, `asChild`, non-`is`-prefixed boolean props. Infrastructure pages (infra request, privacy, tech stack) fully migrated to Dialog, CardRoot, and v3 prop naming.
 
-### forgekit-nx-storybook Plugin
+### @effinrich/nx-storybook Plugin
 
-A publishable Nx plugin at `tools/forgekit-nx-storybook/` that auto-generates Storybook stories, interaction tests, Playwright component tests, and accessibility audits from component analysis.
+A companion plugin for `@nx/storybook` at `tools/forgekit-nx-storybook/` — handles the **content** side (auto-generating stories, interaction tests, Playwright component tests, a11y audits) while `@nx/storybook` handles the infrastructure (config, serving, building, version migrations). Preparing for public npm release under the `@effinrich/nx-storybook` namespace.
+
+### Mock API Server
+
+Express-based mock API server (`apps/api-server/`) serving all portal endpoints on port 8080. Supports companies, users, vendors, CEOs, IP marketplace, consent, and infrastructure requests with paginated JSON responses.
 
 | Generator | Command | Description |
 |---|---|---|
-| `story` | `nx g forgekit-nx-storybook:story --componentPath=<path>` | Generate story + interaction tests for one component |
-| `stories` | `nx g forgekit-nx-storybook:stories --project=<name>` | Bulk generate for entire project with A-F coverage scoring |
-| `component-test` | `nx g forgekit-nx-storybook:component-test --componentPath=<path>` | Co-located Playwright `.ct.tsx` with visual regression + a11y |
-| `init` | `nx g forgekit-nx-storybook:init` | Interactive setup with @nx/storybook prerequisite checks |
+| `story` | `nx g @effinrich/nx-storybook:story --componentPath=<path>` | Generate story + interaction tests for one component |
+| `stories` | `nx g @effinrich/nx-storybook:stories --project=<name>` | Bulk generate for entire project with A-F coverage scoring |
+| `component-test` | `nx g @effinrich/nx-storybook:component-test --componentPath=<path>` | Co-located Playwright `.ct.tsx` with visual regression + a11y |
+| `init` | `nx g @effinrich/nx-storybook:init` | Interactive setup with @nx/storybook prerequisite checks |
 
 Also includes a `watch` executor for auto-generating stories on file changes. See [plugin README](tools/forgekit-nx-storybook/README.md) for full documentation.
 

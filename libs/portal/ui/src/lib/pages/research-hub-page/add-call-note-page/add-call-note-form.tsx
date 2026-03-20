@@ -68,7 +68,8 @@ const AddCallNoteForm = () => {
 
   const form = useForm<NewNotesProps>({
     mode: 'onBlur',
-    resolver: yupResolver(newNotesSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(newNotesSchema) as any,
     defaultValues: {
       intervieweeName: '',
       type: '',
@@ -90,9 +91,10 @@ const AddCallNoteForm = () => {
 
       let fileArrayCopy = fileArray || []
 
-      for (let i = 0; i < files?.length; i++) {
-        fileArrayCopy = [...fileArrayCopy, files[i]]
-        allFilesCopy.append('file', files[i])
+      const fileList = files as FileList
+      for (let i = 0; i < fileList.length; i++) {
+        fileArrayCopy = [...fileArrayCopy, fileList[i]]
+        allFilesCopy.append('file', fileList[i])
       }
 
       setFileArray(fileArrayCopy)
@@ -154,7 +156,7 @@ const AddCallNoteForm = () => {
       submitText="Add call note"
     >
       <CallNotesForm
-        form={form}
+        form={form as ReturnType<typeof useForm<NewNotesProps>>}
         groupOptions={companies?.content}
         setCompany={setCompany}
         taxonomyTags={taxonomyTags}

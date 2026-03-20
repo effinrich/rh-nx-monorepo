@@ -19,10 +19,8 @@ export {
   SliderValueText
 } from '@chakra-ui/react'
 
-// SliderMark was removed in Chakra v3 - use SliderMarker instead
-export { SliderMarker as SliderMark } from '@chakra-ui/react'
-
 // Re-export with v2 names for backward compatibility
+// SliderMark was removed in Chakra v3 - use SliderMarker instead
 export { SliderRange as SliderFilledTrack, SliderMarker as SliderMark } from '@chakra-ui/react'
 
 // Export types

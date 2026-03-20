@@ -152,15 +152,14 @@ export const DevLibrary = ({ libraryId, libraryRoute }: LibraryProps) => {
       </DisclaimerModal>
       <SectionHeader title="Developer Tools" />
 
-      <HStack align="top" spacing={8} py={8} w="full">
-        <UnorderedList spacing={2} listStyleType="none" m={0} pt={3}>
+      <HStack alignItems="flex-start" gap={8} py={8} w="full">
+        <UnorderedList gap={2} listStyleType="none" m={0} pt={3}>
           <ListItem>
             <FormControl pb={6}>
               <AsyncSelect
                 cacheOptions
                 isMulti={false}
                 name="search"
-                colorPalette="primary"
                 closeMenuOnSelect={true}
                 size="md"
                 placeholder="Search"
@@ -188,8 +187,8 @@ export const DevLibrary = ({ libraryId, libraryRoute }: LibraryProps) => {
                     onClick={() => setSelectedDevCategory(cat)}
                     variant={
                       selectedDevCategory.id === cat.id
-                        ? 'primary-on-accent'
-                        : 'ghost-on-accent'
+                        ? 'solid'
+                        : 'ghost'
                     }
                     fontSize="14px"
                     fontWeight="medium"

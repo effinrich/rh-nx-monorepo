@@ -61,18 +61,15 @@ export const ResearchSprintCard = ({
           </Flex>
         ) : reportLink ? (
           <Button
-            as="a"
-            target="_blank"
-            sx={{
-              textDecoration: 'none'
-            }}
-            href={reportLink}
+            asChild
             colorPalette="primary"
             variant="solid"
             width={['100%', '100%', 'inherit']}
           >
-            Read report
-            <MdOpenInNew />
+            <a href={reportLink} target="_blank" style={{ textDecoration: 'none' }}>
+              Read report
+              <MdOpenInNew />
+            </a>
           </Button>
         ) : (
           <AlertRoot

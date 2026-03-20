@@ -26,7 +26,8 @@ const MarketplaceCompanyForm = ({
   isEdit = false
 }: MarketplaceCompanyFormProps) => {
   const methods = useForm<CompanyCommand>({
-    resolver: marketplaceCompanyFormResolver,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: marketplaceCompanyFormResolver as any,
     mode: 'onBlur',
     defaultValues: defaultValues || {
       activityType: '',

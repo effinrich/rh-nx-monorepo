@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import analytics from '@redesignhealth/analytics'
 import {
@@ -35,6 +35,7 @@ export const IPMarketplacePage = () => {
   })
 
   const [currentPage, setCurrentPage] = useState(0)
+  const [isPageTransitioning, startPageTransition] = useTransition()
 
   const { data: userInfo, isPending: isGetUserInfoPending } = useGetUserInfo()
   const currentCompanyMemberRole = getCompanyMemberRole(userInfo?.memberOf)
@@ -95,12 +96,11 @@ export const IPMarketplacePage = () => {
                   name="isHideIpListings"
                   control={methods.control}
                   render={({ field: { name, value, onChange } }) => (
-                    // @ts-expect-error Chakra v3 compound component typing
                     <CheckboxRoot
                       fontSize="sm"
                       name={name}
                       checked={value}
-                      onCheckedChange={(e) => onChange(e.checked)}
+                      onCheckedChange={(e: { checked: boolean }) => onChange(e.checked)}
                       gridArea="left"
                     >
                       {isEnterpriseSeller
@@ -162,7 +162,9 @@ export const IPMarketplacePage = () => {
               <Pagination
                 currentPage={currentPage}
                 totalPages={ips.page.totalPages}
-                handlePageChange={setCurrentPage}
+                handlePageChange={(page: number) =>
+                  startPageTransition(() => setCurrentPage(page))
+                }
               />
             ) : (
               <NoSearchResults searchName="IPs" />

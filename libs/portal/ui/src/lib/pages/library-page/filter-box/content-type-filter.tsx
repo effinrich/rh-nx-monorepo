@@ -1,3 +1,4 @@
+import { useTransition } from 'react'
 import {
   DEFAULT_CONTENT_TYPE,
   Option,
@@ -22,13 +23,14 @@ const options: Option[] = [
 export const ContentTypeFilter = () => {
   const setModuleTypeValue = useLibraryStore(state => state.setModuleTypeValue)
   const moduleTypeValue = useLibraryStore(state => state.moduleTypeValue)
+  const [, startTransition] = useTransition()
 
   return (
     <Filter
       value={moduleTypeValue}
       placeholder="Content type"
       options={options}
-      onChange={setModuleTypeValue}
+      onChange={value => startTransition(() => setModuleTypeValue(value))}
     />
   )
 }

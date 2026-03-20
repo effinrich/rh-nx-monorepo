@@ -47,7 +47,7 @@ const defaultValues: Partial<CompanyCommand> = {
 
 export const AddCompany = () => {
   const navigate = useNavigate()
-  const drawerRef = useRef<{ handleOnClose(): void }>()
+  const drawerRef = useRef<{ handleOnClose(): void }>(null)
   const [conceptOptions, setConceptOptions] = useState<OptionsProps[]>([])
   const [themeOptions, setThemeOptions] = useState<OptionsProps[]>([])
   const [options, setOptions] = useState<OptionsProps[]>([])
@@ -104,7 +104,8 @@ export const AddCompany = () => {
 
   const useFormMethods = useForm<CompanyCommand>({
     mode: 'onBlur',
-    resolver: yupResolver(formSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(formSchema) as any,
     defaultValues
   })
 
@@ -142,7 +143,7 @@ export const AddCompany = () => {
       title="Add Company"
       description="Enter company information below."
       errors={errors}
-      loading={isPending}
+      isLoading={isPending}
       isError={isError}
       ctaText="Add company"
       isValid={isValid}

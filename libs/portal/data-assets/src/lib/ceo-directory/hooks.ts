@@ -168,8 +168,8 @@ const convertFormFieldsToCommand = (ceo: CeoFormFields): CeoCreateCommand => {
     customerSegment: ceo.customerSegment
   }
   for (const key of Object.keys(command)) {
-    if (command[key] === '') {
-      delete command[key]
+    if ((command as Record<string, unknown>)[key] === '') {
+      delete (command as Record<string, unknown>)[key]
     }
   }
   return command
@@ -185,8 +185,8 @@ export const convertCeoToCeoCommand = (ceo?: Ceo): CeoUpdateCommand => {
     businessFocusArea: ceo?.businessFocusArea?.map(e => e.value)
   }
   for (const key of Object.keys(command)) {
-    if (command[key] === '') {
-      delete command[key]
+    if ((command as Record<string, unknown>)[key] === '') {
+      delete (command as Record<string, unknown>)[key]
     }
   }
   return command

@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { ElementType } from 'react'
 import { type CardHeaderProps } from '@redesignhealth/ui'
 import { Box, CardHeader, Divider, Flex, Text } from '@redesignhealth/ui'
+
+// Cast to allow polymorphic `as` prop
+const FlexCardHeader = CardHeader as ElementType
 
 interface ListCardHeaderProps extends Omit<CardHeaderProps, 'title'> {
   title?: React.ReactNode
@@ -19,8 +22,8 @@ export const ListCardHeader = ({
 
   return (
     <>
-      <CardHeader
-        {...props}
+      <FlexCardHeader
+        {...(props as Record<string, unknown>)}
         as={Flex}
         justify="space-between"
         flexDirection={['column', 'column', 'row']}
@@ -52,7 +55,7 @@ export const ListCardHeader = ({
           )}
         </Flex>
         {children}
-      </CardHeader>
+      </FlexCardHeader>
       <Divider />
     </>
   )

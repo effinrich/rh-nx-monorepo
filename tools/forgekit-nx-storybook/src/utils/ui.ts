@@ -18,7 +18,7 @@ export const ui = {
     );
     console.log(
       BRAND_BG(
-        '   ⚡ ForgeKit Storybook — Nx Story Generator   '
+        '   ⚡ @effinrich/nx-storybook                   '
       )
     );
     console.log(

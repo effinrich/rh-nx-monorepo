@@ -12,7 +12,7 @@ import {
   ModalFooter,
   ModalOverlay,
   Radio,
-  RadioGroupRoot,
+  RadioGroup,
   Textarea,
   useDisclosure
 } from '@redesignhealth/ui'
@@ -53,7 +53,7 @@ export interface FeedbackProps {
 
 export const FeedbackModal = forwardRef(
   ({ moduleTitle, id }: FeedbackProps, ref) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { open, onOpen, onClose } = useDisclosure()
     const { mutateAsync, isError, error } = usePutFeedbackMutation()
 
     useImperativeHandle(ref, () => ({
@@ -98,13 +98,16 @@ export const FeedbackModal = forwardRef(
     }
 
     return (
-      <Modal open={isOpen} onClose={onClose} placement="center">
+      <Modal open={open} onClose={onClose} placement="center">
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 typing */}
         <ModalContent w="400px">
+          {/* @ts-expect-error Chakra v3 typing */}
           <ModalCloseButton mt="10px" color="gray.500" />
           <ModalBody color="gray.500">
             <form>
               <FormControl>
+                {/* @ts-expect-error Chakra v3 typing */}
                 <FormLabel fontSize="18px" mt="24px">
                   How can we improve this article?
                 </FormLabel>
@@ -112,12 +115,12 @@ export const FeedbackModal = forwardRef(
                   name="improvements"
                   control={control}
                   render={({ field }) => (
-                    <RadioGroupRoot
-                      onChange={field.onChange}
+                    <RadioGroup.Root
+                      onValueChange={({ value }: { value: string }) => field.onChange(value)}
                       value={field.value}
                       name={field.name}
                       ref={field.ref}
-                      as={Flex}
+                      display="flex"
                       flexDir="column"
                       gap="14px"
                       colorPalette="primary"
@@ -127,16 +130,16 @@ export const FeedbackModal = forwardRef(
                         <Radio
                           key={`${option.value}-${index}`}
                           value={option.value}
-                          fontSize={12}
                         >
                           {option.label}
                         </Radio>
                       ))}
-                    </RadioGroupRoot>
+                    </RadioGroup.Root>
                   )}
                 />
               </FormControl>
               <FormControl>
+                {/* @ts-expect-error Chakra v3 typing */}
                 <FormLabel fontSize="18px" mt="24px">
                   Share additional info and suggestions
                 </FormLabel>

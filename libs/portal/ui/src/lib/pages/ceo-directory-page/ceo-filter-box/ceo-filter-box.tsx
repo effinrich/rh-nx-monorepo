@@ -73,8 +73,9 @@ const CeoFilterBox = () => {
                   <Filter
                     name={name}
                     value={value as Option[]}
-                    loading={isPending}
-                    options={filters[filter.key]}
+                    isLoading={isPending}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    options={(filters as any)[filter.key]}
                     onChange={event => onChange(event as Option[])}
                     placeholder={filter.displayName}
                     isMulti

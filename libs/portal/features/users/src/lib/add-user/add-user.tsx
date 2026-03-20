@@ -40,7 +40,7 @@ const formSchema = yup.object().shape({
 // TODO: Extract any commonly used functions into helpers if possible
 export const AddUser = () => {
   const navigate = useNavigate()
-  const drawerRef = useRef<{ handleOnClose(): void }>()
+  const drawerRef = useRef<{ handleOnClose(): void }>(null)
   const [options, setOptions] = useState<
     {
       value: string
@@ -67,7 +67,8 @@ export const AddUser = () => {
     formState: { errors, dirtyFields, isValid }
   } = useForm<NewUserProps>({
     mode: 'onBlur',
-    resolver: yupResolver(formSchema)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(formSchema) as any
   })
   const userType = watch('role')
 
@@ -116,7 +117,7 @@ export const AddUser = () => {
       title="Add User"
       description="Enter their information below."
       errors={errors}
-      loading={isPending}
+      isLoading={isPending}
       isError={isError}
       ctaText="Add user"
       isValid={isValid}
@@ -134,7 +135,6 @@ export const AddUser = () => {
               render={({ field: { onChange, name, ref } }) => (
                 <RadioGroupRoot
                   onChange={onChange}
-                  as={Flex}
                   name={name}
                   ref={ref}
                   flexDir="column"
@@ -154,8 +154,7 @@ export const AddUser = () => {
                 </RadioGroupRoot>
               )}
             />
-            {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-            <FormErrorMessage role="alert">
+            <FormErrorMessage>
               {errors.role?.message}
             </FormErrorMessage>
           </FormControl>
@@ -169,8 +168,7 @@ export const AddUser = () => {
                 placeholder="jane.doe@example.com"
                 {...register('email')}
               />
-              {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-              <FormErrorMessage role="alert">
+              <FormErrorMessage>
                 {errors.email?.message}
               </FormErrorMessage>
             </FormControl>
@@ -178,8 +176,7 @@ export const AddUser = () => {
               {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="givenName">First Name</FormLabel>
               <Input placeholder="Jane" {...register('givenName')} />
-              {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-              <FormErrorMessage role="alert">
+              <FormErrorMessage>
                 {errors.givenName?.message}
               </FormErrorMessage>
             </FormControl>
@@ -187,8 +184,7 @@ export const AddUser = () => {
               {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="familyName">Last name</FormLabel>
               <Input placeholder="Doe" {...register('familyName')} />
-              {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-              <FormErrorMessage role="alert">
+              <FormErrorMessage>
                 {errors.familyName?.message}
               </FormErrorMessage>
             </FormControl>
@@ -211,14 +207,14 @@ export const AddUser = () => {
                       }}
                       closeMenuOnSelect={false}
                       blurInputOnSelect={false}
-                      colorPalette="primary"
                     />
                   )}
                 />
               )}
-              <FormErrorMessage role="alert">
+              <FormErrorMessage>
                 {errors.memberOf?.message}
               </FormErrorMessage>
+              {/* @ts-expect-error Chakra v3 FieldHelperText children typing */}
               <FormHelperText>
                 Select the companies this user is assigned to.
               </FormHelperText>

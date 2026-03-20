@@ -101,7 +101,7 @@ const Companies = () => {
         </Flex>
 
         <TableContainer borderBottomRadius="md">
-          <TableRoot variant="striped" colorPalette="gray">
+          <TableRoot variant="line" colorPalette="gray" striped>
             <Thead>
               <Tr>
                 <Th>Name</Th>

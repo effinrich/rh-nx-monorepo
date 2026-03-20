@@ -17,400 +17,387 @@
 - [.prettierrc](file://.prettierrc)
 </cite>
 
+## Update Summary
+**Changes Made**
+- Added comprehensive project setup instructions with step-by-step installation guide
+- Enhanced environment variable configuration section with practical examples
+- Expanded development workflow documentation including first-time contributor guidance
+- Improved troubleshooting section with common setup issues and solutions
+- Added verification steps to ensure proper environment setup
+- Updated VS Code integration guidance with Nx Console extension setup
+
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [Project Structure](#project-structure)
-3. [Core Components](#core-components)
-4. [Architecture Overview](#architecture-overview)
-5. [Detailed Component Analysis](#detailed-component-analysis)
-6. [Dependency Analysis](#dependency-analysis)
-7. [Performance Considerations](#performance-considerations)
-8. [Troubleshooting Guide](#troubleshooting-guide)
-9. [Conclusion](#conclusion)
-10. [Appendices](#appendices)
+2. [Prerequisites](#prerequisites)
+3. [Installation](#installation)
+4. [Development Environment Setup](#development-environment-setup)
+5. [Environment Configuration](#environment-configuration)
+6. [Running Applications](#running-applications)
+7. [Essential Commands](#essential-commands)
+8. [Development Workflow](#development-workflow)
+9. [Troubleshooting](#troubleshooting)
+10. [Verification](#verification)
+11. [First-Time Contributor Guidance](#first-time-contributor-guidance)
 
 ## Introduction
-This guide helps you set up and run the Redesign Health Nx monorepo locally. You will clone the repository, install prerequisites, configure the development environment, start the API server and the Portal application, and learn how to use Nx Console in VS Code. It also covers environment variables for development and production, essential commands for building, serving, testing, and linting, and how to use the devcontainer for a reproducible environment.
+Welcome to the Redesign Health Nx monorepo! This comprehensive getting started guide will help you set up your development environment, understand the project structure, and begin contributing effectively. The monorepo contains a full-stack React 19 + Vite frontend (Portal), an Express mock API server, shared design system libraries, and supporting tools for a modern development experience.
 
-## Project Structure
-The repository is organized as an Nx monorepo with:
-- apps/: Application code (Portal, API server, POCs, and others)
-- libs/: Shared libraries (design system, utilities, and feature libraries)
-- tools/: Nx plugins and supporting tooling
-- docs/, playwright/, contracts/, and other directories for documentation, tests, and contracts
+The project follows Nx workspace conventions with TypeScript 5, Chakra UI v3, and a robust development toolchain including Jest/Vitest for testing, ESLint/Prettier for code quality, and Storybook for component development.
 
-Key applications:
-- Portal (React 19 + Vite): serves on port 4200
-- API server (Express via tsx): serves on port 8080
-- Additional apps such as chat POCs, company API, and others
+## Prerequisites
+Before you begin, ensure your system meets the following requirements:
 
-Workspace defaults:
-- Default project is portal
-- Nx Cloud token is configured for caching and orchestration
+### Node.js and npm
+- **Node.js**: Version 24.11.1 (as specified in engines)
+- **npm**: Version 11.6.2 (as specified in engines)
+- Verify with: `node --version` and `npm --version`
 
-**Section sources**
-- [README.md:41-70](file://README.md#L41-L70)
-- [nx.json:108-148](file://nx.json#L108-L148)
+### Development Tools
+- **Git**: For repository management
+- **Docker**: Required for devcontainer setup (optional but recommended)
+- **VS Code**: With recommended extensions for optimal development experience
 
-## Core Components
-- Nx workspace with Nx 22 and TypeScript 5
-- Build system: Nx orchestrator with target defaults and caching
-- Frontend: React 19 + Vite for the Portal app
-- Backend: Express mock server via tsx for the API server
-- Testing: Jest and Vitest for unit tests; Playwright for E2E
-- Linting: ESLint + Prettier with shared configs
-- Storybook: Shared UI and Portal UI storybooks
-
-Essential commands (from the root):
-- Install dependencies: npm install
-- Serve API server: npm run start:api
-- Serve Portal: npm run start:portal
-- Build Portal: nx build portal
-- Run all tests: nx run-many -t test
-- Lint all projects: nx run-many -t lint
-- Run E2E tests: nx e2e portal-e2e
-- View dependency graph: nx graph
-- Run Storybook: npm run storybook
-
-Workspace notes:
-- One root package.json installs all packages; Nx resolves per-project needs
-- Affected commands run only on changed projects
-- Path aliases under @redesignhealth/*
+### Optional but Recommended
+- **Docker Desktop**: For containerized development environment
+- **Rancher Desktop**: Alternative container runtime option
+- **Nx Console Extension**: For enhanced VS Code integration
 
 **Section sources**
-- [README.md:28-40](file://README.md#L28-L40)
-- [README.md:72-127](file://README.md#L72-L127)
-- [package.json:5-47](file://package.json#L5-L47)
-
-## Architecture Overview
-High-level flow:
-- The Portal app runs on Vite (port 4200) and proxies API requests to the Express mock server (port 8080).
-- The API server serves mock endpoints for the Portal to consume.
-- Nx orchestrates builds, tests, and tasks across apps and libs.
-
-```mermaid
-graph TB
-subgraph "Local Machine"
-Browser["Browser<br/>Port 4200"]
-Proxy["Vite Dev Server<br/>Proxy /api -> http://localhost:8080"]
-API["Express Mock Server<br/>tsx on Port 8080"]
-end
-Browser --> Proxy
-Proxy --> API
-```
-
-**Diagram sources**
-- [apps/portal/vite.config.ts:18](file://apps/portal/vite.config.ts#L18)
-- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
-- [apps/api-server/project.json:65-82](file://apps/api-server/project.json#L65-L82)
-
-## Detailed Component Analysis
-
-### Prerequisites
-- Node.js and npm versions are specified in the root package.json engines field.
-- Docker is used for the devcontainer; a container runtime is required.
-- VS Code with the Nx Console extension is recommended for task execution and project navigation.
-
-Verification steps:
-- Confirm Node.js and npm versions meet engines requirements.
-- Verify Docker is installed and running.
-- Launch VS Code and install recommended extensions (see VS Code setup section).
-
-**Section sources**
-- [package.json:262-266](file://package.json#L262-L266)
+- [package.json:266-269](file://package.json#L266-L269)
 - [README.md:140-159](file://README.md#L140-L159)
 
-### Step-by-Step Installation
-1. Clone the repository to your machine.
-2. From the repository root, install dependencies:
-   - npm install
-3. Start the API server:
-   - npm run start:api
-4. Start the Portal:
-   - npm run start:portal
-5. Open the Portal in your browser at http://localhost:4200.
+## Installation
+Follow these step-by-step instructions to set up the development environment:
 
-Environment variables:
-- Create apps/portal/.env.local using the example as a template.
-- Set VITE_COMPANY_API_HOSTNAME to http://localhost:8080 for local API.
-- Add VITE_GOOGLE_CLIENT_ID and optional analytics IDs as needed.
+### 1. Clone the Repository
+```bash
+git clone https://github.com/RedesignHealth/rh-nx-monorepo.git
+cd rh-nx-monorepo
+```
 
-Verification:
-- Confirm the API server responds at http://localhost:8080.
-- Confirm the Portal loads at http://localhost:4200 and can reach /api endpoints.
+### 2. Install Dependencies
+```bash
+npm install
+```
+This command installs all dependencies for the entire monorepo workspace.
+
+### 3. Verify Installation
+Check that all packages are properly installed:
+```bash
+npm run check-types:all
+```
 
 **Section sources**
-- [README.md:76-105](file://README.md#L76-L105)
-- [apps/portal/.env.local.example:1-8](file://apps/portal/.env.local.example#L1-L8)
+- [README.md:76-80](file://README.md#L76-L80)
+- [package.json:16-28](file://package.json#L16-L28)
 
-### Development Environment Setup (Devcontainer)
-Recommended for a fully reproducible local environment:
-- Prerequisites:
-  - VS Code with Remote - Containers extension
-  - Rancher Desktop or another container runtime (dockerd)
-- Steps:
-  - In VS Code, use “Dev Container: Clone Repository in Container Volume”
-  - Enter the repository’s HTTPS URL
-  - The devcontainer builds from .devcontainer/Dockerfile and .devcontainer/devcontainer.json
-  - Features include Java 17, Maven, Python, AWS CLI, Docker, and Nx NPM
-  - VS Code settings enable ESLint, Prettier, and workspace TypeScript
+## Development Environment Setup
+Choose one of the following approaches for setting up your development environment:
 
-Notes:
-- After modifying Dockerfile or devcontainer.json, rebuild the container from the Dev Container menu.
+### Option A: Local Development (Recommended)
+Install all dependencies locally using npm:
+
+```bash
+npm install
+```
+
+### Option B: Devcontainer Setup (Highly Recommended)
+For a fully reproducible environment:
+
+#### Prerequisites
+1. **VS Code** with Remote - Containers extension
+2. **Rancher Desktop** or another container runtime (dockerd)
+3. Minimum system requirements: 16 GB RAM, 4 CPUs
+
+#### Steps
+1. In VS Code, use "Dev Container: Clone Repository in Container Volume"
+2. Enter the repository's HTTPS URL
+3. The devcontainer builds from `.devcontainer/Dockerfile` and `.devcontainer/devcontainer.json`
+4. Features include Java 17, Maven, Python, AWS CLI, Docker, and Nx NPM
+5. VS Code settings enable ESLint, Prettier, and workspace TypeScript
 
 **Section sources**
 - [README.md:140-159](file://README.md#L140-L159)
 - [.devcontainer/devcontainer.json:1-145](file://.devcontainer/devcontainer.json#L1-L145)
 - [.devcontainer/Dockerfile:1-6](file://.devcontainer/Dockerfile#L1-L6)
 
-### Environment Variable Configuration
-- Local development:
-  - Create apps/portal/.env.local from the example
-  - Point VITE_COMPANY_API_HOSTNAME to http://localhost:8080
-  - Add VITE_GOOGLE_CLIENT_ID and optional analytics IDs
-- Production:
-  - Use your hosted company API hostname
-  - Set client IDs and measurement IDs appropriate for the environment
+## Environment Configuration
+Configure environment variables for different scenarios:
 
-Validation:
-- Confirm the Portal can fetch data from /api endpoints proxied to the local API server.
+### Local Development Setup
+1. Create `.env.local` file from the example:
+```bash
+cp apps/portal/.env.local.example apps/portal/.env.local
+```
+
+2. Edit `apps/portal/.env.local`:
+```ini
+VITE_COMPANY_API_HOSTNAME=http://localhost:8080
+VITE_EXPERT_NETWORK_HOSTNAME=https://third-party-network.dev.redesignhealth.com
+VITE_GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
+VITE_PORTAL_LIBRARY_ID=MnDeoylC
+VITE_PORTAL_DEVELOPER_LIBRARY_ID=TkGC8nvM
+VITE_PORTAL_DEVELOPER_LIBRARY_INFRA_LINK=/dev-library/vIh2x3gA/module/65dPfGx1
+VITE_PORTAL_ENV=local
+```
+
+### Environment Variables Explained
+- `VITE_COMPANY_API_HOSTNAME`: Points to your local API server
+- `VITE_EXPERT_NETWORK_HOSTNAME`: Third-party network API endpoint
+- `VITE_GOOGLE_CLIENT_ID`: Google OAuth client ID for authentication
+- `VITE_PORTAL_LIBRARY_ID`: Main documentation library ID
+- `VITE_PORTAL_DEVELOPER_LIBRARY_ID`: Developer documentation library ID
+- `VITE_PORTAL_DEVELOPER_LIBRARY_INFRA_LINK`: Infrastructure documentation link
+- `VITE_PORTAL_ENV`: Current environment (local, dev, staging, prod)
 
 **Section sources**
 - [apps/portal/.env.local.example:1-8](file://apps/portal/.env.local.example#L1-L8)
 - [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
 
-### Essential Commands
-Common tasks from the root:
-- Serve Portal: nx run portal:serve
-- Serve API server: nx run api-server:serve
-- Build Portal: nx build portal
-- Run all tests: nx run-many -t test
-- Run Portal tests: nx test portal
-- Lint all projects: nx run-many -t lint
-- Run E2E tests: nx e2e portal-e2e
-- View dependency graph: nx graph
-- Run Storybook: npm run storybook
+## Running Applications
+Start the development servers for both the API and Portal applications:
 
-Workspace-specific commands:
-- Portal build and serve targets are defined in apps/portal/project.json
-- API server build and serve targets are defined in apps/api-server/project.json
+### Method 1: Individual Commands
+```bash
+# Terminal 1 - Start API server
+npm run start:api
+
+# Terminal 2 - Start Portal
+npm run start:portal
+```
+
+### Method 2: Nx Commands
+```bash
+# Start API server
+nx run api-server:serve
+
+# Start Portal
+nx run portal:serve
+```
+
+### Expected Behavior
+- **API Server**: Runs on `http://localhost:8080`
+- **Portal**: Runs on `http://localhost:4200`
+- **Proxy**: `/api` requests are forwarded to the API server
+
+**Section sources**
+- [README.md:82-94](file://README.md#L82-L94)
+- [apps/portal/vite.config.ts:18](file://apps/portal/vite.config.ts#L18)
+- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
+
+## Essential Commands
+Master these essential commands for daily development:
+
+### Build Commands
+```bash
+# Build Portal application
+nx build portal
+
+# Build API server
+nx run api-server:build
+
+# Build all projects
+nx build
+```
+
+### Development Commands
+```bash
+# Start development servers
+npm run start:api
+npm run start:portal
+
+# Serve Portal with Nx
+nx run portal:serve
+
+# Serve API server with Nx
+nx run api-server:serve
+```
+
+### Testing Commands
+```bash
+# Run all tests
+nx run-many -t test
+
+# Run Portal tests
+nx test portal
+
+# Run API server tests
+nx test api-server
+
+# Run tests in watch mode
+nx test portal --watch
+```
+
+### Linting and Formatting
+```bash
+# Lint all projects
+nx run-many -t lint
+
+# Format code
+nx format --write
+
+# Check TypeScript types
+nx run-many -t check-types
+```
+
+### Documentation and Storybook
+```bash
+# Run Storybook
+npm run storybook
+
+# Build Storybook
+nx run shared-ui:build-storybook
+```
 
 **Section sources**
 - [README.md:107-119](file://README.md#L107-L119)
-- [apps/portal/project.json:33-135](file://apps/portal/project.json#L33-L135)
-- [apps/api-server/project.json:65-82](file://apps/api-server/project.json#L65-L82)
+- [package.json:5-51](file://package.json#L5-L51)
 
-### Using Nx Console in VS Code
-- Install the Nx Console extension from the marketplace.
-- On first open, you may be prompted to use the workspace TypeScript version; accept or set it manually:
-  - Open any TS file
-  - Ctrl+Shift+P → “TypeScript: Select TypeScript Version”
-  - Choose “Use Workspace Version”
-- Use Nx Console to discover and run tasks for apps and libs.
+## Development Workflow
+Follow this structured approach for effective development:
 
-**Section sources**
-- [README.md:128-138](file://README.md#L128-L138)
-- [.devcontainer/devcontainer.json:129-131](file://.devcontainer/devcontainer.json#L129-L131)
+### Daily Development Cycle
+1. **Start Servers**: `npm run start:api` and `npm run start:portal`
+2. **Make Changes**: Edit code in VS Code
+3. **Test Changes**: Run relevant tests
+4. **Commit Changes**: Use conventional commit messages
+5. **Push Changes**: Submit pull requests for review
 
-### Workspace TypeScript Version Selection
-- The devcontainer sets TypeScript SDK to the workspace version.
-- Alternatively, manually select the workspace TS version in VS Code.
+### Working with Libraries
+The monorepo uses a library-first approach:
+- Shared UI components in `libs/shared/ui/`
+- Portal-specific components in `libs/portal/`
+- Third-party network components in `libs/third-party-network/`
 
-**Section sources**
-- [.devcontainer/devcontainer.json:129-131](file://.devcontainer/devcontainer.json#L129-L131)
-
-### Path Aliases and Imports
-- The base tsconfig defines @redesignhealth/* aliases for shared and portal libraries.
-- These aliases simplify imports across the monorepo.
+### Import Aliases
+Use the following import patterns:
+```typescript
+import { Button } from '@redesignhealth/ui';
+import { CompanyCard } from '@redesignhealth/portal/features/companies';
+import { AdvisorCard } from '@redesignhealth/third-party-network/features/advisors';
+```
 
 **Section sources**
 - [tsconfig.base.json:20-91](file://tsconfig.base.json#L20-L91)
 
-### Linting and Formatting
-- ESLint and Prettier are configured globally.
-- Prettier settings enforce consistent formatting across the monorepo.
-- Nx target defaults include lint inputs and caching.
+## Troubleshooting
+Common issues and their solutions:
 
-**Section sources**
-- [.eslintrc.json:1-225](file://.eslintrc.json#L1-L225)
-- [.prettierrc:1-9](file://.prettierrc#L1-L9)
-- [nx.json:31-36](file://nx.json#L31-L36)
+### Node.js Version Issues
+**Problem**: Node.js version mismatch
+**Solution**: 
+```bash
+# Check current version
+node --version
 
-## Architecture Overview
-
-```mermaid
-sequenceDiagram
-participant Dev as "Developer"
-participant VSCode as "VS Code + Nx Console"
-participant NPM as "npm scripts"
-participant Nx as "Nx Orchestrator"
-participant Vite as "Vite Dev Server (Portal)"
-participant API as "Express Mock Server"
-Dev->>VSCode : Open workspace
-VSCode->>NPM : Run "start : api"
-NPM->>API : Start tsx server on port 8080
-VSCode->>NPM : Run "start : portal"
-NPM->>Nx : Resolve portal : serve
-Nx->>Vite : Start dev server on port 4200
-Vite->>API : Proxy /api requests to localhost : 8080
-Dev-->>Vite : Browse http : //localhost : 4200
+# Use nvm to switch versions
+nvm install 24.11.1
+nvm use 24.11.1
 ```
 
-**Diagram sources**
-- [package.json:7-9](file://package.json#L7-L9)
-- [apps/portal/project.json:33-49](file://apps/portal/project.json#L33-L49)
-- [apps/api-server/project.json:65-82](file://apps/api-server/project.json#L65-L82)
-- [apps/portal/vite.config.ts:18](file://apps/portal/vite.config.ts#L18)
-- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
-
-## Detailed Component Analysis
-
-### Portal Application
-- Executor: @nx/vite:build and @nx/vite:dev-server
-- Ports: dev server on 4200, preview on 4300
-- Proxy: /api routed to the API server on 8080
-- Test setup: Vitest with jsdom environment and coverage
-- Type checking: separate targets for app and spec tsconfigs
-
-```mermaid
-flowchart TD
-Start(["Start Portal"]) --> Build["nx build portal"]
-Build --> Serve["nx run portal:serve"]
-Serve --> DevServer["Vite Dev Server on 4200"]
-DevServer --> Proxy["Proxy /api to http://localhost:8080"]
-DevServer --> Tests["Run nx test portal"]
-DevServer --> Lint["Run nx run-many -t lint"]
-DevServer --> Graph["Run nx graph"]
+### Port Conflicts
+**Problem**: Ports 4200 or 8080 already in use
+**Solution**:
+```bash
+# Change Portal port in vite.config.ts
+# Change API server port in package.json scripts
 ```
 
-**Diagram sources**
-- [apps/portal/project.json:8-135](file://apps/portal/project.json#L8-L135)
-- [apps/portal/vite.config.ts:18](file://apps/portal/vite.config.ts#L18)
-- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
-
-**Section sources**
-- [apps/portal/project.json:8-135](file://apps/portal/project.json#L8-L135)
-- [apps/portal/vite.config.ts:1-68](file://apps/portal/vite.config.ts#L1-L68)
-- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
-
-### API Server Application
-- Executor: @nx/esbuild:esbuild for build, @nx/js:node for serve
-- Serves on port 8080 via tsx
-- Build outputs to dist/apps/api-server with sourcemaps in development
-
-```mermaid
-flowchart TD
-Start(["Start API Server"]) --> Build["nx run api-server:build"]
-Build --> Serve["nx run api-server:serve"]
-Serve --> Node["tsx Node process on port 8080"]
+### Proxy Issues
+**Problem**: API requests not reaching the server
+**Solution**:
+```bash
+# Verify proxy configuration
+cat apps/portal/proxy.conf.json
+# Ensure VITE_COMPANY_API_HOSTNAME points to correct URL
 ```
 
-**Diagram sources**
-- [apps/api-server/project.json:8-82](file://apps/api-server/project.json#L8-L82)
-
-**Section sources**
-- [apps/api-server/project.json:8-82](file://apps/api-server/project.json#L8-L82)
-
-### Devcontainer Configuration
-- Base image with Debian Bullseye
-- Git and bash-completion installed
-- Features: Java 17 + Maven, Python, Nx NPM, AWS CLI, Docker
-- VS Code settings: ESLint/Prettier on save, workspace TS SDK, search excludes
-
-```mermaid
-graph TB
-DevContainer["Dev Container Image"] --> Java["Java 17 + Maven"]
-DevContainer --> Python["Python"]
-DevContainer --> Nx["Nx NPM"]
-DevContainer --> AWS["AWS CLI"]
-DevContainer --> Docker["Docker"]
-DevContainer --> VSCode["VS Code Settings<br/>ESLint/Prettier, Workspace TS"]
+### Environment Variables Missing
+**Problem**: Application fails to load
+**Solution**:
+```bash
+# Create .env.local file
+cp apps/portal/.env.local.example apps/portal/.env.local
+# Fill in required values
 ```
 
-**Diagram sources**
-- [.devcontainer/Dockerfile:1-6](file://.devcontainer/Dockerfile#L1-L6)
-- [.devcontainer/devcontainer.json:18-38](file://.devcontainer/devcontainer.json#L18-L38)
-- [.devcontainer/devcontainer.json:44-140](file://.devcontainer/devcontainer.json#L44-L140)
-
-**Section sources**
-- [.devcontainer/devcontainer.json:1-145](file://.devcontainer/devcontainer.json#L1-L145)
-- [.devcontainer/Dockerfile:1-6](file://.devcontainer/Dockerfile#L1-L6)
-
-## Dependency Analysis
-- Nx target defaults define inputs for build, test, lint, and storybook tasks, enabling caching and incremental builds.
-- Named inputs exclude test/spec files and story files from production inputs.
-- Plugins include @nx/storybook, @nx/eslint, and @nxrocks/nx-spring-boot.
-
-```mermaid
-graph LR
-Nx["Nx Target Defaults"] --> Build["build"]
-Nx --> Test["test"]
-Nx --> Lint["lint"]
-Nx --> SB["build-storybook"]
-Nx --> E2E["e2e"]
-Nx --> Plugins["@nx/storybook<br/>@nx/eslint<br/>@nxrocks/nx-spring-boot"]
+### VS Code TypeScript Issues
+**Problem**: TypeScript version conflicts
+**Solution**:
+```bash
+# In VS Code: Ctrl+Shift+P
+# Select "TypeScript: Select TypeScript Version"
+# Choose "Use Workspace Version"
 ```
 
-**Diagram sources**
-- [nx.json:8-72](file://nx.json#L8-L72)
-- [nx.json:109-126](file://nx.json#L109-L126)
-
 **Section sources**
-- [nx.json:1-149](file://nx.json#L1-L149)
-
-## Performance Considerations
-- Use affected commands to limit work to changed projects.
-- Enable Nx Cloud caching for faster CI and local builds.
-- Keep dev server HMR enabled for faster reloads.
-- Prefer running tests in watch mode for iterative development.
-
-[No sources needed since this section provides general guidance]
-
-## Troubleshooting Guide
-Common setup issues and resolutions:
-- Node/npm version mismatch:
-  - Ensure your Node.js and npm versions satisfy engines requirements.
-- Port conflicts:
-  - If ports 4200 or 8080 are in use, adjust the dev server ports in the relevant configuration files.
-- Proxy not forwarding requests:
-  - Verify proxy.conf.json forwards /api to the correct API server address.
-- Missing environment variables:
-  - Create apps/portal/.env.local and set VITE_COMPANY_API_HOSTNAME to http://localhost:8080.
-- VS Code TypeScript version:
-  - Use “TypeScript: Select TypeScript Version” and choose “Use Workspace Version”.
-- Devcontainer build errors:
-  - Rebuild the container after changes to Dockerfile or devcontainer.json.
-
-Verification steps:
-- Confirm the API server responds at http://localhost:8080.
-- Confirm the Portal loads at http://localhost:4200 and can reach /api endpoints.
-- Run nx run-many -t lint and nx run-many -t test to validate the setup.
-
-**Section sources**
-- [package.json:262-266](file://package.json#L262-L266)
+- [package.json:266-269](file://package.json#L266-L269)
 - [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
 - [apps/portal/.env.local.example:1-8](file://apps/portal/.env.local.example#L1-L8)
-- [README.md:128-138](file://README.md#L128-L138)
-- [README.md:140-159](file://README.md#L140-L159)
 
-## Conclusion
-You now have the prerequisites, environment setup, and commands to run the Portal and API server locally. Use the devcontainer for a reproducible environment, configure environment variables for your scenario, and leverage Nx Console in VS Code for efficient task execution. Refer to the sections above for detailed steps and troubleshooting.
+## Verification
+Ensure your setup is working correctly:
 
-[No sources needed since this section summarizes without analyzing specific files]
+### API Server Verification
+1. Start the API server: `npm run start:api`
+2. Test the endpoint: `curl http://localhost:8080/`
+3. Expected response: API server should return available endpoints
 
-## Appendices
+### Portal Verification
+1. Start the Portal: `npm run start:portal`
+2. Open browser: `http://localhost:4200`
+3. Test API connectivity: Browser should be able to access `/api` endpoints
 
-### Appendix A: Quick Reference Commands
-- Install: npm install
-- Start API: npm run start:api
-- Start Portal: npm run start:portal
-- Build Portal: nx build portal
-- Test: nx run-many -t test
-- Lint: nx run-many -t lint
-- E2E: nx e2e portal-e2e
-- Graph: nx graph
-- Storybook: npm run storybook
+### Development Tools Verification
+1. **Linting**: `nx run-many -t lint`
+2. **Testing**: `nx run-many -t test`
+3. **Type Checking**: `nx run-many -t check-types`
+4. **Dependency Graph**: `nx graph`
+
+### Devcontainer Verification
+If using devcontainer:
+1. Container builds successfully
+2. VS Code extensions are loaded
+3. TypeScript version matches workspace
+4. All development tools are available
 
 **Section sources**
 - [README.md:76-119](file://README.md#L76-L119)
-- [package.json:5-47](file://package.json#L5-L47)
+- [apps/portal/vite.config.ts:18](file://apps/portal/vite.config.ts#L18)
+- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
+
+## First-Time Contributor Guidance
+New contributors should follow these steps:
+
+### Initial Setup Checklist
+1. ✅ Fork the repository
+2. ✅ Clone your fork locally
+3. ✅ Install dependencies (`npm install`)
+4. ✅ Start development servers
+5. ✅ Verify all systems are working
+
+### Development Best Practices
+1. **Branch Strategy**: Create feature branches from `main`
+2. **Commit Messages**: Use conventional commits
+3. **Code Quality**: Run linting and tests before committing
+4. **Documentation**: Update docs for significant changes
+
+### Code Review Process
+1. Push changes to your fork
+2. Create Pull Request to `main`
+3. Address reviewer feedback
+4. Squash and merge when approved
+
+### Learning Resources
+- **Nx Documentation**: https://nx.dev
+- **Chakra UI v3**: https://www.chakra-ui.com
+- **React 19**: https://react.dev
+- **Vite**: https://vitejs.dev
+
+### Getting Help
+- Check existing issues for similar problems
+- Ask questions in the development Slack channel
+- Review recent commits for patterns
+
+**Section sources**
+- [README.md:161-167](file://README.md#L161-L167)

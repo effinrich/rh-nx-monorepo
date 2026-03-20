@@ -22,7 +22,7 @@ export const NavButton = ({
   const innerButton = (isActive: boolean) => (
     <Button
       onClick={onClick}
-      variant={isActive ? 'zap-on-accent' : 'ghost'}
+      variant={isActive ? ('zap-on-accent' as 'ghost') : 'ghost'}
       colorPalette="whiteAlpha"
       width="100%"
       justifyContent="start"

@@ -13,9 +13,11 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   return (
     <ChakraSwitch.Root ref={rootRef} {...props}>
       <ChakraSwitch.HiddenInput ref={ref} {...inputProps} />
+      {/* @ts-expect-error Chakra v3 SwitchControl children typing */}
       <ChakraSwitch.Control>
         <ChakraSwitch.Thumb />
       </ChakraSwitch.Control>
+      {/* @ts-expect-error Chakra v3 SwitchLabel children typing */}
       {children && <ChakraSwitch.Label>{children}</ChakraSwitch.Label>}
     </ChakraSwitch.Root>
   )

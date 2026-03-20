@@ -26,18 +26,19 @@ export const Solution = ({ libraryRoute }: SolutionProps) => {
   return (
     <Page>
       <Button
-        as={Link}
+        asChild
         variant="plain"
         colorPalette="primary"
-        to={`/${libraryRoute}`}
         pb={4}
       >
-        <MdChevronLeft size="20" />
-        Back
+        <Link to={`/${libraryRoute}`}>
+          <MdChevronLeft size="20" />
+          Back
+        </Link>
       </Button>
 
       {!data ? (
-        <Loader w="full" />
+        <Loader />
       ) : (
         <LibraryModulePage
           currentModuleId={moduleId}

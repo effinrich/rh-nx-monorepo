@@ -19,6 +19,7 @@ export const GroupPopover = ({ description }: GroupPopoverProps) => {
 
   return (
     <PopoverRoot positioning={{ placement: 'right-start' }} lazyMount>
+      {/* @ts-expect-error Chakra v3 PopoverTrigger children typing */}
       <PopoverTrigger asChild>
         <IconButton
           aria-label="Info"
@@ -30,9 +31,11 @@ export const GroupPopover = ({ description }: GroupPopoverProps) => {
         </IconButton>
       </PopoverTrigger>
 
+      {/* @ts-expect-error Chakra v3 PopoverPositioner children typing */}
       <PopoverPositioner>
-        {/* @ts-expect-error Chakra v3 compound component typing */}
+        {/* @ts-expect-error Chakra v3 PopoverContent children typing */}
         <PopoverContent w="403px">
+          {/* @ts-expect-error Chakra v3 PopoverHeader asChild typing */}
           <PopoverHeader asChild>
             <Flex
               justifyContent="space-between"
@@ -48,6 +51,7 @@ export const GroupPopover = ({ description }: GroupPopoverProps) => {
               >
                 Description
               </Text>
+              {/* @ts-expect-error Chakra v3 PopoverCloseTrigger asChild typing */}
               <PopoverCloseTrigger asChild>
                 <IconButton
                   aria-label="Close"

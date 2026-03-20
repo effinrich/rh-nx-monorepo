@@ -82,6 +82,7 @@ const ResearchSprints = () => {
   return (
     <Fragment>
       <SelectionBox>
+        {/* @ts-expect-error SelectionBoxSearch extends InputGroupProps which requires children, but the component renders its own children */}
         <SelectionBox.Search inputProps={searchBoxOnChange} />
 
         <SelectionBox.FiltersContainer>
@@ -138,12 +139,13 @@ const ResearchSprints = () => {
             Results: {sprints?.totalResults}
           </Text>
           <FormControl as={Flex} flexDir="row-reverse" align="center" mt="8px">
+            {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
             <FormLabel m="0">Hide conflicted content</FormLabel>
             <CheckboxRoot
               mr="12px"
               checked={isHideConflicts}
               disabled={true}
-              onChange={e => setIsHideConflicts(e.target.checked)}
+              onCheckedChange={(e: { checked: boolean }) => setIsHideConflicts(e.checked)}
             >
               <CheckboxHiddenInput />
               <CheckboxControl />

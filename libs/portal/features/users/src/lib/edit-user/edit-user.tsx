@@ -47,7 +47,7 @@ type MappedOpCoProps = {
 export const EditUser = () => {
   const { email } = useParams()
   const navigate = useNavigate()
-  const drawerRef = useRef<{ handleOnClose(): void }>()
+  const drawerRef = useRef<{ handleOnClose(): void }>(null)
   const [options, setOptions] = useState<MappedOpCoProps>()
   const [defaultOpCoValues, setDefaultOpCoValues] = useState<MappedOpCoProps>()
 
@@ -76,7 +76,8 @@ export const EditUser = () => {
     formState: { errors, isValid }
   } = useForm<EditUserProps>({
     mode: 'onBlur',
-    resolver: yupResolver(formSchema)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(formSchema) as any
   })
 
   const currentUserRole = getCurrentUserRole() as string
@@ -124,9 +125,9 @@ export const EditUser = () => {
       ?.filter(opCo => !formData.memberOf?.includes(opCo.value as string))
       .map(co => co.value)
 
-    formData['deletedOpCoIds'] = deletedOpCoIds
+    const submitData = { ...formData, deletedOpCoIds } as EditUserProps
 
-    await mutateAsync(formData)
+    await mutateAsync(submitData)
   })
 
   useEffect(() => {
@@ -151,7 +152,7 @@ export const EditUser = () => {
       title="Edit User"
       description="Update their information below."
       errors={errors}
-      loading={isPending}
+      isLoading={isPending}
       isError={isError}
       ctaText="Edit user"
       isValid={isValid}
@@ -164,6 +165,7 @@ export const EditUser = () => {
         <form>
           <Flex direction={['column', 'column', 'row']} gap="6" mb={6}>
             <FormControl>
+              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="role">User Type</FormLabel>
               <Controller
                 name="role"
@@ -172,7 +174,6 @@ export const EditUser = () => {
                   <RadioGroupRoot
                     onChange={onChange}
                     defaultValue={personData.role?.authority}
-                    as={Flex}
                     name={name}
                     ref={ref}
                     flexDir="column"
@@ -189,7 +190,7 @@ export const EditUser = () => {
                       <Radio
                         key={role.value}
                         value={role.value}
-                        readOnly={currentUserRole !== 'ROLE_SUPER_ADMIN'}
+                        disabled={currentUserRole !== 'ROLE_SUPER_ADMIN'}
                       >
                         {role.label}
                       </Radio>
@@ -201,34 +202,38 @@ export const EditUser = () => {
           </Flex>
           <Flex flexDir="column" mt="24px" gap="24px">
             <FormControl disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input defaultValue={personData.email} {...register('email')} />
-              <FormErrorMessage role="alert">
+              <FormErrorMessage>
                 {errors.email?.message}
               </FormErrorMessage>
             </FormControl>
             <FormControl disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="givenName">First Name</FormLabel>
               <Input
                 defaultValue={personData.givenName}
                 {...register('givenName')}
               />
-              <FormErrorMessage role="alert">
+              <FormErrorMessage>
                 {errors.givenName?.message}
               </FormErrorMessage>
             </FormControl>
             <FormControl disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="familyName">Last name</FormLabel>
               <Input
                 defaultValue={personData.familyName}
                 {...register('familyName')}
               />
-              <FormErrorMessage role="alert">
+              <FormErrorMessage>
                 {errors.familyName?.message}
               </FormErrorMessage>
             </FormControl>
 
             <FormControl disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
               <FormLabel htmlFor="memberOf">Company assignment</FormLabel>
               {isGetOpCosSuccess && isGetSuccess && defaultOpCoValues && (
                 <Controller
@@ -246,14 +251,14 @@ export const EditUser = () => {
                       }}
                       closeMenuOnSelect={false}
                       blurInputOnSelect={false}
-                      colorPalette="primary"
                     />
                   )}
                 />
               )}
-              <FormErrorMessage role="alert">
+              <FormErrorMessage>
                 {errors.memberOf?.message}
               </FormErrorMessage>
+              {/* @ts-expect-error Chakra v3 FieldHelperText children typing */}
               <FormHelperText>
                 Update the companies this user is assigned to.
               </FormHelperText>

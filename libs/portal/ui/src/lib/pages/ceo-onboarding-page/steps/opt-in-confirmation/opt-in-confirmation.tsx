@@ -38,7 +38,8 @@ const OptInConfirmation = ({ handleCancel }: OptInConfirmationProps) => {
   const methods = useForm<CeoFormFields>({
     defaultValues: CEO_FORM_DEFAULT_VALUES,
     mode: 'onBlur',
-    resolver: ceoFormResolver
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: ceoFormResolver as any
   })
 
   useEffect(() => {
@@ -69,6 +70,7 @@ const OptInConfirmation = ({ handleCancel }: OptInConfirmationProps) => {
             </FormProvider>
           </CardBody>
           <Divider />
+          {/* @ts-expect-error Chakra v3 CardFooter children typing */}
           <CardFooter display="flex" justify="end" gap={3}>
             <Button variant="outline" onClick={handleCancel}>
               Back

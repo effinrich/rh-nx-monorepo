@@ -31,7 +31,7 @@ const FormFieldContainer = ({
   serverErrors
 }: FormFieldContainerProps) => {
   const serverError = serverErrors?.find(e => e.name === name)?.description
-  const clientError = clientErrors[name]?.message
+  const clientError = (clientErrors as Record<string, { message?: string }>)[name]?.message
   const error = clientError || serverError
   return (
     <FormControl invalid={!!error} data-testid={name}>

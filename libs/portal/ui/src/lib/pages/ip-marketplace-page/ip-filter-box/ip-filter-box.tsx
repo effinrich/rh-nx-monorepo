@@ -76,16 +76,18 @@ const IPFilterBox = () => {
                 control={control}
                 render={({ field: { name, value, onChange } }) => (
                   <Filter
-                    loading={isPending}
+                    isLoading={isPending}
                     isMulti
                     name={name}
-                    options={filters[filterConfig.keyForApi]}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    options={(filters as Record<string, any>)[filterConfig.keyForApi]}
                     onChange={newValue =>
                       onChange(multiSelectTransformer.output(newValue))
                     }
                     placeholder={filterConfig.displayName}
                     value={multiSelectTransformer.input(
-                      filters[filterConfig.keyForApi],
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      (filters as Record<string, any>)[filterConfig.keyForApi],
                       value
                     )}
                   />

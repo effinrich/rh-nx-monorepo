@@ -45,7 +45,7 @@ export const getArticleLinkMap = async (
     return []
   }
 
-  const linkMap = {}
+  const linkMap: Record<string, string> = {}
   articles.forEach(article => {
     const remoteContentId = article.remoteContentId
     const libraryRelativeUrl = `/${libraryRoute}/${article.parentId}/module/${article.id}`

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import {
   Option,
   useLibraryStore,
@@ -27,6 +27,7 @@ export const CategoriesFilter = () => {
     state.categoryFilter,
     state.setCategoryFilter
   ])
+  const [, startTransition] = useTransition()
 
   useEffect(() => {
     if (categories) {
@@ -41,7 +42,7 @@ export const CategoriesFilter = () => {
     <Filter
       placeholder="Categories"
       options={options}
-      onChange={setCategoryFilter}
+      onChange={value => startTransition(() => setCategoryFilter(value))}
       value={categoryFilter}
     />
   )

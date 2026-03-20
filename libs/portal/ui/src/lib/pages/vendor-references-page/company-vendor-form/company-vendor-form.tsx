@@ -1,4 +1,4 @@
-import { ChangeEvent, forwardRef, LegacyRef, useEffect } from 'react'
+import React, { ChangeEvent, forwardRef, LegacyRef, useEffect } from 'react'
 import DatePicker from 'react-datepicker'
 import { Controller, FormProvider, useForm, useWatch } from 'react-hook-form'
 import { MdEditCalendar } from 'react-icons/md'
@@ -71,7 +71,7 @@ const customDateInput = (
   { value, onClick, onChange }: InputProps,
   ref: LegacyRef<HTMLInputElement>
 ) => (
-  <InputGroup endElement={<Icon as={MdEditCalendar} boxSize={4} color="gray.600" onClick={onClick} cursor="pointer" />}>
+  <InputGroup endElement={<Icon as={MdEditCalendar} boxSize={4} color="gray.600" onClick={onClick as unknown as React.MouseEventHandler<SVGSVGElement>} cursor="pointer" />}>
     <Input
       autoComplete="off"
       value={value}
@@ -99,7 +99,8 @@ export const CompanyVendorForm = ({
   const { data: vendorsNames } = useGetVendorsNames()
 
   const methods = useForm<CompanyVendorProps>({
-    resolver: yupResolver(formSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(formSchema) as any,
     mode: 'onBlur',
     defaultValues: defaultValues || COMPANY_VENDOR_FORM_DEFAULT_VALUES
   })
@@ -153,7 +154,7 @@ export const CompanyVendorForm = ({
         disabled={Boolean(errors) || isSubmitting}
         isPending={isPending}
         isValid={isValid}
-        onSubmit={handleSubmit(data => onSubmit(data))}
+        onSubmit={handleSubmit(data => onSubmit(data as CompanyVendorProps))}
         onCancel={onCancel}
         submitText={submitText}
       >
@@ -168,12 +169,12 @@ export const CompanyVendorForm = ({
                   name={name}
                   onBlur={onBlur}
                   value={selectTransformer.input(vendorsNames, value)}
-                  getNewOptionData={name => ({ label: name, value: name })}
+                  getNewOptionData={(name: string) => ({ label: name, value: name })}
                   options={vendorsNames}
                   onChange={newValue => {
                     onChange(selectTransformer.output(newValue))
                   }}
-                  disabled={isEdit}
+                  isDisabled={isEdit}
                 />
               </FormFieldMaster>
             )}
@@ -260,7 +261,6 @@ export const CompanyVendorForm = ({
                   getOptionValue={o => o.value}
                   name={name}
                   placeholder="Select engagement status"
-                  colorPalette="primary"
                   onBlur={onBlur}
                 />
               </FormFieldMaster>
@@ -364,8 +364,7 @@ export const CompanyVendorForm = ({
                   value={
                     field.value === undefined ? '' : field.value ? 'yes' : 'no'
                   }
-                  onChange={value => field.onChange(value === 'yes')}
-                  as={Flex}
+                  onValueChange={(details: { value: string }) => field.onChange(details.value === 'yes')}
                   gap="40px"
                 >
                   <Radio value="yes">Yes</Radio>

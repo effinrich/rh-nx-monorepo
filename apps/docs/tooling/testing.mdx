@@ -155,7 +155,7 @@ it('should have no accessibility violations', async () => {
 })
 ```
 
-### In the forgekit plugin
+### In @effinrich/nx-storybook
 
 The `stories` generator can include accessibility tests when `--includeA11y` is enabled (on by default). The `component-test` generator produces Playwright tests that include an a11y assertion.
 
@@ -195,7 +195,7 @@ describe('Button', () => {
 
 ### Playwright component tests
 
-The `forgekit-nx-storybook:component-test` generator creates `.ct.tsx` files that mount components directly using `@playwright/experimental-ct-react` for cross-browser testing with visual snapshots.
+The `@effinrich/nx-storybook:component-test` generator creates `.ct.tsx` files that mount components directly using `@playwright/experimental-ct-react` for cross-browser testing with visual snapshots.
 
 ---
 

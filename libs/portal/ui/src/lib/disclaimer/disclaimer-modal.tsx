@@ -35,6 +35,7 @@ export const DisclaimerModal = forwardRef(
         size={{ base: 'full', md: 'md' }}
       >
         <DialogBackdrop />
+        {/* @ts-expect-error Chakra v3 DialogPositioner children typing */}
         <DialogPositioner>
           {/* @ts-expect-error Chakra v3 DialogContent children typing */}
           <DialogContent>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { UseFormReturn, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import {
@@ -53,7 +53,8 @@ const AddResearchSprintForm = () => {
 
   const form = useForm<NewSprintProps>({
     mode: 'onBlur',
-    resolver: yupResolver(newSprintSchema)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(newSprintSchema) as any
   })
 
   useEffect(() => {
@@ -139,7 +140,7 @@ const AddResearchSprintForm = () => {
         taxonomyTags={taxonomyTags}
         isPending={isPending}
         isError={isError}
-        form={form}
+        form={form as UseFormReturn<NewSprintProps>}
         defaultAuthor={defaultAuthors as PersonSummary[]} // Author select defaults to current user
       />
     </FormMaster>

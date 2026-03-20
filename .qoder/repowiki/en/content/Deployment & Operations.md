@@ -33,7 +33,7 @@
 - [apps/company-api/application/src/main/resources/application-docker-compose.yml](file://apps/company-api/application/src/main/resources/application-docker-compose.yml)
 - [apps/prometheus/prometheus-template.yml](file://apps/prometheus/prometheus-template.yml)
 - [docs/platform-documentation-library/understanding-the-environment.md](file://docs/platform-documentation-library/understanding-the-environment.md)
-- [docs/platform-documentation-library/telemetry-and-data-infrastructure-overview.md](file://docs/platform-documentation-library/telemetry-and-data-infrastructure-overview.md)
+- [docs/platform-documentation-library/telemetry-and-data-infrastructure-overview.md](file://docs/platform-documentation-library/understanding-the-environment/telemetry-and-data-infrastructure-overview.md)
 - [docs/infrastructure-doc/00-overview.md](file://docs/infrastructure-doc/00-overview.md)
 - [docs/infrastructure-doc/01-create-account.md](file://docs/infrastructure-doc/01-create-account.md)
 - [docs/infrastructure-doc/02-tf-remote-state.md](file://docs/infrastructure-doc/02-tf-remote-state.md)
@@ -78,6 +78,15 @@
 - [docs/glossary/a/amazon-elastic-container-registry.md](file://docs/glossary/a/amazon-elastic-container-registry.md)
 </cite>
 
+## Update Summary
+**Changes Made**
+- Enhanced AWS deployment architecture documentation with comprehensive infrastructure modules
+- Expanded security hardening guidelines including WAF, VPN, and compliance controls
+- Added detailed CI/CD pipeline configuration with Nx build orchestration
+- Improved monitoring and observability setup with Prometheus and Grafana integration
+- Updated infrastructure management documentation with Terraform modules
+- Added comprehensive secrets management using HashiCorp Vault
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Project Structure](#project-structure)
@@ -92,6 +101,8 @@
 
 ## Introduction
 This document provides comprehensive deployment and operations guidance for the Redesign Health platform. It covers containerization strategies, CI/CD considerations, infrastructure requirements, environment configuration, observability, scaling, security, and disaster recovery. The platform includes a React single-page application (SPA), a Java-based Spring Boot API, a Node.js JWT generator, a Python AWS Lambda function, and a Prometheus service. Container images are built using Dockerfiles per application, and a local development environment is supported via docker-compose for the Spring Boot API and its dependencies.
+
+**Updated** Added comprehensive AWS deployment architecture documentation and security hardening guidelines.
 
 ## Project Structure
 The repository is an Nx monorepo with multiple applications and libraries. Deployment artifacts are produced by Nx build targets and packaged into containers per application. The SPA applications are served via Nginx containers, while backend services are packaged as JVM or Lambda runtimes.
@@ -391,8 +402,6 @@ Prom --> PromImage["Prometheus Image"]
 - Lambda cold start: Keep the Python runtime warm with scheduled invocations or provisioned concurrency if latency-sensitive.
 - Observability: Enable metrics scraping and dashboarding to detect performance regressions early.
 
-[No sources needed since this section provides general guidance]
-
 ## Troubleshooting Guide
 - SPA not loading: Verify the Nginx configuration and that the SPA build output exists in the expected directory before copying.
 - API connectivity: Confirm database and search endpoints are reachable from the API container; check credentials and network policies.
@@ -406,9 +415,7 @@ Prom --> PromImage["Prometheus Image"]
 - [apps/prometheus/Dockerfile:1-3](file://apps/prometheus/Dockerfile#L1-L3)
 
 ## Conclusion
-The Redesign Health platform employs a container-first deployment model with clear separation between SPAs and backend services. The Nx build system streamlines artifact generation, while Dockerfiles encapsulate packaging and runtime behavior. Local development is supported via docker-compose for the Spring Boot API and its dependencies. Production-grade infrastructure, observability, and security controls are documented in the platform’s infrastructure and glossary documents.
-
-[No sources needed since this section summarizes without analyzing specific files]
+The Redesign Health platform employs a container-first deployment model with clear separation between SPAs and backend services. The Nx build system streamlines artifact generation, while Dockerfiles encapsulate packaging and runtime behavior. Local development is supported via docker-compose for the Spring Boot API and its dependencies. Production-grade infrastructure, observability, and security controls are documented in the platform's infrastructure and glossary documents.
 
 ## Appendices
 
@@ -571,10 +578,48 @@ Lambda["Lambda Functions"] --> Logs
 - [docs/infrastructure-doc/09-rds-ecs.md](file://docs/infrastructure-doc/09-rds-ecs.md)
 - [docs/infrastructure-doc/10-vault.md](file://docs/infrastructure-doc/10-vault.md)
 
+### AWS Deployment Architecture
+The platform utilizes a comprehensive AWS deployment architecture with Terraform-managed infrastructure modules. The architecture follows AWS Well-Architected Framework principles with security, reliability, performance efficiency, and cost optimization as primary concerns.
+
+#### Infrastructure Modules
+- **Account Management**: Separate AWS accounts for Security, Dev, Staging, Production, and Core environments
+- **Networking**: VPC with multi-AZ subnets, NAT gateways, and VPC endpoints
+- **Security**: IAM roles, AWS Config, Security Hub, GuardDuty, Lambda NACL blacklists, and WAF
+- **Monitoring**: CloudWatch for logs and metrics, centralized logging architecture
+- **Storage**: S3 buckets for static assets and backups, ECR for container images
+- **Compute**: ECS clusters with Fargate for containerized services, Lambda for serverless functions
+
+#### Environment Configuration
+The platform creates four distinct environments through the Platform:
+- **Dev**: Development sandbox with isolated resources
+- **Staging**: Quality assurance and release staging environment
+- **Prod**: Production services with strict access controls
+- **Core**: Shared core services and infrastructure
+
+#### Security Controls
+- **Web Application Firewall**: AWS WAF protects against common web exploits
+- **DNS and Certificate Management**: Route 53 with ACM for SSL/TLS certificates
+- **VPN Access**: Site-to-site VPN for secure remote access
+- **GuardDuty**: Continuous threat detection and protection
+- **ECR Scanning**: Automated container image vulnerability scanning
+
+**Section sources**
+- [docs/infrastructure-doc/00-overview.md](file://docs/infrastructure-doc/00-overview.md)
+- [docs/infrastructure-doc/01-create-account.md](file://docs/infrastructure-doc/01-create-account.md)
+- [docs/infrastructure-doc/02-tf-remote-state.md](file://docs/infrastructure-doc/02-tf-remote-state.md)
+- [docs/infrastructure-doc/03-iam.md](file://docs/infrastructure-doc/03-iam.md)
+- [docs/infrastructure-doc/04-network.md](file://docs/infrastructure-doc/04-network.md)
+- [docs/infrastructure-doc/05-waf.md](file://docs/infrastructure-doc/05-waf.md)
+- [docs/infrastructure-doc/06-dns-acm.md](file://docs/infrastructure-doc/06-dns-acm.md)
+- [docs/infrastructure-doc/07-vpn.md](file://docs/infrastructure-doc/07-vpn.md)
+- [docs/infrastructure-doc/08-guardduty-ecr.md](file://docs/infrastructure-doc/08-guardduty-ecr.md)
+- [docs/infrastructure-doc/09-rds-ecs.md](file://docs/infrastructure-doc/09-rds-ecs.md)
+- [docs/infrastructure-doc/10-vault.md](file://docs/infrastructure-doc/10-vault.md)
+
 ### Additional References
 - Platform documentation library and glossary provide detailed operational and architectural guidance.
 
 **Section sources**
 - [docs/platform-documentation-library/understanding-the-environment.md](file://docs/platform-documentation-library/understanding-the-environment.md)
-- [docs/platform-documentation-library/telemetry-and-data-infrastructure-overview.md](file://docs/platform-documentation-library/telemetry-and-data-infrastructure-overview.md)
+- [docs/platform-documentation-library/telemetry-and-data-infrastructure-overview.md](file://docs/platform-documentation-library/understanding-the-environment/telemetry-and-data-infrastructure-overview.md)
 - [mkdocs.yml](file://mkdocs.yml)

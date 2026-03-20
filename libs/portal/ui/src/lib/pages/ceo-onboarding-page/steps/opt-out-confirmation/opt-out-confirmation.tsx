@@ -59,6 +59,7 @@ const OptOutConfirmation = ({ handleCancel }: OptOutConfirmationProps) => {
       </CardBody>
       <Divider />
       {ceo && (
+        // @ts-expect-error Chakra v3 CardFooter children typing
         <CardFooter display="flex" justify="flex-end" gap={3}>
           <Button variant="outline" onClick={handleCancel}>
             I want to opt-In

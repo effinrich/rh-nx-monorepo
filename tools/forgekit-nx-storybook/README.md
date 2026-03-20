@@ -1,52 +1,53 @@
-# forgekit-nx-storybook
+# @effinrich/nx-storybook
 
-An Nx plugin that automatically generates Storybook stories, interaction tests, Playwright component tests, and accessibility audits for React components.
+A companion plugin for [`@nx/storybook`](https://nx.dev/nx-api/storybook) that auto-generates Storybook stories, interaction tests, Playwright component tests, and accessibility audits from React component analysis.
 
-Analyzes your component's props, imports, and dependencies to produce ready-to-use `.stories.tsx` and `.ct.tsx` files — complete with controls, variant stories, play-function-based interaction tests, visual regression snapshots, and axe-core accessibility checks.
+## How it works with @nx/storybook
 
-## What makes this different from @nx/storybook?
+`@nx/storybook` handles the **infrastructure** — scaffolding `.storybook/main.ts` and `preview.ts`, serving/building Storybook, running the test runner, and managing Storybook version migrations. It does not generate individual story files.
 
-`@nx/storybook` scaffolds config files (`main.ts`, `preview.ts`, targets). It generates **zero stories**.
+`@effinrich/nx-storybook` handles the **content** — analyzing your React components and generating ready-to-use `.stories.tsx` and `.ct.tsx` files with controls, variants, interaction tests, and accessibility checks.
 
-**forgekit-nx-storybook** generates everything:
+**Use both together.** This plugin requires `@nx/storybook` as a peer dependency and delegates all config scaffolding to it.
 
-| Feature | @nx/storybook | forgekit-nx-storybook |
+| Concern | @nx/storybook | @effinrich/nx-storybook |
 |---|:---:|:---:|
-| Scaffold .storybook config | Yes | Delegates to @nx/storybook |
-| Auto-generate stories from components | - | Yes |
-| ArgTypes, controls, default args from props | - | Yes |
-| Variant / size / colorPalette stories | - | Yes |
-| Interaction tests (play functions) | - | Yes |
-| Accessibility audit stories (axe-core) | - | Yes |
-| Keyboard navigation tests | - | Yes |
-| Co-located Playwright component tests | - | Yes |
-| Visual regression snapshots | - | Yes |
-| Bulk generation across entire projects | - | Yes |
-| Story coverage scoring (A-F grades) | - | Yes |
-| File watcher for auto-updates | - | Yes |
-| Interactive colored CLI | - | Yes |
-| React Router / Chakra / React Query detection | - | Yes |
+| Scaffold `.storybook/` config | Yes | Delegates to @nx/storybook |
+| Serve / build Storybook | Yes | -- |
+| Storybook test runner | Yes | -- |
+| Version migrations (v8→v9→v10) | Yes | -- |
+| Auto-generate `.stories.tsx` from components | -- | Yes |
+| ArgTypes, controls, default args from props | -- | Yes |
+| Variant / size / colorPalette stories | -- | Yes |
+| Interaction tests (play functions) | -- | Yes |
+| Accessibility audit stories (axe-core) | -- | Yes |
+| Keyboard navigation tests | -- | Yes |
+| Co-located Playwright component tests (`.ct.tsx`) | -- | Yes |
+| Visual regression snapshots | -- | Yes |
+| Bulk generation with coverage scoring (A–F) | -- | Yes |
+| File watcher for auto-updates | -- | Yes |
+| Framework detection (Router, Chakra, React Query) | -- | Yes |
 
 ## Prerequisites
 
-| Requirement | Minimum Version |
-|---|---|
-| **Node.js** | >= 18.17.1 |
-| **Nx** | >= 19.0.0 |
-| **Storybook** | >= 8.0.0 |
-| **@nx/storybook** | >= 19.0.0 |
-| **TypeScript** | >= 5.0.0 |
+- **@nx/storybook** >= 19.0.0 (install first, configure at least one project)
+- **Nx** >= 19.0.0
+- **Storybook** >= 8.0.0
+- **TypeScript** >= 5.0.0
+- **Node.js** >= 18.17.1
 
-### @nx/storybook Setup
-
-This plugin requires `@nx/storybook` to be installed and configured in your workspace **before** generating stories. If you haven't set it up yet, run:
+### Quick setup
 
 ```bash
+# 1. Install @nx/storybook and configure a project (if not already done)
 npm install --save-dev @nx/storybook --legacy-peer-deps
 npx nx g @nx/storybook:configuration --project=<your-ui-library>
+
+# 2. Install this plugin
+npx nx add @effinrich/nx-storybook
 ```
 
-> **Tip:** When you run `nx g forgekit-nx-storybook:init`, the plugin will detect if `@nx/storybook` is missing and interactively walk you through installation and project configuration.
+The `init` generator runs automatically on `nx add` and will verify `@nx/storybook` is present, ensure Storybook core dependencies are installed, and display available commands.
 
 ### For Playwright component tests
 
@@ -54,32 +55,12 @@ npx nx g @nx/storybook:configuration --project=<your-ui-library>
 npm install --save-dev @playwright/experimental-ct-react @axe-core/playwright --legacy-peer-deps
 ```
 
-## Installation
-
-### From the workspace (local plugin)
-
-```bash
-npx nx g ./tools/forgekit-nx-storybook:init
-```
-
-### As an npm package
-
-```bash
-npx nx add forgekit-nx-storybook
-```
-
-The `init` generator runs automatically on `nx add` and will:
-
-1. Check if `@nx/storybook` is installed — if not, prompt to install and configure it
-2. Ensure `@storybook/react-vite`, `@storybook/test`, and `storybook` are in your `devDependencies`
-3. Display available commands
-
 ## Generators
 
 ### `story` — Generate a story for one component
 
 ```bash
-npx nx g forgekit-nx-storybook:story --componentPath=libs/shared/ui/src/lib/button/button.tsx
+npx nx g @effinrich/nx-storybook:story --componentPath=libs/shared/ui/src/lib/button/button.tsx
 ```
 
 Produces a `.stories.tsx` file with:
@@ -101,7 +82,7 @@ Produces a `.stories.tsx` file with:
 ### `stories` — Bulk generate for an entire project
 
 ```bash
-npx nx g forgekit-nx-storybook:stories --project=shared-ui
+npx nx g @effinrich/nx-storybook:stories --project=shared-ui
 ```
 
 Scans every component in the project, skips those that already have stories, generates for the rest, and reports a **coverage score**:
@@ -121,15 +102,15 @@ Scans every component in the project, skips those that already have stories, gen
 | `--overwrite` | `boolean` | `false` | Overwrite all existing stories |
 | `--dryRun` | `boolean` | `false` | Preview without writing |
 | `--includeA11y` | `boolean` | `true` | Include a11y audit stories |
-| `--includeComponentTests` | `boolean` | `false` | Also generate Playwright .ct.tsx files |
+| `--includeComponentTests` | `boolean` | `false` | Also generate Playwright `.ct.tsx` files |
 
 ### `component-test` — Generate a Playwright component test
 
 ```bash
-npx nx g forgekit-nx-storybook:component-test --componentPath=libs/shared/ui/src/lib/button/button.tsx
+npx nx g @effinrich/nx-storybook:component-test --componentPath=libs/shared/ui/src/lib/button/button.tsx
 ```
 
-Produces a co-located `.ct.tsx` file next to the component with:
+Produces a co-located `.ct.tsx` file with:
 - **Mount & render** — verifies the component mounts without crashing
 - **Visual regression** — `toHaveScreenshot()` for default state and every variant/size/colorPalette value
 - **Interaction** — click handlers, value change handlers
@@ -147,7 +128,7 @@ Produces a co-located `.ct.tsx` file next to the component with:
 ### `init` — Initialize the plugin
 
 ```bash
-npx nx g forgekit-nx-storybook:init
+npx nx g @effinrich/nx-storybook:init
 ```
 
 Interactive setup that checks prerequisites and installs missing dependencies.
@@ -162,7 +143,7 @@ Add to any project's `project.json`:
 {
   "targets": {
     "watch-stories": {
-      "executor": "./tools/forgekit-nx-storybook:watch",
+      "executor": "@effinrich/nx-storybook:watch",
       "options": {
         "watchPaths": ["libs/shared/ui/src/lib"],
         "debounceMs": 300
@@ -185,61 +166,45 @@ npx nx run shared-ui:watch-stories
 
 ## Auto-detected features
 
+The `story` generator analyzes component source code and adapts output based on what it finds:
+
 | Feature | Detection | Effect |
 |---|---|---|
 | **React Router** | Imports from `react-router-dom` / `react-router` | Adds `withRouter` decorator |
-| **Chakra UI** | Imports from `@chakra-ui/react` / `@redesignhealth/ui` | Flagged in report |
+| **Chakra UI** | Imports from `@chakra-ui/react` | Flagged in report |
 | **React Query** | Imports from `@tanstack/react-query` | Flagged in report |
 | **Union props** | `'a' \| 'b' \| 'c'` type literals | `select` control + variant stories + screenshot tests |
 | **Callback props** | `on*` naming or arrow function types | `action` argType + interaction tests |
 | **Children prop** | `children` in props interface | Content in Default story |
 | **Disabled prop** | `disabled` / `isDisabled` | Disabled story + disabled screenshot |
 
-## Interactive CLI
+## Programmatic API
 
-All generators produce colorful, structured terminal output:
+All generators and utilities are exported for programmatic use:
 
-- Branded banner and step indicators
-- Color-coded file operations (`CREATE` / `UPDATE` / `SKIP`)
-- Component analysis reports (props, features, generated artifacts)
-- Coverage scoring with letter grades
-- Interactive prompts during `init`
+```typescript
+import {
+  storyGenerator,
+  storiesGenerator,
+  componentTestGenerator,
+  analyzeComponent,
+  generateStoryContent,
+  generateInteractionTests,
+  generatePlaywrightTest,
+} from '@effinrich/nx-storybook'
 
-## Architecture
-
-```
-tools/forgekit-nx-storybook/
-├── generators.json              # Generator registry (4 generators)
-├── executors.json               # Executor registry (1 executor)
-├── migrations.json              # Migration registry (for nx migrate)
-├── package.json                 # Plugin metadata and peer deps
-└── src/
-    ├── index.ts                 # Public API exports
-    ├── generators/
-    │   ├── init/                # Init generator (prerequisite checks)
-    │   ├── story/               # Single-component story generator
-    │   │   ├── generator.ts
-    │   │   └── lib/
-    │   │       ├── analyze-component.ts       # Prop extraction, import analysis
-    │   │       ├── generate-story-content.ts  # Story file builder
-    │   │       └── generate-interaction-tests.ts  # Play functions + a11y
-    │   ├── stories/             # Bulk story generator with coverage scoring
-    │   └── component-test/      # Playwright component test generator
-    │       └── lib/
-    │           └── generate-playwright-test.ts
-    ├── executors/
-    │   └── watch/               # File watcher executor
-    └── utils/
-        ├── constants.ts
-        ├── types.ts
-        └── ui.ts                # Colored CLI output (chalk)
+import type {
+  ComponentAnalysis,
+  PropInfo,
+  ImportInfo,
+} from '@effinrich/nx-storybook'
 ```
 
 ## Development
 
 ```bash
-npx nx build forgekit-nx-storybook   # Build
-npx nx test forgekit-nx-storybook    # 9 suites, 85+ tests
+npx nx build effinrich-nx-storybook    # Build
+npx nx test effinrich-nx-storybook     # Run tests (9 suites, 85+ tests)
 npx nx g ./tools/forgekit-nx-storybook:story --componentPath=<path> --dryRun
 ```
 

@@ -5,6 +5,13 @@
 - [package.json](file://libs/shared/ui/package.json)
 - [MIGRATION.md](file://libs/shared/ui/MIGRATION.md)
 - [index.ts](file://libs/shared/ui/src/index.ts)
+- [rh-provider.tsx](file://libs/shared/ui/src/lib/rh-provider/rh-provider.tsx)
+- [theme/index.ts](file://libs/shared/ui/src/lib/theme/index.ts)
+- [color-mode.tsx](file://libs/shared/ui/src/lib/color-mode/color-mode.tsx)
+- [modal.tsx](file://libs/shared/ui/src/lib/modal/modal.tsx)
+- [use-disclosure.ts](file://libs/shared/ui/src/lib/hooks/use-disclosure/use-disclosure.ts)
+- [use-theme.ts](file://libs/shared/ui/src/lib/hooks/use-theme/use-theme.ts)
+- [colors.ts](file://libs/shared/ui/src/lib/theme/foundations/colors.ts)
 - [hooks.ts](file://libs/shared/analytics/src/lib/hooks.ts)
 - [use-pagination.tsx](file://libs/shared/hooks/src/lib/use-pagination/use-pagination.tsx)
 - [company-api-types package.json](file://libs/company-api-types/package.json)
@@ -14,6 +21,14 @@
 - [AwsSecretsManagerPropertySource.java](file://libs/shared-java/data-access-aws-secrets-manager-property-source/src/main/java/com/redesignhealth/property/AwsSecretsManagerPropertySource.java)
 - [AwsSecretsManagerPropertySourceTest.java](file://libs/shared-java/data-access-aws-secrets-manager-property-source/src/test/com/redesignhealth/property/AwsSecretsManagerPropertySourceTest.java)
 </cite>
+
+## Update Summary
+**Changes Made**
+- Comprehensive documentation for the @redesignhealth/ui Chakra UI v3 component library
+- Detailed explanation of component architecture, theming systems, and reusability patterns
+- Added migration guide and versioning strategy for Chakra UI v3 adoption
+- Enhanced component API documentation with prop changes and compatibility shims
+- Updated theming system documentation with semantic tokens and recipe-based customization
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -192,6 +207,233 @@ RHProvider --> ComponentExports : "provides theme/context"
 - [index.ts:1-84](file://libs/shared/ui/src/index.ts#L1-L84)
 - [MIGRATION.md:1-34](file://libs/shared/ui/MIGRATION.md#L1-L34)
 - [package.json](file://libs/shared/ui/package.json)
+
+### Chakra UI v3 Migration Guide
+The @redesignhealth/ui library has undergone a comprehensive migration from Chakra UI v2 to v3, implementing the latest design system patterns and component architecture.
+
+#### Key Migration Changes
+- **Prop Renaming**: Complete prop name transformation to align with Chakra UI v3 conventions
+  - `colorScheme` → `colorPalette`
+  - `isDisabled` → `disabled`
+  - `isOpen` → `open`
+  - `defaultIsOpen` → `defaultOpen`
+  - `isInvalid` → `invalid`
+  - `isRequired` → `required`
+  - `isReadOnly` → `readOnly`
+  - `isLoading` → `loading`
+  - `isChecked` → `checked`
+
+- **Component Architecture Changes**
+  - **Modal** renamed to **Dialog** with compound component pattern
+  - **Drawer** parts restructured (Root, Backdrop, Positioner, Content, etc.)
+  - **Tooltip** positioning moved to `positioning={{ placement: 'top' }}`
+  - **Stack** uses `gap` instead of `spacing`
+
+- **Theming System Overhaul**
+  - Theming now uses `createSystem` and `defineConfig` instead of `extendTheme`
+  - New semantic token system with `_light` and `_dark` design tokens
+  - Recipe-based component customization for brand-specific variants
+
+#### Migration Implementation
+The library maintains backward compatibility through strategic re-exports and compatibility shims:
+
+```typescript
+// Modal compatibility shim for v2 naming
+export {
+  DialogRoot as Modal,
+  DialogBody as ModalBody,
+  // ... other compatibility mappings
+} from '@chakra-ui/react'
+
+// Direct export of v3 recommended components
+export {
+  DialogRoot,
+  DialogBackdrop,
+  DialogPositioner,
+  // ... v3 compound components
+} from '@chakra-ui/react'
+```
+
+**Section sources**
+- [MIGRATION.md:1-34](file://libs/shared/ui/MIGRATION.md#L1-L34)
+- [modal.tsx:1-35](file://libs/shared/ui/src/lib/modal/modal.tsx#L1-L35)
+
+### Theme System Architecture
+The theme system implements Chakra UI v3's advanced theming capabilities with semantic tokens and recipe-based customization.
+
+#### Theme Foundation Structure
+The theme is built using Chakra UI v3's `createSystem` and `defineConfig` functions:
+
+```typescript
+const customConfig = defineConfig({
+  theme: {
+    recipes: {
+      button: buttonRecipe
+    },
+    tokens: {
+      colors: convertColorsToTokens(colors),
+      fonts: convertToStringTokens(typography.fonts),
+      fontSizes: convertToStringTokens(typography.fontSizes),
+      // ... other token conversions
+    },
+    semanticTokens: {
+      colors: {
+        primary: {
+          contrast: { value: { _light: 'white', _dark: 'white' } },
+          fg: { value: { _light: '{colors.primary.700}', _dark: '{colors.primary.200}' } },
+          // ... other semantic token definitions
+        }
+      }
+    }
+  }
+})
+
+export const system = createSystem(defaultConfig, customConfig)
+```
+
+#### Color Token Conversion
+The system includes sophisticated color token conversion utilities:
+
+```typescript
+// Convert v2 color palette to v3 token format
+const convertColorsToTokens = (colorObj: Record<string, unknown>) => {
+  const tokens: Record<string, { value: string }> = {}
+  
+  for (const [key, value] of Object.entries(colorObj)) {
+    if (typeof value === 'string') {
+      tokens[key] = { value }
+    } else if (typeof value === 'object' && value !== null) {
+      for (const [shade, shadeValue] of Object.entries(
+        value as Record<string, string>
+      )) {
+        tokens[`${key}.${shade}`] = { value: shadeValue }
+      }
+    }
+  }
+  
+  return tokens
+}
+```
+
+#### Brand-Specific Component Recipes
+Custom recipes extend Chakra UI v3 defaults with project-specific variants:
+
+```typescript
+const buttonRecipe = defineRecipe({
+  variants: {
+    variant: {
+      'ghost-on-accent': {
+        fontWeight: 'medium',
+        color: 'gray.700',
+        _hover: { bg: 'primary.50' },
+        '&[data-active]': {
+          color: 'primary.700',
+          bg: 'primary.50'
+        }
+      }
+    }
+  }
+})
+```
+
+**Section sources**
+- [theme/index.ts:1-185](file://libs/shared/ui/src/lib/theme/index.ts#L1-L185)
+- [colors.ts:1-397](file://libs/shared/ui/src/lib/theme/foundations/colors.ts#L1-L397)
+
+### Color Mode System
+The color mode system provides seamless dark/light mode switching with Next.js theme integration.
+
+#### Color Mode Provider
+The ColorModeProvider wraps the application with theme context:
+
+```typescript
+export function ColorModeProvider({
+  children,
+  attribute = 'class',
+  defaultTheme = 'light',
+  disableTransitionOnChange = true,
+  ...props
+}: ColorModeProviderProps) {
+  return (
+    <ThemeProvider
+      attribute={attribute}
+      defaultTheme={defaultTheme}
+      disableTransitionOnChange={disableTransitionOnChange}
+      {...props}
+    >
+      {children}
+    </ThemeProvider>
+  )
+}
+```
+
+#### Color Mode Hooks
+Comprehensive hooks for color mode management:
+
+```typescript
+export function useColorMode() {
+  const { resolvedTheme, setTheme, forcedTheme } = useTheme()
+  const colorMode = forcedTheme || resolvedTheme
+
+  const toggleColorMode = () => {
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+  }
+
+  return {
+    colorMode: colorMode as 'light' | 'dark' | undefined,
+    setColorMode: setTheme,
+    toggleColorMode
+  }
+}
+
+export function useColorModeValue<TLight, TDark>(light: TLight, dark: TDark) {
+  const { colorMode } = useColorMode()
+  return colorMode === 'dark' ? dark : light
+}
+```
+
+**Section sources**
+- [color-mode.tsx:1-117](file://libs/shared/ui/src/lib/color-mode/color-mode.tsx#L1-L117)
+
+### Component Architecture Patterns
+The library follows Chakra UI v3's recommended component architecture patterns.
+
+#### Compound Component Pattern
+Components are structured as compound components with clear sub-components:
+
+```typescript
+// Dialog compound components (v3 recommended pattern)
+export {
+  DialogRoot,
+  DialogBackdrop,
+  DialogPositioner,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogBody,
+  DialogFooter,
+  DialogCloseTrigger,
+  DialogTrigger,
+  DialogActionTrigger
+} from '@chakra-ui/react'
+```
+
+#### Hook Integration
+Hooks integrate seamlessly with Chakra UI v3's context system:
+
+```typescript
+// Simplified hook exports
+export { useDisclosure} from '@chakra-ui/react'
+export type { UseDisclosureReturn } from '@chakra-ui/react'
+
+export { useChakraContext as useTheme } from '@chakra-ui/react'
+```
+
+**Section sources**
+- [modal.tsx:20-35](file://libs/shared/ui/src/lib/modal/modal.tsx#L20-L35)
+- [use-disclosure.ts:1-3](file://libs/shared/ui/src/lib/hooks/use-disclosure/use-disclosure.ts#L1-L3)
+- [use-theme.ts:1-2](file://libs/shared/ui/src/lib/hooks/use-theme/use-theme.ts#L1-L2)
 
 ### Analytics Utilities
 - Purpose
@@ -425,7 +667,7 @@ AuthUtils --> JavaLib["AWS Secrets Manager Property Source"]
 - [AwsSecretsManagerPropertySource.java](file://libs/shared-java/data-access-aws-secrets-manager-property-source/src/main/java/com/redesignhealth/property/AwsSecretsManagerPropertySource.java)
 
 ## Conclusion
-The shared libraries in the Redesign Health monorepo provide a cohesive foundation for building applications with consistent UI, reliable data access, and secure integrations. The @redesignhealth/ui library modernizes the design system with Chakra UI v3, while the Portal and Third Party Network libraries offer domain-specific assets and utilities. The Java library ensures secure secret management. Following the migration and integration guidelines will help maintain backward compatibility and smooth upgrades.
+The shared libraries in the Redesign Health monorepo provide a cohesive foundation for building applications with consistent UI, reliable data access, and secure integrations. The @redesignhealth/ui library modernizes the design system with Chakra UI v3, featuring comprehensive component architecture, advanced theming with semantic tokens, and seamless migration compatibility. The Portal and Third Party Network libraries offer domain-specific assets and utilities, while the Java library ensures secure secret management. Following the migration and integration guidelines will help maintain backward compatibility and smooth upgrades.
 
 [No sources needed since this section summarizes without analyzing specific files]
 

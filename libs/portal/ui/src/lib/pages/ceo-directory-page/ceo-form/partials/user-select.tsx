@@ -30,7 +30,7 @@ const UserSelect = ({ onChange, name, value, onBlur }: UserSelectProps) => {
         }`,
         isDisabled: p.ceoInfo.ceo
       }))}
-      loading={isLoadingOptions}
+      isLoading={isLoadingOptions}
     />
   )
 }

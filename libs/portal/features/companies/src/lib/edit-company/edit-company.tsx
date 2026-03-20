@@ -37,7 +37,7 @@ const formSchema = yup.object().shape({
 export const EditCompany = () => {
   const { companyId } = useParams()
   const navigate = useNavigate()
-  const drawerRef = useRef<{ handleOnClose(): void }>()
+  const drawerRef = useRef<{ handleOnClose(): void }>(null)
 
   const [conceptOptions, setConceptOptions] = useState<OptionsProps[]>([])
   const [themeOptions, setThemeOptions] = useState<OptionsProps[]>([])
@@ -101,7 +101,8 @@ export const EditCompany = () => {
 
   const useFormMethods = useForm<CompanyCommand>({
     mode: 'onTouched',
-    resolver: yupResolver(formSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(formSchema) as any,
     defaultValues: () => getCompanyByIdFormFriendly(companyId)
   })
 
@@ -132,7 +133,7 @@ export const EditCompany = () => {
       title="Edit Company"
       description="Update the company information below"
       errors={errors}
-      loading={isPending}
+      isLoading={isPending}
       isError={isError}
       ctaText="Save"
       isValid={isValid}

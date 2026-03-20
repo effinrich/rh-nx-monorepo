@@ -8,7 +8,7 @@ import {
   useGetUserInfo
 } from '@redesignhealth/portal/data-assets'
 import { OverviewCard } from '@redesignhealth/portal/ui'
-import { Button, Card, Flex, Text } from '@redesignhealth/ui'
+import { Button, CardRoot, Flex, Text } from '@redesignhealth/ui'
 
 export const CompanyDetailsOverview = () => {
   const { companyId } = useParams()
@@ -102,14 +102,17 @@ export const CompanyDetailsOverview = () => {
             title="Business development & fundraising"
             rightElement={
               <Button
-                as={Link}
-                to={experienceCloudLink}
-                target="_blank"
+                asChild
                 colorPalette="primary"
                 size="md"
               >
-                Launch CRM
-                <MdLaunch />
+                <Link
+                  to={experienceCloudLink}
+                  target="_blank"
+                >
+                  Launch CRM
+                  <MdLaunch />
+                </Link>
               </Button>
             }
             data-id="get-started"
@@ -125,7 +128,7 @@ export const CompanyDetailsOverview = () => {
       </Flex>
 
       {company?.dashboardHref && (
-        <Card w="full" position="relative" overflow="hidden" pt="56.25%">
+        <CardRoot w="full" position="relative" overflow="hidden" pt="56.25%">
           <iframe
             title="Onboarding Doc"
             src={company.dashboardHref}
@@ -139,7 +142,7 @@ export const CompanyDetailsOverview = () => {
               height: '100%'
             }}
           />
-        </Card>
+        </CardRoot>
       )}
     </>
   )

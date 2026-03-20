@@ -20,7 +20,8 @@ export const AddCeo = () => {
 
   const methods = useForm<CeoFormFields>({
     mode: 'onBlur',
-    resolver: ceoFormResolver,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: ceoFormResolver as any,
     defaultValues: CEO_FORM_DEFAULT_VALUES
   })
 

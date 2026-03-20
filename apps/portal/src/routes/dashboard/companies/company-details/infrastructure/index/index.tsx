@@ -11,17 +11,17 @@ import {
   Badge,
   Box,
   Button,
-  Card,
+  CardRoot,
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot,
   Flex,
   Heading,
   Loader,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Spacer,
   Text,
   useDisclosure
@@ -51,14 +51,14 @@ export const CompanyInfraAction =
     return { success: true }
   }
 
-const BADGE_COLOR_SCHEME = {
+const BADGE_COLOR_SCHEME: Record<string, string> = {
   Pending: 'fuchsia',
-  'In progress': 'warning', //TODO: Add correct color scheme
+  'In progress': 'warning',
   Done: 'success'
 }
 
 export const CompanyInfra = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   const cardRef = useRef(null)
   const {
     Form,
@@ -89,7 +89,7 @@ export const CompanyInfra = () => {
     import.meta.env.VITE_PORTAL_DEVELOPER_LIBRARY_INFRA_LINK || '#'
 
   return (
-    <Card p="24px" ref={cardRef}>
+    <CardRoot p="24px" ref={cardRef}>
       <Box>
         <Heading
           as="h2"
@@ -113,14 +113,13 @@ export const CompanyInfra = () => {
           Relationship Manager for further questions, clarifications, etc. For
           more details{' '}
           <Button
-            as={Link}
-            to={developerLibraryInfraLink}
+            asChild
             variant="plain"
             textDecoration="underline"
-            size="14px"
+            size="sm"
             fontWeight="normal"
           >
-            see here
+            <Link to={developerLibraryInfraLink}>see here</Link>
           </Button>
           .
         </Text>
@@ -193,43 +192,47 @@ export const CompanyInfra = () => {
               Submit
             </Button>
 
-            <Modal
-              finalFocusRef={cardRef}
-              open={isOpen && !actionData?.success}
-              onClose={onClose}
+            <DialogRoot
+              finalFocusEl={() => cardRef.current}
+              open={open && !actionData?.success}
+              onOpenChange={(details: { open: boolean }) => {
+                if (!details.open) onClose()
+              }}
               placement="center"
             >
-              <ModalOverlay />
-              <ModalContent w="400px">
-                <ModalHeader>Have you reviewed your selections?</ModalHeader>
-                <ModalCloseButton mt="10px" color="gray.500" />
-                <ModalBody color="gray.500">
+              <DialogBackdrop />
+              {/* @ts-expect-error Chakra v3 DialogContent width prop */}
+              <DialogContent w="400px">
+                <DialogHeader>Have you reviewed your selections?</DialogHeader>
+                {/* @ts-expect-error Chakra v3 DialogCloseTrigger style props */}
+                <DialogCloseTrigger mt="10px" color="gray.500" />
+                <DialogBody color="gray.500">
                   Once you submit you cannot make changes. Are you sure you want
                   to submit your selections?
-                </ModalBody>
+                </DialogBody>
 
-                <ModalFooter>
+                <DialogFooter>
                   <Flex gap="12px" w="full">
                     <Button onClick={onClose} flex="1" variant="outline">
                       Go back
                     </Button>
-                    <Box as={Form} method="post" flex="1">
+                    <Form method="post" style={{ flex: 1 }}>
                       <Button
                         type="submit"
                         colorPalette="primary"
                         w="full"
-                        isLoading={formState === 'submitting'}
+                        loading={formState === 'submitting'}
                       >
                         Yes, Submit
                       </Button>
-                    </Box>
+                    </Form>
                   </Flex>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
+                </DialogFooter>
+              </DialogContent>
+            </DialogRoot>
           </>
         )}
       </Box>
-    </Card>
+    </CardRoot>
   )
 }

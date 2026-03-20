@@ -281,8 +281,9 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
               serverErrors={serverFieldErrors}
               clientErrors={clientErrors}
             >
+              {/* @ts-expect-error Chakra v3 CheckboxGroup children typing */}
               <CheckboxGroup
-                onChange={newValues => onChange(newValues as string[])}
+                onChange={(newValues: string[]) => onChange(newValues)}
                 value={value}
                 colorPalette="primary"
               >

@@ -52,25 +52,25 @@ Default generator options are configured so you do not have to pass flags repeat
 
 ---
 
-## forgekit-nx-storybook plugin
+## @effinrich/nx-storybook plugin
 
-The `forgekit-nx-storybook` plugin lives in `tools/forgekit-nx-storybook/` and provides generators and an executor for automated Storybook story generation.
+A companion plugin for `@nx/storybook` that handles the **content** side — auto-generating `.stories.tsx` and `.ct.tsx` files from component analysis, while `@nx/storybook` handles the infrastructure (config scaffolding, serving, building, migrations). Located in `tools/forgekit-nx-storybook/`.
 
 ### Generators
 
 <Tabs>
   <Tab title="init">
-    Runs when you install the plugin via `nx add forgekit-nx-storybook`. It checks for `@nx/storybook`, offers to install it if missing, ensures Storybook core dependencies are present, and prints available commands.
+    Runs when you install the plugin via `nx add @effinrich/nx-storybook`. It checks for `@nx/storybook`, offers to install it if missing, ensures Storybook core dependencies are present, and prints available commands.
 
     ```bash
-    npx nx g forgekit-nx-storybook:init
+    npx nx g @effinrich/nx-storybook:init
     ```
   </Tab>
   <Tab title="story">
     Generates a single Storybook story file for a React component. It analyzes the component's props (including Chakra UI, React Router, and React Query usage), generates variants for `size`, `variant`, `colorPalette`, and `disabled` props, and optionally includes interaction tests.
 
     ```bash
-    npx nx g forgekit-nx-storybook:story --componentPath=libs/shared/ui/src/lib/button/button.tsx
+    npx nx g @effinrich/nx-storybook:story --componentPath=libs/shared/ui/src/lib/button/button.tsx
     ```
 
     Options: `--skipInteractionTests`, `--overwrite`, `--dryRun`, `--storyTitle`, `--project`
@@ -79,7 +79,7 @@ The `forgekit-nx-storybook` plugin lives in `tools/forgekit-nx-storybook/` and p
     Bulk generator that scans an entire project and generates stories for every component that does not already have one. Produces a coverage report with a letter grade (A through F).
 
     ```bash
-    npx nx g forgekit-nx-storybook:stories --project=shared-ui
+    npx nx g @effinrich/nx-storybook:stories --project=shared-ui
     ```
 
     Options: `--skipInteractionTests`, `--overwrite`, `--dryRun`, `--includeA11y`, `--includeComponentTests`
@@ -88,7 +88,7 @@ The `forgekit-nx-storybook` plugin lives in `tools/forgekit-nx-storybook/` and p
     Generates a co-located Playwright component test (`.ct.tsx`) that mounts the component using `@playwright/experimental-ct-react`, tests rendering, visual snapshots, interactions, and accessibility.
 
     ```bash
-    npx nx g forgekit-nx-storybook:component-test --componentPath=libs/shared/ui/src/lib/button/button.tsx
+    npx nx g @effinrich/nx-storybook:component-test --componentPath=libs/shared/ui/src/lib/button/button.tsx
     ```
 
     Options: `--overwrite`, `--dryRun`
@@ -105,7 +105,7 @@ sequenceDiagram
     participant Content as generateStoryContent
     participant Tree as Nx Tree
 
-    Dev->>Gen: nx g forgekit-nx-storybook:story --componentPath=...
+    Dev->>Gen: nx g @effinrich/nx-storybook:story --componentPath=...
     Gen->>Tree: resolve component file path
     Tree-->>Gen: resolved path
     Gen->>Analyze: parse component source
@@ -298,15 +298,6 @@ npm run storybook-all
 ```
 
 The `@nx/storybook/plugin` auto-infers `serve:storybook`, `build:storybook`, `test:storybook`, and `static:storybook` targets for any project with a `.storybook` directory.
-
-### MCP server
-
-A Model Context Protocol server at `tools/storybook-mcp/` integrates Storybook component generation with AI assistants:
-
-```bash
-npm run mcp:setup        # First-time install + build
-npm run mcp:storybook:dev  # Development mode
-```
 
 ---
 

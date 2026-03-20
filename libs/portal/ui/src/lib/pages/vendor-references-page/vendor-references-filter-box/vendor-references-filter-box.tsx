@@ -65,8 +65,8 @@ export const VendorFilterBox = () => {
                   <Filter
                     name={name}
                     value={value as Option[]}
-                    loading={isPending}
-                    options={filters[filter.key]}
+                    isLoading={isPending}
+                    options={(filters as unknown as Record<string, Option[]>)[filter.key]}
                     onChange={event => onChange(event as Option[])}
                     placeholder={filter.displayName}
                     isMulti

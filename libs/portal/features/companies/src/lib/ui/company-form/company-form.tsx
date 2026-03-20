@@ -89,9 +89,7 @@ export const CompanyForm = ({
               )}
             />
             {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-            {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-          {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-        <FormErrorMessage role="alert">
+            <FormErrorMessage role="alert">
               <ErrorMessage errors={errors} name="name" />
             </FormErrorMessage>
           </FormControl>
@@ -114,9 +112,7 @@ export const CompanyForm = ({
               )}
             />
             {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-            {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-          {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-        <FormErrorMessage role="alert">
+            <FormErrorMessage role="alert">
               <ErrorMessage errors={errors} name="number" />
             </FormErrorMessage>
           </FormControl>
@@ -182,8 +178,7 @@ export const CompanyForm = ({
           />
 
           {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-          {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-        <FormErrorMessage role="alert">
+          <FormErrorMessage role="alert">
             <ErrorMessage errors={errors} name="stage" />
           </FormErrorMessage>
         </FormControl>
@@ -207,14 +202,11 @@ export const CompanyForm = ({
                   onChange={option => onChange(option)}
                   name={name}
                   placeholder="Select concept"
-                  colorPalette="primary"
                 />
               )}
             />
             {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-            {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-          {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-        <FormErrorMessage role="alert">
+            <FormErrorMessage role="alert">
               <ErrorMessage errors={errors} name="concept" />
             </FormErrorMessage>
           </FormControl>
@@ -237,14 +229,11 @@ export const CompanyForm = ({
                   onChange={option => onChange(option)}
                   name={name}
                   placeholder="Select theme"
-                  colorPalette="primary"
                 />
               )}
             />
             {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-            {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-          {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-        <FormErrorMessage role="alert">
+            <FormErrorMessage role="alert">
               <ErrorMessage errors={errors} name="theme" />
             </FormErrorMessage>
           </FormControl>
@@ -270,16 +259,13 @@ export const CompanyForm = ({
                       name={name}
                       placeholder="Select conflicts"
                       onChange={onChange}
-                      colorPalette="primary"
                     />
                   )
                 }}
               />
             )}
             {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-            {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-          {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-        <FormErrorMessage role="alert">
+            <FormErrorMessage role="alert">
               <ErrorMessage errors={errors} name="conflicts" />
             </FormErrorMessage>
           </FormControl>
@@ -304,9 +290,7 @@ export const CompanyForm = ({
               )}
             />
             {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-            {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-          {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-        <FormErrorMessage role="alert">
+            <FormErrorMessage role="alert">
               <ErrorMessage errors={errors} name="href" />
             </FormErrorMessage>
           </FormControl>
@@ -367,8 +351,7 @@ export const CompanyForm = ({
             )}
           />
           {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-          {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-        <FormErrorMessage role="alert">
+          <FormErrorMessage role="alert">
             <ErrorMessage errors={errors} name="fundraiseStatus" />
           </FormErrorMessage>
         </FormControl>
@@ -402,8 +385,7 @@ export const CompanyForm = ({
             )}
           />
           {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-          {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-        <FormErrorMessage role="alert">
+          <FormErrorMessage role="alert">
             <ErrorMessage errors={errors} name="hasPlatformAgreement" />
           </FormErrorMessage>
         </FormControl>

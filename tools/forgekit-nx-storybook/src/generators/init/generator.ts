@@ -14,7 +14,7 @@ import { InitGeneratorSchema } from './schema';
 
 /**
  * Init generator that runs automatically when users install
- * forgekit-nx-storybook via `nx add forgekit-nx-storybook`.
+ * @effinrich/nx-storybook via `nx add @effinrich/nx-storybook`.
  *
  * Checks for @nx/storybook and offers to set it up if missing,
  * then configures workspace-level story generation settings.
@@ -107,14 +107,14 @@ export default async function initGenerator(
   ui.info('Available commands:');
   console.log('');
   console.log(
-    `    ${ui.command('nx g forgekit-nx-storybook:story')} ${' '.repeat(2)}Generate a story for a component`
+    `    ${ui.command('nx g @effinrich/nx-storybook:story')} ${' '.repeat(2)}Generate a story for a component`
   );
   console.log(
     `    ${ui.command('nx run <project>:watch-stories')} ${' '.repeat(2)}Watch and auto-generate stories`
   );
   ui.separator();
 
-  ui.done('ForgeKit Storybook is ready to use.');
+  ui.done('@effinrich/nx-storybook is ready to use.');
 
   if (!options.skipFormat) {
     await formatFiles(tree);

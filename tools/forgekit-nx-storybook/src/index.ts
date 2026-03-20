@@ -1,4 +1,4 @@
-// forgekit-nx-storybook — Nx plugin for automated Storybook story generation
+// @effinrich/nx-storybook — Nx plugin for automated Storybook story generation
 //
 // Generators:
 //   init           — Initialize the plugin in your workspace (auto-runs on `nx add`)

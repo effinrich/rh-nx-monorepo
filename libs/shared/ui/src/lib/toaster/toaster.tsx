@@ -78,7 +78,6 @@ export const Toaster = ({
             {toast.type === 'loading' ? (
               <Spinner size="sm" color="blue.solid" />
             ) : (
-              // @ts-expect-error Chakra v3 compound component typing
               <Toast.Indicator />
             )}
             <Stack gap="1" flex="1" maxWidth="100%">

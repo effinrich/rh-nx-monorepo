@@ -1,9 +1,20 @@
 // Chakra UI v3: FormControl has been renamed to Field
 // See: https://chakra-ui.com/docs/get-started/migration
 
+import { forwardRef } from 'react'
+import {
+  FieldRoot,
+  FieldLabel,
+  FieldHelperText,
+  FieldErrorText,
+  FieldErrorIcon,
+  FieldRequiredIndicator,
+  type FieldErrorTextProps
+} from '@chakra-ui/react'
+
 // In Chakra v3, `Field` is a namespace object (not a component).
 // Export FieldRoot as Field for backward compat.
-export { FieldRoot as Field } from '@chakra-ui/react'
+export { FieldRoot as Field }
 
 // Export Field compound components (v3 recommended pattern)
 export {
@@ -13,14 +24,20 @@ export {
   FieldErrorText,
   FieldErrorIcon,
   FieldRequiredIndicator
-} from '@chakra-ui/react'
+}
 
 // Re-export with v2 names for backward compatibility during migration
-// These are deprecated - use Field.* components instead
 export {
   FieldRoot as FormControl,
   FieldLabel as FormLabel,
   FieldHelperText as FormHelperText,
-  FieldErrorText as FormErrorMessage,
   FieldErrorIcon as FormErrorIcon
-} from '@chakra-ui/react'
+}
+
+// FormErrorMessage wrapper — Chakra v3 FieldErrorText has incomplete children typing
+export const FormErrorMessage = forwardRef<
+  HTMLDivElement,
+  FieldErrorTextProps & { children?: React.ReactNode }
+>(function FormErrorMessage(props, ref) {
+  return <FieldErrorText ref={ref} {...props} />
+})

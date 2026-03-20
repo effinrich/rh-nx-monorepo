@@ -17,7 +17,7 @@ export const AxiosErrorAlert = ({ error, ...props }: AxiosErrorAlertProps) => {
   return (
     <AlertRoot
       status="error"
-      variant="left-accent"
+      variant="outline"
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"

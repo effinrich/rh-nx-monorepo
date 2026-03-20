@@ -26,7 +26,8 @@ export const EditCeo = () => {
 
   const methods = useForm<CeoFormFields>({
     mode: 'onBlur',
-    resolver: ceoFormResolver,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: ceoFormResolver as any,
     values,
     defaultValues: CEO_FORM_DEFAULT_VALUES
   })

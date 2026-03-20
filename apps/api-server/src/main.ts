@@ -10,17 +10,26 @@ app.use(cors())
 app.use(express.json())
 
 // Load data
-const dbPath = path.join(__dirname, 'assets', 'db.json')
 // In development with nx serve, assets are copied to dist, but we might be running from source
 // Let's try to find the db.json relative to the execution or source
-let db: unknown = {}
+interface MockDb {
+  companies: any[]
+  users: any[]
+  vendors: any[]
+  ceos: any[]
+  ipListings: any[]
+  consents: any[]
+  [key: string]: any[]
+}
+
+let db: MockDb = { companies: [], users: [], vendors: [], ceos: [], ipListings: [], consents: [] }
 
 try {
   // Try loading from src/data location (dev mode)
   const devDbPath = path.join(__dirname, 'data', 'db.json')
   if (fs.existsSync(devDbPath)) {
     console.log(`Loading DB from ${devDbPath}`)
-    db = JSON.parse(fs.readFileSync(devDbPath, 'utf-8'))
+    db = { ...db, ...JSON.parse(fs.readFileSync(devDbPath, 'utf-8')) }
   } else {
     // Fallback to local (if moved) or empty
     console.warn('Could not find db.json, starting with empty data')

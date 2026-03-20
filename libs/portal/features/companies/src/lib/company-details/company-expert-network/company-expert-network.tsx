@@ -9,13 +9,13 @@ const CompanyExpertNetwork = () => {
       title="Introducing the Expert Network"
       rightElement={
         <Button
-          as="a"
+          asChild
           colorPalette="primary"
-          href={EXPERT_NETWORK_HOSTNAME}
-          target="_blank"
         >
-          Search the network
-          <MdLaunch />
+          <a href={EXPERT_NETWORK_HOSTNAME} target="_blank" rel="noreferrer">
+            Search the network
+            <MdLaunch />
+          </a>
         </Button>
       }
     >

@@ -45,6 +45,7 @@ const FormMaster = ({
           bgColor="white"
         >
           <Separator mt={8} />
+          {/* @ts-expect-error Chakra v3 CardFooter children typing */}
           <CardFooter gap={3} justify="end" my={4}>
             <Button onClick={onCancel} variant="outline">
               Cancel

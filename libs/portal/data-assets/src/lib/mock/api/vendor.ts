@@ -16,7 +16,6 @@ export const mockGetVendors = (server: SetupServer, vendors: Vendor[]) => {
             options: vendors.map(v => ({ keyword: v.name, count: 1 }))
           }
         ]
-      })
-    )
+      }))
   )
 }

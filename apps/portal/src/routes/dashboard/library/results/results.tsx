@@ -40,7 +40,7 @@ export const Results = ({ docs, libraryRoute }: ResultsProps) => {
 
   if (!docs) return null
   return (
-    <SimpleGrid columns={[1, 2, 2, 2, 2, 3]} spacing={5}>
+    <SimpleGrid columns={[1, 2, 2, 2, 2, 3]} gap={5}>
       {docs.map(doc => {
         return (
           <ResultCard

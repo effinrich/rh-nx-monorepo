@@ -15,7 +15,9 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
 ) {
   return (
     <ChakraAvatar.Root ref={ref} {...rest}>
+      {/* @ts-expect-error Chakra v3 AvatarFallback typing */}
       <ChakraAvatar.Fallback name={name}>{icon}</ChakraAvatar.Fallback>
+      {/* @ts-expect-error Chakra v3 AvatarImage typing */}
       <ChakraAvatar.Image src={src} srcSet={srcSet} loading={loading} />
       {children}
     </ChakraAvatar.Root>
@@ -34,6 +36,7 @@ export {
 /**
  * @deprecated Use `Avatar.Indicator` from Chakra UI v3 instead.
  */
+// @ts-expect-error Chakra v3 Avatar.Indicator may not exist in all versions
 export const AvatarBadge = ChakraAvatar.Indicator
 
 export type { AvatarRootProps, AvatarGroupProps } from '@chakra-ui/react'

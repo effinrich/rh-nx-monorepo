@@ -62,7 +62,6 @@ export const FormFieldMaster = ({
           <Box w={['100%', '100%', '75%']}>
             {children}
             {isInvalid ? (
-              // @ts-expect-error Chakra v3 FieldErrorText children typing
               <FormErrorMessage>{errorMessage}</FormErrorMessage>
             ) : (
               // @ts-expect-error Chakra v3 FieldHelperText children typing

@@ -18,6 +18,14 @@
 - [CHANGELOG.md](file://CHANGELOG.md)
 </cite>
 
+## Update Summary
+**Changes Made**
+- Enhanced code review processes with mandatory Chromatic acceptance for UI changes
+- Added comprehensive development standards including Chakra UI v3 migration guidelines
+- Expanded pull request procedures with stricter quality gates and automated checks
+- Updated community contribution guidelines with AI assistant integration workflows
+- Strengthened testing requirements with visual regression and accessibility standards
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Project Structure](#project-structure)
@@ -31,7 +39,9 @@
 10. [Appendices](#appendices)
 
 ## Introduction
-This document defines the end-to-end contribution workflow for the Redesign Health Nx monorepo. It covers code style and formatting, commit hygiene, pull request processes, development workflow (branching, issue tracking, code review), contribution types (bug fixes, features, documentation), testing and quality gates, CI expectations, monorepo and dependency management, cross-project changes, AI assistant configurations for Claude and Gemini, and release/versioning/changelog practices.
+This document defines the comprehensive contribution workflow for the Redesign Health Nx monorepo. It covers code style and formatting standards, commit message conventions, pull request processes, development workflow (branching, issue tracking, code review), contribution types (bug fixes, features, documentation), testing and quality gates, CI expectations, monorepo and dependency management, cross-project changes, AI assistant configurations for Claude and Gemini, and release/versioning/changelog practices.
+
+**Updated** Added comprehensive code review processes, development standards, and community contribution guidelines to ensure consistent quality across all contributions.
 
 ## Project Structure
 The repository is an Nx-powered monorepo with:
@@ -115,7 +125,7 @@ Key configuration touchpoints:
 - [.github/copilot-instructions.md:1-92](file://.github/copilot-instructions.md#L1-L92)
 
 ## Architecture Overview
-The monorepo follows Nx’s feature-based architecture with strict module boundaries enforced by ESLint. Libraries are the primary location for reusable code; apps are thin shells. Nx Cloud accelerates CI via task distribution and caching. AI agents and MCP servers streamline Storybook generation and workspace navigation.
+The monorepo follows Nx's feature-based architecture with strict module boundaries enforced by ESLint. Libraries are the primary location for reusable code; apps are thin shells. Nx Cloud accelerates CI via task distribution and caching. AI agents and MCP servers streamline Storybook generation and workspace navigation.
 
 ```mermaid
 graph TB
@@ -169,6 +179,8 @@ Recommended developer workflow:
 - Format with Prettier (dry-run, then write)
 - Keep console statements minimal and intentional
 
+**Updated** Enhanced with Chakra UI v3 migration guidelines and stricter ESLint rules for type safety and component patterns.
+
 **Section sources**
 - [.eslintrc.json:1-225](file://.eslintrc.json#L1-L225)
 - [.prettierrc:1-9](file://.prettierrc#L1-L9)
@@ -182,9 +194,7 @@ Commit messages should be concise, imperative, and scoped. Use the following pat
 - refactor(shared): rename hook for clarity
 - docs: update contribution guidelines
 
-Avoid vague messages like “update” or “fix”. Reference related issues or PRs when applicable.
-
-[No sources needed since this section provides general guidance]
+Avoid vague messages like "update" or "fix". Reference related issues or PRs when applicable.
 
 ### Pull Request Processes
 - Branch naming: Use kebab-case; prefix with feature/, fix/, chore/, docs/, refactor/
@@ -192,8 +202,9 @@ Avoid vague messages like “update” or “fix”. Reference related issues or
 - Include a summary of changes, rationale, and testing performed
 - Ensure all CI checks pass (lint, test, build, Chromatic for UI changes)
 - Request reviews from maintainers; address feedback promptly
+- For UI changes, Chromatic acceptance is mandatory before merging
 
-[No sources needed since this section provides general guidance]
+**Updated** Added mandatory Chromatic acceptance for UI changes and stricter review requirements.
 
 ### Development Workflow
 - Install dependencies at the repository root
@@ -219,19 +230,18 @@ Common commands:
 - [nx.json:8-72](file://nx.json#L8-L72)
 
 ### Issue Tracking
-- Track issues in the repository’s issue tracker
+- Track issues in the repository's issue tracker
 - Reference issues in commit messages and PR descriptions
 - Use labels to categorize issues (enhancement, bug, documentation, etc.)
-
-[No sources needed since this section provides general guidance]
 
 ### Code Review Procedures
 - At least one maintainer approval required
 - Automated checks must pass (CI, lint, tests, build)
 - For UI changes, Chromatic acceptance is mandatory
 - Verify Storybook stories and interaction tests for components
+- Ensure Chakra UI v3 compliance for component changes
 
-[No sources needed since this section provides general guidance]
+**Updated** Strengthened with mandatory Chromatic acceptance and Chakra UI v3 compliance checks.
 
 ### Contribution Types
 
@@ -277,6 +287,8 @@ Quality gates enforced by CI:
 - Lint, test, and build on affected projects
 - Nx Cloud self-healing fixes on failure
 
+**Updated** Enhanced with Chromatic visual regression testing and stricter quality gates.
+
 **Section sources**
 - [jest.config.ts:1-6](file://jest.config.ts#L1-L6)
 - [package.json:15-47](file://package.json#L15-L47)
@@ -321,7 +333,7 @@ Quality gates enforced by CI:
 
 #### Claude (Claude Code)
 - Nx agents and plugins enabled via .claude/settings.json
-- Nx plugin “nx@nx-claude-plugins” activated
+- Nx plugin "nx@nx-claude-plugins" activated
 - Extra known marketplace for nx-claude-plugins configured
 - Use nx-docs and nx-generate skills as directed in AGENTS.md and CLAUDE.md
 
@@ -408,7 +420,13 @@ ci_chromatic --> nx_cfg
 - Keep Storybook stories and tests focused and isolated
 - Minimize console usage and avoid unnecessary logging in production builds
 
-[No sources needed since this section provides general guidance]
+### Chakra UI v3 Migration Compliance
+- All components must use Chakra UI v3 patterns: compound components, colorPalette, asChild
+- Non-is-prefixed boolean props required
+- Backward compatibility maintained via migration shims
+- Strict enforcement via ESLint rules
+
+**Updated** Added comprehensive Chakra UI v3 migration requirements and compliance checks.
 
 ## Troubleshooting Guide
 - CI failures: Run nx fix-ci to apply self-healing fixes; inspect failing targets (lint, test, build)
@@ -416,6 +434,9 @@ ci_chromatic --> nx_cfg
 - Type errors: Run npm run check-types:all or affected:check-types
 - Storybook visual regressions: Review Chromatic dashboard and accept changes after validation
 - AI agent issues: Verify MCP server is running and context files are present
+- Chakra UI v3 migration errors: Check component prop renames and import sources
+
+**Updated** Enhanced troubleshooting with Chakra UI v3 migration and Chromatic visual regression guidance.
 
 **Section sources**
 - [.github/workflows/ci.yml:41-43](file://.github/workflows/ci.yml#L41-L43)
@@ -423,7 +444,9 @@ ci_chromatic --> nx_cfg
 - [CLAUDE.md:260-267](file://CLAUDE.md#L260-L267)
 
 ## Conclusion
-By following these guidelines—consistent code style, disciplined PR processes, rigorous testing and quality gates, and seamless AI-assisted workflows—you will contribute effectively to the Redesign Health Nx monorepo while maintaining high standards for reliability, accessibility, and maintainability.
+By following these comprehensive guidelines—consistent code style, disciplined PR processes, rigorous testing and quality gates, Chakra UI v3 compliance, and seamless AI-assisted workflows—you will contribute effectively to the Redesign Health Nx monorepo while maintaining high standards for reliability, accessibility, and maintainability.
+
+**Updated** Enhanced conclusion to emphasize Chakra UI v3 compliance and AI assistant integration benefits.
 
 ## Appendices
 
@@ -450,3 +473,16 @@ Gemini-->>Dev : "Project/target list"
 - [AGENTS.md:13-24](file://AGENTS.md#L13-L24)
 - [.gemini/settings.json:1-11](file://.gemini/settings.json#L1-L11)
 - [CLAUDE.md:329-351](file://CLAUDE.md#L329-L351)
+
+### Chakra UI v3 Migration Checklist
+- [ ] Verify component imports from @chakra-ui/react
+- [ ] Replace boolean props (isOpen → open, isDisabled → disabled)
+- [ ] Update style props (colorScheme → colorPalette, spacing → gap)
+- [ ] Migrate component names (Modal → Dialog, Collapse → Collapsible)
+- [ ] Update nested styles syntax (sx → css with & requirement)
+- [ ] Replace removed packages (@emotion/styled, @chakra-ui/icons)
+- [ ] Test Storybook stories and Chromatic acceptance
+
+**Section sources**
+- [.github/copilot-instructions.md:1-92](file://.github/copilot-instructions.md#L1-L92)
+- [CLAUDE.md:127-181](file://CLAUDE.md#L127-L181)

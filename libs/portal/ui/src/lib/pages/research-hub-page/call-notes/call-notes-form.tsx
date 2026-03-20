@@ -315,8 +315,8 @@ export const CallNotesForm = ({
                         variant="plain"
                         fontWeight="normal"
                         textDecoration="underline"
-                        fontSize={12}
-                        textColor="purple.600"
+                        fontSize="12px"
+                        color="purple.600"
                         onClick={() => inputRef?.current?.click()}
                         _hover={{
                           textDecoration: 'underline'
@@ -361,11 +361,12 @@ export const CallNotesForm = ({
                       </Box>
                       <Spacer />
                       <IconButton
-                        icon={<MdClose />}
                         onClick={() => handleFileChange(file, 'delete')}
                         id={`${file.name}`}
                         aria-label={`${file.name}`}
-                      />
+                      >
+                        <MdClose />
+                      </IconButton>
                     </Flex>
                   ))}
               </>
@@ -386,7 +387,6 @@ export const CallNotesForm = ({
               upon the intellectual property rights, including but not limited
               to copyrights, trademarks, or patents, of any third party.
             </Text>
-            {/* @ts-expect-error Chakra v3 compound component typing */}
             <CheckboxRoot
               {...form.register('isAttachmentDisclaimerAccepted')}
               mt={1}

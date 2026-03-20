@@ -96,6 +96,7 @@ const CallNotes = () => {
   return (
     <Fragment>
       <SelectionBox>
+        {/* @ts-expect-error SelectionBoxSearch extends InputGroupProps which requires children, but the component renders its own children */}
         <SelectionBox.Search inputProps={searchBoxOnChange} />
         <SelectionBox.FiltersContainer>
           <Flex direction={['column', 'column', 'row', 'row']}>
@@ -155,12 +156,13 @@ const CallNotes = () => {
             Results: {allNotes?.totalResults}
           </Text>
           <FormControl as={Flex} flexDir="row-reverse" align="center" mt="8px">
+            {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
             <FormLabel m="0">Hide conflicted content</FormLabel>
             <CheckboxRoot
               disabled={true}
               mr="12px"
               checked={isConflicts}
-              onChange={e => setIsConflicts(e.target.checked)}
+              onCheckedChange={(e: { checked: boolean }) => setIsConflicts(e.checked)}
             >
               <CheckboxHiddenInput />
               <CheckboxControl />

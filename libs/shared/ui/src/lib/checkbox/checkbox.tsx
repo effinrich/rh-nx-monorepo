@@ -6,6 +6,16 @@ import {
 
 export const CheckboxGroup = ChakraCheckboxGroup
 
+// Compound component exports for direct usage
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const CheckboxRoot = ChakraCheckbox.Root as any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const CheckboxControl = ChakraCheckbox.Control as any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const CheckboxLabel = ChakraCheckbox.Label as any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const CheckboxHiddenInput = ChakraCheckbox.HiddenInput as any
+
 export interface CheckboxProps extends ChakraCheckbox.RootProps {
   icon?: React.ReactNode
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>
@@ -23,9 +33,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         {...props}
       >
         <ChakraCheckbox.HiddenInput ref={ref} {...inputProps} />
+        {/* @ts-expect-error Chakra v3 CheckboxControl children typing */}
         <ChakraCheckbox.Control>
           {icon || <ChakraCheckbox.Indicator />}
         </ChakraCheckbox.Control>
+        {/* @ts-expect-error Chakra v3 CheckboxLabel children typing */}
         {children && <ChakraCheckbox.Label>{children}</ChakraCheckbox.Label>}
       </ChakraCheckbox.Root>
     )

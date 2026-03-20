@@ -4,327 +4,227 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is the **Redesign Health Design System** monorepo, built with Nx. It contains multiple applications and shared libraries organized by domain.
+**Redesign Health Design System** monorepo built with Nx 22. Contains the Platform Portal frontend, mock API server, shared Chakra v3 component library, and supporting libraries.
 
 ### Key Applications
 
-- **portal** - Main portal application (default project)
-- **third-party-network** - Third-party advisor network application
-- **parser-playground** - Tool for testing parsers
-- **chat-pocs/** - Multiple chat platform POCs (CometChat, RocketChat, Sendbird)
-- **expo-poc** - React Native proof of concept
-- **company-api** - Backend API service (Spring Boot)
-- **oauth-jwt-generator** - OAuth JWT generation service
-- **km-docs-lambda** - Knowledge management docs lambda
+- **portal** — Main platform app (React 19 + Vite, port 4200, default project)
+- **api-server** — Mock Express API server (port 8080, used for local development)
+- **third-party-network** — Third-party advisor network app
+- **company-api** — Spring Boot backend API service
+- **parser-playground** — Parser testing tool
 
 ### Library Organization
 
-Libraries are organized by scope and domain:
+Libraries use TypeScript path aliases from `tsconfig.base.json`, imported as `@redesignhealth/<scope>/<lib>`:
 
-- **@redesignhealth/ui** - Shared design system components (Chakra UI-based)
-- **@redesignhealth/portal/\*** - Portal-specific features, data access, and UI
-  - `features/*` - Feature modules (companies, ceo-directory, library, ip-marketplace, etc.)
-  - `data-assets` - API clients, hooks, types
-  - `ui` - Portal-specific UI components
-  - `utils` - Portal utilities
-- **@redesignhealth/third-party-network/\*** - Third-party network modules
-- **@redesignhealth/shared-\*** - Shared utilities, hooks, and analytics
-
-All library imports use TypeScript path aliases defined in `tsconfig.base.json`.
-
-## Development Commands
-
-### Running Applications
-
-```bash
-# Run from root - Nx will locate and run the correct project
-npm start                    # Serves default project (portal)
-npm run start:portal         # Portal app
-npm run start:parser-playground
-nx serve <app-name>          # Any app
-
-# Dev server typically runs on http://localhost:4200/
-```
-
-### Building
-
-```bash
-npm run build               # Build default project
-npm run build:portal        # Build portal specifically
-npm run build:ui            # Build shared UI library
-nx build <project-name>     # Build any project
-```
-
-### Tests
-
-```bash
-# Run tests
-npm test                           # Run tests for all projects
-nx test <project-name>             # Run tests for specific project
-nx test <project-name> --watch     # Watch mode
-nx test <project-name> --testNamePattern="pattern"  # Run specific test
-
-# Run affected tests (only tests affected by changes)
-npm run affected:test
-npm run affected:test -- --verbose
-
-# E2E tests
-nx e2e <app-name>-e2e
-npm run affected:e2e
-```
-
-### Linting and Formatting
-
-```bash
-npm run lint                    # Lint all projects with auto-fix
-npm run lint:portal             # Lint portal with auto-fix
-nx lint <project-name> --fix    # Lint specific project
-
-npm run format                  # Check formatting (dry run)
-npm run format:write            # Write formatting changes
-npm run format:check            # Check without changes
-```
-
-### Type Checking
-
-```bash
-npm run check-types:all             # Type check all projects
-npm run affected:check-types        # Check affected projects
-nx check-types <project-name>       # Check specific project
-```
-
-### Storybook
-
-```bash
-npm run storybook                       # Run shared-ui Storybook
-npm run storybook-portal-ui             # Run portal-ui Storybook
-npm run storybook-all                   # Run all Storybooks
-
-npm run build-storybook                 # Build Storybook for deployment
-npm run build-storybook-portal-ui
-
-npm run test-storybook:shared-ui        # Run Storybook tests
-npm run test-storybook:portal-ui
-```
-
-### Nx Utilities
-
-```bash
-npm run graph                       # View dependency graph
-npm run affected:dep-graph          # Graph of affected projects
-npm run affected:apps               # List affected apps
-npm run affected:libs               # List affected libraries
-```
-
-### Chakra UI Theme
-
-```bash
-npm run theme           # Generate Chakra theme types
-npm run theme:watch     # Watch and regenerate theme types
-```
-
-### MCP Server (Storybook Integration)
-
-This repo includes a Model Context Protocol (MCP) server for Storybook component generation:
-
-```bash
-npm run mcp:setup                   # First-time setup
-npm run mcp:storybook:install       # Install dependencies
-npm run mcp:storybook:build         # Build MCP server
-npm run mcp:storybook:dev           # Development mode
-```
-
-The MCP server is located in `tools/storybook-mcp/`.
-
-## Architecture and Patterns
-
-### Monorepo Structure
-
-This is an Nx monorepo following feature-based architecture. Key principles:
-
-1. **Install all dependencies at root** - Nx automatically includes only what's imported during build/deploy
-2. **Run all scripts from root** - No need to cd into subdirectories
-3. **Add hoisted scripts to root package.json** - Look at project.json for targets, then add convenience scripts to root
+- **@redesignhealth/ui** — Shared Chakra v3 component library (`libs/shared/ui/`)
+- **@redesignhealth/portal/data-assets** — API clients, hooks, types, mock data
+- **@redesignhealth/portal/features/\*** — Feature-sliced pages (companies, ceo-directory, library, ip-marketplace, etc.)
+- **@redesignhealth/portal/ui** — Portal-specific UI components
+- **@redesignhealth/shared-\*** — Shared utilities, hooks, analytics
 
 ### Module Boundaries
 
-Enforced by ESLint `@nx/enforce-module-boundaries`:
+Enforced by ESLint `@nx/enforce-module-boundaries` (defined in `.eslintrc.json`):
 
-- **scope:shared** libraries can only depend on other **scope:shared** libraries
-- **scope:portal** can depend on **scope:portal**, **scope:shared**, and **scope:rocketchat-poc**
-- **scope:oauth-jwt-generator** can depend on **scope:oauth-jwt-generator** and **scope:shared**
+- **scope:shared** can only depend on **scope:shared**
+- **scope:portal** can depend on **scope:portal** and **scope:shared**
+- **type:ui** libs cannot import **type:feature** libs; **type:util** cannot import **type:ui**
 
-These constraints are defined in `.eslintrc.json`.
-
-### Import Organization
-
-Imports are automatically sorted by `simple-import-sort` plugin with this order:
-
-1. Side-effect imports
-2. React and external packages
-3. Internal aliases (@redesignhealth/\*, components, libs, etc.)
-4. Parent imports (../)
-5. Sibling imports (./)
-6. CSS imports
-
-### Styling
-
-- **Emotion** (@emotion/styled) - Default styling solution for React components
-- **Chakra UI** - Component library foundation
-- File naming convention: **kebab-case** enforced by ESLint
-
-### Data Fetching
-
-- **@tanstack/react-query** - Server state management
-- API clients and hooks are in `data-assets` libraries
-- Query keys managed with `@lukemorales/query-key-factory`
-
-### Routing
-
-- **react-router-dom** v6 - Client-side routing
-- Portal uses RouterProvider with data router pattern
-- Auth protected routes use RequireAuth wrapper component
-
-### Testing
-
-- **Jest** - Unit testing (test files use `*.spec.{ts,tsx}` format)
-- **React Testing Library** - Component testing
-- **Playwright** - E2E testing (for some apps)
-- **Storybook Test Runner** - Storybook interaction tests
-- **jest-axe** - Accessibility testing
-
-### Analytics
-
-Portal tracks page views manually using Helmet's `onChangeClientState` to ensure dynamic document titles are captured after async data loads.
-
-### Code Generation
+## Development Commands
 
 ```bash
-# Generate new app
-nx g @nx/react:app my-app
+# Serve
+npm run start:portal              # Portal on http://localhost:4200
+npm run start:api                 # Mock API on http://localhost:8080
+nx serve <app-name>               # Any app
 
-# Generate new library
-nx g @nx/react:lib my-lib --directory=libs/shared
+# Build
+nx build <project-name>
+npm run build:ui                  # Shared UI library
 
-# Generate component
-nx g @nx/react:component my-component --project=my-app
+# Test
+nx test <project-name>                              # Single project
+nx test <project-name> --watch                      # Watch mode
+nx test <project-name> --testNamePattern="pattern"  # Specific test
+npm run affected:test                               # Only changed projects
 
-# Generate API client from OpenAPI
-nx generate-company-api-client portal  # Uses workspace generator
+# Lint & Format
+nx lint <project-name> --fix
+npm run format:write              # Apply Prettier formatting
+
+# Type Check
+npm run check-types:all
+npm run affected:check-types
+
+# Storybook
+npm run storybook                 # Shared UI Storybook
+npm run storybook-portal-ui       # Portal UI Storybook
+
+# Verify before commit
+nx affected -t lint,test,build
 ```
 
 ### OpenAPI Client Generation
 
-Portal has custom targets for generating API clients:
-
 ```bash
-nx generate-company-api-client portal           # From dev environment
-nx generate-company-api-client-local portal     # From localhost:8080
+nx generate-company-api-client portal         # From dev environment
+nx generate-company-api-client-local portal   # From localhost:8080
 ```
 
-These use a workspace generator (`openapi-to-axios-client`) and auto-format the output.
+Uses workspace generator `openapi-to-axios-client` with auto-formatting.
 
-## Important Development Notes
+### @effinrich/nx-storybook Plugin
 
-### Package Management
+Custom Nx plugin at `tools/@effinrich/nx-storybook/` for auto-generating stories and tests:
 
-- Use `--legacy-peer-deps` when installing packages
+```bash
+nx g @effinrich/nx-storybook:story --componentPath=<path>          # Single component
+nx g @effinrich/nx-storybook:stories --project=<name>              # Bulk generate for project
+nx g @effinrich/nx-storybook:component-test --componentPath=<path> # Playwright .ct.tsx
+```
+
+## Architecture and Patterns
+
+### Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Build | Nx 22 |
+| Frontend | React 19 + Vite |
+| UI Library | Chakra UI v3 |
+| Language | TypeScript 5 (strict) |
+| Server State | @tanstack/react-query (keys via @lukemorales/query-key-factory) |
+| Routing | react-router-dom v6 (RouterProvider + data router pattern) |
+| Unit Tests | Jest + React Testing Library |
+| E2E Tests | Playwright (co-located as `.ct.tsx`) |
+| Visual Regression | Chromatic |
+| Linting | ESLint + Prettier (simple-import-sort) |
+
+### Key Patterns
+
+- **Library-first**: 80% of code in `libs/`. Apps are thin shells.
+- **Feature-sliced**: Each feature is its own library under `libs/<scope>/features/`.
+- **Data layer**: API clients (`api.ts`), hooks (`hooks.ts`), and types (`types.ts`) live in `data-assets` libraries.
+- **Auth**: Protected routes use `RequireAuth` wrapper component.
+- **Analytics**: Portal tracks page views via Helmet's `onChangeClientState` for dynamic titles after async loads.
+
+### Import Sort Order
+
+Enforced by `simple-import-sort`:
+
+1. Side-effect imports → 2. React/external packages → 3. `@redesignhealth/*` aliases → 4. Parent `../` → 5. Sibling `./` → 6. CSS
+
+### ESLint Rules
+
+- `@typescript-eslint/no-explicit-any`: **error** — no `any` types
+- `react-hooks/exhaustive-deps`: **error** with autofix
+- `react/no-multi-comp`: warn — one component per file
+- `no-console`: warn
+- `unicorn/filename-case`: warn — **kebab-case** required
+
+## Chakra UI v3 Rules
+
+This project completed a full v2→v3 migration. Follow these rules for all `.tsx` files:
+
+### Import Sources
+
+**From `@chakra-ui/react`:** Alert, Avatar, Button, Card, Field, Table, Input, NativeSelect, Tabs, Textarea, Separator, useDisclosure, Box, Flex, Stack, HStack, VStack, Text, Heading, Icon
+
+**From `components/ui` (relative imports):** Provider, Toaster, ColorModeProvider, Tooltip, PasswordInput
+
+### Removed Packages
+
+- `@emotion/styled` and `framer-motion` — no longer used
+- `@chakra-ui/icons` → use `lucide-react` or `react-icons`
+- `@chakra-ui/hooks` → use `react-use` or `usehooks-ts`
+
+### Prop Renames
+
+| v2 | v3 |
+|----|-----|
+| `isOpen` | `open` |
+| `isDisabled` | `disabled` |
+| `isInvalid` | `invalid` |
+| `isRequired` | `required` |
+| `isLoading` | `loading` |
+| `isChecked` | `checked` |
+| `colorScheme` | `colorPalette` |
+| `spacing` | `gap` |
+| `noOfLines` | `lineClamp` |
+
+### Component Renames
+
+- Divider → **Separator**, Modal → **Dialog**, Collapse → **Collapsible**, Tags → **Badge**
+- `useToast()` → `toaster.create()`
+
+### Style System Changes
+
+```tsx
+// Nested styles: sx → css (& is required)
+<Box css={{ "& svg": { color: "red.500" } }} />
+
+// Gradients
+<Box bgGradient="to-r" gradientFrom="red.200" gradientTo="pink.500" />
+
+// Theme access
+const system = useChakra()
+const gray400 = system.token("colors.gray.400")
+```
+
+### Component Patterns
+
+- Use compound components for complex components
+- Use `asChild` instead of wrapper component patterns
+- Always use `VStack`/`HStack`, not `Stack`
+
+## CI/CD Quality Gates
+
+- **Missing Story Check**: CI fails if any `.tsx` in a `type:ui` lib lacks a `.stories.tsx` file.
+- **Visual Regression**: UI changes in `type:ui` projects trigger Chromatic. PRs cannot merge until changes are accepted in the Chromatic Dashboard.
+- **Affected verification**: `nx affected -t lint,test,build`
+
+## Storybook
+
+Every UI component must have a co-located `*.stories.tsx` file with Controls. Use the `play` function for interaction tests:
+
+```typescript
+export const SubmittedForm: Story = {
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    await step('Submit', async () => {
+      await userEvent.type(canvas.getByTestId('email'), 'senior@dev.com')
+      await userEvent.click(canvas.getByRole('button'))
+    })
+    await expect(canvas.getByText('Success')).toBeInTheDocument()
+  }
+}
+```
+
+## Package Management
+
+- Install with `--legacy-peer-deps`
 - Only add packages to root `package.json`
-- Nx handles dependency pruning during build
+- Node >=18.17.1, NPM >=9.6.7
 
-### VS Code Setup
+## Environment Setup
 
-- Workspace TypeScript version must be selected (not VS Code's version)
-  - Open any .ts file → Cmd/Ctrl+Shift+P → "TypeScript: Select TypeScript Version" → Choose "Use Workspace Version"
-- Required extensions are defined in `.vscode/extensions.json`
-- Settings in `.vscode/settings.json` are critical for linting/formatting
+Create `apps/portal/.env.local` from `.env.local.example`:
 
-### Devcontainer Support
-
-The repo includes devcontainer configuration for Docker-based development. See README.md for setup details.
-
-### Git Workflow
-
-- Main branch: `main`
-- Nx Cloud is enabled for distributed caching
-- Test files follow `*.spec.{ts,tsx,js,jsx}` naming convention
-
-### ESLint Rules to Note
-
-- `@typescript-eslint/no-explicit-any`: error - avoid any types
-- `react/no-multi-comp`: warn - one component per file preferred
-- `no-console`: warn - avoid console statements
-- `react-hooks/exhaustive-deps`: error with autofix enabled
-- `unicorn/filename-case`: warn - kebab-case required
-
-### Chromatic Integration
-
-Visual regression testing via Chromatic:
-
-```bash
-npm run chromatic  # Run visual tests (only changed, debug mode)
+```ini
+VITE_COMPANY_API_HOSTNAME=http://localhost:8080
+VITE_GOOGLE_CLIENT_ID=<your-google-client-id>.apps.googleusercontent.com
 ```
 
-## Common Workflows
-
-### Adding a New Feature to Portal
-
-1. Generate feature library: `nx g @nx/react:lib my-feature --directory=libs/portal/features`
-2. Add exports to library's `src/index.ts`
-3. Add path alias to `tsconfig.base.json` if needed (usually auto-generated)
-4. Import in portal routes/components using `@redesignhealth/portal/features/my-feature`
-5. Add tests in `*.spec.tsx` files
-6. Run `nx test portal-features-my-feature` and `nx lint portal-features-my-feature --fix`
-
-### Working with Shared UI Components
-
-1. Components are in `libs/shared/ui/src/lib/`
-2. Each component exports from its own folder
-3. Add exports to `libs/shared/ui/src/index.ts`
-4. Storybook stories should be co-located with components
-5. Build: `npm run build:ui`
-6. View in Storybook: `npm run storybook`
-
-### Running Tests for Changed Code
+## Code Generation
 
 ```bash
-# Test only what's affected by your changes
-npm run affected:test
-
-# Lint only what's affected
-npm run affected:lint
-
-# Build only what's affected
-npm run affected:build
+nx g @nx/react:lib <path> --tags=scope:<scope>,type:<type>     # New library
+nx g @nx/react:component my-component --project=<name> --export # New component
 ```
 
-### Type Checking Before Commit
-
-```bash
-npm run check-types:all
-# Or for affected only:
-npm run affected:check-types
-```
-
-## File Patterns and Locations
-
-- **Route components**: `apps/portal/src/routes/**/*.tsx`
-- **Feature components**: `libs/portal/features/*/src/lib/**/*.tsx`
-- **Shared UI components**: `libs/shared/ui/src/lib/**/*`
-- **API clients**: `libs/*/data-assets/src/lib/*/api.ts`
-- **React Query hooks**: `libs/*/data-assets/src/lib/*/hooks.ts`
-- **Types**: `libs/*/data-assets/src/lib/*/types.ts`
-- **Test files**: `**/*.spec.{ts,tsx}`
-- **Storybook stories**: `**/*.stories.{ts,tsx,mdx}`
-- **Project configs**: `apps/*/project.json`, `libs/*/project.json`
-
-## Environment and Configuration
-
-- Node version: >=18.17.1
-- NPM version: >=9.6.7
-- TypeScript: 5.1.6 (workspace version)
-- Default dev server port: 4200
-- Build output: `dist/apps/<app-name>` or `dist/libs/<lib-name>`
+Never manually create project folders — always use Nx Generators.
 
 <!-- nx configuration start-->
 <!-- Leave the start & end comments to automatically receive updates. -->
@@ -349,121 +249,3 @@ npm run affected:check-types
 - The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
 
 <!-- nx configuration end-->
-
-<!-- user configuration start -->
-
-# Senior Frontend Engineer Guidelines (Nx + React + Storybook)
-
-## 🛠 Core Tech Stack
-
-- **Workspace:** [Nx Monorepo](https://nx.dev) (Apps + Libs architecture)
-- **Framework:** Next.js (App Router) / React 18+
-- **State:** [TanStack Query](https://tanstack.com) (Server), [Zustand](https://zustand-demo.pmnd.rs) (Client)
-- **Styling:** Tailwind CSS + [CVA (Class Variance Authority)](https://cva.style)
-- **Testing:** [Vitest](https://vitest.dev) (Unit), [Playwright](https://playwright.dev) (E2E), [Storybook](https://storybook.js.org) (Visual/Interaction)
-
-## 🏗 Architectural Guardrails (Nx & Monorepo)
-
-- **Library First:** 80% of code belongs in `libs/`. Apps are minimal shells.
-- **Boundary Enforcement:** `ui` libs cannot import `feature` libs. `util` libs cannot import `ui`.
-- **Generators Only:** Never manually create project folders. Use Nx Generators.
-  - **Create Lib:** `nx g @nx/react:lib libs/shared/ui-components --directory=libs/shared/ui-components --tags=scope:shared,type:ui --importPath=@my-org/shared-ui`
-  - **Create Component:** `nx g @nx/react:component my-button --project=shared-ui-components --export`
-
-## 🎨 Storybook & Visual Regression (Chromatic)
-
-- **Mandatory Stories:** Every UI component MUST have a `*.stories.tsx` file using [Storybook Controls](https://storybook.js.orgdocs/essentials/controls).
-- **Interaction Testing:** Use the `play` function for behavioral assertions (clicks, form fills).
-
-  ```typescript
-  export const SubmittedForm: Story = {
-    play: async ({ canvasElement, step }) => {
-      const canvas = within(canvasElement)
-      await step('Submit', async () => {
-        await userEvent.type(canvas.getByTestId('email'), 'senior@dev.com')
-        await userEvent.click(canvas.getByRole('button'))
-      })
-      await expect(canvas.getByText('Success')).toBeInTheDocument()
-    }
-  }
-  ```
-
-  <!-- user configuration end -->
-
-  <!-- repo configuration start -->
-
-# 🚨 CI/CD Quality Gates
-
-- **Missing Story Check:** CI fails if any `.tsx` in a `type:ui` lib lacks a corresponding `.stories.tsx` file.
-- **Visual Regression:** UI changes in `type:ui` projects trigger Chromatic. PRs cannot merge until changes are **Accepted** in the Chromatic Dashboard.
-
----
-
-# 🚦 Execution Rules (MANDATORY)
-
-- **Zero Fallbacks:** Code must fail loudly. No silent catch blocks or "dummy" data.
-- **RSC Patterns:** Components are Server Components by default. Use `'use client'` strictly for interactivity or browser APIs.
-- **No Sequential Awaits:** Use `Promise.all()` for concurrent fetching to avoid waterfalls.
-- **Full Output:** Never use `// ... existing code`. Always provide the full file content to maintain context.
-
----
-
-# 🔄 Senior Workflow Protocol
-
-1.  **Explore:** Use `Nx Graph` to visualize dependencies before adding a new library.
-2.  **Plan:** State which Nx Generator and tags will be used before execution.
-3.  **Verify:** Run `nx affected -t lint,test,build` and `nx run <project>:storybook` to verify changes.
-
----
-
-# ⌨️ Common Commands
-
-| Action              | Command                                                                   |
-| :------------------ | :------------------------------------------------------------------------ |
-| **Create Lib**      | `nx g @nx/react:lib <path> --tags=scope:<scope>,type:<type>`              |
-| **Add Storybook**   | `nx g @nx/storybook:configuration <project-name> --interactionTests=true` |
-| **Verify Affected** | `nx affected -t lint,test`                                                |
-| **Run Chromatic**   | `nx run <project>:chromatic --project-token=<token> --only-changed`       |
-
-  <!-- repo configuration end -->
-
-# CLAUDE.md - Frontend Guidelines
-
-## 🛡️ Core Principles
-
-- **Senior Mindset:** You are a senior frontend engineer. Focus on maintainability, scalability, accessibility, and performance.
-- **Simplicity:** Impact as little code as possible. Keep functions small and focused [4].
-- **"Never be Lazy":** Do not use temporary fixes. Find root causes and implement robust solutions [4].
-- **AI Constraints:** Do not hallucinate APIs. Read relevant files first [4].
-
-## 🏗️ Architecture & Component Guidelines
-
-- **Frameworks:** Use [React/Vue/Next.js] with TypeScript.
-- **Component Structure:** Use functional components with hooks. Prefer composition over inheritance.
-- **State Management:** Use [Redux/Zustand/Context API] for global state; prefer local state for UI-specific logic.
-- **Styling:** Use [Tailwind CSS/Styled Components/CSS Modules]. Enforce design system tokens (spacing, colors, typography).
-- **File Structure:** Organize by feature/domain, not just by file type.
-
-## 🚀 Performance & Security
-
-- **Code Splitting:** Implement `React.lazy()` for route-based splitting.
-- **Performance:** Optimize image loading (`loading="lazy"`) and minimize third-party scripts.
-- **Security:** Sanitize user input. Prevent XSS by avoiding `dangerouslySetInnerHTML`.
-
-## 🧑‍💻 Coding Standards
-
-- **Typescript:** STRICT mode only. No `any` types.
-- **Testing:** Write tests alongside code (Jest/Vitest + React Testing Library).
-- **Accessibility:** Ensure WCAG 2.1 AA compliance. Use semantic HTML and aria-attributes.
-- **Linting:** Run `npm run lint` and `npm run format` after any change [8].
-
-## 📝 Workflow Commands
-
-- **Init:** Run `/init` to set up the project structure.
-- **Plan:** Draft a plan in `tasks/todo.md` and await approval for complex changes [4].
-- **Test:** Run `npm test` before finalizing any changes [8].
-
-## 📚 Documentation
-
-- If complex, explain high-level changes in the PR description [4].
-- If changing architecture, update this `CLAUDE.md`.

@@ -28,7 +28,7 @@ export const MobileNav = ({
       </Text>
       <Select
         placeholder="Select document"
-        onChange={event => handleOnChange(event)}
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => handleOnChange(event)}
         defaultValue={currentModuleId}
       >
         {modules.map(module => (

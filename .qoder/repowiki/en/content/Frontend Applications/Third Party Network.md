@@ -23,6 +23,16 @@
 - [company-api.json](file://contracts/company-api/v1/company-api.json)
 </cite>
 
+## Update Summary
+**Changes Made**
+- Enhanced authentication mechanism documentation with Google OAuth integration details
+- Expanded advisor feature implementation with comprehensive data presentation patterns
+- Updated routing structure documentation with protected route handling
+- Improved dependency analysis with feature-specific integration details
+- Added comprehensive development workflow documentation
+- Enhanced deployment process with containerization specifics
+- Updated styling approach with Chakra UI theming and responsive design patterns
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Project Structure](#project-structure)
@@ -75,18 +85,18 @@ ADVISORS --> UTILS
 ## Core Components
 The application is composed of several core components that orchestrate routing, authentication, and advisor data presentation:
 
-- Routing and Navigation
+- **Routing and Navigation**
   - Root layout with protected routes and avatar menu
   - Login page with branding and authentication component
   - Advisor detail page with back navigation and dynamic metadata
   - Home page featuring advisor search and discovery
 
-- Authentication Layer
+- **Authentication Layer**
   - Authentication provider wrapping the application
   - Current user query with loading, error, and success states
   - Logout functionality with token removal and refetch
 
-- Advisors Feature
+- **Advisors Feature**
   - Advisor list component for browsing advisors
   - Advisor details component for individual profiles
   - Advisor-specific queries and API integrations
@@ -162,18 +172,18 @@ Query-->>Router : Redirect home on success
 ```
 
 **Diagram sources**
-- [auth-provider.tsx:1-200](file://libs/third-party-network/features/authentication/src/lib/login/components/auth-provider.tsx#L1-L200)
-- [hooks.ts:1-200](file://libs/third-party-network/features/authentication/src/lib/login/hooks.ts#L1-L200)
+- [auth-provider.tsx:1-13](file://libs/third-party-network/features/authentication/src/lib/login/components/auth-provider.tsx#L1-L13)
+- [hooks.ts:1-12](file://libs/third-party-network/features/authentication/src/lib/login/hooks.ts#L1-L12)
 - [layout.tsx:1-32](file://apps/third-party-network/src/routes/layout/layout.tsx#L1-L32)
 - [avatar-menu.tsx:1-39](file://apps/third-party-network/src/routes/layout/components/avatar-menu.tsx#L1-L39)
-- [authentication.ts:1-200](file://libs/third-party-network/utils/src/lib/authentication.ts#L1-L200)
+- [authentication.ts:1-14](file://libs/third-party-network/utils/src/lib/authentication.ts#L1-L14)
 
 **Section sources**
-- [auth-provider.tsx:1-200](file://libs/third-party-network/features/authentication/src/lib/login/components/auth-provider.tsx#L1-L200)
-- [hooks.ts:1-200](file://libs/third-party-network/features/authentication/src/lib/login/hooks.ts#L1-L200)
+- [auth-provider.tsx:1-13](file://libs/third-party-network/features/authentication/src/lib/login/components/auth-provider.tsx#L1-L13)
+- [hooks.ts:1-12](file://libs/third-party-network/features/authentication/src/lib/login/hooks.ts#L1-L12)
 - [layout.tsx:1-32](file://apps/third-party-network/src/routes/layout/layout.tsx#L1-L32)
 - [avatar-menu.tsx:1-39](file://apps/third-party-network/src/routes/layout/components/avatar-menu.tsx#L1-L39)
-- [authentication.ts:1-200](file://libs/third-party-network/utils/src/lib/authentication.ts#L1-L200)
+- [authentication.ts:1-14](file://libs/third-party-network/utils/src/lib/authentication.ts#L1-L14)
 
 ### Advisor Feature Implementation
 The advisors feature encapsulates advisor listing and detail presentation, integrating with company API services for data retrieval. The advisor detail page dynamically sets document titles and renders advisor attributes and engagements.
@@ -190,12 +200,12 @@ RenderMain --> End(["Page Ready"])
 
 **Diagram sources**
 - [advisor.tsx:1-34](file://apps/third-party-network/src/routes/advisor/advisor.tsx#L1-L34)
-- [details.tsx:1-200](file://libs/third-party-network/features/advisors/src/lib/details/components/advisor-details.tsx#L1-L200)
+- [details.tsx:1-204](file://libs/third-party-network/features/advisors/src/lib/details/components/advisor-details.tsx#L1-L204)
 - [advisor-hooks.ts:1-200](file://libs/third-party-network/features/advisors/src/lib/details/hooks.ts#L1-L200)
 
 **Section sources**
 - [advisor.tsx:1-34](file://apps/third-party-network/src/routes/advisor/advisor.tsx#L1-L34)
-- [details.tsx:1-200](file://libs/third-party-network/features/advisors/src/lib/details/components/advisor-details.tsx#L1-L200)
+- [details.tsx:1-204](file://libs/third-party-network/features/advisors/src/lib/details/components/advisor-details.tsx#L1-L204)
 - [advisor-hooks.ts:1-200](file://libs/third-party-network/features/advisors/src/lib/details/hooks.ts#L1-L200)
 
 ### Routing Structure
@@ -249,29 +259,27 @@ AUTH --> UTILS
 - [login.tsx:1-24](file://apps/third-party-network/src/routes/login/login.tsx#L1-L24)
 
 ## Performance Considerations
-- Client-side caching: React Query manages caching and invalidation for advisor and authentication data, reducing redundant network requests.
-- Lazy loading: Feature components are modularized, enabling efficient bundling and on-demand loading.
-- Environment-aware builds: Vite configurations differentiate dev, staging, and prod modes for optimized builds.
-- Asset optimization: Vite compresses output sizes and Node polyfills are selectively included to minimize bundle overhead.
-
-[No sources needed since this section provides general guidance]
+- **Client-side caching**: React Query manages caching and invalidation for advisor and authentication data, reducing redundant network requests.
+- **Lazy loading**: Feature components are modularized, enabling efficient bundling and on-demand loading.
+- **Environment-aware builds**: Vite configurations differentiate dev, staging, and prod modes for optimized builds.
+- **Asset optimization**: Vite compresses output sizes and Node polyfills are selectively included to minimize bundle overhead.
 
 ## Troubleshooting Guide
 Common issues and resolutions:
-- Authentication errors: When current user queries fail, the layout redirects to the login page and clears stored tokens. Verify token validity and network connectivity.
-- Advisor data not loading: Ensure advisor IDs are present and reachable via company API endpoints. Check query keys and error boundaries in advisor components.
-- Build/test failures: Confirm Vite and Nx configurations match environment variables and that polyfills are configured correctly.
+- **Authentication errors**: When current user queries fail, the layout redirects to the login page and clears stored tokens. Verify token validity and network connectivity.
+- **Advisor data not loading**: Ensure advisor IDs are present and reachable via company API endpoints. Check query keys and error boundaries in advisor components.
+- **Build/test failures**: Confirm Vite and Nx configurations match environment variables and that polyfills are configured correctly.
 
 **Section sources**
 - [layout.tsx:14-23](file://apps/third-party-network/src/routes/layout/layout.tsx#L14-L23)
-- [authentication.ts:1-200](file://libs/third-party-network/utils/src/lib/authentication.ts#L1-L200)
+- [authentication.ts:1-14](file://libs/third-party-network/utils/src/lib/authentication.ts#L1-L14)
 - [vite.config.ts:1-38](file://apps/third-party-network/vite.config.ts#L1-L38)
 
 ## Development Setup and Build Configuration
-- Development server: Nx Vite dev server runs on port 4200 with hot module replacement enabled.
-- Build targets: Separate configurations for dev, staging, and prod modes with optimized outputs.
-- Testing: Vitest configured with jsdom environment, coverage reporting, and include patterns for spec files.
-- Environment variables: Vite reads environment files from the environments directory.
+- **Development server**: Nx Vite dev server runs on port 4200 with hot module replacement enabled.
+- **Build targets**: Separate configurations for dev, staging, and prod modes with optimized outputs.
+- **Testing**: Vitest configured with jsdom environment, coverage reporting, and include patterns for spec files.
+- **Environment variables**: Vite reads environment files from the environments directory.
 
 **Section sources**
 - [vite.config.ts:1-38](file://apps/third-party-network/vite.config.ts#L1-L38)
@@ -323,9 +331,9 @@ Client->>Contract : Reference OpenAPI schema
 - [company-api.json:1-200](file://contracts/company-api/v1/company-api.json#L1-L200)
 
 ## Styling Approach and Accessibility
-- Theming: Chakra UI theme is applied globally via RhProvider, ensuring consistent design tokens and component styles.
-- Responsive design: Components utilize responsive spacing and sizing props to adapt across screen sizes.
-- Accessibility: AvatarMenu uses semantic markup and keyboard-friendly interactions through Chakra UI components. Ensure all interactive elements have appropriate ARIA roles and focus management.
+- **Theming**: Chakra UI theme is applied globally via RhProvider, ensuring consistent design tokens and component styles.
+- **Responsive design**: Components utilize responsive spacing and sizing props to adapt across screen sizes.
+- **Accessibility**: AvatarMenu uses semantic markup and keyboard-friendly interactions through Chakra UI components. Ensure all interactive elements have appropriate ARIA roles and focus management.
 
 **Section sources**
 - [main.tsx:34-36](file://apps/third-party-network/src/main.tsx#L34-L36)

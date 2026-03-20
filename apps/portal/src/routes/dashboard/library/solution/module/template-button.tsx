@@ -39,7 +39,7 @@ export const TemplateButton = memo(
           })
           login()
         }}
-        isLoading={isPending}
+        loading={isPending}
         disabled={isPending}
       >
         Open template

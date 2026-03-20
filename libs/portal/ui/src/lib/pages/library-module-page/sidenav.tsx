@@ -24,10 +24,10 @@ export const SideNav = ({ modules, onNavClick, ...props }: SideNavProps) => {
             bg: 'primary.50',
             color: 'primary.700'
           }}
-          _activeLink={
+          css={
             module.id === moduleId
-              ? { bg: 'primary.50', color: 'primary.700' }
-              : { bg: 'inherit', color: 'inherit' }
+              ? { '&[aria-current="page"]': { bg: 'primary.50', color: 'primary.700' } }
+              : {}
           }
           onClick={() => onNavClick(module)}
         >

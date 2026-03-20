@@ -66,7 +66,8 @@ export const VendorForm = ({
   const { data } = useGetCategoriesFilters()
 
   const methods = useForm<VendorFormProps>({
-    resolver: yupResolver(formSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(formSchema) as any,
     mode: 'onBlur',
     defaultValues: defaultValues || VENDOR_FORM_DEFAULT_VALUES
   })
@@ -89,7 +90,7 @@ export const VendorForm = ({
         disabled={Boolean(errors) || isSubmitting}
         isPending={isPending}
         isValid={isValid}
-        onSubmit={handleSubmit(data => onSubmit(data))}
+        onSubmit={handleSubmit(data => onSubmit(data as VendorFormProps))}
         onCancel={onCancel}
         submitText={submitText}
         isSticky
@@ -128,7 +129,6 @@ export const VendorForm = ({
                   getOptionValue={o => o.value}
                   name={name}
                   placeholder="Select type"
-                  colorPalette="primary"
                 />
               </FormFieldMaster>
             )}
@@ -225,8 +225,8 @@ export const VendorForm = ({
               >
                 <RadioGroupRoot
                   ref={ref}
-                  onChange={nextValue =>
-                    controllerOnChange(nextValue === 'true')
+                  onValueChange={(details: { value: string }) =>
+                    controllerOnChange(details.value === 'true')
                   }
                   name={name}
                   defaultValue={value ? 'true' : 'false'}

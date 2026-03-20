@@ -1,15 +1,14 @@
-import { type BoxProps, Button, Flex, Text } from '@redesignhealth/ui'
+import { Button, Flex, Text } from '@redesignhealth/ui'
 
-interface FiltersProps extends BoxProps {
+interface FiltersProps {
   children: React.ReactNode
   handleClear?(): void
 }
 
-export const Filters = ({ children, handleClear, ...props }: FiltersProps) => {
+export const Filters = ({ children, handleClear }: FiltersProps) => {
   return (
     <Flex
       flexDirection={['column', 'column', 'row']}
-      {...props}
       alignItems="baseline"
       gap="16px"
     >

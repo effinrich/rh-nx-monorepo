@@ -28,6 +28,7 @@ const OptInQuestion = ({
       <Divider />
       <OptInForm isOptIn={isOptIn} setIsOptIn={setIsOptIn} />
       <Divider />
+      {/* @ts-expect-error Chakra v3 CardFooter children typing */}
       <CardFooter justify="flex-end" gap={3}>
         <Button variant="ghost" disabled>
           Back

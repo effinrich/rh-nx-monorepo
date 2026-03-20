@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { MdLock } from 'react-icons/md'
 import { Link as RouterLink } from 'react-router-dom'
@@ -46,6 +46,8 @@ export const CeoDirectoryPage = ({
   })
 
   const [currentPage, setCurrentPage] = useState(0)
+  const [isPageTransitioning, startPageTransition] = useTransition()
+
   const { data: ceos, isPending } = useGetCeos(
     formMethods.watch(),
     currentPage,
@@ -141,7 +143,9 @@ export const CeoDirectoryPage = ({
             <Pagination
               currentPage={currentPage}
               totalPages={ceos.page.totalPages}
-              handlePageChange={setCurrentPage}
+              handlePageChange={(page: number) =>
+                startPageTransition(() => setCurrentPage(page))
+              }
             />
           ) : (
             <NoSearchResults searchName="CEOs" />

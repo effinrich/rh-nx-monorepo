@@ -1,6 +1,18 @@
 import * as React from 'react'
 import { Portal, Tooltip as ChakraTooltip } from '@chakra-ui/react'
 
+// Re-export Chakra v3 compound components for direct usage
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const TooltipRoot = ChakraTooltip.Root as any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const TooltipTrigger = ChakraTooltip.Trigger as any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const TooltipContent = ChakraTooltip.Content as any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const TooltipArrow = ChakraTooltip.Arrow as any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const TooltipPositioner = ChakraTooltip.Positioner as any
+
 export interface TooltipProps
   extends Omit<ChakraTooltip.RootProps, 'children'> {
   showArrow?: boolean
@@ -39,20 +51,27 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
 
     if (disabled) return children
 
+    // Use re-exported components to avoid Chakra v3 compound component typing issues
+    const Trigger = ChakraTooltip.Trigger as React.ElementType
+    const Positioner = ChakraTooltip.Positioner as React.ElementType
+    const Content = ChakraTooltip.Content as React.ElementType
+    const Arrow = ChakraTooltip.Arrow as React.ElementType
+    const ArrowTip = ChakraTooltip.ArrowTip as React.ElementType
+
     return (
       <ChakraTooltip.Root positioning={tooltipPositioning} {...rest}>
-        <ChakraTooltip.Trigger asChild>{children}</ChakraTooltip.Trigger>
+        <Trigger asChild>{children}</Trigger>
         <Portal disabled={!portalled} container={portalRef?.current}>
-          <ChakraTooltip.Positioner>
-            <ChakraTooltip.Content ref={ref} {...contentProps}>
+          <Positioner>
+            <Content ref={ref} {...contentProps}>
               {tooltipShowArrow && (
-                <ChakraTooltip.Arrow>
-                  <ChakraTooltip.ArrowTip />
-                </ChakraTooltip.Arrow>
+                <Arrow>
+                  <ArrowTip />
+                </Arrow>
               )}
               {tooltipContent}
-            </ChakraTooltip.Content>
-          </ChakraTooltip.Positioner>
+            </Content>
+          </Positioner>
         </Portal>
       </ChakraTooltip.Root>
     )

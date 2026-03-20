@@ -59,7 +59,7 @@ const HeadshotUploader = ({
           }}
         />
         {isPictureUploading ? (
-          <Loader size="xl" minHeight="96px" w="96px" flex="inherit" />
+          <Loader size="xl" minH="96px" />
         ) : (
           <AvatarRoot size="xl" bg="gray.400">
             {/* @ts-expect-error Chakra v3 compound component typing */}

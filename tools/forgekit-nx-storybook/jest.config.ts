@@ -1,9 +1,9 @@
 export default {
-  displayName: 'forgekit-nx-storybook',
+  displayName: 'effinrich-nx-storybook',
   preset: '../../jest.preset.js',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }]
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/tools/forgekit-nx-storybook'
+  coverageDirectory: '../../coverage/tools/effinrich-nx-storybook'
 }

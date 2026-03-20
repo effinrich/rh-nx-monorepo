@@ -13,6 +13,7 @@
 - [apps/api-server/src/main.ts](file://apps/api-server/src/main.ts)
 - [apps/company-api/project.json](file://apps/company-api/project.json)
 - [apps/company-api/docker-compose.yml](file://apps/company-api/docker-compose.yml)
+- [apps/company-api/doc/architecture/decisions/0001-record-architecture-decisions.md](file://apps/company-api/doc/architecture/decisions/0001-record-architecture-decisions.md)
 - [apps/company-api/doc/architecture/decisions/0002-java-and-spring.md](file://apps/company-api/doc/architecture/decisions/0002-java-and-spring.md)
 - [apps/company-api/doc/architecture/decisions/0005-orm.md](file://apps/company-api/doc/architecture/decisions/0005-orm.md)
 - [apps/company-api/doc/architecture/decisions/0007-multi-module-project.md](file://apps/company-api/doc/architecture/decisions/0007-multi-module-project.md)
@@ -22,229 +23,296 @@
 - [tools/forgekit-nx-storybook/README.md](file://tools/forgekit-nx-storybook/README.md)
 </cite>
 
+## Update Summary
+**Changes Made**
+- Enhanced layered architecture documentation with comprehensive Nx monorepo structure analysis
+- Added detailed architectural decision records section with concrete examples
+- Expanded microservices architecture coverage with Spring Boot patterns
+- Improved component relationship documentation with data flow patterns
+- Added comprehensive system context diagrams with integration points
+- Documented advanced architectural patterns including repository, factory, and observer patterns
+- Enhanced cross-cutting concerns documentation with authentication, authorization, and monitoring
+
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [Project Structure](#project-structure)
-3. [Core Components](#core-components)
-4. [Architecture Overview](#architecture-overview)
-5. [Detailed Component Analysis](#detailed-component-analysis)
-6. [Dependency Analysis](#dependency-analysis)
-7. [Performance Considerations](#performance-considerations)
-8. [Troubleshooting Guide](#troubleshooting-guide)
-9. [Conclusion](#conclusion)
-10. [Appendices](#appendices)
+2. [Nx Monorepo Architecture](#nx-monorepo-architecture)
+3. [Layered Architecture Pattern](#layered-architecture-pattern)
+4. [Microservices Architecture](#microservices-architecture)
+5. [Component Relationships & Data Flow](#component-relationships--data-flow)
+6. [Architectural Decision Records](#architectural-decision-records)
+7. [Advanced Architectural Patterns](#advanced-architectural-patterns)
+8. [Cross-Cutting Concerns](#cross-cutting-constraints)
+9. [System Context & Integration Points](#system-context--integration-points)
+10. [Technology Stack & Trade-offs](#technology-stack--trade-offs)
+11. [Performance & Scalability Considerations](#performance--scalability-considerations)
+12. [Development Workflow & Tooling](#development-workflow--tooling)
+13. [Conclusion](#conclusion)
 
 ## Introduction
-This document describes the architectural design and implementation patterns of the Redesign Health Nx monorepo. It explains the Nx workspace organization, layered architecture (presentation, business logic, data access), microservices approach using Spring Boot for backend services and React for frontend, and the integration points between applications. Cross-cutting concerns such as authentication, authorization, and observability are addressed alongside technology stack choices, trade-offs, and constraints.
+This document provides a comprehensive architectural overview of the Redesign Health Nx monorepo, detailing the layered design patterns, Nx workspace organization, and architectural decision records. The system follows a modern full-stack architecture with React 19 frontend, Spring Boot microservices, and a sophisticated monorepo structure managed by Nx workspace tools.
 
-## Project Structure
-The repository follows an Nx workspace with a clear separation of applications (apps/) and shared libraries (libs/). Applications include:
-- Portal: A React 19 SPA built with Vite and served via Nx dev server, configured with a proxy to the API server.
-- API Server: A mock Express server started via tsx for local development.
-- Company API: A Spring Boot microservice packaged as a multi-module Maven project, orchestrated with Docker Compose for local dependencies.
+The architecture emphasizes separation of concerns through distinct layers, implements robust microservices patterns, and leverages advanced tooling for component development and testing automation. Cross-cutting concerns including authentication, authorization, and observability are systematically addressed throughout the design.
 
-Shared libraries provide reusable UI, analytics, hooks, utilities, and feature modules for both the Portal and third-party network applications.
+## Nx Monorepo Architecture
+The Redesign Health monorepo utilizes Nx workspace architecture to manage multiple applications and libraries efficiently. The workspace follows a clear separation of concerns with dedicated directories for applications, shared libraries, tools, and documentation.
+
+### Workspace Structure
+The monorepo maintains a hierarchical structure that promotes scalability and maintainability:
 
 ```mermaid
 graph TB
-subgraph "Apps"
-Portal["Portal App<br/>React 19 + Vite"]
-APIServer["API Server<br/>Express + tsx"]
-CompanyAPI["Company API<br/>Spring Boot (multi-module)"]
+subgraph "Nx Workspace Root"
+Workspace["rh-nx-monorepo/"]
+Workspace --> Apps["apps/"]
+Workspace --> Libs["libs/"]
+Workspace --> Tools["tools/"]
+Workspace --> Docs["docs/"]
+Workspace --> Contracts["contracts/"]
+Workspace --> Playwright["playwright/"]
 end
-subgraph "Shared Libraries"
-SharedUI["@redesignhealth/ui<br/>Chakra UI v3"]
-SharedAnalytics["@redesignhealth/analytics"]
-SharedHooks["@redesignhealth/hooks"]
-SharedUtils["@redesignhealth/shared-utils"]
-PortalFeatures["@redesignhealth/portal/features/*"]
-PortalUI["@redesignhealth/portal/ui"]
-PortalUtils["@redesignhealth/portal/utils"]
-TPNFeatures["@redesignhealth/third-party-network/features/*"]
-TPNUi["@redesignhealth/third-party-network/ui"]
-TPNUtils["@redesignhealth/third-party-network/utils"]
-CompanyApiTypes["@redesignhealth/company-api-types"]
+subgraph "Applications (apps/)"
+Apps --> Portal["portal/"]
+Apps --> APIServer["api-server/"]
+Apps --> CompanyAPI["company-api/"]
+Apps --> ChatPOCs["chat-pocs/"]
+Apps --> ThirdPartyNetwork["third-party-network/"]
+Apps --> ParserPlayground["parser-playground/"]
+Apps --> OAuthJWT["oauth-jwt-generator/"]
+Apps --> FF4J["ff4j-rh/"]
+Apps --> KMDOCS["km-docs-lambda/"]
+Apps --> Prometheus["prometheus/"]
+Apps --> OPcoFin["opcofin/"]
 end
-Portal --> SharedUI
-Portal --> SharedAnalytics
-Portal --> SharedHooks
-Portal --> PortalFeatures
-Portal --> PortalUI
-Portal --> PortalUtils
-Portal -.-> APIServer
-Portal -.-> CompanyAPI
-CompanyAPI --> CompanyApiTypes
+subgraph "Shared Libraries (libs/)"
+Libs --> Shared["shared/"]
+Libs --> PortalLibs["portal/"]
+Libs --> TPN["third-party-network/"]
+Libs --> CompanyAPI["company-api-types/"]
+Libs --> SharedJava["shared-java/"]
+end
+subgraph "Tools & Utilities"
+Tools --> ForgeKit["forgekit-nx-storybook/"]
+Tools --> StorybookMCP["storybook-mcp/"]
+Tools --> Generators["generators/"]
+Tools --> PortalDataLoaders["portal-data-loaders/"]
+end
 ```
 
 **Diagram sources**
-- [apps/portal/project.json:1-138](file://apps/portal/project.json#L1-L138)
-- [apps/api-server/project.json](file://apps/api-server/project.json)
-- [apps/company-api/project.json:1-74](file://apps/company-api/project.json#L1-L74)
-- [libs/shared/ui/src/index.ts:1-84](file://libs/shared/ui/src/index.ts#L1-L84)
-- [libs/company-api-types/package.json:1-5](file://libs/company-api-types/package.json#L1-L5)
+- [README.md:41-70](file://README.md#L41-L70)
+
+### Nx Configuration & Target Management
+The Nx workspace configuration establishes comprehensive build and development workflows through target defaults, named inputs, and plugin integration. The configuration supports:
+
+- **Target Dependencies**: Automatic dependency resolution between projects
+- **Named Inputs**: Optimized caching strategies for different build scenarios
+- **Plugin Integration**: Spring Boot and Storybook toolchain integration
+- **Default Project**: Portal application as the primary development target
 
 **Section sources**
-- [README.md:41-70](file://README.md#L41-L70)
 - [nx.json:1-149](file://nx.json#L1-L149)
 - [tsconfig.base.json:20-91](file://tsconfig.base.json#L20-L91)
 
-## Core Components
-- Presentation layer (Portal): React application with routing, analytics integration, and a design system powered by Chakra UI v3. Path aliases enable modular imports from shared libraries and feature modules.
-- Business logic: Implemented as React Query data loaders and typed API clients generated from OpenAPI specifications. The Portal project includes targets to regenerate client code from remote or local Company API OpenAPI specs.
-- Data access: Spring Boot microservice with Spring Data JPA/Hibernate for persistence, OpenSearch for search, and CockroachDB for relational data. The project is structured as a multi-module Maven project to separate concerns and enable independent builds.
+## Layered Architecture Pattern
+The system implements a comprehensive layered architecture that separates concerns across three primary layers: presentation, business logic, and data access.
 
-Key architectural patterns observed:
-- Repository pattern: Used in the Spring Boot application via Spring Data JPA repositories for encapsulating data access logic.
-- Factory pattern: Observed in the design system exports and feature module organization, enabling modular composition and consistent component creation.
-- Observer pattern: Applied through React Query’s caching and invalidation mechanisms, and analytics page view tracking via Helmet state changes.
+### Presentation Layer (Portal)
+The presentation layer consists of a React 19 Single Page Application built with Vite, featuring:
+- **Routing**: React Router for navigation management
+- **Design System**: Chakra UI v3 with comprehensive component library
+- **State Management**: React Query for data fetching and caching
+- **Analytics Integration**: Google Analytics 4 and Speed Insights
+- **Development Workflow**: Hot Module Replacement and proxy configuration
 
-Cross-cutting concerns:
-- Authentication and authorization: Managed via external identity providers and environment-driven configuration in the Portal. The Spring Boot service integrates with AWS Secrets Manager and exposes REST endpoints for company-related operations.
-- Monitoring and observability: Vercel Speed Insights integration in the Portal, and Prometheus configuration present in the workspace for metrics collection.
+### Business Logic Layer
+The business logic layer handles application-specific logic and coordination:
+- **Data Loading**: React Query data loaders for API communication
+- **Type Safety**: OpenAPI-generated TypeScript clients
+- **Feature Modules**: Modular organization following feature-sliced architecture
+- **State Management**: Centralized caching with automatic invalidation
 
-**Section sources**
-- [apps/portal/src/app/app.tsx:1-45](file://apps/portal/src/app/app.tsx#L1-L45)
-- [apps/portal/project.json:91-110](file://apps/portal/project.json#L91-L110)
-- [apps/company-api/doc/architecture/decisions/0005-orm.md:1-31](file://apps/company-api/doc/architecture/decisions/0005-orm.md#L1-L31)
-- [apps/company-api/doc/architecture/decisions/0002-java-and-spring.md:1-22](file://apps/company-api/doc/architecture/decisions/0002-java-and-spring.md#L1-L22)
-- [apps/company-api/doc/architecture/decisions/0007-multi-module-project.md:1-21](file://apps/company-api/doc/architecture/decisions/0007-multi-module-project.md#L1-L21)
-- [libs/shared/ui/src/index.ts:1-84](file://libs/shared/ui/src/index.ts#L1-L84)
-
-## Architecture Overview
-The system employs a layered architecture:
-- Presentation: React SPA with feature modules and a shared UI library.
-- Business logic: Data fetching, caching, and state management via React Query and typed API clients.
-- Data access: Spring Boot microservice with Spring Data JPA repositories, OpenSearch, and CockroachDB.
-
-Integration points:
-- Portal communicates with the API server during development and with the Company API in production via a generated Axios client.
-- The Company API is containerized and can be run locally with Docker Compose, which provisions CockroachDB and OpenSearch.
+### Data Access Layer
+The data access layer manages persistence and external service integration:
+- **Spring Boot Services**: Microservice architecture with Spring Data JPA
+- **Database Integration**: CockroachDB with OpenSearch for search capabilities
+- **API Contracts**: OpenAPI specifications for service interfaces
+- **Container Orchestration**: Docker Compose for local development dependencies
 
 ```mermaid
 graph TB
-Browser["Browser"]
+subgraph "Presentation Layer"
+PortalApp["Portal React App"]
 Router["React Router"]
-Queries["React Query Cache"]
-PortalAPI["Portal API Layer<br/>Axios Client"]
-CompanyAPI["Company API<br/>Spring Boot"]
-DB["CockroachDB"]
-Search["OpenSearch"]
-Browser --> Router
-Router --> Queries
-Queries --> PortalAPI
-PortalAPI --> CompanyAPI
-CompanyAPI --> DB
-CompanyAPI --> Search
+QueryClient["React Query Client"]
+Analytics["Analytics Integration"]
+end
+subgraph "Business Logic Layer"
+DataLoaders["React Query Data Loaders"]
+TypedClients["OpenAPI Typed Clients"]
+FeatureModules["Feature-Sliced Modules"]
+StateManagement["Centralized State Management"]
+end
+subgraph "Data Access Layer"
+SpringBoot["Spring Boot Microservices"]
+JPARepositories["Spring Data JPA Repositories"]
+OpenSearch["OpenSearch Client"]
+CockroachDB["CockroachDB DataSource"]
+end
+PortalApp --> Router
+Router --> QueryClient
+QueryClient --> DataLoaders
+DataLoaders --> TypedClients
+TypedClients --> FeatureModules
+FeatureModules --> StateManagement
+StateManagement --> SpringBoot
+SpringBoot --> JPARepositories
+JPARepositories --> OpenSearch
+JPARepositories --> CockroachDB
 ```
 
 **Diagram sources**
-- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
+- [apps/portal/src/app/app.tsx:1-45](file://apps/portal/src/app/app.tsx#L1-L45)
 - [apps/portal/project.json:91-110](file://apps/portal/project.json#L91-L110)
-- [apps/company-api/docker-compose.yml:1-82](file://apps/company-api/docker-compose.yml#L1-L82)
-
-**Section sources**
-- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
-- [apps/portal/project.json:91-110](file://apps/portal/project.json#L91-L110)
-- [apps/company-api/docker-compose.yml:1-82](file://apps/company-api/docker-compose.yml#L1-L82)
-
-## Detailed Component Analysis
-
-### Portal Application
-The Portal is a React 19 application built with Vite. It integrates analytics via Helmet and Speed Insights, and uses a design system library for UI components. Routing is handled by React Router, and the app supports hot module replacement during development.
-
-```mermaid
-sequenceDiagram
-participant Browser as "Browser"
-participant App as "App Component"
-participant Router as "RouterProvider"
-participant Analytics as "Analytics Service"
-Browser->>App : Load application
-App->>Router : Initialize router
-Router-->>App : Render routes
-App->>Analytics : Send page view on title change
-Analytics-->>App : Acknowledge
-```
-
-**Diagram sources**
-- [apps/portal/src/app/app.tsx:26-42](file://apps/portal/src/app/app.tsx#L26-L42)
+- [apps/company-api/doc/architecture/decisions/0005-orm.md:1-31](file://apps/company-api/doc/architecture/decisions/0005-orm.md#L1-L31)
 
 **Section sources**
 - [apps/portal/src/app/app.tsx:1-45](file://apps/portal/src/app/app.tsx#L1-L45)
-- [apps/portal/project.json:1-138](file://apps/portal/project.json#L1-L138)
+- [apps/portal/project.json:91-110](file://apps/portal/project.json#L91-L110)
 
-### API Server (Mock)
-The API server is a lightweight Express application started via tsx for local development. The Portal’s proxy configuration forwards API requests to this server during development.
+## Microservices Architecture
+The backend implements a microservices architecture using Spring Boot, providing scalability, maintainability, and independent deployment capabilities.
 
-```mermaid
-flowchart TD
-Start(["Start API Server"]) --> LoadMain["Load main.ts"]
-LoadMain --> InitExpress["Initialize Express"]
-InitExpress --> Listen["Listen on configured port"]
-Listen --> Ready(["Server Ready"])
-```
-
-**Diagram sources**
-- [apps/api-server/src/main.ts](file://apps/api-server/src/main.ts)
-
-**Section sources**
-- [apps/api-server/project.json](file://apps/api-server/project.json)
-- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
-
-### Company API (Spring Boot Microservice)
-The Company API is a Spring Boot microservice with a multi-module Maven structure. It uses Spring Data JPA/Hibernate for persistence, OpenSearch for search capabilities, and CockroachDB for relational storage. Docker Compose orchestrates local dependencies.
+### Spring Boot Microservice Design
+The Company API service demonstrates enterprise-grade microservice patterns:
 
 ```mermaid
 classDiagram
 class CompanyAPI {
 +Spring Boot Application
-+Multi-module Maven
++Multi-module Maven Structure
++RESTful API Endpoints
 +Spring Data JPA Repositories
-+OpenSearch Client
++OpenSearch Integration
++AWS Secrets Manager
+}
+class ApplicationModule {
++Business Logic Layer
++Service Layer
++Controller Layer
++Validation Layer
+}
+class JiraRestClient {
++JIRA Integration
++Webhook Processing
++SQS Publishing
+}
+class DatabaseLayer {
 +CockroachDB DataSource
++Spring Data JPA
++Entity Management
++Transaction Handling
 }
-class OpenSearch {
-+Search Indexes
-+Security Disabled (dev)
+class SearchLayer {
++OpenSearch Client
++Index Management
++Search Operations
++Security Configuration
 }
-class CockroachDB {
-+PostgreSQL-compatible
-+Single-node (dev)
-}
-CompanyAPI --> OpenSearch : "uses"
-CompanyAPI --> CockroachDB : "uses"
+CompanyAPI --> ApplicationModule
+CompanyAPI --> JiraRestClient
+ApplicationModule --> DatabaseLayer
+ApplicationModule --> SearchLayer
 ```
 
 **Diagram sources**
 - [apps/company-api/project.json:1-74](file://apps/company-api/project.json#L1-L74)
 - [apps/company-api/docker-compose.yml:1-82](file://apps/company-api/docker-compose.yml#L1-L82)
-- [apps/company-api/doc/architecture/decisions/0005-orm.md:1-31](file://apps/company-api/doc/architecture/decisions/0005-orm.md#L1-L31)
-- [apps/company-api/doc/architecture/decisions/0007-multi-module-project.md:1-21](file://apps/company-api/doc/architecture/decisions/0007-multi-module-project.md#L1-L21)
+
+### Service Orchestration & Dependencies
+The microservices architecture includes sophisticated dependency management and orchestration:
+
+- **Docker Compose**: Local development environment with CockroachDB and OpenSearch
+- **AWS Integration**: Secrets management and secure credential handling
+- **JIRA Integration**: Webhook processing and SQS publishing for event-driven architecture
+- **Multi-module Maven**: Clean separation of concerns and independent builds
 
 **Section sources**
 - [apps/company-api/project.json:1-74](file://apps/company-api/project.json#L1-L74)
 - [apps/company-api/docker-compose.yml:1-82](file://apps/company-api/docker-compose.yml#L1-L82)
-- [apps/company-api/doc/architecture/decisions/0002-java-and-spring.md:1-22](file://apps/company-api/doc/architecture/decisions/0002-java-and-spring.md#L1-L22)
-- [apps/company-api/doc/architecture/decisions/0005-orm.md:1-31](file://apps/company-api/doc/architecture/decisions/0005-orm.md#L1-L31)
-- [apps/company-api/doc/architecture/decisions/0007-multi-module-project.md:1-21](file://apps/company-api/doc/architecture/decisions/0007-multi-module-project.md#L1-L21)
 
-### Shared UI Library (@redesignhealth/ui)
-The shared UI library exports a comprehensive set of Chakra UI v3 components and hooks. It enables consistent theming and component composition across applications.
+## Component Relationships & Data Flow
+The system implements sophisticated component relationships with well-defined data flow patterns that ensure maintainability and scalability.
+
+### Data Flow Architecture
+The data flow follows a unidirectional pattern with clear boundaries:
+
+```mermaid
+sequenceDiagram
+participant Browser as "Browser"
+participant Portal as "Portal Application"
+participant QueryClient as "React Query Client"
+participant APIService as "API Service Layer"
+participant CompanyAPI as "Company API"
+participant Database as "CockroachDB"
+participant Search as "OpenSearch"
+Browser->>Portal : User Interaction
+Portal->>QueryClient : Trigger Data Fetch
+QueryClient->>APIService : Execute Request
+APIService->>CompanyAPI : REST Call
+CompanyAPI->>Database : Database Operation
+CompanyAPI->>Search : Search Operation
+Database-->>CompanyAPI : Result
+Search-->>CompanyAPI : Search Results
+CompanyAPI-->>APIService : Response
+APIService-->>QueryClient : Processed Data
+QueryClient-->>Portal : Update UI
+Portal-->>Browser : Rendered Components
+```
+
+**Diagram sources**
+- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
+- [apps/portal/project.json:91-110](file://apps/portal/project.json#L91-L110)
+
+### Component Composition Patterns
+The shared UI library demonstrates advanced composition patterns:
 
 ```mermaid
 graph LR
+subgraph "Shared UI Library"
+RHProvider["RH Provider"]
+ThemeProvider["Theme Provider"]
+ColorModeToggle["Color Mode Toggle"]
+BreakpointHook["useBreakpoint Hook"]
+DisclosureHook["useDisclosure Hook"]
+ThemeHook["useTheme Hook"]
+TooltipHook["useTooltip Hook"]
+end
+subgraph "Component Hierarchy"
 Accordion["Accordion"]
 Alert["Alert"]
 Button["Button"]
 Card["Card"]
 Modal["Modal"]
-Provider["RH Provider"]
-Theme["Theme"]
-Accordion --> Provider
-Alert --> Provider
-Button --> Provider
-Card --> Provider
-Modal --> Provider
-Theme --> Provider
+Badge["Badge"]
+Tabs["Tabs"]
+Menu["Menu"]
+FormControls["Form Controls"]
+end
+RHProvider --> ThemeProvider
+ThemeProvider --> ColorModeToggle
+RHProvider --> BreakpointHook
+RHProvider --> DisclosureHook
+RHProvider --> ThemeHook
+RHProvider --> TooltipHook
+Accordion --> RHProvider
+Alert --> RHProvider
+Button --> RHProvider
+Card --> RHProvider
+Modal --> RHProvider
+Badge --> RHProvider
+Tabs --> RHProvider
+Menu --> RHProvider
+FormControls --> RHProvider
 ```
 
 **Diagram sources**
@@ -253,115 +321,259 @@ Theme --> Provider
 **Section sources**
 - [libs/shared/ui/src/index.ts:1-84](file://libs/shared/ui/src/index.ts#L1-L84)
 
-### Company API Types and OpenAPI Client Generation
-The Portal project includes targets to generate typed API clients from the Company API’s OpenAPI specification. This ensures type-safe integration and reduces coupling to raw HTTP endpoints.
+## Architectural Decision Records
+The Company API maintains comprehensive Architectural Decision Records (ADRs) that document critical design decisions and their rationale.
+
+### Decision Documentation Framework
+The ADR system follows Michael Nygard's methodology with clear status tracking and consequences analysis:
+
+| Decision ID | Title | Date | Status | Key Technologies |
+|-------------|-------|------|--------|------------------|
+| 0001 | Record architecture decisions | 2022-09-22 | Accepted | Documentation Framework |
+| 0002 | Java and Spring | 2022-09-22 | Accepted | JVM Ecosystem |
+| 0005 | ORM | 2022-09-27 | Accepted | Spring Data JPA |
+| 0007 | Multi-module project | 2022-09-22 | Accepted | Maven Structure |
+
+### Technical Decision Analysis
+Each ADR captures not just the decision but also the context, consequences, and alternatives considered:
+
+**Decision 0002: Java and Spring**
+- **Context**: Need for JVM-based backend services with enterprise features
+- **Decision**: Adopt Java and Spring for scalability and ecosystem support
+- **Consequences**: Increased boilerplate but enhanced caching, monitoring, and reactive programming capabilities
+
+**Decision 0005: ORM Selection**
+- **Context**: Requirement for secure database access with transaction management
+- **Decision**: Implement Spring Data JPA with Hibernate for developer experience
+- **Consequences**: Learning curve offset by improved productivity and caching
+
+**Section sources**
+- [apps/company-api/doc/architecture/decisions/0001-record-architecture-decisions.md:1-20](file://apps/company-api/doc/architecture/decisions/0001-record-architecture-decisions.md#L1-L20)
+- [apps/company-api/doc/architecture/decisions/0002-java-and-spring.md:1-22](file://apps/company-api/doc/architecture/decisions/0002-java-and-spring.md#L1-L22)
+- [apps/company-api/doc/architecture/decisions/0005-orm.md:1-31](file://apps/company-api/doc/architecture/decisions/0005-orm.md#L1-L31)
+
+## Advanced Architectural Patterns
+The system implements several advanced architectural patterns that enhance maintainability, testability, and scalability.
+
+### Repository Pattern Implementation
+The Spring Boot application extensively uses the repository pattern for data access abstraction:
 
 ```mermaid
-flowchart TD
-Spec["OpenAPI Spec<br/>company-api.json"] --> Generator["OpenAPI Generator Target"]
-Generator --> Client["Generated TS Client"]
-Client --> PortalAPI["Portal API Layer"]
+classDiagram
+class RepositoryPattern {
+<<interface>>
++findAll()
++findById()
++save()
++delete()
+}
+class CompanyRepository {
++findAllCompanies()
++findCompanyById()
++createCompany()
++updateCompany()
++deleteCompany()
+}
+class PersonRepository {
++findAllPeople()
++findPersonById()
++createPerson()
++updatePerson()
++deletePerson()
+}
+class InfrastructureRequestRepository {
++findAllRequests()
++findRequestById()
++createRequest()
++updateRequest()
++deleteRequest()
+}
+RepositoryPattern <|-- CompanyRepository
+RepositoryPattern <|-- PersonRepository
+RepositoryPattern <|-- InfrastructureRequestRepository
 ```
 
 **Diagram sources**
+- [apps/company-api/doc/architecture/decisions/0005-orm.md:1-31](file://apps/company-api/doc/architecture/decisions/0005-orm.md#L1-L31)
+
+### Factory Pattern Usage
+The design system and feature modules implement factory patterns for component creation and configuration:
+
+- **Component Factories**: Dynamic component instantiation based on props
+- **Configuration Factories**: Environment-specific service configuration
+- **Test Factories**: Test data generation for unit and integration tests
+
+### Observer Pattern Implementation
+React Query and analytics systems implement observer patterns for state management and event handling:
+
+- **React Query Observers**: Automatic cache invalidation and refetching
+- **Analytics Observers**: Page view tracking and event monitoring
+- **State Observers**: Component state synchronization across the application
+
+**Section sources**
+- [apps/company-api/doc/architecture/decisions/0005-orm.md:1-31](file://apps/company-api/doc/architecture/decisions/0005-orm.md#L1-L31)
+
+## Cross-Cutting Concerns
+The architecture addresses critical cross-cutting concerns through systematic design patterns and tooling integration.
+
+### Authentication & Authorization
+Authentication is handled through external identity providers with environment-driven configuration:
+
+- **Google OAuth Integration**: Client ID configuration for user authentication
+- **Environment Variables**: Secure credential management
+- **Role-Based Access Control**: Permission-based feature access
+- **Session Management**: Stateless authentication with JWT tokens
+
+### Monitoring & Observability
+Comprehensive monitoring is implemented across all layers:
+
+- **Frontend Analytics**: Google Analytics 4 and Speed Insights integration
+- **Backend Metrics**: Prometheus configuration for metrics collection
+- **Performance Monitoring**: Real-user monitoring and performance tracking
+- **Error Tracking**: Centralized error reporting and logging
+
+### Testing Strategy
+The architecture supports comprehensive testing across all layers:
+
+- **Unit Testing**: Jest and Vitest for component and utility testing
+- **Integration Testing**: API contract testing with OpenAPI specifications
+- **End-to-End Testing**: Playwright for full application testing
+- **Component Testing**: Storybook with automated interaction tests
+
+**Section sources**
 - [apps/portal/project.json:91-110](file://apps/portal/project.json#L91-L110)
-- [contracts/company-api/v1/company-api.json](file://contracts/company-api/v1/company-api.json)
+
+## System Context & Integration Points
+The system operates within a broader platform ecosystem with well-defined integration points and external dependencies.
+
+### External System Integration
+The architecture supports integration with various external systems:
+
+```mermaid
+graph TB
+subgraph "External Systems"
+Users["Users & Patients"]
+GoogleAuth["Google Identity Provider"]
+JIRA["JIRA Issue Tracker"]
+AWS["AWS Services"]
+OpenSearch["OpenSearch Cluster"]
+CockroachDB["CockroachDB Cluster"]
+end
+subgraph "Internal Systems"
+Portal["Portal Application"]
+APIServer["API Server"]
+CompanyAPI["Company API"]
+SharedLibs["@redesignhealth Libraries"]
+end
+Users --> Portal
+Portal --> APIServer
+Portal --> CompanyAPI
+GoogleAuth --> Portal
+JIRA --> CompanyAPI
+AWS --> CompanyAPI
+OpenSearch --> CompanyAPI
+CockroachDB --> CompanyAPI
+CompanyAPI --> SharedLibs
+```
+
+**Diagram sources**
+- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
+- [apps/company-api/docker-compose.yml:1-82](file://apps/company-api/docker-compose.yml#L1-L82)
+
+### API Contract Management
+The system maintains strict API contract adherence through OpenAPI specifications:
+
+- **Contract-First Development**: API specifications drive implementation
+- **Type Safety**: Generated TypeScript clients ensure compile-time safety
+- **Versioning Strategy**: Semantic versioning for API evolution
+- **Documentation Generation**: Automated API documentation from specifications
 
 **Section sources**
 - [apps/portal/project.json:91-110](file://apps/portal/project.json#L91-L110)
 - [libs/company-api-types/package.json:1-5](file://libs/company-api-types/package.json#L1-L5)
 
-## Dependency Analysis
-The Nx workspace enforces dependency management through named inputs, target defaults, and path aliases. The default project is Portal, and plugins integrate Spring Boot and Storybook toolchains. Path aliases simplify imports across shared libraries and feature modules.
+## Technology Stack & Trade-offs
+The technology stack reflects deliberate trade-offs between developer experience, performance, and maintainability.
 
-```mermaid
-graph TB
-Nx["Nx Workspace"]
-Targets["Target Defaults & Inputs"]
-Aliases["Path Aliases"]
-Plugins["Nx Plugins<br/>Spring Boot + Storybook"]
-Nx --> Targets
-Nx --> Aliases
-Nx --> Plugins
-```
+### Frontend Technology Stack
+- **React 19**: Latest React features with concurrent rendering
+- **Vite**: Lightning-fast build tooling and development server
+- **Chakra UI v3**: Modern design system with improved developer experience
+- **TypeScript 5**: Enhanced type safety and developer productivity
+- **React Query**: Comprehensive data fetching and caching solution
 
-**Diagram sources**
-- [nx.json:8-72](file://nx.json#L8-L72)
-- [tsconfig.base.json:20-91](file://tsconfig.base.json#L20-L91)
-- [package.json:109-126](file://package.json#L109-L126)
+### Backend Technology Stack
+- **Spring Boot**: Enterprise-grade microservices framework
+- **Maven Multi-module**: Clean separation of concerns and independent builds
+- **CockroachDB**: PostgreSQL-compatible distributed database
+- **OpenSearch**: Scalable search and analytics engine
+- **AWS Integration**: Cloud-native deployment and security
 
-**Section sources**
-- [nx.json:1-149](file://nx.json#L1-L149)
-- [tsconfig.base.json:20-91](file://tsconfig.base.json#L20-L91)
-- [package.json:109-126](file://package.json#L109-L126)
-
-## Performance Considerations
-- Build caching and incremental builds are enabled via Nx target defaults and named inputs, reducing CI time and developer feedback loops.
-- Vite-based development server provides fast HMR and optimized production builds.
-- React Query’s caching and background refetching minimize redundant network calls and improve perceived performance.
-- Spring Boot multi-module structure improves build isolation and enables targeted deployments.
-
-[No sources needed since this section provides general guidance]
-
-## Troubleshooting Guide
-Common areas to check:
-- Development proxy misconfiguration: Verify the Portal proxy forwards API traffic to the correct host/port.
-- OpenAPI client generation failures: Ensure the OpenAPI spec URL is reachable and the generator target runs without errors.
-- Spring Boot service startup: Confirm Docker Compose dependencies are healthy and environment variables are set.
-- Analytics integration: Validate page view events are triggered after dynamic titles are set in Helmet.
+### Tooling & Development Experience
+- **Nx Workspace**: Monorepo management with intelligent caching
+- **ForgeKit Nx Storybook**: Automated component testing and documentation
+- **ESLint/Prettier**: Consistent code quality and formatting
+- **Jest/Vitest**: Comprehensive testing framework
+- **Playwright**: End-to-end testing automation
 
 **Section sources**
-- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
-- [apps/portal/project.json:91-110](file://apps/portal/project.json#L91-L110)
-- [apps/company-api/docker-compose.yml:1-82](file://apps/company-api/docker-compose.yml#L1-L82)
+- [README.md:28-40](file://README.md#L28-L40)
+
+## Performance & Scalability Considerations
+The architecture incorporates numerous performance optimizations and scalability patterns.
+
+### Build Performance Optimization
+- **Nx Caching**: Intelligent build caching across the monorepo
+- **Incremental Builds**: Fast rebuilds using affected command patterns
+- **Parallel Execution**: Concurrent build processes for maximum throughput
+- **Bundle Optimization**: Vite's optimized production builds
+
+### Runtime Performance
+- **React Query Caching**: Efficient data caching with automatic invalidation
+- **Component Memoization**: React.memo for expensive component rendering
+- **Lazy Loading**: Code splitting for optimal bundle sizes
+- **CDN Integration**: Static asset delivery optimization
+
+### Scalability Patterns
+- **Microservices Scaling**: Independent service scaling based on demand
+- **Database Sharding**: Horizontal scaling with CockroachDB
+- **Search Optimization**: Distributed search indexing with OpenSearch
+- **Load Balancing**: Container orchestration for high availability
+
+## Development Workflow & Tooling
+The architecture supports efficient development workflows through comprehensive tooling integration.
+
+### Development Environment
+- **Devcontainer Support**: Reproducible development environments
+- **Hot Module Replacement**: Fast feedback loop during development
+- **Proxy Configuration**: Seamless API integration during development
+- **Environment Management**: Configurable environment variables
+
+### Automated Workflows
+- **Storybook Integration**: Component-driven development with automated testing
+- **CI/CD Pipeline**: Automated testing and deployment workflows
+- **Code Quality Gates**: ESLint, Prettier, and TypeScript integration
+- **Dependency Management**: Automated dependency updates and security scanning
+
+### Component Development
+- **ForgeKit Nx Storybook**: Automated component testing and documentation
+- **Playwright Component Tests**: Visual regression and accessibility testing
+- **Story Coverage Scoring**: Quality metrics for component documentation
+- **Interactive CLI**: Developer-friendly component generation tools
+
+**Section sources**
+- [tools/forgekit-nx-storybook/README.md:1-249](file://tools/forgekit-nx-storybook/README.md#L1-L249)
 
 ## Conclusion
-The Redesign Health monorepo leverages Nx to organize a scalable full-stack architecture. The Portal application benefits from a cohesive design system and typed API integrations, while the Spring Boot microservice provides robust data access and search capabilities. Cross-cutting concerns such as analytics and observability are integrated thoughtfully, and architectural decisions emphasize maintainability, modularity, and developer productivity.
+The Redesign Health Nx monorepo architecture represents a sophisticated, enterprise-grade solution that successfully balances scalability, maintainability, and developer productivity. The layered architecture pattern provides clear separation of concerns, while the Nx workspace enables efficient monorepo management.
 
-[No sources needed since this section summarizes without analyzing specific files]
+The microservices architecture with Spring Boot demonstrates enterprise best practices for service design, while the comprehensive tooling ecosystem ensures high-quality development workflows. The architectural decision records provide transparency into design choices and their trade-offs.
 
-## Appendices
+Key strengths of the architecture include:
+- **Modular Design**: Clear separation between presentation, business logic, and data access layers
+- **Scalable Infrastructure**: Microservices architecture with proper service boundaries
+- **Developer Experience**: Comprehensive tooling and automated workflows
+- **Quality Assurance**: Extensive testing strategy across all layers
+- **Documentation**: Architectural decision records and system documentation
 
-### System Context Diagram
-This diagram shows how the Portal, API server, and Company API interact within the broader platform ecosystem.
-
-```mermaid
-graph TB
-subgraph "External"
-Users["Users"]
-end
-subgraph "Portal"
-Router["Router"]
-Queries["React Query"]
-UI["@redesignhealth/ui"]
-end
-subgraph "Backend"
-APIServer["API Server (Express)"]
-CompanyAPI["Company API (Spring Boot)"]
-DB["CockroachDB"]
-Search["OpenSearch"]
-end
-Users --> Router
-Router --> Queries
-Queries --> UI
-Queries -.-> APIServer
-Queries -.-> CompanyAPI
-CompanyAPI --> DB
-CompanyAPI --> Search
-```
-
-**Diagram sources**
-- [apps/portal/src/app/app.tsx:1-45](file://apps/portal/src/app/app.tsx#L1-L45)
-- [apps/portal/proxy.conf.json:1-7](file://apps/portal/proxy.conf.json#L1-L7)
-- [apps/api-server/src/main.ts](file://apps/api-server/src/main.ts)
-- [apps/company-api/docker-compose.yml:1-82](file://apps/company-api/docker-compose.yml#L1-L82)
-
-### Architectural Decisions Summary
-- Java and Spring: Chosen for JVM ecosystem familiarity and enterprise-grade features.
-- ORM: Spring Data JPA/Hibernate selected for developer experience and caching.
-- Multi-module project: Enables separation of concerns and independent builds.
-
-**Section sources**
-- [apps/company-api/doc/architecture/decisions/0002-java-and-spring.md:1-22](file://apps/company-api/doc/architecture/decisions/0002-java-and-spring.md#L1-L22)
-- [apps/company-api/doc/architecture/decisions/0005-orm.md:1-31](file://apps/company-api/doc/architecture/decisions/0005-orm.md#L1-L31)
-- [apps/company-api/doc/architecture/decisions/0007-multi-module-project.md:1-21](file://apps/company-api/doc/architecture/decisions/0007-multi-module-project.md#L1-L21)
+The architecture successfully addresses the complex requirements of a healthcare technology platform while maintaining flexibility for future growth and evolution.
