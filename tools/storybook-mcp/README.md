@@ -1,121 +1,200 @@
-# Storybook MCP Server
+# @effinrich/storybook-mcp
 
-A Model Context Protocol (MCP) server for generating Storybook stories in the RH Design System.
+> **MCP server for Storybook story generation** — works with any React/Nx workspace.
+
+[![npm](https://img.shields.io/npm/v/@effinrich/storybook-mcp)](https://www.npmjs.com/package/@effinrich/storybook-mcp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets AI assistants (Claude, Cursor, etc.) list, analyze, generate, and validate [Storybook](https://storybook.js.org) stories for React components in any workspace.
+
+---
 
 ## Features
 
-This MCP server provides tools to help with Storybook story generation and management:
-
 ### Tools
 
-1. **list_components** - List all React components in the design system libraries
-
-   - Filter by library (shared-ui, portal-ui, or all)
-   - Filter by whether components have stories
-
-2. **analyze_component** - Analyze a React component to extract its structure
-
-   - Extracts props, types, and dependencies
-   - Identifies if component uses Router, React Query, or Chakra UI
-   - Provides suggestions for story generation
-
-3. **generate_story** - Generate a Storybook story file for a component
-
-   - Follows established patterns in the RH Design System
-   - Auto-detects library style (shared-ui vs portal-ui)
-   - Optionally includes variant and interactive stories
-
-4. **get_story_template** - Get templates for different story types
-
-   - basic, with-controls, with-variants, with-msw, with-router, page
-
-5. **validate_story** - Validate an existing story file
-   - Checks for common issues and best practices
-   - Provides improvement suggestions
+| Tool                 | Description                                                                  |
+| -------------------- | ---------------------------------------------------------------------------- |
+| `list_components`    | List React components across configured libraries, with story coverage stats |
+| `analyze_component`  | Analyze a component's props, types, and framework usage                      |
+| `generate_story`     | Generate a `.stories.tsx` file with controls, variants, and autodocs         |
+| `get_story_template` | Get copy-paste templates for common story patterns                           |
+| `validate_story`     | Check an existing story file for common issues                               |
 
 ### Resources
 
-- **storybook://libraries** - Information about component libraries
-- **storybook://patterns** - Common Storybook patterns used in this codebase
+| Resource                | Description                          |
+| ----------------------- | ------------------------------------ |
+| `storybook://libraries` | Configured library registry (JSON)   |
+| `storybook://patterns`  | Common Storybook patterns (Markdown) |
+
+---
 
 ## Installation
 
 ```bash
-cd tools/storybook-mcp
-npm install
-npm run build
+npx @effinrich/storybook-mcp
 ```
 
-## Usage with Claude Code
+Or install locally:
 
-The MCP server is configured in `.vscode/mcp.json`. After building, the server will be available to Claude Code automatically.
-
-### Example Usage
-
+```bash
+npm install -g @effinrich/storybook-mcp
 ```
-# List all components without stories
-Use the list_components tool to show me components in shared-ui that don't have stories
 
-# Generate a story for a component
-Generate a Storybook story for libs/shared/ui/src/lib/card/card.tsx
+---
 
-# Analyze a component before generating a story
-Analyze the component at libs/portal/ui/src/lib/nav/nav.tsx
+## Configuration
+
+Create `storybook-mcp.config.json` in your workspace root:
+
+```json
+{
+  "libraries": {
+    "ui": {
+      "path": "libs/shared/ui/src/lib",
+      "importPath": "@myorg/ui",
+      "storybookPort": 6006
+    },
+    "features": {
+      "path": "libs/features/src/lib",
+      "importPath": "@myorg/features",
+      "storybookPort": 6007
+    }
+  }
+}
 ```
+
+The server will auto-discover libraries by scanning for `.storybook/` directories if no config file is present. You can also point to a custom config via the `STORYBOOK_MCP_CONFIG` environment variable.
+
+---
+
+## Usage with AI Assistants
+
+### Augment / Claude Code
+
+Add to your `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "storybook": {
+      "command": "node",
+      "args": ["/path/to/tools/storybook-mcp/dist/index.js"],
+      "env": {
+        "WORKSPACE_ROOT": "${workspaceFolder}"
+      }
+    }
+  }
+}
+```
+
+### Claude Desktop
+
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "storybook": {
+      "command": "npx",
+      "args": ["@effinrich/storybook-mcp"],
+      "env": {
+        "WORKSPACE_ROOT": "/path/to/your/workspace"
+      }
+    }
+  }
+}
+```
+
+### Cursor
+
+Add to `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "storybook": {
+      "command": "npx",
+      "args": ["@effinrich/storybook-mcp"],
+      "env": {
+        "WORKSPACE_ROOT": "${workspaceFolder}"
+      }
+    }
+  }
+}
+```
+
+---
 
 ## Development
 
 ```bash
-# Watch mode for development
+# Clone and install
+git clone https://github.com/effinrich/storybook-mcp
+cd storybook-mcp
+npm install
+
+# Build
+npm run build
+
+# Watch mode
 npm run dev
 
-# Build for production
-npm run build
+# Run locally
+WORKSPACE_ROOT=/path/to/workspace node dist/index.js
 ```
+
+---
 
 ## Story Patterns
 
-### shared-ui Components
+### Standard component story (modern `satisfies` syntax)
 
 ```tsx
 import { Meta, StoryObj } from '@storybook/react-vite'
-import { ComponentName } from './component-name'
 
-export default {
-  component: ComponentName,
-  title: 'Components / Category / ComponentName',
+import { Button } from './button'
+
+const meta = {
+  component: Button,
+  title: 'Components / Button',
+  tags: ['autodocs'],
   argTypes: {
-    /* controls */
+    variant: { options: ['solid', 'outline', 'ghost'], control: { type: 'select' } },
+    disabled: { control: 'boolean' },
   },
-  args: {
-    /* defaults */
-  }
-} as Meta<typeof ComponentName>
+  args: { children: 'Click me' },
+} satisfies Meta<typeof Button>
 
-export const Basic: StoryObj<typeof ComponentName> = {
-  args: {
-    /* story args */
-  }
-}
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Default: Story = {}
+
+export const Disabled: Story = { args: { disabled: true } }
 ```
 
-### portal-ui Components
+### With React Router decorator
 
 ```tsx
-import type { Meta } from '@storybook/react-vite'
+import { Meta, StoryObj } from '@storybook/react-vite'
 import { withRouter } from 'storybook-addon-react-router-v6'
-import { ComponentName } from './component-name'
 
-const Story: Meta<typeof ComponentName> = {
-  component: ComponentName,
-  title: 'components / ComponentName',
+import { NavLink } from './nav-link'
+
+const meta = {
+  component: NavLink,
+  title: 'Components / NavLink',
   decorators: [withRouter],
-  args: {}
-}
+} satisfies Meta<typeof NavLink>
 
-export default Story
-
-export const Default = {
-  render: () => <ComponentName />
-}
+export default meta
+export const Default: StoryObj<typeof meta> = {}
 ```
+
+---
+
+## License
+
+MIT © [Rich Tillman](https://github.com/effinrich)

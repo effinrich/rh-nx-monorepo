@@ -1,7 +1,7 @@
 {
-  "name": "@rh-design-system/storybook-mcp",
+  "name": "@effinrich/storybook-mcp",
   "version": "1.0.0",
-  "description": "MCP server for Storybook component generation in the RH Design System",
+  "description": "MCP server for Storybook story generation — works with any React/Nx workspace",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -11,6 +11,31 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "start": "node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "storybook",
+    "react",
+    "nx",
+    "story-generation",
+    "ai",
+    "code-generation"
+  ],
+  "license": "MIT",
+  "author": "Rich Tillman",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/effinrich/storybook-mcp"
+  },
+  "homepage": "https://github.com/effinrich/storybook-mcp#readme",
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "glob": "^10.3.10",
