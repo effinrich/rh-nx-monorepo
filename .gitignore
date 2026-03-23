@@ -131,3 +131,5 @@ build-storybook.log
 
 storybook-static
 .nx/polygraph
+.claude/worktrees
+.claude/settings.local.json

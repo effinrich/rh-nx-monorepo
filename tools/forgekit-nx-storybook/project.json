@@ -1,7 +1,7 @@
 {
   "name": "effinrich-nx-storybook",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "tools/effinrich-nx-storybook/src",
+  "sourceRoot": "tools/forgekit-nx-storybook/src",
   "projectType": "library",
   "tags": ["scope:shared", "type:plugin"],
   "targets": {
@@ -10,17 +10,17 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/tools/effinrich-nx-storybook",
-        "main": "tools/effinrich-nx-storybook/src/index.ts",
-        "tsConfig": "tools/effinrich-nx-storybook/tsconfig.lib.json",
+        "main": "tools/forgekit-nx-storybook/src/index.ts",
+        "tsConfig": "tools/forgekit-nx-storybook/tsconfig.lib.json",
         "assets": [
-          "tools/effinrich-nx-storybook/*.md",
+          "tools/forgekit-nx-storybook/*.md",
           {
-            "input": "tools/effinrich-nx-storybook",
+            "input": "tools/forgekit-nx-storybook",
             "glob": "**/*.json",
             "output": "."
           },
           {
-            "input": "tools/effinrich-nx-storybook/src",
+            "input": "tools/forgekit-nx-storybook/src",
             "glob": "**/*.json",
             "output": "./src"
           }
@@ -30,7 +30,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "tools/effinrich-nx-storybook/jest.config.ts",
+        "jestConfig": "tools/forgekit-nx-storybook/jest.config.ts",
         "passWithNoTests": true
       }
     }

@@ -89,18 +89,18 @@ nx g @effinrich/nx-storybook:component-test --componentPath=<path> # Playwright 
 
 ### Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Build | Nx 22 |
-| Frontend | React 19 + Vite |
-| UI Library | Chakra UI v3 |
-| Language | TypeScript 5 (strict) |
-| Server State | @tanstack/react-query (keys via @lukemorales/query-key-factory) |
-| Routing | react-router-dom v6 (RouterProvider + data router pattern) |
-| Unit Tests | Jest + React Testing Library |
-| E2E Tests | Playwright (co-located as `.ct.tsx`) |
-| Visual Regression | Chromatic |
-| Linting | ESLint + Prettier (simple-import-sort) |
+| Layer             | Technology                                                      |
+| ----------------- | --------------------------------------------------------------- |
+| Build             | Nx 22                                                           |
+| Frontend          | React 19 + Vite                                                 |
+| UI Library        | Chakra UI v3                                                    |
+| Language          | TypeScript 5 (strict)                                           |
+| Server State      | @tanstack/react-query (keys via @lukemorales/query-key-factory) |
+| Routing           | react-router-dom v6 (RouterProvider + data router pattern)      |
+| Unit Tests        | Jest + React Testing Library                                    |
+| E2E Tests         | Playwright (co-located as `.ct.tsx`)                            |
+| Visual Regression | Chromatic                                                       |
+| Linting           | ESLint + Prettier (simple-import-sort)                          |
 
 ### Key Patterns
 
@@ -142,17 +142,17 @@ This project completed a full v2→v3 migration. Follow these rules for all `.ts
 
 ### Prop Renames
 
-| v2 | v3 |
-|----|-----|
-| `isOpen` | `open` |
-| `isDisabled` | `disabled` |
-| `isInvalid` | `invalid` |
-| `isRequired` | `required` |
-| `isLoading` | `loading` |
-| `isChecked` | `checked` |
+| v2            | v3             |
+| ------------- | -------------- |
+| `isOpen`      | `open`         |
+| `isDisabled`  | `disabled`     |
+| `isInvalid`   | `invalid`      |
+| `isRequired`  | `required`     |
+| `isLoading`   | `loading`      |
+| `isChecked`   | `checked`      |
 | `colorScheme` | `colorPalette` |
-| `spacing` | `gap` |
-| `noOfLines` | `lineClamp` |
+| `spacing`     | `gap`          |
+| `noOfLines`   | `lineClamp`    |
 
 ### Component Renames
 
@@ -229,7 +229,7 @@ Never manually create project folders — always use Nx Generators.
 <!-- nx configuration start-->
 <!-- Leave the start & end comments to automatically receive updates. -->
 
-# General Guidelines for working with Nx
+## General Guidelines for working with Nx
 
 - For navigating/exploring the workspace, invoke the `nx-workspace` skill first - it has patterns for querying projects, targets, and dependencies
 - When running tasks (for example build, lint, test, e2e, etc.), always prefer running the task through `nx` (i.e. `nx run`, `nx run-many`, `nx affected`) instead of using the underlying tooling directly

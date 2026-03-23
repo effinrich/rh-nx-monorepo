@@ -1,10 +1,19 @@
 {
-  "name": "@effinrich/nx-storybook",
-  "version": "0.1.0",
+  "name": "@effinrich/forgekit-nx-storybook",
+  "version": "0.2.0",
   "description": "Nx companion plugin that auto-generates Storybook stories, interaction tests, Playwright component tests, and accessibility audits from React component analysis",
-  "main": "./src/index.ts",
+  "main": "./src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
+  "files": [
+    "src/**/*.js",
+    "src/**/*.d.ts",
+    "src/**/*.json",
+    "generators.json",
+    "executors.json",
+    "migrations.json",
+    "README.md"
+  ],
   "keywords": [
     "nx",
     "nx-plugin",
@@ -21,7 +30,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/effinrich/nx-storybook"
+    "url": "https://github.com/effinrich/forgekit-nx-storybook"
   },
   "author": "Rich Tillman",
   "publishConfig": {
