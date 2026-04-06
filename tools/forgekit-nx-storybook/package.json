@@ -32,6 +32,11 @@
     "type": "git",
     "url": "https://github.com/effinrich/forgekit-nx-storybook"
   },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
   "author": "Rich Tillman",
   "publishConfig": {
     "access": "public"

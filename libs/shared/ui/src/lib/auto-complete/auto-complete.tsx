@@ -38,7 +38,6 @@ export function AutoComplete<
     <StyledAutoComplete>
       {isAsync ? (
         <AsyncSelect
-          // @ts-expect-error chakra-react-select tagColorPalette typing
           tagColorPalette="primary"
           cacheOptions
           loadOptions={loadOptions}
@@ -47,7 +46,6 @@ export function AutoComplete<
         />
       ) : (
         <Select
-          // @ts-expect-error chakra-react-select tagColorPalette typing
           tagColorPalette="primary"
           // options={options?.map((t: any) => ({ value: t, label: t }))}
           {...props}

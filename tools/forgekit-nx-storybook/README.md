@@ -205,8 +205,8 @@ import type {
 ## Development
 
 ```bash
-npx nx build effinrich-nx-storybook    # Build
-npx nx test effinrich-nx-storybook     # Run tests (9 suites, 85+ tests)
+npx nx build forgekit-nx-storybook    # Build
+npx nx test forgekit-nx-storybook     # Run tests (9 suites, 85+ tests)
 npx nx g ./tools/forgekit-nx-storybook:story --componentPath=<path> --dryRun
 ```
 

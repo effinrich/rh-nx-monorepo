@@ -114,7 +114,7 @@ export const CallNotesForm = ({
                 placeholder="Select one"
                 options={transformOptionsFormat(NOTE_TYPES)}
                 onBlur={onBlur}
-                isInvalid={!!error}
+                invalid={!!error}
               />
             )}
           />
@@ -141,7 +141,7 @@ export const CallNotesForm = ({
                 placeholder="Select one"
                 options={transformOptionsFormat(INTERVIEW_SOURCES)}
                 onBlur={onBlur}
-                isInvalid={!!error}
+                invalid={!!error}
               />
             )}
           />
@@ -169,7 +169,7 @@ export const CallNotesForm = ({
                 getOptionLabel={(option: CompanySummary) => `${option.name}`}
                 getOptionValue={(option: CompanySummary) => `${option.id}`}
                 onBlur={onBlur}
-                isInvalid={!!error}
+                invalid={!!error}
               />
             )}
           />
