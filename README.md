@@ -2,7 +2,7 @@
 
 <p align="center"><img src="./libs/shared/ui/src/lib/assets/RH_Logo_Single_Ultraviolet.png" width="380"></p>
 
-A full-stack Nx monorepo containing the Platform Portal frontend, mock API server, shared design system, and supporting libraries for Redesign Health.
+A full-stack Nx monorepo containing a re-creation of Redesign Health's "Platform Portal", mock API server, express middleware, nextjs docs, Storybook, shared design system, and supporting libraries for Redesign Health.  I mostly use this repo to test AI tooling, MCPs, SKILLs, code generators, and to learn new Nx features as they roll out.
 
 ## Recent Highlights
 
