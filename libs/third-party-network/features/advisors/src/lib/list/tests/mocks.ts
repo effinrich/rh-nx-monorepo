@@ -9,7 +9,7 @@ export const mockUseAllAdvisorsQuery = (
   data: AdvisorList = []
 ) => {
   const mock = vi.fn(
-    () => ({ isPending, data } as QueryObserverSuccessResult<AdvisorList>)
+    () => ({ isPending, data }) as QueryObserverSuccessResult<AdvisorList>
   )
   vi.spyOn(hooks, 'useAllAdvisorsQuery').mockImplementation(mock)
 }

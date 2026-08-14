@@ -61,6 +61,6 @@ export class EditCompanyForm {
     await expect(this.internalName).not.toHaveAttribute('value', '')
   }
   async submit() {
-    await this.submitBtn.click({ position: { x: 10, y: 10 }})
+    await this.submitBtn.click({ position: { x: 10, y: 10 } })
   }
 }

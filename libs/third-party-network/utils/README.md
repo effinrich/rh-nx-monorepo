@@ -4,8 +4,8 @@ Utility functions specific to the Third-Party Network (advisor-facing) applicati
 
 ## Exports
 
-| Module | Description |
-|--------|-------------|
+| Module           | Description                                                      |
+| ---------------- | ---------------------------------------------------------------- |
 | `authentication` | Auth token helpers and session utilities for the advisor network |
 
 ## Running Tests

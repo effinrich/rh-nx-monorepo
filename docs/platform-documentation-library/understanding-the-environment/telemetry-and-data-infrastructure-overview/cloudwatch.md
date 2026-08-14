@@ -22,11 +22,10 @@ CloudWatch collects monitoring and operational data in the form of logs, metrics
 
 CloudWatch provides the following benefits when used as part of the Redesign Platform infrastructure:
 
-* the recommended first offering for logging and events
-* easy integration with other AWS solutions
-* an AWS-centric solution for capturing logs and providing an interface to view
-* a secondary offering of ELK will be provided for more advanced abilities
-
+- the recommended first offering for logging and events
+- easy integration with other AWS solutions
+- an AWS-centric solution for capturing logs and providing an interface to view
+- a secondary offering of ELK will be provided for more advanced abilities
 
 ## Images
 

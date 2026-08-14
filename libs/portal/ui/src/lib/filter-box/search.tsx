@@ -9,8 +9,10 @@ import {
   SearchIcon
 } from '@redesignhealth/ui'
 import { useDebounce } from 'rooks'
-interface SearchProps
-  extends Omit<InputProps, 'onChange' | 'defaultValue' | 'value'> {
+interface SearchProps extends Omit<
+  InputProps,
+  'onChange' | 'defaultValue' | 'value'
+> {
   defaultValue?: string
   onChange(newValue: string): void
   handleClear?(): void

@@ -3,8 +3,8 @@ cardTitle: 'Managing Outside Counsel Relationships'
 description: This brief guide provides a checklist of items to consider when working with and managing outside counsel.
 labels:
   - article
-
 ---
+
 # Managing Outside Counsel Relationships
 
 <iframe

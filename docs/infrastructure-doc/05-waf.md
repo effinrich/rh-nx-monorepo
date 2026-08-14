@@ -14,7 +14,7 @@ Finally, it emphasizes the importance of monitoring logs and tweaking rules to a
 
 The following diagram illustrates what is deployed through the WAF module.
 
-WAF  filters incoming traffic before reaching load balancers, cloud front distributions, or API gateways. Various rules within WAF are designed to filter out malicious traffic, including bad bots, cross-site scripting, SQL injection, and more.
+WAF filters incoming traffic before reaching load balancers, cloud front distributions, or API gateways. Various rules within WAF are designed to filter out malicious traffic, including bad bots, cross-site scripting, SQL injection, and more.
 
 ![WAF Module Architecture](https://assets.redesignhealth.com/pt3yBOlSFtYTQCNFzYU1bNJWqCkfGeIbvbBCiIgl/waf-architecture.png)
 
@@ -23,18 +23,16 @@ WAF  filters incoming traffic before reaching load balancers, cloud front distri
 This section provides a high-level overview of the steps for deploying the WAF module. Review the video and the **tf-modules** and **tf-infrastructure** for more information.
 
 1. Review the rules in the WAF module in the **tf-modules** repository.
-    1. Open the **wafv2/main.tf** file. This includes the preliminary rules that have been set up by default to protect you against common vulnerabilities. Note that the module is using the latest version of AWS WAF (not classic) to increase the number of rules that can be added.
-    2. Make changes as needed.
+   1. Open the **wafv2/main.tf** file. This includes the preliminary rules that have been set up by default to protect you against common vulnerabilities. Note that the module is using the latest version of AWS WAF (not classic) to increase the number of rules that can be added.
+   2. Make changes as needed.
 2. Deploy the rules to the dev and core accounts by using the `terraform init` and `terraform apply` commands.
 3. Review your rules in the AWS Console.
-    1. Log in to your AWS account and navigate to the **WAF & Shield** console.
-    2. Select the WAF that you want to view the rules for.
-    3. In the left-hand navigation pane, select **Rules**. This will display a list of all rules associated with your WAF. You can select a rule to view its details, including the conditions and actions that it applies.
+   1. Log in to your AWS account and navigate to the **WAF & Shield** console.
+   2. Select the WAF that you want to view the rules for.
+   3. In the left-hand navigation pane, select **Rules**. This will display a list of all rules associated with your WAF. You can select a rule to view its details, including the conditions and actions that it applies.
 4. Use CloudFront to review the logs to see the results of the rules.
-
-
 
 ## Related Information
 
-* [AWS WAF](https://aws.amazon.com/waf/)
-* [Rules](https://aws.amazon.com/waf/)
+- [AWS WAF](https://aws.amazon.com/waf/)
+- [Rules](https://aws.amazon.com/waf/)

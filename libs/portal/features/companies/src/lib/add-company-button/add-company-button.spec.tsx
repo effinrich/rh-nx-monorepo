@@ -6,11 +6,7 @@ describe('AddCompanyButton', () => {
   it('shows options', () => {
     render(<AddCompanyButton />)
     fireEvent.click(screen.getByText('Add company'))
-    expect(
-      screen.getByText('RH company')
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText('Marketplace company')
-    ).toBeInTheDocument()
+    expect(screen.getByText('RH company')).toBeInTheDocument()
+    expect(screen.getByText('Marketplace company')).toBeInTheDocument()
   })
 })

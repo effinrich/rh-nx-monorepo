@@ -15,10 +15,10 @@ During your bounded engagement, work with your Relationship Manager and Redesign
 
 Outside counsel should review if:
 
-* The Company’s business involves the sale of regulated products or the provision of medical services
+- The Company’s business involves the sale of regulated products or the provision of medical services
 
-* The website collects personal health information
+- The website collects personal health information
 
-* Children under age 18 are permitted to use the site
+- Children under age 18 are permitted to use the site
 
-* Users outside of the U.S., particularly in Europe, are permitted to use the site
+- Users outside of the U.S., particularly in Europe, are permitted to use the site

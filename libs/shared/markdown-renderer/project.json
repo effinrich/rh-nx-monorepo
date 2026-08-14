@@ -1,0 +1,34 @@
+{
+  "name": "shared-markdown-renderer",
+  "sourceRoot": "libs/shared/markdown-renderer/src",
+  "projectType": "library",
+  "tags": ["scope:shared", "type:ui"],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/markdown-renderer"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "check-types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx tsc --noEmit -p libs/shared/markdown-renderer/tsconfig.lib.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/markdown-renderer"],
+      "options": {
+        "passWithNoTests": true
+      }
+    }
+  }
+}

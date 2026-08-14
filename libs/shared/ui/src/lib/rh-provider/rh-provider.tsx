@@ -8,19 +8,18 @@ import { ColorModeProvider } from './color-mode'
 
 import '@fontsource/inter/variable.css'
 
-export interface RhProviderProps
-  extends Pick<
-    ThemeProviderProps,
-    | 'forcedTheme'
-    | 'defaultTheme'
-    | 'attribute'
-    | 'storageKey'
-    | 'enableSystem'
-    | 'enableColorScheme'
-    | 'disableTransitionOnChange'
-    | 'themes'
-    | 'nonce'
-  > {
+export interface RhProviderProps extends Pick<
+  ThemeProviderProps,
+  | 'forcedTheme'
+  | 'defaultTheme'
+  | 'attribute'
+  | 'storageKey'
+  | 'enableSystem'
+  | 'enableColorScheme'
+  | 'disableTransitionOnChange'
+  | 'themes'
+  | 'nonce'
+> {
   children?: ReactNode
   value?: SystemContext
 }

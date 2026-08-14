@@ -23,8 +23,8 @@ export const Default: StoryObj<typeof Prose> = {
       <h2>Heading 2</h2>
       <h3>Heading 3</h3>
       <p>
-        This is a paragraph with a <a href="#">link</a> and some <strong>bold</strong> and{' '}
-        <em>italic</em> text.
+        This is a paragraph with a <a href="#">link</a> and some{' '}
+        <strong>bold</strong> and <em>italic</em> text.
       </p>
       <ul>
         <li>First item</li>
@@ -61,7 +61,9 @@ export const Default: StoryObj<typeof Prose> = {
 export const WithWideImage: StoryObj<typeof Prose> = {
   render: () => (
     <Prose>
-      <p>The image below uses the wide-image utility class to span full width.</p>
+      <p>
+        The image below uses the wide-image utility class to span full width.
+      </p>
       <img
         className="wide-image"
         src="https://via.placeholder.com/800x200"

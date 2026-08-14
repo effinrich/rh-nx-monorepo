@@ -15,9 +15,12 @@ portalTest(
   }
 )
 
-portalTest.fixme('RH User cannot edit users', async ({ signInRHUser, usersPage }) => {
-  // 10/19/2023 - skipping this due to getting a blank screen instead of 403
-  await usersPage.gotoEditUserForm(PLATFORM_USERS.coUser.email)
-  await expect(usersPage.errorPage.heading).toBeVisible()
-  await expect(usersPage.page).toHaveScreenshot()
-})
+portalTest.fixme(
+  'RH User cannot edit users',
+  async ({ signInRHUser, usersPage }) => {
+    // 10/19/2023 - skipping this due to getting a blank screen instead of 403
+    await usersPage.gotoEditUserForm(PLATFORM_USERS.coUser.email)
+    await expect(usersPage.errorPage.heading).toBeVisible()
+    await expect(usersPage.page).toHaveScreenshot()
+  }
+)

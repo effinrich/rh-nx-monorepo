@@ -66,8 +66,6 @@
     "**/sw.js": false,
     "**/Thumbs.db": true
   },
-  "remark.preview.showPreviewOptionInMenuBar": true,
-  "remark.preview.scrollPreviewWithEditor": true,
   "workbench.colorCustomizations": {
     "statusBar.noFolderBackground": "#222225",
     "editor.lineHighlightBackground": "#1073cf2d",
@@ -76,7 +74,6 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "mdx.experimentalLanguageServer": true,
   "json.schemas": [
     {
       "fileMatch": ["/package.json"],
@@ -92,5 +89,5 @@
   "explorerExclude.backup": {},
   "java.compile.nullAnalysis.mode": "automatic",
   "vitest.disableWorkspaceWarning": true,
-  "nxConsole.nxWorkspacePath": ""
+  "nxConsole.nxWorkspacePath": "./"
 }

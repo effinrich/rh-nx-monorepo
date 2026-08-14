@@ -109,7 +109,9 @@ export const GenericError: StoryFn<typeof RootBoundary> = () => (
 // Story showing the component structure (for documentation purposes)
 export const Documentation: StoryFn = () => (
   <Box p="6" borderWidth="1px" borderRadius="md">
-    <h3 style={{ marginBottom: '1rem', fontWeight: 'bold', fontSize: '1.25rem' }}>
+    <h3
+      style={{ marginBottom: '1rem', fontWeight: 'bold', fontSize: '1.25rem' }}
+    >
       RootBoundary Component
     </h3>
     <p style={{ marginBottom: '0.5rem' }}>
@@ -117,7 +119,13 @@ export const Documentation: StoryFn = () => (
       React Router. It catches routing errors and displays appropriate error
       messages based on the HTTP status code.
     </p>
-    <h4 style={{ marginTop: '1rem', marginBottom: '0.5rem', fontWeight: 'semibold' }}>
+    <h4
+      style={{
+        marginTop: '1rem',
+        marginBottom: '0.5rem',
+        fontWeight: 'semibold'
+      }}
+    >
       Supported Error Codes:
     </h4>
     <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem' }}>
@@ -127,7 +135,13 @@ export const Documentation: StoryFn = () => (
       <li>500 - Internal Server Error</li>
       <li>401 - Unauthorized (triggers logout redirect)</li>
     </ul>
-    <h4 style={{ marginTop: '1rem', marginBottom: '0.5rem', fontWeight: 'semibold' }}>
+    <h4
+      style={{
+        marginTop: '1rem',
+        marginBottom: '0.5rem',
+        fontWeight: 'semibold'
+      }}
+    >
       Features:
     </h4>
     <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem' }}>

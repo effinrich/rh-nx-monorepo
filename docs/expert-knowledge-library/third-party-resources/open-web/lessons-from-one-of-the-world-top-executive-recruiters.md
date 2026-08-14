@@ -2,10 +2,10 @@
 cardTitle: "Lessons from One of the World's Top Executive Recruiters"
 description: "Lessons from one of the world's top executive recruiters | Lauren Ipsen (Daversa Partners, General Catalyst)"
 labels:
-   - third-party
+  - third-party
 ---
 
-#  Lessons from One of the World’s Top Executive Recruiters | Lauren Ipsen (Daversa Partners, General Catalyst)
+# Lessons from One of the World’s Top Executive Recruiters | Lauren Ipsen (Daversa Partners, General Catalyst)
 
 <a class="third-party-button" href="https://www.lennysnewsletter.com/p/lessons-from-one-of-the-worlds-top#details">Lessons from One of the World’s Top Executive Recruiters</a>
 
@@ -54,5 +54,3 @@ In this episode, we cover:
 (1:00:57) Advice for founders looking for a recruiter
 
 (1:04:24) Lightning round
-
-

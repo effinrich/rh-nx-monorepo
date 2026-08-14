@@ -1,3 +1,3 @@
-Parameter | Description
---------- | -----------
-`expand` | Available options: memberOf,roles
+| Parameter | Description                       |
+| --------- | --------------------------------- |
+| `expand`  | Available options: memberOf,roles |

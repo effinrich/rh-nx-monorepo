@@ -1,6 +1,6 @@
 ---
 cardTitle: 'Video: CEO Conversations - Incentivizing B2B BD Advisors'
-description: "CEOs with experience incentivizing B2B BD Advisors had the opportunity to share their insights in an informal, open discussion format."
+description: 'CEOs with experience incentivizing B2B BD Advisors had the opportunity to share their insights in an informal, open discussion format.'
 labels:
   - video
 ---

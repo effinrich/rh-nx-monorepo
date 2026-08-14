@@ -14,18 +14,15 @@ Prometheus, a Cloud Native Computing Foundation project, is a systems and servic
 
 **Repository:** [GitHub](https://github.com/zaproxy/zaproxy)
 
-
-
 ## Benefits
 
-* Prometheus is the most popular, and heavily used solution for aggregating metrics as time series database for application and service monitoring
-* It is completely cloud agnostic and implements a scraping mechanism to reduce the load
-* It follows the Open Telemetry specification
-* Most modern and native software frameworks support prometheus natively with many SDK options
-* Prometheus has backing by a large community by Cloud Native Cloud Foundation (CNCF)
-* Provides very complex features and plugin like alerts, pagerduty and so-on
-* Offer is either Managed or Self Hosted based on Opco level of comfort
-
+- Prometheus is the most popular, and heavily used solution for aggregating metrics as time series database for application and service monitoring
+- It is completely cloud agnostic and implements a scraping mechanism to reduce the load
+- It follows the Open Telemetry specification
+- Most modern and native software frameworks support prometheus natively with many SDK options
+- Prometheus has backing by a large community by Cloud Native Cloud Foundation (CNCF)
+- Provides very complex features and plugin like alerts, pagerduty and so-on
+- Offer is either Managed or Self Hosted based on Opco level of comfort
 
 ## Images
 

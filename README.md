@@ -6,16 +6,16 @@ A full-stack Nx monorepo containing the Platform Portal frontend, mock API serve
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Build System | [Nx 22](https://nx.dev) |
-| Frontend | [React 19](https://react.dev) + [Vite](https://vitejs.dev) |
-| UI Library | [Chakra UI v3](https://www.chakra-ui.com) |
-| Language | [TypeScript 5](https://www.typescriptlang.org) |
-| API Server | [Express](https://expressjs.com) via `tsx` |
-| Unit Tests | [Jest](https://jestjs.io) / [Vitest](https://vitest.dev) |
-| E2E Tests | [Playwright](https://playwright.dev) |
-| Linting | [ESLint](https://eslint.org) + [Prettier](https://prettier.io) |
+| Layer        | Technology                                                     |
+| ------------ | -------------------------------------------------------------- |
+| Build System | [Nx 22](https://nx.dev)                                        |
+| Frontend     | [React 19](https://react.dev) + [Vite](https://vitejs.dev)     |
+| UI Library   | [Chakra UI v3](https://www.chakra-ui.com)                      |
+| Language     | [TypeScript 5](https://www.typescriptlang.org)                 |
+| API Server   | [Express](https://expressjs.com) via `tsx`                     |
+| Unit Tests   | [Jest](https://jestjs.io) / [Vitest](https://vitest.dev)       |
+| E2E Tests    | [Playwright](https://playwright.dev)                           |
+| Linting      | [ESLint](https://eslint.org) + [Prettier](https://prettier.io) |
 
 ## Repository Structure
 
@@ -85,17 +85,17 @@ VITE_HOTJAR_ID=XXXXXXX                  # optional
 
 ## Common Commands
 
-| Task | Command |
-|------|---------|
-| Serve portal | `nx run portal:serve` |
-| Serve API server | `nx run api-server:serve` |
-| Build portal | `nx build portal` |
-| Run all tests | `nx run-many -t test` |
-| Run portal tests | `nx test portal` |
-| Lint all projects | `nx run-many -t lint` |
-| Run E2E tests | `nx e2e portal-e2e` |
-| View dependency graph | `nx graph` |
-| Run Storybook | `npm run storybook` |
+| Task                  | Command                   |
+| --------------------- | ------------------------- |
+| Serve portal          | `nx run portal:serve`     |
+| Serve API server      | `nx run api-server:serve` |
+| Build portal          | `nx build portal`         |
+| Run all tests         | `nx run-many -t test`     |
+| Run portal tests      | `nx test portal`          |
+| Lint all projects     | `nx run-many -t lint`     |
+| Run E2E tests         | `nx e2e portal-e2e`       |
+| View dependency graph | `nx graph`                |
+| Run Storybook         | `npm run storybook`       |
 
 ## Workspace Notes
 

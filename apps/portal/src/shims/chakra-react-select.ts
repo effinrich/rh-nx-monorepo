@@ -36,7 +36,7 @@ export type {
   DropdownIndicatorProps,
   ClearIndicatorProps,
   MenuProps,
-  NoticeProps,
+  NoticeProps
 } from 'react-select'
 
 // OptionBase doesn't exist in react-select — it's a chakra-react-select

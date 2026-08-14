@@ -70,7 +70,7 @@ interface PersonSummary extends BaseResponse {
   memberOf?: CompanySummary[]
   created: string
   lastModified: string
-  roles?: [{ authority: string, displayName: string }]
+  roles?: [{ authority: string; displayName: string }]
 }
 
 interface List<T> {

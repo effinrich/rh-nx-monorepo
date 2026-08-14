@@ -18,9 +18,7 @@ export const Basic: StoryFn<typeof LinkBox> = () => (
     <Heading size="md" my="2">
       <LinkOverlay href="#">New Product Launch</LinkOverlay>
     </Heading>
-    <Text>
-      Learn about our exciting new product features and improvements.
-    </Text>
+    <Text>Learn about our exciting new product features and improvements.</Text>
   </LinkBox>
 )
 

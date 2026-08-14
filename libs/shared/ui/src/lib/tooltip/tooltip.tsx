@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { Portal, Tooltip as ChakraTooltip } from '@chakra-ui/react'
 
-export interface TooltipProps
-  extends Omit<ChakraTooltip.RootProps, 'children'> {
+export interface TooltipProps extends Omit<
+  ChakraTooltip.RootProps,
+  'children'
+> {
   showArrow?: boolean
   hasArrow?: boolean
   children: React.ReactNode

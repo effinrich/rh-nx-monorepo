@@ -197,21 +197,21 @@ export function testCompanyData(input: Object = {}) {
       input['fundraiseStatus'] = FundraiseStatus[key].value
     }
   }
-    return {
-      name: input['name'] || coName,
-      number: input['number'] || Date.now() + Math.floor(Math.random() * 9999),
-      legalName: input['legalName'] || `${coName} legal name`,
-      description: input['description'] || faker.company.catchPhrase(),
-      stage: input['stage'] || 'OP_CO',
-      status: input['status'] || 'ACTIVE',
-      linkedApiId: input['linkedApiId'] || null,
-      createGFolder: input['createGFolder'] || false,
-      href: input['href'] || faker.internet.url(),
-      dashboardHref: input['dashboardHref'] || null,
-      hasPlatformAgreement: input['hasPlatformAgreement'] || true,
-      taxonomy: input['taxonomy'] || randomTaxonomy()[2].key,
-      fundraiseStatus: input['fundraiseStatus']
-    } as CompanyCommand
+  return {
+    name: input['name'] || coName,
+    number: input['number'] || Date.now() + Math.floor(Math.random() * 9999),
+    legalName: input['legalName'] || `${coName} legal name`,
+    description: input['description'] || faker.company.catchPhrase(),
+    stage: input['stage'] || 'OP_CO',
+    status: input['status'] || 'ACTIVE',
+    linkedApiId: input['linkedApiId'] || null,
+    createGFolder: input['createGFolder'] || false,
+    href: input['href'] || faker.internet.url(),
+    dashboardHref: input['dashboardHref'] || null,
+    hasPlatformAgreement: input['hasPlatformAgreement'] || true,
+    taxonomy: input['taxonomy'] || randomTaxonomy()[2].key,
+    fundraiseStatus: input['fundraiseStatus']
+  } as CompanyCommand
 }
 
 export async function testCompanyGenerator(

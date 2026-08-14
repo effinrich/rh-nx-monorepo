@@ -36,17 +36,16 @@ export interface Ceo {
   links?: Link[]
 }
 
-export interface CeoUpdateCommand
-  extends Omit<
-    Ceo,
-    | 'businessType'
-    | 'businessFocusArea'
-    | 'customerSegment'
-    | 'healthcareSector'
-    | 'visible'
-    | 'member'
-    | 'id'
-  > {
+export interface CeoUpdateCommand extends Omit<
+  Ceo,
+  | 'businessType'
+  | 'businessFocusArea'
+  | 'customerSegment'
+  | 'healthcareSector'
+  | 'visible'
+  | 'member'
+  | 'id'
+> {
   businessType?: string
   customerSegment?: string[]
   healthcareSector?: string

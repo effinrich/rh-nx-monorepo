@@ -6,15 +6,14 @@ This tutorial provides an overview of the Network module that is used to set up 
 
 The network module consists of two sub-modules, VPC and peering.
 
-* The VPC module includes the following:
-    * Multiple availability zones, each with public and private subnets
-    * Public subnets have a public route table to the internet gateway
-    * Private subnets have a route table entry to the NAT gateway for internet access
-    * VPC endpoints are available for internal services to avoid traversing the public internet
-    * VPC flow logs capture traffic for audit and analytic purposes
-    * Network Access Control Lists (NACLs) are present for security but are mostly open in this setup
-*  The peering module establishes peering between VPCs. Peering allows the VPCs to communicate with each other as if they were on the same network without using a public internet connection.
-
+- The VPC module includes the following:
+  - Multiple availability zones, each with public and private subnets
+  - Public subnets have a public route table to the internet gateway
+  - Private subnets have a route table entry to the NAT gateway for internet access
+  - VPC endpoints are available for internal services to avoid traversing the public internet
+  - VPC flow logs capture traffic for audit and analytic purposes
+  - Network Access Control Lists (NACLs) are present for security but are mostly open in this setup
+- The peering module establishes peering between VPCs. Peering allows the VPCs to communicate with each other as if they were on the same network without using a public internet connection.
 
 ## Video
 
@@ -27,7 +26,7 @@ The video tutorial will walk you through setting up a VPC for a core and dev env
 The following diagram illustrates what is deployed by the VPC module. The peering module connects different VPCs.
 
 - Multiple availability zones within the VPC, each containing public and private subnets.
-- A route table includes entries that directs private and public subnet traffic to the internet via the  internet gateway.
+- A route table includes entries that directs private and public subnet traffic to the internet via the internet gateway.
 - For cost-saving purposes, some services are kept on private subnets to avoid traversing the public side. Traffic to certain AWS services through the net gateway increases cost.
 - VPC endpoints provided by AWS for services like S3 avoid public endpoints and save cost. VPC flow logs enabled to capture incoming traffic for analytic and audit purposes.
 - Network Access Control List (NACL) is initially open, but can be used to control access. NACL serves as an additional layer of security within the VPC setup.
@@ -36,8 +35,6 @@ The following diagram illustrates what is deployed by the VPC module. The peerin
 
 -
 
-
-
 ## High-Level Process
 
 This section provides a high-level overview of the steps for deploying the Network module. Review the video and the **tf-modules** and **tf-infrastructure** for more information.
@@ -45,14 +42,13 @@ This section provides a high-level overview of the steps for deploying the Netwo
 ### Setting up the VPC
 
 1. Update the VPC reusable module in **tf-modules/network/vpc** folder as needed.
-    1. Review the contents of the **main.tf** file to define options for your VPC, DHCP, HCP, default NACLs, and so on and update as necessary.
-    2. Specify the number of availability zones in the **locals.tf** module.
-    3. Review the **subnet.tf** file and update as necessary.
+   1. Review the contents of the **main.tf** file to define options for your VPC, DHCP, HCP, default NACLs, and so on and update as necessary.
+   2. Specify the number of availability zones in the **locals.tf** module.
+   3. Review the **subnet.tf** file and update as necessary.
 2. Deploy your changes by using the 'terraform init' and 'terraform apply' commands.
 3. Update the VPC parent module in **tf-infrastructure/core/network/vpc** folder as needed.
    1. Review the contents of the **main.tf** file and update as needed to update your requestor and accessor.
    2. Update other environments (dev) as needed.
-
 
 ### Setting up peering
 
@@ -61,7 +57,6 @@ This section provides a high-level overview of the steps for deploying the Netwo
    2. Deploy your changes by using the 'terraform init' and 'terraform apply' commands.
 2. Update the Peering parent module in the **tf-infrastructure/dev/network/peering** folder as needed.
    1. Update the **main.tf** file to reflect your company and needs.
-
 
 ### Viewing peering connections
 
@@ -73,9 +68,7 @@ From here, you can click on a specific peering connection to view its details, i
 
 ![Peering Connections](https://assets.redesignhealth.com/image/2d55a88d6808202aed631e468e8f0e540ed0830f.png)
 
-
-
 ## Related Information
 
-*  [Amazon Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
-*  [Peering Connections](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)
+- [Amazon Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
+- [Peering Connections](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)

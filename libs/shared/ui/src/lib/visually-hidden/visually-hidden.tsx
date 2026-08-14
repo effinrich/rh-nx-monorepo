@@ -12,6 +12,6 @@ export const VisuallyHiddenInput = chakra('input', {
     padding: '0',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
-    position: 'absolute',
+    position: 'absolute'
   }
 })

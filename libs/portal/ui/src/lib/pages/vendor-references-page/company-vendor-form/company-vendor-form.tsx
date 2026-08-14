@@ -71,7 +71,17 @@ const customDateInput = (
   { value, onClick, onChange }: InputProps,
   ref: LegacyRef<HTMLInputElement>
 ) => (
-  <InputGroup endElement={<Icon as={MdEditCalendar} boxSize={4} color="gray.600" onClick={onClick} cursor="pointer" />}>
+  <InputGroup
+    endElement={
+      <Icon
+        as={MdEditCalendar}
+        boxSize={4}
+        color="gray.600"
+        onClick={onClick}
+        cursor="pointer"
+      />
+    }
+  >
     <Input
       autoComplete="off"
       value={value}

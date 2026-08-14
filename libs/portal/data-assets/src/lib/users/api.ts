@@ -42,9 +42,9 @@ export const getUsersByRole = async (
   )
 
   if (isInclusive) {
-    return data.content.filter((user) => user?.role?.authority === role)
+    return data.content.filter(user => user?.role?.authority === role)
   } else {
-    return data.content.filter((user) => user?.role?.authority !== role)
+    return data.content.filter(user => user?.role?.authority !== role)
   }
 }
 
@@ -65,7 +65,6 @@ export const getUsersList = async (
 
   return data
 }
-
 
 export const getUser = async (email?: string, expand?: string[]) => {
   const queryParamsBuilder: [string, string][] = []

@@ -26,9 +26,7 @@ import { Accessibility } from '@/components/Accessibility'
 <Canvas of={AccessibilityStories.Default} />
 
 ```tsx
-<Accessibility>
-  Content
-</Accessibility>
+<Accessibility>Content</Accessibility>
 ```
 
 ## Props
@@ -47,11 +45,11 @@ The `Accessibility` component follows WAI-ARIA guidelines:
 
 ### Keyboard Interactions
 
-| Key | Description |
-|-----|-------------|
-| `Tab` | Moves focus to the component |
-| `Enter` | Activates the component |
-| `Space` | Activates the component |
+| Key     | Description                  |
+| ------- | ---------------------------- |
+| `Tab`   | Moves focus to the component |
+| `Enter` | Activates the component      |
+| `Space` | Activates the component      |
 
 ## Composition
 
@@ -60,13 +58,9 @@ The `Accessibility` component follows WAI-ARIA guidelines:
 ```tsx
 import { Stack } from '@chakra-ui/react'
 
-<Stack spacing={4}>
-  <Accessibility>
-    First item
-  </Accessibility>
-  <Accessibility>
-    Second item
-  </Accessibility>
+;<Stack spacing={4}>
+  <Accessibility>First item</Accessibility>
+  <Accessibility>Second item</Accessibility>
 </Stack>
 ```
 
@@ -75,10 +69,7 @@ import { Stack } from '@chakra-ui/react'
 Use responsive props for different screen sizes:
 
 ```tsx
-<Accessibility
-  
-  width={{ base: '100%', md: 'auto' }}
->
+<Accessibility width={{ base: '100%', md: 'auto' }}>
   Responsive Accessibility
 </Accessibility>
 ```
@@ -86,8 +77,8 @@ Use responsive props for different screen sizes:
 ## Best Practices
 
 1. **Accessibility**: Always provide meaningful content or aria-label
-4. **Composition**: Combine with other components using Stack or Flex for layouts
-5. **Performance**: Avoid creating new callback functions on each render
+2. **Composition**: Combine with other components using Stack or Flex for layouts
+3. **Performance**: Avoid creating new callback functions on each render
 
 ## Related Components
 

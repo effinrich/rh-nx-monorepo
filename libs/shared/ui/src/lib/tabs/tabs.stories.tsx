@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/no-multi-comp */
+/** biome-ignore-all lint/a11y/useButtonType: <explanation> */
 import * as React from 'react'
 import { useInterval } from 'react-use'
 import { Tabs } from '@chakra-ui/react'
+import type { storiesOf } from 'storybook'
 
 import {
   Drawer,
@@ -13,7 +17,7 @@ import { rh } from '../rh/rh'
 export default {
   title: 'Components / Disclosure / Tabs',
   decorators: [
-    (story: any) => (
+    (story: storiesOf) => (
       <rh.div maxWidth="500px" mt="100px" mx="auto">
         {story()}
       </rh.div>
@@ -61,7 +65,7 @@ export const Sizes = () =>
     </rh.div>
   ))
 
-export const automatic = () => (
+export const Automatic = () => (
   <>
     <p>manual</p>
     <p>manual</p>
@@ -102,7 +106,7 @@ export const automatic = () => (
   </>
 )
 
-export const manual = () => (
+export const Manual = () => (
   <Tabs.Root defaultValue="settings">
     <Tabs.List>
       <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
@@ -119,7 +123,7 @@ export const manual = () => (
   </Tabs.Root>
 )
 
-export const withIndicator = () => (
+export const WithIndicator = () => (
   <Tabs.Root variant="plain" defaultValue="settings">
     <Tabs.List>
       <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
@@ -138,7 +142,7 @@ export const withIndicator = () => (
   </Tabs.Root>
 )
 
-export const withIndicatorAndLongTabText = () => (
+export const WithIndicatorAndLongTabText = () => (
   <Tabs.Root variant="plain" defaultValue="long">
     <Tabs.List>
       <Tabs.Trigger value="long">Tab with long text</Tabs.Trigger>
@@ -154,12 +158,14 @@ export const withIndicatorAndLongTabText = () => (
   </Tabs.Root>
 )
 
-export const withVerticalTabs = () => (
+export const WithVerticalTabs = () => (
   <Tabs.Root orientation="vertical" defaultValue="settings">
     <Tabs.List>
       <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
       <Tabs.Trigger value="billings">Billings</Tabs.Trigger>
-      <Tabs.Trigger value="preferences" disabled>Preferences</Tabs.Trigger>
+      <Tabs.Trigger value="preferences" disabled>
+        Preferences
+      </Tabs.Trigger>
       <Tabs.Trigger value="shutdown">Shut Down</Tabs.Trigger>
     </Tabs.List>
     <Tabs.Content value="settings">Settings</Tabs.Content>
@@ -179,7 +185,7 @@ const Interval = () => {
   )
 }
 
-export const withLazyTabs = () => (
+export const WithLazyTabs = () => (
   <Tabs.Root lazyMount defaultValue="1">
     <Tabs.List>
       <Tabs.Trigger value="1">Interval 1</Tabs.Trigger>
@@ -196,7 +202,7 @@ export const withLazyTabs = () => (
   </Tabs.Root>
 )
 
-export const withLazyTabsMounted = () => (
+export const WithLazyTabsMounted = () => (
   <Tabs.Root lazyMount unmountOnExit={false} defaultValue="1">
     <Tabs.List>
       <Tabs.Trigger value="1">Interval 1</Tabs.Trigger>
@@ -225,22 +231,21 @@ export const WithSwappedTabs = () => {
     setSelectedItemId: (id: string) => void
   }> = ({ items, selectedItemId, setSelectedItemId }) => {
     // Derive current tab index from id
-    const tabIndex = React.useMemo(() => {
+    const _tabIndex = React.useMemo(() => {
       return items.findIndex(x => x.id === selectedItemId)
     }, [items, selectedItemId])
 
     // Update current selected item id
-    const onTabChange = (idx: number) => {
-      console.log('onTabChange', idx, items[idx].id)
-      const { id } = items[idx]
-      setSelectedItemId(id)
-    }
+    // const onTabChange = (idx: number) => {
+    //   // console.log('onTabChange', idx, items[idx].id)
+    //   const { id } = items[idx]
+    //   setSelectedItemId(id)
+    // }
 
-    return (
     return (
       <Tabs.Root
         value={selectedItemId}
-        onValueChange={(e) => setSelectedItemId(e.value)}
+        onValueChange={e => setSelectedItemId(e.value)}
         orientation="vertical"
         variant="enclosed"
       >
@@ -258,7 +263,6 @@ export const WithSwappedTabs = () => {
         ))}
       </Tabs.Root>
     )
-    )
   }
 
   const [items, setItems] = React.useState(initialData)
@@ -270,11 +274,6 @@ export const WithSwappedTabs = () => {
       return [b, a]
     })
   }
-
-  console.log(
-    { selectedItemId },
-    items.map(x => x.id)
-  )
 
   return (
     <rh.div m={4}>
@@ -288,8 +287,8 @@ export const WithSwappedTabs = () => {
   )
 }
 
-export const withinDrawer = () => (
-  <Drawer open onClose={console.log}>
+export const WithinDrawer = () => (
+  <Drawer open>
     <DrawerOverlay>
       <DrawerContent>
         <DrawerBody>

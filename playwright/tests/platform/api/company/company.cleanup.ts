@@ -15,7 +15,6 @@ test('Test CEO Cleanup', async ({ request }) => {
   }
 })
 
-
 test('Test Research Cleanup', async ({ request }) => {
   const docs = await request
     .get('/research?page=0&size=9999')

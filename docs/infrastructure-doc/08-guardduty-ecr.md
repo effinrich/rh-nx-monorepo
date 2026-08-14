@@ -2,8 +2,8 @@
 
 This section describes the Guard Duty module and the Elastic Container Registry (ECR) module.
 
-* The Guard Duty module deploys the Amazon Guard Duty service which manages threat detection. It monitors all resources and detects any malicious traffic coming into the account and reports the findings for visibility purposes. The module also includes a lambda function that takes remedial action, such as blocking malicious IPs and adding them to the IP set blocklist.
-* The ECR module sets up a repository where Docker images can be pushed and pulled for deployment purposes. The ECR module is simple and involves setting up a repository, replication across regions, and a lifecycle policy for expiring older images.
+- The Guard Duty module deploys the Amazon Guard Duty service which manages threat detection. It monitors all resources and detects any malicious traffic coming into the account and reports the findings for visibility purposes. The module also includes a lambda function that takes remedial action, such as blocking malicious IPs and adding them to the IP set blocklist.
+- The ECR module sets up a repository where Docker images can be pushed and pulled for deployment purposes. The ECR module is simple and involves setting up a repository, replication across regions, and a lifecycle policy for expiring older images.
 
 ## Video
 
@@ -13,17 +13,15 @@ This section describes the Guard Duty module and the Elastic Container Registry 
 
 The following diagram illustrates the configuration managed by the GuardDuty module.
 
-* The GuardDuty module activates the GuardDuty service.
-* CloudWatch includes triggers based on threat severity levels.
-* If high-threat incidents is detected, a Lambda function is triggered and initiates actions.
-* The malicious IP is blocked at the network ingress point using NACL.
-* IP is added the WAF filtering rules to prevent it from accessing the account and load balancers.
-* Amazon Simple Notification Service (SNS) sends email alerts on malicious findings.
-* Amazon DynamoDB stores malicious IPs in its database to enable tracking and analysis.
+- The GuardDuty module activates the GuardDuty service.
+- CloudWatch includes triggers based on threat severity levels.
+- If high-threat incidents is detected, a Lambda function is triggered and initiates actions.
+- The malicious IP is blocked at the network ingress point using NACL.
+- IP is added the WAF filtering rules to prevent it from accessing the account and load balancers.
+- Amazon Simple Notification Service (SNS) sends email alerts on malicious findings.
+- Amazon DynamoDB stores malicious IPs in its database to enable tracking and analysis.
 
 ![Diagram of GuardDuty module](https://assets.redesignhealth.com/O0B7OS43cf86Oh0LO1sqaNCbvVskpIbOrXKDt8Vh/guard-duty-module.png)
-
-
 
 ## High-Level Process
 
@@ -52,9 +50,7 @@ This section provides a high-level overview of the steps for deploying the Guard
 1. Review **tf-modules/s3/main.tf** file to set up S3 bucket resources.
 2. Review **tf-infrastructure/dev/s3/main.tf** to set up values for a particular bucket.
 
-
 ## Related Information
 
-* [Amazon GuardDuty](https://www.amazonaws.cn/en/guardduty/)
-* [Amazon Elastic Container Registry (ECR)](https://aws.amazon.com/ecr/)
-
+- [Amazon GuardDuty](https://www.amazonaws.cn/en/guardduty/)
+- [Amazon Elastic Container Registry (ECR)](https://aws.amazon.com/ecr/)

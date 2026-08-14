@@ -4,7 +4,5 @@ description: No definitive list exists for Board-required company actions. Howev
 labels:
   - tool
   - company-foundations
-googleDocId:  1fgr-6stXbA5EJD7-8kgFlN-S5gp_eGs8f4kNJQgUIWk
+googleDocId: 1fgr-6stXbA5EJD7-8kgFlN-S5gp_eGs8f4kNJQgUIWk
 ---
-
-

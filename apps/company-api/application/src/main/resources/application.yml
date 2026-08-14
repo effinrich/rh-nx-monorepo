@@ -606,7 +606,7 @@ xcloud:
     QtCXCoJk
 prometheus-service:
   base-url: https://mimir.core.redesignhealth.com/prometheus
-  instance: "company-api.dev.redesignhealth.com:80"
+  instance: 'company-api.dev.redesignhealth.com:80'
 rocket-chat-service:
   base-url:
   notifications:

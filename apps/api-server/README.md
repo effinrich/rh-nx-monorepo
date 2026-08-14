@@ -29,14 +29,14 @@ VITE_COMPANY_API_HOSTNAME=http://localhost:8080
 
 Seed data lives in `apps/api-server/src/data/db.json` and includes:
 
-| Collection | Count |
-|------------|-------|
-| Companies | 100 |
-| Vendors | 100 |
-| CEOs | 50 |
-| IP Marketplace listings | 100 |
-| Users | 51 (including a Super Admin) |
-| Consent records | per user |
+| Collection              | Count                        |
+| ----------------------- | ---------------------------- |
+| Companies               | 100                          |
+| Vendors                 | 100                          |
+| CEOs                    | 50                           |
+| IP Marketplace listings | 100                          |
+| Users                   | 51 (including a Super Admin) |
+| Consent records         | per user                     |
 
 To regenerate mock data:
 
@@ -46,31 +46,31 @@ node apps/api-server/src/data/generate.js
 
 ## Endpoints
 
-| Endpoint | Methods | Description |
-|----------|---------|-------------|
-| `/company` | GET, POST | List / create companies |
-| `/company/:id` | GET, PUT | Get / update a company |
-| `/company/:id/members` | GET | Get company members |
-| `/company/:id/conflicts` | PUT | Update company conflicts |
-| `/vendor` | GET, POST | List / create vendors |
-| `/vendor/:id` | GET, PUT | Get / update a vendor |
-| `/vendor/category` | GET | Get vendor categories |
-| `/ceos` | GET, POST | List / create CEOs |
-| `/ceos/:id` | GET, PUT | Get / update a CEO |
-| `/ceos/filters` | GET | Get CEO filter options |
-| `/ip-marketplace` | GET, POST | List / create IP listings |
-| `/ip-marketplace/:id` | GET | Get an IP listing |
-| `/ip-marketplace/filters` | GET | Get IP filter options |
-| `/userinfo` | GET | Get current authenticated user |
-| `/person` | GET | List all users |
-| `/person/:email` | GET, PUT, DELETE | User CRUD by email |
-| `/me/role` | GET | Get current user's role |
-| `/me/consent/:consentType` | GET, PUT | Get / accept a consent record |
-| `/consent` | GET, PUT | General consent management |
-| `/research` | GET, POST | Research hub entries |
-| `/expert-note` | GET, POST | Expert call notes |
-| `/asset` | POST | Asset upload |
-| `/library-doc` | GET, POST | Library documents |
+| Endpoint                   | Methods          | Description                    |
+| -------------------------- | ---------------- | ------------------------------ |
+| `/company`                 | GET, POST        | List / create companies        |
+| `/company/:id`             | GET, PUT         | Get / update a company         |
+| `/company/:id/members`     | GET              | Get company members            |
+| `/company/:id/conflicts`   | PUT              | Update company conflicts       |
+| `/vendor`                  | GET, POST        | List / create vendors          |
+| `/vendor/:id`              | GET, PUT         | Get / update a vendor          |
+| `/vendor/category`         | GET              | Get vendor categories          |
+| `/ceos`                    | GET, POST        | List / create CEOs             |
+| `/ceos/:id`                | GET, PUT         | Get / update a CEO             |
+| `/ceos/filters`            | GET              | Get CEO filter options         |
+| `/ip-marketplace`          | GET, POST        | List / create IP listings      |
+| `/ip-marketplace/:id`      | GET              | Get an IP listing              |
+| `/ip-marketplace/filters`  | GET              | Get IP filter options          |
+| `/userinfo`                | GET              | Get current authenticated user |
+| `/person`                  | GET              | List all users                 |
+| `/person/:email`           | GET, PUT, DELETE | User CRUD by email             |
+| `/me/role`                 | GET              | Get current user's role        |
+| `/me/consent/:consentType` | GET, PUT         | Get / accept a consent record  |
+| `/consent`                 | GET, PUT         | General consent management     |
+| `/research`                | GET, POST        | Research hub entries           |
+| `/expert-note`             | GET, POST        | Expert call notes              |
+| `/asset`                   | POST             | Asset upload                   |
+| `/library-doc`             | GET, POST        | Library documents              |
 
 All list endpoints support pagination via `page` and `size` query parameters and return the response envelope the portal expects:
 

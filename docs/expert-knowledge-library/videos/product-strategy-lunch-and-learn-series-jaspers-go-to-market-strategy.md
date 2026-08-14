@@ -1,6 +1,6 @@
 ---
 cardTitle: "Product Strategy Lunch and Learn Series: Jasper's Go-To-Market Strategy (Video)"
-description: "Kim Warner, VP of Business Development and Sales at Jasper Health, shares lessons learned from Jasper’s go-to-market approach, including motions around insurance plans and employer and health systems."
+description: 'Kim Warner, VP of Business Development and Sales at Jasper Health, shares lessons learned from Jasper’s go-to-market approach, including motions around insurance plans and employer and health systems.'
 labels:
   - video
 ---

@@ -44,7 +44,9 @@ export class ResearchHubPage {
       this.page,
       this.page.locator('.chakra-modal__content')
     )
-    this.callNotesTab = new CallNotesTab(this.page.locator('[id$="tabpanel-1"]'))
+    this.callNotesTab = new CallNotesTab(
+      this.page.locator('[id$="tabpanel-1"]')
+    )
   }
 
   async goto() {

@@ -11,7 +11,7 @@ export default defineConfig({
 
   plugins: [
     dts({
-      tsconfigPath: join(__dirname, 'tsconfig.lib.json'),
+      tsconfigPath: join(__dirname, 'tsconfig.lib.json')
     }),
     react(),
     nxViteTsPaths()

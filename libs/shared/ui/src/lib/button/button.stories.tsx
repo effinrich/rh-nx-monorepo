@@ -242,11 +242,7 @@ export const WithIcon = () => (
     <Button leftIcon={<LuMail />} colorPalette="teal" variant="solid">
       Email
     </Button>
-    <Button
-      rightIcon={<LuArrowRight />}
-      colorPalette="teal"
-      variant="outline"
-    >
+    <Button rightIcon={<LuArrowRight />} colorPalette="teal" variant="outline">
       Call us
     </Button>
   </Stack>

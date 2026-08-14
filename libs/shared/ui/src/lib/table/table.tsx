@@ -32,4 +32,8 @@ export {
 } from '@chakra-ui/react'
 
 // Export types
-export type { TableRootProps, TableRowProps, TableCellProps } from '@chakra-ui/react'
+export type {
+  TableRootProps,
+  TableRowProps,
+  TableCellProps
+} from '@chakra-ui/react'

@@ -20,9 +20,9 @@ export default defineConfig({
   optimizeDeps: {
     esbuildOptions: {
       define: {
-        'process.env.NODE_ENV': JSON.stringify('development'),
-      },
-    },
+        'process.env.NODE_ENV': JSON.stringify('development')
+      }
+    }
   },
 
   preview: {
@@ -37,7 +37,7 @@ export default defineConfig({
       'chakra-react-select': path.resolve(
         __dirname,
         'src/shims/chakra-react-select.ts'
-      ),
+      )
     }
   },
 

@@ -3,7 +3,8 @@ id: number-input
 category: form
 title: Number Input
 package: '@redesignhealth/ui'
-description: The NumberInput component is similar to the Input component, but it has
+description:
+  The NumberInput component is similar to the Input component, but it has
   controls for incrementing or decrementing numeric values.
 ---
 
@@ -18,7 +19,13 @@ Redesign UI exports 5 components for the NumberInput.
 - `NumberDecrementStepper`: The button to decrement the value of the input.
 
 ```js
-import { NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@redesignhealth/ui'
+import {
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper
+} from '@redesignhealth/ui'
 ```
 
 ## Usage
@@ -120,7 +127,12 @@ support this use case.
 > than `min`.
 
 ```jsx
-<NumberInput defaultValue={15} max={10} keepWithinRange={false} clampValueOnBlur={false}>
+<NumberInput
+  defaultValue={15}
+  max={10}
+  keepWithinRange={false}
+  clampValueOnBlur={false}
+>
   <NumberInputField />
   <NumberInputStepper>
     <NumberIncrementStepper />
@@ -139,7 +151,11 @@ function Example() {
   const [value, setValue] = React.useState('1.53')
 
   return (
-    <NumberInput onChange={valueString => setValue(parse(valueString))} value={format(value)} max={50}>
+    <NumberInput
+      onChange={valueString => setValue(parse(valueString))}
+      value={format(value)}
+      max={50}
+    >
       <NumberInputField />
       <NumberInputStepper>
         <NumberIncrementStepper />
@@ -200,8 +216,16 @@ can also change the icons used in the steppers.
 <NumberInput size="sm" defaultValue={15} min={10}>
   <NumberInputField focusBorderColor="red.200" />
   <NumberInputStepper>
-    <NumberIncrementStepper bg="green.200" _active={{ bg: 'green.300' }} children="+" />
-    <NumberDecrementStepper bg="pink.200" _active={{ bg: 'pink.300' }} children="-" />
+    <NumberIncrementStepper
+      bg="green.200"
+      _active={{ bg: 'green.300' }}
+      children="+"
+    />
+    <NumberDecrementStepper
+      bg="pink.200"
+      _active={{ bg: 'pink.300' }}
+      children="-"
+    />
   </NumberInputStepper>
 </NumberInput>
 ```
@@ -229,7 +253,12 @@ function SliderInput() {
           <NumberDecrementStepper />
         </NumberInputStepper>
       </NumberInput>
-      <Slider flex="1" focusThumbOnChange={false} value={value} onChange={handleChange}>
+      <Slider
+        flex="1"
+        focusThumbOnChange={false}
+        value={value}
+        onChange={handleChange}
+      >
         <SliderTrack>
           <SliderFilledTrack />
         </SliderTrack>
@@ -247,13 +276,14 @@ how you can leverage the `useNumberInput` hook to build one.
 
 ```jsx
 function HookUsage() {
-  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
-    step: 0.01,
-    defaultValue: 1.53,
-    min: 1,
-    max: 6,
-    precision: 2
-  })
+  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
+    useNumberInput({
+      step: 0.01,
+      defaultValue: 1.53,
+      min: 1,
+      max: 6,
+      precision: 2
+    })
 
   const inc = getIncrementButtonProps()
   const dec = getDecrementButtonProps()

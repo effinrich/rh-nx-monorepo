@@ -3,8 +3,8 @@ cardTitle: 'Value Based Care Billing Codes Analysis'
 description: Understand the limitations of reimbursement from Medicare Part B for billing codes that Redesign Health proposes to leverage in its OpCos.
 labels:
   - article
-
 ---
+
 # Value Based Care Billing Codes Analysis
 
 Understand the limitations of reimbursement from Medicare Part B for billing codes that Redesign Health proposes to leverage in its OpCos.

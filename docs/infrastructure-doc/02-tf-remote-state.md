@@ -6,14 +6,14 @@ Terraform is an open-source **infrastructure as code** software tool created by 
 
 The Terraform modules needed to deploy your infrastructure are provided in Git repositories to your company.
 
-The first module (**tf-remote-state**)  you will deploy sets up an S3 bucket with encryption. It provides a locking mechanism by using the Amazon DynamoDB to store lock state each time a deployment is triggered.
+The first module (**tf-remote-state**) you will deploy sets up an S3 bucket with encryption. It provides a locking mechanism by using the Amazon DynamoDB to store lock state each time a deployment is triggered.
 
 ## Structure of the Terraform Repositories
 
 To deploy the infrastructure using Terraform, you will use the following repositories:
 
-* The **tf-modules** repository includes reusable modules. These modules include no hardcoded or static values. You can reference these modules and deploy them in your account as needed.
-* The **tf-infrastructure** repository acts as the parent repository and include scripts for each of the four environments.
+- The **tf-modules** repository includes reusable modules. These modules include no hardcoded or static values. You can reference these modules and deploy them in your account as needed.
+- The **tf-infrastructure** repository acts as the parent repository and include scripts for each of the four environments.
 
 **Note:** The repositories use semantic versioning for components.
 
@@ -49,11 +49,11 @@ For example, consider the following script as an example. This script is for the
 
 It identifies:
 
-* the source of the reuable module in **tf-modules** to reference (including the semantic version number)
-* specific values to use for that module
-* metadata tags you can use to organize your AWS resources
-* the terraform backend
-* the terraform output value
+- the source of the reuable module in **tf-modules** to reference (including the semantic version number)
+- specific values to use for that module
+- metadata tags you can use to organize your AWS resources
+- the terraform backend
+- the terraform output value
 
 ```
 module "tf-state" {
@@ -93,30 +93,26 @@ output "tf-state" {
 
 ## Architecture
 
- The following diagram illustrates the architecture of what the Terraform State module configures.
+The following diagram illustrates the architecture of what the Terraform State module configures.
 
 The terraform module deploys the S3 backend. The backend will be fully encrypted and versioned. The Amazon DynamoDB allows state locking so that a terraform module is locked for other users while it is being deployed.
 
- ![Diagram of Terraform State Module Architecture](https://assets.redesignhealth.com/ibTE0lXXzTb611mWAlCglVnrAke0Ne1ErUnhSyy7/tf-remote-architecture.png)
-
-
+![Diagram of Terraform State Module Architecture](https://assets.redesignhealth.com/ibTE0lXXzTb611mWAlCglVnrAke0Ne1ErUnhSyy7/tf-remote-architecture.png)
 
 ## Steps
 
-1. In the **tf-module** repository, review the following reusable files  in the **tf-remote-state** module.
-
-    - **tf-remote-state/dynamo.tf** -  resource definitions for for a DynamoDB table for state locking.
-    - **tf-remote-state/s3.tf**  - resource definitions for the S3 remote state bucket.
-    - **tf-remote-state/data.tf** - resource definitions for S3 bucket policies
+1. In the **tf-module** repository, review the following reusable files in the **tf-remote-state** module.
+   - **tf-remote-state/dynamo.tf** - resource definitions for for a DynamoDB table for state locking.
+   - **tf-remote-state/s3.tf** - resource definitions for the S3 remote state bucket.
+   - **tf-remote-state/data.tf** - resource definitions for S3 bucket policies
 
 2. In the **tf-infrastrcture** repository, update the **core/tf-remote-state/main.tf** file with the appropriate values for your environment.
 
 3. Deploy the terraform script for core by issuing the `terraform init` and then the `terraform apply` commands.
 
 4. Review the results of the deploy in the Amazon console.
-
-    - To view the S3 buckets go to **Amazon S3 > Buckets**.
-    - To view the DynamoDB , go to **DynamoDB > Items**.
+   - To view the S3 buckets go to **Amazon S3 > Buckets**.
+   - To view the DynamoDB , go to **DynamoDB > Items**.
 
 **Note:** In other modules, you will specify this S3 bucket as the backend.
 
@@ -131,10 +127,11 @@ terraform {
   }
 }
 ```
-The key value needs to be unique across all modules and environments. A suggested naming convention is ***team-name*/infrastructure/*module-name***.
+
+The key value needs to be unique across all modules and environments. A suggested naming convention is **_team-name_/infrastructure/_module-name_**.
 
 ## Related Information
 
-* [Terraform](https://www.terraform.io/)
-* [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)
-* [Amazon S3](https://aws.amazon.com/s3/)
+- [Terraform](https://www.terraform.io/)
+- [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)
+- [Amazon S3](https://aws.amazon.com/s3/)

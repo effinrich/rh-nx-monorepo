@@ -49,9 +49,7 @@ test.describe('No-permission roles cannot update a company', () => {
   })
 
   for (const role of noPermissionRoles) {
-    test(role.displayName, async ({
-      request
-    }) => {
+    test(role.displayName, async ({ request }) => {
       // create person
       person = await testPersonGenerator(request, {
         role: role.authority

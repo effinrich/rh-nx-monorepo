@@ -18,9 +18,9 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service offering 
 
 Amazon S3 provides the following benefits when used as part of the Redesign Platform infrastructure:
 
-* a standard offering for general purpose storage that can be used across various open-source tools
-* low cost and highly scalable
-* a derivative is available on all cloud providers
+- a standard offering for general purpose storage that can be used across various open-source tools
+- low cost and highly scalable
+- a derivative is available on all cloud providers
 
 ## Images
 

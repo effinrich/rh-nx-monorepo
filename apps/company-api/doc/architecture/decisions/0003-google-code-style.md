@@ -18,4 +18,4 @@ We will use [Google's Java Style Guide](https://google.github.io/styleguide/java
 
 This may cause developers pain if the formatter makes code look worse. We can re-evaluate this decision if that occurs.
 
-Code style isn't being verfied yet. We will need to add that to have code formatted before it is merged into *main*.
+Code style isn't being verfied yet. We will need to add that to have code formatted before it is merged into _main_.

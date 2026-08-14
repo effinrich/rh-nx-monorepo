@@ -1,6 +1,5 @@
 # Data Stores - Document DB (No-SQL)
 
-
 ## Mongo DB
 
 MongoDB is a document database with the scalability and flexibility that you want with the querying and indexing that you need.
@@ -15,11 +14,9 @@ MongoDB is a document database with the scalability and flexibility that you wan
 
 **Repository:** Github
 
-
 ## ElasticSearch
 
 Elasticsearch is a distributed, RESTful search and analytics engine capable of addressing a growing number of use cases. As the heart of the Elastic Stack, it centrally stores your data for search, fine‑tuned relevancy, and powerful analytics that scale with ease.
-
 
 **Category:** Document Store
 
@@ -31,9 +28,7 @@ Elasticsearch is a distributed, RESTful search and analytics engine capable of a
 
 **Repository:** Github](https://github.com/elastic/elasticsearch)
 
-
 ## Document DB
-
 
 **Category:** Document Store
 
@@ -43,12 +38,10 @@ Elasticsearch is a distributed, RESTful search and analytics engine capable of a
 
 **Documentation:** [Guide](https://docs.aws.amazon.com/documentdb/latest/developerguide/what-is)
 
-**Repository:**  N/A
+**Repository:** N/A
 
 ## Benefits
 
-* Terraform Scripts will allow for a selection of the  the leading Document DB solutions
-* They all come in varying support model from Managed, to Cloud Native 
-* OpCos can select based on their set of requirements and level of familiarity and comfort 
-
-
+- Terraform Scripts will allow for a selection of the the leading Document DB solutions
+- They all come in varying support model from Managed, to Cloud Native
+- OpCos can select based on their set of requirements and level of familiarity and comfort

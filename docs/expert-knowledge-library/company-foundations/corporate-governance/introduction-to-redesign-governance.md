@@ -3,8 +3,8 @@ cardTitle: 'Introduction to Redesign Governance'
 description: "A high-level overview of RH's governance process for OpCos."
 labels:
   - article
-
 ---
+
 # Introduction to Redesign Governance
 
 <iframe

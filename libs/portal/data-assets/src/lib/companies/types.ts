@@ -27,15 +27,14 @@ export interface CompanySummary {
  * START: Used for Company forms and UI specifically
  **/
 
-export interface CompanyCommand
-  extends Omit<
-    CompanySummary,
-    | 'fundraiseStatus'
-    | 'taxonomy'
-    | 'activityType'
-    | 'organizationType'
-    | 'region'
-  > {
+export interface CompanyCommand extends Omit<
+  CompanySummary,
+  | 'fundraiseStatus'
+  | 'taxonomy'
+  | 'activityType'
+  | 'organizationType'
+  | 'region'
+> {
   fundraiseStatus?: string
   taxonomy?: string
   theme?: Option

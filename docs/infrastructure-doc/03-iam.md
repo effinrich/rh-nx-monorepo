@@ -21,14 +21,13 @@ The IAM module is a Terraform module used to set up users and manage permissions
 2. The IAM module is broken down into different one-to-one and one-to-many mappings, where users and groups are mapped to permission sets, which are then mapped to accounts. For example, you can have a group for your DevOps team, while Developers might have a different permission set.
 
 3. There are three ways to define permission sets:
+   - **AWS Managed Policy**: Built-in policies created by AWS that define information for end-users.
 
-    * **AWS Managed Policy**: Built-in policies created by AWS that define information for end-users.
+   - **Customer Managed Policy**: Custom policies created by the customer to define permissions for specific services. Note that the IAM module includes examples of customer-managed policies in the **iam/policies** folder in the **tf-module** repository.
 
-    * **Customer Managed Policy**: Custom policies created by the customer to define permissions for specific services. Note that the IAM module includes examples of customer-managed policies in the **iam/policies** folder in the **tf-module** repository.
+   - **Inline Policy:** Policies defined within the permission set for each account, which only exist within that policy and not in the account itself.
 
-    * **Inline Policy:** Policies defined within the permission set for each account, which only exist within that policy and not in the account itself.
-
-     Permission sets are mapped to groups and users and then to accounts.
+   Permission sets are mapped to groups and users and then to accounts.
 
 ## Video
 
@@ -42,12 +41,10 @@ The following diagram illustrates what is deployed by the IAM module. The IAM mo
 
 The diagram illustrates two different user groups (**devOps** and **developers**) with access to two different accounts (**Core** and **Dev**).
 
-* The devOps group has a single permission set that grants access to the Core and Dev accounts through an AWS managed policy.
-* The developrs group has different permissions for each account.
-    * For the **Core** account, the permission setd efines an "AWS admin access"  read-only policies for developers.
-    * For the **Dev** account, three permission sets exist that provides different policies for different services. The example includes three types of permission sets can be defined: AWS Managed Policies, Customer-Managed Policies, and Inline Policies.
-
-
+- The devOps group has a single permission set that grants access to the Core and Dev accounts through an AWS managed policy.
+- The developrs group has different permissions for each account.
+  - For the **Core** account, the permission setd efines an "AWS admin access" read-only policies for developers.
+  - For the **Dev** account, three permission sets exist that provides different policies for different services. The example includes three types of permission sets can be defined: AWS Managed Policies, Customer-Managed Policies, and Inline Policies.
 
 ## High-Level Process
 
@@ -63,11 +60,9 @@ Within the IAM Module in the TF-Modules Repository perform the following tasks t
 
 In the IAM module, the iam.tf file includes examples. This example defines:
 
-* a group named "devops"
-* specifies users
-* specifies the membership of the group by associating each user with that group
-
-
+- a group named "devops"
+- specifies users
+- specifies the membership of the group by associating each user with that group
 
 ```
 resource "aws_identitystore_group" "devops" {
@@ -139,8 +134,8 @@ The **locals.tf** file also includes assigning users to specific AWS accounts. I
 
 To deploy the module, issue the following commands:
 
-* `terraform init`
-* `terraform apply`
+- `terraform init`
+- `terraform apply`
 
 ### Setting up Users in the Parent IAM Module
 
@@ -152,10 +147,6 @@ You can review accounts and users in the IAM Identify Center.
 
 ![image-20230425170343703](https://assets.redesignhealth.com/image/7358d97830ee355982c3d9e042d5ae9286788878.png)
 
-
 ## Related Information
 
-* [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
-
-
-
+- [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)

@@ -4,6 +4,7 @@ description: Describes the technical stack that supports the Innovation Platform
 labels:
   - infrastructure
 ---
+
 # Telemetry and Data Infrastructure
 
 The following table lists components of the telemetry infrastructure:
@@ -11,8 +12,6 @@ The following table lists components of the telemetry infrastructure:
 | **Telemetry**         |             |
 | --------------------- | ----------- |
 | **Category**          | **Service** |
-| Metrics               | CloudWatch |
-| Metrics Visualization | CloudWatch |
+| Metrics               | CloudWatch  |
+| Metrics Visualization | CloudWatch  |
 | Logging Visualization | CloudWatch  |
-
-

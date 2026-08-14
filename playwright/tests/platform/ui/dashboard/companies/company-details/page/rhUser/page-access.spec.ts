@@ -4,7 +4,7 @@ import { portalTest } from '../../../../../../../../fixtures/platform-ui-test'
 import {
   createCompany,
   deleteCompany,
-  newAPIContext,
+  newAPIContext
   // newCompanyWithMember
 } from '../../../../../../../../utils/platform/company'
 

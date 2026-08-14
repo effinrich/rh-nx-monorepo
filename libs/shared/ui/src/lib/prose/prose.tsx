@@ -15,7 +15,7 @@ export const Prose = ({ children, ...rest }: BoxProps) => (
         fontWeight: 'bold',
         lineHeight: '1.3',
         marginTop: '1.5em',
-        marginBottom: '0.5em',
+        marginBottom: '0.5em'
       },
       '& h1': { fontSize: '2xl' },
       '& h2': { fontSize: 'xl' },
@@ -29,28 +29,36 @@ export const Prose = ({ children, ...rest }: BoxProps) => (
         borderLeftColor: 'gray.300',
         paddingLeft: '1em',
         fontStyle: 'italic',
-        marginBottom: '1em',
+        marginBottom: '1em'
       },
       '& pre, & code': {
         fontFamily: 'mono',
         fontSize: 'sm',
         backgroundColor: 'gray.100',
         borderRadius: 'md',
-        padding: '0.2em 0.4em',
+        padding: '0.2em 0.4em'
       },
       '& pre': {
         padding: '1em',
         overflowX: 'auto',
-        marginBottom: '1em',
+        marginBottom: '1em'
       },
       '& pre code': { backgroundColor: 'transparent', padding: 0 },
       '& img': { maxWidth: '100%', height: 'auto' },
-      '& table': { width: '100%', borderCollapse: 'collapse', marginBottom: '1em' },
-      '& th, & td': { border: '1px solid', borderColor: 'gray.200', padding: '0.5em' },
+      '& table': {
+        width: '100%',
+        borderCollapse: 'collapse',
+        marginBottom: '1em'
+      },
+      '& th, & td': {
+        border: '1px solid',
+        borderColor: 'gray.200',
+        padding: '0.5em'
+      },
       '& th': { backgroundColor: 'gray.50', fontWeight: 'bold' },
       '& hr': { borderColor: 'gray.200', marginY: '2em' },
       // Utility class for images that should span the full width of the prose container (e.g. CMS content)
-      '& .wide-image': { width: '100%' },
+      '& .wide-image': { width: '100%' }
     }}
     {...rest}
   >

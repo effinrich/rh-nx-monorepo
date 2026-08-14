@@ -1,11 +1,6 @@
 import { ChangeEvent, memo } from 'react'
 import { MdClose, MdSearch } from 'react-icons/md'
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup
-} from '@redesignhealth/ui'
+import { FormControl, FormLabel, Input, InputGroup } from '@redesignhealth/ui'
 import debounce from 'debounce-promise'
 
 interface SearchProps {

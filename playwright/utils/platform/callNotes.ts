@@ -100,8 +100,8 @@ export async function testCallNoteGenerator(
       ? input['noteTaker']
       : PLATFORM_USERS.rhUser.email,
     type: input['type']
-    ? input['type']
-    : faker.helpers.arrayElement(NOTE_TYPES),
+      ? input['type']
+      : faker.helpers.arrayElement(NOTE_TYPES),
     sourceOfInterview: input['sourceOfInterview']
       ? input['sourceOfInterview']
       : faker.helpers.arrayElement(INTERVIEW_SOURCES),
@@ -130,7 +130,7 @@ export async function testCallNoteGenerator(
           faker.lorem.word({ length: { min: 5, max: 8 } }),
           faker.lorem.word({ length: { min: 5, max: 8 } }),
           faker.lorem.word({ length: { min: 5, max: 8 } })
-        ],
+        ]
   }
   if (input['attachments']) {
     data['attachments'] = input['attachments']

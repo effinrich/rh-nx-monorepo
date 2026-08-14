@@ -41,12 +41,10 @@ test.describe('Person CRUD', () => {
       .toBeLessThanOrEqual(after.valueOf())
   })
 
-  test('Admin can GET newly created person', async ({
-    request
-  }) => {
+  test('Admin can GET newly created person', async ({ request }) => {
     let getResp = await request.get(`/person/${EMAIL}`)
     expect(getResp.status()).toBe(200)
-    const actualResponse = await getResp.json() as PersonSummary
+    const actualResponse = (await getResp.json()) as PersonSummary
     expect(actualResponse).toStrictEqual(person)
   })
 

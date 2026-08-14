@@ -1,5 +1,5 @@
 ---
-cardTitle: "Pilot Agreement MSO/PC Template"
+cardTitle: 'Pilot Agreement MSO/PC Template'
 description: A template Pilot Agreement for a MSO/PC Structure.
 
 labels:

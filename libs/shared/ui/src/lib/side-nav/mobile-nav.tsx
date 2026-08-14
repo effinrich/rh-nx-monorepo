@@ -1,11 +1,7 @@
 import { useDisclosure } from '@chakra-ui/react'
 
 import { Box } from '../box/box'
-import {
-  Drawer,
-  DrawerContent,
-  DrawerOverlay
-} from '../drawer/drawer'
+import { Drawer, DrawerContent, DrawerOverlay } from '../drawer/drawer'
 import { Flex } from '../flex/flex'
 import { RedesignLogo } from '../logos/redesign-logo/redesign-logo'
 
@@ -29,11 +25,7 @@ export const MobileNav = ({ userProfile, numOpcos, numPersons }: any) => {
           w={{ base: '200px', md: '225px' }}
           alt="Redesign Health logo"
         />
-        <ToggleButton
-          open={open}
-          aria-label="Open Menu"
-          onClick={onToggle}
-        />
+        <ToggleButton open={open} aria-label="Open Menu" onClick={onToggle} />
         <Drawer
           open={open}
           placement="left"

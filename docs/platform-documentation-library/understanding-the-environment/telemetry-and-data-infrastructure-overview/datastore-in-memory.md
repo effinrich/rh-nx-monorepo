@@ -32,7 +32,6 @@ The open source, in-memory data store used by millions of developers as a databa
 
 Amazon ElasticCache is a managed-caching service for Redis and Memcached. ElastiCache makes it easy to achieve high performance and massive scale with ...
 
-
 **Category:** In-Mem Cache
 
 **Website:** [ElastiCache](https://aws.amazon.com/elasticache/)
@@ -45,6 +44,6 @@ Amazon ElasticCache is a managed-caching service for Redis and Memcached. Elasti
 
 ## Benefits
 
-* Terraform Scripts will allow for a selection of the  the leading In-Memory DB solutions
-* They all come in varying support model from Managed, to Cloud Native
-* OpCos can select based on their set of requirements and level of familiarity and comfort
+- Terraform Scripts will allow for a selection of the the leading In-Memory DB solutions
+- They all come in varying support model from Managed, to Cloud Native
+- OpCos can select based on their set of requirements and level of familiarity and comfort
