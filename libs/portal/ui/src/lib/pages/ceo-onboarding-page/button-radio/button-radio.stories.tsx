@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { RadioGroup, Stack } from '@redesignhealth/ui'
+import { RadioGroupRoot, Stack } from '@redesignhealth/ui'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
 import type { Meta } from '@storybook/react-vite'
@@ -18,8 +18,8 @@ export default Story
 export const Default = () => {
   const [selected, setSelected] = useState<string>()
   return (
-    <RadioGroup value={selected} onChange={setSelected}>
-      <Stack spacing={4}>
+    <RadioGroupRoot value={selected} onChange={setSelected}>
+      <Stack gap={4}>
         <ButtonRadio
           title="Title 1"
           subtitle="Subtitle for option 1"
@@ -33,6 +33,6 @@ export const Default = () => {
           isChecked={selected === 'Option 2'}
         />
       </Stack>
-    </RadioGroup>
+    </RadioGroupRoot>
   )
 }

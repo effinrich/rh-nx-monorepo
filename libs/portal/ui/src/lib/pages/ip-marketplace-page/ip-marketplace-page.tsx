@@ -14,7 +14,7 @@ import {
 } from '@redesignhealth/portal/utils'
 import {
   Box,
-  Checkbox,
+  CheckboxRoot,
   Flex,
   HStack,
   Loader,
@@ -95,21 +95,22 @@ export const IPMarketplacePage = () => {
                   name="isHideIpListings"
                   control={methods.control}
                   render={({ field: { name, value, onChange } }) => (
-                    <Checkbox
+                    // @ts-expect-error Chakra v3 compound component typing
+                    <CheckboxRoot
                       fontSize="sm"
                       name={name}
-                      isChecked={value}
-                      onChange={onChange}
+                      checked={value}
+                      onCheckedChange={(e) => onChange(e.checked)}
                       gridArea="left"
                     >
                       {isEnterpriseSeller
                         ? 'Hide IP listings from other sellers in my organization'
                         : 'Hide IP listings that I requested info for'}
-                    </Checkbox>
+                    </CheckboxRoot>
                   )}
                 />
               </VStack>
-              <HStack spacing={4}>
+              <HStack gap={4}>
                 <Text whiteSpace="nowrap" color="gray.600" fontSize={14}>
                   Sort by
                 </Text>

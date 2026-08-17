@@ -1,14 +1,18 @@
 /* eslint-disable react/no-children-prop */
 import { useState } from 'react'
 import {
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Radio,
-  RadioGroup,
-  Select
+  NumberInputRoot,
+  NumberInputInput,
+  NumberInputControl,
+  NumberInputIncrementTrigger,
+  NumberInputDecrementTrigger,
+  RadioGroupRoot,
+  RadioGroupItem,
+  RadioGroupItemControl,
+  RadioGroupItemText,
+  RadioGroupItemHiddenInput,
+  NativeSelectRoot,
+  NativeSelectField
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 
@@ -17,40 +21,44 @@ import { Meta } from '@storybook/react-vite'
 import { Button, Container, HStack, Input } from '../../index'
 
 import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot
 } from './form-control'
 
 export default {
-  component: FormControl,
+  component: FieldRoot,
   title: 'Components / Forms / FormControl',
   decorators: [Story => <Container>{Story()}</Container>]
 } as Meta
 
 export const Basic = () => (
-  <FormControl>
-    <FormLabel>Email address</FormLabel>
+  <FieldRoot>
+    {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
+    <FieldLabel>Email address</FieldLabel>
     <Input type="email" />
-    <FormHelperText>We'll never share your email.</FormHelperText>
-  </FormControl>
+    {/* @ts-expect-error Chakra v3 FieldHelperText children typing */}
+    <FieldHelperText>We'll never share your email.</FieldHelperText>
+  </FieldRoot>
 )
 
 export const WithRadioGroup = () => {
   return (
-    <FormControl as="fieldset">
-      <FormLabel as="legend">Favorite Naruto Character</FormLabel>
-      <RadioGroup defaultValue="Itachi">
+    <FieldRoot as="fieldset">
+      {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
+      <FieldLabel as="legend">Favorite Naruto Character</FieldLabel>
+      <RadioGroupRoot defaultValue="Itachi">
         <HStack gap="24px">
-          <Radio value="Sasuke">Sasuke</Radio>
-          <Radio value="Nagato">Nagato</Radio>
-          <Radio value="Itachi">Itachi</Radio>
-          <Radio value="Sage of the six Paths">Sage of the six Paths</Radio>
+          <RadioGroupItem value="Sasuke"><RadioGroupItemHiddenInput /><RadioGroupItemControl /><RadioGroupItemText>Sasuke</RadioGroupItemText></RadioGroupItem>
+          <RadioGroupItem value="Nagato"><RadioGroupItemHiddenInput /><RadioGroupItemControl /><RadioGroupItemText>Nagato</RadioGroupItemText></RadioGroupItem>
+          <RadioGroupItem value="Itachi"><RadioGroupItemHiddenInput /><RadioGroupItemControl /><RadioGroupItemText>Itachi</RadioGroupItemText></RadioGroupItem>
+          <RadioGroupItem value="Sage of the six Paths"><RadioGroupItemHiddenInput /><RadioGroupItemControl /><RadioGroupItemText>Sage of the six Paths</RadioGroupItemText></RadioGroupItem>
         </HStack>
-      </RadioGroup>
-      <FormHelperText>Select only if you're a fan.</FormHelperText>
-    </FormControl>
+      </RadioGroupRoot>
+      {/* @ts-expect-error Chakra v3 FieldHelperText children typing */}
+      <FieldHelperText>Select only if you're a fan.</FieldHelperText>
+    </FieldRoot>
   )
 }
 
@@ -62,48 +70,56 @@ export const WithErrorMessage = () => {
   const isError = input === ''
 
   return (
-    <FormControl invalid={isError}>
-      <FormLabel>Email</FormLabel>
+    <FieldRoot invalid={isError}>
+      {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
+      <FieldLabel>Email</FieldLabel>
       <Input type="email" value={input} onChange={handleInputChange} />
       {!isError ? (
-        <FormHelperText>
+        // @ts-expect-error Chakra v3 FieldHelperText children typing
+        <FieldHelperText>
           Enter the email you'd like to receive the newsletter on.
-        </FormHelperText>
+        </FieldHelperText>
       ) : (
-        <FormErrorMessage>Email is required.</FormErrorMessage>
+        // @ts-expect-error Chakra v3 FieldErrorText children typing
+        <FieldErrorText>Email is required.</FieldErrorText>
       )}
-    </FormControl>
+    </FieldRoot>
   )
 }
 
 export const WithRequiredField = () => (
-  <FormControl required>
-    <FormLabel>First name</FormLabel>
+  <FieldRoot required>
+    {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
+    <FieldLabel>First name</FieldLabel>
     <Input placeholder="First name" />
-  </FormControl>
+  </FieldRoot>
 )
 
 export const WithSelect = () => (
-  <FormControl>
-    <FormLabel>Country</FormLabel>
-    <Select placeholder="Select country">
-      <option>United Arab Emirates</option>
-      <option>Nigeria</option>
-    </Select>
-  </FormControl>
+  <FieldRoot>
+    {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
+    <FieldLabel>Country</FieldLabel>
+    <NativeSelectRoot>
+      <NativeSelectField placeholder="Select country">
+        <option>United Arab Emirates</option>
+        <option>Nigeria</option>
+      </NativeSelectField>
+    </NativeSelectRoot>
+  </FieldRoot>
 )
 
 export const WithNumberInput = () => (
-  <FormControl>
-    <FormLabel>Amount</FormLabel>
-    <NumberInput max={50} min={10}>
-      <NumberInputField />
-      <NumberInputStepper>
-        <NumberIncrementStepper />
-        <NumberDecrementStepper />
-      </NumberInputStepper>
-    </NumberInput>
-  </FormControl>
+  <FieldRoot>
+    {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
+    <FieldLabel>Amount</FieldLabel>
+    <NumberInputRoot max={50} min={10}>
+      <NumberInputInput />
+      <NumberInputControl>
+        <NumberInputIncrementTrigger />
+        <NumberInputDecrementTrigger />
+      </NumberInputControl>
+    </NumberInputRoot>
+  </FieldRoot>
 )
 
 export const WithFormik = () => {
@@ -131,11 +147,13 @@ export const WithFormik = () => {
         <Form>
           <Field name="name" validate={validateName}>
             {({ field, form }: any) => (
-              <FormControl invalid={form.errors.name && form.touched.name}>
-                <FormLabel>First name</FormLabel>
+              <FieldRoot invalid={form.errors.name && form.touched.name}>
+                {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
+                <FieldLabel>First name</FieldLabel>
                 <Input {...field} placeholder="name" />
-                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-              </FormControl>
+                {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
+                <FieldErrorText>{form.errors.name}</FieldErrorText>
+              </FieldRoot>
             )}
           </Field>
           <Button

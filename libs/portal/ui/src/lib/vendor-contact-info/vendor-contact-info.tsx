@@ -9,19 +9,20 @@ export interface VendorContactInfoProps {
 const VendorContactInfo = ({ name, email }: VendorContactInfoProps) => (
   <Flex direction="column">
     <Text>{name}</Text>
-    <HStack spacing="2">
-      <Link isExternal href={`mailto:${email}`}>
+    <HStack gap="2">
+      <Link href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
         <Text as="span">{email}</Text>
       </Link>
       <IconButton
-        variant="link"
+        variant="plain"
         color="primary.600"
-        icon={<MdFileCopy />}
         aria-label="copy email"
         onClick={() => {
           navigator.clipboard.writeText(email)
         }}
-      />
+      >
+        <MdFileCopy />
+      </IconButton>
     </HStack>
   </Flex>
 )

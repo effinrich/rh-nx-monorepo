@@ -1,0 +1,109 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Redesign Health Platform",
+  "theme": "maple",
+  "colors": {
+    "primary": "#9425C9",
+    "light": "#B540EC",
+    "dark": "#631487"
+  },
+  "favicon": "/images/favicon.svg",
+  "fonts": {
+    "family": "Inter",
+    "heading": {
+      "family": "Inter",
+      "weight": 700
+    },
+    "body": {
+      "family": "Inter",
+      "weight": 400
+    }
+  },
+  "appearance": {
+    "default": "system"
+  },
+  "background": {
+    "decoration": "gradient"
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs",
+    "codeblocks": {
+      "theme": {
+        "light": "github-light",
+        "dark": "github-dark"
+      }
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Platform",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": ["index", "getting-started"]
+          },
+          {
+            "group": "Architecture",
+            "pages": ["architecture", "shared-libraries"]
+          },
+          {
+            "group": "Applications",
+            "pages": [
+              "applications/overview",
+              {
+                "group": "Portal",
+                "pages": [
+                  "applications/portal/overview",
+                  "applications/portal/structure",
+                  "applications/portal/routing",
+                  "applications/portal/authentication",
+                  "applications/portal/state-management",
+                  "applications/portal/components",
+                  "applications/portal/styling",
+                  "applications/portal/development-workflow"
+                ]
+              },
+              "applications/third-party-network",
+              "applications/parser-playground"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Backend",
+        "groups": [
+          {
+            "group": "Services",
+            "pages": ["backend/services", "backend/authentication"]
+          },
+          {
+            "group": "Data",
+            "pages": ["backend/data-management", "backend/api-reference"]
+          }
+        ]
+      },
+      {
+        "tab": "Tooling",
+        "groups": [
+          {
+            "group": "Development",
+            "pages": [
+              "tooling/development-tools",
+              "tooling/testing",
+              "tooling/deployment"
+            ]
+          },
+          {
+            "group": "Contributing",
+            "pages": ["tooling/contributing"]
+          }
+        ]
+      }
+    ]
+  },
+  "footerSocials": {
+    "github": "https://github.com/ArdentHQ/rh-nx-monorepo"
+  },
+  "mermaid": {}
+}

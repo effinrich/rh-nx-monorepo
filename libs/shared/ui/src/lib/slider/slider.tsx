@@ -23,7 +23,7 @@ export {
 export { SliderMarker as SliderMark } from '@chakra-ui/react'
 
 // Re-export with v2 names for backward compatibility
-export { SliderRange as SliderFilledTrack } from '@chakra-ui/react'
+export { SliderRange as SliderFilledTrack, SliderMarker as SliderMark } from '@chakra-ui/react'
 
 // Export types
 export type { SliderRootProps, SliderThumbProps } from '@chakra-ui/react'

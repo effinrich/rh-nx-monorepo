@@ -42,7 +42,7 @@ const ToggleIcon = (props: { active: boolean }) => {
   )
 }
 
-interface ToggleButtonProps extends IconButtonProps {
+export interface ToggleButtonProps extends Omit<IconButtonProps, 'children'> {
   open: boolean
 }
 
@@ -51,7 +51,7 @@ export const ToggleButton = (props: ToggleButtonProps) => {
   return (
     <IconButton
       position="relative"
-      variant="unstyled"
+      variant="ghost"
       size="sm"
       color="on-accent"
       zIndex="skipLink"

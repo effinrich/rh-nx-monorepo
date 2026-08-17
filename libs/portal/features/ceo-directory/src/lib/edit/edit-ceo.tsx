@@ -85,15 +85,15 @@ export const EditCeo = () => {
                 variant="outline"
                 mr={3}
                 onClick={() => navigate(-1)}
-                isDisabled={isPending}
+                disabled={isPending}
                 w={['50%', 'auto']}
               >
                 Cancel
               </Button>
               <Button
-                colorScheme="brand"
-                isDisabled={isPending || !isValid}
-                isLoading={isPending}
+                colorPalette="brand"
+                disabled={isPending || !isValid}
+                loading={isPending}
                 type="submit"
                 onClick={() => handleOnSubmit()}
                 w={['50%', 'auto']}

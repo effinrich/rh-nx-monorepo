@@ -39,10 +39,10 @@ export const AdvisorList = () => {
       <Flex justify="space-between" align="flex-end" gap="20px">
         <Search onChange={setSearch} />
         <Flex gap="2">
-          <Button onClick={decrementPage} isDisabled={page <= 0}>
+          <Button onClick={decrementPage} disabled={page <= 0}>
             Previous
           </Button>
-          <Button onClick={incrementPage} isDisabled={page >= maxPage}>
+          <Button onClick={incrementPage} disabled={page >= maxPage}>
             Next
           </Button>
         </Flex>

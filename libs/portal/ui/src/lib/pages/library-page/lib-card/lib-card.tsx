@@ -1,7 +1,7 @@
 import {
   Box,
   BoxProps,
-  Card,
+  CardRoot,
   CardBody,
   CardFooter,
   CardHeader,
@@ -23,7 +23,7 @@ export const LibCard = ({
   ...props
 }: LibCardProps) => {
   return (
-    <Card
+    <CardRoot
       {...props}
       cursor="pointer"
       borderWidth="1px"
@@ -64,7 +64,7 @@ export const LibCard = ({
       <CardFooter>
         <Divider />
       </CardFooter>
-    </Card>
+    </CardRoot>
   )
 }
 

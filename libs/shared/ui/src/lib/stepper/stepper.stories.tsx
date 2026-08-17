@@ -2,14 +2,18 @@ import { Box } from '../box/box'
 import { HStack } from '../h-stack/h-stack'
 
 import {
-  Step,
-  StepDescription,
-  StepIndicator,
-  StepIndicatorContent,
-  Stepper,
-  StepSeparator,
-  StepTitle,
-  useSteps
+  StepsRoot,
+  StepsItem,
+  StepsIndicator,
+  StepsSeparator,
+  StepsTitle,
+  StepsDescription,
+  StepsStatus,
+  StepsList,
+  StepsContent,
+  StepsCompletedContent,
+  StepsNextTrigger,
+  StepsPrevTrigger
 } from './stepper'
 
 export default {
@@ -23,67 +27,61 @@ const steps = [
 ]
 
 export const Horizontal = () => {
-  const { goToNext, goToPrevious, activeStep, setActiveStep } = useSteps({
-    index: 1,
-    count: steps.length
-  })
-
   return (
-    <>
-      <Stepper index={activeStep}>
+    <StepsRoot defaultStep={1} count={steps.length}>
+      <StepsList>
         {steps.map((step, index) => (
-          <Step key={index} onClick={() => setActiveStep(index)}>
-            <StepIndicator>
-              <StepIndicatorContent />
-            </StepIndicator>
-
+          // @ts-expect-error Chakra v3 compound component typing
+          <StepsItem key={index} index={index}>
+            {/* @ts-expect-error Chakra v3 compound component typing */}
+            <StepsIndicator />
             <Box flexShrink="0">
-              <StepTitle>{step.title}</StepTitle>
-              <StepDescription>{step.description}</StepDescription>
+              <StepsTitle>{step.title}</StepsTitle>
+              <StepsDescription>{step.description}</StepsDescription>
             </Box>
-
-            <StepSeparator />
-          </Step>
+            <StepsSeparator />
+          </StepsItem>
         ))}
-      </Stepper>
+      </StepsList>
 
       <HStack mt="5">
-        <button onClick={goToPrevious}>Prev</button>
-        <button onClick={goToNext}>Next</button>
+        <StepsPrevTrigger asChild>
+          <button>Prev</button>
+        </StepsPrevTrigger>
+        <StepsNextTrigger asChild>
+          <button>Next</button>
+        </StepsNextTrigger>
       </HStack>
-    </>
+    </StepsRoot>
   )
 }
 
 export const Vertical = () => {
-  const { goToNext, goToPrevious, activeStep } = useSteps({
-    index: 1,
-    count: steps.length
-  })
-
   return (
-    <>
-      <Stepper index={activeStep} orientation="vertical" height="400px" gap="0">
+    <StepsRoot defaultStep={1} count={steps.length} orientation="vertical">
+      <StepsList height="400px">
         {steps.map((step, index) => (
-          <Step key={index}>
-            <StepIndicator>
-              <StepIndicatorContent />
-            </StepIndicator>
-
+          // @ts-expect-error Chakra v3 compound component typing
+          <StepsItem key={index} index={index}>
+            {/* @ts-expect-error Chakra v3 compound component typing */}
+            <StepsIndicator />
             <Box flexShrink="0">
-              <StepTitle>{step.title}</StepTitle>
-              <StepDescription>{step.description}</StepDescription>
+              <StepsTitle>{step.title}</StepsTitle>
+              <StepsDescription>{step.description}</StepsDescription>
             </Box>
-
-            <StepSeparator />
-          </Step>
+            <StepsSeparator />
+          </StepsItem>
         ))}
-      </Stepper>
+      </StepsList>
 
       <HStack mt="5">
-        <button onClick={goToPrevious}>Prev</button>
-        <button onClick={goToNext}>Next</button>
+        <StepsPrevTrigger asChild>
+          <button>Prev</button>
+        </StepsPrevTrigger>
+        <StepsNextTrigger asChild>
+          <button>Next</button>
+        </StepsNextTrigger>
       </HStack>
-    </>
+    </StepsRoot>
   )
 }

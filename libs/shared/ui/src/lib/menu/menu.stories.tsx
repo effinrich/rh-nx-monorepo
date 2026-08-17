@@ -1,5 +1,3 @@
-import { Menu } from '@chakra-ui/react'
-
 import type { Meta } from '@storybook/react-vite'
 
 import { Button } from '../button/button'
@@ -14,8 +12,18 @@ import {
 } from '../icons/icons'
 import { Image } from '../image/image'
 
-const Story: Meta<typeof Menu> = {
-  component: Menu,
+import {
+  MenuRoot,
+  MenuTrigger,
+  MenuSeparator,
+  MenuItemGroup,
+  MenuItemGroupLabel,
+  MenuItem,
+  MenuContent
+} from './menu'
+
+const Story: Meta<typeof MenuRoot> = {
+  component: MenuRoot,
   title: 'Overlay/Menu',
   args: {}
 }
@@ -23,57 +31,59 @@ export default Story
 
 export const Default = {
   render: (args: any) => (
-    <Menu.Root {...args}>
-      <Menu.Trigger asChild>
-        <Button rightIcon={<ChevronDownIcon />}>Actions</Button>
-      </Menu.Trigger>
-      <Menu.Content>
-        <Menu.Item value="download">Download</Menu.Item>
-        <Menu.Item value="copy">Create a Copy</Menu.Item>
-        <Menu.Item value="draft">Mark as Draft</Menu.Item>
-        <Menu.Item value="delete">Delete</Menu.Item>
-        <Menu.Item value="attend">Attend a Workshop</Menu.Item>
-      </Menu.Content>
-    </Menu.Root>
+    <MenuRoot {...args}>
+      <MenuTrigger asChild>
+        <Button>
+          Actions
+          <ChevronDownIcon />
+        </Button>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItem value="download">Download</MenuItem>
+        <MenuItem value="copy">Create a Copy</MenuItem>
+        <MenuItem value="draft">Mark as Draft</MenuItem>
+        <MenuItem value="delete">Delete</MenuItem>
+        <MenuItem value="workshop">Attend a Workshop</MenuItem>
+      </MenuContent>
+    </MenuRoot>
   )
 }
 
 export const LetterNavigation = {
   render: (args: any) => (
-    <Menu.Root {...args}>
-      <Menu.Trigger asChild>
+    <MenuRoot {...args}>
+      <MenuTrigger asChild>
         <Button
           px={4}
           py={2}
-          transition="all 0.2s"
           borderRadius="md"
           borderWidth="1px"
-          _hover={{ bg: 'gray.400' }}
-          _expanded={{ bg: 'blue.400' }}
-          _focus={{ boxShadow: 'outline' }}
         >
           File <ChevronDownIcon />
         </Button>
-      </Menu.Trigger>
-      <Menu.Content>
-        <Menu.Item value="new-file">New File</Menu.Item>
-        <Menu.Item value="new-window">New Window</Menu.Item>
-        <Menu.Separator />
-        <Menu.Item value="open">Open...</Menu.Item>
-        <Menu.Item value="save">Save File</Menu.Item>
-      </Menu.Content>
-    </Menu.Root>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItem value="new-file">New File</MenuItem>
+        <MenuItem value="new-window">New Window</MenuItem>
+        <MenuSeparator />
+        <MenuItem value="open">Open...</MenuItem>
+        <MenuItem value="save">Save File</MenuItem>
+      </MenuContent>
+    </MenuRoot>
   )
 }
 
 export const WithImages = {
   render: (args: any) => (
-    <Menu.Root {...args}>
-      <Menu.Trigger asChild>
-        <Button rightIcon={<ChevronDownIcon />}>Your Cats</Button>
-      </Menu.Trigger>
-      <Menu.Content>
-        <Menu.Item value="fluffy" minH="48px">
+    <MenuRoot {...args}>
+      <MenuTrigger asChild>
+        <Button>
+          Your Cats
+          <ChevronDownIcon />
+        </Button>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItem value="fluffybuns" minH="48px">
           <Image
             boxSize="2rem"
             borderRadius="full"
@@ -82,8 +92,8 @@ export const WithImages = {
             mr="12px"
           />
           <span>Fluffybuns the Destroyer</span>
-        </Menu.Item>
-        <Menu.Item value="simon" minH="40px">
+        </MenuItem>
+        <MenuItem value="simon" minH="40px">
           <Image
             boxSize="2rem"
             borderRadius="full"
@@ -92,125 +102,112 @@ export const WithImages = {
             mr="12px"
           />
           <span>Simon the pensive</span>
-        </Menu.Item>
-      </Menu.Content>
-    </Menu.Root>
+        </MenuItem>
+      </MenuContent>
+    </MenuRoot>
   )
 }
 
 export const WithIconsAndCommands = {
   render: (args: any) => (
-    <Menu.Root {...args}>
-      <Menu.Trigger asChild>
-        <IconButton
-          aria-label="Options"
-          icon={<HamburgerIcon />}
-          variant="outline"
-        />
-      </Menu.Trigger>
-      <Menu.Content>
-        <Menu.Item value="new-tab">
+    <MenuRoot {...args}>
+      <MenuTrigger asChild>
+        <IconButton aria-label="Options" variant="outline">
+          <HamburgerIcon />
+        </IconButton>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItem value="new-tab">
           <AddIcon />
           New Tab
-          <Menu.ItemCommand>⌘T</Menu.ItemCommand>
-        </Menu.Item>
-        <Menu.Item value="new-window">
+        </MenuItem>
+        <MenuItem value="new-window">
           <ExternalLinkIcon />
           New Window
-          <Menu.ItemCommand>⌘N</Menu.ItemCommand>
-        </Menu.Item>
-        <Menu.Item value="open-closed">
+        </MenuItem>
+        <MenuItem value="open-closed">
           <RepeatIcon />
           Open Closed Tab
-          <Menu.ItemCommand>⌘⇧N</Menu.ItemCommand>
-        </Menu.Item>
-        <Menu.Item value="open-file">
+        </MenuItem>
+        <MenuItem value="open-file">
           <EditIcon />
           Open File...
-          <Menu.ItemCommand>⌘O</Menu.ItemCommand>
-        </Menu.Item>
-      </Menu.Content>
-    </Menu.Root>
+        </MenuItem>
+      </MenuContent>
+    </MenuRoot>
   )
 }
 
 export const LazyMounting = {
   render: (args: any) => (
-    <Menu.Root lazyMount {...args}>
-      <Menu.Trigger asChild>
+    <MenuRoot {...args}>
+      <MenuTrigger asChild>
         <Button>Open menu</Button>
-      </Menu.Trigger>
-      <Menu.Content>
-        {/* MenuItems are not rendered unless Menu is open */}
-        <Menu.Item value="new-window">New Window</Menu.Item>
-        <Menu.Item value="open-closed">Open Closed Tab</Menu.Item>
-        <Menu.Item value="open-file">Open File</Menu.Item>
-      </Menu.Content>
-    </Menu.Root>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItem value="new-window">New Window</MenuItem>
+        <MenuItem value="open-closed">Open Closed Tab</MenuItem>
+        <MenuItem value="open-file">Open File</MenuItem>
+      </MenuContent>
+    </MenuRoot>
   )
 }
 
 export const WithMenuGroup = {
   render: (args: any) => (
-    <Menu.Root {...args}>
-      <Menu.Trigger asChild>
+    <MenuRoot {...args}>
+      <MenuTrigger asChild>
         <Button colorPalette="pink">Profile</Button>
-      </Menu.Trigger>
-      <Menu.Content>
-        <Menu.ItemGroup>
-          <Menu.ItemGroupLabel>Profile</Menu.ItemGroupLabel>
-          <Menu.Item value="account">My Account</Menu.Item>
-          <Menu.Item value="payments">Payments </Menu.Item>
-        </Menu.ItemGroup>
-        <Menu.Separator />
-        <Menu.ItemGroup>
-          <Menu.ItemGroupLabel>Help</Menu.ItemGroupLabel>
-          <Menu.Item value="docs">Docs</Menu.Item>
-          <Menu.Item value="faq">FAQ</Menu.Item>
-        </Menu.ItemGroup>
-      </Menu.Content>
-    </Menu.Root>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItemGroup>
+          <MenuItemGroupLabel>Profile</MenuItemGroupLabel>
+          <MenuItem value="account">My Account</MenuItem>
+          <MenuItem value="payments">Payments</MenuItem>
+        </MenuItemGroup>
+        <MenuSeparator />
+        <MenuItemGroup>
+          <MenuItemGroupLabel>Help</MenuItemGroupLabel>
+          <MenuItem value="docs">Docs</MenuItem>
+          <MenuItem value="faq">FAQ</MenuItem>
+        </MenuItemGroup>
+      </MenuContent>
+    </MenuRoot>
   )
 }
 
 export const MenuItemAsALink = {
   render: (args: any) => (
-    <Menu.Root {...args}>
-      <Menu.Trigger asChild>
+    <MenuRoot {...args}>
+      <MenuTrigger asChild>
         <Button>Open menu</Button>
-      </Menu.Trigger>
-      <Menu.Content>
-        <Menu.Item value="link1" asChild>
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItem value="link1" asChild>
           <a href="#">Link 1</a>
-        </Menu.Item>
-        <Menu.Item value="link2" asChild>
+        </MenuItem>
+        <MenuItem value="link2" asChild>
           <a href="#">Link 2</a>
-        </Menu.Item>
-      </Menu.Content>
-    </Menu.Root>
+        </MenuItem>
+      </MenuContent>
+    </MenuRoot>
   )
 }
 
 export const MenuOptionGroups = {
   render: (args: any) => (
-    <Menu.Root closeOnSelect={false} {...args}>
-      <Menu.Trigger asChild>
+    <MenuRoot closeOnSelect={false} {...args}>
+      <MenuTrigger asChild>
         <Button colorPalette="blue">MenuItem</Button>
-      </Menu.Trigger>
-      <Menu.Content minWidth="240px">
-        <Menu.RadioItemGroup defaultValue="asc">
-          <Menu.ItemGroupLabel>Order</Menu.ItemGroupLabel>
-          <Menu.RadioItem value="asc">Ascending</Menu.RadioItem>
-          <Menu.RadioItem value="desc">Descending</Menu.RadioItem>
-        </Menu.RadioItemGroup>
-        <Menu.Separator />
-        <Menu.CheckboxItemGroup defaultValue={['email', 'phone']}>
-          <Menu.ItemGroupLabel>Country</Menu.ItemGroupLabel>
-          <Menu.CheckboxItem value="email">Email</Menu.CheckboxItem>
-          <Menu.CheckboxItem value="phone">Phone</Menu.CheckboxItem>
-          <Menu.CheckboxItem value="country">Country</Menu.CheckboxItem>
-        </Menu.CheckboxItemGroup>
-      </Menu.Content>
-    </Menu.Root>
+      </MenuTrigger>
+      <MenuContent minWidth="240px">
+        <MenuItem value="asc">Ascending</MenuItem>
+        <MenuItem value="desc">Descending</MenuItem>
+        <MenuSeparator />
+        <MenuItem value="email">Email</MenuItem>
+        <MenuItem value="phone">Phone</MenuItem>
+        <MenuItem value="country">Country</MenuItem>
+      </MenuContent>
+    </MenuRoot>
   )
 }

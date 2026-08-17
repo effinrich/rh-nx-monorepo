@@ -2,7 +2,7 @@ import { MdOutlinePending } from 'react-icons/md'
 import {
   Flex,
   Icon,
-  List,
+  ListRoot,
   ListItem,
   Loader,
   StarIcon,
@@ -37,7 +37,7 @@ export const OpcoEngagements = ({
 
   return (
     <OpcoEngagementsPopover opcoName={opcoName}>
-      <List as={Flex} flexDir="column" gap="36px">
+      <ListRoot as={Flex} flexDir="column" gap="36px">
         {engagements?.map(engagement => {
           const reviewDate = new Date(engagement.reviewDate ?? '')
 
@@ -103,7 +103,7 @@ export const OpcoEngagements = ({
             </ListItem>
           )
         })}
-      </List>
+      </ListRoot>
     </OpcoEngagementsPopover>
   )
 }

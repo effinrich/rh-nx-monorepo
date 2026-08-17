@@ -13,14 +13,20 @@ import {
 } from '@redesignhealth/portal/data-assets'
 import { HasRole } from '@redesignhealth/portal/utils'
 import {
-  Avatar,
+  AvatarRoot,
+  AvatarImage,
+  AvatarFallback,
   Button,
   Flex,
   HStack,
   Icon,
   Link,
   Text,
-  Tooltip
+  TooltipRoot,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipArrow,
+  TooltipPositioner
 } from '@redesignhealth/ui'
 
 import { ListCard } from '../../../list-card/list-card'
@@ -77,7 +83,13 @@ export const CeoCard = ({
   return (
     <ListCard>
       <ListCardHeader
-        leftAddon={<Avatar name={ceoName} src={ceoPictureHref} />}
+        leftAddon={
+          <AvatarRoot name={ceoName}>
+            {/* @ts-expect-error Chakra v3 compound component typing */}
+            <AvatarImage src={ceoPictureHref} />
+            <AvatarFallback />
+          </AvatarRoot>
+        }
         title={
           isCeoOptOut ? (
             <Text>
@@ -98,21 +110,24 @@ export const CeoCard = ({
                   ]}
                   currentRole={currentRole}
                 >
-                  <Tooltip
-                    hasArrow
-                    label="CEO opt-out, profile not externally visible"
-                    placement="right"
-                    aria-label="CEO has opted out of CEO Directory"
-                  >
-                    <Flex align="center">
-                      <Icon
-                        as={MdVisibilityOff}
-                        color="red.500"
-                        aria-label="CEO opt-out icon"
-                        boxSize={6}
-                      />
-                    </Flex>
-                  </Tooltip>
+                  <TooltipRoot positioning={{ placement: 'right' }}>
+                    <TooltipTrigger asChild>
+                      <Flex align="center">
+                        <Icon
+                          as={MdVisibilityOff}
+                          color="red.500"
+                          aria-label="CEO opt-out icon"
+                          boxSize={6}
+                        />
+                      </Flex>
+                    </TooltipTrigger>
+                    <TooltipPositioner>
+                      <TooltipContent aria-label="CEO has opted out of CEO Directory">
+                        <TooltipArrow />
+                        CEO opt-out, profile not externally visible
+                      </TooltipContent>
+                    </TooltipPositioner>
+                  </TooltipRoot>
                 </HasRole>
               )}
             </HStack>
@@ -143,13 +158,12 @@ export const CeoCard = ({
       >
         {!isCeoOptOut && (
           <Button
-            as={RouterLink}
-            to={`${id}`}
-            colorScheme="primary"
+            asChild
+            colorPalette="primary"
             variant="solid"
             width={['100%', '100%', 'initial']}
           >
-            View profile
+            <RouterLink to={`${id}`}>View profile</RouterLink>
           </Button>
         )}
         {isCeoOptOut && (
@@ -173,11 +187,19 @@ export const CeoCard = ({
                 <Text>{company?.name}</Text>
               ))}{' '}
             {company?.description && (
-              <Tooltip hasArrow label={company?.description} placement="right">
-                <Flex align="center">
-                  <Icon as={MdInfoOutline} boxSize={6} color="gray.500" />
-                </Flex>
-              </Tooltip>
+              <TooltipRoot positioning={{ placement: 'right' }}>
+                <TooltipTrigger asChild>
+                  <Flex align="center">
+                    <Icon as={MdInfoOutline} boxSize={6} color="gray.500" />
+                  </Flex>
+                </TooltipTrigger>
+                <TooltipPositioner>
+                  <TooltipContent>
+                    <TooltipArrow />
+                    {company?.description}
+                  </TooltipContent>
+                </TooltipPositioner>
+              </TooltipRoot>
             )}
           </Flex>
         </ListCardRow>

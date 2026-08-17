@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "watch": {
+      "implementation": "./src/executors/watch/executor",
+      "schema": "./src/executors/watch/executor.schema.json",
+      "description": "Watch component files and auto-generate/update Storybook stories"
+    }
+  }
+}

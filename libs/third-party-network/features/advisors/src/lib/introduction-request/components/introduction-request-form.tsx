@@ -23,7 +23,7 @@ import { SuccessConfirmation } from './success-confirmation'
 interface IntroductionRequestFormProps {
   advisorId: string
   advisorName?: string
-  isOpen: UseDisclosureReturn['isOpen']
+  isOpen: boolean
   onClose: UseDisclosureReturn['onClose']
 }
 
@@ -58,8 +58,9 @@ export const IntroductionRequestForm = ({
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} size="5xl">
+    <Modal open={isOpen} onOpenChange={(e: { open: boolean }) => !e.open && handleClose()} size="5xl">
       <ModalOverlay />
+      {/* @ts-expect-error Chakra v3 DialogContent children typing */}
       <ModalContent minH="470px">
         <ModalHeader>Request Introduction</ModalHeader>
         <ModalCloseButton />
@@ -86,10 +87,10 @@ export const IntroductionRequestForm = ({
           {isError && <ErrorAlert />}
 
           <ModalFooter as={Flex} gap="16px" px="0">
-            <Button colorScheme="gray" onClick={handleClose}>
+            <Button colorPalette="gray" onClick={handleClose}>
               Close
             </Button>
-            <Button type="submit" isLoading={isPending} colorScheme="blue">
+            <Button type="submit" loading={isPending} colorPalette="blue">
               Request Introduction
             </Button>
           </ModalFooter>

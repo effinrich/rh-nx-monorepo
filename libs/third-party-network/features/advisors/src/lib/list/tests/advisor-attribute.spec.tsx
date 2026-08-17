@@ -1,4 +1,4 @@
-import { List } from '@redesignhealth/ui'
+import { ListRoot } from '@redesignhealth/ui'
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
@@ -20,11 +20,11 @@ describe('AdvisorAttribute', () => {
 
 const renderComponent = () => {
   return render(
-    <List>
+    <ListRoot>
       <AdvisorAttribute attribute={data.attribute}>
         {data.value}
       </AdvisorAttribute>
-    </List>
+    </ListRoot>
   )
 }
 

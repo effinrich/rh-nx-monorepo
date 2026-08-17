@@ -20,12 +20,13 @@ export const SelectionBoxSearch = ({
   )
 
   return (
-    <InputGroup startElement={<MdSearch />} {...props}>
+    <InputGroup {...props} startElement={<MdSearch height="16px" width="16px" />}>
       <Input
         placeholder="Search"
         aria-label="Search"
         name="search"
         onChange={event => setNotesSearchQuery(event.target.value)}
+        ps="10"
         {...inputProps}
       />
     </InputGroup>

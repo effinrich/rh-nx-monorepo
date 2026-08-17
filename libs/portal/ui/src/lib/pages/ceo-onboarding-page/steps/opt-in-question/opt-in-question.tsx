@@ -1,6 +1,6 @@
 import {
   Button,
-  Card,
+  CardRoot,
   CardFooter,
   CardHeader,
   Divider
@@ -20,7 +20,7 @@ const OptInQuestion = ({
   setIsOptIn
 }: OptInQuestionProps) => {
   return (
-    <Card variant="outline">
+    <CardRoot variant="outline">
       <CardHeader>
         Do you wish to opt in to sharing your information with other founders?
         You can always change this later in your CEO profile.
@@ -29,14 +29,14 @@ const OptInQuestion = ({
       <OptInForm isOptIn={isOptIn} setIsOptIn={setIsOptIn} />
       <Divider />
       <CardFooter justify="flex-end" gap={3}>
-        <Button variant="ghost" isDisabled>
+        <Button variant="ghost" disabled>
           Back
         </Button>
-        <Button variant="primary" isDisabled={!isOptIn} onClick={handleConfirm}>
+        <Button variant="solid" colorPalette="primary" disabled={!isOptIn} onClick={handleConfirm}>
           Continue
         </Button>
       </CardFooter>
-    </Card>
+    </CardRoot>
   )
 }
 

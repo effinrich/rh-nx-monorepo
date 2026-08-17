@@ -1,11 +1,13 @@
 import { render, screen, testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { Avatar, AvatarGroup } from './avatar'
+import { AvatarRoot, AvatarFallback, AvatarGroup } from './avatar'
 
 it('passes a11y test', async () => {
   await testA11y(
     <AvatarGroup>
-      <Avatar />
+      <AvatarRoot>
+        <AvatarFallback />
+      </AvatarRoot>
     </AvatarGroup>,
     {
       axeOptions: {
@@ -20,11 +22,11 @@ it('passes a11y test', async () => {
 test('renders a number avatar showing count of truncated avatars', () => {
   render(
     <AvatarGroup max={2}>
-      <Avatar />
-      <Avatar />
-      <Avatar />
-      <Avatar />
-      <Avatar />
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
     </AvatarGroup>
   )
   const moreLabel = screen.getByText('+3')
@@ -34,10 +36,10 @@ test('renders a number avatar showing count of truncated avatars', () => {
 test('does not render a number avatar showing count of truncated avatars if max is equal to avatars given', async () => {
   const utils = render(
     <AvatarGroup max={4}>
-      <Avatar />
-      <Avatar />
-      <Avatar />
-      <Avatar />
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
     </AvatarGroup>
   )
   const moreLabel = utils.container.querySelector('.chakra-avatar--excess')
@@ -47,10 +49,10 @@ test('does not render a number avatar showing count of truncated avatars if max 
 test('does not render a number avatar showing count of truncated avatars if max is more than avatars given', async () => {
   const utils = render(
     <AvatarGroup max={6}>
-      <Avatar />
-      <Avatar />
-      <Avatar />
-      <Avatar />
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
+      <AvatarRoot><AvatarFallback /></AvatarRoot>
     </AvatarGroup>
   )
   const moreLabel = utils.container.querySelector('.chakra-avatar--excess')

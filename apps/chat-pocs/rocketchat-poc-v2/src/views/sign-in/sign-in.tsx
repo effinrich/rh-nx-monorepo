@@ -69,7 +69,7 @@ export const SignIn = () => {
 
           <Button
             onClick={() => googleLogin()}
-            colorScheme="purple"
+            colorPalette="purple"
             variant="solid"
           >
             Google Auth-Flow Login

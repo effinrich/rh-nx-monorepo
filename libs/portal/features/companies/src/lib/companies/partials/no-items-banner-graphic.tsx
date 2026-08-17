@@ -1,9 +1,8 @@
-import { Box } from '@redesignhealth/ui'
+import { rh } from '@redesignhealth/ui'
 
 const NoItemsBannerGraphic = () => {
   return (
-    <Box
-      as="svg"
+    <rh.svg
       width="180"
       height="136"
       viewBox="0 0 180 136"
@@ -162,7 +161,7 @@ const NoItemsBannerGraphic = () => {
           <stop offset="0.350715" stopColor="white" stopOpacity="0" />
         </linearGradient>
       </defs>
-    </Box>
+    </rh.svg>
   )
 }
 

@@ -1,10 +1,10 @@
 import { render } from '@redesignhealth/shared-utils-jest'
 
-import { Tag } from './tag'
+import { TagRoot, TagLabel } from './tag'
 
 describe('Tag', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Tag />)
+    const { baseElement } = render(<TagRoot><TagLabel>Test</TagLabel></TagRoot>)
     expect(baseElement).toBeTruthy()
   })
 })

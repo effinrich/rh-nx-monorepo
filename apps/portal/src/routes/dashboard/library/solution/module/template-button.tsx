@@ -31,8 +31,7 @@ export const TemplateButton = memo(
     return (
       <Button
         variant="solid"
-        colorScheme="primary"
-        rightIcon={<MdLaunch />}
+        colorPalette="primary"
         onClick={() => {
           analytics.sendSelectContentEvent({
             content_type: 'Template',
@@ -40,10 +39,11 @@ export const TemplateButton = memo(
           })
           login()
         }}
-        isLoading={isPending}
-        isDisabled={isPending}
+        loading={isPending}
+        disabled={isPending}
       >
         Open template
+        <MdLaunch />
       </Button>
     )
   }

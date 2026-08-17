@@ -1,28 +1,27 @@
-// Chakra UI v3: Drawer uses compound component pattern (same as Dialog)
+// Chakra UI v3: Drawer uses compound component pattern
 // See: https://chakra-ui.com/docs/get-started/migration
 
-export { DrawerRoot as Drawer } from '@chakra-ui/react'
+// Export Drawer compound namespace (v3 recommended: Drawer.Root, Drawer.Content, etc.)
+export { Drawer } from '@chakra-ui/react'
 
-// Export Drawer compound components (v3 recommended pattern)
+// Export v3 named Drawer components
 export {
-  DrawerActionTrigger,
-  DrawerBackdrop,
-  DrawerBody,
-  DrawerCloseTrigger,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerPositioner,
   DrawerRoot,
+  DrawerBackdrop,
+  DrawerPositioner,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
   DrawerTitle,
-  DrawerTrigger
+  DrawerDescription,
+  DrawerCloseTrigger,
+  DrawerTrigger,
+  DrawerActionTrigger
 } from '@chakra-ui/react'
 
-// Re-export with v2 names for backward compatibility during migration
-// These are deprecated - use Drawer.* components instead
-export type { DrawerRootProps } from '@chakra-ui/react'
+// v2 backward-compat aliases
 export {
-  DrawerCloseTrigger as DrawerCloseButton,
-  DrawerBackdrop as DrawerOverlay
+  DrawerBackdrop as DrawerOverlay,
+  DrawerCloseTrigger as DrawerCloseButton
 } from '@chakra-ui/react'

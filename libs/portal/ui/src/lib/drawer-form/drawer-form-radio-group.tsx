@@ -1,15 +1,15 @@
-import { Box, Radio, RadioGroup } from '@redesignhealth/ui'
+import { Box, Radio, RadioGroupRoot } from '@redesignhealth/ui'
 
 export const DrawerFormRadioGroup = (props: {
   options: Array<{ value: string; label?: string }>
   name?: string
   defaultValue?: string
   direction?: 'row' | 'column'
-  isReadOnly?: boolean
-  isDisabled?: boolean
+  readOnly?: boolean
+  disabled?: boolean
 }) => {
   return (
-    <RadioGroup
+    <RadioGroupRoot
       name={props.name}
       defaultValue={props.defaultValue}
       display="flex"
@@ -31,14 +31,14 @@ export const DrawerFormRadioGroup = (props: {
         >
           <Radio
             value={option.value}
-            isReadOnly={props.isReadOnly}
-            isDisabled={props.isDisabled}
-            colorScheme="purple"
+            readOnly={props.readOnly}
+            disabled={props.disabled}
+            colorPalette="purple"
           >
             {option.label ?? option.value}
           </Radio>
         </Box>
       ))}
-    </RadioGroup>
+    </RadioGroupRoot>
   )
 }

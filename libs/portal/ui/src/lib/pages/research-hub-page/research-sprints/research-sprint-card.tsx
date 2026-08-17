@@ -3,7 +3,7 @@ import { MdLock, MdOpenInNew } from 'react-icons/md'
 import { ResearchSprintCardProps } from '@redesignhealth/portal/data-assets'
 import { formatDate } from '@redesignhealth/portal/utils'
 import {
-  Alert,
+  AlertRoot,
   AlertIcon,
   AlertTitle,
   Badge,
@@ -67,15 +67,15 @@ export const ResearchSprintCard = ({
               textDecoration: 'none'
             }}
             href={reportLink}
-            rightIcon={<MdOpenInNew />}
-            colorScheme="primary"
+            colorPalette="primary"
             variant="solid"
             width={['100%', '100%', 'inherit']}
           >
             Read report
+            <MdOpenInNew />
           </Button>
         ) : (
-          <Alert
+          <AlertRoot
             status="error"
             rounded="md"
             pr={1}
@@ -85,7 +85,7 @@ export const ResearchSprintCard = ({
           >
             <AlertIcon />
             <AlertTitle>Invalid URL</AlertTitle>
-          </Alert>
+          </AlertRoot>
         )}
       </ListCard.Header>
 
@@ -119,7 +119,7 @@ export const ResearchSprintCard = ({
             <ListCard.Row title="Segments">
               <Flex gap="16px">
                 {segments?.map((segment, index) => (
-                  <Badge key={index} colorScheme="primary" size="sm">
+                  <Badge key={index} colorPalette="primary" size="sm">
                     {segment}
                   </Badge>
                 ))}
@@ -146,8 +146,8 @@ export const ResearchSprintCard = ({
         <ListCard.Row>
           <Button
             onClick={() => setIsShowMore(!isShowMore)}
-            variant="link"
-            colorScheme="primary"
+            variant="plain"
+            colorPalette="primary"
             size="md"
           >
             Show {isShowMore ? 'less' : 'more'}

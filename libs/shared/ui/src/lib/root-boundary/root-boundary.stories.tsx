@@ -1,12 +1,16 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
-import { MemoryRouter, Route, Routes, useRouteError } from 'react-router-dom'
 
 import { Box } from '../box/box'
+import { Button } from '../button/button'
+import { Flex } from '../flex/flex'
+import { Heading } from '../heading/heading'
+import { Text } from '../text/text'
 
-import { RootBoundary } from './root-boundary'
+// RootBoundary requires React Router's useRouteError hook which is only
+// available inside a route errorElement. We render the visual output directly
+// to demonstrate the error page UI.
 
 export default {
-  component: RootBoundary,
   title: 'Components / Feedback / RootBoundary',
   decorators: [
     (Story: any) => (
@@ -15,84 +19,102 @@ export default {
       </Box>
     )
   ]
-} as Meta<typeof RootBoundary>
+} as Meta
 
-// Mock logout function for stories
-const mockLogout = (callback?: () => void) => {
-  console.log('Logout called')
-  callback?.()
-}
+const ErrorDisplay = ({
+  statusCode,
+  statusText,
+  message
+}: {
+  statusCode: number | string
+  statusText: string
+  message: string
+}) => (
+  <Flex
+    flexDir="column"
+    justify="center"
+    p={{ base: '32px', xl: '112px' }}
+    h="100%"
+  >
+    <Heading
+      as="h1"
+      fontSize="16px"
+      lineHeight="24px"
+      fontWeight="semibold"
+      color="primary.700"
+    >
+      {statusCode} error
+    </Heading>
+    <Text
+      mt="12px"
+      fontSize="60px"
+      lineHeight="72px"
+      letterSpacing="-0.02em"
+      fontWeight="semibold"
+      color="gray.900"
+    >
+      {statusText}
+    </Text>
+    <Text
+      mt="24px"
+      fontSize="20px"
+      lineHeight="30px"
+      fontWeight="normal"
+      color="gray.500"
+    >
+      {message}
+    </Text>
+    <Flex gap="12px" mt="48px">
+      <Button variant="outline" size={{ base: 'md', md: 'lg' }}>
+        Go Back
+      </Button>
+      <Button colorPalette="primary" size={{ base: 'md', md: 'lg' }}>
+        Take me home
+      </Button>
+    </Flex>
+  </Flex>
+)
 
-// Error component that throws specific errors
-const ThrowError = ({ error }: { error: any }) => {
-  // eslint-disable-next-line @typescript-eslint/no-throw-literal
-  throw error
-}
-
-// Wrapper to create an error boundary with specific error
-const ErrorBoundaryWrapper = ({ error }: { error: any }) => {
-  return (
-    <MemoryRouter initialEntries={['/error']}>
-      <Routes>
-        <Route path="/error" element={<ThrowError error={error} />} />
-        <Route path="/" element={<div>Home</div>} />
-        <Route path="/sign-in" element={<div>Sign In</div>} />
-      </Routes>
-    </MemoryRouter>
-  )
-}
-
-export const Error404: StoryFn<typeof RootBoundary> = () => (
-  <ErrorBoundaryWrapper
-    error={{
-      status: 404,
-      statusText: 'Not Found',
-      data: {}
-    }}
+export const Error404: StoryFn = () => (
+  <ErrorDisplay
+    statusCode={404}
+    statusText="Not Found"
+    message="Sorry, the page you are looking for doesn't exist or has been moved."
   />
 )
 
-export const Error403: StoryFn<typeof RootBoundary> = () => (
-  <ErrorBoundaryWrapper
-    error={{
-      status: 403,
-      statusText: 'Forbidden',
-      data: {}
-    }}
+export const Error403: StoryFn = () => (
+  <ErrorDisplay
+    statusCode={403}
+    statusText="Forbidden"
+    message="Sorry, the page you are looking for has restricted access. Please contact your administrator."
   />
 )
 
-export const Error400: StoryFn<typeof RootBoundary> = () => (
-  <ErrorBoundaryWrapper
-    error={{
-      status: 400,
-      statusText: 'Bad Request',
-      data: {}
-    }}
+export const Error400: StoryFn = () => (
+  <ErrorDisplay
+    statusCode={400}
+    statusText="Bad Request"
+    message="Sorry, your request resulted in an error. You might not have permission to perform this action."
   />
 )
 
-export const Error500: StoryFn<typeof RootBoundary> = () => (
-  <ErrorBoundaryWrapper
-    error={{
-      status: 500,
-      statusText: 'Internal Server Error',
-      data: {}
-    }}
+export const Error500: StoryFn = () => (
+  <ErrorDisplay
+    statusCode={500}
+    statusText="Internal Server Error"
+    message="Sorry, something went wrong. Please try again or contact support."
   />
 )
 
-export const AxiosError: StoryFn<typeof RootBoundary> = () => (
-  <ErrorBoundaryWrapper
-    error={{
-      name: 'AxiosError',
-      message: 'Network Error',
-      response: {
-        status: 500
-      }
-    }}
+export const AxiosError: StoryFn = () => (
+  <ErrorDisplay
+    statusCode={500}
+    statusText="Network Error"
+    message="Sorry, your request resulted in an error."
   />
 )
+<<<<<<< HEAD
 
 export const GenericError: StoryFn<typeof RootBoundary> = () => (
   <ErrorBoundaryWrapper
@@ -152,3 +174,5 @@ export const Documentation: StoryFn = () => (
     </ul>
   </Box>
 )
+=======
+>>>>>>> origin/main

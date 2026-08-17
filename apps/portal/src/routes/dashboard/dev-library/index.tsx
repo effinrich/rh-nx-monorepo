@@ -160,7 +160,7 @@ export const DevLibrary = ({ libraryId, libraryRoute }: LibraryProps) => {
                 cacheOptions
                 isMulti={false}
                 name="search"
-                colorScheme="primary"
+                colorPalette="primary"
                 closeMenuOnSelect={true}
                 size="md"
                 placeholder="Search"
@@ -194,7 +194,7 @@ export const DevLibrary = ({ libraryId, libraryRoute }: LibraryProps) => {
                     fontSize="14px"
                     fontWeight="medium"
                   >
-                    <Text noOfLines={1}>{cat.title}</Text>
+                    <Text lineClamp={1}>{cat.title}</Text>
                   </Button>
                 </ListItem>
               )

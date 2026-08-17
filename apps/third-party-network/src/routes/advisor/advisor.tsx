@@ -17,8 +17,8 @@ export const Advisor = () => {
         <Button
           as={Link}
           to="/"
-          variant="link"
-          colorScheme="blue"
+          variant="plain"
+          colorPalette="blue"
           fontSize="xs"
         >
           Back to results

@@ -42,7 +42,7 @@ export const FormItem = ({
       _first={{ mt: '16px' }}
       _notFirst={{ mt: '32px' }}
     >
-      <FormControl isInvalid={Boolean(error)}>
+      <FormControl invalid={Boolean(error)}>
         <DrawerFormHeader>{categoryName}</DrawerFormHeader>
         <DrawerFormDescription as={FormLabel}>
           {serviceName}
@@ -51,7 +51,7 @@ export const FormItem = ({
           <DrawerFormRadioGroup
             name={getInputName(categoryName, serviceName)}
             options={[{ value: 'Yes' }, { value: 'No' }]}
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
             defaultValue={radioDefaultValue}
           />
         </Box>
@@ -64,7 +64,7 @@ export const FormItem = ({
           aria-label="If you answered no to the previous question, please provide an alternative service the company will use."
           placeholder="Enter an alternative service if your response was “No”"
           defaultValue={commentDefaultValue}
-          isReadOnly={isReadOnly}
+          readOnly={isReadOnly}
           mt="6px"
         />
       </FormControl>

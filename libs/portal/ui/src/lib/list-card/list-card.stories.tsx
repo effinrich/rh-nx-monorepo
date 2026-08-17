@@ -1,4 +1,4 @@
-import { Avatar, Button, Text } from '@redesignhealth/ui'
+import { AvatarRoot, AvatarImage, AvatarFallback, Button, Text } from '@redesignhealth/ui'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
@@ -19,7 +19,13 @@ export const Default: StoryObj<typeof ListCard> = {
     return (
       <ListCard>
         <ListCardHeader
-          leftAddon={<Avatar src="https://placekitten.com/200/200" />}
+          leftAddon={
+            <AvatarRoot>
+              {/* @ts-expect-error Chakra v3 compound component typing */}
+              <AvatarImage src="https://placekitten.com/200/200" />
+              <AvatarFallback />
+            </AvatarRoot>
+          }
           title="Title information"
           subtitle={<Text>Subtitle</Text>}
         />

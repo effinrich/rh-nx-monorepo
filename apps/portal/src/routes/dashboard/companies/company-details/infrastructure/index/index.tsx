@@ -58,7 +58,7 @@ const BADGE_COLOR_SCHEME = {
 }
 
 export const CompanyInfra = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open: isOpen, onOpen, onClose } = useDisclosure()
   const cardRef = useRef(null)
   const {
     Form,
@@ -115,7 +115,7 @@ export const CompanyInfra = () => {
           <Button
             as={Link}
             to={developerLibraryInfraLink}
-            variant="link"
+            variant="plain"
             textDecoration="underline"
             size="14px"
             fontWeight="normal"
@@ -150,7 +150,7 @@ export const CompanyInfra = () => {
               <Spacer />
               <Box>
                 <Badge
-                  colorScheme={`${
+                  colorPalette={`${
                     BADGE_COLOR_SCHEME[infraRequestStatus as string]
                   }`}
                   size="sm"
@@ -183,8 +183,8 @@ export const CompanyInfra = () => {
           <>
             <Button
               type="button"
-              colorScheme="primary"
-              isDisabled={!canInfraRequestBeSubmitted}
+              colorPalette="primary"
+              disabled={!canInfraRequestBeSubmitted}
               onClick={onOpen}
               display="block"
               mt="16px"
@@ -195,9 +195,9 @@ export const CompanyInfra = () => {
 
             <Modal
               finalFocusRef={cardRef}
-              isOpen={isOpen && !actionData?.success}
-              onClose={onClose}
-              isCentered
+              open={isOpen && !actionData?.success}
+              onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
+              placement="center"
             >
               <ModalOverlay />
               <ModalContent w="400px">
@@ -216,9 +216,9 @@ export const CompanyInfra = () => {
                     <Box as={Form} method="post" flex="1">
                       <Button
                         type="submit"
-                        colorScheme="primary"
+                        colorPalette="primary"
                         w="full"
-                        isLoading={formState === 'submitting'}
+                        loading={formState === 'submitting'}
                       >
                         Yes, Submit
                       </Button>

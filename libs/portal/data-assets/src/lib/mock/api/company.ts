@@ -1,4 +1,4 @@
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { SetupServer } from 'msw/node'
 
 import { CompanySummary } from '../../companies'
@@ -6,7 +6,7 @@ import { PersonSummary } from '../../types'
 
 export const mockGetCompany = (server: SetupServer, company: CompanySummary) =>
   server.use(
-    rest.get('/company/:companyId', (req, res, ctx) => res(ctx.json(company)))
+    http.get('/company/:companyId', () => HttpResponse.json(company))
   )
 
 export const mockGetCompanyMembers = (
@@ -14,7 +14,7 @@ export const mockGetCompanyMembers = (
   members: PersonSummary[]
 ) =>
   server.use(
-    rest.get('/company/:companyId/members', (req, res, ctx) =>
-      res(ctx.json({ content: members }))
+    http.get('/company/:companyId/members', () =>
+      HttpResponse.json({ content: members })
     )
   )

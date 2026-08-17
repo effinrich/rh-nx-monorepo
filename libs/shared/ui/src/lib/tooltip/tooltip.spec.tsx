@@ -7,19 +7,36 @@ import {
   waitFor
 } from '@redesignhealth/shared-utils-jest'
 
-import { Tooltip, TooltipProps } from './tooltip'
+import {
+  TooltipRoot,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipPositioner
+} from './tooltip'
+import type { TooltipRootProps } from './tooltip'
 
 const buttonLabel = 'Hover me'
 const tooltipLabel = 'tooltip label'
 
 const DummyComponent = (
-  props: Omit<TooltipProps & { isButtonDisabled?: boolean }, 'children'>
+  props: Partial<TooltipRootProps> & { isButtonDisabled?: boolean; shouldWrapChildren?: boolean }
 ) => {
-  const { isButtonDisabled, ...tooltipProps } = props
+  const { isButtonDisabled, shouldWrapChildren, ...tooltipProps } = props
   return (
-    <Tooltip label={tooltipLabel} {...tooltipProps}>
-      <button disabled={isButtonDisabled || false}>{buttonLabel}</button>
-    </Tooltip>
+    <TooltipRoot {...tooltipProps}>
+      <TooltipTrigger asChild>
+        {shouldWrapChildren ? (
+          <span>
+            <button disabled={isButtonDisabled || false}>{buttonLabel}</button>
+          </span>
+        ) : (
+          <button disabled={isButtonDisabled || false}>{buttonLabel}</button>
+        )}
+      </TooltipTrigger>
+      <TooltipPositioner>
+        <TooltipContent>{tooltipLabel}</TooltipContent>
+      </TooltipPositioner>
+    </TooltipRoot>
   )
 }
 
@@ -50,7 +67,7 @@ test.skip('shows on pointerover and closes on pointerleave', async () => {
   )
 })
 
-test('should not show on pointerover if disabled is true', async () => {
+test('should not show on pointerover if isDisabled is true', async () => {
   jest.useFakeTimers()
 
   render(<DummyComponent disabled />)
@@ -96,7 +113,7 @@ test.skip('should close on pointerleave if openDelay is set', async () => {
   jest.useRealTimers()
 })
 
-test.skip('should show on pointerover if disabled has a falsy value', async () => {
+test.skip('should show on pointerover if isDisabled has a falsy value', async () => {
   render(<DummyComponent disabled={false} />)
 
   fireEvent.pointerOver(screen.getByText(buttonLabel))
@@ -155,7 +172,7 @@ test.skip("shows on pointerover and stays on pressing 'esc' if 'closeOnEsc' is f
   expect(screen.getByRole('tooltip')).toBeInTheDocument()
 })
 
-test.skip('does not show tooltip after delay when `disabled` prop changes to `true`', async () => {
+test.skip('does not show tooltip after delay when `isDisabled` prop changes to `true`', async () => {
   jest.useFakeTimers()
 
   const { rerender } = render(
@@ -182,7 +199,7 @@ test.skip('does not show tooltip after delay when `disabled` prop changes to `tr
 test.skip('should call onClose prop on pointerleave', async () => {
   const onClose = jest.fn()
 
-  render(<DummyComponent onClose={onClose} />)
+  render(<DummyComponent onExitComplete={onClose} />)
 
   fireEvent.pointerOver(screen.getByText(buttonLabel))
 

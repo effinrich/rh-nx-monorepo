@@ -1,22 +1,15 @@
-import { Box, Flex, FlexProps, Grid, GridProps, theme } from '../index'
+import { Box, Flex, FlexProps, Grid, GridProps, getColorShades, resolveColorToken } from '../index'
 
-import '@fontsource/inter/variable.css'
+import '@fontsource-variable/inter'
 
 type ColorPaletteProps = FlexProps & { color?: string; name?: string }
 
+// Access color values from the theme foundations (public API, avoids brittle internal _config access)
+const resolvedColors = colors
+
 export const ColorPalette = (props: ColorPaletteProps) => {
   const { color, name, ...rest } = props
-
-  let colorCode = color
-  const [shade, hue] = color!.split('.')
-
-  if (shade && hue) {
-    colorCode = theme.colors[shade][hue]
-  }
-
-  if (color! in theme.colors && typeof theme.colors[color!] === 'string') {
-    colorCode = theme.colors[color!]
-  }
+  const colorCode = resolveColorToken(color!)
 
   return (
     <Flex align="center" {...rest}>
@@ -46,8 +39,7 @@ export const ColorPalette = (props: ColorPaletteProps) => {
 
 export const ColorPalettes = (props: { color: string }) => {
   const { color } = props
-
-  const keys = Object.keys(theme.colors[color])
+  const keys = getColorShades(color)
 
   return keys.map(item => (
     <ColorPalette

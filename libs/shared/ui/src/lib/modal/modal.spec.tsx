@@ -14,6 +14,7 @@ describe('Modal', () => {
     const { baseElement } = render(
       <Modal open onOpenChange={onOpenChange}>
         <ModalOverlay />
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <ModalContent>
           <ModalHeader>Modal header</ModalHeader>
           <ModalCloseButton data-testid="close" />

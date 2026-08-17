@@ -7,7 +7,7 @@ const TotalCount = ({ totalUsers }: TotalCountProps) => {
   return (
     <Flex align="center" px="24px" py="20px">
       <Badge
-        colorScheme="primary"
+        colorPalette="primary"
         size="sm"
         variant="subtle"
         textTransform="capitalize"

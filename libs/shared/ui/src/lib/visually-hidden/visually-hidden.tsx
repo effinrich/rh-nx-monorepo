@@ -1,4 +1,5 @@
 export { VisuallyHidden } from '@chakra-ui/react'
+<<<<<<< HEAD
 
 // VisuallyHiddenInput was removed in Chakra v3 — create a simple shim
 import { chakra } from '@chakra-ui/react'
@@ -15,3 +16,5 @@ export const VisuallyHiddenInput = chakra('input', {
     position: 'absolute'
   }
 })
+=======
+>>>>>>> origin/main

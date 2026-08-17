@@ -1,5 +1,5 @@
 import { mockConsent, mockRhUser } from '@redesignhealth/portal/data-assets'
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
 import { Meta } from '@storybook/react-vite'
@@ -13,11 +13,11 @@ const Story: Meta<typeof SupportPage> = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(mockRhUser))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(mockRhUser)
         }),
-        rest.get('/me/consent/*', (req, res, ctx) => {
-          return res(ctx.json(mockConsent))
+        http.get('/me/consent/*', () => {
+          return HttpResponse.json(mockConsent)
         })
       ]
     }

@@ -132,7 +132,7 @@ export const EditCompany = () => {
       title="Edit Company"
       description="Update the company information below"
       errors={errors}
-      isLoading={isPending}
+      loading={isPending}
       isError={isError}
       ctaText="Save"
       isValid={isValid}

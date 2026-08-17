@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 
-import { Avatar } from '../avatar/avatar'
+import { AvatarRoot, AvatarImage, AvatarFallback } from '../avatar/avatar'
 import { Badge } from '../badge/badge'
 import { Box } from '../box/box'
 import { Button } from '../button/button'
@@ -168,7 +168,11 @@ export const UserProfile: StoryFn<typeof VStack> = () => (
     maxW="sm"
   >
     <HStack gap="4">
-      <Avatar size="lg" name="Jane Doe" src="https://bit.ly/dan-abramov" />
+      <AvatarRoot size="lg" name="Jane Doe">
+        {/* @ts-expect-error Chakra v3 compound component typing */}
+        <AvatarImage src="https://bit.ly/dan-abramov" />
+        <AvatarFallback />
+      </AvatarRoot>
       <VStack align="start" gap="1">
         <Heading size="md">Jane Doe</Heading>
         <Text fontSize="sm" color="gray.500">
@@ -210,7 +214,9 @@ export const NotificationList: StoryFn<typeof VStack> = () => (
   >
     <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
       <HStack gap="3">
-        <Avatar size="sm" name="John Smith" />
+        <AvatarRoot size="sm" name="John Smith">
+          <AvatarFallback />
+        </AvatarRoot>
         <VStack align="start" gap="1" flex="1">
           <Text fontSize="sm" fontWeight="semibold">
             John Smith commented on your post
@@ -224,7 +230,9 @@ export const NotificationList: StoryFn<typeof VStack> = () => (
     <Divider />
     <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
       <HStack gap="3">
-        <Avatar size="sm" name="Sarah Johnson" />
+        <AvatarRoot size="sm" name="Sarah Johnson">
+          <AvatarFallback />
+        </AvatarRoot>
         <VStack align="start" gap="1" flex="1">
           <Text fontSize="sm" fontWeight="semibold">
             Sarah Johnson started following you
@@ -238,7 +246,9 @@ export const NotificationList: StoryFn<typeof VStack> = () => (
     <Divider />
     <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
       <HStack gap="3">
-        <Avatar size="sm" name="Mike Wilson" />
+        <AvatarRoot size="sm" name="Mike Wilson">
+          <AvatarFallback />
+        </AvatarRoot>
         <VStack align="start" gap="1" flex="1">
           <Text fontSize="sm" fontWeight="semibold">
             Mike Wilson liked your article

@@ -1,8 +1,8 @@
 import React from 'react'
 import { IconType } from 'react-icons/lib'
-import { type AlertProps, Alert, AlertIcon, HStack } from '@redesignhealth/ui'
+import { type AlertRootProps, AlertRoot, AlertIcon, HStack } from '@redesignhealth/ui'
 
-export interface BannerAlert extends AlertProps {
+export interface BannerAlert extends AlertRootProps {
   children: React.ReactNode
   icon?: IconType
   rightElement?: React.ReactNode
@@ -15,12 +15,12 @@ export const BannerAlert = ({
   ...rest
 }: BannerAlert) => {
   return (
-    <Alert status="warning" {...rest}>
+    <AlertRoot status="warning" {...rest}>
       <AlertIcon {...(icon && { as: icon })} />
-      <HStack spacing={2}>
+      <HStack gap={2}>
         {children}
         {rightElement}
       </HStack>
-    </Alert>
+    </AlertRoot>
   )
 }

@@ -1,0 +1,121 @@
+---
+title: "Styling and theming"
+description: "Chakra UI v3 theming, design tokens, and styling patterns."
+---
+
+The Portal uses Chakra UI v3 as its component library foundation, with a custom theme that defines the Redesign Health design system. Emotion provides additional styling capabilities for custom components.
+
+## Chakra UI v3
+
+The Portal migrated from Chakra UI v2 to v3, which introduces a new theme system based on `createSystem` and `defineConfig`:
+
+```tsx
+import { createSystem, defineConfig } from '@chakra-ui/react'
+
+const config = defineConfig({
+  theme: {
+    tokens: {
+      colors: { /* ... */ },
+      fonts: { /* ... */ },
+    },
+    semanticTokens: {
+      colors: { /* ... */ },
+    },
+  },
+})
+
+export const theme = createSystem(config)
+```
+
+## RH provider
+
+The `RhProvider` from `@redesignhealth/ui` wraps the application and provides the theme to all Chakra components:
+
+```tsx
+import { RhProvider, theme } from '@redesignhealth/ui'
+
+<RhProvider value={theme}>
+  <App />
+</RhProvider>
+```
+
+<Note>
+  In Chakra UI v3, the provider accepts a `value` prop with the system instance, replacing the v2 `theme` prop on `ChakraProvider`.
+</Note>
+
+## Design tokens
+
+### Semantic tokens
+
+Chakra UI v3 uses semantic tokens that adapt to color modes. These replace the legacy `useColorModeValue` pattern from v2:
+
+```tsx
+// v3 semantic tokens (defined in theme)
+semanticTokens: {
+  colors: {
+    'bg.surface': { value: { _light: '{colors.white}', _dark: '{colors.gray.800}' } },
+    'text.primary': { value: { _light: '{colors.gray.900}', _dark: '{colors.white}' } },
+  }
+}
+
+// Usage in components
+<Box bg="bg.surface" color="text.primary">
+  Content
+</Box>
+```
+
+### Core tokens
+
+The theme defines foundational tokens for:
+
+- **Colors** — Brand palette, neutrals, semantic colors (success, warning, error)
+- **Fonts** — Primary and monospace font families
+- **Spacing** — Consistent spacing scale
+- **Radii** — Border radius values
+
+## Color mode
+
+Chakra UI v3 handles color mode through the provider. Components use semantic tokens that automatically resolve based on the active color mode, eliminating the need for manual `useColorModeValue` calls.
+
+## Emotion for custom styling
+
+For components that need styling beyond Chakra's utility props, use Emotion's `styled` API:
+
+```tsx
+import styled from '@emotion/styled'
+
+const StyledCard = styled.div`
+  border: 1px solid var(--chakra-colors-border-subtle);
+  border-radius: var(--chakra-radii-md);
+  padding: var(--chakra-space-4);
+`
+```
+
+<Tip>
+  Prefer Chakra utility props for most styling needs. Reserve Emotion for complex custom components or third-party library integrations.
+</Tip>
+
+## Migration notes (v2 to v3)
+
+If you encounter legacy patterns, here is how they map to v3:
+
+| Chakra v2 | Chakra v3 |
+|---|---|
+| `<ChakraProvider theme={theme}>` | `<RhProvider value={systemInstance}>` |
+| `useColorModeValue('white', 'gray.800')` | Semantic token `bg.surface` |
+| `extendTheme({})` | `defineConfig({})` + `createSystem()` |
+| `<Box as="button">` | `<Box asChild>` or use Chakra's `<Button>` |
+| Theme typings via CLI | Built into the system definition |
+
+<Warning>
+  The `chakra-react-select` package is shimmed in the Vite config because it relies on Chakra v2 internals. The shim at `apps/portal/src/shims/chakra-react-select.ts` re-exports a compatible surface using `react-select` directly.
+</Warning>
+
+## Theme generation
+
+To regenerate Chakra theme types after modifying the theme:
+
+```bash
+npm run theme           # One-time generation
+npm run theme:watch     # Watch mode for continuous regeneration
+```

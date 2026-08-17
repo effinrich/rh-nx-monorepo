@@ -7,12 +7,15 @@ import {
 } from '@redesignhealth/portal/data-assets'
 import { printPersonName } from '@redesignhealth/portal/utils'
 import {
-  Checkbox,
+  CheckboxRoot,
+  CheckboxControl,
+  CheckboxLabel,
+  CheckboxHiddenInput,
   CheckboxGroup,
   HStack,
   Input,
   Radio,
-  RadioGroup,
+  RadioGroupRoot,
   Stack,
   Textarea
 } from '@redesignhealth/ui'
@@ -216,15 +219,15 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
               serverErrors={serverFieldErrors}
               clientErrors={clientErrors}
             >
-              <RadioGroup
+              <RadioGroupRoot
                 onChange={onChange}
                 name={name}
                 ref={ref}
                 value={value}
-                colorScheme="primary"
+                colorPalette="primary"
                 onBlur={onBlur}
               >
-                <Stack spacing={4}>
+                <Stack gap={4}>
                   <Radio value="OPT_IN">
                     Yes, I want to <b>opt-in</b> to having my profile be visible
                     in the directory.
@@ -234,7 +237,7 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
                     in the directory.
                   </Radio>
                 </Stack>
-              </RadioGroup>
+              </RadioGroupRoot>
             </FormFieldContainer>
           )}
         />
@@ -249,12 +252,12 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
               serverErrors={serverFieldErrors}
               clientErrors={clientErrors}
             >
-              <RadioGroup
+              <RadioGroupRoot
                 onChange={onChange}
                 name={name}
                 ref={ref}
                 value={value}
-                colorScheme="primary"
+                colorPalette="primary"
                 onBlur={onBlur}
               >
                 <HStack gap={10}>
@@ -264,7 +267,7 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
                     </Radio>
                   ))}
                 </HStack>
-              </RadioGroup>
+              </RadioGroupRoot>
             </FormFieldContainer>
           )}
         />
@@ -281,13 +284,15 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
               <CheckboxGroup
                 onChange={newValues => onChange(newValues as string[])}
                 value={value}
-                colorScheme="primary"
+                colorPalette="primary"
               >
                 <Stack gap={4}>
                   {customerSegment.map(type => (
-                    <Checkbox key={type.value} value={type.value}>
-                      {type.label}
-                    </Checkbox>
+                    <CheckboxRoot key={type.value} value={type.value}>
+                      <CheckboxHiddenInput />
+                      <CheckboxControl />
+                      <CheckboxLabel>{type.label}</CheckboxLabel>
+                    </CheckboxRoot>
                   ))}
                 </Stack>
               </CheckboxGroup>

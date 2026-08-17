@@ -68,8 +68,8 @@ export const CeoDirectoryPage = ({
         <BannerAlert
           icon={MdLock}
           rightElement={
-            <Button as={RouterLink} to="/ceo-directory/onboarding" size="sm">
-              Opt-in now
+            <Button asChild size="sm">
+              <RouterLink to="/ceo-directory/onboarding">Opt-in now</RouterLink>
             </Button>
           }
         >
@@ -88,13 +88,13 @@ export const CeoDirectoryPage = ({
                 currentRole={user?.role?.authority}
                 allowed={['ROLE_SUPER_ADMIN', 'ROLE_RH_ADMIN']}
               >
-                <Button colorScheme="primary" as={RouterLink} to="add">
-                  Add CEO
+                <Button asChild colorPalette="primary">
+                  <RouterLink to="add">Add CEO</RouterLink>
                 </Button>
               </HasRole>
               {ceoId && (
-                <Button variant="outline" as={RouterLink} to={ceoId}>
-                  View my profile
+                <Button asChild variant="outline">
+                  <RouterLink to={ceoId}>View my profile</RouterLink>
                 </Button>
               )}
             </>

@@ -1,9 +1,10 @@
-import type { UserInfoSummary } from '@redesignhealth/portal/data-assets'
+import { UserInfoSummary } from '@redesignhealth/portal/data-assets'
 import {
   Box,
-  Drawer,
+  DrawerBackdrop,
   DrawerContent,
-  DrawerOverlay,
+  DrawerPositioner,
+  DrawerRoot,
   IconButton,
   RedesignLogo,
   rh,
@@ -22,7 +23,7 @@ interface MobileNavProps {
 }
 
 const Bar = rh('span', {
-  baseStyle: {
+  base: {
     display: 'block',
     pos: 'absolute',
     w: '1.25rem',
@@ -35,7 +36,7 @@ const Bar = rh('span', {
 })
 
 export const MobileNav = ({ userInfo }: MobileNavProps) => {
-  const { open, onToggle, onClose } = useDisclosure()
+  const { open: isOpen, onToggle, onClose } = useDisclosure()
 
   return (
     <Box
@@ -43,6 +44,8 @@ export const MobileNav = ({ userInfo }: MobileNavProps) => {
       justifyContent="space-between"
       alignItems="center"
       w="100%"
+      // borderBottom="2px"
+      // borderColor="gray.200"
       borderColor="transparent"
       bg="galaxy.500"
       py={4}
@@ -56,17 +59,18 @@ export const MobileNav = ({ userInfo }: MobileNavProps) => {
       <RedesignLogo
         alt="Redesign Health logo"
         w={{ base: '225px', md: '250px' }}
+        // mt="7px"
       />
 
       <IconButton
-        aria-label={`${open ? 'close' : 'open'} navigation menu`}
-        variant="unstyled"
+        aria-label={`${isOpen ? 'close' : 'open'} navigation menu`}
+        variant="ghost"
         onClick={onToggle}
         size="sm"
       >
         <Box
           className="group"
-          data-active={open ? '' : undefined}
+          data-active={isOpen ? '' : undefined}
           w="1.5rem"
           h="1.5rem"
           pos="relative"
@@ -87,16 +91,18 @@ export const MobileNav = ({ userInfo }: MobileNavProps) => {
         </Box>
       </IconButton>
 
-      <Drawer
-        open={open}
+      <DrawerRoot
+        open={isOpen}
         placement="start"
-        onOpenChange={e => !e.open && onClose()}
+        onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
       >
-        <DrawerOverlay display={{ lg: 'none' }} />
-        <DrawerContent display={{ lg: 'none' }}>
-          <Nav onClose={onClose} userInfo={userInfo} />
-        </DrawerContent>
-      </Drawer>
+        <DrawerBackdrop display={{ lg: 'none' }} />
+        <DrawerPositioner display={{ lg: 'none' }}>
+          <DrawerContent>
+            <Nav onClose={onClose} userInfo={userInfo} />
+          </DrawerContent>
+        </DrawerPositioner>
+      </DrawerRoot>
     </Box>
   )
 }

@@ -1,6 +1,8 @@
-import { Float, Stack } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 
-import { Avatar, AvatarGroup } from './avatar'
+type PropsOf<T extends keyof JSX.IntrinsicElements> = JSX.IntrinsicElements[T]
+
+import { AvatarRoot, AvatarImage, AvatarFallback, AvatarBadge, AvatarGroup } from './avatar'
 
 export default {
   title: 'Components / Media & Icons / Avatar'
@@ -8,9 +10,21 @@ export default {
 
 export const Basic = () => (
   <Stack direction="row">
-    <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
-    <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
-    <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
+    <AvatarRoot name="Dan Abrahmov">
+      {/* @ts-expect-error Chakra v3 compound component typing */}
+      <AvatarImage src="https://bit.ly/dan-abramov" />
+      <AvatarFallback />
+    </AvatarRoot>
+    <AvatarRoot name="Christian Nwamba">
+      {/* @ts-expect-error Chakra v3 compound component typing */}
+      <AvatarImage src="https://bit.ly/code-beast" />
+      <AvatarFallback />
+    </AvatarRoot>
+    <AvatarRoot name="Segun Adebayo">
+      {/* @ts-expect-error Chakra v3 compound component typing */}
+      <AvatarImage src="https://bit.ly/sage-adebayo" />
+      <AvatarFallback />
+    </AvatarRoot>
   </Stack>
 )
 
@@ -18,7 +32,7 @@ export const Basic = () => (
  * You can use a custom generic avatar instead of
  * what we have in Redesign UI.
  */
-const GenericAvatar = (props: React.ComponentProps<'svg'>) => (
+const GenericAvatar = (props: PropsOf<'svg'>) => (
   <svg
     color="#fff"
     viewBox="0 0 30 31"
@@ -35,31 +49,28 @@ const GenericAvatar = (props: React.ComponentProps<'svg'>) => (
 
 export const WithCustomIcon = () => (
   <AvatarGroup>
-    <Avatar icon={<GenericAvatar />} />
-    <Avatar />
+    <AvatarRoot icon={<GenericAvatar />}>
+      <AvatarFallback />
+    </AvatarRoot>
+    <AvatarRoot>
+      <AvatarFallback />
+    </AvatarRoot>
   </AvatarGroup>
 )
 
 export const WithSizes = () => (
   <Stack direction="row" gap="24px">
     {['xs', 'sm', 'md', 'lg', 'xl', '2xl'].map(size => (
-      <Avatar
+      <AvatarRoot
         key={size}
         size={size}
         name="Uchiha Itachi"
-        src="https://uinames.com/api/photos/female/18.jpg"
       >
-        <Float placement="bottom-end">
-          <div
-            style={{
-              width: '1.25em',
-              height: '1.25em',
-              backgroundColor: 'green',
-              borderRadius: '50%'
-            }}
-          />
-        </Float>
-      </Avatar>
+        {/* @ts-expect-error Chakra v3 compound component typing */}
+        <AvatarImage src="https://uinames.com/api/photos/female/18.jpg" />
+        <AvatarFallback />
+        <AvatarBadge boxSize="1.25em" bg="green.500" />
+      </AvatarRoot>
     ))}
   </Stack>
 )
@@ -75,19 +86,38 @@ export const WithSrcSet = () => {
     'https://accelerated.atoms.crystallize.digital/snowball/images/PalmaSpeedJusterteBilder-15/_resized_3200.jpg'
 
   return (
-    <Avatar
-      name="Uchiha Itachi"
-      src={small}
-      srcSet={`${small} 300w, ${medium} 768w, ${large} 1280w, ${xlarge} 3200w`}
-    />
+    <AvatarRoot name="Uchiha Itachi">
+      {/* @ts-expect-error Chakra v3 compound component typing */}
+      <AvatarImage
+        src={small}
+        srcSet={`${small} 300w, ${medium} 768w, ${large} 1280w, ${xlarge} 3200w`}
+      />
+      <AvatarFallback />
+    </AvatarRoot>
   )
 }
 
 export const AvatarsGroup = () => (
   <AvatarGroup size="lg" max={3}>
-    <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
-    <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
-    <Avatar name="Prosper Otemuyiwa" src="https://bit.ly/prosper-baba" />
-    <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+    <AvatarRoot name="Ryan Florence">
+      {/* @ts-expect-error Chakra v3 compound component typing */}
+      <AvatarImage src="https://bit.ly/ryan-florence" />
+      <AvatarFallback />
+    </AvatarRoot>
+    <AvatarRoot name="Kent Dodds">
+      {/* @ts-expect-error Chakra v3 compound component typing */}
+      <AvatarImage src="https://bit.ly/kent-c-dodds" />
+      <AvatarFallback />
+    </AvatarRoot>
+    <AvatarRoot name="Prosper Otemuyiwa">
+      {/* @ts-expect-error Chakra v3 compound component typing */}
+      <AvatarImage src="https://bit.ly/prosper-baba" />
+      <AvatarFallback />
+    </AvatarRoot>
+    <AvatarRoot name="Christian Nwamba">
+      {/* @ts-expect-error Chakra v3 compound component typing */}
+      <AvatarImage src="https://bit.ly/code-beast" />
+      <AvatarFallback />
+    </AvatarRoot>
   </AvatarGroup>
 )

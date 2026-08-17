@@ -24,7 +24,7 @@ const SellerReleaseModal = ({
   } = useRequestIpListingContactInfo(ipListingId, buyerEmail)
 
   return (
-    <Modal onClose={onClose} isOpen={isOpen} size="xl">
+    <Modal open={isOpen} onOpenChange={(e: { open: boolean }) => !e.open && onClose()} size="xl">
       <ModalOverlay />
       {isSuccess ? (
         <Success onConfirmation={onClose} />

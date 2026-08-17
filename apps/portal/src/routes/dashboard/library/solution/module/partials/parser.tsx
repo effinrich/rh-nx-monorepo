@@ -153,11 +153,11 @@ export const Parser = ({
             <Link {...props} to={href}>
               <Button
                 variant="solid"
-                colorScheme="primary"
-                rightIcon={<MdLaunch />}
+                colorPalette="primary"
                 justifyContent="flex-start"
               >
                 {domToReact(children, parserOptions)}
+                <MdLaunch />
               </Button>
             </Link>
           )

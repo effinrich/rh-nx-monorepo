@@ -6,7 +6,7 @@ import {
   mockIpListingWithRequests,
   mockIpMarketplaceContactInfo
 } from '@redesignhealth/portal/data-assets'
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import {
   reactRouterParameters,
   withRouter
@@ -50,11 +50,11 @@ export const SellerView = {
     reactRouter: reactRouterConfig,
     msw: {
       handlers: [
-        rest.get('/ip-marketplace/:id', (req, res, ctx) => {
-          return res(ctx.json(mockIpListingWithRequests))
+        http.get('/ip-marketplace/:id', () => {
+          return HttpResponse.json(mockIpListingWithRequests)
         }),
-        rest.get('/userinfo', (req, res, ctx) =>
-          res(ctx.json(mockEnterpriseSellerUser))
+        http.get('/userinfo', () =>
+          HttpResponse.json(mockEnterpriseSellerUser)
         )
       ]
     }
@@ -66,14 +66,14 @@ export const BuyerView = {
     reactRouter: reactRouterConfig,
     msw: {
       handlers: [
-        rest.get('/ip-marketplace/:id', (req, res, ctx) => {
-          return res(ctx.json(mockIpListing))
+        http.get('/ip-marketplace/:id', () => {
+          return HttpResponse.json(mockIpListing)
         }),
-        rest.get('/userinfo', (req, res, ctx) =>
-          res(ctx.json(mockEnterpriseBuyerUser))
+        http.get('/userinfo', () =>
+          HttpResponse.json(mockEnterpriseBuyerUser)
         ),
-        rest.put('/me/ip-marketplace/:id/contact-info', (req, res, ctx) =>
-          res(ctx.json(mockIpMarketplaceContactInfo))
+        http.put('/me/ip-marketplace/:id/contact-info', () =>
+          HttpResponse.json(mockIpMarketplaceContactInfo)
         )
       ]
     }
@@ -85,10 +85,10 @@ export const AdminView = {
     reactRouter: reactRouterConfig,
     msw: {
       handlers: [
-        rest.get('/ip-marketplace/:id', (req, res, ctx) => {
-          return res(ctx.json(mockIpListing))
+        http.get('/ip-marketplace/:id', () => {
+          return HttpResponse.json(mockIpListing)
         }),
-        rest.get('/userinfo', (req, res, ctx) => res(ctx.json(mockAdminUser)))
+        http.get('/userinfo', () => HttpResponse.json(mockAdminUser))
       ]
     }
   }

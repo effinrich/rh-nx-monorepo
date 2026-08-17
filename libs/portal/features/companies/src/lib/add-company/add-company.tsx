@@ -142,7 +142,7 @@ export const AddCompany = () => {
       title="Add Company"
       description="Enter company information below."
       errors={errors}
-      isLoading={isPending}
+      loading={isPending}
       isError={isError}
       ctaText="Add company"
       isValid={isValid}

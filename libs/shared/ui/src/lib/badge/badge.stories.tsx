@@ -38,6 +38,10 @@ export default {
 }
 
 export const Basic = {
+  args: {
+    variant: 'outline'
+  },
+
   render: (args: any) => <Badge {...args}>Success, man!</Badge>
 }
 
@@ -46,15 +50,15 @@ export const SolidBadge = {
     return (
       <>
         {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(
-          colorPalette => (
+          colorScheme => (
             <Badge
-              key={colorPalette}
-              colorPalette={colorPalette}
+              key={colorScheme}
+              colorPalette={colorScheme}
               variant="solid"
               mr={2}
               {...args}
             >
-              {colorPalette}
+              {colorScheme}
             </Badge>
           )
         )}
@@ -66,6 +70,7 @@ export const SolidBadge = {
 export const SubtleBadges = {
   render: (args: any) => (
     <>
+<<<<<<< HEAD
       {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(
         colorPalette => (
           <Badge
@@ -79,6 +84,19 @@ export const SubtleBadges = {
           </Badge>
         )
       )}
+=======
+      {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(colorScheme => (
+        <Badge
+          key={colorScheme}
+          colorPalette={colorScheme}
+          mr={2}
+          {...args}
+          variant="subtle"
+        >
+          {colorScheme}
+        </Badge>
+      ))}
+>>>>>>> origin/main
     </>
   )
 }
@@ -86,6 +104,7 @@ export const SubtleBadges = {
 export const OutlineBadges = {
   render: (args: any) => (
     <>
+<<<<<<< HEAD
       {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(
         colorPalette => (
           <Badge
@@ -99,6 +118,19 @@ export const OutlineBadges = {
           </Badge>
         )
       )}
+=======
+      {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(colorScheme => (
+        <Badge
+          key={colorScheme}
+          colorPalette={colorScheme}
+          variant="outline"
+          mr={2}
+          {...args}
+        >
+          {colorScheme}
+        </Badge>
+      ))}
+>>>>>>> origin/main
     </>
   )
 }

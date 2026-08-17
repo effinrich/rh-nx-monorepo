@@ -80,7 +80,7 @@ export const CompanyDetailsOverview = () => {
 
                   handleOpenOnboardingDocs()
                 }}
-                colorScheme="primary"
+                colorPalette="primary"
                 size="md"
               >
                 View docs
@@ -103,13 +103,13 @@ export const CompanyDetailsOverview = () => {
             rightElement={
               <Button
                 as={Link}
-                rightIcon={<MdLaunch />}
                 to={experienceCloudLink}
                 target="_blank"
-                colorScheme="primary"
+                colorPalette="primary"
                 size="md"
               >
                 Launch CRM
+                <MdLaunch />
               </Button>
             }
             data-id="get-started"

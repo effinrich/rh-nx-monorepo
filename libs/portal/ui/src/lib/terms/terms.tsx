@@ -42,14 +42,14 @@ const Terms = ({ isAskingConsent = false, isOpen, onClose }: TermsProps) => {
 
   return (
     <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      size={['full', '2xl', '2xl']}
+      open={isOpen}
+      onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
+      size={{ base: 'full', md: 'xl' }}
       scrollBehavior="inside"
-      closeOnOverlayClick={false}
-      closeOnEsc={false}
+      closeOnInteractOutside={false}
     >
       <ModalOverlay />
+      {/* @ts-expect-error Chakra v3 DialogContent children typing */}
       <ModalContent maxHeight="80vh">
         <ModalHeader>Terms of Service</ModalHeader>
         <ModalBody id="termsModalBody">
@@ -62,8 +62,8 @@ const Terms = ({ isAskingConsent = false, isOpen, onClose }: TermsProps) => {
               Decline
             </Button>
             <Button
-              colorScheme="primary"
-              isLoading={isPending}
+              colorPalette="primary"
+              loading={isPending}
               onClick={() => mutate()}
             >
               Accept
@@ -72,7 +72,7 @@ const Terms = ({ isAskingConsent = false, isOpen, onClose }: TermsProps) => {
         )}
         {!isAskingConsent && (
           <ModalFooter>
-            <Button colorScheme="primary" onClick={onClose}>
+            <Button colorPalette="primary" onClick={onClose}>
               Close
             </Button>
           </ModalFooter>

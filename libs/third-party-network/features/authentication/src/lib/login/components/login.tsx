@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 import { setUserAccessToken } from '@redesignhealth/third-party-network/utils'
-import { Alert, Box } from '@redesignhealth/ui'
+import { AlertRoot, Box } from '@redesignhealth/ui'
 
 import { useCurrentUserQuery } from '../hooks'
 
@@ -29,7 +29,7 @@ export const Login = ({ onSuccess }: LoginProps) => {
         />
       </Box>
       {isError && (
-        <Alert
+        <AlertRoot
           status="error"
           color="red.600"
           bgColor="transparent"
@@ -38,7 +38,7 @@ export const Login = ({ onSuccess }: LoginProps) => {
         >
           We couldn't find a user associated with that Google account. Try
           selecting a different account.
-        </Alert>
+        </AlertRoot>
       )}
     </Fragment>
   )

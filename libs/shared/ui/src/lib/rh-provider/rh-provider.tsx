@@ -6,7 +6,7 @@ import { ThemeProviderProps } from 'next-themes'
 
 import { ColorModeProvider } from './color-mode'
 
-import '@fontsource/inter/variable.css'
+import '@fontsource-variable/inter'
 
 export interface RhProviderProps extends Pick<
   ThemeProviderProps,

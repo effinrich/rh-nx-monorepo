@@ -1,18 +1,18 @@
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { SetupServer } from 'msw/node'
 
 import { ConsentSummary } from '../../terms/types'
 
 export const mockGetMeConsentNotFound = (server: SetupServer) =>
-  server.use(rest.get('/me/consent/*', (req, res, ctx) => res(ctx.status(404))))
+  server.use(http.get('/me/consent/*', () => new HttpResponse(null, { status: 404 })))
 
 export const mockGetMeConsentServerError = (server: SetupServer) =>
-  server.use(rest.get('/me/consent/*', (req, res, ctx) => res(ctx.status(500))))
+  server.use(http.get('/me/consent/*', () => new HttpResponse(null, { status: 500 })))
 
 export const mockGetMeConsent = (
   server: SetupServer,
   consent: ConsentSummary
 ) =>
   server.use(
-    rest.get('/me/consent/*', (req, res, ctx) => res(ctx.json(consent)))
+    http.get('/me/consent/*', () => HttpResponse.json(consent))
   )

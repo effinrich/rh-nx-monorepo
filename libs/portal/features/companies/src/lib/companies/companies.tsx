@@ -18,7 +18,7 @@ import {
   IconButton,
   Loader,
   SectionHeader,
-  Table,
+  TableRoot,
   TableContainer,
   Tbody,
   Td,
@@ -91,7 +91,7 @@ const Companies = () => {
       >
         <Flex align="center" px={6} py={5}>
           <Badge
-            colorScheme="primary"
+            colorPalette="primary"
             size="sm"
             variant="subtle"
             textTransform="capitalize"
@@ -101,7 +101,7 @@ const Companies = () => {
         </Flex>
 
         <TableContainer borderBottomRadius="md">
-          <Table variant="striped" colorScheme="gray">
+          <TableRoot variant="striped" colorPalette="gray">
             <Thead>
               <Tr>
                 <Th>Name</Th>
@@ -127,14 +127,13 @@ const Companies = () => {
                     {company.stage === 'NEW_CO' ||
                     company.stage === 'OP_CO' ||
                     company.isMarketplaceCompany ? (
-                      <Text
-                        as={Link}
+                      <Link
                         to={`/companies/${company.id}/overview`}
                         aria-label={`${company.name} details`}
-                        color="primary.700"
+                        style={{ color: 'var(--chakra-colors-primary-700)' }}
                       >
-                        {company.name}
-                      </Text>
+                        <Text color="primary.700">{company.name}</Text>
+                      </Link>
                     ) : (
                       <Text
                         aria-label={`${company.name} details`}
@@ -149,7 +148,7 @@ const Companies = () => {
                   <Td>
                     <Badge
                       ml={[0, 1]}
-                      colorScheme={
+                      colorPalette={
                         company?.status === 'ACTIVE' ? 'green' : 'red'
                       }
                       variant="outline"
@@ -175,29 +174,33 @@ const Companies = () => {
                     >
                       {company.isMarketplaceCompany ? (
                         <IconButton
-                          as={Link}
-                          to={`/companies/${company.id}/edit-marketplace-company`}
+                          asChild
                           aria-label={`Edit ${company.name} details`}
-                          icon={<Icon as={MdOutlineEdit} />}
                           variant="ghost"
-                          colorScheme="primary"
-                        />
+                          colorPalette="primary"
+                        >
+                          <Link to={`/companies/${company.id}/edit-marketplace-company`}>
+                            <Icon as={MdOutlineEdit} />
+                          </Link>
+                        </IconButton>
                       ) : (
                         <IconButton
-                          as={Link}
-                          to={`/companies/${company.id}/edit`}
+                          asChild
                           aria-label={`Edit ${company.name} details`}
-                          icon={<Icon as={MdOutlineEdit} />}
                           variant="ghost"
-                          colorScheme="primary"
-                        />
+                          colorPalette="primary"
+                        >
+                          <Link to={`/companies/${company.id}/edit`}>
+                            <Icon as={MdOutlineEdit} />
+                          </Link>
+                        </IconButton>
                       )}
                     </HasRole>
                   </Td>
                 </Tr>
               ))}
             </Tbody>
-          </Table>
+          </TableRoot>
         </TableContainer>
       </Box>
       <Outlet />

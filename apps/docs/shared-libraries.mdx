@@ -1,0 +1,206 @@
+---
+title: "Shared libraries"
+description: "Reusable UI components, hooks, utilities, and data access libraries."
+---
+
+The shared libraries form the foundation of the Redesign Health platform. They provide reusable UI components, data access patterns, analytics utilities, and common hooks used across all applications.
+
+## @redesignhealth/ui
+
+The shared UI library (`libs/shared/ui`) is built on **Chakra UI v3** and provides the design system for all frontend applications. It exports themed components, layout primitives, and form elements.
+
+### Component catalog
+
+The library includes the following components:
+
+<Columns>
+  <div>
+    - Accordion
+    - ActionMenu
+    - Badge
+    - Breadcrumbs
+    - Button
+    - Card
+    - Checkbox
+    - DataTable
+    - DatePicker
+    - Dialog (Modal)
+    - Divider
+    - Drawer
+    - EmptyState
+  </div>
+  <div>
+    - FileUpload
+    - FormControl
+    - Icon
+    - Input
+    - Link
+    - Menu
+    - Pagination
+    - Popover
+    - Radio
+    - SearchInput
+    - Select
+    - Skeleton
+    - Spinner
+  </div>
+  <div>
+    - Stat
+    - Switch
+    - Tabs
+    - Tag
+    - Text
+    - Textarea
+    - Toast
+    - Tooltip
+    - Typography (Heading, Text)
+    - VisuallyHidden
+  </div>
+</Columns>
+
+Every component has a co-located Storybook story (`*.stories.tsx`) and follows WCAG 2.1 AA accessibility standards.
+
+### Theme and tokens
+
+The theme is defined in the shared UI library and provides design tokens for colors, spacing, typography, and breakpoints. You generate TypeScript types for the theme with:
+
+```bash
+npm run theme
+```
+
+Use `npm run theme:watch` during development to regenerate types automatically when the theme changes.
+
+## Analytics utilities
+
+The `@redesignhealth/shared-analytics` library provides hooks and utilities for tracking user behavior across applications.
+
+### useInitialize
+
+Initializes the analytics provider at the application root. Call this hook once in your top-level component.
+
+```tsx
+import { useInitialize } from '@redesignhealth/shared-analytics';
+
+function App() {
+  useInitialize({
+    apiKey: import.meta.env.VITE_ANALYTICS_KEY,
+  });
+
+  return <RouterProvider router={router} />;
+}
+```
+
+### useWatchSearchEvent
+
+Tracks search interactions with debouncing to avoid excessive event firing.
+
+```tsx
+import { useWatchSearchEvent } from '@redesignhealth/shared-analytics';
+
+function SearchBar() {
+  const [query, setQuery] = useState('');
+  useWatchSearchEvent(query, 'company-search');
+
+  return <SearchInput value={query} onChange={setQuery} />;
+}
+```
+
+## Pagination hook
+
+The `usePagination` hook from `@redesignhealth/shared-hooks` manages paginated data fetching state.
+
+```tsx
+import { usePagination } from '@redesignhealth/shared-hooks';
+
+function CompanyList() {
+  const { page, pageSize, setPage, setPageSize, offset } = usePagination({
+    initialPage: 1,
+    initialPageSize: 25,
+  });
+
+  const { data } = useCompanies({ page, pageSize });
+
+  return (
+    <DataTable data={data?.items} />
+    <Pagination
+      page={page}
+      total={data?.total}
+      pageSize={pageSize}
+      onPageChange={setPage}
+    />
+  );
+}
+```
+
+## Portal data assets
+
+The `@redesignhealth/portal/data-assets` library contains all API clients, TanStack Query hooks, and TypeScript types for the portal application. It is organized by domain entity:
+
+| Domain | API client | Hooks | Types |
+| :--- | :--- | :--- | :--- |
+| Companies | `companies/api.ts` | `companies/hooks.ts` | `companies/types.ts` |
+| Users | `users/api.ts` | `users/hooks.ts` | `users/types.ts` |
+| Advisors | `advisors/api.ts` | `advisors/hooks.ts` | `advisors/types.ts` |
+| Library | `library/api.ts` | `library/hooks.ts` | `library/types.ts` |
+| IP Marketplace | `ip-marketplace/api.ts` | `ip-marketplace/hooks.ts` | `ip-marketplace/types.ts` |
+
+Query keys are managed with `@lukemorales/query-key-factory` for consistent cache key generation. Each domain exports its query key factory alongside its hooks.
+
+<Tip>
+  You can regenerate the portal API client from the OpenAPI spec with `nx generate-company-api-client portal`. Use `generate-company-api-client-local` to generate from a locally running backend on port 8080.
+</Tip>
+
+## Third-party network data assets
+
+The `@redesignhealth/third-party-network/data-assets` library follows the same structure as the portal data assets but is scoped to the third-party advisor network application. It shares types with the portal where domain entities overlap.
+
+## Company API types
+
+The `@redesignhealth/company-api-types` library provides TypeScript type definitions that mirror the Company API's Java DTOs. These types are used by both the portal and third-party network data access layers to ensure type safety across the frontend-backend boundary.
+
+## AWS Secrets Manager property source
+
+The backend includes a custom Spring Boot property source that resolves secrets from AWS Secrets Manager at startup. This allows sensitive configuration values (database credentials, API keys, third-party tokens) to be stored securely and injected into the application context without environment variables in deployment manifests.
+
+## Chakra UI v3 migration
+
+The shared UI library was migrated from Chakra UI v2 to v3. If you are updating existing components or writing new ones, use the v3 API. The following table summarizes the key prop and component changes:
+
+| v2 pattern | v3 pattern | Notes |
+| :--- | :--- | :--- |
+| `<Modal>` | `<Dialog>` | Component renamed |
+| `isOpen` / `onClose` | `open` / `onOpenChange` | Boolean prop renamed |
+| `<ModalOverlay>` | `<Dialog.Backdrop>` | Subcomponent renamed |
+| `<ModalContent>` | `<Dialog.Content>` | Subcomponent renamed |
+| `<ModalHeader>` | `<Dialog.Header>` | Subcomponent renamed |
+| `<ModalBody>` | `<Dialog.Body>` | Subcomponent renamed |
+| `<ModalFooter>` | `<Dialog.Footer>` | Subcomponent renamed |
+| `<DrawerOverlay>` | `<Drawer.Backdrop>` | Subcomponent renamed |
+| `<DrawerContent>` | `<Drawer.Content>` | Subcomponent renamed |
+| `<AccordionButton>` | `<Accordion.Trigger>` | Subcomponent renamed |
+| `<AccordionPanel>` | `<Accordion.Content>` | Subcomponent renamed |
+| `<TabList>` | `<Tabs.List>` | Subcomponent renamed |
+| `<Tab>` | `<Tabs.Trigger>` | Subcomponent renamed |
+| `<TabPanel>` | `<Tabs.Content>` | Subcomponent renamed |
+| `<PopoverTrigger>` | `<Popover.Trigger>` | Subcomponent renamed |
+| `<PopoverContent>` | `<Popover.Content>` | Subcomponent renamed |
+| `<MenuButton>` | `<Menu.Trigger>` | Subcomponent renamed |
+| `<MenuList>` | `<Menu.Content>` | Subcomponent renamed |
+| `<MenuItem>` | `<Menu.Item>` | Subcomponent renamed |
+| `useDisclosure()` | `useState(false)` | Hook removed, use React state |
+| `colorScheme` | `colorPalette` | Prop renamed |
+| `noOfLines` | `lineClamp` | Prop renamed |
+
+<Warning>
+  Chakra UI v3 uses compound component patterns (`Component.Part`) instead of flat imports. If you see v2-style imports in existing code, update them to v3 patterns when you touch that file.
+</Warning>
+
+## Integration guidelines
+
+When building new features or libraries, follow these rules to stay consistent with the existing architecture:
+
+1. **Import through barrel exports.** Always import from the library's `index.ts`, not from internal file paths.
+2. **Respect module boundaries.** Shared libraries cannot import from portal or third-party network libraries. Run `nx lint` to verify.
+3. **Co-locate tests and stories.** Every component needs a `*.spec.tsx` for unit tests and a `*.stories.tsx` for Storybook.
+4. **Use path aliases.** Import libraries with their `@redesignhealth/` path alias, never with relative paths.
+5. **Keep libraries focused.** Each library should have a single responsibility. If a library grows too large, split it into smaller libraries.

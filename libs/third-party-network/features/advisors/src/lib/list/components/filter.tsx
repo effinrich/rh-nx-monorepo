@@ -35,9 +35,9 @@ export const Filter = memo(
         </FormLabel>
         <Select
           placeholder=""
-          colorScheme={badgeColor}
+          colorPalette={badgeColor}
           isMulti
-          isLoading={isPending}
+          loading={isPending}
           options={[...options].map(option => ({
             value: option,
             label: option

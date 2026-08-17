@@ -1,9 +1,10 @@
 import { ReactNode } from 'react'
 import {
-  Popover,
+  PopoverRoot,
   PopoverArrow,
   PopoverBody,
   PopoverContent,
+  PopoverPositioner,
   PopoverTrigger
 } from '@chakra-ui/react'
 import { Text } from '@redesignhealth/ui'
@@ -20,16 +21,19 @@ export const OpcoEngagementsPopover = ({
   if (!opcoName) return null
 
   return (
-    <Popover trigger="hover">
-      <PopoverTrigger>
+    <PopoverRoot>
+      <PopoverTrigger asChild>
         <Text as="span" w="fit-content" cursor="default">
           {opcoName}
         </Text>
       </PopoverTrigger>
-      <PopoverContent>
-        <PopoverArrow />
-        <PopoverBody>{children}</PopoverBody>
-      </PopoverContent>
-    </Popover>
+      <PopoverPositioner>
+        {/* @ts-expect-error Chakra v3 compound component typing */}
+        <PopoverContent>
+          <PopoverArrow />
+          <PopoverBody>{children}</PopoverBody>
+        </PopoverContent>
+      </PopoverPositioner>
+    </PopoverRoot>
   )
 }

@@ -17,10 +17,13 @@ export interface DrawerFormItemProps {
 
 export const DrawerFormItem = (props: DrawerFormItemProps) => {
   return (
-    <FormControl variant="flex-grid" isInvalid={props.isInvalid}>
+    <FormControl variant="flex-grid" invalid={props.isInvalid}>
+      {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
       <DrawerFormHeader as={FormLabel}>{props.label}</DrawerFormHeader>
       {props.children}
+      {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
       <FormErrorMessage>{props.error}</FormErrorMessage>
+      {/* @ts-expect-error Chakra v3 FieldHelperText children typing */}
       <FormHelperText>{props.helperText}</FormHelperText>
     </FormControl>
   )

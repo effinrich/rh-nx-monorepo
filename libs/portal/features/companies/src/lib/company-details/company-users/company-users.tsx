@@ -10,7 +10,7 @@ import { HasRole } from '@redesignhealth/portal/utils'
 import {
   Button,
   Loader,
-  Table,
+  TableRoot,
   Tbody,
   Td,
   Text,
@@ -54,7 +54,7 @@ const CompanyUsers = () => {
   )
 
   const simpleTable = (
-    <Table>
+    <TableRoot>
       <Thead>
         <Tr>
           <Th>Name</Th>
@@ -71,7 +71,7 @@ const CompanyUsers = () => {
           </Tr>
         ))}
       </Tbody>
-    </Table>
+    </TableRoot>
   )
 
   return (
@@ -84,8 +84,8 @@ const CompanyUsers = () => {
             currentRole={currentUser?.role?.authority}
             allowed={['ROLE_RH_ADMIN', 'ROLE_SUPER_ADMIN']}
           >
-            <Button as={RouterLink} to="add" colorScheme="primary">
-              Add user
+            <Button asChild colorPalette="primary">
+              <RouterLink to="add">Add user</RouterLink>
             </Button>
           </HasRole>
         ) : (

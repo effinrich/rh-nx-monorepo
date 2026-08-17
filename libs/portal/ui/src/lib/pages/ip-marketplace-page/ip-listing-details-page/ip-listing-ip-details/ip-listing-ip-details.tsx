@@ -117,7 +117,8 @@ const IpListingIpDetails = () => {
           <Link
             display="flex"
             alignItems="center"
-            isExternal
+            target="_blank"
+            rel="noopener noreferrer"
             href={href}
             key={href}
             gap="2"

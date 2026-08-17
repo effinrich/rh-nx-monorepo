@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle } from '../alert/alert'
+import { AlertRoot, AlertDescription, AlertIcon, AlertTitle } from '../alert/alert'
 
 interface ErrorFallbackProps {
   error: {
@@ -12,9 +12,8 @@ export const ErrorFallback = ({
   resetErrorBoundary
 }: ErrorFallbackProps) => {
   return (
-    <Alert
+    <AlertRoot
       status="error"
-      variant="top-accent"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
@@ -32,10 +31,7 @@ export const ErrorFallback = ({
         Check the console for an error to debug locally. If it is a server
         error, provide details to the API team.
       </AlertDescription>
-      {/* <Button onClick={resetErrorBoundary} mt={4} colorPalette="red">
-        Sign out and try again
-      </Button> */}
-    </Alert>
+    </AlertRoot>
   )
 }
 
