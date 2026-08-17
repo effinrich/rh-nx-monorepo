@@ -72,8 +72,8 @@
     "editorBracketMatch.border": "#575B5F",
     "editor.lineHighlightBorder": "#9fced11f"
   },
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "js/ts.tsdk": "node_modules/typescript/lib",
+  "js/ts.enablePromptUseWorkspaceTsdk": true,
   "json.schemas": [
     {
       "fileMatch": ["/package.json"],
@@ -89,5 +89,6 @@
   "explorerExclude.backup": {},
   "java.compile.nullAnalysis.mode": "automatic",
   "vitest.disableWorkspaceWarning": true,
-  "nxConsole.nxWorkspacePath": "./"
+  "nxConsole.nxWorkspacePath": "./",
+  "chat.sessionSync.enabled": true
 }

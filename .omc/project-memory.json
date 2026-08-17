@@ -1,0 +1,252 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1786896853426,
+  "projectRoot": "d:\\documents-from-c\\GitHub\\rh-nx-monorepo",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": "24.12.0",
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "express",
+        "version": "4.21.2",
+        "category": "backend"
+      },
+      {
+        "name": "react",
+        "version": "19.1.0",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.1.0",
+        "category": "frontend"
+      },
+      {
+        "name": "@playwright/test",
+        "version": "1.57.0",
+        "category": "testing"
+      },
+      {
+        "name": "cypress",
+        "version": "15.15.0",
+        "category": "testing"
+      },
+      {
+        "name": "esbuild",
+        "version": "0.28.0",
+        "category": "build"
+      },
+      {
+        "name": "jest",
+        "version": "30.0.5",
+        "category": "testing"
+      },
+      {
+        "name": "playwright",
+        "version": "1.57.0",
+        "category": "testing"
+      },
+      {
+        "name": "vite",
+        "version": "7.3.1",
+        "category": "build"
+      },
+      {
+        "name": "vitest",
+        "version": "4.0.0",
+        "category": "testing"
+      },
+      {
+        "name": "webpack",
+        "version": "5.107.1",
+        "category": "build"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": "Node.js 24.12.0"
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "npm test",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run start",
+    "scripts": {
+      "start": "nx serve",
+      "start:api": "npx tsx apps/api-server/src/main.ts",
+      "build": "nx build",
+      "start:portal": "nx run portal:serve",
+      "build:portal": "nx run portal:build",
+      "lint:portal": "nx run portal:lint --fix",
+      "test:portal": "nx run portal:test",
+      "build:ui": "nx run shared-ui:build",
+      "start:parser-playground": "nx run parser-playground:serve",
+      "test": "nx test",
+      "lint": "nx run-many --target=lint --all --fix",
+      "check-types:all": "nx run-many --target=check-types --all",
+      "affected:apps": "nx affected:apps",
+      "affected:libs": "nx affected:libs",
+      "affected:build": "nx affected:build",
+      "affected:e2e": "nx affected:e2e",
+      "affected:test": "nx affected:test --verbose",
+      "affected:lint": "nx affected:lint",
+      "affected:check-types": "nx affected:check-types",
+      "affected:dep-graph": "nx affected:dep-graph",
+      "affected": "nx affected",
+      "format": "nx format --dry-run",
+      "format:write": "nx format:write",
+      "format:check": "nx format:check",
+      "update": "nx migrate latest && npm install --legacy-peer-deps && nx migrate --run-migrations=migrations.json && npm run format:write && npm run test",
+      "chromatic": "npx chromatic --only-changed --exit-zero-on-changes --exit-once-uploaded --debug --trace-changed=expanded",
+      "graph": "nx graph",
+      "reset": "nx reset",
+      "repair": "nx repair",
+      "help": "nx help",
+      "storybook": "nx run shared-ui:storybook",
+      "build-storybook": "nx run portal-ui:build-storybook",
+      "test-storybook:shared-ui": "nx run shared-ui:test-storybook",
+      "test-storybook:portal-ui": "nx run portal-ui:test-storybook",
+      "storybook-portal-ui": "nx run portal-ui:storybook",
+      "build-storybook-portal-ui": "nx run portal-ui:build-storybook",
+      "storybook-all": "nx run-many --targets=storybook --projects=portal-ui,shared-ui",
+      "theme": "chakra-cli tokens ./libs/shared/ui/src/lib/theme/index.ts",
+      "theme:watch": "chakra-cli tokens ./libs/shared/ui/src/lib/theme/index.ts --watch",
+      "mcp:storybook:install": "cd tools/storybook-mcp && npm install",
+      "mcp:storybook:build": "cd tools/storybook-mcp && npm run build",
+      "mcp:storybook:dev": "cd tools/storybook-mcp && npm run dev",
+      "mcp:setup": "npm run mcp:storybook:install && npm run mcp:storybook:build"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "docs"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "apps": {
+      "path": "apps",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1786896853399,
+      "keyFiles": []
+    },
+    "contracts": {
+      "path": "contracts",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1786896853400,
+      "keyFiles": []
+    },
+    "dist": {
+      "path": "dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 0,
+      "lastAccessed": 1786896853407,
+      "keyFiles": []
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 6,
+      "lastAccessed": 1786896853407,
+      "keyFiles": [
+        "expert-knowledge-library-card.md",
+        "index.md",
+        "platform-documentation-library-card.md",
+        "readme.md",
+        "requirements.txt"
+      ]
+    },
+    "edge": {
+      "path": "edge",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1786896853407,
+      "keyFiles": []
+    },
+    "libs": {
+      "path": "libs",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1786896853408,
+      "keyFiles": []
+    },
+    "llms": {
+      "path": "llms",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1786896853408,
+      "keyFiles": [
+        "llms-full.txt",
+        "llms-v3-migration.txt"
+      ]
+    },
+    "playwright": {
+      "path": "playwright",
+      "purpose": null,
+      "fileCount": 13,
+      "lastAccessed": 1786896853408,
+      "keyFiles": [
+        "company-api-setup.ts",
+        "index.d.ts",
+        "package-lock.json",
+        "package.json",
+        "plat-StorageState-unregistered.json"
+      ]
+    },
+    "tools": {
+      "path": "tools",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1786896853409,
+      "keyFiles": [
+        "tsconfig.tools.json"
+      ]
+    },
+    "playwright\\data": {
+      "path": "playwright\\data",
+      "purpose": "Data files",
+      "fileCount": 0,
+      "lastAccessed": 1786896853411,
+      "keyFiles": []
+    },
+    "playwright\\fixtures": {
+      "path": "playwright\\fixtures",
+      "purpose": "Test fixtures",
+      "fileCount": 1,
+      "lastAccessed": 1786896853411,
+      "keyFiles": [
+        "platform-ui-test.ts"
+      ]
+    },
+    "playwright\\pages": {
+      "path": "playwright\\pages",
+      "purpose": "Page components",
+      "fileCount": 0,
+      "lastAccessed": 1786896853412,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}

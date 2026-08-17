@@ -89,3 +89,10 @@ const gray400 = theme.colors.gray['400']
 const system = useChakra()
 const gray400 = system.token('colors.gray.400')
 ```
+
+<!-- mermaid-ai-skills:start -->
+## Mermaid Diagrams
+
+When the user asks to create, edit, or visualize a diagram, follow the
+instructions in `.github/instructions/mermaid.instructions.md`.
+<!-- mermaid-ai-skills:end -->
