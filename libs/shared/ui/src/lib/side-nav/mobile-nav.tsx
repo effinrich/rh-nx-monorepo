@@ -1,11 +1,7 @@
 import { useDisclosure } from '../hooks/use-disclosure/use-disclosure'
 
 import { Box } from '../box/box'
-<<<<<<< HEAD
-import { Drawer, DrawerContent, DrawerOverlay } from '../drawer/drawer'
-=======
 import { Drawer } from '../drawer/drawer'
->>>>>>> origin/main
 import { Flex } from '../flex/flex'
 import { RedesignLogo } from '../logos/redesign-logo/redesign-logo'
 
@@ -29,17 +25,12 @@ export const MobileNav = ({ userProfile, numOpcos, numPersons }: any) => {
           w={{ base: '200px', md: '225px' }}
           alt="Redesign Health logo"
         />
-<<<<<<< HEAD
-        <ToggleButton open={open} aria-label="Open Menu" onClick={onToggle} />
-        <Drawer
-=======
         <ToggleButton
           open={open}
           aria-label="Open Menu"
           onClick={onToggle}
         />
         <Drawer.Root
->>>>>>> origin/main
           open={open}
           placement="start"
           onOpenChange={(e: { open: boolean }) => !e.open && onClose()}

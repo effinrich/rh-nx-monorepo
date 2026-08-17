@@ -241,14 +241,10 @@ export const WithIcon = () => (
       <LuMail />
       Email
     </Button>
-<<<<<<< HEAD
-    <Button rightIcon={<LuArrowRight />} colorPalette="teal" variant="outline">
-=======
     <Button
       colorPalette="teal"
       variant="outline"
     >
->>>>>>> origin/main
       Call us
       <LuArrowRight />
     </Button>

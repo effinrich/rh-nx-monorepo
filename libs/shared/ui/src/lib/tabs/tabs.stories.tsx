@@ -3,11 +3,6 @@
 /** biome-ignore-all lint/a11y/useButtonType: <explanation> */
 import * as React from 'react'
 import { useInterval } from 'react-use'
-<<<<<<< HEAD
-import { Tabs } from '@chakra-ui/react'
-import type { storiesOf } from 'storybook'
-=======
->>>>>>> origin/main
 
 import {
   DrawerRoot,
@@ -102,30 +97,6 @@ export const Automatic = () => (
   </>
 )
 
-<<<<<<< HEAD
-export const Manual = () => (
-  <Tabs.Root defaultValue="settings">
-    <Tabs.List>
-      <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
-      <Tabs.Trigger value="billings">Billings</Tabs.Trigger>
-      <Tabs.Trigger value="preferences" disabled>
-        Preferences
-      </Tabs.Trigger>
-      <Tabs.Trigger value="shutdown">Shut Down</Tabs.Trigger>
-    </Tabs.List>
-    <Tabs.Content value="settings">Settings</Tabs.Content>
-    <Tabs.Content value="billings">Billings</Tabs.Content>
-    <Tabs.Content value="preferences">Preferences</Tabs.Content>
-    <Tabs.Content value="shutdown">Shut Down</Tabs.Content>
-  </Tabs.Root>
-)
-
-export const WithIndicator = () => (
-  <Tabs.Root variant="plain" defaultValue="settings">
-    <Tabs.List>
-      <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
-      <Tabs.Trigger value="billings" disabled>
-=======
 export const manual = () => (
   <TabsRoot isManual>
     <TabList>
@@ -146,7 +117,6 @@ export const withIndicator = () => (
     <TabList>
       <Tab>Settings</Tab>
       <Tab _disabled={{ color: 'gray.400' }} disabled>
->>>>>>> origin/main
         Billings
       </Tab>
       <Tab>Preferences</Tab>
@@ -162,39 +132,6 @@ export const withIndicator = () => (
   </TabsRoot>
 )
 
-<<<<<<< HEAD
-export const WithIndicatorAndLongTabText = () => (
-  <Tabs.Root variant="plain" defaultValue="long">
-    <Tabs.List>
-      <Tabs.Trigger value="long">Tab with long text</Tabs.Trigger>
-      <Tabs.Trigger value="billings">Billings</Tabs.Trigger>
-      <Tabs.Trigger value="preferences">Preferences</Tabs.Trigger>
-      <Tabs.Trigger value="shutdown">Shut Down</Tabs.Trigger>
-      <Tabs.Indicator mt="-36px" zIndex={-1} height="34px" bg="green.200" />
-    </Tabs.List>
-    <Tabs.Content value="long">Tab with long text</Tabs.Content>
-    <Tabs.Content value="billings">Billings</Tabs.Content>
-    <Tabs.Content value="preferences">Preferences</Tabs.Content>
-    <Tabs.Content value="shutdown">Shut Down</Tabs.Content>
-  </Tabs.Root>
-)
-
-export const WithVerticalTabs = () => (
-  <Tabs.Root orientation="vertical" defaultValue="settings">
-    <Tabs.List>
-      <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
-      <Tabs.Trigger value="billings">Billings</Tabs.Trigger>
-      <Tabs.Trigger value="preferences" disabled>
-        Preferences
-      </Tabs.Trigger>
-      <Tabs.Trigger value="shutdown">Shut Down</Tabs.Trigger>
-    </Tabs.List>
-    <Tabs.Content value="settings">Settings</Tabs.Content>
-    <Tabs.Content value="billings">Billings</Tabs.Content>
-    <Tabs.Content value="preferences">Preferences</Tabs.Content>
-    <Tabs.Content value="shutdown">Shut Down</Tabs.Content>
-  </Tabs.Root>
-=======
 export const withIndicatorAndLongTabText = () => (
   <TabsRoot variant="unstyled" isManual>
     <TabList>
@@ -224,7 +161,6 @@ export const withVerticalTabs = () => (
     <TabPanel>Preferences</TabPanel>
     <TabPanel>Shut Down</TabPanel>
   </TabsRoot>
->>>>>>> origin/main
 )
 
 const Interval = () => {
@@ -237,15 +173,6 @@ const Interval = () => {
   )
 }
 
-<<<<<<< HEAD
-export const WithLazyTabs = () => (
-  <Tabs.Root lazyMount defaultValue="1">
-    <Tabs.List>
-      <Tabs.Trigger value="1">Interval 1</Tabs.Trigger>
-      <Tabs.Trigger value="2">Interval 2</Tabs.Trigger>
-    </Tabs.List>
-    <Tabs.Content value="1">
-=======
 export const withLazyTabs = () => (
   <TabsRoot isLazy>
     <TabList>
@@ -253,7 +180,6 @@ export const withLazyTabs = () => (
       <Tab>Interval 2</Tab>
     </TabList>
     <TabPanel>
->>>>>>> origin/main
       Interval 1:
       <Interval />
     </TabPanel>
@@ -264,15 +190,6 @@ export const withLazyTabs = () => (
   </TabsRoot>
 )
 
-<<<<<<< HEAD
-export const WithLazyTabsMounted = () => (
-  <Tabs.Root lazyMount unmountOnExit={false} defaultValue="1">
-    <Tabs.List>
-      <Tabs.Trigger value="1">Interval 1</Tabs.Trigger>
-      <Tabs.Trigger value="2">Interval 2</Tabs.Trigger>
-    </Tabs.List>
-    <Tabs.Content value="1">
-=======
 export const withLazyTabsMounted = () => (
   <TabsRoot isLazy lazyBehavior="keepMounted">
     <TabList>
@@ -280,7 +197,6 @@ export const withLazyTabsMounted = () => (
       <Tab>Interval 2</Tab>
     </TabList>
     <TabPanel>
->>>>>>> origin/main
       Interval 1:
       <Interval />
     </TabPanel>
@@ -315,15 +231,9 @@ export const WithSwappedTabs = () => {
     // }
 
     return (
-<<<<<<< HEAD
-      <Tabs.Root
-        value={selectedItemId}
-        onValueChange={e => setSelectedItemId(e.value)}
-=======
       <TabsRoot
         index={tabIndex}
         onChange={onTabChange}
->>>>>>> origin/main
         orientation="vertical"
         variant="enclosed-colored"
       >
@@ -339,11 +249,7 @@ export const WithSwappedTabs = () => {
             {x.id}: {x.value}
           </TabPanel>
         ))}
-<<<<<<< HEAD
-      </Tabs.Root>
-=======
       </TabsRoot>
->>>>>>> origin/main
     )
   }
 
@@ -369,13 +275,8 @@ export const WithSwappedTabs = () => {
   )
 }
 
-<<<<<<< HEAD
-export const WithinDrawer = () => (
-  <Drawer open>
-=======
 export const withinDrawer = () => (
   <DrawerRoot open onOpenChange={console.log}>
->>>>>>> origin/main
     <DrawerOverlay>
       <DrawerContent>
         <DrawerBody>
