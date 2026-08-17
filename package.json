@@ -167,7 +167,7 @@
     "@nx/web": "^22.7.3",
     "@nx/webpack": "^22.7.3",
     "@nx/workspace": "22.3.3",
-    "@nxrocks/nx-spring-boot": "^8.1.0",
+    "@nxrocks/nx-spring-boot": "^11.0.1",
     "@parcel/watcher": "2.5.4",
     "@playwright/test": "^1.57.0",
     "@rollup/plugin-url": "8.0.2",
