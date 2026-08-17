@@ -90,5 +90,6 @@
   "java.compile.nullAnalysis.mode": "automatic",
   "vitest.disableWorkspaceWarning": true,
   "nxConsole.nxWorkspacePath": "./",
-  "chat.sessionSync.enabled": true
+  "chat.sessionSync.enabled": true,
+  "cSpell.words": ["chakra", "chromaui"]
 }
