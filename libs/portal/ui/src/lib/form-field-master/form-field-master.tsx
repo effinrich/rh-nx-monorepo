@@ -22,7 +22,7 @@ interface FormFieldProps {
   optional?: boolean
 }
 
-interface FormFieldProps {
+export const FormFieldMaster = ({
   children,
   name,
   helper,
@@ -46,22 +46,22 @@ interface FormFieldProps {
           <Box w={['100%', '100%', '25%']} mr={4}>
             {/* @ts-expect-error Chakra v3 children typing */}
             <FieldLabel color="gray.800">
-            {optional ? (
-              label
-            ) : (
-              <Text
-                as="span"
-                css={{
-                  '&::after': {
-                    content: '" *"',
-                    color: '#fd3131',
-                    whiteSpace: 'nowrap'
-                  }
-                }}
-              >
-                {label}
-              </Text>
-            )}
+              {optional ? (
+                label
+              ) : (
+                <Text
+                  as="span"
+                  css={{
+                    '&::after': {
+                      content: '" *"',
+                      color: '#fd3131',
+                      whiteSpace: 'nowrap'
+                    }
+                  }}
+                >
+                  {label}
+                </Text>
+              )}
             </FieldLabel>
           </Box>
 

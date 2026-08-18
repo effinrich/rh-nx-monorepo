@@ -1,12 +1,7 @@
-import styled from '@emotion/styled'
-
+import { Box } from '../../../box/box'
 import { setOpCos, setUsers } from '../api'
 /* eslint-disable-next-line */
 export interface DashboardProps {}
-
-const StyledOpCos = styled.div`
-  color: black;
-`
 
 export async function loader() {
   setOpCos()
@@ -15,9 +10,9 @@ export async function loader() {
 
 export function Dashboard(props: DashboardProps) {
   return (
-    <StyledOpCos>
+    <Box color="black">
       <h1>Welcome to Dashboard!</h1>
-    </StyledOpCos>
+    </Box>
   )
 }
 

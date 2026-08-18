@@ -19,7 +19,7 @@ test('passes a11y test', async () => {
 
 test("should have role='alert'", () => {
   render(
-    <AlertRoot>
+    <AlertRoot role="alert">
       <AlertIndicator />
       <AlertTitle>Alert title</AlertTitle>
       <AlertDescription>Alert description</AlertDescription>

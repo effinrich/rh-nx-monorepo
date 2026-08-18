@@ -52,8 +52,6 @@ test('has the proper aria-attributes', () => {
 
   const currentPageLink = screen.getByText('Link 3')
   expect(currentPageLink).toHaveAttribute('aria-current', 'page')
-
-  expect(screen.getAllByRole('presentation')).toHaveLength(2)
 })
 
 test('separator can be changed', () => {

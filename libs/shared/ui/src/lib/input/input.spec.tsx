@@ -5,6 +5,7 @@ import {
   testA11y
 } from '@redesignhealth/shared-utils-jest'
 
+import { FieldRoot } from '../form-control/form-control'
 import { Input, InputGroup } from './input'
 
 describe('Input', () => {
@@ -34,7 +35,11 @@ describe('Input', () => {
   })
 
   test('Invalid input renders correctly', () => {
-    render(<Input invalid />)
+    render(
+      <FieldRoot invalid>
+        <Input />
+      </FieldRoot>
+    )
 
     expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'true')
   })
@@ -48,7 +53,7 @@ describe('Input', () => {
   test('Readonly input renders correctly', () => {
     render(<Input readOnly />)
 
-    expect(screen.getByRole('textbox')).toHaveAttribute('aria-readonly', 'true')
+    expect(screen.getByRole('textbox')).toHaveAttribute('readOnly')
   })
 
   test('Input with native size renders correctly', () => {
