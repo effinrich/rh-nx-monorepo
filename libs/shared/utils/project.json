@@ -12,10 +12,6 @@
         "outputPath": "dist/libs/shared/utils"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
-    },
     "check-types": {
       "executor": "nx:run-commands",
       "options": {

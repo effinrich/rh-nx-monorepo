@@ -50,10 +50,6 @@
         }
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
-    },
     "build-image": {
       "executor": "@nx-tools/nx-container:build",
       "dependsOn": ["build"],

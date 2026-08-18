@@ -2,5 +2,57 @@
   "/api": {
     "target": "http://localhost:8080",
     "secure": false
+  },
+  "/asset": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/ceos": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/company": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/consent": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/expert-note": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/infra-request": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/ip-marketplace": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/library-doc": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/me": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/person": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/research": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/userinfo": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/vendor": {
+    "target": "http://localhost:8080",
+    "secure": false
   }
 }
