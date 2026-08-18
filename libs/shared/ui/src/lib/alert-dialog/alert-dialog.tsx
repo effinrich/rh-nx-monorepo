@@ -1,20 +1,33 @@
-// Chakra UI v3: AlertDialog is now part of Dialog with role="alertdialog"
-// See: https://chakra-ui.com/docs/get-started/migration
-
-// Dialog is a namespace object in Chakra v3 - don't export it directly as a component.
-// Export Dialog compound components as AlertDialog for v2 compatibility
-export {
-  DialogRoot as AlertDialog,
-  DialogBackdrop as AlertDialogOverlay,
-  DialogContent as AlertDialogContent,
-  DialogHeader as AlertDialogHeader,
-  DialogBody as AlertDialogBody,
-  DialogFooter as AlertDialogFooter,
-  DialogCloseTrigger as AlertDialogCloseButton
+import { forwardRef } from 'react'
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner,
+  DialogRoot,
+  type DialogContentProps,
+  type DialogRootProps
 } from '@chakra-ui/react'
 
-// Export types
-export type {
-  DialogRootProps as AlertDialogProps,
-  DialogContentProps as AlertDialogContentProps
-} from '@chakra-ui/react'
+export const AlertDialog = DialogRoot
+export const AlertDialogOverlay = DialogBackdrop
+export const AlertDialogHeader = DialogHeader
+export const AlertDialogBody = DialogBody
+export const AlertDialogFooter = DialogFooter
+export const AlertDialogCloseButton = DialogCloseTrigger
+
+export const AlertDialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
+  function AlertDialogContent(props, ref) {
+    return (
+      <DialogPositioner>
+        <DialogContent ref={ref} role="alertdialog" {...props} />
+      </DialogPositioner>
+    )
+  }
+)
+
+export type AlertDialogProps = DialogRootProps
+export type AlertDialogContentProps = DialogContentProps

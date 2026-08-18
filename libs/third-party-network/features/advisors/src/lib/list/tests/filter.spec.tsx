@@ -1,4 +1,4 @@
-import { RhProvider, theme } from '@redesignhealth/ui'
+import { RhProvider } from '@redesignhealth/ui'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, it, vi } from 'vitest'
@@ -59,7 +59,7 @@ describe('Filter', () => {
 const renderComponent = (name: FilterName, label: string) => {
   const environment = { getWindow: () => window, getDocument: () => document }
   const utils = render(
-    <RhProvider theme={theme} environment={environment}>
+    <RhProvider>
       <Filter badgeColor="blue" label={label} name={name} onChange={vi.fn()} />
     </RhProvider>
   )

@@ -1,22 +1,15 @@
 'use client'
 
-// Chakra UI v3: Toaster
-// - Uses createToaster() to create a toaster instance
-// - Toaster component renders toast notifications via Portal
-// See: https://chakra-ui.com/docs/components/toaster
-
-import type {
-  CreateToasterReturn,
-  ToastActionTriggerProps
-} from '@chakra-ui/react'
+import type { CreateToasterReturn } from '@chakra-ui/react'
 import {
   createToaster,
   Portal,
   Spinner,
-  Stack,
   Toast,
   Toaster as ChakraToaster
 } from '@chakra-ui/react'
+import { VStack } from '@chakra-ui/react'
+import type { ReactNode } from 'react'
 
 export interface ToasterOptions {
   placement?:
@@ -37,11 +30,6 @@ const defaultOptions: ToasterOptions = {
   pauseOnPageIdle: true
 }
 
-/**
- * Creates a toaster instance for displaying toast notifications.
- * @param options - Configuration options for the toaster
- * @returns A toaster instance with methods like toast(), success(), error(), etc.
- */
 export const createAppToaster = (
   options: ToasterOptions = {}
 ): CreateToasterReturn => {
@@ -51,49 +39,45 @@ export const createAppToaster = (
   })
 }
 
-// Default toaster instance for convenience
 export const toaster = createAppToaster()
 
+interface ToastRenderData {
+  type?: string
+  title?: ReactNode
+  description?: ReactNode
+  action?: { label?: ReactNode }
+  closable?: boolean
+}
+
 export interface ToasterProps {
-  /** The toaster instance to use */
   toaster?: CreateToasterReturn
-  /** Inline inset for mobile devices */
   insetInline?: Record<string, string | number> | string | number
 }
 
-/**
- * Toaster component that renders toast notifications.
- * Must be placed at the root of your app, typically in the provider.
- */
 export const Toaster = ({
   toaster: toasterInstance = toaster,
   insetInline = { mdDown: '4' }
 }: ToasterProps) => {
   return (
     <Portal>
-      {/* @ts-expect-error Chakra v3 Toaster typing issue with children render prop */}
       <ChakraToaster toaster={toasterInstance} insetInline={insetInline}>
-        {(toast: any) => (
+        {(toast: ToastRenderData) => (
           <Toast.Root width={{ md: 'sm' }}>
             {toast.type === 'loading' ? (
               <Spinner size="sm" color="blue.solid" />
             ) : (
-              // @ts-expect-error Chakra v3 compound component typing
               <Toast.Indicator />
             )}
-            <Stack gap="1" flex="1" maxWidth="100%">
-              {/* @ts-expect-error Chakra v3 compound component typing */}
-              {toast.title && <Toast.Title>{toast.title}</Toast.Title>}
-              {toast.description && (
-                // @ts-expect-error Chakra v3 compound component typing
+            <VStack gap="1" flex="1" maxWidth="100%" align="stretch">
+              {toast.title ? <Toast.Title>{toast.title}</Toast.Title> : null}
+              {toast.description ? (
                 <Toast.Description>{toast.description}</Toast.Description>
-              )}
-            </Stack>
-            {toast.action && (
-              // @ts-expect-error Chakra v3 compound component typing
+              ) : null}
+            </VStack>
+            {toast.action ? (
               <Toast.ActionTrigger>{toast.action.label}</Toast.ActionTrigger>
-            )}
-            {toast.closable && <Toast.CloseTrigger />}
+            ) : null}
+            {toast.closable ? <Toast.CloseTrigger /> : null}
           </Toast.Root>
         )}
       </ChakraToaster>
@@ -101,5 +85,4 @@ export const Toaster = ({
   )
 }
 
-// Re-export toast types for convenience
 export type { CreateToasterReturn }

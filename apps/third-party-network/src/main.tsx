@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { theme } from '@chakra-ui/react'
 import { AuthProvider } from '@redesignhealth/third-party-network/features/authentication'
 import { RhProvider } from '@redesignhealth/ui'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -31,7 +30,7 @@ root.render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools buttonPosition="bottom-right" />
-      <RhProvider theme={theme}>
+      <RhProvider>
         <AuthProvider>{router}</AuthProvider>
       </RhProvider>
     </QueryClientProvider>

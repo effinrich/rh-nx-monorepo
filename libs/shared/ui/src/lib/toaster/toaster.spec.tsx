@@ -4,7 +4,7 @@ import { render, screen, waitFor } from '@redesignhealth/shared-utils-jest'
 
 import { Toaster } from './toaster'
 
-describe('Toaster', () => {
+describ
   it('should render successfully', () => {
     const { baseElement } = render(<Toaster />)
     expect(baseElement).toBeTruthy()

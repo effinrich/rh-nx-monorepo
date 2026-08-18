@@ -2,7 +2,7 @@ import { lazy } from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { ToastContainer } from 'react-toastify'
 import { GoogleOAuthProvider } from '@react-oauth/google'
-import { RhProvider, theme } from '@redesignhealth/ui'
+import { RhProvider } from '@redesignhealth/ui'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -25,7 +25,7 @@ const root = ReactDOM.createRoot(document.querySelector('#root')!)
 root.render(
   <QueryClientProvider client={queryClient}>
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID || ''}>
-      <RhProvider theme={theme}>
+      <RhProvider>
         <App />
         <ToastContainer newestOnTop />
       </RhProvider>

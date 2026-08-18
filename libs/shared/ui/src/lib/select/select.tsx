@@ -1,20 +1,19 @@
-// Chakra UI v3: Select has been renamed to NativeSelect for native select
-// For custom selects, use the Select component with compound pattern
-// See: https://chakra-ui.com/docs/get-started/migration
-
-export {
-  NativeSelectRoot as NativeSelect,
-  SelectRoot as Select
+import { forwardRef } from 'react'
+import {
+  NativeSelectField,
+  NativeSelectIndicator,
+  NativeSelectRoot,
+  type NativeSelectFieldProps,
+  type NativeSelectRootProps,
+  type SelectRootProps
 } from '@chakra-ui/react'
 
-// Export NativeSelect compound components
 export {
   NativeSelectRoot,
   NativeSelectField,
   NativeSelectIndicator
 } from '@chakra-ui/react'
 
-// Export Select compound components (for custom select)
 export {
   SelectRoot,
   SelectTrigger,
@@ -32,5 +31,21 @@ export {
   SelectHiddenSelect
 } from '@chakra-ui/react'
 
-// Export types
-export type { NativeSelectRootProps, SelectRootProps } from '@chakra-ui/react'
+export const NativeSelect = NativeSelectRoot
+
+/**
+ * Native HTML select with v2-compatible `<Select><option/></Select>` usage.
+ * Custom listbox select is `SelectRoot` / `Select.*`.
+ */
+export const Select = forwardRef<HTMLSelectElement, NativeSelectFieldProps>(
+  function Select(props, ref) {
+    return (
+      <NativeSelectRoot>
+        <NativeSelectField ref={ref} {...props} />
+        <NativeSelectIndicator />
+      </NativeSelectRoot>
+    )
+  }
+)
+
+export type { NativeSelectRootProps, NativeSelectFieldProps, SelectRootProps }
