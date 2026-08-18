@@ -24,10 +24,10 @@ The `useDisclosure` hook returns an object with the following fields:
 
 | Name                 | Type       | Default | Description                                                                               |
 | -------------------- | ---------- | ------- | ----------------------------------------------------------------------------------------- |
-| `isOpen`             | `boolean`  | `false` | If `true`, it sets the controlled component to its visible state.                         |
-| `onClose`            | `function` |         | Callback function to set a falsy value for the `isOpen` parameter.                        |
-| `onOpen`             | `function` |         | Callback function to set a truthy value for the `isOpen` parameter.                       |
-| `onToggle`           | `function` |         | Callback function to toggle the value of the `isOpen` parameter.                          |
+| `open`               | `boolean`  | `false` | If `true`, it sets the controlled component to its visible state.                         |
+| `onClose`            | `function` |         | Callback function to set a falsy value for the `open` parameter.                          |
+| `onOpen`             | `function` |         | Callback function to set a truthy value for the `open` parameter.                         |
+| `onToggle`           | `function` |         | Callback function to toggle the value of the `open` parameter.                            |
 | `getDisclosureProps` | `function` |         | Callback function to retrieve a set of props for the controlled component.                |
 | `getButtonProps`     | `function` |         | Callback function to retrieve a set of props for the button that triggers the disclosure. |
 
@@ -41,22 +41,30 @@ Below is the use of returned fields of the hook without a getter to control the
 
 ```jsx
 function Example() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
-      <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
-          <DrawerBody>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <DrawerRoot
+        placement="right"
+        onOpenChange={e => {
+          if (!e.open) onClose()
+        }}
+        open={open}
+      >
+        <DrawerBackdrop />
+        <DrawerPositioner>
+          <DrawerContent>
+            <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
+            <DrawerBody>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerPositioner>
+      </DrawerRoot>
     </>
   )
 }

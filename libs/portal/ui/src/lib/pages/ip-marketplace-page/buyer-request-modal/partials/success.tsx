@@ -1,10 +1,11 @@
 import {
   Button,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner
 } from '@redesignhealth/ui'
 
 interface SuccessProps {
@@ -13,20 +14,23 @@ interface SuccessProps {
 
 const Success = ({ onConfirmation }: SuccessProps) => {
   return (
-    // @ts-expect-error Chakra v3 DialogContent children typing
-    <ModalContent>
-      <ModalCloseButton />
-      <ModalHeader>Request sent successfully</ModalHeader>
-      <ModalBody>
-        We'll email you when the seller releases their contact information to
-        you.
-      </ModalBody>
-      <ModalFooter>
-        <Button colorPalette="primary" onClick={onConfirmation}>
-          Got it
-        </Button>
-      </ModalFooter>
-    </ModalContent>
+    // @ts-expect-error Chakra v3 children typing
+    <DialogPositioner>
+      {/* @ts-expect-error Chakra v3 children typing */}
+      <DialogContent>
+        <DialogCloseTrigger />
+        <DialogHeader>Request sent successfully</DialogHeader>
+        <DialogBody>
+          We'll email you when the seller releases their contact information to
+          you.
+        </DialogBody>
+        <DialogFooter>
+          <Button colorPalette="primary" onClick={onConfirmation}>
+            Got it
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </DialogPositioner>
   )
 }
 

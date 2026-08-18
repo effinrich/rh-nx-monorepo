@@ -4,7 +4,7 @@ import {
   MdPeople,
   MdSupport
 } from 'react-icons/md'
-import { Divider } from '../divider/divider'
+import { Separator } from '../divider/divider'
 import { Flex } from '../flex/flex'
 import { RedesignLogo } from '../logos/redesign-logo/redesign-logo'
 import { Stack } from '../stack/stack'
@@ -78,7 +78,7 @@ export const Nav = ({
           <Stack gap="1">
             <NavButton label="Support" icon={MdSupport} path="support" />
           </Stack>
-          <Divider borderColor="gray.200" />
+          <Separator borderColor="gray.200" />
           <UserProfile
             name={`${userProfile.givenName} ${userProfile.familyName}`}
             image={userProfile.picture}

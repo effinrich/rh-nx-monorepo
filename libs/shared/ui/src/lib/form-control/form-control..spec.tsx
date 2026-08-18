@@ -1,10 +1,10 @@
 import { render } from '@redesignhealth/shared-utils-jest'
 
-import { FormControl } from './form-control'
+import { FieldRoot } from './form-control'
 
-describe('FormControl', () => {
+describe('Field', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<FormControl />)
+    const { baseElement } = render(<FieldRoot />)
     expect(baseElement).toBeTruthy()
   })
 })

@@ -11,12 +11,12 @@ import {
 import {
   rh,
   TableRoot,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
+  TableScrollArea,
+  TableBody,
+  TableCell,
+  TableColumnHeader,
+  TableHeader,
+  TableRow,
   TriangleDownIcon,
   TriangleUpIcon
 } from '../../index'
@@ -48,16 +48,16 @@ export function DataTable<Data extends object>({
   })
 
   return (
-    <TableContainer borderBottomRadius="8px">
+    <TableScrollArea borderBottomRadius="8px">
       <TableRoot variant={variant as any} colorPalette={colorPalette}>
-        <Thead>
+        <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
-            <Tr key={headerGroup.id}>
+            <TableRow key={headerGroup.id}>
               {headerGroup.headers.map(header => {
                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                 const meta: any = header.column.columnDef.meta
                 return (
-                  <Th
+                  <TableColumnHeader
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
                     textAlign={meta?.isNumeric ? 'end' : undefined}
@@ -76,28 +76,28 @@ export function DataTable<Data extends object>({
                         )
                       ) : null}
                     </rh.span>
-                  </Th>
+                  </TableColumnHeader>
                 )
               })}
-            </Tr>
+            </TableRow>
           ))}
-        </Thead>
-        <Tbody>
+        </TableHeader>
+        <TableBody>
           {table.getRowModel().rows.map(row => (
-            <Tr key={row.id}>
+            <TableRow key={row.id}>
               {row.getVisibleCells().map(cell => {
                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                 const meta: any = cell.column.columnDef.meta
                 return (
-                  <Td key={cell.id} textAlign={meta?.isNumeric ? 'end' : undefined}>
+                  <TableCell key={cell.id} textAlign={meta?.isNumeric ? 'end' : undefined}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Td>
+                  </TableCell>
                 )
               })}
-            </Tr>
+            </TableRow>
           ))}
-        </Tbody>
+        </TableBody>
       </TableRoot>
-    </TableContainer>
+    </TableScrollArea>
   )
 }

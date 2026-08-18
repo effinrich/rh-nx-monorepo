@@ -65,7 +65,7 @@ const SupportPage = () => {
             variant="filled"
           />
         )}
-        <Terms isOpen={open} onClose={onClose} />
+        <Terms open={open} onClose={onClose} />
       </SimpleGrid>
     </Box>
   )

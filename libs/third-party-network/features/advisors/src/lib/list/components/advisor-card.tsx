@@ -156,7 +156,7 @@ export const AdvisorCard = memo(
         <IntroductionRequestForm
           advisorId={advisorId}
           advisorName={name}
-          isOpen={open}
+          open={open}
           onClose={onClose}
         />
       </CardRoot>

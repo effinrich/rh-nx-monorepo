@@ -21,10 +21,10 @@ import {
   Button,
   CheckboxRoot,
   CheckboxGroupProps,
-  Divider,
+  Separator,
   Flex,
-  FormErrorMessage,
-  FormLabel,
+  FieldErrorText,
+  FieldLabel,
   Stack
 } from '@redesignhealth/ui'
 import { QueryClient } from '@tanstack/react-query'
@@ -161,7 +161,7 @@ export const CompanyInfraPrivacy = () => {
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s1">
+            <DrawerFormHeader as={FieldLabel} data-testid="s1">
               1. Personal information
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q1-a-desc">
@@ -176,7 +176,8 @@ export const CompanyInfraPrivacy = () => {
               readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q1-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q1-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
@@ -194,14 +195,14 @@ export const CompanyInfraPrivacy = () => {
             listItems={examples['q1-a']}
           />
         </Flex>
-        <Divider />
+        <Separator />
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
             invalid={Boolean(fieldErrors?.['q2-a'])}
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s2">
+            <DrawerFormHeader as={FieldLabel} data-testid="s2">
               2. Medical information
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q2-a-desc">
@@ -215,7 +216,8 @@ export const CompanyInfraPrivacy = () => {
               readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q2-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q2-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
@@ -234,7 +236,7 @@ export const CompanyInfraPrivacy = () => {
           />
         </Flex>
 
-        <Divider />
+        <Separator />
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
@@ -242,7 +244,7 @@ export const CompanyInfraPrivacy = () => {
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s3">
+            <DrawerFormHeader as={FieldLabel} data-testid="s3">
               3. Financial information
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q3-a-desc">
@@ -256,7 +258,8 @@ export const CompanyInfraPrivacy = () => {
               readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q3-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q3-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
@@ -280,7 +283,7 @@ export const CompanyInfraPrivacy = () => {
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormDescription as={FormLabel} data-testid="q3-b-desc">
+            <DrawerFormDescription as={FieldLabel} data-testid="q3-b-desc">
               Will your service be collecting any Credit Card data in any way,
               shape or form? Select one response.
             </DrawerFormDescription>
@@ -301,21 +304,20 @@ export const CompanyInfraPrivacy = () => {
             />
           </DrawerFormControl>
           <DrawerFormControl flexDir="column" gap="16px">
-            <DrawerFormDescription as={FormLabel} data-testid="q3-c-desc">
+            <DrawerFormDescription as={FieldLabel} data-testid="q3-c-desc">
               How will the financial information be stored? Select all that
               apply.
             </DrawerFormDescription>
             <Flex flexDir="column" gap="16px" pb="16px">
-              <Stack spacing={[1, 5]} direction="column">
+              <Stack gap={[1, 5]} direction="column">
                 {q3cCheckboxes.map((value, index) => (
-                  // @ts-expect-error Chakra v3 compound component typing
                   <CheckboxRoot
                     key={index}
                     name={`q3-c${index}`}
                     value={value}
                     readOnly={infraRequestSubmitted}
-                    isChecked={q3checked.includes(value)}
-                    onChange={() => {
+                    checked={q3checked.includes(value)}
+                    onCheckedChange={() => {
                       const wasChecked = q3checked.includes(value)
                       let newq3checked: string[] = []
                       if (!wasChecked) {
@@ -341,12 +343,13 @@ export const CompanyInfraPrivacy = () => {
                   </CheckboxRoot>
                 ))}
               </Stack>
-              <FormErrorMessage>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText>
                 {fieldErrors?.['q3-c0'] ||
                   fieldErrors?.['q3-c1'] ||
                   fieldErrors?.['q3-c2'] ||
                   fieldErrors?.['q3-c3']}
-              </FormErrorMessage>
+              </FieldErrorText>
             </Flex>
           </DrawerFormControl>
           <DrawerFormControl>
@@ -375,7 +378,7 @@ export const CompanyInfraPrivacy = () => {
             /> */}
         </Flex>
 
-        <Divider />
+        <Separator />
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
@@ -383,7 +386,7 @@ export const CompanyInfraPrivacy = () => {
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s4">
+            <DrawerFormHeader as={FieldLabel} data-testid="s4">
               4. Proprietary information
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q4-a-desc">
@@ -398,7 +401,8 @@ export const CompanyInfraPrivacy = () => {
               readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q4-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q4-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
@@ -417,7 +421,7 @@ export const CompanyInfraPrivacy = () => {
           />
         </Flex>
 
-        <Divider />
+        <Separator />
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
@@ -425,7 +429,7 @@ export const CompanyInfraPrivacy = () => {
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s5">
+            <DrawerFormHeader as={FieldLabel} data-testid="s5">
               5. Data storage
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q5-a-desc">
@@ -438,7 +442,8 @@ export const CompanyInfraPrivacy = () => {
               readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q5-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q5-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
@@ -450,7 +455,7 @@ export const CompanyInfraPrivacy = () => {
             />
           </DrawerFormControl>
           <DrawerFormControl mt="50px">
-            <DrawerFormDescription as={FormLabel} data-testid="q5-b-desc">
+            <DrawerFormDescription as={FieldLabel} data-testid="q5-b-desc">
               If the information is stored, where will it be stored? Please
               provide detail, if known.
             </DrawerFormDescription>
@@ -470,7 +475,7 @@ export const CompanyInfraPrivacy = () => {
           />
         </Flex>
 
-        <Divider />
+        <Separator />
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
@@ -478,7 +483,7 @@ export const CompanyInfraPrivacy = () => {
             gap="16px"
             invalid={Boolean(fieldErrors?.['q6-a'])}
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s6">
+            <DrawerFormHeader as={FieldLabel} data-testid="s6">
               6. Sharing data with third parties
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q6-a-desc">
@@ -491,7 +496,8 @@ export const CompanyInfraPrivacy = () => {
               readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q6-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q6-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
@@ -509,7 +515,7 @@ export const CompanyInfraPrivacy = () => {
             listItems={examples['q6-a']}
           />
           <DrawerFormControl mt="50px">
-            <DrawerFormDescription as={FormLabel} data-testid="q6-b-desc">
+            <DrawerFormDescription as={FieldLabel} data-testid="q6-b-desc">
               If the information is transmitted outside your system, how is it
               done? Please provide detail, if known.
             </DrawerFormDescription>
@@ -529,20 +535,19 @@ export const CompanyInfraPrivacy = () => {
           />
         </Flex>
 
-        <Divider />
+        <Separator />
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl flexDir="column" gap="16px">
-            <DrawerFormHeader as={FormLabel} data-testid="s7">
+            <DrawerFormHeader as={FieldLabel} data-testid="s7">
               7. After using data
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q7-a-desc">
               After data is used, is it destroyed or masked when it is no longer
               needed? Select all that apply.
             </DrawerFormDescription>
-            <Stack spacing={[1, 5]} direction="column">
+            <Stack gap={[1, 5]} direction="column">
               {q7cCheckboxes.map((value, index) => (
-                // @ts-expect-error Chakra v3 compound component typing
                 <CheckboxRoot
                   key={index}
                   name={`q7-a${index}`}
@@ -551,8 +556,8 @@ export const CompanyInfraPrivacy = () => {
                   defaultChecked={Object.keys(privacyForm?.form || {}).includes(
                     `q7-a${index}`
                   )}
-                  isChecked={q7checked.includes(value)}
-                  onChange={() => {
+                  checked={q7checked.includes(value)}
+                  onCheckedChange={() => {
                     const wasChecked = q7checked.includes(value)
                     let newq7checked: string[] = []
                     if (!wasChecked) {
@@ -590,12 +595,13 @@ export const CompanyInfraPrivacy = () => {
                 { value: 'Other' }
               ]}
             /> */}
-            <FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>
               {fieldErrors?.['q7-a0'] ||
                 fieldErrors?.['q7-a1'] ||
                 fieldErrors?.['q7-a2'] ||
                 fieldErrors?.['q7-a3']}
-            </FormErrorMessage>
+            </FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea

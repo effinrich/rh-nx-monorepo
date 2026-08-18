@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { fireEvent, render } from '@redesignhealth/shared-utils-jest'
 
-import { FormControl, FormLabel } from '../form-control/form-control'
+import { FieldLabel, FieldRoot } from '../form-control/form-control'
 
 import { Switch } from './switch'
 
@@ -17,7 +17,7 @@ test('Uncontrolled - should check and uncheck', async () => {
 })
 
 test('Uncontrolled - should not check if disabled', async () => {
-  const { container, user } = render(<Switch isDisabled />)
+  const { container, user } = render(<Switch disabled />)
   const input = container.querySelector('input') as HTMLInputElement
 
   expect(input).toBeDisabled()
@@ -31,10 +31,10 @@ test('Controlled - should check and uncheck', async () => {
     const [checked, setChecked] = React.useState(false)
     return (
       <Switch
-        isChecked={checked}
-        onChange={e => {
+        checked={checked}
+        onCheckedChange={e => {
           onChange?.()
-          setChecked(e.target.checked)
+          setChecked(e.checked === true)
         }}
       />
     )
@@ -59,14 +59,14 @@ test('Controlled - should check and uncheck', async () => {
   expect(onChange).toHaveBeenCalled()
 })
 
-test('Uncontrolled FormControl - should not check if form-control disabled', async () => {
+test('Uncontrolled FieldRoot - should not check if form-control disabled', async () => {
   const { container, user } = render(
-    <FormControl isDisabled mt={4}>
-      <FormLabel>Disabled Opt-in Example</FormLabel>
+    <FieldRoot disabled mt={4}>
+      <FieldLabel>Disabled Opt-in Example</FieldLabel>
       <Switch />
-      <Switch isDisabled />
+      <Switch disabled />
       <Switch disabled={false} />
-    </FormControl>
+    </FieldRoot>
   )
 
   const [switchOne, switchTwo, switchThree] = Array.from(
@@ -86,14 +86,14 @@ test('Uncontrolled FormControl - should not check if form-control disabled', asy
   expect(switchThree).toBeChecked()
 })
 
-test('Uncontrolled FormControl - mark label as invalid', () => {
+test('Uncontrolled FieldRoot - mark label as invalid', () => {
   const { container } = render(
-    <FormControl isInvalid mt={4}>
-      <FormLabel>Invalid Opt-in Example</FormLabel>
+    <FieldRoot invalid mt={4}>
+      <FieldLabel>Invalid Opt-in Example</FieldLabel>
       <Switch>Invalid Opt-in 1</Switch>
-      <Switch isInvalid>Invalid Opt-in 2</Switch>
-      <Switch isInvalid={false}>Invalid Opt-in 3</Switch>
-    </FormControl>
+      <Switch invalid>Invalid Opt-in 2</Switch>
+      <Switch invalid={false}>Invalid Opt-in 3</Switch>
+    </FieldRoot>
   )
 
   const [switchOne, switchTwo, switchThree] = Array.from(
@@ -121,14 +121,14 @@ test('Uncontrolled FormControl - mark label as invalid', () => {
   expect(controlThree).not.toHaveAttribute('data-invalid')
 })
 
-test('Uncontrolled FormControl - mark required', () => {
+test('Uncontrolled FieldRoot - mark required', () => {
   const { container } = render(
-    <FormControl isRequired mt={4}>
-      <FormLabel>Required Opt-in Example</FormLabel>
+    <FieldRoot required mt={4}>
+      <FieldLabel>Required Opt-in Example</FieldLabel>
       <Switch />
-      <Switch isRequired />
-      <Switch isRequired={false} />
-    </FormControl>
+      <Switch required />
+      <Switch required={false} />
+    </FieldRoot>
   )
 
   const [switchOne, switchTwo, switchThree] = Array.from(
@@ -140,14 +140,14 @@ test('Uncontrolled FormControl - mark required', () => {
   expect(switchThree).not.toBeRequired()
 })
 
-test('Uncontrolled FormControl - mark readonly', () => {
+test('Uncontrolled FieldRoot - mark readonly', () => {
   const { container } = render(
-    <FormControl isReadOnly mt={4}>
-      <FormLabel>ReadOnly Opt-in Example</FormLabel>
+    <FieldRoot readOnly mt={4}>
+      <FieldLabel>ReadOnly Opt-in Example</FieldLabel>
       <Switch />
-      <Switch isReadOnly />
-      <Switch isReadOnly={false} />
-    </FormControl>
+      <Switch readOnly />
+      <Switch readOnly={false} />
+    </FieldRoot>
   )
 
   const [switchOne, switchTwo, switchThree] = Array.from(
@@ -167,15 +167,15 @@ test('Uncontrolled FormControl - mark readonly', () => {
   expect(controlThree).not.toHaveAttribute('data-readonly')
 })
 
-test('Uncontrolled FormControl - calls all onFocus EventHandler', () => {
+test('Uncontrolled FieldRoot - calls all onFocus EventHandler', () => {
   const formControlOnFocusMock = jest.fn()
   const switchOnFocusMock = jest.fn()
 
   const { container } = render(
-    <FormControl mt={4} onFocus={formControlOnFocusMock}>
-      <FormLabel>onFocus Example</FormLabel>
+    <FieldRoot mt={4} onFocus={formControlOnFocusMock}>
+      <FieldLabel>onFocus Example</FieldLabel>
       <Switch onFocus={switchOnFocusMock} />
-    </FormControl>
+    </FieldRoot>
   )
 
   const [switchOne] = Array.from(container.querySelectorAll('input'))
@@ -184,15 +184,15 @@ test('Uncontrolled FormControl - calls all onFocus EventHandler', () => {
   expect(switchOnFocusMock).toHaveBeenCalled()
 })
 
-test('Uncontrolled FormControl - calls all onBlur EventHandler', () => {
+test('Uncontrolled FieldRoot - calls all onBlur EventHandler', () => {
   const formControlOnBlurMock = jest.fn()
   const switchOnBlurMock = jest.fn()
 
   const { container } = render(
-    <FormControl mt={4} onBlur={formControlOnBlurMock}>
-      <FormLabel>onBlur Example</FormLabel>
+    <FieldRoot mt={4} onBlur={formControlOnBlurMock}>
+      <FieldLabel>onBlur Example</FieldLabel>
       <Switch onBlur={switchOnBlurMock} />
-    </FormControl>
+    </FieldRoot>
   )
 
   const [switchOne] = Array.from(container.querySelectorAll('input'))

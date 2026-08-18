@@ -30,6 +30,7 @@ module.exports = {
    */
   moduleNameMapper: {
     '^(.*)\\?raw': `\$1`,
-    '^(.*).html\\?raw': `\$1.html`
+    '^(.*).html\\?raw': `\$1.html`,
+    '^@fontsource(-variable)?/.+$': require.resolve('./jest.style-mock.js')
   }
 }

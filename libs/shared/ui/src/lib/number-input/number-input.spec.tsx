@@ -8,15 +8,15 @@ import {
   waitFor
 } from '@redesignhealth/shared-utils-jest'
 
-import { FormControl, FormHelperText, FormLabel } from '../../index'
+import { FieldHelperText, FieldLabel, FieldRoot } from '../../index'
 
 import {
-  NumberDecrementStepper,
-  NumberIncrementStepper,
+  NumberInputDecrementTrigger,
+  NumberInputIncrementTrigger,
   NumberInputRoot,
-  NumberInputField,
+  NumberInputInput,
   NumberInputRootProps,
-  NumberInputStepper,
+  NumberInputControl,
   useNumberInput
 } from './number-input'
 
@@ -25,11 +25,11 @@ function renderComponent(props: NumberInputRootProps = {}) {
     <>
       <label htmlFor="input">Select number:</label>
       <NumberInputRoot id="input" data-testid="root" {...props}>
-        <NumberInputField data-testid="input" />
-        <NumberInputStepper data-testid="group">
-          <NumberIncrementStepper children="+" data-testid="up-btn" />
-          <NumberDecrementStepper children="-" data-testid="down-btn" />
-        </NumberInputStepper>
+        <NumberInputInput data-testid="input" />
+        <NumberInputControl data-testid="group">
+          <NumberInputIncrementTrigger children="+" data-testid="up-btn" />
+          <NumberInputDecrementTrigger children="-" data-testid="down-btn" />
+        </NumberInputControl>
       </NumberInputRoot>
     </>
   )
@@ -155,16 +155,18 @@ test('should behave properly with precision value', async () => {
   expect(input).toHaveValue('1.30')
 })
 
-test('should call onChange on value change', async () => {
-  const onChange = jest.fn()
-  const { getByTestId, user } = renderComponent({ onChange })
+test('should call onValueChange on value change', async () => {
+  const onValueChange = jest.fn()
+  const { getByTestId, user } = renderComponent({ onValueChange })
 
   const upBtn = getByTestId('up-btn')
 
   await user.click(upBtn)
 
-  expect(onChange).toHaveBeenCalled()
-  expect(onChange).toBeCalledWith('1', 1)
+  expect(onValueChange).toHaveBeenCalled()
+  expect(onValueChange).toHaveBeenCalledWith(
+    expect.objectContaining({ value: '1', valueAsNumber: 1 })
+  )
 })
 
 test('should constrain value onBlur', async () => {
@@ -192,12 +194,12 @@ test('should focus input on spin', async () => {
   // expect(tools.getByTestId("input")).toEqual(document.activeElement)
 })
 
-test('should derive values from surrounding FormControl', () => {
+test('should derive values from surrounding FieldRoot', () => {
   const onFocus = jest.fn()
   const onBlur = jest.fn()
 
   render(
-    <FormControl
+    <FieldRoot
       id="input"
       required
       invalid
@@ -206,16 +208,16 @@ test('should derive values from surrounding FormControl', () => {
       onFocus={onFocus}
       onBlur={onBlur}
     >
-      <FormLabel>Number</FormLabel>
+      <FieldLabel>Number</FieldLabel>
       <NumberInputRoot data-testid="root">
-        <NumberInputField data-testid="input" />
-        <NumberInputStepper data-testid="group">
-          <NumberIncrementStepper children="+" data-testid="up-btn" />
-          <NumberDecrementStepper children="-" data-testid="down-btn" />
-        </NumberInputStepper>
+        <NumberInputInput data-testid="input" />
+        <NumberInputControl data-testid="group">
+          <NumberInputIncrementTrigger children="+" data-testid="up-btn" />
+          <NumberInputDecrementTrigger children="-" data-testid="down-btn" />
+        </NumberInputControl>
       </NumberInputRoot>
-      <FormHelperText>Select a number</FormHelperText>
-    </FormControl>
+      <FieldHelperText>Select a number</FieldHelperText>
+    </FieldRoot>
   )
 
   const input = screen.getByTestId('input')

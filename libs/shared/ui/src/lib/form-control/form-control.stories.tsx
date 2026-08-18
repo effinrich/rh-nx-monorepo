@@ -29,7 +29,7 @@ import {
 
 export default {
   component: FieldRoot,
-  title: 'Components / Forms / FormControl',
+  title: 'Components / Forms / Field',
   decorators: [Story => <Container>{Story()}</Container>]
 } as Meta
 

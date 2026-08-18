@@ -1,15 +1,13 @@
 /* eslint-disable no-console */
 import * as React from 'react'
-import { chakra } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
 
 import {
   Box,
-  Divider,
+  Separator,
   FieldLabel,
   FieldRoot,
-  Flex,
   Heading,
   HStack,
   Icon,
@@ -22,9 +20,7 @@ import {
   CheckboxControl,
   CheckboxLabel,
   CheckboxHiddenInput,
-  CheckboxGroup,
-  useCheckbox,
-  useCheckboxGroup
+  CheckboxGroup
 } from './checkbox'
 
 export default {
@@ -49,7 +45,7 @@ export const Disabled = () => (
 )
 
 export const Readonly = () => (
-  <CheckboxRoot isReadOnly>
+  <CheckboxRoot readOnly>
     <CheckboxHiddenInput />
     <CheckboxControl />
     <CheckboxLabel>Readonly</CheckboxLabel>
@@ -57,7 +53,7 @@ export const Readonly = () => (
 )
 
 export const Invalid = () => (
-  <CheckboxRoot isInvalid>
+  <CheckboxRoot invalid>
     <CheckboxHiddenInput />
     <CheckboxControl />
     <CheckboxLabel>Invalid</CheckboxLabel>
@@ -137,13 +133,16 @@ export const WithCustomIcon = () => {
         <CheckboxLabel>Hello world</CheckboxLabel>
       </CheckboxRoot>
 
-      <Divider />
+      <Separator />
 
       <Heading>Indeterminate</Heading>
       <CheckboxRoot
-        isChecked={allChecked}
-        isIndeterminate={isIndeterminate}
-        onChange={e => setCheckedItems([e.target.checked, e.target.checked])}
+        checked={allChecked}
+        indeterminate={isIndeterminate}
+        onCheckedChange={e => {
+          const next = e.checked === true
+          setCheckedItems([next, next])
+        }}
         icon={<CustomIcon />}
       >
         <CheckboxHiddenInput />
@@ -152,16 +151,20 @@ export const WithCustomIcon = () => {
       </CheckboxRoot>
       <Stack ml="6" mt="2" align="start">
         <CheckboxRoot
-          isChecked={checkedItems[0]}
-          onChange={e => setCheckedItems([e.target.checked, checkedItems[1]])}
+          checked={checkedItems[0]}
+          onCheckedChange={e =>
+            setCheckedItems([e.checked === true, checkedItems[1]])
+          }
         >
           <CheckboxHiddenInput />
           <CheckboxControl />
           <CheckboxLabel>Child Checkbox 1</CheckboxLabel>
         </CheckboxRoot>
         <CheckboxRoot
-          isChecked={checkedItems[1]}
-          onChange={e => setCheckedItems([checkedItems[0], e.target.checked])}
+          checked={checkedItems[1]}
+          onCheckedChange={e =>
+            setCheckedItems([checkedItems[0], e.checked === true])
+          }
         >
           <CheckboxHiddenInput />
           <CheckboxControl />
@@ -196,9 +199,12 @@ export const Indeterminate = () => {
   return (
     <>
       <CheckboxRoot
-        isChecked={allChecked}
-        isIndeterminate={isIndeterminate}
-        onChange={e => setCheckedItems([e.target.checked, e.target.checked])}
+        checked={allChecked}
+        indeterminate={isIndeterminate}
+        onCheckedChange={e => {
+          const next = e.checked === true
+          setCheckedItems([next, next])
+        }}
       >
         <CheckboxHiddenInput />
         <CheckboxControl />
@@ -206,16 +212,20 @@ export const Indeterminate = () => {
       </CheckboxRoot>
       <Stack ml="6" mt="2" align="start">
         <CheckboxRoot
-          isChecked={checkedItems[0]}
-          onChange={e => setCheckedItems([e.target.checked, checkedItems[1]])}
+          checked={checkedItems[0]}
+          onCheckedChange={e =>
+            setCheckedItems([e.checked === true, checkedItems[1]])
+          }
         >
           <CheckboxHiddenInput />
           <CheckboxControl />
           <CheckboxLabel>Child Checkbox 1</CheckboxLabel>
         </CheckboxRoot>
         <CheckboxRoot
-          isChecked={checkedItems[1]}
-          onChange={e => setCheckedItems([checkedItems[0], e.target.checked])}
+          checked={checkedItems[1]}
+          onCheckedChange={e =>
+            setCheckedItems([checkedItems[0], e.checked === true])
+          }
         >
           <CheckboxHiddenInput />
           <CheckboxControl />
@@ -229,12 +239,11 @@ export const Indeterminate = () => {
 export const Controlled = () => {
   const [value, setValue] = React.useState(false)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.checked)
-  }
-
   return (
-    <CheckboxRoot isChecked={value} onChange={handleChange}>
+    <CheckboxRoot
+      checked={value}
+      onCheckedChange={e => setValue(e.checked === true)}
+    >
       <CheckboxHiddenInput />
       <CheckboxControl />
     </CheckboxRoot>
@@ -245,7 +254,7 @@ export const CheckboxGroupExample = () => {
   return (
     <CheckboxGroup
       defaultValue={['one', 'two']}
-      onChange={value => console.log(value)}
+      onValueChange={value => console.log(value)}
     >
       <Stack align="start" direction={['column', 'row']} gap={[2, 4, 6]}>
         <CheckboxRoot value="one">
@@ -272,7 +281,7 @@ export const ResponsiveCheckboxGroup = () => {
   return (
     <CheckboxGroup
       defaultValue={['one', 'two']}
-      onChange={value => console.log(value)}
+      onValueChange={value => console.log(value)}
     >
       <Stack gap={[2, 4, 6]} direction={['column', 'row']}>
         <CheckboxRoot value="one">
@@ -295,17 +304,14 @@ export const ResponsiveCheckboxGroup = () => {
   )
 }
 
-type Value = string | number
-type ArrayOfValue = Value[]
-
 export const ControlledCheckboxGroup = () => {
-  const [value, setValue] = React.useState<ArrayOfValue>(['one', 'two'])
+  const [value, setValue] = React.useState<string[]>(['one', 'two'])
   return (
     <CheckboxGroup
       value={value}
-      onChange={value => {
-        console.log(value)
-        setValue(value)
+      onValueChange={nextValue => {
+        console.log(nextValue)
+        setValue(nextValue)
       }}
     >
       <Stack direction="row" gap="40px">
@@ -330,57 +336,48 @@ export const ControlledCheckboxGroup = () => {
 }
 
 export const CustomCheckboxGroup = () => {
-  function CustomCheckbox(props: any) {
-    const { state, getCheckboxProps, getInputProps, getLabelProps, htmlProps } =
-      useCheckbox(props)
-
-    return (
-      <chakra.label
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        gridColumnGap={2}
-        maxW="40"
-        bg="green.50"
-        border="1px solid"
-        borderColor="green.500"
-        rounded="lg"
-        px={3}
-        py={1}
-        cursor="pointer"
-        {...htmlProps}
-      >
-        <input {...getInputProps()} hidden />
-        <Flex
-          alignItems="center"
-          justifyContent="center"
-          border="2px solid"
-          borderColor="green.500"
-          w={4}
-          h={4}
-          {...getCheckboxProps()}
-        >
-          {state.isChecked && <Box w={2} h={2} bg="green.500" />}
-        </Flex>
-        <Text {...getLabelProps()}>Click me for {props.value}</Text>
-      </chakra.label>
-    )
-  }
-
-  const { value, getCheckboxProps } = useCheckboxGroup({
-    defaultValue: [2]
-  })
+  const [value, setValue] = React.useState<string[]>(['2'])
 
   return (
     <Stack>
       <Text>The selected checkboxes are: {value.sort().join(' and ')}</Text>
-      <CustomCheckbox {...getCheckboxProps({ value: 1 })} />
-      <CustomCheckbox {...getCheckboxProps({ value: 2 })} />
-      <CustomCheckbox {...getCheckboxProps({ value: 3 })} />
+      <CheckboxGroup value={value} onValueChange={setValue}>
+        {['1', '2', '3'].map(item => (
+          <CheckboxRoot
+            key={item}
+            value={item}
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            gap={2}
+            maxW="40"
+            bg="green.50"
+            border="1px solid"
+            borderColor="green.500"
+            rounded="lg"
+            px={3}
+            py={1}
+            cursor="pointer"
+          >
+            <CheckboxHiddenInput />
+            <CheckboxControl
+              alignItems="center"
+              justifyContent="center"
+              border="2px solid"
+              borderColor="green.500"
+              w={4}
+              h={4}
+            >
+              {value.includes(item) && <Box w={2} h={2} bg="green.500" />}
+            </CheckboxControl>
+            <CheckboxLabel>Click me for {item}</CheckboxLabel>
+          </CheckboxRoot>
+        ))}
+      </CheckboxGroup>
     </Stack>
   )
 }
-export const WithFormControl = () => {
+export const WithField = () => {
   return (
     <>
       <FieldRoot id="optIn">

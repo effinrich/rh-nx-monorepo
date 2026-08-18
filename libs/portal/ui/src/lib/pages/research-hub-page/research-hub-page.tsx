@@ -4,9 +4,9 @@ import {
   Box,
   SectionHeader,
   Stack,
-  Tab,
-  TabList,
-  TabsRoot
+  TabsList,
+  TabsRoot,
+  TabsTrigger
 } from '@redesignhealth/ui'
 
 import { AddResearchMenu } from './add-research-menu/add-research-menu'
@@ -29,16 +29,16 @@ export const ResearchHubPage = ({
           <AddResearchMenu hideArticlesSupport={hideArticlesSupport} />
         }
       />
-      <TabsRoot index={activeTab} colorPalette="primary">
-        <TabList>
+      <TabsRoot value={tabs[activeTab]?.to} colorPalette="primary">
+        <TabsList>
           {tabs.map(tab => (
-            <Tab key={tab.to} asChild>
+            <TabsTrigger key={tab.to} value={tab.to} asChild>
               <RouterLink to={tab.to} replace>
                 {tab.label}
               </RouterLink>
-            </Tab>
+            </TabsTrigger>
           ))}
-        </TabList>
+        </TabsList>
         <Outlet />
       </TabsRoot>
     </Stack>

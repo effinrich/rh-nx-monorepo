@@ -19,8 +19,8 @@ import {
   CheckboxHiddenInput,
   ChevronDownIcon,
   Flex,
-  FormControl,
-  FormLabel,
+  FieldRoot,
+  FieldLabel,
   InputProps,
   Loader,
   MenuRoot,
@@ -36,7 +36,7 @@ import { SelectionBox } from '../../../selection-box/selection-box'
 import { CallNoteCard } from './call-note-card'
 
 export interface CallNotesProps {
-  notes?: { content: CallNoteWithId[]; totalResults: number }
+  notes?: { content: Array<CallNoteWithId>; totalResults: number }
   filterOptions?: CallNoteFilterOptions
   isPending: boolean
 }
@@ -89,7 +89,7 @@ const CallNotes = () => {
     content:
       callNotes?.pages.reduce((all, page) => {
         return [...all, ...page.content]
-      }, [] as CallNoteWithId[]) || [],
+      }, [] as Array<CallNoteWithId>) || [],
     totalResults: callNotes?.pages[0]?.page.totalElements ?? 0
   }
 
@@ -154,18 +154,21 @@ const CallNotes = () => {
           >
             Results: {allNotes?.totalResults}
           </Text>
-          <FormControl as={Flex} flexDir="row-reverse" align="center" mt="8px">
-            <FormLabel m="0">Hide conflicted content</FormLabel>
+          <FieldRoot as={Flex} flexDir="row-reverse" align="center" mt="8px">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel m="0">Hide conflicted content</FieldLabel>
             <CheckboxRoot
               disabled={true}
               mr="12px"
               checked={isConflicts}
-              onChange={e => setIsConflicts(e.target.checked)}
+              onCheckedChange={(e: { checked: boolean | 'indeterminate' }) =>
+                setIsConflicts(!!e.checked)
+              }
             >
               <CheckboxHiddenInput />
               <CheckboxControl />
             </CheckboxRoot>
-          </FormControl>
+          </FieldRoot>
         </Box>
         <Flex align="center" gap="16px" mt="-30px">
           <Text

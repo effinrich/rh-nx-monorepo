@@ -13,10 +13,10 @@ import { Container, rh } from '../../index'
 
 import {
   AccordionRoot,
-  AccordionButton,
-  AccordionIcon,
   AccordionItem,
-  AccordionPanel
+  AccordionItemTrigger,
+  AccordionItemIndicator,
+  AccordionItemContent
 } from './'
 
 export default {
@@ -38,125 +38,125 @@ export default {
 
 export const Basic = () => (
   <AccordionRoot>
-    <AccordionItem>
+    <AccordionItem value="a">
       <h2>
-        <AccordionButton>
+        <AccordionItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 1 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <AccordionItemIndicator />
+        </AccordionItemTrigger>
       </h2>
-      <AccordionPanel>Panel 1</AccordionPanel>
+      <AccordionItemContent>Panel 1</AccordionItemContent>
     </AccordionItem>
 
-    <AccordionItem>
+    <AccordionItem value="b">
       <h2>
-        <AccordionButton>
+        <AccordionItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 2 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <AccordionItemIndicator />
+        </AccordionItemTrigger>
       </h2>
-      <AccordionPanel>Panel 2</AccordionPanel>
+      <AccordionItemContent>Panel 2</AccordionItemContent>
     </AccordionItem>
   </AccordionRoot>
 )
 
 export const AllowToggle = () => (
-  <AccordionRoot allowToggle>
-    <AccordionItem>
+  <AccordionRoot collapsible>
+    <AccordionItem value="a">
       <h2>
-        <AccordionButton>
+        <AccordionItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 1 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <AccordionItemIndicator />
+        </AccordionItemTrigger>
       </h2>
-      <AccordionPanel pb={4}>
+      <AccordionItemContent pb={4}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
-      </AccordionPanel>
+      </AccordionItemContent>
     </AccordionItem>
 
-    <AccordionItem>
+    <AccordionItem value="b">
       <h2>
-        <AccordionButton>
+        <AccordionItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 2 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <AccordionItemIndicator />
+        </AccordionItemTrigger>
       </h2>
-      <AccordionPanel pb={4}>
+      <AccordionItemContent pb={4}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
-      </AccordionPanel>
+      </AccordionItemContent>
     </AccordionItem>
   </AccordionRoot>
 )
 
 export const AllowMultiple = () => (
-  <AccordionRoot allowMultiple>
-    <AccordionItem>
+  <AccordionRoot multiple>
+    <AccordionItem value="a">
       <h2>
-        <AccordionButton>
+        <AccordionItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 1 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <AccordionItemIndicator />
+        </AccordionItemTrigger>
       </h2>
-      <AccordionPanel pb={4}>
+      <AccordionItemContent pb={4}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
-      </AccordionPanel>
+      </AccordionItemContent>
     </AccordionItem>
 
-    <AccordionItem>
+    <AccordionItem value="b">
       <h2>
-        <AccordionButton>
+        <AccordionItemTrigger>
           <rh.div flex="1" textAlign="left">
             Section 2 title
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <AccordionItemIndicator />
+        </AccordionItemTrigger>
       </h2>
-      <AccordionPanel pb={4}>
+      <AccordionItemContent pb={4}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
-      </AccordionPanel>
+      </AccordionItemContent>
     </AccordionItem>
   </AccordionRoot>
 )
 
 export const StylingExpanded = () => (
-  <AccordionRoot allowToggle>
-    <AccordionItem>
+  <AccordionRoot collapsible>
+    <AccordionItem value="a">
       <h2>
-        <AccordionButton _expanded={{ bg: 'tomato', color: 'white' }}>
+        <AccordionItemTrigger _open={{ bg: 'tomato', color: 'white' }}>
           <rh.div flex="1" textAlign="left">
             Click me to see a different style
           </rh.div>
-          <AccordionIcon />
-        </AccordionButton>
+          <AccordionItemIndicator />
+        </AccordionItemTrigger>
       </h2>
-      <AccordionPanel>
+      <AccordionItemContent>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
-      </AccordionPanel>
+      </AccordionItemContent>
     </AccordionItem>
   </AccordionRoot>
 )
@@ -206,18 +206,18 @@ export function Bug_2160() {
         />
       </rh.div>
       {displayData.length > 0 && (
-        <AccordionRoot allowToggle>
+        <AccordionRoot collapsible>
           {displayData.map((item, i) => (
-            <AccordionItem key={`accordion-item-${i}`}>
+            <AccordionItem key={`accordion-item-${i}`} value={`item-${i}`}>
               <h2>
-                <AccordionButton>
+                <AccordionItemTrigger>
                   <rh.div flex="1" textAlign="left">
                     {item.title}
                   </rh.div>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <AccordionItemIndicator />
+                </AccordionItemTrigger>
               </h2>
-              <AccordionPanel pb={4}>{item.text}</AccordionPanel>
+              <AccordionItemContent pb={4}>{item.text}</AccordionItemContent>
             </AccordionItem>
           ))}
         </AccordionRoot>
@@ -228,26 +228,26 @@ export function Bug_2160() {
 
 export const WithDisabledAccordionItem = () => {
   return (
-    <AccordionRoot index={1}>
-      <AccordionItem disabled>
-        <AccordionButton>Button 1</AccordionButton>
-        <AccordionPanel>One Content</AccordionPanel>
+    <AccordionRoot defaultValue={['2']}>
+      <AccordionItem value="1" disabled>
+        <AccordionItemTrigger>Button 1</AccordionItemTrigger>
+        <AccordionItemContent>One Content</AccordionItemContent>
       </AccordionItem>
-      <AccordionItem disabled>
-        <AccordionButton>Button 2</AccordionButton>
-        <AccordionPanel>Two Content</AccordionPanel>
+      <AccordionItem value="2" disabled>
+        <AccordionItemTrigger>Button 2</AccordionItemTrigger>
+        <AccordionItemContent>Two Content</AccordionItemContent>
       </AccordionItem>
-      <AccordionItem>
-        <AccordionButton>Button 3</AccordionButton>
-        <AccordionPanel>Three Content</AccordionPanel>
+      <AccordionItem value="3">
+        <AccordionItemTrigger>Button 3</AccordionItemTrigger>
+        <AccordionItemContent>Three Content</AccordionItemContent>
       </AccordionItem>
-      <AccordionItem disabled>
-        <AccordionButton>Button 4</AccordionButton>
-        <AccordionPanel>Four Content</AccordionPanel>
+      <AccordionItem value="4" disabled>
+        <AccordionItemTrigger>Button 4</AccordionItemTrigger>
+        <AccordionItemContent>Four Content</AccordionItemContent>
       </AccordionItem>
-      <AccordionItem>
-        <AccordionButton>Button 5</AccordionButton>
-        <AccordionPanel>Five Content</AccordionPanel>
+      <AccordionItem value="5">
+        <AccordionItemTrigger>Button 5</AccordionItemTrigger>
+        <AccordionItemContent>Five Content</AccordionItemContent>
       </AccordionItem>
     </AccordionRoot>
   )

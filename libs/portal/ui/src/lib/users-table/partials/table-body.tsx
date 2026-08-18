@@ -9,10 +9,10 @@ import {
   Box,
   Flex,
   IconButton,
-  Tbody,
-  Td,
+  TableBody as ChakraTableBody,
+  TableCell,
   Text,
-  Tr,
+  TableRow,
   Wrap,
   WrapItem
 } from '@redesignhealth/ui'
@@ -32,15 +32,15 @@ const TableBody = ({
   onClickEditUser
 }: TableBodyProps) => {
   return (
-    <Tbody
+    <ChakraTableBody
       fontSize="14px"
       lineHeight="20px"
       fontWeight="normal"
       color="gray.500"
     >
       {tableData.map(user => (
-        <Tr key={user.email}>
-          <Td>
+        <TableRow key={user.email}>
+          <TableCell>
             <Flex gap="12px">
               <AvatarRoot
                 name={user.name}
@@ -57,14 +57,14 @@ const TableBody = ({
                 <Text>{user.email}</Text>
               </Box>
             </Flex>
-          </Td>
-          <Td>
+          </TableCell>
+          <TableCell>
             <Text>{user.userType}</Text>
-          </Td>
-          <Td>
+          </TableCell>
+          <TableCell>
             <Text whiteSpace="pre-line">{formatDate(user.dateAdded)}</Text>
-          </Td>
-          <Td>
+          </TableCell>
+          <TableCell>
             <Wrap>
               {user?.companies?.map(co => (
                 <WrapItem key={co.id}>
@@ -81,8 +81,8 @@ const TableBody = ({
                 </WrapItem>
               ))}
             </Wrap>
-          </Td>
-          <Td>
+          </TableCell>
+          <TableCell>
             <IconButton
               aria-label={`Edit ${user.name}'s details`}
               onClick={() => onClickEditUser(user.email)}
@@ -92,9 +92,9 @@ const TableBody = ({
             >
               <MdOutlineEdit />
             </IconButton>
-          </Td>
+          </TableCell>
           {isSuperAdmin && (
-            <Td>
+            <TableCell>
               <IconButton
                 title="Impersonate"
                 aria-label={`Impersonate ${user.name}`}
@@ -104,11 +104,11 @@ const TableBody = ({
               >
                 <MdOutlineTheaterComedy />
               </IconButton>
-            </Td>
+            </TableCell>
           )}
-        </Tr>
+        </TableRow>
       ))}
-    </Tbody>
+    </ChakraTableBody>
   )
 }
 export default TableBody

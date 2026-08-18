@@ -19,9 +19,9 @@ import {
   type InputProps,
   Box,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
+  FieldErrorText,
+  FieldLabel,
+  FieldRoot,
   Icon,
   Input,
   InputGroup,
@@ -189,14 +189,14 @@ export const CompanyVendorForm = ({
             )}
           />
 
-          <FormControl
+          <FieldRoot
             invalid={Boolean(errors.subcategories)}
             disabled={isPending}
           >
             <Flex direction={['column', 'column', 'row']}>
               <Box w={['100%', '100%', '25%']} mr={4}>
-                {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
-                <FormLabel color="gray.800">Tags</FormLabel>
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldLabel color="gray.800">Tags</FieldLabel>
               </Box>
               <Spacer />
               <Box w={['100%', '100%', '75%']}>
@@ -246,13 +246,13 @@ export const CompanyVendorForm = ({
                     )
                   }}
                 />
-                {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-                <FormErrorMessage role="alert">
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldErrorText role="alert">
                   <ErrorMessage errors={errors} name="subcategories" />
-                </FormErrorMessage>
+                </FieldErrorText>
               </Box>
             </Flex>
-          </FormControl>
+          </FieldRoot>
 
           <Controller
             name="engagementStatus"
@@ -277,14 +277,14 @@ export const CompanyVendorForm = ({
             )}
           />
 
-          <FormControl
+          <FieldRoot
             invalid={Boolean(errors.startDate)}
             disabled={isPending}
           >
             <Flex direction={['column', 'column', 'row']}>
               <Box w={['100%', '100%', '25%']} mr={4}>
-                {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
-                <FormLabel color="gray.800">Engagement start</FormLabel>
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldLabel color="gray.800">Engagement start</FieldLabel>
               </Box>
               <Spacer />
               <Box w={['100%', '100%', '75%']}>
@@ -310,23 +310,23 @@ export const CompanyVendorForm = ({
                     />
                   )}
                 />
-                {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-                <FormErrorMessage role="alert">
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldErrorText role="alert">
                   <ErrorMessage errors={errors} name="startDate" />
-                </FormErrorMessage>
+                </FieldErrorText>
               </Box>
             </Flex>
-          </FormControl>
+          </FieldRoot>
 
-          <FormControl
+          <FieldRoot
             invalid={Boolean(errors.endDate)}
             disabled={isPending}
             mb={2}
           >
             <Flex direction={['column', 'column', 'row']}>
               <Box w={['100%', '100%', '25%']} mr={4}>
-                {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
-                <FormLabel color="gray.800">Engagement end</FormLabel>
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldLabel color="gray.800">Engagement end</FieldLabel>
               </Box>
               <Spacer />
               <Box w={['100%', '100%', '75%']}>
@@ -353,13 +353,13 @@ export const CompanyVendorForm = ({
                     />
                   )}
                 />
-                {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-                <FormErrorMessage role="alert">
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldErrorText role="alert">
                   <ErrorMessage errors={errors} name="endDate" />
-                </FormErrorMessage>
+                </FieldErrorText>
               </Box>
             </Flex>
-          </FormControl>
+          </FieldRoot>
 
           <Controller
             name="willingToDiscuss"

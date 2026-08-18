@@ -1,1 +1,1 @@
-export { useChakraContext as useTheme } from '@chakra-ui/react'
+export { useChakraContext } from '@chakra-ui/react'

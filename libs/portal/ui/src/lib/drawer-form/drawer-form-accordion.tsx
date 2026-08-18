@@ -1,14 +1,13 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import {
   AccordionRoot,
-  AccordionButton,
-  AccordionIcon,
   AccordionItem,
-  AccordionPanel,
+  AccordionItemTrigger,
+  AccordionItemContent,
+  AccordionItemIndicator,
   Box,
   ListItem,
-  Text,
-  UnorderedList
+  ListRoot,
 } from '@redesignhealth/ui'
 
 export interface DrawerFormAccordionProps {
@@ -22,53 +21,60 @@ export interface DrawerFormAccordionProps {
 
 export const DrawerFormAccordion = (props: DrawerFormAccordionProps) => {
   const expandedTitle = props.expandedTitle ?? props.title
+  const [value, setValue] = useState<string[]>([])
+  const isExpanded = value.includes('help')
+
   return (
-    <AccordionRoot allowToggle>
-      <AccordionItem borderWidth="0px" borderColor="transparent">
-        {({ isExpanded }) => (
-          <>
-            <AccordionButton
-              w="fit-content"
-              p="0px"
-              _hover={{ bg: 'transparent' }}
-              fontSize="14px"
-              lineHeight="20px"
-              fontWeight="medium"
-              color="primary.700"
-            >
-              <Box>{isExpanded ? expandedTitle : props.title}</Box>
-              <AccordionIcon />
-            </AccordionButton>
+    <AccordionRoot
+      collapsible
+      value={value}
+      onValueChange={details => setValue(details.value)}
+    >
+      <AccordionItem
+        value="help"
+        borderWidth="0px"
+        borderColor="transparent"
+      >
+        <AccordionItemTrigger
+          w="fit-content"
+          p="0px"
+          _hover={{ bg: 'transparent' }}
+          fontSize="14px"
+          lineHeight="20px"
+          fontWeight="medium"
+          color="primary.700"
+        >
+          <Box>{isExpanded ? expandedTitle : props.title}</Box>
+          <AccordionItemIndicator />
+        </AccordionItemTrigger>
 
-            <AccordionPanel
-              rounded="md"
-              fontSize="14px"
-              lineHeight="20px"
-              fontWeight="normal"
-              color="gray.500"
-              mt="16px"
-              bg="primary.50"
-              p="16px"
-            >
-              {props.listItems &&
-                props.listItems.map((list, index) => (
-                  <Fragment key={index}>
-                    {list?.header && (
-                      <Text fontWeight="bold" _notFirst={{ mt: '16px' }}>
-                        {list.header}
-                      </Text>
-                    )}
+        <AccordionItemContent
+          rounded="md"
+          fontSize="14px"
+          lineHeight="20px"
+          fontWeight="normal"
+          color="gray.500"
+          mt="16px"
+          bg="primary.50"
+          p="16px"
+        >
+          {props.listItems &&
+            props.listItems.map((list, index) => (
+              <Fragment key={index}>
+                {list?.header && (
+                  <Text fontWeight="bold" _notFirst={{ mt: '16px' }}>
+                    {list.header}
+                  </Text>
+                )}
 
-                    <UnorderedList mt={list.header ? '12px' : undefined}>
-                      {list.items.map((item, index) => (
-                        <ListItem key={index}>{item}</ListItem>
-                      ))}
-                    </UnorderedList>
-                  </Fragment>
-                ))}
-            </AccordionPanel>
-          </>
-        )}
+                <ListRoot as="ul" mt={list.header ? '12px' : undefined}>
+                  {list.items.map((item, itemIndex) => (
+                    <ListItem key={itemIndex}>{item}</ListItem>
+                  ))}
+                </ListRoot>
+              </Fragment>
+            ))}
+        </AccordionItemContent>
       </AccordionItem>
     </AccordionRoot>
   )

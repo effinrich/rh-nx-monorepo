@@ -5,7 +5,7 @@ import {
   testA11y
 } from '@redesignhealth/shared-utils-jest'
 
-import { Input, InputGroup, InputLeftElement, InputRightElement } from './input'
+import { Input, InputGroup } from './input'
 
 describe('Input', () => {
   mocks.matchMedia('any', false)
@@ -22,14 +22,11 @@ describe('Input', () => {
 
   test('Elements inside input render correctly', () => {
     render(
-      <InputGroup>
-        <InputLeftElement>
-          <span>Hello</span>
-        </InputLeftElement>
+      <InputGroup
+        startElement={<span>Hello</span>}
+        endElement={<span>World</span>}
+      >
         <Input />
-        <InputRightElement>
-          <span>World</span>
-        </InputRightElement>
       </InputGroup>
     )
     expect(screen.getByText('Hello')).toBeInTheDocument()

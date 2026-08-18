@@ -148,7 +148,7 @@ function FormError(props: any) {
   )
 }
 
-export const WithFormControl = () => {
+export const WithField = () => {
   const [isError, setIsError] = useState(false)
   return (
     <Stack align="start">

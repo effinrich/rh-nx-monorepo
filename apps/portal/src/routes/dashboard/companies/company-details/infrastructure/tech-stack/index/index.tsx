@@ -10,7 +10,7 @@ import { InfraRequestCommandStatusEnum } from '@redesignhealth/company-api-types
 import { useGetInfraRequest } from '@redesignhealth/portal/data-assets'
 import { DrawerForm } from '@redesignhealth/portal/ui'
 import { getErrorsFromValidation } from '@redesignhealth/portal/utils'
-import { Box, Button, Divider, Flex, Text } from '@redesignhealth/ui'
+import { Box, Button, Separator, Flex, Text } from '@redesignhealth/ui'
 import { QueryClient } from '@tanstack/react-query'
 import { z } from 'zod'
 
@@ -139,7 +139,7 @@ export const CompanyInfraTechStack = () => {
                   }
                 )}
               </Box>
-              <Divider mt="56px" _last={{ display: 'none' }} />
+              <Separator mt="56px" _last={{ display: 'none' }} />
             </Fragment>
           )
         )}

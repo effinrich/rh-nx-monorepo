@@ -9,52 +9,60 @@ import { useDisclosure } from '../hooks/use-disclosure/use-disclosure'
 import { rh } from '../rh/rh'
 
 import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner,
+  DialogRoot
 } from './modal'
 
 export default {
-  component: Modal,
-  title: 'Components / Overlay / Modal'
-} as Meta<typeof Modal>
+  component: DialogRoot,
+  title: 'Components / Overlay / Dialog'
+} as Meta<typeof DialogRoot>
 
 export function BasicUsage() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent>
-          <ModalCloseButton />
-          <ModalHeader>Welcome Home</ModalHeader>
-          <ModalBody>
-            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
-            ullamco deserunt aute id consequat veniam incididunt duis in sint
-            irure nisi.
-          </ModalBody>
-          <ModalFooter>
-            <Button colorPalette="red" onClick={onClose} mr={3}>
-              Cancel
-            </Button>
-            <Button colorPalette="primary">Save</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <DialogRoot
+        open={open}
+        onOpenChange={(e) => {
+          if (!e.open) onClose()
+        }}
+        placement="center"
+      >
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogCloseTrigger />
+            <DialogHeader>Welcome Home</DialogHeader>
+            <DialogBody>
+              Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
+              ullamco deserunt aute id consequat veniam incididunt duis in sint
+              irure nisi.
+            </DialogBody>
+            <DialogFooter>
+              <Button colorPalette="red" onClick={onClose} mr={3}>
+                Cancel
+              </Button>
+              <Button colorPalette="primary">Save</Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     </>
   )
 }
 
 export function ReturnFocus() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   const finalRef = useRef<HTMLDivElement>(null)
 
   return (
@@ -64,35 +72,42 @@ export function ReturnFocus() {
       </rh.div>
 
       <Button mt={4} onClick={onOpen} maxW="300px">
-        Open Modal
+        Open Dialog
       </Button>
 
-      <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
-            ullamco deserunt aute id consequat veniam incididunt duis in sint
-            irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit
-            officia tempor esse quis.
-          </ModalBody>
+      <DialogRoot
+        finalFocusEl={() => finalRef.current}
+        open={open}
+        onOpenChange={(e) => {
+          if (!e.open) onClose()
+        }}
+      >
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogHeader>Dialog Title</DialogHeader>
+            <DialogCloseTrigger />
+            <DialogBody>
+              Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
+              ullamco deserunt aute id consequat veniam incididunt duis in sint
+              irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit
+              officia tempor esse quis.
+            </DialogBody>
 
-          <ModalFooter>
-            <Button colorPalette="red" onClick={onClose} mr={3}>
-              Close
-            </Button>
-            <Button colorPalette="primary">Secondary Action</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            <DialogFooter>
+              <Button colorPalette="red" onClick={onClose} mr={3}>
+                Close
+              </Button>
+              <Button colorPalette="primary">Secondary Action</Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     </>
   )
 }
 
-export function NestedModal() {
+export function NestedDialog() {
   const first = useDisclosure()
   const second = useDisclosure()
   const third = useDisclosure()
@@ -101,175 +116,206 @@ export function NestedModal() {
       <Button onClick={first.onOpen} maxW="300px">
         Open
       </Button>
-      <Modal isOpen={first.isOpen} onClose={first.onClose}>
-        <ModalOverlay />
-        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalBody>
-            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
-            ullamco deserunt aute id consequat veniam incididunt duis in sint
-            irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit
-            officia tempor esse quis.
-          </ModalBody>
-          <ModalFooter>
-            <rh.div flex="1" />
-            <Button mr={3}>Button 2</Button>
-            <Button colorPalette="primary" onClick={second.onOpen}>
-              Open Nested
-            </Button>
-          </ModalFooter>
+      <DialogRoot
+        open={first.open}
+        onOpenChange={(e) => {
+          if (!e.open) first.onClose()
+        }}
+      >
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogHeader>Dialog Title</DialogHeader>
+            <DialogBody>
+              Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
+              ullamco deserunt aute id consequat veniam incididunt duis in sint
+              irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit
+              officia tempor esse quis.
+            </DialogBody>
+            <DialogFooter>
+              <rh.div flex="1" />
+              <Button mr={3}>Button 2</Button>
+              <Button colorPalette="primary" onClick={second.onOpen}>
+                Open Nested
+              </Button>
+            </DialogFooter>
 
-          <Modal isOpen={second.isOpen} onClose={second.onClose}>
-            <ModalOverlay />
-            {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent>
-              <ModalHeader>Modal 2 Title</ModalHeader>
-              <ModalFooter>
-                <rh.div flex="1" />
-                <Button colorPalette="primary" onClick={third.onOpen}>
-                  Open Nested 2
-                </Button>
-              </ModalFooter>
+            <DialogRoot
+              open={second.open}
+              onOpenChange={(e) => {
+                if (!e.open) second.onClose()
+              }}
+            >
+              <DialogBackdrop />
+              <DialogPositioner>
+                <DialogContent>
+                  <DialogHeader>Dialog 2 Title</DialogHeader>
+                  <DialogFooter>
+                    <rh.div flex="1" />
+                    <Button colorPalette="primary" onClick={third.onOpen}>
+                      Open Nested 2
+                    </Button>
+                  </DialogFooter>
 
-              <Modal isOpen={third.isOpen} onClose={third.onClose}>
-                <ModalOverlay />
-                {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent>
-                  <ModalHeader tabIndex={0}>Modal 3 Title</ModalHeader>
-                </ModalContent>
-              </Modal>
-            </ModalContent>
-          </Modal>
-        </ModalContent>
-      </Modal>
+                  <DialogRoot
+                    open={third.open}
+                    onOpenChange={(e) => {
+                      if (!e.open) third.onClose()
+                    }}
+                  >
+                    <DialogBackdrop />
+                    <DialogPositioner>
+                      <DialogContent>
+                        <DialogHeader tabIndex={0}>Dialog 3 Title</DialogHeader>
+                      </DialogContent>
+                    </DialogPositioner>
+                  </DialogRoot>
+                </DialogContent>
+              </DialogPositioner>
+            </DialogRoot>
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     </>
   )
 }
 
 export const InsideScroll = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
   const btnRef = useRef(null)
   return (
     <>
       <Button onClick={onOpen} ref={btnRef} maxW="300px">
         Open
       </Button>
-      <Modal
-        finalFocusRef={btnRef}
-        onClose={onClose}
-        isOpen={isOpen}
+      <DialogRoot
+        finalFocusEl={() => btnRef.current}
+        onOpenChange={(e) => {
+          if (!e.open) onClose()
+        }}
+        open={open}
         scrollBehavior="inside"
       >
-        <ModalOverlay />
-        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <LoremIpsum p={5} />
-          </ModalBody>
-          <ModalFooter>
-            <Button colorPalette="red" onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogHeader>Dialog Title</DialogHeader>
+            <DialogCloseTrigger />
+            <DialogBody>
+              <LoremIpsum p={5} />
+            </DialogBody>
+            <DialogFooter>
+              <Button colorPalette="red" onClick={onClose}>
+                Close
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     </>
   )
 }
 
 export const AnimationDisabled = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal onClose={onClose} isOpen={isOpen} motionPreset="none">
-        <ModalOverlay />
-        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <LoremIpsum p={5} />
-          </ModalBody>
-          <ModalFooter>
-            <Button colorPalette="red" onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <DialogRoot
+        onOpenChange={(e) => {
+          if (!e.open) onClose()
+        }}
+        open={open}
+      >
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogHeader>Dialog Title</DialogHeader>
+            <DialogCloseTrigger />
+            <DialogBody>
+              <LoremIpsum p={5} />
+            </DialogBody>
+            <DialogFooter>
+              <Button colorPalette="red" onClick={onClose}>
+                Close
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     </>
   )
 }
 
 export const FullWithLongContent = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal onClose={onClose} isOpen={isOpen} size="full">
-        <ModalOverlay />
-        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent>
-          <ModalHeader>Modal Title2</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <LoremIpsum avgWordsPerSentence={30} />
-          </ModalBody>
-          <ModalFooter>
-            <Button colorPalette="red" onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <DialogRoot
+        onOpenChange={(e) => {
+          if (!e.open) onClose()
+        }}
+        open={open}
+        size="full"
+      >
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogHeader>Dialog Title2</DialogHeader>
+            <DialogCloseTrigger />
+            <DialogBody>
+              <LoremIpsum avgWordsPerSentence={30} />
+            </DialogBody>
+            <DialogFooter>
+              <Button colorPalette="red" onClick={onClose}>
+                Close
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     </>
   )
 }
 
-export function WithCustomMotionProps() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+export function WithCenteredPlacement() {
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent
-          motionProps={{
-            initial: 'exit',
-            animate: 'enter',
-            exit: 'exit',
-            variants: {
-              enter: { opacity: 1, y: 10 },
-              exit: { opacity: 0, y: 0, transition: { duration: 0.1 } }
-            }
-          }}
-        >
-          <ModalCloseButton />
-          <ModalHeader>Welcome Home</ModalHeader>
-          <ModalBody>
-            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
-            ullamco deserunt aute id consequat veniam incididunt duis in sint
-            irure nisi.
-          </ModalBody>
-          <ModalFooter>
-            <Button colorPalette="red" onClick={onClose} mr={3}>
-              Cancel
-            </Button>
-            <Button colorPalette="primary">Save</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <DialogRoot
+        open={open}
+        onOpenChange={(e) => {
+          if (!e.open) onClose()
+        }}
+        placement="center"
+      >
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogCloseTrigger />
+            <DialogHeader>Welcome Home</DialogHeader>
+            <DialogBody>
+              Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
+              ullamco deserunt aute id consequat veniam incididunt duis in sint
+              irure nisi.
+            </DialogBody>
+            <DialogFooter>
+              <Button colorPalette="red" onClick={onClose} mr={3}>
+                Cancel
+              </Button>
+              <Button colorPalette="primary">Save</Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     </>
   )
 }

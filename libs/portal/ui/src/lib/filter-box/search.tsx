@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {
   type InputProps,
   CloseIcon,
-  FormControl,
+  FieldRoot,
   IconButton,
   Input,
   InputGroup,
@@ -32,7 +32,7 @@ export const Search = ({
   const [value, setValue] = useState(defaultValue || DEFAULT_VALUE)
   const debouncedOnChange = useDebounce(onChange, 500)
   return (
-    <FormControl py={4}>
+    <FieldRoot py={4}>
       <InputGroup
         startElement={<SearchIcon color="gray.800" w="16px" h="16px" />}
         endElement={
@@ -65,7 +65,7 @@ export const Search = ({
           {...inputProps}
         />
       </InputGroup>
-    </FormControl>
+    </FieldRoot>
   )
 }
 

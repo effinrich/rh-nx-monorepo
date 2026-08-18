@@ -1,6 +1,11 @@
 import { Box, Container } from '../../index'
 
-import { AlertRoot, AlertDescription, AlertIcon, AlertTitle } from './alert'
+import {
+  AlertDescription,
+  AlertIndicator,
+  AlertRoot,
+  AlertTitle
+} from './alert'
 
 export default {
   title: 'Components / Feedback / Alert',
@@ -9,7 +14,7 @@ export default {
 
 export const Basic = () => (
   <AlertRoot status="error" variant="solid" borderRadius="md">
-    <AlertIcon />
+    <AlertIndicator />
     <AlertTitle mr={2}>Outdated</AlertTitle>
     <AlertDescription>Your Chakra experience may be degraded.</AlertDescription>
   </AlertRoot>
@@ -17,7 +22,7 @@ export const Basic = () => (
 
 export const Subtle = () => (
   <AlertRoot status="success" mx="auto" alignItems="start">
-    <AlertIcon />
+    <AlertIndicator />
     <Box flex="1">
       <AlertTitle>Holy Smokes</AlertTitle>
       <AlertDescription>Something just happened!</AlertDescription>
@@ -26,8 +31,14 @@ export const Subtle = () => (
 )
 
 export const LeftAccent = () => (
-  <AlertRoot variant="left-accent" mx="auto" alignItems="start">
-    <AlertIcon />
+  <AlertRoot
+    variant="subtle"
+    mx="auto"
+    alignItems="start"
+    borderStartWidth="3px"
+    borderStartColor="colorPalette.solid"
+  >
+    <AlertIndicator />
     <Box flex="1">
       <AlertTitle>Holy Smokes</AlertTitle>
       <AlertDescription>Something just happened!</AlertDescription>
@@ -37,13 +48,15 @@ export const LeftAccent = () => (
 
 export const TopAccent = () => (
   <AlertRoot
-    variant="top-accent"
+    variant="subtle"
     mx="auto"
     alignItems="flex-start"
     pt="3"
     rounded="md"
+    borderTopWidth="3px"
+    borderTopColor="colorPalette.solid"
   >
-    <AlertIcon />
+    <AlertIndicator />
     <Box flex="1">
       <AlertTitle display="block" mr="2">
         Holy Smokes
@@ -56,7 +69,7 @@ export const TopAccent = () => (
 export const DocsExample = () => {
   return (
     <AlertRoot status="error">
-      <AlertIcon />
+      <AlertIndicator />
       There was an error processing your request
     </AlertRoot>
   )
@@ -65,7 +78,7 @@ export const DocsExample = () => {
 export const LoadingExample = () => {
   return (
     <AlertRoot status="loading">
-      <AlertIcon />
+      <AlertIndicator />
       We are loading something
     </AlertRoot>
   )
@@ -74,7 +87,7 @@ export const LoadingExample = () => {
 export const WarningExample = () => {
   return (
     <AlertRoot status="warning">
-      <AlertIcon />
+      <AlertIndicator />
       Warning! Something isn't quite right
     </AlertRoot>
   )

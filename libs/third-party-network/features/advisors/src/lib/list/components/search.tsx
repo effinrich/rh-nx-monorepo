@@ -1,6 +1,6 @@
 import { ChangeEvent, memo } from 'react'
 import { MdClose, MdSearch } from 'react-icons/md'
-import { FormControl, FormLabel, Input, InputGroup } from '@redesignhealth/ui'
+import { FieldLabel, FieldRoot, Input, InputGroup } from '@redesignhealth/ui'
 import debounce from 'debounce-promise'
 
 interface SearchProps {
@@ -13,8 +13,9 @@ export const Search = memo(({ onChange }: SearchProps) => {
   }, 300)
 
   return (
-    <FormControl>
-      <FormLabel
+    <FieldRoot>
+      {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
+      <FieldLabel
         fontSize="sm"
         color="gray.600"
         fontWeight="semibold"
@@ -22,7 +23,7 @@ export const Search = memo(({ onChange }: SearchProps) => {
         letterSpacing="tight"
       >
         Search
-      </FormLabel>
+      </FieldLabel>
       <form
         method="POST"
         onReset={() => onChange('')}
@@ -39,7 +40,7 @@ export const Search = memo(({ onChange }: SearchProps) => {
           <Input onChange={handleChange} />
         </InputGroup>
       </form>
-    </FormControl>
+    </FieldRoot>
   )
 })
 

@@ -3,11 +3,11 @@ import {
   Center,
   Stack,
   TableRoot,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr
+  TableBody,
+  TableCell,
+  TableColumnHeader,
+  TableHeader,
+  TableRow
 } from '@redesignhealth/ui'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -73,22 +73,22 @@ export const WithTable: StoryObj<typeof OverviewCard> = {
   render: args => (
     <OverviewCard {...args}>
       <TableRoot>
-        <Thead>
-          <Tr>
-            <Th>Type</Th>
-            <Th>Color</Th>
-            <Th>Season</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
+        <TableHeader>
+          <TableRow>
+            <TableColumnHeader>Type</TableColumnHeader>
+            <TableColumnHeader>Color</TableColumnHeader>
+            <TableColumnHeader>Season</TableColumnHeader>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {new Array(2).fill(mockItem).map(item => (
-            <Tr key={item.type}>
-              <Td>{item.type}</Td>
-              <Td>{item.color}</Td>
-              <Td>{item.season}</Td>
-            </Tr>
+            <TableRow key={item.type}>
+              <TableCell>{item.type}</TableCell>
+              <TableCell>{item.color}</TableCell>
+              <TableCell>{item.season}</TableCell>
+            </TableRow>
           ))}
-        </Tbody>
+        </TableBody>
       </TableRoot>
     </OverviewCard>
   )

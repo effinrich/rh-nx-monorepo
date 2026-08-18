@@ -42,6 +42,7 @@ export const createAppToaster = (
 export const toaster = createAppToaster()
 
 interface ToastRenderData {
+  id?: string
   type?: string
   title?: ReactNode
   description?: ReactNode
@@ -62,7 +63,7 @@ export const Toaster = ({
     <Portal>
       <ChakraToaster toaster={toasterInstance} insetInline={insetInline}>
         {(toast: ToastRenderData) => (
-          <Toast.Root width={{ md: 'sm' }}>
+          <Toast.Root key={toast.id} width={{ md: 'sm' }}>
             {toast.type === 'loading' ? (
               <Spinner size="sm" color="blue.solid" />
             ) : (

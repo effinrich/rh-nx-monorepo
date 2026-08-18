@@ -1,4 +1,10 @@
-import { FormControl, Input, Select, styled, Text } from '@redesignhealth/ui'
+import {
+  FieldRoot,
+  Input,
+  NativeSelectField,
+  styled,
+  Text
+} from '@redesignhealth/ui'
 
 export const DrawerFormHeader = styled(Text, {
   base: {
@@ -23,11 +29,11 @@ export const DrawerFormInput = styled(Input, {
   base: { _placeholder: { color: 'gray.500' } }
 })
 
-export const DrawerFormSelect = styled(Select, {
+export const DrawerFormSelect = styled(NativeSelectField, {
   base: { _placeholder: { color: 'gray.500' } }
 })
 
-export const DrawerFormControl = styled(FormControl, {
+export const DrawerFormControl = styled(FieldRoot, {
   base: {
     display: 'flex',
     flexDir: 'column',

@@ -1,4 +1,4 @@
-import { AbsoluteCenter, Box, Divider } from '@redesignhealth/ui'
+import { AbsoluteCenter, Box, Separator } from '@redesignhealth/ui'
 
 interface PageDividerProps {
   content: string
@@ -7,7 +7,7 @@ interface PageDividerProps {
 export const PageDivider = ({ content }: PageDividerProps) => {
   return (
     <Box position="relative" py={2}>
-      <Divider />
+      <Separator />
       <AbsoluteCenter px={[2, 4]} bg="white">
         {content}
       </AbsoluteCenter>

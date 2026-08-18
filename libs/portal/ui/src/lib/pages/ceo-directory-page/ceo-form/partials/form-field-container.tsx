@@ -5,10 +5,10 @@ import {
   CeoFormFields
 } from '@redesignhealth/portal/data-assets'
 import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot
 } from '@redesignhealth/ui'
 
 interface FormFieldContainerProps {
@@ -34,17 +34,17 @@ const FormFieldContainer = ({
   const clientError = clientErrors[name]?.message
   const error = clientError || serverError
   return (
-    <FormControl invalid={!!error} data-testid={name}>
-      {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
-      <FormLabel>{label}</FormLabel>
+    <FieldRoot invalid={!!error} data-testid={name}>
+      {/* @ts-expect-error Chakra v3 children typing */}
+      <FieldLabel>{label}</FieldLabel>
       {children}
-      {/* @ts-expect-error Chakra v3 FieldHelperText children typing */}
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
-      {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-      <FormErrorMessage role="alert">
+      {/* @ts-expect-error Chakra v3 children typing */}
+      {helperText && <FieldHelperText>{helperText}</FieldHelperText>}
+      {/* @ts-expect-error Chakra v3 children typing */}
+      <FieldErrorText role="alert">
         <ErrorMessage errors={clientErrors} name={name} />
-      </FormErrorMessage>
-    </FormControl>
+      </FieldErrorText>
+    </FieldRoot>
   )
 }
 

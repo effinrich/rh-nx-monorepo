@@ -180,9 +180,6 @@ const customConfig = defineConfig({
 
 export const system = createSystem(defaultConfig, customConfig)
 
-// Export theme as alias for backward compatibility
-export const theme = system
-
 /**
  * Resolve a color token path (e.g. 'gray.500') to its raw value
  * using the public system.token() API.

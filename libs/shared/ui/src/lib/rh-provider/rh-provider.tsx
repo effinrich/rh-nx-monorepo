@@ -24,18 +24,15 @@ export interface RhProviderProps extends Pick<
 > {
   children?: ReactNode
   value?: SystemContext
-  /** @deprecated Use `value` — accepted during v2 → v3 migration */
-  theme?: SystemContext
 }
 
 export function RhProvider({
   children,
-  value,
-  theme,
+  value = system,
   ...themeProps
 }: RhProviderProps) {
   return (
-    <ChakraProvider value={value ?? theme ?? system}>
+    <ChakraProvider value={value}>
       <ColorModeProvider {...themeProps}>
         {children}
         <Toaster />

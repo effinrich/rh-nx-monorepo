@@ -17,11 +17,11 @@ import {
 } from '../../index'
 
 import {
-  NumberDecrementStepper,
-  NumberIncrementStepper,
+  NumberInputDecrementTrigger,
+  NumberInputIncrementTrigger,
   NumberInputRoot,
-  NumberInputField,
-  NumberInputStepper,
+  NumberInputInput,
+  NumberInputControl,
   useNumberInput
 } from './number-input'
 
@@ -39,22 +39,22 @@ export default {
 export const Default: StoryObj<typeof NumberInputRoot> = {
   render: args => (
     <NumberInputRoot max={50} min={10} {...args}>
-      <NumberInputField />
-      <NumberInputStepper>
-        <NumberIncrementStepper />
-        <NumberDecrementStepper />
-      </NumberInputStepper>
+      <NumberInputInput />
+      <NumberInputControl>
+        <NumberInputIncrementTrigger />
+        <NumberInputDecrementTrigger />
+      </NumberInputControl>
     </NumberInputRoot>
   )
 }
 
 export const Basic: StoryFn<typeof NumberInputRoot> = () => (
   <NumberInputRoot max={50} min={10}>
-    <NumberInputField />
-    <NumberInputStepper>
-      <NumberIncrementStepper />
-      <NumberDecrementStepper />
-    </NumberInputStepper>
+    <NumberInputInput />
+    <NumberInputControl>
+      <NumberInputIncrementTrigger />
+      <NumberInputDecrementTrigger />
+    </NumberInputControl>
   </NumberInputRoot>
 )
 
@@ -66,11 +66,11 @@ export const Sizes: StoryFn<typeof NumberInputRoot> = () => (
       <rh.div key={size}>
         <pre>size = {size}</pre>
         <NumberInputRoot mt="2" size={size} defaultValue={15} min={10}>
-          <NumberInputField />
-          <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
-          </NumberInputStepper>
+          <NumberInputInput />
+          <NumberInputControl>
+            <NumberInputIncrementTrigger />
+            <NumberInputDecrementTrigger />
+          </NumberInputControl>
         </NumberInputRoot>
       </rh.div>
     ))}
@@ -126,7 +126,7 @@ export const FormatAndParse = () => {
     min: 1,
     max: 6,
     precision: 2,
-    onChange: valueString => setValue(parse(valueString))
+    onValueChange: ({ value }) => setValue(parse(value))
   })
 
   return (
@@ -143,41 +143,41 @@ export const FormatAndParse = () => {
 
 export const WithMinAndMax = () => (
   <NumberInputRoot defaultValue={15} min={10} max={20}>
-    <NumberInputField />
-    <NumberInputStepper>
-      <NumberIncrementStepper />
-      <NumberDecrementStepper />
-    </NumberInputStepper>
+    <NumberInputInput />
+    <NumberInputControl>
+      <NumberInputIncrementTrigger />
+      <NumberInputDecrementTrigger />
+    </NumberInputControl>
   </NumberInputRoot>
 )
 
 export const WithStep = () => (
   <NumberInputRoot step={5} defaultValue={15} min={10} max={30}>
-    <NumberInputField />
-    <NumberInputStepper>
-      <NumberIncrementStepper />
-      <NumberDecrementStepper />
-    </NumberInputStepper>
+    <NumberInputInput />
+    <NumberInputControl>
+      <NumberInputIncrementTrigger />
+      <NumberInputDecrementTrigger />
+    </NumberInputControl>
   </NumberInputRoot>
 )
 
 export const WithPrecision = () => (
   <NumberInputRoot defaultValue={15} precision={2} step={0.2}>
-    <NumberInputField />
-    <NumberInputStepper>
-      <NumberIncrementStepper />
-      <NumberDecrementStepper />
-    </NumberInputStepper>
+    <NumberInputInput />
+    <NumberInputControl>
+      <NumberInputIncrementTrigger />
+      <NumberInputDecrementTrigger />
+    </NumberInputControl>
   </NumberInputRoot>
 )
 
 export const WithClampValueDisabled = () => (
   <NumberInputRoot defaultValue={15} max={30} clampValueOnBlur={false}>
-    <NumberInputField />
-    <NumberInputStepper>
-      <NumberIncrementStepper />
-      <NumberDecrementStepper />
-    </NumberInputStepper>
+    <NumberInputInput />
+    <NumberInputControl>
+      <NumberInputIncrementTrigger />
+      <NumberInputDecrementTrigger />
+    </NumberInputControl>
   </NumberInputRoot>
 )
 
@@ -188,11 +188,11 @@ export const AllowOutOfRange = () => (
     keepWithinRange={false}
     clampValueOnBlur={false}
   >
-    <NumberInputField />
-    <NumberInputStepper>
-      <NumberIncrementStepper />
-      <NumberDecrementStepper />
-    </NumberInputStepper>
+    <NumberInputInput />
+    <NumberInputControl>
+      <NumberInputIncrementTrigger />
+      <NumberInputDecrementTrigger />
+    </NumberInputControl>
   </NumberInputRoot>
 )
 
@@ -213,11 +213,11 @@ export const WithReactHookForm = () => {
           console.log('blurred')
         }}
       >
-        <NumberInputField {...register('sales')} />
-        <NumberInputStepper>
-          <NumberIncrementStepper />
-          <NumberDecrementStepper />
-        </NumberInputStepper>
+        <NumberInputInput {...register('sales')} />
+        <NumberInputControl>
+          <NumberInputIncrementTrigger />
+          <NumberInputDecrementTrigger />
+        </NumberInputControl>
       </NumberInputRoot>
     </form>
   )
@@ -237,7 +237,7 @@ function FormError(props: any) {
   )
 }
 
-export const WithFormControl = () => {
+export const WithField = () => {
   const [isError, setIsError] = React.useState(false)
 
   return (
@@ -257,11 +257,11 @@ export const WithFormControl = () => {
             console.log('blurred')
           }}
         >
-          <NumberInputField />
-          <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
-          </NumberInputStepper>
+          <NumberInputInput />
+          <NumberInputControl>
+            <NumberInputIncrementTrigger />
+            <NumberInputDecrementTrigger />
+          </NumberInputControl>
         </NumberInputRoot>
         <FieldHelperText>Keep it very short and sweet!</FieldHelperText>
       </FieldRoot>

@@ -19,7 +19,7 @@ export const Basic = () => <Radio>Hello</Radio>
 export const Disabled = () => <Radio disabled>Disabled</Radio>
 
 export const Readonly = () => (
-  <Radio mt="40px" isChecked isReadOnly size="lg" colorPalette="green">
+  <Radio mt="40px" checked readOnly size="lg" colorPalette="green">
     I'm a readonly radio
   </Radio>
 )

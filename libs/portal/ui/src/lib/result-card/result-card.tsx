@@ -10,7 +10,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
+  Separator,
   Heading,
   IconButton
 } from '@redesignhealth/ui'
@@ -95,7 +95,7 @@ export const ResultCard = ({
         {description}
       </CardBody>
       <CardFooter>
-        <Divider />
+        <Separator />
       </CardFooter>
     </CardRoot>
   )

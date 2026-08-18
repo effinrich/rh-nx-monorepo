@@ -6,28 +6,22 @@ import { Meta } from '@storybook/react-vite'
 import { Button } from '../button/button'
 
 import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogCloseButton,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay
+  AlertDialogRoot,
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner
 } from './alert-dialog'
 
 export default {
-  component: AlertDialog,
+  component: AlertDialogRoot,
   title: 'Components / Overlay / Alert Dialog',
   argTypes: {
     size: {
-      options: [
-        'xs',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-        'full'
-      ],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', 'full'],
       control: { type: 'radio' }
     },
     placement: {
@@ -39,9 +33,9 @@ export default {
       control: { type: 'boolean' }
     }
   }
-} as Meta<typeof AlertDialog>
+} as Meta<typeof AlertDialogRoot>
 
-const BasicUsageHooks = (args: any) => {
+const BasicUsageHooks = (args: Record<string, unknown>) => {
   const { open, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef<HTMLButtonElement>(null)
   return (
@@ -49,44 +43,45 @@ const BasicUsageHooks = (args: any) => {
       <Button colorPalette="red" onClick={onOpen} maxW="150px">
         Delete Customer
       </Button>
-      <AlertDialog
-        role="alertdialog"
+      <AlertDialogRoot
         open={open}
+        initialFocusEl={() => cancelRef.current}
         onOpenChange={(e: { open: boolean }) => {
           if (!e.open) onClose()
         }}
         {...args}
       >
-        <AlertDialogOverlay />
-        {/* @ts-expect-error Chakra v3 compound component typing */}
-        <AlertDialogContent>
-          <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            Delete Customer
-          </AlertDialogHeader>
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogHeader fontSize="lg" fontWeight="bold">
+              Delete Customer
+            </DialogHeader>
 
-          <AlertDialogBody>
-            Are you sure? You can&apos;t undo this action afterwards.
-          </AlertDialogBody>
+            <DialogBody>
+              Are you sure? You can&apos;t undo this action afterwards.
+            </DialogBody>
 
-          <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorPalette="red" onClick={onClose} ml={3}>
-              Delete
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            <DialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancel
+              </Button>
+              <Button colorPalette="red" onClick={onClose} ml={3}>
+                Delete
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </AlertDialogRoot>
     </>
   )
 }
 
 export const BasicUsage = {
-  render: (args: any) => <BasicUsageHooks {...args} />
+  render: (args: Record<string, unknown>) => <BasicUsageHooks {...args} />
 }
 
-const TransitionHooks = (args: any) => {
+const TransitionHooks = (args: Record<string, unknown>) => {
   const { open, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef<HTMLButtonElement>(null)
 
@@ -96,39 +91,39 @@ const TransitionHooks = (args: any) => {
         Discard
       </Button>
 
-      <AlertDialog
-        role="alertdialog"
+      <AlertDialogRoot
         onOpenChange={(e: { open: boolean }) => {
           if (!e.open) onClose()
         }}
         open={open}
         placement="center"
+        initialFocusEl={() => cancelRef.current}
         {...args}
       >
-        <AlertDialogOverlay />
-
-        {/* @ts-expect-error Chakra v3 compound component typing */}
-        <AlertDialogContent>
-          <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
-          <AlertDialogCloseButton />
-          <AlertDialogBody>
-            Are you sure you want to discard all of your notes? 44 words will be
-            deleted.
-          </AlertDialogBody>
-          <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onClose}>
-              No
-            </Button>
-            <Button colorPalette="red" ml={3}>
-              Yes
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogHeader>Discard Changes?</DialogHeader>
+            <DialogCloseTrigger />
+            <DialogBody>
+              Are you sure you want to discard all of your notes? 44 words will
+              be deleted.
+            </DialogBody>
+            <DialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                No
+              </Button>
+              <Button colorPalette="red" ml={3}>
+                Yes
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </AlertDialogRoot>
     </>
   )
 }
 
 export const Transition = {
-  render: (args: any) => <TransitionHooks {...args} />
+  render: (args: Record<string, unknown>) => <TransitionHooks {...args} />
 }

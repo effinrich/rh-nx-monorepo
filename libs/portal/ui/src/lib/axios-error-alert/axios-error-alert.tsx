@@ -3,7 +3,7 @@ import {
   type BoxProps,
   AlertRoot,
   AlertDescription,
-  AlertIcon,
+  AlertIndicator,
   AlertTitle,
   Box,
   Text
@@ -25,7 +25,7 @@ export const AxiosErrorAlert = ({ error, ...props }: AxiosErrorAlertProps) => {
       {...props}
     >
       <Box flexDirection="row" display="flex">
-        <AlertIcon mr={2} />
+        <AlertIndicator mr={2} />
         <AlertTitle fontSize="md">
           {(() => {
             if (typeof error === 'string') {

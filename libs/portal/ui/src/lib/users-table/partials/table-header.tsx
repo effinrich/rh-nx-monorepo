@@ -1,8 +1,8 @@
 import {
   rh,
-  Th,
-  Thead,
-  Tr,
+  TableColumnHeader,
+  TableHeader as ChakraTableHeader,
+  TableRow,
   useBreakpoint,
   VisuallyHidden
 } from '@redesignhealth/ui'
@@ -22,20 +22,20 @@ const TableHeader = () => {
           <rh.col span={1} w="6%" />
         </rh.colgroup>
       )}
-      <Thead>
-        <Tr>
-          <Th>Name</Th>
-          <Th>User type</Th>
-          <Th>Date added</Th>
-          <Th>Company</Th>
-          <Th>
+      <ChakraTableHeader>
+        <TableRow>
+          <TableColumnHeader>Name</TableColumnHeader>
+          <TableColumnHeader>User type</TableColumnHeader>
+          <TableColumnHeader>Date added</TableColumnHeader>
+          <TableColumnHeader>Company</TableColumnHeader>
+          <TableColumnHeader>
             <VisuallyHidden>Edit User</VisuallyHidden>
-          </Th>
-          <Th>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <VisuallyHidden>Impersonate User</VisuallyHidden>
-          </Th>
-        </Tr>
-      </Thead>
+          </TableColumnHeader>
+        </TableRow>
+      </ChakraTableHeader>
     </>
   )
 }

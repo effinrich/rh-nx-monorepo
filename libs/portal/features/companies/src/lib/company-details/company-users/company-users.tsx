@@ -11,12 +11,12 @@ import {
   Button,
   Loader,
   TableRoot,
-  Tbody,
-  Td,
+  TableBody,
+  TableCell,
   Text,
-  Th,
-  Thead,
-  Tr
+  TableColumnHeader,
+  TableHeader,
+  TableRow
 } from '@redesignhealth/ui'
 
 const getDescriptionText = (company?: CompanySummary) => {
@@ -55,22 +55,22 @@ const CompanyUsers = () => {
 
   const simpleTable = (
     <TableRoot>
-      <Thead>
-        <Tr>
-          <Th>Name</Th>
-          <Th>Email</Th>
-          <Th>Status</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
+      <TableHeader>
+        <TableRow>
+          <TableColumnHeader>Name</TableColumnHeader>
+          <TableColumnHeader>Email</TableColumnHeader>
+          <TableColumnHeader>Status</TableColumnHeader>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
         {data?.map(person => (
-          <Tr key={person.email}>
-            <Td>{`${person.givenName} ${person.familyName}`}</Td>
-            <Td>{person.email}</Td>
-            <Td>{person.status}</Td>
-          </Tr>
+          <TableRow key={person.email}>
+            <TableCell>{`${person.givenName} ${person.familyName}`}</TableCell>
+            <TableCell>{person.email}</TableCell>
+            <TableCell>{person.status}</TableCell>
+          </TableRow>
         ))}
-      </Tbody>
+      </TableBody>
     </TableRoot>
   )
 

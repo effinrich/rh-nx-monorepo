@@ -4,9 +4,9 @@ import { useGetActiveTab } from '@redesignhealth/portal/utils'
 import {
   Loader,
   Stack,
-  Tab,
-  TabList,
-  TabsRoot
+  TabsList,
+  TabsRoot,
+  TabsTrigger
 } from '@redesignhealth/ui'
 
 import BackButton from '../../back-button/back-button'
@@ -38,16 +38,16 @@ const CompanyDetailsPage = () => {
           number={company.number}
         />
       )}
-      <TabsRoot index={activeTab} colorPalette="primary">
-        <TabList>
+      <TabsRoot value={tabs[activeTab]?.to} colorPalette="primary">
+        <TabsList>
           {tabs.map(tab => (
-            <Tab key={tab.to} asChild>
+            <TabsTrigger key={tab.to} value={tab.to} asChild>
               <RouterLink to={tab.to} replace>
                 {tab.label}
               </RouterLink>
-            </Tab>
+            </TabsTrigger>
           ))}
-        </TabList>
+        </TabsList>
         <Outlet />
       </TabsRoot>
     </Stack>

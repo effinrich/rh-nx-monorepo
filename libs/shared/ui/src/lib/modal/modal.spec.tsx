@@ -1,25 +1,27 @@
 import { render } from '@redesignhealth/shared-utils-jest'
 
 import {
-  Modal,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay
+  DialogBackdrop,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogPositioner,
+  DialogRoot
 } from './modal'
 
-describe('Modal', () => {
+describe('Dialog', () => {
   it('should render successfully', () => {
     const onOpenChange = jest.fn()
     const { baseElement } = render(
-      <Modal open onOpenChange={onOpenChange}>
-        <ModalOverlay />
-        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent>
-          <ModalHeader>Modal header</ModalHeader>
-          <ModalCloseButton data-testid="close" />
-        </ModalContent>
-      </Modal>
+      <DialogRoot open onOpenChange={onOpenChange}>
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogHeader>Dialog header</DialogHeader>
+            <DialogCloseTrigger data-testid="close" />
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     )
     expect(baseElement).toBeTruthy()
   })

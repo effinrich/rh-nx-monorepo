@@ -2,12 +2,14 @@ import { useRef, useState } from 'react'
 import { render, screen, testA11y } from '@redesignhealth/shared-utils-jest'
 
 import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay
+  AlertDialogRoot,
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner,
+  DialogTitle
 } from './alert-dialog'
 
 interface BasicUsageProps {
@@ -15,10 +17,10 @@ interface BasicUsageProps {
 }
 
 const BasicUsage = (props: BasicUsageProps) => {
-  const [open, setIsOpen] = useState(props.open || false)
+  const [open, setOpen] = useState(props.open || false)
 
-  const onOpen = () => setIsOpen(true)
-  const onClose = () => setIsOpen(false)
+  const onOpen = () => setOpen(true)
+  const onClose = () => setOpen(false)
 
   const cancelRef = useRef<HTMLButtonElement>(null)
 
@@ -27,29 +29,32 @@ const BasicUsage = (props: BasicUsageProps) => {
       <button type="button" onClick={onOpen}>
         Delete something
       </button>
-      <AlertDialog
+      <AlertDialogRoot
         open={open}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
+        initialFocusEl={() => cancelRef.current}
+        onOpenChange={(e) => setOpen(e.open)}
       >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader>Please Confirm!</AlertDialogHeader>
-            <AlertDialogBody>
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Please Confirm!</DialogTitle>
+            </DialogHeader>
+            <DialogBody>
               Are you sure you want to delete something? This action is
               permanent, and we're totally not just flipping a field called
               "deleted" to "true" in our database, we're actually deleting
               something.
-            </AlertDialogBody>
-            <AlertDialogFooter>
+            </DialogBody>
+            <DialogFooter>
               <button type="button" ref={cancelRef} onClick={onClose}>
                 Nevermind
               </button>
               <button type="button">Yes, delete</button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </AlertDialogRoot>
     </>
   )
 }

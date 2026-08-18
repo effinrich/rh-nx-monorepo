@@ -1,4 +1,4 @@
-import { AlertRoot, AlertDescription, AlertIcon, AlertTitle } from '../alert/alert'
+import { AlertRoot, AlertDescription, AlertIndicator, AlertTitle } from '../alert/alert'
 
 interface ErrorFallbackProps {
   error: {
@@ -21,7 +21,7 @@ export const ErrorFallback = ({
       rounded="md"
       height="250px"
     >
-      <AlertIcon boxSize="40px" mr={0} />
+      <AlertIndicator boxSize="40px" mr={0} />
       <AlertTitle mt={4} mb={1} fontSize="lg">
         Something went wrong!
       </AlertTitle>

@@ -19,7 +19,7 @@ const TermsChecker = ({ children }: ConsentCheckerProps) => {
   if (!hasUserConsentedFetched) {
     return <Loader />
   } else if (!hasUserConsented) {
-    return <Terms isAskingConsent isOpen={open} onClose={onClose} />
+    return <Terms isAskingConsent open={open} onClose={onClose} />
   } else {
     return children
   }

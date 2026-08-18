@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@redesignhealth/shared-utils-jest'
 
-import { FormControl, FormHelperText, FormLabel } from '../../index'
+import { FieldHelperText, FieldLabel, FieldRoot } from '../../index'
 
 import { Radio, useRadio, UseRadioProps } from './radio'
 
@@ -129,12 +129,12 @@ test('handles events and callbacks correctly', () => {
   expect(inputProps.onKeyUp).toHaveBeenCalled()
 })
 
-test('should derive values from surrounding FormControl', () => {
+test('should derive values from surrounding FieldRoot', () => {
   const onFocus = jest.fn()
   const onBlur = jest.fn()
 
   render(
-    <FormControl
+    <FieldRoot
       id="radio"
       required
       invalid
@@ -143,10 +143,10 @@ test('should derive values from surrounding FormControl', () => {
       onFocus={onFocus}
       onBlur={onBlur}
     >
-      <FormLabel>Radio</FormLabel>
+      <FieldLabel>Radio</FieldLabel>
       <Radio value="Chakra UI">Chakra UI</Radio>
-      <FormHelperText>Select a value</FormHelperText>
-    </FormControl>
+      <FieldHelperText>Select a value</FieldHelperText>
+    </FieldRoot>
   )
 
   const radio = screen.getByRole('radio')

@@ -1,15 +1,15 @@
 import { useParams } from 'react-router-dom'
 import analytics from '@redesignhealth/analytics'
 import { useRequestIpListingContactInfo } from '@redesignhealth/portal/data-assets'
-import { Modal, ModalOverlay } from '@redesignhealth/ui'
+import { DialogBackdrop, DialogRoot } from '@redesignhealth/ui'
 
 import Disclaimer from './partials/disclaimer'
 import Success from './partials/success'
 interface BuyerRequestModalProps {
   onClose(): void
-  isOpen: boolean
+  open: boolean
 }
-const BuyerRequestModal = ({ onClose, isOpen }: BuyerRequestModalProps) => {
+const BuyerRequestModal = ({ onClose, open }: BuyerRequestModalProps) => {
   const { ipListingId } = useParams()
   const {
     mutateAsync: requestSellerInfo,
@@ -18,8 +18,14 @@ const BuyerRequestModal = ({ onClose, isOpen }: BuyerRequestModalProps) => {
   } = useRequestIpListingContactInfo(ipListingId)
 
   return (
-    <Modal open={isOpen} onOpenChange={(e: { open: boolean }) => !e.open && onClose()} size="xl">
-      <ModalOverlay />
+    <DialogRoot
+      open={open}
+      onOpenChange={(e: { open: boolean }) => {
+        if (!e.open) onClose()
+      }}
+      size="xl"
+    >
+      <DialogBackdrop />
       {isSuccess ? (
         <Success onConfirmation={onClose} />
       ) : (
@@ -32,7 +38,7 @@ const BuyerRequestModal = ({ onClose, isOpen }: BuyerRequestModalProps) => {
           isSubmitting={isPending}
         />
       )}
-    </Modal>
+    </DialogRoot>
   )
 }
 

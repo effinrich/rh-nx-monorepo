@@ -5,7 +5,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
+  Separator,
   Heading
 } from '@redesignhealth/ui'
 
@@ -62,7 +62,7 @@ export const LibCard = ({
         {description}
       </CardBody>
       <CardFooter>
-        <Divider />
+        <Separator />
       </CardFooter>
     </CardRoot>
   )

@@ -9,9 +9,9 @@ import {
 import {
   Box,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel
+  FieldErrorText,
+  FieldLabel,
+  FieldRoot
 } from '@redesignhealth/ui'
 
 import { getInputName } from './utils'
@@ -42,9 +42,9 @@ export const FormItem = ({
       _first={{ mt: '16px' }}
       _notFirst={{ mt: '32px' }}
     >
-      <FormControl invalid={Boolean(error)}>
+      <FieldRoot invalid={Boolean(error)}>
         <DrawerFormHeader>{categoryName}</DrawerFormHeader>
-        <DrawerFormDescription as={FormLabel}>
+        <DrawerFormDescription as={FieldLabel}>
           {serviceName}
         </DrawerFormDescription>
         <Box mt="16px">
@@ -55,9 +55,10 @@ export const FormItem = ({
             defaultValue={radioDefaultValue}
           />
         </Box>
-        <FormErrorMessage>{error}</FormErrorMessage>
-      </FormControl>
-      <FormControl>
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText>{error}</FieldErrorText>
+      </FieldRoot>
+      <FieldRoot>
         <DrawerFormHeader>Comment</DrawerFormHeader>
         <DrawerFormInput
           name={getInputName(categoryName, serviceName, true)}
@@ -67,7 +68,7 @@ export const FormItem = ({
           readOnly={isReadOnly}
           mt="6px"
         />
-      </FormControl>
+      </FieldRoot>
       {learnMoreItems && (
         <DrawerFormAccordion title="Learn more" listItems={learnMoreItems} />
       )}

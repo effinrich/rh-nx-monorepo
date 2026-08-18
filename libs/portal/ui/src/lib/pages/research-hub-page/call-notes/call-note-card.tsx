@@ -4,7 +4,7 @@ import { CallNoteCardProps } from '@redesignhealth/portal/data-assets'
 import { formatDate } from '@redesignhealth/portal/utils'
 import {
   AlertRoot,
-  AlertIcon,
+  AlertIndicator,
   AlertTitle,
   Button,
   Flex,
@@ -79,7 +79,7 @@ export const CallNoteCard = ({
           <Button
             as="a"
             target="_blank"
-            sx={{ textDecoration: 'none' }}
+            css={{ textDecoration: 'none' }}
             href={noteLink}
             colorPalette="primary"
             variant="solid"
@@ -97,7 +97,7 @@ export const CallNoteCard = ({
             width={['100%', '100%', 'initial']}
             h="40px"
           >
-            <AlertIcon />
+            <AlertIndicator />
             <AlertTitle>Invalid URL</AlertTitle>
           </AlertRoot>
         )}

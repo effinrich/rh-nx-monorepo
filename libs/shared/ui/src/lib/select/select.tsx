@@ -1,13 +1,3 @@
-import { forwardRef } from 'react'
-import {
-  NativeSelectField,
-  NativeSelectIndicator,
-  NativeSelectRoot,
-  type NativeSelectFieldProps,
-  type NativeSelectRootProps,
-  type SelectRootProps
-} from '@chakra-ui/react'
-
 export {
   NativeSelectRoot,
   NativeSelectField,
@@ -31,21 +21,8 @@ export {
   SelectHiddenSelect
 } from '@chakra-ui/react'
 
-export const NativeSelect = NativeSelectRoot
-
-/**
- * Native HTML select with v2-compatible `<Select><option/></Select>` usage.
- * Custom listbox select is `SelectRoot` / `Select.*`.
- */
-export const Select = forwardRef<HTMLSelectElement, NativeSelectFieldProps>(
-  function Select(props, ref) {
-    return (
-      <NativeSelectRoot>
-        <NativeSelectField ref={ref} {...props} />
-        <NativeSelectIndicator />
-      </NativeSelectRoot>
-    )
-  }
-)
-
-export type { NativeSelectRootProps, NativeSelectFieldProps, SelectRootProps }
+export type {
+  NativeSelectRootProps,
+  NativeSelectFieldProps,
+  SelectRootProps
+} from '@chakra-ui/react'

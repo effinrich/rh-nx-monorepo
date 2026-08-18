@@ -1,10 +1,10 @@
 import { render } from '@redesignhealth/shared-utils-jest'
 
-import { Divider } from './divider'
+import { Separator } from './divider'
 
-describe('Divider', () => {
+describe('Separator', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Divider />)
+    const { baseElement } = render(<Separator />)
     expect(baseElement).toBeTruthy()
   })
 })

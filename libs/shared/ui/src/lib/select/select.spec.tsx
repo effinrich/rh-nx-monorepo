@@ -1,6 +1,6 @@
 import { render, testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { FormControl } from '../form-control/form-control'
+import { FieldRoot } from '../form-control/form-control'
 
 import { NativeSelectRoot, NativeSelectField } from './select'
 
@@ -49,13 +49,13 @@ test('doesnt render in disabled state if disabled is false', () => {
   expect(select).toBeEnabled()
 })
 
-test('renders in disabled state if wrapped by FormControl with disabled', () => {
+test('renders in disabled state if wrapped by FieldRoot with disabled', () => {
   const { container } = render(
-    <FormControl disabled>
+    <FieldRoot disabled>
       <NativeSelectRoot>
         <NativeSelectField placeholder="Select an option" />
       </NativeSelectRoot>
-    </FormControl>
+    </FieldRoot>
   )
   const select = container.querySelector('select') as HTMLElement
   expect(select).toBeDisabled()

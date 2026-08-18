@@ -15,13 +15,14 @@ import {
   Flex,
   Heading,
   Loader,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner,
+  DialogRoot,
   Spacer,
   Text,
   useDisclosure
@@ -193,40 +194,46 @@ export const CompanyInfra = () => {
               Submit
             </Button>
 
-            <Modal
-              finalFocusRef={cardRef}
+            <DialogRoot
+              finalFocusEl={cardRef}
               open={isOpen && !actionData?.success}
-              onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
+              onOpenChange={(e: { open: boolean }) => {
+                if (!e.open) onClose()
+              }}
               placement="center"
             >
-              <ModalOverlay />
-              <ModalContent w="400px">
-                <ModalHeader>Have you reviewed your selections?</ModalHeader>
-                <ModalCloseButton mt="10px" color="gray.500" />
-                <ModalBody color="gray.500">
-                  Once you submit you cannot make changes. Are you sure you want
-                  to submit your selections?
-                </ModalBody>
+              <DialogBackdrop />
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <DialogPositioner>
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <DialogContent w="400px">
+                  <DialogHeader>Have you reviewed your selections?</DialogHeader>
+                  <DialogCloseTrigger />
+                  <DialogBody color="gray.500">
+                    Once you submit you cannot make changes. Are you sure you want
+                    to submit your selections?
+                  </DialogBody>
 
-                <ModalFooter>
-                  <Flex gap="12px" w="full">
-                    <Button onClick={onClose} flex="1" variant="outline">
-                      Go back
-                    </Button>
-                    <Box as={Form} method="post" flex="1">
-                      <Button
-                        type="submit"
-                        colorPalette="primary"
-                        w="full"
-                        loading={formState === 'submitting'}
-                      >
-                        Yes, Submit
+                  <DialogFooter>
+                    <Flex gap="12px" w="full">
+                      <Button onClick={onClose} flex="1" variant="outline">
+                        Go back
                       </Button>
-                    </Box>
-                  </Flex>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
+                      <Box as={Form} method="post" flex="1">
+                        <Button
+                          type="submit"
+                          colorPalette="primary"
+                          w="full"
+                          loading={formState === 'submitting'}
+                        >
+                          Yes, Submit
+                        </Button>
+                      </Box>
+                    </Flex>
+                  </DialogFooter>
+                </DialogContent>
+              </DialogPositioner>
+            </DialogRoot>
           </>
         )}
       </Box>

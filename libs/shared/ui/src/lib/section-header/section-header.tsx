@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
 import { type BoxProps, Box } from '../box/box'
-import { Divider } from '../divider/divider'
+import { Separator } from '../divider/divider'
 import { Flex } from '../flex/flex'
 import { Heading } from '../heading/heading'
 import { ElementType } from 'react'
@@ -69,7 +69,7 @@ export const SectionHeader = ({
         </Box>
         <Box pl={2}>{rightElement}</Box>
       </Flex>
-      {isDivider && <Divider mt={{ base: '12px' }} />}
+      {isDivider && <Separator mt={{ base: '12px' }} />}
     </Box>
   )
 }
