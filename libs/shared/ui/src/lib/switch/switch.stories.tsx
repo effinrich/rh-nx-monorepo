@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { chakra } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
+import { expect, userEvent, within } from 'storybook/test'
 
 import {
   Container,
@@ -28,6 +29,17 @@ export default {
 } as Meta
 
 export const Base = () => <Switch colorPalette="primary" />
+
+export const Interactive = {
+  render: () => <Switch colorPalette="primary">Email alerts</Switch>,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement)
+    const input = canvas.getByRole('switch', { hidden: true })
+    await expect(input).not.toBeChecked()
+    await userEvent.click(input)
+    await expect(input).toBeChecked()
+  }
+}
 
 export const Disabled = () => (
   <Switch disabled size="md" colorPalette="primary" margin="20px" />

@@ -1,8 +1,9 @@
 import { Stack } from '@chakra-ui/react'
-
-type PropsOf<T extends keyof JSX.IntrinsicElements> = JSX.IntrinsicElements[T]
+import { expect, within } from 'storybook/test'
 
 import { AvatarRoot, AvatarImage, AvatarFallback, AvatarBadge, AvatarGroup } from './avatar'
+
+type PropsOf<T extends keyof JSX.IntrinsicElements> = JSX.IntrinsicElements[T]
 
 export default {
   title: 'Components / Media & Icons / Avatar'
@@ -97,27 +98,28 @@ export const WithSrcSet = () => {
   )
 }
 
-export const AvatarsGroup = () => (
-  <AvatarGroup size="lg" max={3}>
-    <AvatarRoot name="Ryan Florence">
-      {/* @ts-expect-error Chakra v3 compound component typing */}
-      <AvatarImage src="https://bit.ly/ryan-florence" />
-      <AvatarFallback />
-    </AvatarRoot>
-    <AvatarRoot name="Kent Dodds">
-      {/* @ts-expect-error Chakra v3 compound component typing */}
-      <AvatarImage src="https://bit.ly/kent-c-dodds" />
-      <AvatarFallback />
-    </AvatarRoot>
-    <AvatarRoot name="Prosper Otemuyiwa">
-      {/* @ts-expect-error Chakra v3 compound component typing */}
-      <AvatarImage src="https://bit.ly/prosper-baba" />
-      <AvatarFallback />
-    </AvatarRoot>
-    <AvatarRoot name="Christian Nwamba">
-      {/* @ts-expect-error Chakra v3 compound component typing */}
-      <AvatarImage src="https://bit.ly/code-beast" />
-      <AvatarFallback />
-    </AvatarRoot>
-  </AvatarGroup>
-)
+export const AvatarsGroup = {
+  render: () => (
+    <AvatarGroup size="lg">
+      <AvatarRoot>
+        <AvatarImage src="https://bit.ly/ryan-florence" alt="Ryan Florence" />
+        <AvatarFallback name="Ryan Florence" />
+      </AvatarRoot>
+      <AvatarRoot>
+        <AvatarImage src="https://bit.ly/kent-c-dodds" alt="Kent Dodds" />
+        <AvatarFallback name="Kent Dodds" />
+      </AvatarRoot>
+      <AvatarRoot>
+        <AvatarImage src="https://bit.ly/prosper-baba" alt="Prosper Otemuyiwa" />
+        <AvatarFallback name="Prosper Otemuyiwa" />
+      </AvatarRoot>
+      <AvatarRoot>
+        <AvatarFallback>+1</AvatarFallback>
+      </AvatarRoot>
+    </AvatarGroup>
+  ),
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement)
+    await expect(canvas.getByText('+1')).toBeInTheDocument()
+  }
+}

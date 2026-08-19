@@ -60,3 +60,14 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     )
   }
 )
+
+export {
+  TooltipRoot,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipPositioner,
+  TooltipArrow,
+  TooltipArrowTip
+} from '@chakra-ui/react'
+
+export type { TooltipRootProps } from '@chakra-ui/react'

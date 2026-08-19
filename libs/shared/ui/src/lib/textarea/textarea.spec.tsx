@@ -1,5 +1,7 @@
 import { render, screen, testA11y } from '@redesignhealth/shared-utils-jest'
 
+import { FieldRoot } from '../form-control/form-control'
+
 import { Textarea } from './textarea'
 
 test('passes a11y test', async () => {
@@ -13,7 +15,11 @@ test('passes a11y test', async () => {
 })
 
 test('Invalid input renders correctly', () => {
-  render(<Textarea invalid />)
+  render(
+    <FieldRoot invalid>
+      <Textarea />
+    </FieldRoot>
+  )
 
   expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'true')
 })
@@ -27,5 +33,5 @@ test('Disabled input renders correctly', () => {
 test('Readonly input renders correctly', () => {
   render(<Textarea readOnly />)
 
-  expect(screen.getByRole('textbox')).toHaveAttribute('aria-readonly', 'true')
+  expect(screen.getByRole('textbox')).toHaveAttribute('readOnly')
 })

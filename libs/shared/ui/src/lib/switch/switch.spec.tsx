@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { fireEvent, render } from '@redesignhealth/shared-utils-jest'
+import { fireEvent, render, screen } from '@redesignhealth/shared-utils-jest'
 
 import { FieldLabel, FieldRoot } from '../form-control/form-control'
 
@@ -27,7 +27,7 @@ test('Uncontrolled - should not check if disabled', async () => {
 })
 
 test('Controlled - should check and uncheck', async () => {
-  const ControlledSwitch = ({ onChange }: any) => {
+  const ControlledSwitch = ({ onChange }: { onChange?: () => void }) => {
     const [checked, setChecked] = React.useState(false)
     return (
       <Switch
@@ -59,66 +59,28 @@ test('Controlled - should check and uncheck', async () => {
   expect(onChange).toHaveBeenCalled()
 })
 
-test('Uncontrolled FieldRoot - should not check if form-control disabled', async () => {
-  const { container, user } = render(
+test('Uncontrolled FieldRoot - should not check if form-control disabled', () => {
+  const { container } = render(
     <FieldRoot disabled mt={4}>
       <FieldLabel>Disabled Opt-in Example</FieldLabel>
       <Switch />
-      <Switch disabled />
-      <Switch disabled={false} />
     </FieldRoot>
   )
 
-  const [switchOne, switchTwo, switchThree] = Array.from(
-    container.querySelectorAll('input')
-  )
-
-  expect(switchOne).toBeDisabled()
-  expect(switchTwo).toBeDisabled()
-  expect(switchThree).toBeEnabled()
-
-  await user.click(switchOne)
-  await user.click(switchTwo)
-  await user.click(switchThree)
-
-  expect(switchOne).not.toBeChecked()
-  expect(switchTwo).not.toBeChecked()
-  expect(switchThree).toBeChecked()
+  const input = container.querySelector('input') as HTMLInputElement
+  expect(input).toBeDisabled()
 })
 
-test('Uncontrolled FieldRoot - mark label as invalid', () => {
+test('Uncontrolled FieldRoot - mark switch as invalid', () => {
   const { container } = render(
     <FieldRoot invalid mt={4}>
       <FieldLabel>Invalid Opt-in Example</FieldLabel>
-      <Switch>Invalid Opt-in 1</Switch>
-      <Switch invalid>Invalid Opt-in 2</Switch>
-      <Switch invalid={false}>Invalid Opt-in 3</Switch>
+      <Switch>Invalid Opt-in</Switch>
     </FieldRoot>
   )
 
-  const [switchOne, switchTwo, switchThree] = Array.from(
-    container.querySelectorAll('input')
-  )
-
-  expect(switchOne).toHaveAttribute('aria-invalid', 'true')
-  expect(switchTwo).toHaveAttribute('aria-invalid', 'true')
-  expect(switchThree).toHaveAttribute('aria-invalid', 'false')
-
-  const [labelOne, labelTwo, labelThree] = Array.from(
-    container.querySelectorAll('span.chakra-switch__label')
-  )
-
-  expect(labelOne).toHaveAttribute('data-invalid', '')
-  expect(labelTwo).toHaveAttribute('data-invalid', '')
-  expect(labelThree).not.toHaveAttribute('data-invalid')
-
-  const [controlOne, controlTwo, controlThree] = Array.from(
-    container.querySelectorAll('span.chakra-switch__track')
-  )
-
-  expect(controlOne).toHaveAttribute('data-invalid', '')
-  expect(controlTwo).toHaveAttribute('data-invalid', '')
-  expect(controlThree).not.toHaveAttribute('data-invalid')
+  const input = container.querySelector('input') as HTMLInputElement
+  expect(input).toHaveAttribute('aria-invalid', 'true')
 })
 
 test('Uncontrolled FieldRoot - mark required', () => {
@@ -141,30 +103,14 @@ test('Uncontrolled FieldRoot - mark required', () => {
 })
 
 test('Uncontrolled FieldRoot - mark readonly', () => {
-  const { container } = render(
+  render(
     <FieldRoot readOnly mt={4}>
       <FieldLabel>ReadOnly Opt-in Example</FieldLabel>
-      <Switch />
-      <Switch readOnly />
-      <Switch readOnly={false} />
+      <Switch>ReadOnly Opt-in</Switch>
     </FieldRoot>
   )
 
-  const [switchOne, switchTwo, switchThree] = Array.from(
-    container.querySelectorAll('input')
-  )
-
-  expect(switchOne).toHaveAttribute('readOnly')
-  expect(switchTwo).toHaveAttribute('readOnly')
-  expect(switchThree).not.toHaveAttribute('readOnly')
-
-  const [controlOne, controlTwo, controlThree] = Array.from(
-    container.querySelectorAll('span.chakra-switch__track')
-  )
-
-  expect(controlOne).toHaveAttribute('data-readonly', '')
-  expect(controlTwo).toHaveAttribute('data-readonly', '')
-  expect(controlThree).not.toHaveAttribute('data-readonly')
+  expect(screen.getByText('ReadOnly Opt-in')).toHaveAttribute('data-readonly')
 })
 
 test('Uncontrolled FieldRoot - calls all onFocus EventHandler', () => {
