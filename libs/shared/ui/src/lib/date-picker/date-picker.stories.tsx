@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { useArgs } from 'storybook/preview-api'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { expect, within } from '@storybook/test'
+import { expect, within } from 'storybook/test'
 
 import { Flex } from '../flex/flex'
 
