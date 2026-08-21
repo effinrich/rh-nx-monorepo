@@ -66,9 +66,14 @@
 
 - Treat Chakra UI v2 → v3 as a full migrate, refactor, and overhaul — not a compatibility layer.
 - Where Chakra v3 diverges from v2, replace the implementation and update call sites; do not keep v2-compat shims, aliases, or deprecated prop fallbacks.
+- One React component per file. Extract Storybook example components into sibling kebab-case files or `partials/`; do not `eslint-disable react/no-multi-comp`.
+- When extracting or renaming components, update every dependent: co-located stories, specs, barrels, and all import/call sites.
 
 ## Learned Workspace Facts
 
 - Portal is an Nx React app with react-router-dom, not Next.js App Router; do not apply Next.js layout/`"use client"` patterns to portal.
 - Shared design system lives in `libs/shared/ui` (kebab-case filenames); Chakra provider/snippets belong there, not a new repo-root `components/ui`.
+- Story-only helpers belong in unexported sibling/`partials/` files: do not add `*.stories.tsx` and do not export them from `type:ui` barrels (CI fails if a `type:ui` `.tsx` lacks stories).
+- Hooks go in a `hooks/` directory next to the component, the same directory, or a shared hooks lib if reusable.
+- One-component-per-file convention is encoded in `.cursor/rules/one-component-per-file.mdc` and `.cursor/skills/one-component-per-file/`.
 

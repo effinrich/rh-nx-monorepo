@@ -1,24 +1,29 @@
 import { render, screen, testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { Alert, AlertDescription, AlertIcon, AlertTitle } from './alert'
+import {
+  AlertDescription,
+  AlertIndicator,
+  AlertRoot,
+  AlertTitle
+} from './alert'
 
 test('passes a11y test', async () => {
   await testA11y(
-    <Alert>
-      <AlertIcon />
+    <AlertRoot>
+      <AlertIndicator />
       <AlertTitle>Alert title</AlertTitle>
       <AlertDescription>Alert description</AlertDescription>
-    </Alert>
+    </AlertRoot>
   )
 })
 
 test("should have role='alert'", () => {
   render(
-    <Alert>
-      <AlertIcon />
+    <AlertRoot role="alert">
+      <AlertIndicator />
       <AlertTitle>Alert title</AlertTitle>
       <AlertDescription>Alert description</AlertDescription>
-    </Alert>
+    </AlertRoot>
   )
 
   expect(screen.getByRole('alert')).toBeInTheDocument()

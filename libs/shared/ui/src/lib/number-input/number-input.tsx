@@ -1,14 +1,12 @@
+export type { NumberInputRootProps } from '@chakra-ui/react'
 export {
-  NumberInputRoot,
-  NumberInputInput,
   NumberInputControl,
-  NumberInputIncrementTrigger,
   NumberInputDecrementTrigger,
+  NumberInputIncrementTrigger,
+  NumberInputInput,
   NumberInputLabel,
+  NumberInputRoot,
   NumberInputScrubber,
   NumberInputValueText
 } from '@chakra-ui/react'
-
 export { useNumberInput } from '@chakra-ui/react'
-
-export type { NumberInputRootProps } from '@chakra-ui/react'

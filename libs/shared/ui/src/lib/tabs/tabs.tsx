@@ -1,7 +1,6 @@
 export {
-  TabsRoot,
-  TabsList,
-  TabsTrigger,
   TabsContent,
-  TabsIndicator
-} from '@chakra-ui/react'
+  TabsIndicator,
+  TabsList,
+  TabsRoot,
+  TabsTrigger} from '@chakra-ui/react'

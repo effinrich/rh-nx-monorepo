@@ -1,17 +1,15 @@
+export type {
+  TableCellProps,
+  TableRootProps,
+  TableRowProps} from '@chakra-ui/react'
 export {
-  TableRoot,
-  TableHeader,
   TableBody,
-  TableFooter,
-  TableRow,
+  TableCaption,
   TableCell,
   TableColumnHeader,
-  TableCaption,
+  TableFooter,
+  TableHeader,
+  TableRoot,
+  TableRow,
   TableScrollArea
-} from '@chakra-ui/react'
-
-export type {
-  TableRootProps,
-  TableRowProps,
-  TableCellProps
 } from '@chakra-ui/react'

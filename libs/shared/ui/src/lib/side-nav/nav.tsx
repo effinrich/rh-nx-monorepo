@@ -4,6 +4,7 @@ import {
   MdPeople,
   MdSupport
 } from 'react-icons/md'
+
 import { Separator } from '../divider/divider'
 import { Flex } from '../flex/flex'
 import { RedesignLogo } from '../logos/redesign-logo/redesign-logo'

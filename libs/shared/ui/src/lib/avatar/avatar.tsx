@@ -1,5 +1,5 @@
-import { Avatar as ChakraAvatar } from '@chakra-ui/react'
 import { forwardRef } from 'react'
+import { Avatar as ChakraAvatar } from '@chakra-ui/react'
 
 export interface AvatarProps extends ChakraAvatar.RootProps {
   name?: string
@@ -23,12 +23,11 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
 })
 
 export {
-  AvatarRoot,
-  AvatarImage,
   AvatarFallback,
+  AvatarGroup,
   AvatarIcon,
-  AvatarGroup
-} from '@chakra-ui/react'
+  AvatarImage,
+  AvatarRoot} from '@chakra-ui/react'
 
 // Re-export with v2 names for backward compatibility
 /**
@@ -36,4 +35,4 @@ export {
  */
 export const AvatarBadge = ChakraAvatar.Indicator
 
-export type { AvatarRootProps, AvatarGroupProps } from '@chakra-ui/react'
+export type { AvatarGroupProps,AvatarRootProps } from '@chakra-ui/react'

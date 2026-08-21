@@ -10,12 +10,11 @@ import { FieldLabel, FieldRoot, Icon } from '../../index'
 
 import {
   Checkbox,
-  CheckboxRoot,
   CheckboxControl,
-  CheckboxLabel,
+  CheckboxGroup,
   CheckboxHiddenInput,
-  CheckboxGroup
-} from './checkbox'
+  CheckboxLabel,
+  CheckboxRoot} from './checkbox'
 
 it('passes a11y test', async () => {
   await testA11y(

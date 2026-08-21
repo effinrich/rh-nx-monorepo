@@ -1,11 +1,10 @@
-import { useState } from 'react'
-
 import { useArgs } from 'storybook/preview-api'
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, within } from 'storybook/test'
 
-import { Flex } from '../flex/flex'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { ControlledDatePicker } from './partials/controlled-date-picker'
+import { RangeDatePicker } from './partials/range-date-picker'
 import { DatePicker } from './date-picker'
 
 const meta: Meta<typeof DatePicker> = {
@@ -25,18 +24,7 @@ const meta: Meta<typeof DatePicker> = {
       url: 'https://www.figma.com/file/pDrgZWbUTfF49d6uoTK2Vi/%5BPlatform%5D-Vendor-Info-Collection-%26-Search?type=design&node-id=212-26558&mode=design&t=RoNdlLKpMQYbMdjv-4'
     }
   },
-  render: function Component(args) {
-    const [, updateArgs] = useArgs()
-
-    const onChange = (date: Date | null) => {
-      if (date) {
-        onChange(date)
-        updateArgs({ selected: date })
-      }
-    }
-
-    return <DatePicker {...args} onChange={onChange} />
-  }
+  render: args => <ControlledDatePicker {...args} />
 }
 
 export default meta
@@ -50,30 +38,6 @@ export const Default: Story = {
   }
 }
 
-const Range = () => {
-  const [startDate, setStartDate] = useState(new Date('2014/02/08'))
-  const [endDate, setEndDate] = useState(new Date('2014/02/10'))
-  return (
-    <Flex w="500px">
-      <DatePicker
-        selected={startDate}
-        onChange={date => date && setStartDate(date)}
-        selectsStart
-        startDate={startDate}
-        endDate={endDate}
-      />
-      <DatePicker
-        selected={endDate}
-        onChange={date => date && setEndDate(date)}
-        selectsEnd
-        startDate={startDate}
-        endDate={endDate}
-        minDate={startDate}
-      />
-    </Flex>
-  )
-}
-
 export const WithRange: Story = {
-  render: (args: any) => <Range {...args} />
+  render: () => <RangeDatePicker />
 }

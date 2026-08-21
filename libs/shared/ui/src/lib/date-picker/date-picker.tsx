@@ -1,16 +1,11 @@
-import { forwardRef, LegacyRef } from 'react'
 import ReactDatePicker from 'react-datepicker'
 import { MdEditCalendar } from 'react-icons/md'
 import { useToken } from '@chakra-ui/react'
 
 import { Icon } from '../icon/icon'
-import {
-  Input,
-  InputGroup,
-  InputProps
-} from '../input/input'
-import { rh } from '../rh/rh'
+import { InputGroup } from '../input/input'
 
+import { CustomInput } from './custom-input'
 import StyledDatePicker from './date-picker.styles'
 
 import 'react-datepicker/dist/react-datepicker.css'
@@ -28,27 +23,6 @@ export interface DatePickerProps {
   placeholder?: string
   name?: string
 }
-
-// const RhDatePicker = rh(ReactDatePicker)
-
-const customDateInput = (
-  { value, onClick, onChange }: InputProps,
-  ref: LegacyRef<HTMLInputElement>
-) => (
-  <>
-    <Input
-      autoComplete="off"
-      value={value}
-      ref={ref}
-      onClick={onClick}
-      onChange={onChange}
-      placeholder="MM/DD/YYYY"
-      maxW="100%"
-    />
-  </>
-)
-customDateInput.displayName = 'DateInput'
-const CustomInput = forwardRef(customDateInput)
 
 export const DatePicker = ({
   selected,
@@ -82,7 +56,6 @@ export const DatePicker = ({
           selectsEnd={selectsEnd}
           selectsRange={selectsRange}
           withPortal
-          // style={{ width: '100%' }}
           {...props}
         />
       </StyledDatePicker>

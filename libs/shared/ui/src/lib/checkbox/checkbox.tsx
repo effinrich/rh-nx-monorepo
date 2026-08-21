@@ -1,9 +1,9 @@
+import type { ComponentProps } from 'react'
 import { forwardRef } from 'react'
 import {
   Checkbox as ChakraCheckbox,
   CheckboxGroup as ChakraCheckboxGroup
 } from '@chakra-ui/react'
-import type { ComponentProps } from 'react'
 
 export const CheckboxGroup = ChakraCheckboxGroup
 export const CheckboxRoot = ChakraCheckbox.Root

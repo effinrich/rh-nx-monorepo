@@ -1,81 +1,48 @@
-import { Box, Container } from '../../index'
+import { Meta } from '@storybook/react-vite'
 
-import { Alert, AlertDescription, AlertIcon, AlertTitle } from './alert'
+import { Container } from '../container/container'
+
+import { BasicAlert } from './partials/basic-alert'
+import { DocsExampleAlert } from './partials/docs-example-alert'
+import { LeftAccentAlert } from './partials/left-accent-alert'
+import { LoadingExampleAlert } from './partials/loading-example-alert'
+import { SubtleAlert } from './partials/subtle-alert'
+import { TopAccentAlert } from './partials/top-accent-alert'
+import { WarningExampleAlert } from './partials/warning-example-alert'
+import { AlertRoot } from './alert'
 
 export default {
+  component: AlertRoot,
   title: 'Components / Feedback / Alert',
-  decorators: [(story: any) => <Container mt={4}>{story()}</Container>]
+  decorators: [
+    (story: () => unknown) => <Container mt={4}>{story()}</Container>
+  ]
+} as Meta<typeof AlertRoot>
+
+export const Basic = {
+  render: () => <BasicAlert />
 }
 
-export const Basic = () => (
-  <Alert status="error" variant="solid" borderRadius="md">
-    <AlertIcon />
-    <AlertTitle mr={2}>Outdated</AlertTitle>
-    <AlertDescription>Your Chakra experience may be degraded.</AlertDescription>
-  </Alert>
-)
-
-export const Subtle = () => (
-  <Alert status="success" mx="auto" alignItems="start">
-    <AlertIcon />
-    <Box flex="1">
-      <AlertTitle>Holy Smokes</AlertTitle>
-      <AlertDescription>Something just happened!</AlertDescription>
-    </Box>
-  </Alert>
-)
-
-export const LeftAccent = () => (
-  <Alert variant="left-accent" mx="auto" alignItems="start">
-    <AlertIcon />
-    <Box flex="1">
-      <AlertTitle>Holy Smokes</AlertTitle>
-      <AlertDescription>Something just happened!</AlertDescription>
-    </Box>
-  </Alert>
-)
-
-export const TopAccent = () => (
-  <Alert
-    variant="top-accent"
-    mx="auto"
-    alignItems="flex-start"
-    pt="3"
-    rounded="md"
-  >
-    <AlertIcon />
-    <Box flex="1">
-      <AlertTitle display="block" mr="2">
-        Holy Smokes
-      </AlertTitle>
-      <AlertDescription>Something just happened!</AlertDescription>
-    </Box>
-  </Alert>
-)
-
-export const DocsExample = () => {
-  return (
-    <Alert status="error">
-      <AlertIcon />
-      There was an error processing your request
-    </Alert>
-  )
+export const Subtle = {
+  render: () => <SubtleAlert />
 }
 
-export const LoadingExample = () => {
-  return (
-    <Alert status="loading">
-      <AlertIcon />
-      We are loading something
-    </Alert>
-  )
+export const LeftAccent = {
+  render: () => <LeftAccentAlert />
 }
 
-export const WarningExample = () => {
-  return (
-    <Alert status="warning">
-      <AlertIcon />
-      Warning! Something isn't quite right
-    </Alert>
-  )
+export const TopAccent = {
+  render: () => <TopAccentAlert />
+}
+
+export const DocsExample = {
+  render: () => <DocsExampleAlert />
+}
+
+export const LoadingExample = {
+  render: () => <LoadingExampleAlert />
+}
+
+export const WarningExample = {
+  render: () => <WarningExampleAlert />
 }

@@ -10,13 +10,13 @@ import {
   FieldHelperText,
   FieldLabel,
   FieldRoot,
-  InputProps,
   Stack,
   Text
 } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
 
+import { FlushedCustomInput } from './partials/flushed-custom-input'
 import { Input, InputGroup } from './input'
 
 export default {
@@ -199,13 +199,9 @@ export const InputGroupCustomInputProps = () => {
   return (
     <>
       <InputGroup>
-        <CustomInput m="10px" placeholder="should be flushed" />
+        <FlushedCustomInput m="10px" placeholder="should be flushed" />
       </InputGroup>
-      <CustomInput m="10px" placeholder="is flushed" />
+      <FlushedCustomInput m="10px" placeholder="is flushed" />
     </>
   )
 }
-
-const CustomInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
-  <Input ref={ref} color="gray.600" variant="flushed" {...props} />
-))

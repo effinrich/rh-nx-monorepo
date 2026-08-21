@@ -1,7 +1,7 @@
+import { useColorMode } from '../color-mode/hooks/use-color-mode'
 import { IconButton } from '../icon-button/icon-button'
 import { MoonIcon } from '../icons/src/Moon'
 import { SunIcon } from '../icons/src/Sun'
-import { useColorMode } from '../color-mode/color-mode'
 
 export const ColorModeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode()

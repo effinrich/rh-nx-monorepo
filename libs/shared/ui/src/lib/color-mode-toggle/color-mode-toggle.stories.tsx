@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react-vite'
+import { Meta } from '@storybook/react-vite'
 
 import { Box } from '../../index'
 
@@ -16,9 +16,7 @@ export default {
   ]
 } as Meta<typeof ColorModeToggle>
 
-const Template: StoryFn<typeof ColorModeToggle> = () => <ColorModeToggle />
-
 export const Default = {
-  render: Template,
+  render: () => <ColorModeToggle />,
   args: {}
 }

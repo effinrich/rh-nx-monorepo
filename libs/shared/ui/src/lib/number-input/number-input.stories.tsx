@@ -16,12 +16,13 @@ import {
   Stack
 } from '../../index'
 
+import { UseNumberInputExample } from './partials/use-number-input-example'
 import {
+  NumberInputControl,
   NumberInputDecrementTrigger,
   NumberInputIncrementTrigger,
-  NumberInputRoot,
   NumberInputInput,
-  NumberInputControl,
+  NumberInputRoot,
   useNumberInput
 } from './number-input'
 
@@ -76,37 +77,10 @@ export const Sizes: StoryFn<typeof NumberInputRoot> = () => (
     ))}
   </Stack>
 )
-const UseNumberInput = (args: any) => {
-  const {
-    getInputProps,
-    getIncrementButtonProps,
-    getDecrementButtonProps,
-    valueAsNumber
-  } = useNumberInput({
-    step: 0.01,
-    defaultValue: 1.53,
-    min: 1,
-    max: 6,
-    precision: 2,
-    allowMouseWheel: true
-  })
-
-  return (
-    <>
-      <div>current: {valueAsNumber}</div>
-      <LoremIpsum p={1} />
-      <rh.div display="flex" {...args}>
-        <Button {...getIncrementButtonProps()}>+</Button>
-        <Input {...(getInputProps() as any)} />
-        <Button {...getDecrementButtonProps()}>-</Button>
-      </rh.div>
-      <LoremIpsum p={1} />
-    </>
-  )
-}
-
 export const NumberInputHook = {
-  render: (args: any) => <UseNumberInput {...args} />
+  render: (args: Record<string, unknown>) => (
+    <UseNumberInputExample {...args} />
+  )
 }
 
 const format = (val: string) => `$${val}`
