@@ -1,4 +1,4 @@
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -20,14 +20,14 @@ export const Default: StoryObj<typeof CeoDirectoryOnboardingPage> = {
   parameters: {
     msw: {
       handlers: [
-        rest.get('/ceos/6nuT80li', (req, res, ctx) => {
-          return res(ctx.json(ceo))
+        http.get('/ceos/6nuT80li', () => {
+          return HttpResponse.json(ceo)
         }),
-        rest.get('/userinfo', (req, res, ctx) => {
-          return res(ctx.json(userInfo))
+        http.get('/userinfo', () => {
+          return HttpResponse.json(userInfo)
         }),
-        rest.get('/person/sazh.katzroy@redesignhealth.com', (req, res, ctx) => {
-          return res(ctx.json(person))
+        http.get('/person/sazh.katzroy@redesignhealth.com', () => {
+          return HttpResponse.json(person)
         })
       ]
     }

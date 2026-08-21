@@ -1,13 +1,13 @@
 import { UserInfoSummary } from '@redesignhealth/portal/data-assets'
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 
 import { vendor } from './.'
 
 export const registerMockEndpoints = (user: UserInfoSummary) => [
-  rest.get('/userinfo', (req, res, ctx) => {
-    return res(ctx.json(user))
+  http.get('/userinfo', () => {
+    return HttpResponse.json(user)
   }),
-  rest.get('/vendor/123456', (req, res, ctx) => {
-    return res(ctx.json(vendor))
+  http.get('/vendor/123456', () => {
+    return HttpResponse.json(vendor)
   })
 ]

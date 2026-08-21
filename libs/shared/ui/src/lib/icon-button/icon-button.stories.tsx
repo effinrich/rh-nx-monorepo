@@ -10,11 +10,6 @@ export default {
   component: IconButton,
   title: 'Components / Forms / IconButton',
   argTypes: {
-    isActive: { type: 'boolean' },
-    disabled: { type: 'boolean' },
-    isPending: { type: 'boolean' },
-    isRound: { type: 'boolean' },
-    icon: { type: 'function' },
     'aria-label': { type: 'string' },
     variant: {
       options: ['solid', 'outline', 'ghost', 'link', 'unstyled'],
@@ -38,15 +33,8 @@ export default {
       control: { type: 'select' }
     }
   },
-  args: {
-    'aria-label': 'icon button action',
-    icon: <SearchIcon />,
-    colorPalette: 'primary',
-    size: 'md',
-    variant: 'solid'
-  },
   decorators: [
-    Story => (
+    (Story: any) => (
       <Box display="flex" justifyContent="center">
         <Story />
       </Box>
@@ -55,36 +43,41 @@ export default {
 } as Meta<typeof IconButton>
 
 export const Default = {
-  args: {}
+  render: () => (
+    <IconButton aria-label="search" colorPalette="primary" size="md" variant="solid">
+      <SearchIcon />
+    </IconButton>
+  )
 }
 
 export const WithColors = {
-  args: { colorPalette: 'blue' }
+  render: () => (
+    <IconButton aria-label="search" colorPalette="blue">
+      <SearchIcon />
+    </IconButton>
+  )
 }
 
 export const WithSizes = {
-  args: {
-    size: 'lg',
-    icon: <PhoneIcon />,
-    'aria-label': 'call this number'
-  }
+  render: () => (
+    <IconButton size="lg" aria-label="call this number">
+      <PhoneIcon />
+    </IconButton>
+  )
 }
 
 export const WithVariants = {
-  args: {
-    variant: 'outline',
-    colorPalette: 'teal',
-    icon: <EmailIcon />,
-    'aria-label': 'send email'
-  }
+  render: () => (
+    <IconButton variant="outline" colorPalette="teal" aria-label="send email">
+      <EmailIcon />
+    </IconButton>
+  )
 }
 
 export const WithCustomIcon = {
-  args: {
-    variant: 'outline',
-    colorPalette: 'teal',
-    icon: <MdPhone />,
-    fontSize: '20px',
-    'aria-label': 'call this number'
-  }
+  render: () => (
+    <IconButton variant="outline" colorPalette="teal" fontSize="20px" aria-label="call this number">
+      <MdPhone />
+    </IconButton>
+  )
 }

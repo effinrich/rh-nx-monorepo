@@ -3,16 +3,17 @@ import { Controller, useForm } from 'react-hook-form'
 import {
   Button,
   Flex,
-  FormControl,
-  FormLabel,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalOverlay,
+  FieldLabel,
+  FieldRoot,
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogPositioner,
+  DialogRoot,
   Radio,
-  RadioGroup,
+  RadioGroupRoot,
   Textarea,
   useDisclosure
 } from '@redesignhealth/ui'
@@ -53,7 +54,7 @@ export interface FeedbackProps {
 
 export const FeedbackModal = forwardRef(
   ({ moduleTitle, id }: FeedbackProps, ref) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { open, onOpen, onClose } = useDisclosure()
     const { mutateAsync, isError, error } = usePutFeedbackMutation()
 
     useImperativeHandle(ref, () => ({
@@ -98,21 +99,31 @@ export const FeedbackModal = forwardRef(
     }
 
     return (
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        <ModalContent w="400px">
-          <ModalCloseButton mt="10px" color="gray.500" />
-          <ModalBody color="gray.500">
-            <form>
-              <FormControl>
-                <FormLabel fontSize="18px" mt="24px">
-                  How can we improve this article?
-                </FormLabel>
+      <DialogRoot
+        open={open}
+        onOpenChange={(e: { open: boolean }) => {
+          if (!e.open) handleOnCloseComplete()
+        }}
+        placement="center"
+      >
+        <DialogBackdrop />
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <DialogPositioner>
+          {/* @ts-expect-error Chakra v3 children typing */}
+          <DialogContent w="400px">
+            <DialogCloseTrigger />
+            <DialogBody color="gray.500">
+              <form>
+                <FieldRoot>
+                  {/* @ts-expect-error Chakra v3 children typing */}
+                  <FieldLabel fontSize="18px" mt="24px">
+                    How can we improve this article?
+                  </FieldLabel>
                 <Controller
                   name="improvements"
                   control={control}
                   render={({ field }) => (
-                    <RadioGroup
+                    <RadioGroupRoot
                       onChange={field.onChange}
                       value={field.value}
                       name={field.name}
@@ -120,7 +131,7 @@ export const FeedbackModal = forwardRef(
                       as={Flex}
                       flexDir="column"
                       gap="14px"
-                      colorScheme="primary"
+                      colorPalette="primary"
                       mt="14px"
                     >
                       {RADIO_OPTIONS.map((option, index) => (
@@ -132,36 +143,38 @@ export const FeedbackModal = forwardRef(
                           {option.label}
                         </Radio>
                       ))}
-                    </RadioGroup>
+                    </RadioGroupRoot>
                   )}
                 />
-              </FormControl>
-              <FormControl>
-                <FormLabel fontSize="18px" mt="24px">
-                  Share additional info and suggestions
-                </FormLabel>
-                <Textarea
-                  placeholder="Additional comments"
-                  {...register('comments')}
-                />
-              </FormControl>
-            </form>
-          </ModalBody>
+                </FieldRoot>
+                <FieldRoot>
+                  {/* @ts-expect-error Chakra v3 children typing */}
+                  <FieldLabel fontSize="18px" mt="24px">
+                    Share additional info and suggestions
+                  </FieldLabel>
+                  <Textarea
+                    placeholder="Additional comments"
+                    {...register('comments')}
+                  />
+                </FieldRoot>
+              </form>
+            </DialogBody>
 
-          <ModalFooter>
-            <Button
-              onClick={() => handleOnCloseComplete()}
-              variant="outline"
-              mr={2}
-            >
-              Cancel
-            </Button>
-            <Button onClick={handleFormSubmit} colorScheme="brand">
-              Submit
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            <DialogFooter>
+              <Button
+                onClick={() => handleOnCloseComplete()}
+                variant="outline"
+                mr={2}
+              >
+                Cancel
+              </Button>
+              <Button onClick={handleFormSubmit} colorPalette="brand">
+                Submit
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     )
   }
 )

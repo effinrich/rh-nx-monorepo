@@ -3,16 +3,17 @@ import { Link as RouterLink } from 'react-router-dom'
 // import { useCountUp } from 'use-count-up'
 import { type BoxProps } from '../box/box'
 import { Button } from '../button/button'
-import { Card } from '../card/card'
-import { Divider } from '../divider/divider'
+import { CardRoot } from '../card/card'
+import { Separator } from '../divider/divider'
 import { Flex } from '../flex/flex'
 import { Link } from '../link/link'
 import {
-  Stat,
-  StatArrow,
+  StatDownIndicator,
   StatHelpText,
   StatLabel,
-  StatNumber
+  StatRoot,
+  StatUpIndicator,
+  StatValueText
 } from '../stat/stat'
 
 export interface StatCardProps extends BoxProps {
@@ -35,36 +36,32 @@ export const StatCard = ({
   arrowType = 'increase',
   ...props
 }: StatCardProps) => {
-  // const { value } = useCountUp({
-  //   isCounting: true,
-  //   end: stat,
-  //   duration: 1
-  // })
-
   return (
-    <Card as="section" {...props}>
-      <Stat pt={5} px={5} pb={12}>
+    <CardRoot as="section" {...props}>
+      <StatRoot pt={5} px={5} pb={12}>
         <StatLabel color="gray.500">{title}</StatLabel>
-        <StatNumber color="gray.900" fontSize="4xl">
-          {/* {value ? value : 0} */}
+        <StatValueText color="gray.900" fontSize="4xl">
           {stat ? stat : 0}
-        </StatNumber>
+        </StatValueText>
         {helpText && (
           <StatHelpText>
-            <StatArrow type={arrowType} />
+            {arrowType === 'increase' ? (
+              <StatUpIndicator />
+            ) : (
+              <StatDownIndicator />
+            )}
             {helpText}
           </StatHelpText>
         )}
-      </Stat>
+      </StatRoot>
       {!noFooter && (
         <div>
-          <Divider />
+          <Separator />
 
           <Flex alignItems="center" justifyContent="flex-end" h="55px" pr={4}>
             {to ? (
               <Link
-                as={RouterLink}
-                to={to}
+                asChild
                 fontSize="14px"
                 fontWeight="medium"
                 _hover={{
@@ -72,7 +69,7 @@ export const StatCard = ({
                 }}
                 data-id="view-all"
               >
-                View all
+                <RouterLink to={to}>View all</RouterLink>
               </Link>
             ) : (
               <Button
@@ -87,6 +84,6 @@ export const StatCard = ({
           </Flex>
         </div>
       )}
-    </Card>
+    </CardRoot>
   )
 }

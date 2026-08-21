@@ -38,6 +38,10 @@ export default {
 }
 
 export const Basic = {
+  args: {
+    variant: 'outline'
+  },
+
   render: (args: any) => <Badge {...args}>Success, man!</Badge>
 }
 
@@ -46,15 +50,15 @@ export const SolidBadge = {
     return (
       <>
         {['gray', 'green', 'red', 'orange', 'purple', 'teal'].map(
-          colorPalette => (
+          colorScheme => (
             <Badge
-              key={colorPalette}
-              colorPalette={colorPalette}
+              key={colorScheme}
+              colorPalette={colorScheme}
               variant="solid"
               mr={2}
               {...args}
             >
-              {colorPalette}
+              {colorScheme}
             </Badge>
           )
         )}

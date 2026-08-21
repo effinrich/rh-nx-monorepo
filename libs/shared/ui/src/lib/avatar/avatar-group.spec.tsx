@@ -1,11 +1,13 @@
 import { render, screen, testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { Avatar, AvatarGroup } from './avatar'
+import { AvatarRoot, AvatarFallback, AvatarGroup } from './avatar'
 
 it('passes a11y test', async () => {
   await testA11y(
     <AvatarGroup>
-      <Avatar />
+      <AvatarRoot>
+        <AvatarFallback />
+      </AvatarRoot>
     </AvatarGroup>,
     {
       axeOptions: {
@@ -17,42 +19,18 @@ it('passes a11y test', async () => {
   )
 })
 
-test('renders a number avatar showing count of truncated avatars', () => {
+test('renders grouped avatars', () => {
   render(
-    <AvatarGroup max={2}>
-      <Avatar />
-      <Avatar />
-      <Avatar />
-      <Avatar />
-      <Avatar />
+    <AvatarGroup>
+      <AvatarRoot>
+        <AvatarFallback name="Ada Lovelace" />
+      </AvatarRoot>
+      <AvatarRoot>
+        <AvatarFallback name="Grace Hopper" />
+      </AvatarRoot>
     </AvatarGroup>
   )
-  const moreLabel = screen.getByText('+3')
-  expect(moreLabel).toBeInTheDocument()
-})
 
-test('does not render a number avatar showing count of truncated avatars if max is equal to avatars given', async () => {
-  const utils = render(
-    <AvatarGroup max={4}>
-      <Avatar />
-      <Avatar />
-      <Avatar />
-      <Avatar />
-    </AvatarGroup>
-  )
-  const moreLabel = utils.container.querySelector('.chakra-avatar--excess')
-  expect(moreLabel).not.toBeInTheDocument()
-})
-
-test('does not render a number avatar showing count of truncated avatars if max is more than avatars given', async () => {
-  const utils = render(
-    <AvatarGroup max={6}>
-      <Avatar />
-      <Avatar />
-      <Avatar />
-      <Avatar />
-    </AvatarGroup>
-  )
-  const moreLabel = utils.container.querySelector('.chakra-avatar--excess')
-  expect(moreLabel).not.toBeInTheDocument()
+  expect(screen.getByText('AL')).toBeInTheDocument()
+  expect(screen.getByText('GH')).toBeInTheDocument()
 })

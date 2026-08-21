@@ -61,3 +61,14 @@
   ```
 
 <!-- user configuration end -->
+
+## Learned User Preferences
+
+- Treat Chakra UI v2 → v3 as a full migrate, refactor, and overhaul — not a compatibility layer.
+- Where Chakra v3 diverges from v2, replace the implementation and update call sites; do not keep v2-compat shims, aliases, or deprecated prop fallbacks.
+
+## Learned Workspace Facts
+
+- Portal is an Nx React app with react-router-dom, not Next.js App Router; do not apply Next.js layout/`"use client"` patterns to portal.
+- Shared design system lives in `libs/shared/ui` (kebab-case filenames); Chakra provider/snippets belong there, not a new repo-root `components/ui`.
+

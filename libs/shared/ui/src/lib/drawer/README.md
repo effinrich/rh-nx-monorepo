@@ -15,13 +15,14 @@ description:
 
 ```js
 import {
-  Drawer,
+  DrawerRoot,
   DrawerBody,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
+  DrawerBackdrop,
+  DrawerPositioner,
   DrawerContent,
-  DrawerCloseButton
+  DrawerCloseTrigger
 } from '@redesignhealth/ui'
 ```
 
@@ -31,37 +32,41 @@ import {
 
 ```jsx
 function DrawerExample() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
   return (
     <>
-      <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
+      <Button ref={btnRef} colorPalette="teal" onClick={onOpen}>
         Open
       </Button>
-      <Drawer
-        isOpen={isOpen}
+      <DrawerRoot
+        open={open}
         placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
+        onOpenChange={e => {
+          if (!e.open) onClose()
+        }}
+        finalFocusEl={() => btnRef.current}
       >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+        <DrawerBackdrop />
+        <DrawerPositioner>
+          <DrawerContent>
+            <DrawerCloseTrigger />
+            <DrawerHeader>Create your account</DrawerHeader>
 
-          <DrawerBody>
-            <Input placeholder="Type here..." />
-          </DrawerBody>
+            <DrawerBody>
+              <Input placeholder="Type here..." />
+            </DrawerBody>
 
-          <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue">Save</Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+            <DrawerFooter>
+              <Button variant="outline" mr={3} onClick={onClose}>
+                Cancel
+              </Button>
+              <Button colorPalette="blue">Save</Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </DrawerPositioner>
+      </DrawerRoot>
     </>
   )
 }
@@ -74,7 +79,7 @@ set it to `top`, `right`, `bottom`, or `left`.
 
 ```jsx
 function PlacementExample() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   const [placement, setPlacement] = React.useState('right')
 
   return (
@@ -87,20 +92,28 @@ function PlacementExample() {
           <Radio value="left">Left</Radio>
         </Stack>
       </RadioGroup>
-      <Button colorScheme="blue" onClick={onOpen}>
+      <Button colorPalette="blue" onClick={onOpen}>
         Open
       </Button>
-      <Drawer placement={placement} onClose={onClose} isOpen={isOpen}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
-          <DrawerBody>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <DrawerRoot
+        placement={placement}
+        onOpenChange={e => {
+          if (!e.open) onClose()
+        }}
+        open={open}
+      >
+        <DrawerBackdrop />
+        <DrawerPositioner>
+          <DrawerContent>
+            <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
+            <DrawerBody>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerPositioner>
+      </DrawerRoot>
     </>
   )
 }
@@ -116,74 +129,80 @@ when the drawer opens. Pass the `initialFocusRef` prop.
 
 ```jsx
 function DrawerExample() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   const firstField = React.useRef()
 
   return (
     <>
-      <Button leftIcon={<AddIcon />} colorScheme="teal" onClick={onOpen}>
+      <Button leftIcon={<AddIcon />} colorPalette="teal" onClick={onOpen}>
         Create user
       </Button>
-      <Drawer
-        isOpen={isOpen}
+      <DrawerRoot
+        open={open}
         placement="right"
-        initialFocusRef={firstField}
-        onClose={onClose}
+        initialFocusEl={() => firstField.current}
+        onOpenChange={e => {
+          if (!e.open) onClose()
+        }}
       >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">
-            Create a new account
-          </DrawerHeader>
+        <DrawerBackdrop />
+        <DrawerPositioner>
+          <DrawerContent>
+            <DrawerCloseTrigger />
+            <DrawerHeader borderBottomWidth="1px">
+              Create a new account
+            </DrawerHeader>
 
-          <DrawerBody>
-            <Stack spacing="24px">
-              <Box>
-                <FormLabel htmlFor="username">Name</FormLabel>
-                <Input
-                  ref={firstField}
-                  id="username"
-                  placeholder="Please enter user name"
-                />
-              </Box>
-
-              <Box>
-                <FormLabel htmlFor="url">Url</FormLabel>
-                <InputGroup>
-                  <InputLeftAddon>http://</InputLeftAddon>
+            <DrawerBody>
+              <Stack gap="24px">
+                <Box>
+                  <FieldLabel htmlFor="username">Name</FieldLabel>
                   <Input
-                    type="url"
-                    id="url"
-                    placeholder="Please enter domain"
+                    ref={firstField}
+                    id="username"
+                    placeholder="Please enter user name"
                   />
-                  <InputRightAddon>.com</InputRightAddon>
-                </InputGroup>
-              </Box>
+                </Box>
 
-              <Box>
-                <FormLabel htmlFor="owner">Select Owner</FormLabel>
-                <Select id="owner" defaultValue="segun">
-                  <option value="segun">Segun Adebayo</option>
-                  <option value="kola">Kola Tioluwani</option>
-                </Select>
-              </Box>
+                <Box>
+                  <FieldLabel htmlFor="url">Url</FieldLabel>
+                  <InputGroup>
+                    <InputLeftAddon>http://</InputLeftAddon>
+                    <Input
+                      type="url"
+                      id="url"
+                      placeholder="Please enter domain"
+                    />
+                    <InputRightAddon>.com</InputRightAddon>
+                  </InputGroup>
+                </Box>
 
-              <Box>
-                <FormLabel htmlFor="desc">Description</FormLabel>
-                <Textarea id="desc" />
-              </Box>
-            </Stack>
-          </DrawerBody>
+                <Box>
+                  <FieldLabel htmlFor="owner">Select Owner</FieldLabel>
+                  <NativeSelectRoot>
+                    <NativeSelectField id="owner" defaultValue="segun">
+                      <option value="segun">Segun Adebayo</option>
+                      <option value="kola">Kola Tioluwani</option>
+                    </NativeSelectField>
+                  </NativeSelectRoot>
+                </Box>
 
-          <DrawerFooter borderTopWidth="1px">
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue">Submit</Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+                <Box>
+                  <FieldLabel htmlFor="desc">Description</FieldLabel>
+                  <Textarea id="desc" />
+                </Box>
+              </Stack>
+            </DrawerBody>
+
+            <DrawerFooter borderTopWidth="1px">
+              <Button variant="outline" mr={3} onClick={onClose}>
+                Cancel
+              </Button>
+              <Button colorPalette="blue">Submit</Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </DrawerPositioner>
+      </DrawerRoot>
     </>
   )
 }
@@ -197,7 +216,7 @@ Pass the `size` prop if you need to adjust the size of the drawer. Values can be
 ```jsx
 function SizeExample() {
   const [size, setSize] = React.useState('')
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
 
   const handleClick = newSize => {
     setSize(newSize)
@@ -216,24 +235,32 @@ function SizeExample() {
         >{`Open ${size} Drawer`}</Button>
       ))}
 
-      <Drawer onClose={onClose} isOpen={isOpen} size={size}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>{`${size} drawer contents`}</DrawerHeader>
-          <DrawerBody>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Consequat nisl vel pretium lectus quam id. Semper quis lectus
-              nulla at volutpat diam ut venenatis. Dolor morbi non arcu risus
-              quis varius quam quisque. Massa ultricies mi quis hendrerit dolor
-              magna eget est lorem. Erat imperdiet sed euismod nisi porta.
-              Lectus vestibulum mattis ullamcorper velit.
-            </p>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <DrawerRoot
+        onOpenChange={e => {
+          if (!e.open) onClose()
+        }}
+        open={open}
+        size={size}
+      >
+        <DrawerBackdrop />
+        <DrawerPositioner>
+          <DrawerContent>
+            <DrawerCloseTrigger />
+            <DrawerHeader>{`${size} drawer contents`}</DrawerHeader>
+            <DrawerBody>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Consequat nisl vel pretium lectus quam id. Semper quis lectus
+                nulla at volutpat diam ut venenatis. Dolor morbi non arcu risus
+                quis varius quam quisque. Massa ultricies mi quis hendrerit dolor
+                magna eget est lorem. Erat imperdiet sed euismod nisi porta.
+                Lectus vestibulum mattis ullamcorper velit.
+              </p>
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerPositioner>
+      </DrawerRoot>
     </>
   )
 }
@@ -250,35 +277,42 @@ way to do it:
 
 ```jsx
 export const App = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen}>Open</Button>
-      <Drawer isOpen={isOpen} onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+      <DrawerRoot
+        open={open}
+        onOpenChange={e => {
+          if (!e.open) onClose()
+        }}
+      >
+        <DrawerBackdrop />
+        <DrawerPositioner>
+          <DrawerContent>
+            <DrawerCloseTrigger />
+            <DrawerHeader>Create your account</DrawerHeader>
 
-          <DrawerBody>
-            <form
-              id="my-form"
-              onSubmit={e => {
-                e.preventDefault()
-                console.log('submitted')
-              }}
-            >
-              <Input name="nickname" placeholder="Type here..." />
-            </form>
-          </DrawerBody>
+            <DrawerBody>
+              <form
+                id="my-form"
+                onSubmit={e => {
+                  e.preventDefault()
+                  console.log('submitted')
+                }}
+              >
+                <Input name="nickname" placeholder="Type here..." />
+              </form>
+            </DrawerBody>
 
-          <DrawerFooter>
-            <Button type="submit" form="my-form">
-              Save
-            </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+            <DrawerFooter>
+              <Button type="submit" form="my-form">
+                Save
+              </Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </DrawerPositioner>
+      </DrawerRoot>
     </>
   )
 }

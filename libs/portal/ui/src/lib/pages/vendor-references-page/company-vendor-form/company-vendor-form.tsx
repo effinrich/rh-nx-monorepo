@@ -19,15 +19,15 @@ import {
   type InputProps,
   Box,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
+  FieldErrorText,
+  FieldLabel,
+  FieldRoot,
   Icon,
   Input,
   InputGroup,
   Loader,
   Radio,
-  RadioGroup,
+  RadioGroupRoot,
   Spacer,
   Stack,
   Text
@@ -183,19 +183,20 @@ export const CompanyVendorForm = ({
                   onChange={newValue => {
                     onChange(selectTransformer.output(newValue))
                   }}
-                  isDisabled={isEdit}
+                  disabled={isEdit}
                 />
               </FormFieldMaster>
             )}
           />
 
-          <FormControl
-            isInvalid={Boolean(errors.subcategories)}
-            isDisabled={isPending}
+          <FieldRoot
+            invalid={Boolean(errors.subcategories)}
+            disabled={isPending}
           >
             <Flex direction={['column', 'column', 'row']}>
               <Box w={['100%', '100%', '25%']} mr={4}>
-                <FormLabel color="gray.800">Tags</FormLabel>
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldLabel color="gray.800">Tags</FieldLabel>
               </Box>
               <Spacer />
               <Box w={['100%', '100%', '75%']}>
@@ -245,12 +246,13 @@ export const CompanyVendorForm = ({
                     )
                   }}
                 />
-                <FormErrorMessage role="alert">
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldErrorText role="alert">
                   <ErrorMessage errors={errors} name="subcategories" />
-                </FormErrorMessage>
+                </FieldErrorText>
               </Box>
             </Flex>
-          </FormControl>
+          </FieldRoot>
 
           <Controller
             name="engagementStatus"
@@ -268,20 +270,21 @@ export const CompanyVendorForm = ({
                   getOptionValue={o => o.value}
                   name={name}
                   placeholder="Select engagement status"
-                  colorScheme="primary"
+                  colorPalette="primary"
                   onBlur={onBlur}
                 />
               </FormFieldMaster>
             )}
           />
 
-          <FormControl
-            isInvalid={Boolean(errors.startDate)}
-            isDisabled={isPending}
+          <FieldRoot
+            invalid={Boolean(errors.startDate)}
+            disabled={isPending}
           >
             <Flex direction={['column', 'column', 'row']}>
               <Box w={['100%', '100%', '25%']} mr={4}>
-                <FormLabel color="gray.800">Engagement start</FormLabel>
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldLabel color="gray.800">Engagement start</FieldLabel>
               </Box>
               <Spacer />
               <Box w={['100%', '100%', '75%']}>
@@ -307,21 +310,23 @@ export const CompanyVendorForm = ({
                     />
                   )}
                 />
-                <FormErrorMessage role="alert">
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldErrorText role="alert">
                   <ErrorMessage errors={errors} name="startDate" />
-                </FormErrorMessage>
+                </FieldErrorText>
               </Box>
             </Flex>
-          </FormControl>
+          </FieldRoot>
 
-          <FormControl
-            isInvalid={Boolean(errors.endDate)}
-            isDisabled={isPending}
+          <FieldRoot
+            invalid={Boolean(errors.endDate)}
+            disabled={isPending}
             mb={2}
           >
             <Flex direction={['column', 'column', 'row']}>
               <Box w={['100%', '100%', '25%']} mr={4}>
-                <FormLabel color="gray.800">Engagement end</FormLabel>
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldLabel color="gray.800">Engagement end</FieldLabel>
               </Box>
               <Spacer />
               <Box w={['100%', '100%', '75%']}>
@@ -348,12 +353,13 @@ export const CompanyVendorForm = ({
                     />
                   )}
                 />
-                <FormErrorMessage role="alert">
+                {/* @ts-expect-error Chakra v3 children typing */}
+                <FieldErrorText role="alert">
                   <ErrorMessage errors={errors} name="endDate" />
-                </FormErrorMessage>
+                </FieldErrorText>
               </Box>
             </Flex>
-          </FormControl>
+          </FieldRoot>
 
           <Controller
             name="willingToDiscuss"
@@ -363,7 +369,7 @@ export const CompanyVendorForm = ({
                 name={field.name}
                 label="Are you willing to discuss your engagement with other founders?"
               >
-                <RadioGroup
+                <RadioGroupRoot
                   {...field}
                   value={
                     field.value === undefined ? '' : field.value ? 'yes' : 'no'
@@ -374,7 +380,7 @@ export const CompanyVendorForm = ({
                 >
                   <Radio value="yes">Yes</Radio>
                   <Radio value="no">No</Radio>
-                </RadioGroup>
+                </RadioGroupRoot>
               </FormFieldMaster>
             )}
           />

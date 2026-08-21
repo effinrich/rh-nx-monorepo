@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "id": "Stories",
+  "title": "Bulk Generate Stories",
+  "description": "Scan an entire project and generate stories for all components missing them",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The Nx project to scan for components",
+      "x-prompt": "Which project should be scanned for components?"
+    },
+    "skipInteractionTests": {
+      "type": "boolean",
+      "default": false,
+      "description": "Skip generating interaction tests"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "description": "Overwrite existing story files"
+    },
+    "dryRun": {
+      "type": "boolean",
+      "default": false,
+      "description": "Preview what would be generated without writing files"
+    },
+    "includeA11y": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include accessibility test stories"
+    },
+    "includeComponentTests": {
+      "type": "boolean",
+      "default": false,
+      "description": "Also generate Playwright component tests"
+    }
+  },
+  "required": ["project"]
+}

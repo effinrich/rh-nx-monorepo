@@ -1,9 +1,9 @@
 import { useFormContext } from 'react-hook-form'
 import {
   Box,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
+  FieldErrorText,
+  FieldLabel,
+  FieldRoot,
   Grid,
   Input,
   Textarea
@@ -23,15 +23,17 @@ export const FormField = ({ field, label, type = 'input' }: FormFieldProps) => {
   const isInvalid = Boolean(errorMessage)
 
   return (
-    <FormControl isInvalid={isInvalid} as={Grid} gridTemplateColumns="1fr 3fr">
-      <FormLabel whiteSpace="pre-line">{label}</FormLabel>
+    <FieldRoot invalid={isInvalid} as={Grid} gridTemplateColumns="1fr 3fr">
+      {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
+      <FieldLabel whiteSpace="pre-line">{label}</FieldLabel>
       <Box>
         {type === 'input' && <Input {...register(field)} />}
         {type === 'textarea' && (
           <Textarea {...register(field)} resize="none" minH="150px" />
         )}
-        <FormErrorMessage>{errorMessage}</FormErrorMessage>
+        {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
+        <FieldErrorText>{errorMessage}</FieldErrorText>
       </Box>
-    </FormControl>
+    </FieldRoot>
   )
 }

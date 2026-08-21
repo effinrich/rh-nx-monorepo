@@ -11,10 +11,10 @@ import {
 } from '@redesignhealth/portal/data-assets'
 import {
   Button,
-  Card,
+  CardRoot,
   CardBody,
   CardFooter,
-  Divider,
+  Separator,
   Loader
 } from '@redesignhealth/ui'
 
@@ -59,7 +59,7 @@ const OptInConfirmation = ({ handleCancel }: OptInConfirmationProps) => {
   })
 
   return (
-    <Card variant="outline">
+    <CardRoot variant="outline">
       {isPending && <Loader />}
       {ceo && (
         <>
@@ -68,22 +68,22 @@ const OptInConfirmation = ({ handleCancel }: OptInConfirmationProps) => {
               <CeoForm isEdit />
             </FormProvider>
           </CardBody>
-          <Divider />
+          <Separator />
           <CardFooter display="flex" justify="end" gap={3}>
             <Button variant="outline" onClick={handleCancel}>
               Back
             </Button>
             <Button
-              variant="primary"
+              variant="solid" colorPalette="primary"
               onClick={handleContinue}
-              isLoading={updateCeoIsLoading}
+              loading={updateCeoIsLoading}
             >
               Continue
             </Button>
           </CardFooter>
         </>
       )}
-    </Card>
+    </CardRoot>
   )
 }
 

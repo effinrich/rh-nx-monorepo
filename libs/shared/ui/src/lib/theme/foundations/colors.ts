@@ -1,6 +1,4 @@
-import { Colors } from '@chakra-ui/react'
-
-export const colors: Colors = {
+export const colors: Record<string, string | Record<string, string>> = {
   transparent: 'transparent',
   current: 'currentColor',
   black: '#000000',

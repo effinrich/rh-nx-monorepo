@@ -38,7 +38,7 @@ export const SignIn = () => {
       <Flex direction="column" justify="center">
         <Stack
           maxW="400px"
-          spacing={6}
+          gap={6}
           background="white"
           align="center"
           borderRadius="md"
@@ -63,7 +63,7 @@ export const SignIn = () => {
               borderRadius="md"
               fontSize="md"
               color="red.500"
-              align="center"
+              textAlign="center"
             >
               {errorMessage}
             </Text>

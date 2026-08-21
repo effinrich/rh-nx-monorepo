@@ -20,7 +20,7 @@ const CompanyIpListing = () => {
     >
       {companyIp ? (
         companyIp.page.totalElements > 0 ? (
-          <Stack spacing={6}>
+          <Stack gap={6}>
             {companyIp.content.map(ip => (
               <IPCard
                 key={ip.id}
@@ -28,12 +28,13 @@ const CompanyIpListing = () => {
                 name={ip.name}
                 rightElement={
                   <Button
-                    as={RouterLink}
-                    to={`/ip-marketplace/${ip.id}`}
+                    asChild
                     size="sm"
                     variant="outline"
                   >
-                    View details
+                    <RouterLink to={`/ip-marketplace/${ip.id}`}>
+                      View details
+                    </RouterLink>
                   </Button>
                 }
                 sellerAddOn={

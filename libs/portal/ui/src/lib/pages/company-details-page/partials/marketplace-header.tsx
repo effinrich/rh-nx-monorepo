@@ -23,12 +23,14 @@ const MarketplaceHeader = ({
             allowed={['ROLE_RH_ADMIN', 'ROLE_SUPER_ADMIN']}
           >
             <IconButton
+              asChild
               variant="outline"
               aria-label="Edit company"
-              icon={<Icon as={MdEdit} />}
-              as={RouterLink}
-              to="edit-marketplace-company"
-            />
+            >
+              <RouterLink to="edit-marketplace-company">
+                <Icon as={MdEdit} />
+              </RouterLink>
+            </IconButton>
           </HasRole>
         ) : (
           <Loader />

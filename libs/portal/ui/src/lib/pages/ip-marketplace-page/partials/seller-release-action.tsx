@@ -13,13 +13,13 @@ export const SellerReleaseAction = ({
   buyerEmail,
   ipListingId
 }: SellerReleaseActionProps) => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       {!dateRelease && (
         <Button
-          colorScheme="primary"
+          colorPalette="primary"
           variant="solid"
           width={['100%', '100%', 'initial']}
           onClick={() => {
@@ -34,7 +34,7 @@ export const SellerReleaseAction = ({
         </Button>
       )}
       <SellerReleaseModal
-        isOpen={isOpen}
+        open={open}
         onClose={onClose}
         buyerEmail={buyerEmail}
         ipListingId={ipListingId}

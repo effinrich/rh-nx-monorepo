@@ -73,7 +73,7 @@ const CeoFilterBox = () => {
                   <Filter
                     name={name}
                     value={value as Option[]}
-                    isLoading={isPending}
+                    loading={isPending}
                     options={filters[filter.key]}
                     onChange={event => onChange(event as Option[])}
                     placeholder={filter.displayName}

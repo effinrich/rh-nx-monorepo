@@ -1,9 +1,9 @@
 import { type ApiError } from '@redesignhealth/portal/data-assets'
 import {
   type BoxProps,
-  Alert,
+  AlertRoot,
   AlertDescription,
-  AlertIcon,
+  AlertIndicator,
   AlertTitle,
   Box,
   Text
@@ -15,7 +15,7 @@ interface AxiosErrorAlertProps extends BoxProps {
 
 export const AxiosErrorAlert = ({ error, ...props }: AxiosErrorAlertProps) => {
   return (
-    <Alert
+    <AlertRoot
       status="error"
       variant="left-accent"
       flexDirection="row"
@@ -25,7 +25,7 @@ export const AxiosErrorAlert = ({ error, ...props }: AxiosErrorAlertProps) => {
       {...props}
     >
       <Box flexDirection="row" display="flex">
-        <AlertIcon mr={2} />
+        <AlertIndicator mr={2} />
         <AlertTitle fontSize="md">
           {(() => {
             if (typeof error === 'string') {
@@ -50,7 +50,7 @@ export const AxiosErrorAlert = ({ error, ...props }: AxiosErrorAlertProps) => {
             </Box>
           ))}
       </AlertDescription>
-    </Alert>
+    </AlertRoot>
   )
 }
 

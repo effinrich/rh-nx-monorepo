@@ -18,7 +18,6 @@
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
-    "affected:e2e": "nx affected:e2e",
     "affected:test": "nx affected:test --verbose",
     "affected:lint": "nx affected:lint",
     "affected:check-types": "nx affected:check-types",
@@ -45,7 +44,11 @@
     "mcp:storybook:install": "cd tools/storybook-mcp && npm install",
     "mcp:storybook:build": "cd tools/storybook-mcp && npm run build",
     "mcp:storybook:dev": "cd tools/storybook-mcp && npm run dev",
-    "mcp:setup": "npm run mcp:storybook:install && npm run mcp:storybook:build"
+    "mcp:setup": "npm run mcp:storybook:install && npm run mcp:storybook:build",
+    "docs:dev": "nx run docs:serve",
+    "docs:build": "nx run docs:build",
+    "docs:validate": "nx run docs:validate",
+    "docs:lint": "nx run docs:lint-docs"
   },
   "lint-staged": {
     "**/*.{ts,tsx,js,jsx}": [
@@ -127,7 +130,8 @@
     "use-count-up": "^3.0.1",
     "yup": "^1.7.1",
     "zod": "4.3.5",
-    "zustand": "5.0.10"
+    "zustand": "5.0.10",
+    "@fontsource-variable/inter": "^5.2.8"
   },
   "devDependencies": {
     "@babel/core": "7.22.5",
@@ -163,7 +167,7 @@
     "@nx/web": "^22.7.3",
     "@nx/webpack": "^22.7.3",
     "@nx/workspace": "22.3.3",
-    "@nxrocks/nx-spring-boot": "^8.1.0",
+    "@nxrocks/nx-spring-boot": "^11.0.1",
     "@parcel/watcher": "2.5.4",
     "@playwright/test": "^1.57.0",
     "@rollup/plugin-url": "8.0.2",
@@ -222,7 +226,6 @@
     "eslint-plugin-cypress": "2.15.1",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-jsx-a11y": "6.10.1",
-    "eslint-plugin-playwright": "^0.15.3",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "5.0.0",
     "eslint-plugin-simple-import-sort": "7.0.0",

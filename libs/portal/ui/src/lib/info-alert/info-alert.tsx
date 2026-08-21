@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import {
-  Alert,
+  AlertRoot,
   AlertDescription,
   AlertTitle,
   Box,
@@ -15,7 +15,7 @@ export interface InfoAlertProps {
 
 export const InfoAlert = ({ onClick, title, children }: InfoAlertProps) => {
   return (
-    <Alert status="info" mb="24px" bg="gray.200" rounded="lg">
+    <AlertRoot status="info" mb="24px" bg="gray.200" rounded="lg">
       <Box>
         <AlertTitle fontWeight={700} fontSize="18px" lineHeight="28px">
           {title}
@@ -29,11 +29,11 @@ export const InfoAlert = ({ onClick, title, children }: InfoAlertProps) => {
         >
           {children}
         </AlertDescription>
-        <Button onClick={onClick} colorScheme="primary" mt="16px">
+        <Button onClick={onClick} colorPalette="primary" mt="16px">
           Got it
         </Button>
       </Box>
-    </Alert>
+    </AlertRoot>
   )
 }
 

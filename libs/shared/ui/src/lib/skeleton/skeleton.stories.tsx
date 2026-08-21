@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import { LoremIpsum } from 'react-lorem-ipsum'
-import { DarkMode } from '@chakra-ui/system'
-
 import { Meta } from '@storybook/react-vite'
 
 import { Box, rh, Stack, Text } from '../../index'
@@ -31,7 +29,7 @@ export const TextLines = () => (
     padding="20px"
     borderWidth="1px"
     borderRadius="lg"
-    noOfLines={[3, 4, 5, 6, 7]}
+    lineClamp={[3, 4, 5, 6, 7]}
   >
     <LoremIpsum p={2} avgSentencesPerParagraph={4} />
   </SkeletonText>
@@ -104,7 +102,7 @@ export const Circle = () => <SkeletonCircle />
 export const Combined = () => (
   <rh.div padding="6" boxShadow="lg" bg="white">
     <SkeletonCircle size="10" />
-    <SkeletonText mt="4" noOfLines={4} gap="4" />
+    <SkeletonText mt="4" lineClamp={4} gap="4" />
   </rh.div>
 )
 
@@ -139,14 +137,12 @@ export const WithCustomSpeed = () => (
 )
 
 export const WithDarkMode = () => (
-  <DarkMode>
-    <Stack>
-      <rh.p>Some text</rh.p>
-      <Skeleton boxSize="100px" />
-      <Skeleton boxSize="100px" />
-      <Skeleton boxSize="100px" />
-    </Stack>
-  </DarkMode>
+  <Stack colorPalette="gray" data-theme="dark">
+    <rh.p>Some text</rh.p>
+    <Skeleton boxSize="100px" />
+    <Skeleton boxSize="100px" />
+    <Skeleton boxSize="100px" />
+  </Stack>
 )
 
 export const WithStartAndEndColor = () => (

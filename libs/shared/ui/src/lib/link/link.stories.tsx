@@ -9,7 +9,7 @@ export default {
 }
 
 export const Default = () => (
-  <Link isExternal href="https://google.com">
+  <Link target="_blank" rel="noopener noreferrer" href="https://google.com">
     This is a link
   </Link>
 )

@@ -4,7 +4,7 @@ type SelectionBoxClearProps = Omit<ButtonProps, 'children'>
 
 export const SelectionBoxClear = (props: SelectionBoxClearProps) => {
   return (
-    <Button {...props} variant="link" colorScheme="primary" size="sm">
+    <Button {...props} variant="plain" colorPalette="primary" size="sm">
       Clear
     </Button>
   )

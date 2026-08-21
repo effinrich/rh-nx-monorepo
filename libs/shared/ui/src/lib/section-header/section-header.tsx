@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 
 import { type BoxProps, Box } from '../box/box'
-import { Divider } from '../divider/divider'
+import { Separator } from '../divider/divider'
 import { Flex } from '../flex/flex'
 import { Heading } from '../heading/heading'
-import { As } from '../rh/rh'
+import { ElementType } from 'react'
 import { Text } from '../text/text'
 
 export interface SectionHeaderProps extends BoxProps {
@@ -12,8 +12,8 @@ export interface SectionHeaderProps extends BoxProps {
   title: string
   helpText?: ReactNode
   rightElement?: ReactNode
-  hTag?: As
-  size?: string
+  hTag?: ElementType
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl'
   helpTextFontSize?: string | number
   isDivider?: boolean
   isSticky?: boolean
@@ -28,7 +28,7 @@ export const SectionHeader = ({
   hTag = 'h1',
   isDivider = true,
   isSticky = false,
-  size = 'sm',
+  size = 'sm' as const,
   fontWeight = 'bold',
   ...props
 }: SectionHeaderProps) => {
@@ -69,7 +69,7 @@ export const SectionHeader = ({
         </Box>
         <Box pl={2}>{rightElement}</Box>
       </Flex>
-      {isDivider && <Divider mt={{ base: '12px' }} />}
+      {isDivider && <Separator mt={{ base: '12px' }} />}
     </Box>
   )
 }

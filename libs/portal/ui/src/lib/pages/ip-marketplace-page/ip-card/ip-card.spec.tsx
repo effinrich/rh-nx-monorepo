@@ -154,13 +154,10 @@ describe('IPCard', () => {
         id="D0CuB24u"
         name={data.name}
         rightElement={
-          <Button
-            as={RouterLink}
-            to={`/ip-marketplace/${data.id}`}
-            size="sm"
-            variant="outline"
-          >
-            View more
+          <Button asChild size="sm" variant="outline">
+            <RouterLink to={`/ip-marketplace/${data.id}`}>
+              View more
+            </RouterLink>
           </Button>
         }
       />

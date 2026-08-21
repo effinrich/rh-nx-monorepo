@@ -4,8 +4,7 @@ import {
   MdPeople,
   MdSupport
 } from 'react-icons/md'
-import { useColorModeValue } from '../color-mode/color-mode'
-import { Divider } from '../divider/divider'
+import { Separator } from '../divider/divider'
 import { Flex } from '../flex/flex'
 import { RedesignLogo } from '../logos/redesign-logo/redesign-logo'
 import { Stack } from '../stack/stack'
@@ -20,9 +19,6 @@ export const Nav = ({
   router,
   logOut
 }: any) => {
-  const bgColor = useColorModeValue('white', 'blackAlpha.500')
-  const borderColor = useColorModeValue('gray.200', 'gray.200')
-
   const IconMap: any = {
     dashboard: MdHomeFilled,
     opcos: MdCorporateFare,
@@ -39,17 +35,17 @@ export const Nav = ({
   return (
     <Flex
       flex="1"
-      bg={bgColor}
+      bg="bg-surface"
       color="on-accent"
       overflowY="auto"
       maxW={{ base: 'full', sm: 'xs' }}
       py={{ base: '6', sm: '8' }}
       px={{ base: '4', sm: '6' }}
       borderRight="2px"
-      borderColor={borderColor}
+      borderColor="gray.200"
     >
       <Stack justify="space-between" gap="1">
-        <Stack gap={{ base: '5', sm: '6' }} shouldWrapChildren>
+        <Stack gap={{ base: '5', sm: '6' }}>
           <RedesignLogo maxW="250px" />
           <Stack gap="1">
             {routes.length > 0 &&
@@ -82,7 +78,7 @@ export const Nav = ({
           <Stack gap="1">
             <NavButton label="Support" icon={MdSupport} path="support" />
           </Stack>
-          <Divider borderColor={borderColor} />
+          <Separator borderColor="gray.200" />
           <UserProfile
             name={`${userProfile.givenName} ${userProfile.familyName}`}
             image={userProfile.picture}

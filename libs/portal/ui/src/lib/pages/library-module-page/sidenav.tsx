@@ -11,7 +11,7 @@ export const SideNav = ({ modules, onNavClick, ...props }: SideNavProps) => {
   const { moduleId } = useParams()
 
   return (
-    <Stack spacing={1} {...props}>
+    <Stack gap={1} {...props}>
       <Text fontWeight="medium" fontSize="xs" color="gray.500">
         IN THIS COLLECTION
       </Text>
@@ -31,7 +31,7 @@ export const SideNav = ({ modules, onNavClick, ...props }: SideNavProps) => {
           }
           onClick={() => onNavClick(module)}
         >
-          <Stack spacing="1" py={2} px={2} fontSize="sm" lineHeight="1.25rem">
+          <Stack gap="1" py={2} px={2} fontSize="sm" lineHeight="1.25rem">
             <Text fontWeight="medium">{module.title}</Text>
           </Stack>
         </Link>

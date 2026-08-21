@@ -4,10 +4,11 @@ import {
   Button,
   Flex,
   Link,
-  List,
+  ListRoot,
   ListItem,
   Loader,
-  Tag,
+  TagRoot,
+  TagLabel,
   Text,
   useDisclosure
 } from '@redesignhealth/ui'
@@ -26,7 +27,7 @@ interface AdvisorDetailsProps {
 export const AdvisorDetails = ({ advisorId }: AdvisorDetailsProps) => {
   const { data: currentUser } = useCurrentUserQuery()
   const { data: advisor, isPending } = useAdvisorQuery(advisorId)
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   if (isPending) return <Loader mt="8px" />
   if (!advisor) return <NotFound />
@@ -50,11 +51,11 @@ export const AdvisorDetails = ({ advisorId }: AdvisorDetailsProps) => {
             as="a"
             href={`https://5inxi4pt259.typeform.com/to/dIAXUaDn#${contractRequestParams}`}
             target="_blank"
-            colorScheme="purple"
+            colorPalette="purple"
           >
             Request Contract
           </Button>
-          <Button colorScheme="blue" onClick={onOpen}>
+          <Button colorPalette="blue" onClick={onOpen}>
             Request Introduction
           </Button>
         </Flex>
@@ -65,8 +66,8 @@ export const AdvisorDetails = ({ advisorId }: AdvisorDetailsProps) => {
             as="a"
             href={advisor.linkedIn}
             target="blank"
-            variant="link"
-            colorScheme="blue"
+            variant="plain"
+            colorPalette="blue"
           >
             LinkedIn Profile
           </Button>
@@ -76,8 +77,8 @@ export const AdvisorDetails = ({ advisorId }: AdvisorDetailsProps) => {
             as="a"
             href={advisor.website}
             target="_blank"
-            variant="link"
-            colorScheme="blue"
+            variant="plain"
+            colorPalette="blue"
           >
             Website
           </Button>
@@ -86,35 +87,35 @@ export const AdvisorDetails = ({ advisorId }: AdvisorDetailsProps) => {
 
       <Flex gap="8px" mt="16px">
         {advisor.categories?.map(category => (
-          <Tag
+          <TagRoot
             key={category}
             aria-label="category"
-            colorScheme="blue"
+            colorPalette="blue"
             rounded="2xl"
             size="md"
           >
-            {category}
-          </Tag>
+            <TagLabel>{category}</TagLabel>
+          </TagRoot>
         ))}
         {advisor.tags?.map(tag => (
-          <Tag
+          <TagRoot
             key={tag}
             aria-label="tag"
-            colorScheme="green"
+            colorPalette="green"
             size="md"
             rounded="2xl"
           >
-            {tag}
-          </Tag>
+            <TagLabel>{tag}</TagLabel>
+          </TagRoot>
         ))}
       </Flex>
 
-      <List display="flex" flexDirection="column" gap="56px" mt="64px">
+      <ListRoot display="flex" flexDirection="column" gap="56px" mt="64px">
         <ListItem as={AdvisorAttribute} attribute="Bio">
           {advisor.bio ? advisor.bio : 'None'}
         </ListItem>
         <ListItem>
-          <List
+          <ListRoot
             display="grid"
             gridTemplateColumns="1fr 1fr"
             rowGap="56px"
@@ -179,9 +180,9 @@ export const AdvisorDetails = ({ advisorId }: AdvisorDetailsProps) => {
             <ListItem as={AdvisorAttribute} attribute="Tier">
               {advisor.tier ? advisor.tier : 'None'}
             </ListItem>
-          </List>
+          </ListRoot>
         </ListItem>
-      </List>
+      </ListRoot>
       <Box as="aside" mt="32">
         <Text as="p" fontSize="sm" fontStyle="italic">
           Please email Rachel Soffer{' '}
@@ -193,7 +194,7 @@ export const AdvisorDetails = ({ advisorId }: AdvisorDetailsProps) => {
       </Box>
       <IntroductionRequestForm
         advisorId={advisorId}
-        isOpen={isOpen}
+        open={open}
         onClose={onClose}
         advisorName={advisor.name}
       />

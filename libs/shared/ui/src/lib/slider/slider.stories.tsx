@@ -3,9 +3,10 @@ import * as React from 'react'
 import { rh } from '../rh/rh'
 
 import {
-  Slider,
-  SliderFilledTrack,
-  SliderMark,
+  SliderRoot,
+  SliderControl,
+  SliderRange,
+  SliderMarker,
   SliderThumb,
   SliderTrack
 } from './slider'
@@ -25,7 +26,7 @@ const DEFAULT_MAX_VALUE = 40
 
 export const WithPropsUpdate = () => {
   const [count, setCount] = React.useState(0)
-  const [disabled, setIsDisabled] = React.useState(true)
+  const [isDisabled, setIsDisabled] = React.useState(true)
   const [max, setMax] = React.useState(DEFAULT_MAX_VALUE)
 
   React.useEffect(() => {
@@ -42,23 +43,25 @@ export const WithPropsUpdate = () => {
   return (
     <rh.div display="flex" flexDirection="column" gap="8">
       <h1>
-        Slide max value: {max}, disabled: {String(disabled)}
+        Slide max value: {max}, isDisabled: {String(isDisabled)}
       </h1>
-      <Slider
+      <SliderRoot
         aria-label="Player Progress"
         min={0}
         max={max}
-        disabled={disabled}
-        defaultValue={0}
-        value={count}
-        onChange={setCount}
+        disabled={isDisabled}
+        defaultValue={[0]}
+        value={[count]}
+        onValueChange={({ value }) => setCount(value[0])}
         mr="20"
       >
-        <SliderTrack>
-          <SliderFilledTrack />
-        </SliderTrack>
-        <SliderThumb />
-      </Slider>
+        <SliderControl>
+          <SliderTrack>
+            <SliderRange />
+          </SliderTrack>
+          <SliderThumb index={0} />
+        </SliderControl>
+      </SliderRoot>
 
       <button onClick={() => setCount(count => count + 1)}>
         count is {count}
@@ -69,49 +72,67 @@ export const WithPropsUpdate = () => {
 
 export function HorizontalSlider() {
   return (
-    <Slider colorPalette="red">
-      <SliderTrack>
-        <SliderFilledTrack />
-      </SliderTrack>
-      <SliderThumb />
-      <SliderMark value={90} top="20px">
+    <SliderRoot colorPalette="red">
+      <SliderControl>
+        <SliderTrack>
+          <SliderRange />
+        </SliderTrack>
+        <SliderThumb index={0} />
+      </SliderControl>
+      <SliderMarker value={90}>
         "90%"
-      </SliderMark>
-    </Slider>
+      </SliderMarker>
+    </SliderRoot>
   )
 }
 
 export function VerticalSlider() {
   return (
-    <Slider colorPalette="red" isReversed orientation="vertical">
-      <SliderTrack>
-        <SliderFilledTrack />
-      </SliderTrack>
-      <SliderThumb />
-      <SliderMark value={90} children="90%" left="40px" />
-    </Slider>
+    <SliderRoot colorPalette="red" orientation="vertical">
+      <SliderControl>
+        <SliderTrack>
+          <SliderRange />
+        </SliderTrack>
+        <SliderThumb index={0} />
+      </SliderControl>
+      <SliderMarker value={90}>90%</SliderMarker>
+    </SliderRoot>
   )
 }
 
 export function rhHorizontalSlider() {
   return (
-    <Slider colorPalette="blue" defaultValue={40}>
-      <SliderTrack>
-        <SliderFilledTrack />
-      </SliderTrack>
-      <SliderThumb children="#" boxSize="30px" color="black" />
-    </Slider>
+    <SliderRoot colorPalette="blue" defaultValue={[40]}>
+      <SliderControl>
+        <SliderTrack>
+          <SliderRange />
+        </SliderTrack>
+        <SliderThumb index={0} boxSize="30px" color="black">
+          #
+        </SliderThumb>
+      </SliderControl>
+    </SliderRoot>
   )
 }
 
 export function SteppedHorizontalSlider() {
   const [value, setValue] = React.useState<number>(1)
   return (
-    <Slider value={value} onChange={setValue} min={1} max={7} step={2}>
-      <SliderTrack>
-        <SliderFilledTrack />
-      </SliderTrack>
-      <SliderThumb children={value} boxSize="30px" color="black" />
-    </Slider>
+    <SliderRoot
+      value={[value]}
+      onValueChange={({ value: v }) => setValue(v[0])}
+      min={1}
+      max={7}
+      step={2}
+    >
+      <SliderControl>
+        <SliderTrack>
+          <SliderRange />
+        </SliderTrack>
+        <SliderThumb index={0} boxSize="30px" color="black">
+          {value}
+        </SliderThumb>
+      </SliderControl>
+    </SliderRoot>
   )
 }

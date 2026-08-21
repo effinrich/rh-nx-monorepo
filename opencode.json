@@ -2,13 +2,9 @@
   "$schema": "https://app.kilo.ai/config.json",
   "mcp": {
     "nx-mcp": {
+      "enabled": true,
       "type": "local",
-      "command": [
-        "npx",
-        "nx",
-        "mcp"
-      ],
-      "enabled": true
+      "command": ["npx", "nx", "mcp"]
     }
   }
 }

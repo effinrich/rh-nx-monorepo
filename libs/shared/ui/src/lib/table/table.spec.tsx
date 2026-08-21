@@ -1,34 +1,43 @@
 import { testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { Table, TableCaption, Tbody, Td, Tfoot, Th, Thead, Tr } from './table'
+import {
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableColumnHeader,
+  TableFooter,
+  TableHeader,
+  TableRoot,
+  TableRow
+} from './table'
 
 describe('<Table />', () => {
   it('should pass a11y test', async () => {
     const simpleTable = (
-      <Table>
+      <TableRoot>
         <TableCaption>Imperial to metric conversion factors</TableCaption>
-        <Thead>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          <Tr>
-            <Td>inches</Td>
-            <Td>millimetres (mm)</Td>
-            <Td isNumeric>25.4</Td>
-          </Tr>
-        </Tbody>
-        <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot>
-      </Table>
+        <TableHeader>
+          <TableRow>
+            <TableColumnHeader>To convert</TableColumnHeader>
+            <TableColumnHeader>into</TableColumnHeader>
+            <TableColumnHeader textAlign="end">multiply by</TableColumnHeader>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>inches</TableCell>
+            <TableCell>millimetres (mm)</TableCell>
+            <TableCell textAlign="end">25.4</TableCell>
+          </TableRow>
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableColumnHeader>To convert</TableColumnHeader>
+            <TableColumnHeader>into</TableColumnHeader>
+            <TableColumnHeader textAlign="end">multiply by</TableColumnHeader>
+          </TableRow>
+        </TableFooter>
+      </TableRoot>
     )
 
     await testA11y(simpleTable)

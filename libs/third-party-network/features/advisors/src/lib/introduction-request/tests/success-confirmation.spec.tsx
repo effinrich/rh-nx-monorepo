@@ -37,7 +37,7 @@ describe('SuccessConfirmation', () => {
 
 const renderComponent = (onClose: VoidFunction, advisorName?: string) => {
   const utils = render(
-    <SuccessConfirmation isOpen onClose={onClose} advisorName={advisorName} />
+    <SuccessConfirmation open onClose={onClose} advisorName={advisorName} />
   )
 
   return { ...utils, user: userEvent.setup() }

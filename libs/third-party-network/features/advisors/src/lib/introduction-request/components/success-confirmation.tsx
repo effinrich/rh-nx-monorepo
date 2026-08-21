@@ -1,41 +1,49 @@
 import {
   Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  UseDisclosureReturn
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner,
+  DialogRoot
 } from '@redesignhealth/ui'
 
 interface SuccessConfirmationProps {
   advisorName?: string
   onClose: VoidFunction
-  isOpen: UseDisclosureReturn['isOpen']
+  open: boolean
 }
 
 export const SuccessConfirmation = ({
-  isOpen,
+  open,
   onClose,
   advisorName
 }: SuccessConfirmationProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Successful Request</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          Your request for {advisorName ?? 'the advisor'} has been submitted.
-        </ModalBody>
-        <ModalFooter>
-          <Button colorScheme="blue" onClick={onClose}>
-            Close
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+    <DialogRoot
+      open={open}
+      onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
+      size="xl"
+    >
+      <DialogBackdrop />
+      {/* @ts-expect-error Chakra v3 DialogPositioner children typing */}
+      <DialogPositioner>
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
+        <DialogContent>
+          <DialogHeader>Successful Request</DialogHeader>
+          <DialogCloseTrigger />
+          <DialogBody>
+            Your request for {advisorName ?? 'the advisor'} has been submitted.
+          </DialogBody>
+          <DialogFooter>
+            <Button colorPalette="blue" onClick={onClose}>
+              Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </DialogPositioner>
+    </DialogRoot>
   )
 }

@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 // import { GoogleOAuthProvider } from '@react-oauth/google'
-import { RhProvider, theme } from '@redesignhealth/ui'
+import { RhProvider } from '@redesignhealth/ui'
 
 import App from './app/app'
 const GOOGLE_CLIENT_ID =
@@ -14,7 +14,7 @@ root.render(
   <StrictMode>
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <BrowserRouter>
-        <RhProvider theme={theme}>
+        <RhProvider>
           <App />
         </RhProvider>
       </BrowserRouter>

@@ -6,11 +6,11 @@ import {
 } from '@redesignhealth/portal/data-assets'
 import {
   Button,
-  Card,
+  CardRoot,
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
+  Separator,
   Text
 } from '@redesignhealth/ui'
 
@@ -35,15 +35,15 @@ const OptOutConfirmation = ({ handleCancel }: OptOutConfirmationProps) => {
   }
 
   return (
-    <Card variant="outline">
+    <CardRoot variant="outline">
       <CardHeader>
         <Text>
           You can always opt back in should you change your mind later.
         </Text>
       </CardHeader>
-      <Divider />
+      <Separator />
       <CardBody>
-        <Card variant="outline">
+        <CardRoot variant="outline">
           <CardBody>
             <Text fontSize="md" as="b">
               Most CEOs opt in to get the most benefit out of the community
@@ -55,24 +55,24 @@ const OptOutConfirmation = ({ handleCancel }: OptOutConfirmationProps) => {
               found in the CEO community.
             </Text>
           </CardBody>
-        </Card>
+        </CardRoot>
       </CardBody>
-      <Divider />
+      <Separator />
       {ceo && (
         <CardFooter display="flex" justify="flex-end" gap={3}>
           <Button variant="outline" onClick={handleCancel}>
             I want to opt-In
           </Button>
           <Button
-            variant="primary"
+            variant="solid" colorPalette="primary"
             onClick={handleContinue}
-            isLoading={optOutCeoIsSaving}
+            loading={optOutCeoIsSaving}
           >
             Continue to directory
           </Button>
         </CardFooter>
       )}
-    </Card>
+    </CardRoot>
   )
 }
 

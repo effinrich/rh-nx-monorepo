@@ -10,17 +10,19 @@ import {
 import {
   Box,
   Button,
-  Checkbox,
+  CheckboxRoot,
+  CheckboxControl,
+  CheckboxHiddenInput,
   ChevronDownIcon,
   Flex,
-  FormControl,
-  FormLabel,
+  FieldRoot,
+  FieldLabel,
   InputProps,
   Loader,
-  Menu,
-  MenuButton,
+  MenuRoot,
+  MenuTrigger,
   MenuItem,
-  MenuList,
+  MenuContent,
   Text
 } from '@redesignhealth/ui'
 
@@ -135,15 +137,21 @@ const ResearchSprints = () => {
           >
             Results: {sprints?.totalResults}
           </Text>
-          <FormControl as={Flex} flexDir="row-reverse" align="center" mt="8px">
-            <FormLabel m="0">Hide conflicted content</FormLabel>
-            <Checkbox
+          <FieldRoot as={Flex} flexDir="row-reverse" align="center" mt="8px">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel m="0">Hide conflicted content</FieldLabel>
+            <CheckboxRoot
               mr="12px"
               checked={isHideConflicts}
-              isDisabled={true}
-              onChange={e => setIsHideConflicts(e.target.checked)}
-            />
-          </FormControl>
+              disabled={true}
+              onCheckedChange={(e: { checked: boolean | 'indeterminate' }) =>
+                setIsHideConflicts(!!e.checked)
+              }
+            >
+              <CheckboxHiddenInput />
+              <CheckboxControl />
+            </CheckboxRoot>
+          </FieldRoot>
         </Box>
 
         <Flex align="center" gap="16px" mt="-30px">
@@ -156,23 +164,24 @@ const ResearchSprints = () => {
             Sort by
           </Text>
 
-          <Menu>
-            <MenuButton
-              isDisabled={true}
-              as={Button}
-              rightIcon={<ChevronDownIcon />}
-              colorScheme="gray"
-              variant="outline"
-            >
-              {sortOrder === 'asc' ? 'Most recent' : 'Oldest'}
-            </MenuButton>
-            <MenuList>
-              <MenuItem onClick={() => setSortOrder('asc')}>
+          <MenuRoot>
+            <MenuTrigger asChild>
+              <Button
+                disabled={true}
+                colorPalette="gray"
+                variant="outline"
+              >
+                {sortOrder === 'asc' ? 'Most recent' : 'Oldest'}
+                <ChevronDownIcon />
+              </Button>
+            </MenuTrigger>
+            <MenuContent>
+              <MenuItem value="asc" onClick={() => setSortOrder('asc')}>
                 Most recent
               </MenuItem>
-              <MenuItem onClick={() => setSortOrder('desc')}>Oldest</MenuItem>
-            </MenuList>
-          </Menu>
+              <MenuItem value="desc" onClick={() => setSortOrder('desc')}>Oldest</MenuItem>
+            </MenuContent>
+          </MenuRoot>
         </Flex>
       </Flex>
 
@@ -188,7 +197,7 @@ const ResearchSprints = () => {
                 <ResearchSprintCard key={sprint.id} {...sprint} />
               ))}
               <Button
-                isDisabled={!hasNextResearch}
+                disabled={!hasNextResearch}
                 onClick={() => {
                   if (fetchNextResearch) {
                     fetchNextResearch()

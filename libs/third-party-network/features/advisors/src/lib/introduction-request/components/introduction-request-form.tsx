@@ -1,14 +1,15 @@
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import {
   Button,
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner,
+  DialogRoot,
   Flex,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   UseDisclosureReturn
 } from '@redesignhealth/ui'
 
@@ -23,13 +24,13 @@ import { SuccessConfirmation } from './success-confirmation'
 interface IntroductionRequestFormProps {
   advisorId: string
   advisorName?: string
-  isOpen: UseDisclosureReturn['isOpen']
+  open: boolean
   onClose: UseDisclosureReturn['onClose']
 }
 
 export const IntroductionRequestForm = ({
   advisorId,
-  isOpen,
+  open,
   onClose,
   advisorName
 }: IntroductionRequestFormProps) => {
@@ -50,7 +51,7 @@ export const IntroductionRequestForm = ({
   if (isSuccess) {
     return (
       <SuccessConfirmation
-        isOpen={isOpen}
+        open={open}
         onClose={handleClose}
         advisorName={advisorName}
       />
@@ -58,43 +59,51 @@ export const IntroductionRequestForm = ({
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} size="5xl">
-      <ModalOverlay />
-      <ModalContent minH="470px">
-        <ModalHeader>Request Introduction</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody
-          as="form"
-          onSubmit={form.handleSubmit(handleSubmit)}
-          mt="20px"
-        >
-          <FormProvider {...form}>
-            <Flex flexDir="column" gap="24px">
-              <FormField field="requesterName" label="Requester Name" />
-              <FormField field="requesterEmail" label="Requester Email" />
-              <FormField field="additionalEmails" label="Additional Emails" />
-              <FormField field="opcoName" label="OpCo/concept name" />
-              <FormField
-                type="textarea"
-                field="opcoDescription"
-                label="OpCo/concept description
+    <DialogRoot
+      open={open}
+      onOpenChange={(e: { open: boolean }) => !e.open && handleClose()}
+      size="cover"
+    >
+      <DialogBackdrop />
+      {/* @ts-expect-error Chakra v3 DialogPositioner children typing */}
+      <DialogPositioner>
+        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
+        <DialogContent minH="470px">
+          <DialogHeader>Request Introduction</DialogHeader>
+          <DialogCloseTrigger />
+          <DialogBody
+            as="form"
+            onSubmit={form.handleSubmit(handleSubmit)}
+            mt="20px"
+          >
+            <FormProvider {...form}>
+              <Flex flexDir="column" gap="24px">
+                <FormField field="requesterName" label="Requester Name" />
+                <FormField field="requesterEmail" label="Requester Email" />
+                <FormField field="additionalEmails" label="Additional Emails" />
+                <FormField field="opcoName" label="OpCo/concept name" />
+                <FormField
+                  type="textarea"
+                  field="opcoDescription"
+                  label="OpCo/concept description
                 (in context of advisor request)"
-              />
-            </Flex>
-          </FormProvider>
+                />
+              </Flex>
+            </FormProvider>
 
-          {isError && <ErrorAlert />}
+            {isError && <ErrorAlert />}
 
-          <ModalFooter as={Flex} gap="16px" px="0">
-            <Button colorScheme="gray" onClick={handleClose}>
-              Close
-            </Button>
-            <Button type="submit" isLoading={isPending} colorScheme="blue">
-              Request Introduction
-            </Button>
-          </ModalFooter>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+            <DialogFooter as={Flex} gap="16px" px="0">
+              <Button colorPalette="gray" onClick={handleClose}>
+                Close
+              </Button>
+              <Button type="submit" loading={isPending} colorPalette="blue">
+                Request Introduction
+              </Button>
+            </DialogFooter>
+          </DialogBody>
+        </DialogContent>
+      </DialogPositioner>
+    </DialogRoot>
   )
 }

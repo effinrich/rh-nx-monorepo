@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 import { useFormContext } from 'react-hook-form'
 import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   Tooltip
 } from '@redesignhealth/ui'
 
@@ -35,17 +35,20 @@ export const FormField = ({
     <Tooltip
       label={disabledHelpText}
       placement="top-start"
-      isDisabled={!disabledHelpText}
+      disabled={!disabledHelpText}
     >
-      <FormControl data-testid={testid} isInvalid={isInvalid}>
-        <FormLabel>{optional ? `${label} (optional)` : label}</FormLabel>
+      <FieldRoot data-testid={testid} invalid={isInvalid}>
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldLabel>{optional ? `${label} (optional)` : label}</FieldLabel>
         {children}
         {isInvalid ? (
-          <FormErrorMessage>{errorMessage}</FormErrorMessage>
+          // @ts-expect-error Chakra v3 children typing
+          <FieldErrorText>{errorMessage}</FieldErrorText>
         ) : (
-          <FormHelperText>{helper}</FormHelperText>
+          // @ts-expect-error Chakra v3 children typing
+          <FieldHelperText>{helper}</FieldHelperText>
         )}
-      </FormControl>
+      </FieldRoot>
     </Tooltip>
   )
 }

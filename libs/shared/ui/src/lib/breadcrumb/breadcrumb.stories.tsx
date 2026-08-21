@@ -1,79 +1,80 @@
-import { LuChevronRight } from 'react-icons/lu'
 import { BrowserRouter, Link } from 'react-router-dom'
+import { LuChevronRight } from 'react-icons/lu'
 
-import { Breadcrumb } from './breadcrumb'
+import {
+  BreadcrumbCurrentLink,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbRoot,
+  BreadcrumbSeparator
+} from './breadcrumb'
 
 export default {
   title: 'Components / Navigation / Breadcrumb',
-  component: Breadcrumb
+  component: BreadcrumbRoot
 }
 
 export const Basic = () => (
   <BrowserRouter>
-    <Breadcrumb.Root>
-      <Breadcrumb.List gap="4">
-        <Breadcrumb.Item>
-          <Breadcrumb.Link asChild>
+    <BreadcrumbRoot>
+      <BreadcrumbList gap="4">
+        <BreadcrumbItem>
+          <BreadcrumbLink asChild>
             <Link to="/home" replace>
               Breadcrumb 1
             </Link>
-          </Breadcrumb.Link>
-          <Breadcrumb.Separator />
-        </Breadcrumb.Item>
-
-        <Breadcrumb.Item>
-          <Breadcrumb.Link href="#">Breadcrumb 2</Breadcrumb.Link>
-          <Breadcrumb.Separator />
-        </Breadcrumb.Item>
-
-        <Breadcrumb.Item>
-          <Breadcrumb.CurrentLink>Breadcrumb 3</Breadcrumb.CurrentLink>
-        </Breadcrumb.Item>
-      </Breadcrumb.List>
-    </Breadcrumb.Root>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">Breadcrumb 2</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbCurrentLink>Breadcrumb 3</BreadcrumbCurrentLink>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </BreadcrumbRoot>
   </BrowserRouter>
 )
 
 export const WithSeparator = () => (
-  <Breadcrumb.Root>
-    <Breadcrumb.List>
-      <Breadcrumb.Item>
-        <Breadcrumb.Link href="#">Home</Breadcrumb.Link>
-        <Breadcrumb.Separator />
-      </Breadcrumb.Item>
-
-      <Breadcrumb.Item>
-        <Breadcrumb.Link href="#">About</Breadcrumb.Link>
-        <Breadcrumb.Separator />
-      </Breadcrumb.Item>
-
-      <Breadcrumb.Item>
-        <Breadcrumb.CurrentLink>Current</Breadcrumb.CurrentLink>
-      </Breadcrumb.Item>
-    </Breadcrumb.List>
-  </Breadcrumb.Root>
+  <BreadcrumbRoot>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">About</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbCurrentLink>Current</BreadcrumbCurrentLink>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </BreadcrumbRoot>
 )
 
 export const WithCustomSeparator = () => (
-  <Breadcrumb.Root>
-    <Breadcrumb.List gap="8px">
-      <Breadcrumb.Item>
-        <Breadcrumb.Link href="/">Home</Breadcrumb.Link>
-        <Breadcrumb.Separator>
-          <LuChevronRight color="gray.300" />
-        </Breadcrumb.Separator>
-      </Breadcrumb.Item>
-
-      <Breadcrumb.Item>
-        <Breadcrumb.Link href="/about">About</Breadcrumb.Link>
-        <Breadcrumb.Separator>
-          <LuChevronRight color="gray.300" />
-        </Breadcrumb.Separator>
-      </Breadcrumb.Item>
-
-      <Breadcrumb.Item>
-        <Breadcrumb.CurrentLink>Contact</Breadcrumb.CurrentLink>
-      </Breadcrumb.Item>
-    </Breadcrumb.List>
-  </Breadcrumb.Root>
+  <BreadcrumbRoot>
+    <BreadcrumbList gap="8px">
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator>
+        <LuChevronRight color="gray.300" />
+      </BreadcrumbSeparator>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/about">About</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator>
+        <LuChevronRight color="gray.300" />
+      </BreadcrumbSeparator>
+      <BreadcrumbItem>
+        <BreadcrumbCurrentLink>Contact</BreadcrumbCurrentLink>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </BreadcrumbRoot>
 )

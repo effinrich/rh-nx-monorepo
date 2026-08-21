@@ -12,8 +12,9 @@ export const getSource = async () => {
   )
 
   const env = import.meta.env
-  const source = new GoogleSpreadsheet(env.VITE_GOOGLE_SHEET_ID)
-  source.useRawAccessToken(exchangeResponse.data.accessToken ?? '')
+  const source = new GoogleSpreadsheet(env.VITE_GOOGLE_SHEET_ID, {
+    token: exchangeResponse.data.accessToken ?? ''
+  })
 
   await source.loadInfo()
   return source

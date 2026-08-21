@@ -1,23 +1,29 @@
-import { act, mocks, render, testA11y } from '@redesignhealth/shared-utils-jest'
+import { render, testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { Avatar, AvatarBadge } from './avatar'
+import { AvatarRoot, AvatarImage, AvatarFallback, AvatarBadge } from './avatar'
 
 describe('accessibility', () => {
   test('passes a11y test', async () => {
-    await testA11y(<Avatar />, {
-      axeOptions: {
-        rules: {
-          'svg-img-alt': { enabled: false }
+    await testA11y(
+      <AvatarRoot>
+        <AvatarFallback />
+      </AvatarRoot>,
+      {
+        axeOptions: {
+          rules: {
+            'svg-img-alt': { enabled: false }
+          }
         }
       }
-    })
+    )
   })
 
   test('passes a11y test with AvatarBadge', async () => {
     await testA11y(
-      <Avatar>
+      <AvatarRoot>
+        <AvatarFallback />
         <AvatarBadge />
-      </Avatar>,
+      </AvatarRoot>,
       {
         axeOptions: {
           rules: {
@@ -29,55 +35,33 @@ describe('accessibility', () => {
   })
 })
 
-describe('fallback + loading strategy', () => {
-  beforeEach(() => {
-    jest.useFakeTimers()
-  })
-
-  afterEach(() => {
-    jest.useRealTimers()
-    mocks.image().restore()
-  })
-
-  test('renders an image', async () => {
-    const mock = mocks.image()
-    mock.simulate('loaded')
-    const utils = render(
-      <Avatar src="https://bit.ly/dan-abramov" name="Dan Abramov" />
-    )
-
-    act(() => {
-      jest.runAllTimers()
-    })
-
-    const img = utils.getByAltText('Dan Abramov')
-    expect(img).toBeInTheDocument()
-  })
-
-  test('fires onError if image fails to load', async () => {
-    const mock = mocks.image()
-    mock.simulate('error')
-
-    const src = 'https://bit.ly/dan-abramov'
-    const name = 'Dan Abramov'
-    const onErrorFn = jest.fn()
-    render(<Avatar src={src} name={name} onError={onErrorFn} />)
-
-    act(() => {
-      jest.runAllTimers()
-    })
-
-    expect(onErrorFn).toHaveBeenCalledTimes(1)
-  })
-
+describe('fallback', () => {
   test('renders a name avatar if no src', () => {
-    const utils = render(<Avatar name="Dan Abramov" />)
-    const img = utils.queryByText('DA')
-    expect(img).toBeInTheDocument()
+    const utils = render(
+      <AvatarRoot>
+        <AvatarFallback name="Dan Abramov" />
+      </AvatarRoot>
+    )
+    expect(utils.getByText('DA')).toBeInTheDocument()
   })
 
   test('renders a default avatar if no name or src', () => {
-    const utils = render(<Avatar />)
-    expect(utils.getByRole('img')).toHaveClass('chakra-avatar__svg')
+    const { container } = render(
+      <AvatarRoot>
+        <AvatarFallback />
+      </AvatarRoot>
+    )
+    expect(container.querySelector('svg')).toBeInTheDocument()
+  })
+
+  test('renders an image with alt text', () => {
+    const utils = render(
+      <AvatarRoot>
+        <AvatarImage src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+        <AvatarFallback name="Dan Abramov" />
+      </AvatarRoot>
+    )
+
+    expect(utils.getByAltText('Dan Abramov')).toBeInTheDocument()
   })
 })

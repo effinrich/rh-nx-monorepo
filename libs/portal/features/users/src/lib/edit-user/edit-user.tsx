@@ -15,15 +15,15 @@ import {
   isSuperAdminRole
 } from '@redesignhealth/portal/utils'
 import {
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Input,
   Loader,
   Radio,
-  RadioGroup
+  RadioGroupRoot
 } from '@redesignhealth/ui'
 import { Select as MultiSelect } from 'chakra-react-select'
 import * as yup from 'yup'
@@ -151,7 +151,7 @@ export const EditUser = () => {
       title="Edit User"
       description="Update their information below."
       errors={errors}
-      isLoading={isPending}
+      loading={isPending}
       isError={isError}
       ctaText="Edit user"
       isValid={isValid}
@@ -163,13 +163,14 @@ export const EditUser = () => {
       ) : (
         <form>
           <Flex direction={['column', 'column', 'row']} gap="6" mb={6}>
-            <FormControl>
-              <FormLabel htmlFor="role">User Type</FormLabel>
+            <FieldRoot>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="role">User Type</FieldLabel>
               <Controller
                 name="role"
                 control={control}
                 render={({ field: { onChange, name, ref } }) => (
-                  <RadioGroup
+                  <RadioGroupRoot
                     onChange={onChange}
                     defaultValue={personData.role?.authority}
                     as={Flex}
@@ -177,9 +178,9 @@ export const EditUser = () => {
                     ref={ref}
                     flexDir="column"
                     gap="24px"
-                    colorScheme="primary"
+                    colorPalette="primary"
                     mt="24px"
-                    isDisabled={currentUserRole !== 'ROLE_SUPER_ADMIN'}
+                    disabled={currentUserRole !== 'ROLE_SUPER_ADMIN'}
                   >
                     {USER_TYPE_OPTIONS.filter(role =>
                       isSuperAdminRole(currentUserRole)
@@ -189,47 +190,54 @@ export const EditUser = () => {
                       <Radio
                         key={role.value}
                         value={role.value}
-                        isReadOnly={currentUserRole !== 'ROLE_SUPER_ADMIN'}
+                        readOnly={currentUserRole !== 'ROLE_SUPER_ADMIN'}
                       >
                         {role.label}
                       </Radio>
                     ))}
-                  </RadioGroup>
+                  </RadioGroupRoot>
                 )}
               />
-            </FormControl>
+            </FieldRoot>
           </Flex>
           <Flex flexDir="column" mt="24px" gap="24px">
-            <FormControl isDisabled={isPending}>
-              <FormLabel htmlFor="email">Email</FormLabel>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="email">Email</FieldLabel>
               <Input defaultValue={personData.email} {...register('email')} />
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.email?.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isDisabled={isPending}>
-              <FormLabel htmlFor="givenName">First Name</FormLabel>
+              </FieldErrorText>
+            </FieldRoot>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="givenName">First Name</FieldLabel>
               <Input
                 defaultValue={personData.givenName}
                 {...register('givenName')}
               />
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.givenName?.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isDisabled={isPending}>
-              <FormLabel htmlFor="familyName">Last name</FormLabel>
+              </FieldErrorText>
+            </FieldRoot>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="familyName">Last name</FieldLabel>
               <Input
                 defaultValue={personData.familyName}
                 {...register('familyName')}
               />
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.familyName?.message}
-              </FormErrorMessage>
-            </FormControl>
+              </FieldErrorText>
+            </FieldRoot>
 
-            <FormControl isDisabled={isPending}>
-              <FormLabel htmlFor="memberOf">Company assignment</FormLabel>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="memberOf">Company assignment</FieldLabel>
               {isGetOpCosSuccess && isGetSuccess && defaultOpCoValues && (
                 <Controller
                   name="memberOf"
@@ -246,18 +254,20 @@ export const EditUser = () => {
                       }}
                       closeMenuOnSelect={false}
                       blurInputOnSelect={false}
-                      colorScheme="primary"
+                      colorPalette="primary"
                     />
                   )}
                 />
               )}
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.memberOf?.message}
-              </FormErrorMessage>
-              <FormHelperText>
+              </FieldErrorText>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldHelperText>
                 Update the companies this user is assigned to.
-              </FormHelperText>
-            </FormControl>
+              </FieldHelperText>
+            </FieldRoot>
           </Flex>
         </form>
       )}

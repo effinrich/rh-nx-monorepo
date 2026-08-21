@@ -1,7 +1,4 @@
-import styled from '@emotion/styled'
 import { AsyncSelect, GroupBase, Props, Select } from 'chakra-react-select'
-
-const StyledAutoComplete = styled.div``
 
 export interface AutoCompleteProps {
   isAsync: boolean
@@ -34,24 +31,20 @@ export function AutoComplete<
     }, 1000)
   }
 
-  return (
-    <StyledAutoComplete>
-      {isAsync ? (
-        <AsyncSelect
-          colorPalette="primary"
-          cacheOptions
-          loadOptions={loadOptions}
-          defaultOptions
-          {...props}
-        />
-      ) : (
-        <Select
-          colorPalette="primary"
-          // options={options?.map((t: any) => ({ value: t, label: t }))}
-          {...props}
-        />
-      )}
-    </StyledAutoComplete>
+  return isAsync ? (
+    <AsyncSelect
+      tagColorPalette="primary"
+      cacheOptions
+      loadOptions={loadOptions}
+      defaultOptions
+      {...props}
+    />
+  ) : (
+    <Select
+      tagColorPalette="primary"
+      // options={options?.map((t: any) => ({ value: t, label: t }))}
+      {...props}
+    />
   )
 }
 

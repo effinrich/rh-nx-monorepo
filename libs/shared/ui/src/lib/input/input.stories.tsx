@@ -6,11 +6,10 @@ import {
   Box,
   Button,
   Container,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  forwardRef,
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   InputProps,
   Stack,
   Text
@@ -18,14 +17,7 @@ import {
 
 import { Meta } from '@storybook/react-vite'
 
-import {
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  InputLeftElement,
-  InputRightAddon,
-  InputRightElement
-} from './input'
+import { Input, InputGroup } from './input'
 
 export default {
   title: 'Components / Forms / Input',
@@ -71,9 +63,9 @@ export const WithSizes = () => (
 export const WithStates = () => (
   <Stack align="start">
     <Input placeholder="Idle" />
-    <Input invalid placeholder="invalid" />
-    <Input disabled placeholder="disabled" />
-    <Input readOnly placeholder="readOnly" />
+    <Input invalid placeholder="isInvalid" />
+    <Input disabled placeholder="isDisabled" />
+    <Input readOnly placeholder="isReadonly" />
   </Stack>
 )
 
@@ -88,30 +80,28 @@ export const WithVariants = () => (
 
 export const WithInputAddon = () => (
   <Stack align="start">
-    <InputGroup>
-      <InputLeftAddon children="+234" />
+    <InputGroup startAddon="+234">
       <Input placeholder="Phone number..." />
     </InputGroup>
 
-    <InputGroup size="sm">
-      <InputLeftAddon children="https://" />
+    <InputGroup size="sm" startAddon="https://" endAddon=".com">
       <Input placeholder="website.com" />
-      <InputRightAddon children=".com" />
     </InputGroup>
   </Stack>
 )
 
 export const WithInputElement = () => (
   <Stack align="start">
-    <InputGroup>
-      <InputLeftElement children={<LuPhone color="gray.300" />} />
-      <Input paddingStart="60px" type="tel" placeholder="Phone number" />
+    <InputGroup startElement={<LuPhone color="gray.300" />}>
+      <Input type="tel" placeholder="Phone number" />
     </InputGroup>
 
-    <InputGroup size="sm">
-      <InputLeftElement color="gray.300" fontSize="1.2em" children="$" />
+    <InputGroup
+      size="sm"
+      startElement="$"
+      endElement={<LuCheck color="green.500" />}
+    >
       <Input placeholder="Enter amount" />
-      <InputRightElement children={<LuCheck color="green.500" />} />
     </InputGroup>
   </Stack>
 )
@@ -121,15 +111,16 @@ export function PasswordInput() {
   const handleClick = () => setShow(!show)
 
   return (
-    <InputGroup size="md">
+    <InputGroup
+      size="md"
+      endElement={
+        <Button onClick={handleClick}>{show ? 'Hide' : 'Show'}</Button>
+      }
+    >
       <Input
-        paddingEnd="4.5rem"
         type={show ? 'text' : 'password'}
         placeholder="Enter password"
       />
-      <InputRightElement width="4.5rem">
-        <Button onClick={handleClick}>{show ? 'Hide' : 'Show'}</Button>
-      </InputRightElement>
     </InputGroup>
   )
 }
@@ -159,7 +150,7 @@ export const WithFocusAndErrorColors = () => (
 
 function FormError(props: any) {
   return (
-    <FormErrorMessage
+    <FieldErrorText
       mt="0"
       bg="red.500"
       color="white"
@@ -171,24 +162,22 @@ function FormError(props: any) {
   )
 }
 
-export const WithFormControl = () => {
+export const WithField = () => {
   const [isError, setIsError] = React.useState(false)
   return (
     <Stack align="start">
-      <FormControl id="first-name" invalid={isError}>
+      <FieldRoot id="first-name" invalid={isError}>
         <Box display="flex" mb="2">
-          <FormLabel mb="0" lineHeight="1em">
+          <FieldLabel mb="0" lineHeight="1em">
             Amount
-          </FormLabel>
+          </FieldLabel>
           <FormError>is invalid!</FormError>
         </Box>
-        <InputGroup size="sm">
-          <InputLeftElement children="$" />
+        <InputGroup size="sm" startElement="$" endAddon=".com">
           <Input placeholder="Enter amount" />
-          <InputRightAddon children=".com" />
         </InputGroup>
-        <FormHelperText>Keep it very short and sweet!</FormHelperText>
-      </FormControl>
+        <FieldHelperText>Keep it very short and sweet!</FieldHelperText>
+      </FieldRoot>
       <button onClick={() => setIsError(s => !s)}>Toggle Invalid</button>
     </Stack>
   )
@@ -199,8 +188,7 @@ export const WithInputElementBug = () => {
   return (
     <>
       <button onClick={onToggle}>Toggle element</button>
-      <InputGroup>
-        {open && <InputLeftElement>O</InputLeftElement>}
+      <InputGroup startElement={open ? 'O' : undefined}>
         <Input name="input" placeholder="placeholder" />
       </InputGroup>
     </>
@@ -218,6 +206,6 @@ export const InputGroupCustomInputProps = () => {
   )
 }
 
-const CustomInput = forwardRef<InputProps, 'input'>((props, ref) => (
+const CustomInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
   <Input ref={ref} color="gray.600" variant="flushed" {...props} />
 ))

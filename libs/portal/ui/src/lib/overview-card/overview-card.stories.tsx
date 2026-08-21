@@ -2,12 +2,12 @@ import {
   Button,
   Center,
   Stack,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr
+  TableRoot,
+  TableBody,
+  TableCell,
+  TableColumnHeader,
+  TableHeader,
+  TableRow
 } from '@redesignhealth/ui'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -26,7 +26,7 @@ const Story: Meta<typeof OverviewCard> = {
     title: 'Title',
     description: 'More information',
     rightElement: (
-      <Button colorScheme="primary" onClick={() => alert('Clicked')}>
+      <Button colorPalette="primary" onClick={() => alert('Clicked')}>
         CTA
       </Button>
     )
@@ -52,7 +52,7 @@ export const WithCards: StoryObj<typeof OverviewCard> = {
   args: {},
   render: args => (
     <OverviewCard {...args}>
-      <Stack spacing={6}>
+      <Stack gap={6}>
         {new Array(2).fill(mockItem).map(item => (
           <ListCard key={item.type}>
             <ListCardHeader title="Item" />
@@ -72,24 +72,24 @@ export const WithTable: StoryObj<typeof OverviewCard> = {
   args: {},
   render: args => (
     <OverviewCard {...args}>
-      <Table>
-        <Thead>
-          <Tr>
-            <Th>Type</Th>
-            <Th>Color</Th>
-            <Th>Season</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
+      <TableRoot>
+        <TableHeader>
+          <TableRow>
+            <TableColumnHeader>Type</TableColumnHeader>
+            <TableColumnHeader>Color</TableColumnHeader>
+            <TableColumnHeader>Season</TableColumnHeader>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {new Array(2).fill(mockItem).map(item => (
-            <Tr key={item.type}>
-              <Td>{item.type}</Td>
-              <Td>{item.color}</Td>
-              <Td>{item.season}</Td>
-            </Tr>
+            <TableRow key={item.type}>
+              <TableCell>{item.type}</TableCell>
+              <TableCell>{item.color}</TableCell>
+              <TableCell>{item.season}</TableCell>
+            </TableRow>
           ))}
-        </Tbody>
-      </Table>
+        </TableBody>
+      </TableRoot>
     </OverviewCard>
   )
 }

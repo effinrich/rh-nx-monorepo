@@ -1,48 +1,89 @@
 'use client'
 
+import type { CreateToasterReturn } from '@chakra-ui/react'
 import {
   createToaster,
   Portal,
   Spinner,
-  Stack,
   Toast,
   Toaster as ChakraToaster
 } from '@chakra-ui/react'
+import { VStack } from '@chakra-ui/react'
+import type { ReactNode } from 'react'
 
-export const toaster = createToaster({
-  placement: 'bottom-end',
-  pauseOnPageIdle: true
-})
-
-export interface ToasterProps {
-  toaster?: ReturnType<typeof createToaster>
+export interface ToasterOptions {
+  placement?:
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+  pauseOnPageIdle?: boolean
+  pauseOnInteraction?: boolean
+  max?: number
+  duration?: number
 }
 
-export const Toaster: React.FC<ToasterProps> = (props: ToasterProps) => {
-  const { toaster: toasterProp = toaster } = props
+const defaultOptions: ToasterOptions = {
+  placement: 'bottom-end',
+  pauseOnPageIdle: true
+}
+
+export const createAppToaster = (
+  options: ToasterOptions = {}
+): CreateToasterReturn => {
+  return createToaster({
+    ...defaultOptions,
+    ...options
+  })
+}
+
+export const toaster = createAppToaster()
+
+interface ToastRenderData {
+  id?: string
+  type?: string
+  title?: ReactNode
+  description?: ReactNode
+  action?: { label?: ReactNode }
+  closable?: boolean
+}
+
+export interface ToasterProps {
+  toaster?: CreateToasterReturn
+  insetInline?: Record<string, string | number> | string | number
+}
+
+export const Toaster = ({
+  toaster: toasterInstance = toaster,
+  insetInline = { mdDown: '4' }
+}: ToasterProps) => {
   return (
     <Portal>
-      <ChakraToaster toaster={toasterProp} insetInline={{ mdDown: '4' }}>
-        {toast => (
-          <Toast.Root width={{ md: 'sm' }}>
+      <ChakraToaster toaster={toasterInstance} insetInline={insetInline}>
+        {(toast: ToastRenderData) => (
+          <Toast.Root key={toast.id} width={{ md: 'sm' }}>
             {toast.type === 'loading' ? (
               <Spinner size="sm" color="blue.solid" />
             ) : (
               <Toast.Indicator />
             )}
-            <Stack gap="1" flex="1" maxWidth="100%">
-              {toast.title && <Toast.Title>{toast.title}</Toast.Title>}
-              {toast.description && (
+            <VStack gap="1" flex="1" maxWidth="100%" align="stretch">
+              {toast.title ? <Toast.Title>{toast.title}</Toast.Title> : null}
+              {toast.description ? (
                 <Toast.Description>{toast.description}</Toast.Description>
-              )}
-            </Stack>
-            {toast.action && 'label' in toast.action && (
+              ) : null}
+            </VStack>
+            {toast.action ? (
               <Toast.ActionTrigger>{toast.action.label}</Toast.ActionTrigger>
-            )}
-            {toast.closable && <Toast.CloseTrigger />}
+            ) : null}
+            {toast.closable ? <Toast.CloseTrigger /> : null}
           </Toast.Root>
         )}
       </ChakraToaster>
     </Portal>
   )
 }
+
+export type { CreateToasterReturn }

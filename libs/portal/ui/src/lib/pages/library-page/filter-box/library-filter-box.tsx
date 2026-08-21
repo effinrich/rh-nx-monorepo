@@ -54,7 +54,7 @@ export const LibraryFilterBox = () => {
             through critical stages of company creation.{' '}
             <Button
               color="gray.500"
-              variant="link"
+              variant="plain"
               fontWeight="normal"
               textDecoration="underline"
               onClick={() => modalRef?.current?.handleOnOpen()}

@@ -1,12 +1,14 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { ChakraProvider, defaultSystem, SystemContext } from '@chakra-ui/react'
+import { ChakraProvider, SystemContext } from '@chakra-ui/react'
 import { ThemeProviderProps } from 'next-themes'
 
-import { ColorModeProvider } from './color-mode'
+import { ColorModeProvider } from '../color-mode/color-mode'
+import { system } from '../theme'
+import { Toaster } from '../toaster/toaster'
 
-import '@fontsource/inter/variable.css'
+import '@fontsource-variable/inter'
 
 export interface RhProviderProps extends Pick<
   ThemeProviderProps,
@@ -26,12 +28,15 @@ export interface RhProviderProps extends Pick<
 
 export function RhProvider({
   children,
-  value,
+  value = system,
   ...themeProps
 }: RhProviderProps) {
   return (
-    <ChakraProvider value={value ?? defaultSystem}>
-      <ColorModeProvider {...themeProps}>{children}</ColorModeProvider>
+    <ChakraProvider value={value}>
+      <ColorModeProvider {...themeProps}>
+        {children}
+        <Toaster />
+      </ColorModeProvider>
     </ChakraProvider>
   )
 }

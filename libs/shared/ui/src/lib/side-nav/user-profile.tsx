@@ -1,6 +1,6 @@
 import { MdLogout } from 'react-icons/md'
 
-import { Avatar } from '../avatar/avatar'
+import { AvatarFallback, AvatarImage, AvatarRoot } from '../avatar/avatar'
 import { Box } from '../box/box'
 import { Flex } from '../flex/flex'
 import { IconButton } from '../icon-button/icon-button'
@@ -19,7 +19,11 @@ export const UserProfile = (props: UserProfileProps) => {
   return (
     <Flex justify="space-between" alignItems="center">
       <Box display="flex" alignItems="center">
-        <Avatar name={name} src={image} boxSize="10" />
+        <AvatarRoot name={name} boxSize="10">
+          {/* @ts-expect-error Chakra v3 compound component typing */}
+          <AvatarImage src={image} />
+          <AvatarFallback />
+        </AvatarRoot>
         <Box pl={2}>
           <Text color="on-accent" fontWeight="500" fontSize={14}>
             {name}
@@ -37,11 +41,12 @@ export const UserProfile = (props: UserProfileProps) => {
       <Box>
         <IconButton
           aria-label="logout"
-          icon={<MdLogout />}
-          variant="unstyled"
+          variant="ghost"
           fontSize={22}
           onClick={logOut}
-        />
+        >
+          <MdLogout />
+        </IconButton>
       </Box>
     </Flex>
   )

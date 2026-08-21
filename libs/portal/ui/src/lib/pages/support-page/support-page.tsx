@@ -18,12 +18,12 @@ const SupportPage = () => {
     'https://docs.google.com/forms/d/e/1FAIpQLSfvVGv18OYYthjB6Z5BCRuxbESpC4YwAQvDviE42MzYQ-YYWQ/viewform'
   const { data: consent } = useGetMeConsent()
 
-  const { onOpen, isOpen, onClose } = useDisclosure({ defaultIsOpen: false })
+  const { onOpen, open, onClose } = useDisclosure()
 
   return (
     <Box as="section" w="full">
       <SectionHeader title="Support Center" isDivider={false} pb={6} />
-      <SimpleGrid columns={[1, 1, 2, 2]} spacing={6}>
+      <SimpleGrid columns={[1, 1, 2, 2]} gap={6}>
         <CtaCard
           topVisual={
             <Circle size={14} bg="primary.600" color="white">
@@ -65,7 +65,7 @@ const SupportPage = () => {
             variant="filled"
           />
         )}
-        <Terms isOpen={isOpen} onClose={onClose} />
+        <Terms open={open} onClose={onClose} />
       </SimpleGrid>
     </Box>
   )

@@ -34,17 +34,15 @@ export const VendorReferencesPage = () => {
         rightElement={
           <>
             <HasRole currentRole={currentRole} allowed={['ROLE_SUPER_ADMIN']}>
-              <Button as={Link} colorScheme="primary" to="/vendors/add-vendor">
-                Add vendor
+              <Button asChild colorPalette="primary">
+                <Link to="/vendors/add-vendor">Add vendor</Link>
               </Button>
             </HasRole>
             <HasRole currentRole={currentRole} allowed={['ROLE_OP_CO_USER']}>
-              <Button
-                as={Link}
-                colorScheme="primary"
-                to={`/companies/${userCompany?.id}/vendors/add`}
-              >
-                Add vendor
+              <Button asChild colorPalette="primary">
+                <Link to={`/companies/${userCompany?.id}/vendors/add`}>
+                  Add vendor
+                </Link>
               </Button>
             </HasRole>
           </>

@@ -1,9 +1,9 @@
-import { type As } from '@redesignhealth/ui'
+import { ElementType } from 'react'
 import { Flex, Icon, Text } from '@redesignhealth/ui'
 
 interface SecondaryTextProps {
   children: React.ReactNode
-  icon: As
+  icon: ElementType
   testid?: string
 }
 

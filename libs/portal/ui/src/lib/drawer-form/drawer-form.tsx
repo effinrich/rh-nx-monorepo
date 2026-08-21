@@ -1,19 +1,19 @@
-import type { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { Form } from 'react-router-dom'
 import {
   Box,
   CloseIcon,
-  Divider,
-  Drawer,
+  Separator,
+  DrawerBackdrop,
   DrawerContent,
-  DrawerOverlay,
+  DrawerPositioner,
+  DrawerRoot,
   Flex,
   IconButton,
   Loader,
   Text,
   useDisclosure
 } from '@redesignhealth/ui'
-import type { DrawerRootProps } from '@redesignhealth/ui'
 
 export const DrawerForm = (props: {
   children: ReactNode
@@ -26,25 +26,28 @@ export const DrawerForm = (props: {
   fetcherForm?: typeof Form
   action?: string
   success?: ReactNode
-  size?: DrawerRootProps['size']
 }) => {
   const { open, onClose } = useDisclosure({ defaultOpen: true })
 
-  const handleClose = props.onClose || onClose
+  const handleClose = () => {
+    onClose()
+    props.onClose?.()
+  }
 
   return (
-    <Drawer
+    <DrawerRoot
       open={open}
       placement="end"
-      onOpenChange={e => {
+      onOpenChange={(e: { open: boolean }) => {
         if (!e.open) {
           handleClose()
           props.onCloseComplete?.()
         }
       }}
-      size={props.size ?? 'lg'}
+      size={{ base: 'full', md: 'lg' }}
     >
-      <DrawerOverlay />
+      <DrawerBackdrop />
+      <DrawerPositioner>
       <DrawerContent pt="12px">
         <Flex flexDir="column" h="100%">
           <IconButton
@@ -89,7 +92,7 @@ export const DrawerForm = (props: {
                   </Text>
                 )}
 
-                <Divider mt="24px" />
+                <Separator mt="24px" />
               </Box>
 
               <Flex
@@ -121,7 +124,8 @@ export const DrawerForm = (props: {
           )}
         </Flex>
       </DrawerContent>
-    </Drawer>
+      </DrawerPositioner>
+    </DrawerRoot>
   )
 }
 

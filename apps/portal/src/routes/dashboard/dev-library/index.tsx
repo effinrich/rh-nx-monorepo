@@ -12,12 +12,12 @@ import {
 import {
   Box,
   Button,
-  FormControl,
+  FieldRoot,
   HStack,
   ListItem,
   SectionHeader,
   Text,
-  UnorderedList,
+  ListRoot,
   VStack
 } from '@redesignhealth/ui'
 import { AsyncSelect, OptionBase } from 'chakra-react-select'
@@ -152,15 +152,15 @@ export const DevLibrary = ({ libraryId, libraryRoute }: LibraryProps) => {
       </DisclaimerModal>
       <SectionHeader title="Developer Tools" />
 
-      <HStack align="top" spacing={8} py={8} w="full">
-        <UnorderedList spacing={2} listStyleType="none" m={0} pt={3}>
+      <HStack align="top" gap={8} py={8} w="full">
+        <ListRoot as="ul" gap={2} listStyleType="none" m={0} pt={3}>
           <ListItem>
-            <FormControl pb={6}>
+            <FieldRoot pb={6}>
               <AsyncSelect
                 cacheOptions
                 isMulti={false}
                 name="search"
-                colorScheme="primary"
+                colorPalette="primary"
                 closeMenuOnSelect={true}
                 size="md"
                 placeholder="Search"
@@ -170,7 +170,7 @@ export const DevLibrary = ({ libraryId, libraryRoute }: LibraryProps) => {
                 getOptionLabel={(option: Option) => `${option.title}`}
                 getOptionValue={(option: Option) => `${option.id}`}
               />
-            </FormControl>
+            </FieldRoot>
           </ListItem>
           <Text fontWeight="medium" fontSize="xs" color="gray.500">
             CATEGORIES
@@ -194,12 +194,12 @@ export const DevLibrary = ({ libraryId, libraryRoute }: LibraryProps) => {
                     fontSize="14px"
                     fontWeight="medium"
                   >
-                    <Text noOfLines={1}>{cat.title}</Text>
+                    <Text lineClamp={1}>{cat.title}</Text>
                   </Button>
                 </ListItem>
               )
             })}
-        </UnorderedList>
+        </ListRoot>
         <VStack>
           <DisclaimerBox
             isFirstVisit={isFirstVisit}

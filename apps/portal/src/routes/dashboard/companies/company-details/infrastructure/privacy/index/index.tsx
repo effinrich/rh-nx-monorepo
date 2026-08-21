@@ -19,12 +19,12 @@ import {
 import { getErrorsFromValidation } from '@redesignhealth/portal/utils'
 import {
   Button,
-  Checkbox,
+  CheckboxRoot,
   CheckboxGroupProps,
-  Divider,
+  Separator,
   Flex,
-  FormErrorMessage,
-  FormLabel,
+  FieldErrorText,
+  FieldLabel,
   Stack
 } from '@redesignhealth/ui'
 import { QueryClient } from '@tanstack/react-query'
@@ -146,7 +146,7 @@ export const CompanyInfraPrivacy = () => {
               type="submit"
               name="_action"
               value="complete"
-              colorScheme="primary"
+              colorPalette="primary"
             >
               Done
             </Button>
@@ -157,11 +157,11 @@ export const CompanyInfraPrivacy = () => {
       <Flex flexDir="column" gap="16px">
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q1-a'])}
+            invalid={Boolean(fieldErrors?.['q1-a'])}
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s1">
+            <DrawerFormHeader as={FieldLabel} data-testid="s1">
               1. Personal information
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q1-a-desc">
@@ -173,16 +173,17 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q1-a"
               defaultValue={privacyForm?.form?.['q1-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q1-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q1-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
               name="q1-a-comment"
               defaultValue={privacyForm?.form?.['q1-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -194,14 +195,14 @@ export const CompanyInfraPrivacy = () => {
             listItems={examples['q1-a']}
           />
         </Flex>
-        <Divider />
+        <Separator />
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q2-a'])}
+            invalid={Boolean(fieldErrors?.['q2-a'])}
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s2">
+            <DrawerFormHeader as={FieldLabel} data-testid="s2">
               2. Medical information
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q2-a-desc">
@@ -212,16 +213,17 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q2-a"
               defaultValue={privacyForm?.form?.['q2-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q2-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q2-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
               name="q2-a-comment"
               defaultValue={privacyForm?.form?.['q2-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -234,15 +236,15 @@ export const CompanyInfraPrivacy = () => {
           />
         </Flex>
 
-        <Divider />
+        <Separator />
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q3-a'])}
+            invalid={Boolean(fieldErrors?.['q3-a'])}
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s3">
+            <DrawerFormHeader as={FieldLabel} data-testid="s3">
               3. Financial information
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q3-a-desc">
@@ -253,16 +255,17 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q3-a"
               defaultValue={privacyForm?.form?.['q3-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q3-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q3-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
               name="q3-a-comment"
               defaultValue={privacyForm?.form?.['q3-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -276,18 +279,18 @@ export const CompanyInfraPrivacy = () => {
         </Flex>
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q3-b'])}
+            invalid={Boolean(fieldErrors?.['q3-b'])}
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormDescription as={FormLabel} data-testid="q3-b-desc">
+            <DrawerFormDescription as={FieldLabel} data-testid="q3-b-desc">
               Will your service be collecting any Credit Card data in any way,
               shape or form? Select one response.
             </DrawerFormDescription>
             <DrawerFormRadioGroup
               name="q3-b"
               defaultValue={privacyForm?.form?.['q3-b']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
           </DrawerFormControl>
@@ -295,26 +298,26 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormTextArea
               name="q3-b-comment"
               defaultValue={privacyForm?.form?.['q3-b-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
           </DrawerFormControl>
           <DrawerFormControl flexDir="column" gap="16px">
-            <DrawerFormDescription as={FormLabel} data-testid="q3-c-desc">
+            <DrawerFormDescription as={FieldLabel} data-testid="q3-c-desc">
               How will the financial information be stored? Select all that
               apply.
             </DrawerFormDescription>
             <Flex flexDir="column" gap="16px" pb="16px">
-              <Stack spacing={[1, 5]} direction="column">
+              <Stack gap={[1, 5]} direction="column">
                 {q3cCheckboxes.map((value, index) => (
-                  <Checkbox
+                  <CheckboxRoot
                     key={index}
                     name={`q3-c${index}`}
                     value={value}
-                    isReadOnly={infraRequestSubmitted}
-                    isChecked={q3checked.includes(value)}
-                    onChange={() => {
+                    readOnly={infraRequestSubmitted}
+                    checked={q3checked.includes(value)}
+                    onCheckedChange={() => {
                       const wasChecked = q3checked.includes(value)
                       let newq3checked: string[] = []
                       if (!wasChecked) {
@@ -337,22 +340,23 @@ export const CompanyInfraPrivacy = () => {
                     }}
                   >
                     {value}
-                  </Checkbox>
+                  </CheckboxRoot>
                 ))}
               </Stack>
-              <FormErrorMessage>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText>
                 {fieldErrors?.['q3-c0'] ||
                   fieldErrors?.['q3-c1'] ||
                   fieldErrors?.['q3-c2'] ||
                   fieldErrors?.['q3-c3']}
-              </FormErrorMessage>
+              </FieldErrorText>
             </Flex>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
               name="q3-c-comment"
               defaultValue={privacyForm?.form?.['q3-c-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder='Add a comment if your response was "Other or not sure"'
               aria-label={TEXTAREA_LABEL}
             />
@@ -361,7 +365,7 @@ export const CompanyInfraPrivacy = () => {
           {/* <DrawerFormRadioGroup
               name="q3-c"
               defaultValue={privacyForm?.form?.['q3-c']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               direction="column"
               options={[
                 { value: 'Processing In Memory Only' },
@@ -374,15 +378,15 @@ export const CompanyInfraPrivacy = () => {
             /> */}
         </Flex>
 
-        <Divider />
+        <Separator />
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q4-a'])}
+            invalid={Boolean(fieldErrors?.['q4-a'])}
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s4">
+            <DrawerFormHeader as={FieldLabel} data-testid="s4">
               4. Proprietary information
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q4-a-desc">
@@ -394,16 +398,17 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q4-a"
               defaultValue={privacyForm?.form?.['q4-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q4-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q4-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
               name="q4-a-comment"
               defaultValue={privacyForm?.form?.['q4-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -416,15 +421,15 @@ export const CompanyInfraPrivacy = () => {
           />
         </Flex>
 
-        <Divider />
+        <Separator />
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
-            isInvalid={Boolean(fieldErrors?.['q5-a'])}
+            invalid={Boolean(fieldErrors?.['q5-a'])}
             flexDir="column"
             gap="16px"
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s5">
+            <DrawerFormHeader as={FieldLabel} data-testid="s5">
               5. Data storage
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q5-a-desc">
@@ -434,29 +439,30 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q5-a"
               defaultValue={privacyForm?.form?.['q5-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q5-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q5-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
               name="q5-a-comment"
               defaultValue={privacyForm?.form?.['q5-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
           </DrawerFormControl>
           <DrawerFormControl mt="50px">
-            <DrawerFormDescription as={FormLabel} data-testid="q5-b-desc">
+            <DrawerFormDescription as={FieldLabel} data-testid="q5-b-desc">
               If the information is stored, where will it be stored? Please
               provide detail, if known.
             </DrawerFormDescription>
             <DrawerFormTextArea
               name="q5-b-comment"
               defaultValue={privacyForm?.form?.['q5-b-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder="Add a comment with details"
               aria-label={TEXTAREA_LABEL}
             />
@@ -469,15 +475,15 @@ export const CompanyInfraPrivacy = () => {
           />
         </Flex>
 
-        <Divider />
+        <Separator />
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl
             flexDir="column"
             gap="16px"
-            isInvalid={Boolean(fieldErrors?.['q6-a'])}
+            invalid={Boolean(fieldErrors?.['q6-a'])}
           >
-            <DrawerFormHeader as={FormLabel} data-testid="s6">
+            <DrawerFormHeader as={FieldLabel} data-testid="s6">
               6. Sharing data with third parties
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q6-a-desc">
@@ -487,16 +493,17 @@ export const CompanyInfraPrivacy = () => {
             <DrawerFormRadioGroup
               name="q6-a"
               defaultValue={privacyForm?.form?.['q6-a']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               options={defaultFormRadioGroupOptions}
             />
-            <FormErrorMessage>{fieldErrors?.['q6-a']}</FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>{fieldErrors?.['q6-a']}</FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
               name="q6-a-comment"
               defaultValue={privacyForm?.form?.['q6-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder={TEXTAREA_PLACEHOLDER}
               aria-label={TEXTAREA_LABEL}
             />
@@ -508,14 +515,14 @@ export const CompanyInfraPrivacy = () => {
             listItems={examples['q6-a']}
           />
           <DrawerFormControl mt="50px">
-            <DrawerFormDescription as={FormLabel} data-testid="q6-b-desc">
+            <DrawerFormDescription as={FieldLabel} data-testid="q6-b-desc">
               If the information is transmitted outside your system, how is it
               done? Please provide detail, if known.
             </DrawerFormDescription>
             <DrawerFormTextArea
               name="q6-b-comment"
               defaultValue={privacyForm?.form?.['q6-b-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder="Add a comment with details"
               aria-label={TEXTAREA_LABEL}
             />
@@ -528,29 +535,29 @@ export const CompanyInfraPrivacy = () => {
           />
         </Flex>
 
-        <Divider />
+        <Separator />
 
         <Flex flexDir="column" gap="16px" pb="50px">
           <DrawerFormControl flexDir="column" gap="16px">
-            <DrawerFormHeader as={FormLabel} data-testid="s7">
+            <DrawerFormHeader as={FieldLabel} data-testid="s7">
               7. After using data
             </DrawerFormHeader>
             <DrawerFormDescription data-testid="q7-a-desc">
               After data is used, is it destroyed or masked when it is no longer
               needed? Select all that apply.
             </DrawerFormDescription>
-            <Stack spacing={[1, 5]} direction="column">
+            <Stack gap={[1, 5]} direction="column">
               {q7cCheckboxes.map((value, index) => (
-                <Checkbox
+                <CheckboxRoot
                   key={index}
                   name={`q7-a${index}`}
                   value={value}
-                  isReadOnly={infraRequestSubmitted}
+                  readOnly={infraRequestSubmitted}
                   defaultChecked={Object.keys(privacyForm?.form || {}).includes(
                     `q7-a${index}`
                   )}
-                  isChecked={q7checked.includes(value)}
-                  onChange={() => {
+                  checked={q7checked.includes(value)}
+                  onCheckedChange={() => {
                     const wasChecked = q7checked.includes(value)
                     let newq7checked: string[] = []
                     if (!wasChecked) {
@@ -573,11 +580,11 @@ export const CompanyInfraPrivacy = () => {
                   }}
                 >
                   {value}
-                </Checkbox>
+                </CheckboxRoot>
               ))}
             </Stack>
             {/* <DrawerFormRadioGroup
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               name="q7-a"
               defaultValue={privacyForm?.form?.['q7-a']}
               direction="column"
@@ -588,18 +595,19 @@ export const CompanyInfraPrivacy = () => {
                 { value: 'Other' }
               ]}
             /> */}
-            <FormErrorMessage>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText>
               {fieldErrors?.['q7-a0'] ||
                 fieldErrors?.['q7-a1'] ||
                 fieldErrors?.['q7-a2'] ||
                 fieldErrors?.['q7-a3']}
-            </FormErrorMessage>
+            </FieldErrorText>
           </DrawerFormControl>
           <DrawerFormControl>
             <DrawerFormTextArea
               name="q7-a-comment"
               defaultValue={privacyForm?.form?.['q7-a-comment']}
-              isReadOnly={infraRequestSubmitted}
+              readOnly={infraRequestSubmitted}
               placeholder='Add a comment if your response was "Other or not sure"'
               aria-label={TEXTAREA_LABEL}
             />

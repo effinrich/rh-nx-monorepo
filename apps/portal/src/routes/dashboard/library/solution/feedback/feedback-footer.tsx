@@ -58,27 +58,25 @@ export const FeedbackFooter = ({ moduleTitle, id }: FeedbackProps) => {
         aria-label="library-feedback-positive"
         icon={<Icon as={MdOutlineThumbUp} boxSize={4} />}
         variant="ghost"
-        colorScheme="primary"
+        colorPalette="primary"
       />
       <IconButton
         onClick={handleThumbsDown}
         aria-label="library-feedback-negative"
         icon={<Icon as={MdOutlineThumbDown} boxSize={4} />}
         variant="ghost"
-        colorScheme="primary"
+        colorPalette="primary"
       />
       <Button
-        colorScheme="primary"
+        colorPalette="primary"
         ml={1}
-        leftIcon={
-          <Icon boxSize={4} as={MdOutlineComment} color="primary.600" />
-        }
         color="gray.600"
         variant="ghost"
         fontWeight="normal"
         textDecoration="underline"
         onClick={() => modalRef?.current?.handleOnOpen()}
       >
+        <Icon boxSize={4} as={MdOutlineComment} color="primary.600" />
         Give feedback about this article
       </Button>
 

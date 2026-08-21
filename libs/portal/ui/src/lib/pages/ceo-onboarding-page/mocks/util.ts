@@ -1,17 +1,17 @@
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 
 import { ceo } from './ceo'
 import { person } from './person'
 import { userInfo } from './userinfo'
 
 export const registerMockEndpoints = () => [
-  rest.get('/ceos/6nuT80li', (req, res, ctx) => {
-    return res(ctx.json(ceo))
+  http.get('/ceos/6nuT80li', () => {
+    return HttpResponse.json(ceo)
   }),
-  rest.get('/userinfo', (req, res, ctx) => {
-    return res(ctx.json(userInfo))
+  http.get('/userinfo', () => {
+    return HttpResponse.json(userInfo)
   }),
-  rest.get('/person/sazh.katzroy@redesignhealth.com', (req, res, ctx) => {
-    return res(ctx.json(person))
+  http.get('/person/sazh.katzroy@redesignhealth.com', () => {
+    return HttpResponse.json(person)
   })
 ]

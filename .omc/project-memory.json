@@ -121,7 +121,11 @@
       "mcp:storybook:install": "cd tools/storybook-mcp && npm install",
       "mcp:storybook:build": "cd tools/storybook-mcp && npm run build",
       "mcp:storybook:dev": "cd tools/storybook-mcp && npm run dev",
-      "mcp:setup": "npm run mcp:storybook:install && npm run mcp:storybook:build"
+      "mcp:setup": "npm run mcp:storybook:install && npm run mcp:storybook:build",
+      "docs:dev": "nx run docs:serve",
+      "docs:build": "nx run docs:build",
+      "docs:validate": "nx run docs:validate",
+      "docs:lint": "nx run docs:lint-docs"
     }
   },
   "conventions": {
@@ -184,6 +188,16 @@
       "lastAccessed": 1786896853407,
       "keyFiles": []
     },
+    "ios": {
+      "path": "ios",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1786896853407,
+      "keyFiles": [
+        "Podfile",
+        "Podfile.properties.json"
+      ]
+    },
     "libs": {
       "path": "libs",
       "purpose": null,
@@ -245,6 +259,24 @@
       "fileCount": 0,
       "lastAccessed": 1786896853412,
       "keyFiles": []
+    },
+    "tmp": {
+      "path": "tmp",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1786896853412,
+      "keyFiles": []
+    },
+    "apps/docs": {
+      "path": "apps/docs",
+      "purpose": "Documentation",
+      "fileCount": 6,
+      "lastAccessed": 1786896853412,
+      "keyFiles": [
+        "architecture.mdx",
+        "docs.json",
+        "getting-started.mdx"
+      ]
     }
   },
   "hotPaths": [],

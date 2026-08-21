@@ -7,8 +7,7 @@ import { Icon } from '../icon/icon'
 import {
   Input,
   InputGroup,
-  InputProps,
-  InputRightElement
+  InputProps
 } from '../input/input'
 import { rh } from '../rh/rh'
 
@@ -46,9 +45,6 @@ const customDateInput = (
       placeholder="MM/DD/YYYY"
       maxW="100%"
     />
-    <InputRightElement color="gray.600">
-      <Icon as={MdEditCalendar} boxSize={4} />
-    </InputRightElement>
   </>
 )
 customDateInput.displayName = 'DateInput'
@@ -70,7 +66,9 @@ export const DatePicker = ({
   const [primary500] = useToken('colors', ['primary.500'])
 
   return (
-    <InputGroup>
+    <InputGroup
+      endElement={<Icon as={MdEditCalendar} boxSize={4} color="gray.600" />}
+    >
       <StyledDatePicker themeColor={primary500}>
         <ReactDatePicker
           placeholderText={placeholder}

@@ -1,8 +1,8 @@
 import {
-  Box,
-  Th,
-  Thead,
-  Tr,
+  rh,
+  TableColumnHeader,
+  TableHeader as ChakraTableHeader,
+  TableRow,
   useBreakpoint,
   VisuallyHidden
 } from '@redesignhealth/ui'
@@ -13,29 +13,29 @@ const TableHeader = () => {
   return (
     <>
       {(breakpoint === 'xl' || breakpoint === '2xl') && (
-        <Box as="colgroup">
-          <Box as="col" span={1} w="28%" />
-          <Box as="col" span={1} w="20%" />
-          <Box as="col" span={1} w="20%" />
-          <Box as="col" span={1} w="20%" />
-          <Box as="col" span={1} w="6%" />
-          <Box as="col" span={1} w="6%" />
-        </Box>
+        <rh.colgroup>
+          <rh.col span={1} w="28%" />
+          <rh.col span={1} w="20%" />
+          <rh.col span={1} w="20%" />
+          <rh.col span={1} w="20%" />
+          <rh.col span={1} w="6%" />
+          <rh.col span={1} w="6%" />
+        </rh.colgroup>
       )}
-      <Thead>
-        <Tr>
-          <Th>Name</Th>
-          <Th>User type</Th>
-          <Th>Date added</Th>
-          <Th>Company</Th>
-          <Th>
+      <ChakraTableHeader>
+        <TableRow>
+          <TableColumnHeader>Name</TableColumnHeader>
+          <TableColumnHeader>User type</TableColumnHeader>
+          <TableColumnHeader>Date added</TableColumnHeader>
+          <TableColumnHeader>Company</TableColumnHeader>
+          <TableColumnHeader>
             <VisuallyHidden>Edit User</VisuallyHidden>
-          </Th>
-          <Th>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <VisuallyHidden>Impersonate User</VisuallyHidden>
-          </Th>
-        </Tr>
-      </Thead>
+          </TableColumnHeader>
+        </TableRow>
+      </ChakraTableHeader>
     </>
   )
 }

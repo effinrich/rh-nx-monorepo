@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 import { MdBuild, MdCall, MdFacebook } from 'react-icons/md'
 import {
   LuArrowRight,
@@ -9,8 +9,6 @@ import {
 } from 'react-icons/lu'
 import { BeatLoader } from 'react-spinners'
 import { Box, HStack, Stack, Wrap, WrapItem } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
-
 import { Meta, StoryObj } from '@storybook/react-vite'
 
 import { IconButton } from '../icon-button/icon-button'
@@ -25,8 +23,8 @@ export default {
     children: { type: 'string' },
     loadingText: { type: 'string' },
     isActive: { type: 'boolean' },
-    disabled: { type: 'boolean' },
-    loading: { type: 'boolean' },
+    isDisabled: { type: 'boolean' },
+    isLoading: { type: 'boolean' },
     leftIcon: { type: 'function' },
     // isRound: { type: 'boolean' },
     rightIcon: { type: 'function' },
@@ -74,7 +72,7 @@ export default {
 
 interface StoryProps {
   children?: ReactNode
-  colorPalette?: string
+  colorScheme?: string
   variant?: string
   size?: string
 }
@@ -133,7 +131,7 @@ export const WithVariants = () => (
     {/* <Button colorPalette="teal" variant="ghost-on-accent">
       Ghost on accent
     </Button> */}
-    <Button colorPalette="teal" variant="link">
+    <Button colorPalette="teal" variant="plain">
       Link
     </Button>
     <Button colorPalette="teal" variant="unstyled">
@@ -239,22 +237,29 @@ export const WithSizes = () => (
 
 export const WithIcon = () => (
   <Stack direction="row" gap={4}>
-    <Button leftIcon={<LuMail />} colorPalette="teal" variant="solid">
+    <Button colorPalette="teal" variant="solid">
+      <LuMail />
       Email
     </Button>
-    <Button rightIcon={<LuArrowRight />} colorPalette="teal" variant="outline">
+    <Button
+      colorPalette="teal"
+      variant="outline"
+    >
       Call us
+      <LuArrowRight />
     </Button>
   </Stack>
 )
 
 export const WithReactIcons = () => (
   <Stack direction="row" gap={4} align="center">
-    <Button leftIcon={<MdBuild />} colorPalette="pink" variant="solid">
+    <Button colorPalette="pink" variant="solid">
+      <MdBuild />
       Settings
     </Button>
-    <Button rightIcon={<MdCall />} colorPalette="blue" variant="outline">
+    <Button colorPalette="blue" variant="outline">
       Call us
+      <MdCall />
     </Button>
   </Stack>
 )
@@ -319,7 +324,7 @@ export const WithDisabled = () => (
     <Button disabled colorPalette="teal" variant="ghost">
       Button
     </Button>
-    <Button disabled colorPalette="teal" variant="link">
+    <Button disabled colorPalette="teal" variant="plain">
       Button
     </Button>
   </HStack>
@@ -339,13 +344,14 @@ export const CustomComposition = () => (
 
 export const ButtonWithIcon = () => (
   <Stack direction="row">
-    <IconButton aria-label="Search database" icon={<LuSearch />} />
+    <IconButton aria-label="Search database"><LuSearch /></IconButton>
 
     <IconButton
       colorPalette="blue"
       aria-label="Search database"
-      icon={<LuSearch />}
-    />
+    >
+      <LuSearch />
+    </IconButton>
 
     <IconButton colorPalette="teal" aria-label="Call Segun" size="lg">
       <LuPhone />
@@ -361,54 +367,24 @@ export const WithButtonGroup = () => (
 )
 
 export const WithAttachedButtons = () => (
-  <ButtonGroup size="sm" isAttached variant="outline">
+  <ButtonGroup size="sm" attached variant="outline">
     <Button>Save</Button>
     <Button>Cancel</Button>
     <IconButton
       fontSize="2xl"
       aria-label="Add to friends"
-      icon={<LuChevronDown />}
-    />
+    >
+      <LuChevronDown />
+    </IconButton>
   </ButtonGroup>
 )
 
 export const WithSocialButton = () => (
   <Stack direction="row">
-    <Button colorPalette="facebook" leftIcon={<MdFacebook />}>
+    <Button colorPalette="facebook">
+      <MdFacebook />
       Facebook
     </Button>
   </Stack>
 )
 
-const motionConfig = {
-  initial: false,
-  transition: {
-    type: 'spring',
-    duration: 2,
-    bounce: 0
-  }
-}
-
-const MotionButton = motion(Button)
-const BG_GRADIENT_SOFT = `linear-gradient(to right, #fa8080, #F40000)`
-const BG_GRADIENT_SOFT_REVERSED = `linear-gradient(to right, #F40000, #fa8080)`
-
-export const WithMotion = () => {
-  const [binary, setBinary] = useState(false)
-  return (
-    <>
-      <Button onClick={() => setBinary(binary => !binary)}>
-        Toggle binary state: {String(binary)}
-      </Button>
-      <MotionButton
-        {...motionConfig}
-        animate={{
-          scale: binary ? 1.2 : 1,
-          backgroundImage: binary ? BG_GRADIENT_SOFT : BG_GRADIENT_SOFT_REVERSED
-        }}
-      >
-        ({String(binary)}) Doesn't work
-      </MotionButton>
-    </>
-  )
-}

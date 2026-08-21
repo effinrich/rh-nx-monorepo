@@ -4,14 +4,15 @@ import { ErrorMessage } from '@hookform/error-message'
 import {
   Box,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   Input,
+  NativeSelectField,
+  NativeSelectRoot,
   Radio,
-  RadioGroup,
-  Select,
+  RadioGroupRoot,
   Stack,
   Textarea
 } from '@redesignhealth/ui'
@@ -71,8 +72,9 @@ export const CompanyForm = ({
       />
       <Flex direction={['column', 'column', 'row']} gap="6" mb={6}>
         <Box w={['full', '40%', '40%']}>
-          <FormControl isInvalid={Boolean(errors.name)} isDisabled={isPending}>
-            <FormLabel>Internal name (required)</FormLabel>
+          <FieldRoot invalid={Boolean(errors.name)} disabled={isPending}>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel>Internal name (required)</FieldLabel>
             <Controller
               name="name"
               control={control}
@@ -87,14 +89,16 @@ export const CompanyForm = ({
                 />
               )}
             />
-            <FormErrorMessage role="alert">
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="name" />
-            </FormErrorMessage>
-          </FormControl>
+            </FieldErrorText>
+          </FieldRoot>
         </Box>
         <Box w={['full', '20%', '20%']}>
-          <FormControl isDisabled={isPending}>
-            <FormLabel>Company #</FormLabel>
+          <FieldRoot disabled={isPending}>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel>Company #</FieldLabel>
             <Controller
               name="number"
               control={control}
@@ -108,14 +112,16 @@ export const CompanyForm = ({
                 />
               )}
             />
-            <FormErrorMessage role="alert">
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="number" />
-            </FormErrorMessage>
-          </FormControl>
+            </FieldErrorText>
+          </FieldRoot>
         </Box>
         <Box w={['full', '40%', '40%']}>
-          <FormControl isDisabled={isPending}>
-            <FormLabel>Legal name</FormLabel>
+          <FieldRoot disabled={isPending}>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel>Legal name</FieldLabel>
             <Controller
               name="legalName"
               control={control}
@@ -129,12 +135,13 @@ export const CompanyForm = ({
                 />
               )}
             />
-          </FormControl>
+          </FieldRoot>
         </Box>
       </Flex>
       <Flex gap="6" mb={6}>
-        <FormControl isInvalid={Boolean(errors.stage)} isDisabled={isPending}>
-          <FormLabel>Stage</FormLabel>
+        <FieldRoot invalid={Boolean(errors.stage)} disabled={isPending}>
+          {/* @ts-expect-error Chakra v3 children typing */}
+          <FieldLabel>Stage</FieldLabel>
           <Controller
             name="stage"
             control={control}
@@ -142,47 +149,55 @@ export const CompanyForm = ({
               field: { onChange, value, name, ref },
               formState: { defaultValues }
             }) => (
-              <Select
-                name={name}
-                ref={ref}
-                onChange={onChange}
-                value={value}
-                colorScheme="primary"
-                placeholder="Select stage"
+              <NativeSelectRoot
+                colorPalette="primary"
                 disabled={
                   isPending || (isEdit && defaultValues?.[name] === 'OP_CO')
                 }
               >
-                {isEdit &&
-                (stageField === 'OP_CO' || stageField === 'NEW_CO') ? (
-                  <>
-                    <option value="OP_CO">OpCo</option>
-                    <option value="NEW_CO">NewCo</option>
-                  </>
-                ) : (
-                  <>
-                    <option value="OP_CO">OpCo</option>
-                    <option value="NEW_CO">NewCo</option>
-                    <option value="THEME">Theme</option>
-                    <option value="CONCEPT">Concept</option>
-                  </>
-                )}
-              </Select>
+                <NativeSelectField
+                  name={name}
+                  ref={ref}
+                  onChange={onChange}
+                  value={value}
+                  disabled={
+                    isPending || (isEdit && defaultValues?.[name] === 'OP_CO')
+                  }
+                >
+                  <option value="">Select stage</option>
+                  {isEdit &&
+                  (stageField === 'OP_CO' || stageField === 'NEW_CO') ? (
+                    <>
+                      <option value="OP_CO">OpCo</option>
+                      <option value="NEW_CO">NewCo</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="OP_CO">OpCo</option>
+                      <option value="NEW_CO">NewCo</option>
+                      <option value="THEME">Theme</option>
+                      <option value="CONCEPT">Concept</option>
+                    </>
+                  )}
+                </NativeSelectField>
+              </NativeSelectRoot>
             )}
           />
 
-          <FormErrorMessage role="alert">
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText role="alert">
             <ErrorMessage errors={errors} name="stage" />
-          </FormErrorMessage>
-        </FormControl>
+          </FieldErrorText>
+        </FieldRoot>
       </Flex>
       {(stageField === 'NEW_CO' || stageField === 'OP_CO') && (
         <Flex gap="6" mb={6}>
-          <FormControl
-            isInvalid={Boolean(errors.concept)}
-            isDisabled={isPending || stageField === 'OP_CO'}
+          <FieldRoot
+            invalid={Boolean(errors.concept)}
+            disabled={isPending || stageField === 'OP_CO'}
           >
-            <FormLabel>Concept</FormLabel>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel>Concept</FieldLabel>
             <Controller
               name="concept"
               control={control}
@@ -194,21 +209,23 @@ export const CompanyForm = ({
                   onChange={option => onChange(option)}
                   name={name}
                   placeholder="Select concept"
-                  colorScheme="primary"
+                  colorPalette="primary"
                 />
               )}
             />
-            <FormErrorMessage role="alert">
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="concept" />
-            </FormErrorMessage>
-          </FormControl>
+            </FieldErrorText>
+          </FieldRoot>
         </Flex>
       )}
 
       {stageField === 'CONCEPT' && (
         <Flex gap="6" mb={6}>
-          <FormControl isInvalid={Boolean(errors.theme)} isDisabled={isPending}>
-            <FormLabel>Theme</FormLabel>
+          <FieldRoot invalid={Boolean(errors.theme)} disabled={isPending}>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel>Theme</FieldLabel>
             <Controller
               name="theme"
               control={control}
@@ -220,21 +237,23 @@ export const CompanyForm = ({
                   onChange={option => onChange(option)}
                   name={name}
                   placeholder="Select theme"
-                  colorScheme="primary"
+                  colorPalette="primary"
                 />
               )}
             />
-            <FormErrorMessage role="alert">
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="theme" />
-            </FormErrorMessage>
-          </FormControl>
+            </FieldErrorText>
+          </FieldRoot>
         </Flex>
       )}
 
       {(stageField === 'NEW_CO' || stageField === 'OP_CO') && (
         <Flex gap="6" mb={6}>
-          <FormControl isDisabled={isPending}>
-            <FormLabel>Conflicts</FormLabel>
+          <FieldRoot disabled={isPending}>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel>Conflicts</FieldLabel>
             {isSuccess && (
               <Controller
                 name="conflicts"
@@ -249,22 +268,24 @@ export const CompanyForm = ({
                       name={name}
                       placeholder="Select conflicts"
                       onChange={onChange}
-                      colorScheme="primary"
+                      colorPalette="primary"
                     />
                   )
                 }}
               />
             )}
-            <FormErrorMessage role="alert">
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="conflicts" />
-            </FormErrorMessage>
-          </FormControl>
+            </FieldErrorText>
+          </FieldRoot>
         </Flex>
       )}
       {stageField === 'OP_CO' && (
         <Flex gap="6" mb={6}>
-          <FormControl isDisabled={isPending}>
-            <FormLabel>Company URL</FormLabel>
+          <FieldRoot disabled={isPending}>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel>Company URL</FieldLabel>
             <Controller
               name="href"
               control={control}
@@ -278,14 +299,16 @@ export const CompanyForm = ({
                 />
               )}
             />
-            <FormErrorMessage role="alert">
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="href" />
-            </FormErrorMessage>
-          </FormControl>
+            </FieldErrorText>
+          </FieldRoot>
         </Flex>
       )}
-      <FormControl isDisabled={isPending} mb={6}>
-        <FormLabel>Description</FormLabel>
+      <FieldRoot disabled={isPending} mb={6}>
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldLabel>Description</FieldLabel>
         <Controller
           name="description"
           control={control}
@@ -303,26 +326,28 @@ export const CompanyForm = ({
           )}
         />
 
-        <FormHelperText>{500 - count} characters left</FormHelperText>
-      </FormControl>
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldHelperText>{500 - count} characters left</FieldHelperText>
+      </FieldRoot>
       {stageField === 'OP_CO' && (
-        <FormControl
-          isInvalid={Boolean(errors.fundraiseStatus)}
-          isDisabled={isPending}
+        <FieldRoot
+          invalid={Boolean(errors.fundraiseStatus)}
+          disabled={isPending}
           mb={6}
           as="fieldset"
         >
-          <FormLabel as="legend">Fundraising Stage</FormLabel>
+          {/* @ts-expect-error Chakra v3 children typing */}
+          <FieldLabel as="legend">Fundraising Stage</FieldLabel>
           <Controller
             name="fundraiseStatus"
             control={control}
             render={({ field: { onChange, name, ref, value } }) => (
-              <RadioGroup
+              <RadioGroupRoot
                 onChange={onChange}
                 name={name}
                 ref={ref}
                 value={value}
-                colorScheme="primary"
+                colorPalette="primary"
                 maxW="175px"
               >
                 <Stack>
@@ -332,52 +357,56 @@ export const CompanyForm = ({
                   <Radio value="SERIES_B">Series B</Radio>
                   <Radio value="SERIES_C">Series C</Radio>
                 </Stack>
-              </RadioGroup>
+              </RadioGroupRoot>
             )}
           />
-          <FormErrorMessage role="alert">
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText role="alert">
             <ErrorMessage errors={errors} name="fundraiseStatus" />
-          </FormErrorMessage>
-        </FormControl>
+          </FieldErrorText>
+        </FieldRoot>
       )}
       {stageField === 'OP_CO' && (
-        <FormControl
-          isInvalid={Boolean(errors.hasPlatformAgreement)}
-          isDisabled={isPending}
+        <FieldRoot
+          invalid={Boolean(errors.hasPlatformAgreement)}
+          disabled={isPending}
           mb={6}
           as="fieldset"
         >
-          <FormLabel as="legend">Signed Platform Agreement?</FormLabel>
+          {/* @ts-expect-error Chakra v3 children typing */}
+          <FieldLabel as="legend">Signed Platform Agreement?</FieldLabel>
           <Controller
             name="hasPlatformAgreement"
             control={control}
             render={({ field: { onChange, name, ref, value } }) => (
-              <RadioGroup
+              <RadioGroupRoot
                 onChange={onChange}
                 name={name}
                 ref={ref}
                 value={String(value)}
-                colorScheme="primary"
+                colorPalette="primary"
                 maxW="175px"
               >
                 <Stack>
                   <Radio value="true">Yes</Radio>
                   <Radio value="false">No</Radio>
                 </Stack>
-              </RadioGroup>
+              </RadioGroupRoot>
             )}
           />
-          <FormErrorMessage role="alert">
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText role="alert">
             <ErrorMessage errors={errors} name="hasPlatformAgreement" />
-          </FormErrorMessage>
-        </FormControl>
+          </FieldErrorText>
+        </FieldRoot>
       )}
-      <FormControl
-        isDisabled={isPending}
+      <FieldRoot
+        disabled={isPending}
         mb={6}
-        isInvalid={Boolean(errors.dashboardHref)}
+        invalid={Boolean(errors.dashboardHref)}
       >
-        <FormLabel>Dashboard URL</FormLabel>
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldLabel>Dashboard URL</FieldLabel>
         <Controller
           name="dashboardHref"
           control={control}
@@ -391,11 +420,13 @@ export const CompanyForm = ({
             />
           )}
         />
-        <FormErrorMessage role="alert">
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText role="alert">
           <ErrorMessage errors={errors} name="dashboardHref" />
-        </FormErrorMessage>
-        <FormHelperText>Link for overview dashboard</FormHelperText>
-      </FormControl>
+        </FieldErrorText>
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldHelperText>Link for overview dashboard</FieldHelperText>
+      </FieldRoot>
     </form>
   )
 }

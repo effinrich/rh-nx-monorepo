@@ -1,11 +1,11 @@
 import {
   Box,
   BoxProps,
-  Card,
+  CardRoot,
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
+  Separator,
   Heading
 } from '@redesignhealth/ui'
 
@@ -23,7 +23,7 @@ export const LibCard = ({
   ...props
 }: LibCardProps) => {
   return (
-    <Card
+    <CardRoot
       {...props}
       cursor="pointer"
       borderWidth="1px"
@@ -62,9 +62,9 @@ export const LibCard = ({
         {description}
       </CardBody>
       <CardFooter>
-        <Divider />
+        <Separator />
       </CardFooter>
-    </Card>
+    </CardRoot>
   )
 }
 

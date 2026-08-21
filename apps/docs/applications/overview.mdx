@@ -1,0 +1,32 @@
+---
+title: "Frontend applications"
+description: "Overview of the frontend applications in the monorepo."
+---
+
+The Redesign Health monorepo contains several frontend applications, each serving a distinct purpose within the platform. All applications are built with Vite and managed through Nx project targets.
+
+<Cards>
+  <Card title="Portal" icon="browser" href="/applications/portal/overview">
+    The main Redesign Health user interface. Built with React 19 and Vite, the Portal serves on port 4200 and provides company management, IP marketplace, CEO directory, research hub, and library features.
+  </Card>
+  <Card title="Third-party network" icon="users" href="/applications/third-party-network">
+    An advisor network portal for external stakeholders. Provides authentication, advisor management, and engagement tools for third-party participants in the Redesign Health ecosystem.
+  </Card>
+  <Card title="Parser playground" icon="code" href="/applications/parser-playground">
+    A standalone tool for testing and debugging parsers. Useful during development to validate parsing logic before integrating it into production applications.
+  </Card>
+</Cards>
+
+## Quick start
+
+Run any application from the monorepo root using Nx:
+
+```bash
+npm start                          # Serves the Portal (default project)
+nx serve third-party-network       # Serves the third-party network app
+nx serve parser-playground         # Serves the parser playground
+```
+
+<Note>
+  Always run commands from the repository root. Nx locates the correct project configuration automatically.
+</Note>

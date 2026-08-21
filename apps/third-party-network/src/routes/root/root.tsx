@@ -22,7 +22,7 @@ export const Home = () => {
           href="https://5inxi4pt259.typeform.com/to/SVq9ZUao"
           target="_blank"
           variant="solid"
-          colorScheme="blue"
+          colorPalette="blue"
           flexShrink="0"
         >
           Refer Advisor

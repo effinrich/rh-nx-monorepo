@@ -27,12 +27,12 @@ export const Solution = ({ libraryRoute }: SolutionProps) => {
     <Page>
       <Button
         as={Link}
-        variant="link"
-        leftIcon={<MdChevronLeft size="20" />}
-        colorScheme="primary"
+        variant="plain"
+        colorPalette="primary"
         to={`/${libraryRoute}`}
         pb={4}
       >
+        <MdChevronLeft size="20" />
         Back
       </Button>
 

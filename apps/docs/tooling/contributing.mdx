@@ -1,0 +1,357 @@
+---
+title: "Contributing guidelines"
+description: "Code style, PR process, testing requirements, and CI expectations."
+---
+
+## Code style
+
+### ESLint and Prettier
+
+All code is linted with ESLint and formatted with Prettier. Both tools run automatically on staged files via `lint-staged` before each commit.
+
+```bash
+# Lint all projects with auto-fix
+npm run lint
+
+# Format all files
+npm run format:write
+
+# Check formatting without writing
+npm run format:check
+```
+
+### Prettier rules
+
+| Setting | Value |
+| :--- | :--- |
+| Tab width | 2 spaces |
+| Quotes | Single quotes (JSX uses double) |
+| Semicolons | None |
+| Trailing commas | None |
+| Arrow parens | Avoid when possible |
+
+### Import sorting
+
+Imports are automatically sorted by `simple-import-sort` in this order:
+
+1. Side-effect imports
+2. React and external packages
+3. Internal aliases (`@redesignhealth/*`, `components`, `libs`, etc.)
+4. Parent imports (`../`)
+5. Sibling imports (`./`)
+6. CSS imports
+
+### Filename conventions
+
+All files must use **kebab-case** naming, enforced by the `unicorn/filename-case` ESLint rule.
+
+```
+button.tsx           ✓
+button-group.tsx     ✓
+ButtonGroup.tsx      ✗
+```
+
+### Module boundaries
+
+The `@nx/enforce-module-boundaries` rule prevents illegal cross-library imports:
+
+- **scope:shared** libraries can only import from other **scope:shared** libraries
+- **scope:portal** libraries can import from **scope:portal**, **scope:shared**, and **scope:rocketchat-poc**
+- **scope:oauth-jwt-generator** can import from its own scope and **scope:shared**
+
+<Warning>
+  Violating module boundaries causes a lint error. If you need a new dependency relationship, update the `depConstraints` in `.eslintrc.json` and discuss the architecture change in your PR.
+</Warning>
+
+---
+
+## Commit conventions
+
+Use the conventional commit format:
+
+```
+type(scope): summary
+```
+
+### Types
+
+| Type | Use when |
+| :--- | :--- |
+| `feat` | Adding a new feature |
+| `fix` | Fixing a bug |
+| `chore` | Maintenance, dependency updates, tooling |
+| `docs` | Documentation changes |
+| `refactor` | Code restructuring without behavior changes |
+| `test` | Adding or updating tests |
+| `style` | Formatting, whitespace (no logic changes) |
+| `perf` | Performance improvements |
+
+### Examples
+
+```
+feat(portal): add company search filters to dashboard
+fix(shared-ui): resolve button focus ring not visible in dark mode
+chore(deps): update @tanstack/react-query to 5.0.0
+docs(contributing): add commit convention examples
+refactor(data-assets): extract company API hooks to separate file
+test(ceo-directory): add unit tests for sort and filter logic
+```
+
+<Tip>
+  Keep the summary line under 72 characters. Use the commit body for additional context when needed.
+</Tip>
+
+---
+
+## Branch naming
+
+Use a prefix that matches your commit type:
+
+| Prefix | Purpose |
+| :--- | :--- |
+| `feature/` | New features |
+| `fix/` | Bug fixes |
+| `chore/` | Maintenance and tooling |
+| `docs/` | Documentation |
+| `refactor/` | Code restructuring |
+
+Examples:
+
+```
+feature/company-search-filters
+fix/button-focus-ring
+chore/update-react-query
+```
+
+---
+
+## PR process
+
+<Steps>
+  <Step title="Create your branch">
+    Branch from `main` using the naming convention above.
+  </Step>
+  <Step title="Make your changes">
+    Follow the code style guidelines. Write tests for new functionality. Add or update Storybook stories for UI changes.
+  </Step>
+  <Step title="Run local checks">
+    Before pushing, verify your changes pass locally:
+    ```bash
+    npm run affected:lint
+    npm run affected:test
+    npm run check-types:all
+    ```
+  </Step>
+  <Step title="Open a PR against main">
+    Include a clear summary of what changed and why. Link any related issues.
+  </Step>
+  <Step title="Wait for CI">
+    CI runs lint, test, and build for affected projects. Fix any failures before requesting review.
+  </Step>
+  <Step title="Chromatic review (UI changes)">
+    If your PR touches UI components, Chromatic captures visual diffs. Review and accept changes in the Chromatic dashboard.
+  </Step>
+  <Step title="Code review and merge">
+    Address reviewer feedback. Once approved and CI is green, merge to `main`.
+  </Step>
+</Steps>
+
+---
+
+## Development workflow
+
+### Common commands
+
+| Task | Command |
+| :--- | :--- |
+| Start portal dev server | `npm run start:portal` |
+| Build portal | `npm run build:portal` |
+| Run all tests | `npm test` |
+| Test affected projects | `npm run affected:test` |
+| Lint affected projects | `npm run affected:lint` |
+| Type-check all projects | `npm run check-types:all` |
+| Run shared-ui Storybook | `npm run storybook` |
+| Run portal-ui Storybook | `npm run storybook-portal-ui` |
+| View dependency graph | `npm run graph` |
+| Generate Chakra theme types | `npm run theme` |
+
+### Running specific project tasks
+
+```bash
+# Test a specific project
+npx nx test portal-features-companies
+
+# Lint a specific project with auto-fix
+npx nx lint shared-ui --fix
+
+# Build a specific library
+npx nx build shared-ui
+```
+
+---
+
+## Testing requirements
+
+Every PR must meet these testing standards:
+
+### Unit tests
+
+- Write `*.spec.tsx` tests alongside any new component or utility
+- Aim for meaningful coverage of business logic, not just line counts
+- Use `@testing-library/react` for component tests -- query by role, label, or text rather than test IDs
+
+### E2E tests
+
+- Add or update Playwright tests for critical user flows
+- Component-level Playwright tests use the `.ct.tsx` convention and are co-located with components
+
+### Storybook
+
+- Every UI component in a `type:ui` library must have a `.stories.tsx` file
+- Use `play` functions for interaction testing in stories
+- CI fails if a component in a UI library is missing its story
+
+### Accessibility
+
+- Run `jest-axe` in unit tests for new components
+- Check the Storybook a11y addon panel for violations
+- Ensure semantic HTML and proper `aria-*` attributes
+
+### Type checking
+
+```bash
+npm run check-types:all
+```
+
+<Note>
+  Type errors are not caught by ESLint. Always run `check-types:all` or `affected:check-types` before pushing.
+</Note>
+
+---
+
+## CI expectations
+
+### What CI runs
+
+On every push and PR, CI executes:
+
+```bash
+npx nx affected -t lint test build
+```
+
+This only processes projects affected by your changes, making CI fast for isolated changes.
+
+### Nx Cloud
+
+The workspace is connected to Nx Cloud for:
+
+- **Remote caching** -- previously computed results are replayed instantly
+- **Distributed execution** -- tasks are spread across 3 agents for parallelism
+- **Self-healing** -- `nx fix-ci` suggests automated fixes for common failures
+
+### What to do when CI fails
+
+1. Check the Nx Cloud dashboard link in the CI output for detailed logs
+2. Reproduce the failure locally with `npx nx affected -t lint test build`
+3. Fix the issue and push a new commit -- do not force-push over the failed commit
+
+---
+
+## Working with monorepo dependencies
+
+### Install packages at the root
+
+Always add dependencies to the root `package.json`. Nx handles dependency pruning during builds.
+
+```bash
+npm install <package-name> --legacy-peer-deps
+npm install -D <package-name> --legacy-peer-deps
+```
+
+<Warning>
+  Always use `--legacy-peer-deps` when installing packages. The monorepo has complex peer dependency relationships that require this flag.
+</Warning>
+
+### Path aliases
+
+Import shared libraries using TypeScript path aliases defined in `tsconfig.base.json`:
+
+```tsx
+import { Button } from '@redesignhealth/ui'
+import { useCompanies } from '@redesignhealth/portal/data-assets'
+import { formatDate } from '@redesignhealth/shared-utils'
+```
+
+### Module boundary rules
+
+Before adding a new dependency between libraries, verify it is allowed by the module boundary rules. Run `npm run graph` to visualize the dependency graph.
+
+---
+
+## Cross-project changes
+
+When your change affects multiple projects:
+
+1. **Check the impact** -- run `npx nx affected:apps` and `npx nx affected:libs` to see what is affected
+2. **Visualize dependencies** -- run `npm run graph` or `npx nx affected:dep-graph`
+3. **Test everything** -- run `npm run affected:test` to ensure nothing is broken
+4. **Document the scope** -- mention all affected projects in your PR description
+
+<Tip>
+  Nx's computation caching means that testing affected projects is usually faster than you expect. Do not skip cross-project testing.
+</Tip>
+
+---
+
+## Release and versioning
+
+- The monorepo uses `0.0.0` as a placeholder version -- individual apps are versioned at deployment time
+- Changelogs are maintained through PR descriptions and commit history
+- Deployments are triggered by merges to `main`
+
+---
+
+## AI assistant configurations
+
+The repository includes configuration files for AI coding assistants:
+
+- **Claude** -- `CLAUDE.md` at the workspace root with architecture context, commands, and coding guidelines
+- **Gemini** -- `.gemini/` directory with project rules
+- **GitHub Copilot** -- `.github/copilot-instructions.md` with workspace-specific guidance
+
+These files help AI assistants understand the monorepo structure, coding conventions, and available tooling. Update them when making significant architectural changes.
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="npm install fails with peer dependency errors">
+    Always use `--legacy-peer-deps`:
+    ```bash
+    npm install --legacy-peer-deps
+    ```
+  </Accordion>
+  <Accordion title="Nx cache seems stale">
+    Reset the local Nx cache:
+    ```bash
+    npm run reset
+    ```
+  </Accordion>
+  <Accordion title="TypeScript errors in VS Code but not in CI">
+    Ensure you are using the workspace TypeScript version. Open any `.ts` file, press `Cmd+Shift+P`, search for "TypeScript: Select TypeScript Version", and choose "Use Workspace Version".
+  </Accordion>
+  <Accordion title="Module boundary violation for a legitimate dependency">
+    Update the `depConstraints` in `.eslintrc.json` to allow the new dependency relationship. Add appropriate scope tags to the library's `project.json` if they are missing.
+  </Accordion>
+  <Accordion title="Storybook fails to start">
+    Check that all Storybook dependencies are installed. Run:
+    ```bash
+    npm run mcp:setup
+    ```
+    Also verify that the `.storybook` directory exists in the project root and its `main.ts` references the correct stories glob pattern.
+  </Accordion>
+  <Accordion title="Tests pass locally but fail in CI">
+    Common causes: timezone-sensitive date formatting, missing environment variables, or file system case sensitivity (macOS is case-insensitive, Linux is not). Check the Nx Cloud dashboard for detailed logs.
+  </Accordion>
+</AccordionGroup>

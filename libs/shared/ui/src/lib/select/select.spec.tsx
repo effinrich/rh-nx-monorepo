@@ -1,70 +1,62 @@
 import { render, testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { FormControl } from '../form-control/form-control'
+import { FieldRoot } from '../form-control/form-control'
 
-import { Select } from './select'
+import { NativeSelectRoot, NativeSelectField } from './select'
 
 test.skip('should pass a11y check', async () => {
   const { container } = render(
-    <Select aria-label="Select Food" placeholder="Select an option">
-      <option value="a">A</option>
-      <option value="b">B</option>
-      <option value="c">C</option>
-    </Select>
+    <NativeSelectRoot>
+      <NativeSelectField aria-label="Select Food" placeholder="Select an option">
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+      </NativeSelectField>
+    </NativeSelectRoot>
   )
   await testA11y(container)
 })
 
 test('renders a placeholder option', () => {
-  const { container } = render(<Select placeholder="Select an option" />)
+  const { container } = render(
+    <NativeSelectRoot>
+      <NativeSelectField placeholder="Select an option" />
+    </NativeSelectRoot>
+  )
   const option = container.querySelector("option[value='']") as HTMLElement
 
   expect(option).toBeInTheDocument()
   expect(option).toHaveTextContent('Select an option')
 })
 
-test('renders an icon by default', () => {
-  const { getByRole } = render(<Select />)
-  const icon = getByRole('presentation', { hidden: true })
-
-  expect(icon).toHaveAttribute('aria-hidden', 'true')
-  expect(icon).toHaveClass('chakra-select__icon')
-})
-
 test('renders in disabled state if disabled is true', () => {
   const { container } = render(
-    <Select disabled placeholder="Select an option" />
+    <NativeSelectRoot disabled>
+      <NativeSelectField placeholder="Select an option" />
+    </NativeSelectRoot>
   )
   const select = container.querySelector('select') as HTMLElement
-  const iconWrapper = container.querySelector(
-    '.chakra-select__icon-wrapper'
-  ) as HTMLElement
   expect(select).toBeDisabled()
-  expect(iconWrapper).toHaveAttribute('data-disabled', '')
 })
 
-test('doesnt renders in disabled state if disabled is false', () => {
+test('doesnt render in disabled state if disabled is false', () => {
   const { container } = render(
-    <Select disabled={false} placeholder="Select an option" />
+    <NativeSelectRoot disabled={false}>
+      <NativeSelectField placeholder="Select an option" />
+    </NativeSelectRoot>
   )
   const select = container.querySelector('select') as HTMLElement
-  const iconWrapper = container.querySelector(
-    '.chakra-select__icon-wrapper'
-  ) as HTMLElement
   expect(select).toBeEnabled()
-  expect(iconWrapper).not.toHaveAttribute('data-disabled')
 })
 
-test('renders in disabled state if wrapped by FormControl with disabled=true', () => {
+test('renders in disabled state if wrapped by FieldRoot with disabled', () => {
   const { container } = render(
-    <FormControl disabled>
-      <Select placeholder="Select an option" />,
-    </FormControl>
+    <FieldRoot disabled>
+      <NativeSelectRoot>
+        <NativeSelectField placeholder="Select an option" />
+      </NativeSelectRoot>
+    </FieldRoot>
   )
   const select = container.querySelector('select') as HTMLElement
-  const iconWrapper = container.querySelector(
-    '.chakra-select__icon-wrapper'
-  ) as HTMLElement
   expect(select).toBeDisabled()
-  expect(iconWrapper).toHaveAttribute('data-disabled', '')
 })

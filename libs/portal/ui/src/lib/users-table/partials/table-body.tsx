@@ -2,15 +2,17 @@ import { MdOutlineEdit, MdOutlineTheaterComedy } from 'react-icons/md'
 import { Link as RouterLink } from 'react-router-dom'
 import { formatDate } from '@redesignhealth/portal/utils'
 import {
-  Avatar,
+  AvatarRoot,
+  AvatarFallback,
+  AvatarImage,
   Badge,
   Box,
   Flex,
   IconButton,
-  Tbody,
-  Td,
+  TableBody as ChakraTableBody,
+  TableCell,
   Text,
-  Tr,
+  TableRow,
   Wrap,
   WrapItem
 } from '@redesignhealth/ui'
@@ -30,77 +32,83 @@ const TableBody = ({
   onClickEditUser
 }: TableBodyProps) => {
   return (
-    <Tbody
+    <ChakraTableBody
       fontSize="14px"
       lineHeight="20px"
       fontWeight="normal"
       color="gray.500"
     >
       {tableData.map(user => (
-        <Tr key={user.email}>
-          <Td>
+        <TableRow key={user.email}>
+          <TableCell>
             <Flex gap="12px">
-              <Avatar
-                src={user.pictureSrc}
+              <AvatarRoot
                 name={user.name}
                 boxSize="10"
                 bg="primary.200"
                 color="gray.500"
-              />
+              >
+                {/* @ts-expect-error Chakra v3 compound component typing */}
+                <AvatarImage src={user.pictureSrc} />
+                <AvatarFallback />
+              </AvatarRoot>
               <Box whiteSpace="normal">
                 <Text color="gray.900">{user.name}</Text>
                 <Text>{user.email}</Text>
               </Box>
             </Flex>
-          </Td>
-          <Td>
+          </TableCell>
+          <TableCell>
             <Text>{user.userType}</Text>
-          </Td>
-          <Td>
+          </TableCell>
+          <TableCell>
             <Text whiteSpace="pre-line">{formatDate(user.dateAdded)}</Text>
-          </Td>
-          <Td>
+          </TableCell>
+          <TableCell>
             <Wrap>
               {user?.companies?.map(co => (
                 <WrapItem key={co.id}>
                   <Badge
-                    colorScheme="primary"
+                    colorPalette="primary"
                     size="sm"
                     variant="subtle"
-                    as={RouterLink}
-                    to={`/companies/${co.id}`}
+                    asChild
                   >
-                    {co.name}
+                    <RouterLink to={`/companies/${co.id}`}>
+                      {co.name}
+                    </RouterLink>
                   </Badge>
                 </WrapItem>
               ))}
             </Wrap>
-          </Td>
-          <Td>
+          </TableCell>
+          <TableCell>
             <IconButton
               aria-label={`Edit ${user.name}'s details`}
               onClick={() => onClickEditUser(user.email)}
-              icon={<MdOutlineEdit />}
               variant="ghost"
               title="Edit"
-              colorScheme="primary"
-            />
-          </Td>
+              colorPalette="primary"
+            >
+              <MdOutlineEdit />
+            </IconButton>
+          </TableCell>
           {isSuperAdmin && (
-            <Td>
+            <TableCell>
               <IconButton
                 title="Impersonate"
                 aria-label={`Impersonate ${user.name}`}
                 onClick={() => handleImpersonatedEmail(user)}
-                icon={<MdOutlineTheaterComedy />}
                 variant="ghost"
-                colorScheme="primary"
-              />
-            </Td>
+                colorPalette="primary"
+              >
+                <MdOutlineTheaterComedy />
+              </IconButton>
+            </TableCell>
           )}
-        </Tr>
+        </TableRow>
       ))}
-    </Tbody>
+    </ChakraTableBody>
   )
 }
 export default TableBody

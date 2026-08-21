@@ -1,19 +1,19 @@
 import analytics from '@redesignhealth/analytics'
 import { useRequestIpListingContactInfo } from '@redesignhealth/portal/data-assets'
-import { Modal, ModalOverlay } from '@redesignhealth/ui'
+import { DialogBackdrop, DialogRoot } from '@redesignhealth/ui'
 
 import Disclaimer from './partials/disclaimer'
 import Success from './partials/success'
 interface SellerReleaseModalProps {
   onClose(): void
-  isOpen: boolean
+  open: boolean
   buyerEmail?: string
   ipListingId?: string
 }
 
 const SellerReleaseModal = ({
   onClose,
-  isOpen,
+  open,
   buyerEmail,
   ipListingId
 }: SellerReleaseModalProps) => {
@@ -24,8 +24,14 @@ const SellerReleaseModal = ({
   } = useRequestIpListingContactInfo(ipListingId, buyerEmail)
 
   return (
-    <Modal onClose={onClose} isOpen={isOpen} size="xl">
-      <ModalOverlay />
+    <DialogRoot
+      open={open}
+      onOpenChange={(e: { open: boolean }) => {
+        if (!e.open) onClose()
+      }}
+      size="xl"
+    >
+      <DialogBackdrop />
       {isSuccess ? (
         <Success onConfirmation={onClose} />
       ) : (
@@ -38,7 +44,7 @@ const SellerReleaseModal = ({
           isSubmitting={isPending}
         />
       )}
-    </Modal>
+    </DialogRoot>
   )
 }
 

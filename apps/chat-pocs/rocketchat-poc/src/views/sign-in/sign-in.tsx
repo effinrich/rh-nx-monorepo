@@ -81,7 +81,7 @@ export const SignIn = () => {
       <Flex direction="column" justify="center">
         <Stack
           maxW="400px"
-          spacing={6}
+          gap={6}
           background="white"
           align="center"
           borderRadius="md"
@@ -92,7 +92,7 @@ export const SignIn = () => {
           <Image src={RedesignHealthText} />
           <Text color="gray.600">Welcome! Sign into your account.</Text>
           {/*
-          <Button onClick={() => googleLogin()} colorScheme="primary">
+          <Button onClick={() => googleLogin()} colorPalette="primary">
             Google Auth-Flow Login
           </Button>
           */}

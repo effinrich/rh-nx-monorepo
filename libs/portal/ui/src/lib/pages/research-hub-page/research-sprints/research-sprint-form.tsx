@@ -1,23 +1,21 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Controller, FormProvider, UseFormReturn } from 'react-hook-form'
 import {
-  Box,
-  Flex,
-  Input,
-  NumberInput,
-  NumberInputField
-} from '@redesignhealth/ui'
-import {
   CompanySummary,
   NewSprintProps,
   PersonSummary,
   TaxonomySummary
 } from '@redesignhealth/portal/data-assets'
 import {
-  Alert,
+  AlertRoot,
   AlertDescription,
-  AlertIcon,
+  AlertIndicator,
   AlertTitle,
+  Box,
+  Flex,
+  Input,
+  NumberInputRoot,
+  NumberInputInput,
   Text,
   Textarea
 } from '@redesignhealth/ui'
@@ -285,20 +283,20 @@ export const ResearchSprintForm = ({
         {showAddtlFields && (
           <>
             <FormField name="sampleSize" label="n=">
-              <NumberInput>
-                <NumberInputField {...form.register('sampleSize')} />
-              </NumberInput>
+              <NumberInputRoot>
+                <NumberInputInput {...form.register('sampleSize')} />
+              </NumberInputRoot>
             </FormField>
 
-            <Alert status="info">
-              <AlertIcon />
+            <AlertRoot status="info">
+              <AlertIndicator />
               <AlertTitle>Reminder: Ensure Link Integrity</AlertTitle>
               <AlertDescription>
                 Remember to share the original VI-owned file stored in the
                 Venture Insights Google Drive. Be sure to use a shareable link
                 instead of a shortcut.
               </AlertDescription>
-            </Alert>
+            </AlertRoot>
 
             <FormField
               name="SOW"

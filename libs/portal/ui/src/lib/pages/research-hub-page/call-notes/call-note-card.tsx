@@ -3,12 +3,13 @@ import { MdLock, MdOpenInNew } from 'react-icons/md'
 import { CallNoteCardProps } from '@redesignhealth/portal/data-assets'
 import { formatDate } from '@redesignhealth/portal/utils'
 import {
-  Alert,
-  AlertIcon,
+  AlertRoot,
+  AlertIndicator,
   AlertTitle,
   Button,
   Flex,
-  Tag,
+  TagRoot,
+  TagLabel,
   Text
 } from '@redesignhealth/ui'
 
@@ -78,17 +79,17 @@ export const CallNoteCard = ({
           <Button
             as="a"
             target="_blank"
-            sx={{ textDecoration: 'none' }}
+            css={{ textDecoration: 'none' }}
             href={noteLink}
-            rightIcon={<MdOpenInNew />}
-            colorScheme="primary"
+            colorPalette="primary"
             variant="solid"
             width={['100%', '100%', 'initial']}
           >
             Read notes
+            <MdOpenInNew />
           </Button>
         ) : (
-          <Alert
+          <AlertRoot
             status="error"
             rounded="md"
             ml="auto"
@@ -96,9 +97,9 @@ export const CallNoteCard = ({
             width={['100%', '100%', 'initial']}
             h="40px"
           >
-            <AlertIcon />
+            <AlertIndicator />
             <AlertTitle>Invalid URL</AlertTitle>
-          </Alert>
+          </AlertRoot>
         )}
       </ListCard.Header>
 
@@ -111,9 +112,9 @@ export const CallNoteCard = ({
             <Button
               as="a"
               target="_blank"
-              variant="link"
+              variant="plain"
               href={linkedInProfileHref}
-              colorScheme="primary"
+              colorPalette="primary"
               cursor="pointer"
             >
               {linkedInProfileHref ? linkedInProfileHref : ''}
@@ -126,9 +127,9 @@ export const CallNoteCard = ({
           <Flex gap="2">
             {additionalTags && additionalTags.length > 0
               ? additionalTags?.map((tag, index) => (
-                  <Tag variant="solid" key={index}>
-                    {tag}
-                  </Tag>
+                  <TagRoot variant="solid" key={index}>
+                    <TagLabel>{tag}</TagLabel>
+                  </TagRoot>
                 ))
               : ''}
           </Flex>
@@ -148,9 +149,9 @@ export const CallNoteCard = ({
               <Flex gap="2">
                 {stakeholders && stakeholders.length > 0
                   ? stakeholders?.map((tag, index) => (
-                      <Tag variant="solid" key={index}>
-                        {tag}
-                      </Tag>
+                      <TagRoot variant="solid" key={index}>
+                        <TagLabel>{tag}</TagLabel>
+                      </TagRoot>
                     ))
                   : ''}
               </Flex>
@@ -161,9 +162,9 @@ export const CallNoteCard = ({
                 <Button
                   as="a"
                   target="_blank"
-                  variant="link"
+                  variant="plain"
                   href={`mailto:${intervieweeEmail}`}
-                  colorScheme="primary"
+                  colorPalette="primary"
                   cursor="pointer"
                 >
                   {intervieweeEmail ? intervieweeEmail : ''}
@@ -193,8 +194,8 @@ export const CallNoteCard = ({
         <ListCard.Row>
           <Button
             onClick={() => setIsShowMore(!isShowMore)}
-            variant="link"
-            colorScheme="primary"
+            variant="plain"
+            colorPalette="primary"
             size="md"
           >
             Show {isShowMore ? 'less' : 'more'}

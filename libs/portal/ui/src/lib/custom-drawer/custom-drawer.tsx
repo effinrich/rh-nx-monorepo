@@ -1,15 +1,15 @@
-import { forwardRef, useImperativeHandle } from 'react'
-import type { ReactElement } from 'react'
-import type { FieldErrors } from 'react-hook-form'
+import { forwardRef, ReactElement, useImperativeHandle } from 'react'
+import { FieldErrors } from 'react-hook-form'
 import {
   Button,
-  Drawer,
+  DrawerBackdrop,
   DrawerBody,
-  DrawerCloseButton,
+  DrawerCloseTrigger,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
+  DrawerPositioner,
+  DrawerRoot,
   Text,
   useDisclosure
 } from '@redesignhealth/ui'
@@ -54,66 +54,65 @@ export const CustomDrawer = forwardRef(
     }))
 
     return (
-      <Drawer
+      <DrawerRoot
         open={open}
         placement="end"
-        onOpenChange={e => {
-          if (!e.open) {
-            onClose()
-            handleOnCloseComplete?.()
-          }
-        }}
-        size="lg"
+        onOpenChange={(e: { open: boolean }) => { if (!e.open) { onClose(); handleOnCloseComplete?.() } }}
+        size={{ base: 'full', md: 'lg' }}
       >
-        <DrawerOverlay />
-        <DrawerContent pt={6}>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" fontSize="30px">
-            {title}
-            {description && (
-              <Text
-                as="p"
-                my="4px"
-                fontSize="14px"
-                lineHeight="20px"
-                fontWeight="normal"
-                color="gray.500"
-              >
-                {description}
-              </Text>
-            )}
-          </DrawerHeader>
-          <DrawerBody py={6}>
-            {isError && (
-              <AxiosErrorAlert
-                error={errors?.root?.serverError.message}
-                mb={3}
-              />
-            )}
-            {children}
-          </DrawerBody>
+        <DrawerBackdrop />
+        {/* @ts-expect-error Chakra v3 DrawerPositioner children type mismatch */}
+        <DrawerPositioner>
+          {/* @ts-expect-error Chakra v3 DrawerContent children type mismatch */}
+          <DrawerContent pt={6}>
+            <DrawerCloseTrigger />
+            <DrawerHeader borderBottomWidth="1px" fontSize="30px">
+              {title}
+              {description && (
+                <Text
+                  as="p"
+                  my="4px"
+                  fontSize="14px"
+                  lineHeight="20px"
+                  fontWeight="normal"
+                  color="gray.500"
+                >
+                  {description}
+                </Text>
+              )}
+            </DrawerHeader>
+            <DrawerBody py={6}>
+              {isError && (
+                <AxiosErrorAlert
+                  error={errors?.root?.serverError.message}
+                  mb={3}
+                />
+              )}
+              {children}
+            </DrawerBody>
 
-          <DrawerFooter borderTopWidth="1px">
-            <Button
-              variant="outline"
-              mr={3}
-              onClick={onClose}
-              disabled={isLoading}
-            >
-              Cancel
-            </Button>
-            <Button
-              colorPalette="primary"
-              disabled={isLoading || !isValid}
-              loading={isLoading}
-              type="submit"
-              onClick={() => handleOnSubmit()}
-            >
-              {ctaText}
-            </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+            <DrawerFooter borderTopWidth="1px">
+              <Button
+                variant="outline"
+                mr={3}
+                onClick={onClose}
+                disabled={isLoading}
+              >
+                Cancel
+              </Button>
+              <Button
+                colorPalette="brand"
+                disabled={isLoading || !isValid}
+                loading={isLoading}
+                type="submit"
+                onClick={() => handleOnSubmit()}
+              >
+                {ctaText}
+              </Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </DrawerPositioner>
+      </DrawerRoot>
     )
   }
 )

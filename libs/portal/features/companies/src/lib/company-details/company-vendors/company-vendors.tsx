@@ -22,19 +22,17 @@ const CompanyVendors = () => {
       title="Your vendors"
       description="Be sure to keep this list updated if there are any changes in your engagement with vendors."
       rightElement={
-        <Button
-          as={RouterLink}
-          colorScheme="primary"
-          to={`/companies/${companyId}/vendors/add`}
-        >
-          Add vendor
+        <Button asChild colorPalette="primary">
+          <RouterLink to={`/companies/${companyId}/vendors/add`}>
+            Add vendor
+          </RouterLink>
         </Button>
       }
     >
       {vendorsPending ? (
         <Loader />
       ) : vendorsData && vendorsData.length > 0 ? (
-        <Stack spacing="6">
+        <Stack gap="6">
           {vendorsData.map(vendor => (
             <VendorCard
               key={vendor.id}
@@ -47,12 +45,14 @@ const CompanyVendors = () => {
               )}
               rightAddon={
                 <IconButton
-                  as={RouterLink}
-                  to={`${vendor.id}/edit`}
+                  asChild
                   variant="outline"
                   aria-label="Edit company vendor"
-                  icon={<Icon as={MdEdit} />}
-                />
+                >
+                  <RouterLink to={`${vendor.id}/edit`}>
+                    <Icon as={MdEdit} />
+                  </RouterLink>
+                </IconButton>
               }
             />
           ))}

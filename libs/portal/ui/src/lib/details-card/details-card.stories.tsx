@@ -1,5 +1,5 @@
 import { MdAlternateEmail } from 'react-icons/md'
-import { Button, Tab, TabList, Tabs, Text } from '@redesignhealth/ui'
+import { Button, TabsList, TabsRoot, TabsTrigger, Text } from '@redesignhealth/ui'
 import { withRouter } from 'storybook-addon-react-router-v6'
 
 import type { Meta } from '@storybook/react-vite'
@@ -65,12 +65,12 @@ export const WithTabs = {
           // avatarHref="https://placekitten.com/200/200"
           subtitle={<Text>Subtitle</Text>}
         />
-        <Tabs colorScheme="primary">
-          <TabList>
-            <Tab>Details</Tab>
-            <Tab>Users</Tab>
-          </TabList>
-        </Tabs>
+        <TabsRoot defaultValue="details" colorPalette="primary">
+          <TabsList>
+            <TabsTrigger value="details">Details</TabsTrigger>
+            <TabsTrigger value="users">Users</TabsTrigger>
+          </TabsList>
+        </TabsRoot>
         <DetailsCardBody>
           <DetailsCardRow title="Row 1">Details</DetailsCardRow>
           <DetailsCardRow title="Row 2">

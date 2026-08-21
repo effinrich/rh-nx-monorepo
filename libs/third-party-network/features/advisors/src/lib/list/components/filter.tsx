@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { FormControl, FormLabel } from '@redesignhealth/ui'
+import { FieldLabel, FieldRoot } from '@redesignhealth/ui'
 import { Select } from 'chakra-react-select'
 
 import { useAllAdvisorsQuery } from '../hooks'
@@ -23,8 +23,9 @@ export const Filter = memo(
     }
 
     return (
-      <FormControl>
-        <FormLabel
+      <FieldRoot>
+        {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
+        <FieldLabel
           fontSize="sm"
           color="gray.600"
           fontWeight="semibold"
@@ -32,12 +33,12 @@ export const Filter = memo(
           letterSpacing="tight"
         >
           {label}
-        </FormLabel>
+        </FieldLabel>
         <Select
           placeholder=""
-          colorScheme={badgeColor}
+          colorPalette={badgeColor}
           isMulti
-          isLoading={isPending}
+          loading={isPending}
           options={[...options].map(option => ({
             value: option,
             label: option
@@ -47,7 +48,7 @@ export const Filter = memo(
             onChange(name, newValues)
           }}
         />
-      </FormControl>
+      </FieldRoot>
     )
   }
 )

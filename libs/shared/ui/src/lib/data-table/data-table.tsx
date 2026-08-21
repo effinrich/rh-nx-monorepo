@@ -10,13 +10,13 @@ import {
 
 import {
   rh,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
+  TableRoot,
+  TableScrollArea,
+  TableBody,
+  TableCell,
+  TableColumnHeader,
+  TableHeader,
+  TableRow,
   TriangleDownIcon,
   TriangleUpIcon
 } from '../../index'
@@ -48,19 +48,19 @@ export function DataTable<Data extends object>({
   })
 
   return (
-    <TableContainer borderBottomRadius="8px">
-      <Table variant={variant} colorPalette={colorPalette}>
-        <Thead>
+    <TableScrollArea borderBottomRadius="8px">
+      <TableRoot variant={variant as any} colorPalette={colorPalette}>
+        <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
-            <Tr key={headerGroup.id}>
+            <TableRow key={headerGroup.id}>
               {headerGroup.headers.map(header => {
                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                 const meta: any = header.column.columnDef.meta
                 return (
-                  <Th
+                  <TableColumnHeader
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
-                    isNumeric={meta?.isNumeric}
+                    textAlign={meta?.isNumeric ? 'end' : undefined}
                   >
                     {flexRender(
                       header.column.columnDef.header,
@@ -76,28 +76,28 @@ export function DataTable<Data extends object>({
                         )
                       ) : null}
                     </rh.span>
-                  </Th>
+                  </TableColumnHeader>
                 )
               })}
-            </Tr>
+            </TableRow>
           ))}
-        </Thead>
-        <Tbody>
+        </TableHeader>
+        <TableBody>
           {table.getRowModel().rows.map(row => (
-            <Tr key={row.id}>
+            <TableRow key={row.id}>
               {row.getVisibleCells().map(cell => {
                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                 const meta: any = cell.column.columnDef.meta
                 return (
-                  <Td key={cell.id} isNumeric={meta?.isNumeric}>
+                  <TableCell key={cell.id} textAlign={meta?.isNumeric ? 'end' : undefined}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Td>
+                  </TableCell>
                 )
               })}
-            </Tr>
+            </TableRow>
           ))}
-        </Tbody>
-      </Table>
-    </TableContainer>
+        </TableBody>
+      </TableRoot>
+    </TableScrollArea>
   )
 }

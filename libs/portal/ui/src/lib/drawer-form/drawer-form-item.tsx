@@ -1,8 +1,8 @@
 import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot
 } from '@redesignhealth/ui'
 
 import { DrawerFormHeader } from '.'
@@ -17,11 +17,13 @@ export interface DrawerFormItemProps {
 
 export const DrawerFormItem = (props: DrawerFormItemProps) => {
   return (
-    <FormControl variant="flex-grid" isInvalid={props.isInvalid}>
-      <DrawerFormHeader as={FormLabel}>{props.label}</DrawerFormHeader>
+    <FieldRoot variant="flex-grid" invalid={props.isInvalid}>
+      <DrawerFormHeader as={FieldLabel}>{props.label}</DrawerFormHeader>
       {props.children}
-      <FormErrorMessage>{props.error}</FormErrorMessage>
-      <FormHelperText>{props.helperText}</FormHelperText>
-    </FormControl>
+      {/* @ts-expect-error Chakra v3 children typing */}
+      <FieldErrorText>{props.error}</FieldErrorText>
+      {/* @ts-expect-error Chakra v3 children typing */}
+      <FieldHelperText>{props.helperText}</FieldHelperText>
+    </FieldRoot>
   )
 }

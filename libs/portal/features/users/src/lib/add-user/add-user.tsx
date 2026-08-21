@@ -10,14 +10,14 @@ import {
   isSuperAdminRole
 } from '@redesignhealth/portal/utils'
 import {
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Input,
   Radio,
-  RadioGroup
+  RadioGroupRoot
 } from '@redesignhealth/ui'
 import { Select as MultiSelect } from 'chakra-react-select'
 import * as yup from 'yup'
@@ -116,7 +116,7 @@ export const AddUser = () => {
       title="Add User"
       description="Enter their information below."
       errors={errors}
-      isLoading={isPending}
+      loading={isPending}
       isError={isError}
       ctaText="Add user"
       isValid={isValid}
@@ -125,20 +125,21 @@ export const AddUser = () => {
     >
       <form>
         <Flex direction={['column', 'column', 'row']} gap="6" mb={6}>
-          <FormControl isInvalid={Boolean(errors.role)} isDisabled={isPending}>
-            <FormLabel htmlFor="role">User Type</FormLabel>
+          <FieldRoot invalid={Boolean(errors.role)} disabled={isPending}>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel htmlFor="role">User Type</FieldLabel>
             <Controller
               name="role"
               control={control}
               render={({ field: { onChange, name, ref } }) => (
-                <RadioGroup
+                <RadioGroupRoot
                   onChange={onChange}
                   as={Flex}
                   name={name}
                   ref={ref}
                   flexDir="column"
                   gap="24px"
-                  colorScheme="primary"
+                  colorPalette="primary"
                   mt="24px"
                 >
                   {USER_TYPE_OPTIONS.filter(role =>
@@ -150,43 +151,51 @@ export const AddUser = () => {
                       {role.label}
                     </Radio>
                   ))}
-                </RadioGroup>
+                </RadioGroupRoot>
               )}
             />
-            <FormErrorMessage role="alert">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText role="alert">
               {errors.role?.message}
-            </FormErrorMessage>
-          </FormControl>
+            </FieldErrorText>
+          </FieldRoot>
         </Flex>
         {userType !== undefined && (
           <Flex flexDir="column" mt="24px" gap="24px">
-            <FormControl isDisabled={isPending}>
-              <FormLabel htmlFor="email">Email</FormLabel>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="email">Email</FieldLabel>
               <Input
                 placeholder="jane.doe@example.com"
                 {...register('email')}
               />
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.email?.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isDisabled={isPending}>
-              <FormLabel htmlFor="givenName">First Name</FormLabel>
+              </FieldErrorText>
+            </FieldRoot>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="givenName">First Name</FieldLabel>
               <Input placeholder="Jane" {...register('givenName')} />
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.givenName?.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isDisabled={isPending}>
-              <FormLabel htmlFor="familyName">Last name</FormLabel>
+              </FieldErrorText>
+            </FieldRoot>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="familyName">Last name</FieldLabel>
               <Input placeholder="Doe" {...register('familyName')} />
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.familyName?.message}
-              </FormErrorMessage>
-            </FormControl>
+              </FieldErrorText>
+            </FieldRoot>
 
-            <FormControl isDisabled={isPending}>
-              <FormLabel htmlFor="memberOf">Company assignment</FormLabel>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="memberOf">Company assignment</FieldLabel>
               {isGetSuccess && (
                 <Controller
                   name="memberOf"
@@ -202,18 +211,20 @@ export const AddUser = () => {
                       }}
                       closeMenuOnSelect={false}
                       blurInputOnSelect={false}
-                      colorScheme="primary"
+                      colorPalette="primary"
                     />
                   )}
                 />
               )}
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.memberOf?.message}
-              </FormErrorMessage>
-              <FormHelperText>
+              </FieldErrorText>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldHelperText>
                 Select the companies this user is assigned to.
-              </FormHelperText>
-            </FormControl>
+              </FieldHelperText>
+            </FieldRoot>
           </Flex>
         )}
       </form>

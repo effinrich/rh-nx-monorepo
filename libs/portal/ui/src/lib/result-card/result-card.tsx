@@ -6,11 +6,11 @@ import {
 import {
   Box,
   BoxProps,
-  Card,
+  CardRoot,
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
+  Separator,
   Heading,
   IconButton
 } from '@redesignhealth/ui'
@@ -37,13 +37,13 @@ export const ResultCard = ({
       Module: MdOutlineInsertDriveFile
     }
     const DefaultIcon = MdWebStories
-    const Icon = IconMap[contentType] || DefaultIcon
+    const Icon = IconMap[contentType as keyof typeof IconMap] || DefaultIcon
 
     return <Icon size="22px" />
   }
 
   return (
-    <Card
+    <CardRoot
       {...props}
       maxW="500px"
       // as={motion.div}
@@ -77,11 +77,12 @@ export const ResultCard = ({
           <IconButton
             aria-label="Search database"
             color={`libType${contentType}.500`}
-            colorScheme="libIconGray"
-            icon={getIcon()}
+            colorPalette="libIconGray"
             maxW="55px"
             maxH="55px"
-          />
+          >
+            {getIcon()}
+          </IconButton>
         </Box>
       </CardHeader>
       <CardBody
@@ -94,8 +95,8 @@ export const ResultCard = ({
         {description}
       </CardBody>
       <CardFooter>
-        <Divider />
+        <Separator />
       </CardFooter>
-    </Card>
+    </CardRoot>
   )
 }

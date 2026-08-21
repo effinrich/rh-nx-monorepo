@@ -1,11 +1,17 @@
 import { render } from '@redesignhealth/shared-utils-jest'
 
-import { Drawer } from './drawer'
+import { DrawerContent, DrawerPositioner, DrawerRoot } from './drawer'
 
 describe('Drawer', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
-      <Drawer children={<div>Hello</div>} onClose={() => ''} open />
+      <DrawerRoot onOpenChange={() => undefined} open>
+        <DrawerPositioner>
+          <DrawerContent>
+            <div>Hello</div>
+          </DrawerContent>
+        </DrawerPositioner>
+      </DrawerRoot>
     )
     expect(baseElement).toBeTruthy()
   })

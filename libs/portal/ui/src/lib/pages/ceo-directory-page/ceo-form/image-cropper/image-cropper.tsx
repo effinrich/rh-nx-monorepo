@@ -4,17 +4,19 @@ import { MdImage } from 'react-icons/md'
 import {
   Box,
   Button,
-  Divider,
+  Separator,
   HStack,
   Icon,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Slider,
-  SliderFilledTrack,
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner,
+  DialogRoot,
+  SliderControl,
+  SliderRange,
+  SliderRoot,
   SliderThumb,
   SliderTrack
 } from '@redesignhealth/ui'
@@ -22,14 +24,14 @@ import {
 import { getCroppedImg } from './util'
 
 export interface ImageCropperProps {
-  isOpen: boolean
+  open: boolean
   onClose(): void
   onSuccess(croppedFile: File | null): void
   imageSrc: string
 }
 
 const ImageCropper = ({
-  isOpen,
+  open,
   onClose,
   onSuccess,
   imageSrc
@@ -39,12 +41,21 @@ const ImageCropper = ({
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>()
 
   return (
-    <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Adjust photo</ModalHeader>
-        <Divider />
-        <ModalBody px={10}>
+    <DialogRoot
+      size="xl"
+      open={open}
+      onOpenChange={(e: { open: boolean }) => {
+        if (!e.open) onClose()
+      }}
+    >
+      <DialogBackdrop />
+      {/* @ts-expect-error Chakra v3 children typing */}
+      <DialogPositioner>
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <DialogContent maxW="48rem">
+          <DialogHeader>Adjust photo</DialogHeader>
+          <Separator />
+          <DialogBody px={10}>
           <Box position="relative" h={400} my={4}>
             <Cropper
               image={imageSrc}
@@ -62,30 +73,32 @@ const ImageCropper = ({
           </Box>
           <HStack gap={6} pt={4} pb={8}>
             <Icon as={MdImage} boxSize={6} />
-            <Slider
-              colorScheme="primary"
+            <SliderRoot
+              colorPalette="primary"
               aria-label="slider-ex-1"
-              value={zoom}
+              value={[zoom]}
               min={1}
               step={0.1}
               max={3}
-              onChange={setZoom}
+              onValueChange={({ value }) => setZoom(value[0] ?? zoom)}
             >
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb />
-            </Slider>
+              <SliderControl>
+                <SliderTrack>
+                  <SliderRange />
+                </SliderTrack>
+                <SliderThumb index={0} />
+              </SliderControl>
+            </SliderRoot>
             <Icon as={MdImage} boxSize={8} />
           </HStack>
-        </ModalBody>
-        <Divider />
-        <ModalFooter gap="3">
+        </DialogBody>
+        <Separator />
+        <DialogFooter gap="3">
           <Button variant="outline" onClick={onClose}>
             Cancel
           </Button>
           <Button
-            colorScheme="primary"
+            colorPalette="primary"
             onClick={async () => {
               if (croppedAreaPixels) {
                 const croppedFile = await getCroppedImg(
@@ -99,9 +112,10 @@ const ImageCropper = ({
           >
             Save picture
           </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </DialogFooter>
+        </DialogContent>
+      </DialogPositioner>
+    </DialogRoot>
   )
 }
 

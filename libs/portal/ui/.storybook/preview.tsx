@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { ChakraProvider, createSystem, defaultConfig } from '@chakra-ui/react'
-import { ColorModeProvider, theme } from '@redesignhealth/ui'
+import { ChakraProvider } from '@chakra-ui/react'
+import { ColorModeProvider, system } from '@redesignhealth/ui'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 
@@ -16,24 +16,13 @@ const queryClient = new QueryClient({
   }
 })
 
-const system = createSystem(defaultConfig, {
-  theme: {
-    tokens: {
-      fonts: {
-        heading: { value: 'Inter, sans-serif' },
-        body: { value: 'Inter, sans-serif' },
-        mono: { value: 'Roboto Mono, monospace' }
-      }
-    }
-  }
-})
-
 const preview: Preview = {
   parameters: {
     actions: { disable: true },
     docs: {
       toc: true // 👈 Enables the table of contents
     },
+    autodocs: true,
     controls: {
       // expanded: true,
       hideNoControlsWarning: true,

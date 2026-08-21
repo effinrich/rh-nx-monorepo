@@ -1,9 +1,9 @@
 import {
   Button,
-  Card,
+  CardRoot,
   CardFooter,
   CardHeader,
-  Divider
+  Separator
 } from '@redesignhealth/ui'
 
 import OptInForm from './partials/opt-in-form'
@@ -20,23 +20,23 @@ const OptInQuestion = ({
   setIsOptIn
 }: OptInQuestionProps) => {
   return (
-    <Card variant="outline">
+    <CardRoot variant="outline">
       <CardHeader>
         Do you wish to opt in to sharing your information with other founders?
         You can always change this later in your CEO profile.
       </CardHeader>
-      <Divider />
+      <Separator />
       <OptInForm isOptIn={isOptIn} setIsOptIn={setIsOptIn} />
-      <Divider />
+      <Separator />
       <CardFooter justify="flex-end" gap={3}>
-        <Button variant="ghost" isDisabled>
+        <Button variant="ghost" disabled>
           Back
         </Button>
-        <Button variant="primary" isDisabled={!isOptIn} onClick={handleConfirm}>
+        <Button variant="solid" colorPalette="primary" disabled={!isOptIn} onClick={handleConfirm}>
           Continue
         </Button>
       </CardFooter>
-    </Card>
+    </CardRoot>
   )
 }
 

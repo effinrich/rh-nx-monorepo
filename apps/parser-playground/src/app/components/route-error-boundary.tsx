@@ -87,7 +87,7 @@ export const RouteErrorBoundary = () => {
       <Box mt="48px">
         <Button
           onClick={() => (window.location.href = '/')}
-          colorScheme="primary"
+          colorPalette="primary"
           size={{ base: 'md', md: 'lg' }}
         >
           Click here to reload the app

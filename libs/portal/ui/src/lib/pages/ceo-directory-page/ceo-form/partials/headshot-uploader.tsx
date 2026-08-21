@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react'
 import { useCreateAsset } from '@redesignhealth/portal/data-assets'
 import {
-  Avatar,
+  AvatarRoot,
+  AvatarImage,
+  AvatarFallback,
   Button,
   HStack,
   Loader,
@@ -59,13 +61,17 @@ const HeadshotUploader = ({
         {isPictureUploading ? (
           <Loader size="xl" minHeight="96px" w="96px" flex="inherit" />
         ) : (
-          <Avatar size="xl" src={href} bg="gray.400" />
+          <AvatarRoot size="xl" bg="gray.400">
+            {/* @ts-expect-error Chakra v3 compound component typing */}
+            <AvatarImage src={href} />
+            <AvatarFallback />
+          </AvatarRoot>
         )}
 
         <Stack align="flex-start" gap="2" justify="center">
           <Button
-            variant="link"
-            colorScheme="primary"
+            variant="plain"
+            colorPalette="primary"
             onClick={() => {
               if (inputRef.current) {
                 // reset value so we can trigger file->onChange event
@@ -77,7 +83,7 @@ const HeadshotUploader = ({
             Click to upload an image
           </Button>
           <Button
-            variant="link"
+            variant="plain"
             onClick={() => {
               setFileValue('')
               onClear()
@@ -91,10 +97,10 @@ const HeadshotUploader = ({
           )}
         </Stack>
       </HStack>
-      {uploadModal.isOpen && newFileDataUrl && (
+      {uploadModal.open && newFileDataUrl && (
         <ImageCropper
           imageSrc={newFileDataUrl}
-          isOpen={uploadModal.isOpen}
+          open={uploadModal.open}
           onClose={uploadModal.onClose}
           onSuccess={croppedFile => {
             if (croppedFile) {

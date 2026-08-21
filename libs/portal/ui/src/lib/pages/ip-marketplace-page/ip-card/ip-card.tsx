@@ -55,13 +55,12 @@ export const IPCard = ({
         >
           {rightElement || (
             <Button
-              as={Link}
-              to={`/ip-marketplace/${id}`}
-              colorScheme="primary"
+              asChild
+              colorPalette="primary"
               variant="solid"
               width={['100%', '100%', 'initial']}
             >
-              View details
+              <Link to={`/ip-marketplace/${id}`}>View details</Link>
             </Button>
           )}
         </ListCardHeader>
@@ -101,7 +100,7 @@ export const IPCard = ({
         )}
         {executiveSummary && (
           <ListCardRow title="Executive summary">
-            <Text noOfLines={3}>{executiveSummary}</Text>
+            <Text lineClamp={3}>{executiveSummary}</Text>
           </ListCardRow>
         )}
       </ListCardRowsContainer>

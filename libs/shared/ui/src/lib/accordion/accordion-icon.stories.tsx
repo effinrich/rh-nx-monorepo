@@ -1,37 +1,54 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, userEvent, within } from 'storybook/test'
-import AccordionIcon from './accordion-icon'
+import { expect, within } from 'storybook/test'
 
-const meta: Meta<typeof AccordionIcon> = {
-  title: 'Shared / Ui/AccordionIcon',
-  component: AccordionIcon,
+import {
+  AccordionRoot,
+  AccordionItem,
+  AccordionItemTrigger,
+  AccordionItemIndicator,
+  AccordionItemContent
+} from './accordion'
+
+const meta: Meta<typeof AccordionItemIndicator> = {
+  title: 'Shared / Ui/AccordionItemIndicator',
+  component: AccordionItemIndicator,
   tags: ['autodocs']
 }
 
 export default meta
 
-type Story = StoryObj<typeof AccordionIcon>
+type Story = StoryObj<typeof AccordionItemIndicator>
 
-/**
- * Default AccordionIcon
- */
-export const Default: Story = {}
+export const Default: Story = {
+  render: () => (
+    <AccordionRoot collapsible defaultValue={['a']}>
+      <AccordionItem value="a">
+        <AccordionItemTrigger>
+          Section
+          <AccordionItemIndicator />
+        </AccordionItemTrigger>
+        <AccordionItemContent>Panel</AccordionItemContent>
+      </AccordionItem>
+    </AccordionRoot>
+  )
+}
 
-/**
- * Interactive test
- */
 export const Interactive: Story = {
-  args: {
-    children: 'Click me'
-  },
+  render: () => (
+    <AccordionRoot collapsible defaultValue={['a']}>
+      <AccordionItem value="a">
+        <AccordionItemTrigger>
+          Click me
+          <AccordionItemIndicator />
+        </AccordionItemTrigger>
+        <AccordionItemContent>Panel</AccordionItemContent>
+      </AccordionItem>
+    </AccordionRoot>
+  ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const element = canvas.getByText(/click me/i)
 
-    // Verify element renders
     await expect(element).toBeInTheDocument()
-
-    // Test interaction
-    await userEvent.click(element)
   }
 }

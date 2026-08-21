@@ -9,9 +9,9 @@ import {
 import {
   Box,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel
+  FieldErrorText,
+  FieldLabel,
+  FieldRoot
 } from '@redesignhealth/ui'
 
 import { getInputName } from './utils'
@@ -42,32 +42,33 @@ export const FormItem = ({
       _first={{ mt: '16px' }}
       _notFirst={{ mt: '32px' }}
     >
-      <FormControl isInvalid={Boolean(error)}>
+      <FieldRoot invalid={Boolean(error)}>
         <DrawerFormHeader>{categoryName}</DrawerFormHeader>
-        <DrawerFormDescription as={FormLabel}>
+        <DrawerFormDescription as={FieldLabel}>
           {serviceName}
         </DrawerFormDescription>
         <Box mt="16px">
           <DrawerFormRadioGroup
             name={getInputName(categoryName, serviceName)}
             options={[{ value: 'Yes' }, { value: 'No' }]}
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
             defaultValue={radioDefaultValue}
           />
         </Box>
-        <FormErrorMessage>{error}</FormErrorMessage>
-      </FormControl>
-      <FormControl>
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <FieldErrorText>{error}</FieldErrorText>
+      </FieldRoot>
+      <FieldRoot>
         <DrawerFormHeader>Comment</DrawerFormHeader>
         <DrawerFormInput
           name={getInputName(categoryName, serviceName, true)}
           aria-label="If you answered no to the previous question, please provide an alternative service the company will use."
           placeholder="Enter an alternative service if your response was “No”"
           defaultValue={commentDefaultValue}
-          isReadOnly={isReadOnly}
+          readOnly={isReadOnly}
           mt="6px"
         />
-      </FormControl>
+      </FieldRoot>
       {learnMoreItems && (
         <DrawerFormAccordion title="Learn more" listItems={learnMoreItems} />
       )}
