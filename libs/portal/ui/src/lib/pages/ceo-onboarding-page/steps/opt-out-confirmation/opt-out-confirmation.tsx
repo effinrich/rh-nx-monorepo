@@ -10,7 +10,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
+  Separator,
   Text
 } from '@redesignhealth/ui'
 
@@ -41,7 +41,7 @@ const OptOutConfirmation = ({ handleCancel }: OptOutConfirmationProps) => {
           You can always opt back in should you change your mind later.
         </Text>
       </CardHeader>
-      <Divider />
+      <Separator />
       <CardBody>
         <CardRoot variant="outline">
           <CardBody>
@@ -57,7 +57,7 @@ const OptOutConfirmation = ({ handleCancel }: OptOutConfirmationProps) => {
           </CardBody>
         </CardRoot>
       </CardBody>
-      <Divider />
+      <Separator />
       {ceo && (
         <CardFooter display="flex" justify="flex-end" gap={3}>
           <Button variant="outline" onClick={handleCancel}>

@@ -1,59 +1,64 @@
 import { Box, BoxProps } from '@chakra-ui/react'
 
+const proseClass = 'chakra-prose'
+
 /**
  * Prose component — v3-compatible replacement for @nikolovlazar/chakra-ui-prose.
  *
- * Wraps rich HTML content (from CMS / Google Docs parser) with sensible
- * typographic defaults via a CSS class. Add `prose` styles to your global
- * stylesheet or theme if you need custom typography.
+ * Nested typography lives in a stylesheet (not Chakra `css` selectors) because
+ * v3's css() crashes on descendant selector maps (`prop.startsWith is not a function`).
  */
-export const Prose = ({ children, ...rest }: BoxProps) => (
-  <Box
-    className="chakra-prose"
-    css={{
-      '& h1, & h2, & h3, & h4, & h5, & h6': {
-        fontWeight: 'bold',
-        lineHeight: '1.3',
-        marginTop: '1.5em',
-        marginBottom: '0.5em',
-      },
-      '& h1': { fontSize: '2xl' },
-      '& h2': { fontSize: 'xl' },
-      '& h3': { fontSize: 'lg' },
-      '& p': { marginBottom: '1em', lineHeight: '1.7' },
-      '& ul, & ol': { paddingLeft: '1.5em', marginBottom: '1em' },
-      '& li': { marginBottom: '0.25em' },
-      '& a': { color: 'blue.500', textDecoration: 'underline' },
-      '& blockquote': {
-        borderLeftWidth: '4px',
-        borderLeftColor: 'gray.300',
-        paddingLeft: '1em',
-        fontStyle: 'italic',
-        marginBottom: '1em',
-      },
-      '& pre, & code': {
-        fontFamily: 'mono',
-        fontSize: 'sm',
-        backgroundColor: 'gray.100',
-        borderRadius: 'md',
-        padding: '0.2em 0.4em',
-      },
-      '& pre': {
-        padding: '1em',
-        overflowX: 'auto',
-        marginBottom: '1em',
-      },
-      '& pre code': { backgroundColor: 'transparent', padding: 0 },
-      '& img': { maxWidth: '100%', height: 'auto' },
-      '& table': { width: '100%', borderCollapse: 'collapse', marginBottom: '1em' },
-      '& th, & td': { border: '1px solid', borderColor: 'gray.200', padding: '0.5em' },
-      '& th': { backgroundColor: 'gray.50', fontWeight: 'bold' },
-      '& hr': { borderColor: 'gray.200', marginY: '2em' },
-      // Utility class for images that should span the full width of the prose container (e.g. CMS content)
-      '& .wide-image': { width: '100%' },
-    }}
-    {...rest}
-  >
+const proseStyles = `
+.${proseClass} h1, .${proseClass} h2, .${proseClass} h3, .${proseClass} h4, .${proseClass} h5, .${proseClass} h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.${proseClass} h1 { font-size: 1.5rem; }
+.${proseClass} h2 { font-size: 1.25rem; }
+.${proseClass} h3 { font-size: 1.125rem; }
+.${proseClass} p { margin-bottom: 1em; line-height: 1.7; }
+.${proseClass} ul, .${proseClass} ol { padding-left: 1.5em; margin-bottom: 1em; }
+.${proseClass} li { margin-bottom: 0.25em; }
+.${proseClass} a { color: var(--chakra-colors-blue-500, #3182ce); text-decoration: underline; }
+.${proseClass} blockquote {
+  border-left: 4px solid var(--chakra-colors-gray-300, #cbd5e0);
+  padding-left: 1em;
+  font-style: italic;
+  margin-bottom: 1em;
+}
+.${proseClass} code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+  background: var(--chakra-colors-gray-100, #edf2f7);
+  border-radius: 0.375rem;
+  padding: 0.2em 0.4em;
+}
+.${proseClass} pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+  background: var(--chakra-colors-gray-100, #edf2f7);
+  border-radius: 0.375rem;
+  padding: 1em;
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+.${proseClass} pre code { background: transparent; padding: 0; }
+.${proseClass} img { max-width: 100%; height: auto; }
+.${proseClass} table { width: 100%; border-collapse: collapse; margin-bottom: 1em; }
+.${proseClass} th, .${proseClass} td {
+  border: 1px solid var(--chakra-colors-gray-200, #e2e8f0);
+  padding: 0.5em;
+}
+.${proseClass} th { background: var(--chakra-colors-gray-50, #f7fafc); font-weight: 700; }
+.${proseClass} hr { border-color: var(--chakra-colors-gray-200, #e2e8f0); margin: 2em 0; }
+.${proseClass} .wide-image { width: 100%; }
+`
+
+export const Prose = ({ children, className, ...rest }: BoxProps) => (
+  <Box className={[proseClass, className].filter(Boolean).join(' ')} {...rest}>
+    <style>{proseStyles}</style>
     {children}
   </Box>
 )

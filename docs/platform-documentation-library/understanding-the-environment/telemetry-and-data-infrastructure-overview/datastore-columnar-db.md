@@ -30,6 +30,6 @@ Amazon Redshift uses SQL to analyze structured and semi-structured data across d
 
 ## Benefits
 
-* Terraform Scripts will allow for a selection of the  the leading Columnar DB solutions
-* They all come in varying support model from Managed, to Cloud Native 
-* OpCos can select based on their set of requirements and level of familiarity and comfort 
+- Terraform Scripts will allow for a selection of the the leading Columnar DB solutions
+- They all come in varying support model from Managed, to Cloud Native
+- OpCos can select based on their set of requirements and level of familiarity and comfort

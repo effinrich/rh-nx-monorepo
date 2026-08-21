@@ -10,21 +10,14 @@ import {
   FieldHelperText,
   FieldLabel,
   FieldRoot,
-  InputProps,
   Stack,
   Text
 } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
 
-import {
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  InputLeftElement,
-  InputRightAddon,
-  InputRightElement
-} from './input'
+import { FlushedCustomInput } from './partials/flushed-custom-input'
+import { Input, InputGroup } from './input'
 
 export default {
   title: 'Components / Forms / Input',
@@ -70,9 +63,9 @@ export const WithSizes = () => (
 export const WithStates = () => (
   <Stack align="start">
     <Input placeholder="Idle" />
-    <Input isInvalid placeholder="isInvalid" />
+    <Input invalid placeholder="isInvalid" />
     <Input disabled placeholder="isDisabled" />
-    <Input isReadOnly placeholder="isReadonly" />
+    <Input readOnly placeholder="isReadonly" />
   </Stack>
 )
 
@@ -87,30 +80,28 @@ export const WithVariants = () => (
 
 export const WithInputAddon = () => (
   <Stack align="start">
-    <InputGroup>
-      <InputLeftAddon children="+234" />
+    <InputGroup startAddon="+234">
       <Input placeholder="Phone number..." />
     </InputGroup>
 
-    <InputGroup size="sm">
-      <InputLeftAddon children="https://" />
+    <InputGroup size="sm" startAddon="https://" endAddon=".com">
       <Input placeholder="website.com" />
-      <InputRightAddon children=".com" />
     </InputGroup>
   </Stack>
 )
 
 export const WithInputElement = () => (
   <Stack align="start">
-    <InputGroup>
-      <InputLeftElement children={<LuPhone color="gray.300" />} />
-      <Input paddingStart="60px" type="tel" placeholder="Phone number" />
+    <InputGroup startElement={<LuPhone color="gray.300" />}>
+      <Input type="tel" placeholder="Phone number" />
     </InputGroup>
 
-    <InputGroup size="sm">
-      <InputLeftElement color="gray.300" fontSize="1.2em" children="$" />
+    <InputGroup
+      size="sm"
+      startElement="$"
+      endElement={<LuCheck color="green.500" />}
+    >
       <Input placeholder="Enter amount" />
-      <InputRightElement children={<LuCheck color="green.500" />} />
     </InputGroup>
   </Stack>
 )
@@ -120,15 +111,16 @@ export function PasswordInput() {
   const handleClick = () => setShow(!show)
 
   return (
-    <InputGroup size="md">
+    <InputGroup
+      size="md"
+      endElement={
+        <Button onClick={handleClick}>{show ? 'Hide' : 'Show'}</Button>
+      }
+    >
       <Input
-        paddingEnd="4.5rem"
         type={show ? 'text' : 'password'}
         placeholder="Enter password"
       />
-      <InputRightElement width="4.5rem">
-        <Button onClick={handleClick}>{show ? 'Hide' : 'Show'}</Button>
-      </InputRightElement>
     </InputGroup>
   )
 }
@@ -143,13 +135,13 @@ export const WithFocusAndErrorColors = () => (
     />
 
     <Input
-      isInvalid
+      invalid
       errorBorderColor="red.300"
       placeholder="Here is a sample placeholder"
     />
 
     <Input
-      isInvalid
+      invalid
       errorBorderColor="crimson"
       placeholder="Here is a sample placeholder"
     />
@@ -170,7 +162,7 @@ function FormError(props: any) {
   )
 }
 
-export const WithFormControl = () => {
+export const WithField = () => {
   const [isError, setIsError] = React.useState(false)
   return (
     <Stack align="start">
@@ -181,10 +173,8 @@ export const WithFormControl = () => {
           </FieldLabel>
           <FormError>is invalid!</FormError>
         </Box>
-        <InputGroup size="sm">
-          <InputLeftElement children="$" />
+        <InputGroup size="sm" startElement="$" endAddon=".com">
           <Input placeholder="Enter amount" />
-          <InputRightAddon children=".com" />
         </InputGroup>
         <FieldHelperText>Keep it very short and sweet!</FieldHelperText>
       </FieldRoot>
@@ -194,12 +184,11 @@ export const WithFormControl = () => {
 }
 
 export const WithInputElementBug = () => {
-  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true })
+  const { open, onToggle } = useDisclosure({ defaultOpen: true })
   return (
     <>
       <button onClick={onToggle}>Toggle element</button>
-      <InputGroup>
-        {isOpen && <InputLeftElement>O</InputLeftElement>}
+      <InputGroup startElement={open ? 'O' : undefined}>
         <Input name="input" placeholder="placeholder" />
       </InputGroup>
     </>
@@ -210,13 +199,9 @@ export const InputGroupCustomInputProps = () => {
   return (
     <>
       <InputGroup>
-        <CustomInput m="10px" placeholder="should be flushed" />
+        <FlushedCustomInput m="10px" placeholder="should be flushed" />
       </InputGroup>
-      <CustomInput m="10px" placeholder="is flushed" />
+      <FlushedCustomInput m="10px" placeholder="is flushed" />
     </>
   )
 }
-
-const CustomInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
-  <Input ref={ref} color="gray.600" variant="flushed" {...props} />
-))

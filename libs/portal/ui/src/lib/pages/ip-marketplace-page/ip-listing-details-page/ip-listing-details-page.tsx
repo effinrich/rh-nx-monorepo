@@ -13,9 +13,9 @@ import {
 import {
   Box,
   Loader,
-  Tab,
-  TabList,
+  TabsList,
   TabsRoot,
+  TabsTrigger,
   useDisclosure
 } from '@redesignhealth/ui'
 
@@ -82,21 +82,21 @@ const IpListingDetailsPage = () => {
             )
           }
         />
-        <TabsRoot index={activeTab} colorPalette="primary">
-          <TabList>
+        <TabsRoot value={tabs[activeTab]?.to} colorPalette="primary">
+          <TabsList>
             {tabs.length > 1 &&
               tabs.map(tab => (
-                <Tab key={tab.to} asChild>
+                <TabsTrigger key={tab.to} value={tab.to} asChild>
                   <RouterLink to={tab.to} replace>
                     {tab.label}
                   </RouterLink>
-                </Tab>
+                </TabsTrigger>
               ))}
-          </TabList>
+          </TabsList>
           <Outlet />
         </TabsRoot>
       </DetailsCard>
-      <BuyerRequestModal onClose={onClose} isOpen={open} />
+      <BuyerRequestModal onClose={onClose} open={open} />
     </Box>
   )
 }

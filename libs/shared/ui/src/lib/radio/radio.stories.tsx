@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Wrap, WrapItem } from '@chakra-ui/react'
+import { expect, userEvent, within } from 'storybook/test'
 
 import { Container, SimpleGrid, Stack } from '../../index'
 
@@ -14,32 +15,60 @@ export default {
   decorators: [(story: any) => <Container mt="40px">{story()}</Container>]
 }
 
-export const Basic = () => <Radio>Hello</Radio>
+export const Basic = () => (
+  <RadioGroupRoot>
+    <Radio value="hello">Hello</Radio>
+  </RadioGroupRoot>
+)
 
-export const Disabled = () => <Radio disabled>Disabled</Radio>
+export const Disabled = () => (
+  <RadioGroupRoot>
+    <Radio value="disabled" disabled>
+      Disabled
+    </Radio>
+  </RadioGroupRoot>
+)
 
 export const Readonly = () => (
-  <Radio mt="40px" isChecked isReadOnly size="lg" colorPalette="green">
-    I'm a readonly radio
-  </Radio>
+  <RadioGroupRoot defaultValue="readonly">
+    <Radio value="readonly" readOnly size="lg" colorPalette="green">
+      I'm a readonly radio
+    </Radio>
+  </RadioGroupRoot>
 )
+
+export const Interactive = {
+  render: () => (
+    <RadioGroupRoot>
+      <Radio value="one">One</Radio>
+      <Radio value="two">Two</Radio>
+    </RadioGroupRoot>
+  ),
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByText('One'))
+    await expect(canvas.getByRole('radio', { name: 'One' })).toBeChecked()
+  }
+}
 
 export const WithSizes = () => {
   const sizes = ['sm', 'md', 'lg']
 
   return (
     <>
-      {sizes.map(size => (
-        <Radio
-          key={size}
-          size={size}
-          name="sample"
-          ml="1rem"
-          colorPalette="green"
-        >
-          Option
-        </Radio>
-      ))}
+      <RadioGroupRoot>
+        {sizes.map(size => (
+          <Radio
+            key={size}
+            size={size}
+            value={size}
+            ml="1rem"
+            colorPalette="green"
+          >
+            Option
+          </Radio>
+        ))}
+      </RadioGroupRoot>
     </>
   )
 }

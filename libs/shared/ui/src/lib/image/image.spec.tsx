@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render } from '@redesignhealth/shared-utils-jest'
 
 import { Image } from './image'
 

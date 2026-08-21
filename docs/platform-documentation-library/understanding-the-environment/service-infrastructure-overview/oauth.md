@@ -19,14 +19,14 @@ Okta (optional)
 
 The Platform uses Google authentication and OAuth in the following ways:
 
-* All users to an infrastructure will first be added to the Google workspace as a standard practice
-* For OAuth:
-* * The Platform will use Google to authenticate the user against the Google workspace. Doing so allows a no-cost initial entry to getting authentication into the infrastructure and platform resources
-* Authentication will be managed from a single location  via Google
-* After an OpCo is ready to establish a native CIAM, authentication can be migrated to Okta
-* Using Google provides a free, no-effort management for OAuth (Standard - Recommended)
-* Okta allows for growth and an advanced management fidelity for future growth (Optional)
-
+- All users to an infrastructure will first be added to the Google workspace as a standard practice
+- For OAuth:
+- - The Platform will use Google to authenticate the user against the Google workspace. Doing so allows a no-cost initial entry to getting authentication into the infrastructure and platform resources
+- Authentication will be managed from a single location via Google
+- After an OpCo is ready to establish a native CIAM, authentication can be migrated to Okta
+- Using Google provides a free, no-effort management for OAuth (Standard - Recommended)
+- Okta allows for growth and an advanced management fidelity for future growth (Optional)
 
 ## Images
+
 ![OAuth Screenshot](images/okta.png)

@@ -15,24 +15,24 @@ During your bounded engagement, work with your Relationship Manager and Redesign
 
 Includes sections on:
 
-* Privacy and Security Officer
+- Privacy and Security Officer
 
-* Risk Analysis and Contingency Plan
+- Risk Analysis and Contingency Plan
 
-* Business Associate Agreements with Covered Entities
+- Business Associate Agreements with Covered Entities
 
-* Business Associate Agreements with Subcontractors
+- Business Associate Agreements with Subcontractors
 
-* Use of Technical, Administrative and Physical Safeguards
+- Use of Technical, Administrative and Physical Safeguards
 
-* Individual Right of Access, Right of Accounting, and Amendments
+- Individual Right of Access, Right of Accounting, and Amendments
 
-* HIPAA Violations, Security Incidents, and Data Breaches
+- HIPAA Violations, Security Incidents, and Data Breaches
 
-* Employee Sanctions
+- Employee Sanctions
 
-* Training
+- Training
 
-* Document Retention
+- Document Retention
 
-* *Appendices:* Glossary, Board Resolutions to Appoint Privacy and Security Officer, Privacy and Security Officer Job Description, HIPAA Authorization, Email Disclaimer, and more.
+- _Appendices:_ Glossary, Board Resolutions to Appoint Privacy and Security Officer, Privacy and Security Officer Job Description, HIPAA Authorization, Email Disclaimer, and more.

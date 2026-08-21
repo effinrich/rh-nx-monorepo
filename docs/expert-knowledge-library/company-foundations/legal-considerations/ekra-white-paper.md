@@ -3,8 +3,8 @@ cardTitle: 'Eliminating Kickbacks in Recovery Act (EKRA): An Additional Fraud an
 description: This resource explains why Redesign Health Operating Companies (OpCos) providing or contracting with recovery homes, clinical treatment facilities, and laboratories should be aware of the Eliminating Kickback in Recovery Act (2018).
 labels:
   - article
-
 ---
+
 # Eliminating Kickbacks in Recovery Act (EKRA): An Additional Fraud and Abuse Consideration Related to Drug Treatment and Laboratory Services
 
 This resource explains why Redesign Health Operating Companies (OpCos) providing or contracting with recovery homes, clinical treatment facilities, and laboratories should be aware of the Eliminating Kickback in Recovery Act (EKRA) of 2018.

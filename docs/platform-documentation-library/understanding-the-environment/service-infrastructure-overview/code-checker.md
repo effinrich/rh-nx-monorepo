@@ -14,7 +14,6 @@ Veracode Static Analysis provides fast, automated security feedback to developer
 
 **Repository:** [GitHub](https://github.com/veracode/Veracode-Community-Projects)
 
-
 ## Dynamic Code Checker - OWASP ZAP
 
 The OWASP Zed Attack Proxy (ZAP) is one of the world’s most popular free security tools and is actively maintained by a dedicated international team of volunteers. It can help you automatically find security vulnerabilities in your web applications while you are developing and testing your applications. It's also a great tool for experienced pentesters to use for manual security testing.
@@ -31,6 +30,6 @@ The OWASP Zed Attack Proxy (ZAP) is one of the world’s most popular free secur
 
 ## Benefits
 
-* Both are highly recommended and popular in the tech industry
-* Will provide and meet the standards set for all static and dynamic scans
-* This will be automatically included in all pipelines
+- Both are highly recommended and popular in the tech industry
+- Will provide and meet the standards set for all static and dynamic scans
+- This will be automatically included in all pipelines

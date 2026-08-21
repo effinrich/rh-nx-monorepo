@@ -1,26 +1,16 @@
-// Chakra UI v3: FormControl has been renamed to Field
-// See: https://chakra-ui.com/docs/get-started/migration
+import { Field as ChakraField } from '@chakra-ui/react'
 
-// In Chakra v3, `Field` is a namespace object (not a component).
-// Export FieldRoot as Field for backward compat.
-export { FieldRoot as Field } from '@chakra-ui/react'
+export const Field = ChakraField
+export const FieldRoot = ChakraField.Root
+export const FieldLabel = ChakraField.Label
+export const FieldHelperText = ChakraField.HelperText
+export const FieldErrorText = ChakraField.ErrorText
+export const FieldErrorIcon = ChakraField.ErrorIcon
+export const FieldRequiredIndicator = ChakraField.RequiredIndicator
 
-// Export Field compound components (v3 recommended pattern)
-export {
-  FieldRoot,
-  FieldLabel,
-  FieldHelperText,
-  FieldErrorText,
-  FieldErrorIcon,
-  FieldRequiredIndicator
-} from '@chakra-ui/react'
-
-// Re-export with v2 names for backward compatibility during migration
-// These are deprecated - use Field.* components instead
-export {
-  FieldRoot as FormControl,
-  FieldLabel as FormLabel,
-  FieldHelperText as FormHelperText,
-  FieldErrorText as FormErrorMessage,
-  FieldErrorIcon as FormErrorIcon
+export type {
+  FieldRootProps,
+  FieldLabelProps,
+  FieldHelperTextProps,
+  FieldErrorTextProps
 } from '@chakra-ui/react'

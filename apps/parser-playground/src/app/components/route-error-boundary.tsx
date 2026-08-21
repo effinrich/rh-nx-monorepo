@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import { ApiError } from '@redesignhealth/portal/data-assets'
 import { Box, Button, Flex, Heading, Text } from '@redesignhealth/ui'
-import {  AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 
 import { logout } from '../store'
 

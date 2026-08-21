@@ -2,7 +2,7 @@
 cardTitle: 'Guide to Health System Pilots with Bethany Vick'
 description: How-tos discussion with Bethany Vick related to setting up pilots with health systems covering a range of topics, from identifying the right stakeholder to pitching your solution to understanding pricing models for pilots.
 labels:
-   - third-party
+  - third-party
 ---
 
 # Guide to Health System Pilots with Bethany Vick (Providence Digital Innovation Group)

@@ -225,8 +225,8 @@ export const VendorForm = ({
               >
                 <RadioGroupRoot
                   ref={ref}
-                  onChange={nextValue =>
-                    controllerOnChange(nextValue === 'true')
+                  onValueChange={e =>
+                    controllerOnChange(e.value === 'true')
                   }
                   name={name}
                   defaultValue={value ? 'true' : 'false'}

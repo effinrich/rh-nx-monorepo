@@ -1,6 +1,6 @@
 ---
 cardTitle: 'Video: Driving Repeat Referrals - A Discussion with Kins'
-description: "The Kins team discusses how to blend the human touch with tech tools for sales success, while leveraging referrals, personalized value propositions, and effective marketing that engages physicians."
+description: 'The Kins team discusses how to blend the human touch with tech tools for sales success, while leveraging referrals, personalized value propositions, and effective marketing that engages physicians.'
 labels:
   - video
 ---

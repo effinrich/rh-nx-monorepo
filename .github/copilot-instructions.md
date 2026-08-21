@@ -1,6 +1,6 @@
 ---
 description: Chakra UI v3 Development Rules
-globs: "*.tsx"
+globs: '*.tsx'
 alwaysApply: false
 ---
 
@@ -83,9 +83,16 @@ Provider, Toaster, ColorModeProvider, Tooltip, PasswordInput
 ```tsx
 // ❌ Old v2
 const theme = useTheme()
-const gray400 = theme.colors.gray["400"]
+const gray400 = theme.colors.gray['400']
 
 // ✅ New v3
 const system = useChakra()
-const gray400 = system.token("colors.gray.400")
+const gray400 = system.token('colors.gray.400')
 ```
+
+<!-- mermaid-ai-skills:start -->
+## Mermaid Diagrams
+
+When the user asks to create, edit, or visualize a diagram, follow the
+instructions in `.github/instructions/mermaid.instructions.md`.
+<!-- mermaid-ai-skills:end -->

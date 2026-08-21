@@ -52,7 +52,7 @@ describe('IntroductionRequestForm', () => {
 const renderComponent = (advisorName?: string) => {
   const utils = render(
     <IntroductionRequestForm
-      isOpen
+      open
       onClose={vi.fn()}
       advisorId={data.advisorId}
       advisorName={advisorName}

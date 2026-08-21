@@ -1,38 +1,48 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, within } from 'storybook/test'
-import AccordionButton from './accordion-button'
 
-const meta: Meta<typeof AccordionButton> = {
-  title: 'Shared / Ui/AccordionButton',
-  component: AccordionButton,
-  tags: ['autodocs'],
+import {
+  AccordionRoot,
+  AccordionItem,
+  AccordionItemTrigger,
+  AccordionItemContent
+} from './accordion'
+
+const meta: Meta<typeof AccordionItemTrigger> = {
+  title: 'Shared / Ui/AccordionItemTrigger',
+  component: AccordionItemTrigger,
+  tags: ['autodocs']
 }
 
 export default meta
 
-type Story = StoryObj<typeof AccordionButton>
+type Story = StoryObj<typeof AccordionItemTrigger>
 
-/**
- * Default AccordionButton
- */
 export const Default: Story = {
+  render: () => (
+    <AccordionRoot collapsible>
+      <AccordionItem value="a">
+        <AccordionItemTrigger>Section</AccordionItemTrigger>
+        <AccordionItemContent>Panel</AccordionItemContent>
+      </AccordionItem>
+    </AccordionRoot>
+  )
 }
 
-/**
- * Interactive test
- */
 export const Interactive: Story = {
-  args: {
-    children: 'Click me',
-  },
+  render: () => (
+    <AccordionRoot collapsible>
+      <AccordionItem value="a">
+        <AccordionItemTrigger>Click me</AccordionItemTrigger>
+        <AccordionItemContent>Panel</AccordionItemContent>
+      </AccordionItem>
+    </AccordionRoot>
+  ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const element = canvas.getByText(/click me/i)
-    
-    // Verify element renders
+
     await expect(element).toBeInTheDocument()
-    
-    // Test interaction
     await userEvent.click(element)
-  },
+  }
 }

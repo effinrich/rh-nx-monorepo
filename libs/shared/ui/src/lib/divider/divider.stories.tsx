@@ -2,13 +2,13 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Box, Center, Stack, Text } from '../../index'
 
-import { Divider } from './divider'
+import { Separator } from './divider'
 
 export default {
-  component: Divider,
-  title: 'Components / Layout / Divider',
+  component: Separator,
+  title: 'Components / Layout / Separator',
   decorators: [Story => <Box pt={100}>{Story()}</Box>]
-} as Meta<typeof Divider>
+} as Meta<typeof Separator>
 
 export const Horizontal = {
   args: {
@@ -16,18 +16,18 @@ export const Horizontal = {
   }
 }
 
-export const Vertical: StoryObj<typeof Divider> = {
-  render: args => (
+export const Vertical: StoryObj<typeof Separator> = {
+  render: () => (
     <Center height="50px" bgColor="primary.500">
-      <Divider orientation="vertical" />
+      <Separator orientation="vertical" />
     </Center>
   )
 }
 
-export const Composition: StoryObj<typeof Divider> = {
-  render: args => (
+export const Composition: StoryObj<typeof Separator> = {
+  render: () => (
     <Stack direction="row" h="100px" p={4} bgColor="primary.500" color="white">
-      <Divider orientation="vertical" />
+      <Separator orientation="vertical" />
       <Text>Redesign Health</Text>
     </Stack>
   )

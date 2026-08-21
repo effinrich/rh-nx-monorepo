@@ -100,7 +100,7 @@ const HeadshotUploader = ({
       {uploadModal.open && newFileDataUrl && (
         <ImageCropper
           imageSrc={newFileDataUrl}
-          isOpen={uploadModal.open}
+          open={uploadModal.open}
           onClose={uploadModal.onClose}
           onSuccess={croppedFile => {
             if (croppedFile) {

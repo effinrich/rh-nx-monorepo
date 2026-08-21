@@ -1,8 +1,9 @@
+import { createElement } from 'react'
 import {
   RequestFormCommandStatusEnum,
   RequestFormSummary
 } from '@redesignhealth/company-api-types'
-import { Box, ListIcon, ListItem, Text } from '@redesignhealth/ui'
+import { Box, ListIndicator, ListItem, Text } from '@redesignhealth/ui'
 
 import { CompletedIcon, IncompletedIcon, InProgressIcon } from './partials'
 
@@ -27,7 +28,7 @@ export const InfraStep = ({
       _notFirst={{ mt: '16px' }}
       data-testid={form?.status?.value}
     >
-      <ListIcon as={formStatusIcon} />
+      <ListIndicator asChild>{createElement(formStatusIcon)}</ListIndicator>
       <Box flex="1" ml="12px">
         <Text
           as="p"

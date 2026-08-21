@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { chakra } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
+import { expect, userEvent, within } from 'storybook/test'
 
 import {
   Container,
@@ -29,16 +30,27 @@ export default {
 
 export const Base = () => <Switch colorPalette="primary" />
 
+export const Interactive = {
+  render: () => <Switch colorPalette="primary">Email alerts</Switch>,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement)
+    const input = canvas.getByRole('switch', { hidden: true })
+    await expect(input).not.toBeChecked()
+    await userEvent.click(input)
+    await expect(input).toBeChecked()
+  }
+}
+
 export const Disabled = () => (
   <Switch disabled size="md" colorPalette="primary" margin="20px" />
 )
 
 export const Readonly = () => (
-  <Switch isReadOnly size="md" colorPalette="primary" margin="20px" />
+  <Switch readOnly size="md" colorPalette="primary" margin="20px" />
 )
 
 export const Invalid = () => (
-  <Switch isInvalid size="md" colorPalette="primary" margin="20px" />
+  <Switch invalid size="md" colorPalette="primary" margin="20px" />
 )
 
 export const Usage = () => (
@@ -67,9 +79,9 @@ export const Controlled = () => {
     <>
       {checked ? 'Checked' : 'Unchecked'}{' '}
       <Switch
-        isChecked={checked}
+        checked={checked}
         colorPalette="green"
-        onChange={e => setChecked(e.target.checked)}
+        onCheckedChange={e => setChecked(e.checked === true)}
       />
     </>
   )
@@ -79,7 +91,7 @@ export const StateDependingBehavior = () => {
   return (
     <FieldRoot as={SimpleGrid} columns={{ base: 2, lg: 4 }}>
       <FieldLabel htmlFor="isChecked">isChecked:</FieldLabel>
-      <Switch id="isChecked" isChecked />
+      <Switch id="isChecked" checked />
 
       <FieldLabel htmlFor="isDisabled">isDisabled:</FieldLabel>
       <Switch id="isDisabled" disabled defaultChecked />
@@ -88,13 +100,13 @@ export const StateDependingBehavior = () => {
       <Switch id="isFocusable" isFocusable disabled />
 
       <FieldLabel htmlFor="isInvalid">isInvalid:</FieldLabel>
-      <Switch id="isInvalid" isInvalid />
+      <Switch id="isInvalid" invalid />
 
       <FieldLabel htmlFor="isReadOnly">isReadOnly:</FieldLabel>
-      <Switch id="isReadOnly" isReadOnly />
+      <Switch id="isReadOnly" readOnly />
 
       <FieldLabel htmlFor="isRequired">isRequired:</FieldLabel>
-      <Switch id="isRequired" isRequired />
+      <Switch id="isRequired" required />
     </FieldRoot>
   )
 }
@@ -124,7 +136,7 @@ export const WithReactHookForm = () => {
   )
 }
 
-export const WithFormControl = () => {
+export const WithField = () => {
   return (
     <>
       <FieldRoot id="optIn">

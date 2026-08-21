@@ -18,11 +18,11 @@ AWS Control Tower is a powerful tool that enables centralized management of mult
 
 Pre-populated OUs can include one for:
 
-* core shared services
-* development
-* staging
-* QA
-* production
+- core shared services
+- development
+- staging
+- QA
+- production
 
 It also includes default security accounts for logging, governance, and auditing. These pre-populated OUs help you get started quickly and provide a solid foundation for your AWS environment. By following these steps, you can create an OU and an account for that OU in AWS Control Tower, allowing for centralized management of multiple AWS accounts.
 
@@ -41,7 +41,4 @@ It also includes default security accounts for logging, governance, and auditing
 
 ## Related Information
 
-* [Amazon Control Tower](https://aws.amazon.com/controltower/?)
-
-
-
+- [Amazon Control Tower](https://aws.amazon.com/controltower/?)

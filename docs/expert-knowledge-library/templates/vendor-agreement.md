@@ -15,34 +15,34 @@ During your bounded engagement, work with your Relationship Manager and Redesign
 
 Includes sections on:
 
-* Services and payment
+- Services and payment
 
-* Lobby activity and disclosure
+- Lobby activity and disclosure
 
-* The company’s intellectual property and confidential information
+- The company’s intellectual property and confidential information
 
-* The vendor’s intellectual property
+- The vendor’s intellectual property
 
-* Publicity
+- Publicity
 
-* Representation and warranties
+- Representation and warranties
 
-* Term and termination
+- Term and termination
 
-* Non-solicitation
+- Non-solicitation
 
-* Non-disparagement
+- Non-disparagement
 
-* Relationship of the parties
+- Relationship of the parties
 
-* Indemnification
+- Indemnification
 
-* Limitations of liability
+- Limitations of liability
 
-* Use of the company’s network and property
+- Use of the company’s network and property
 
-* Assignment
+- Assignment
 
-* Notice
+- Notice
 
-* and More
+- and More

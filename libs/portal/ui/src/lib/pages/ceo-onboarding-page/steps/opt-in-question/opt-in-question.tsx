@@ -3,7 +3,7 @@ import {
   CardRoot,
   CardFooter,
   CardHeader,
-  Divider
+  Separator
 } from '@redesignhealth/ui'
 
 import OptInForm from './partials/opt-in-form'
@@ -25,9 +25,9 @@ const OptInQuestion = ({
         Do you wish to opt in to sharing your information with other founders?
         You can always change this later in your CEO profile.
       </CardHeader>
-      <Divider />
+      <Separator />
       <OptInForm isOptIn={isOptIn} setIsOptIn={setIsOptIn} />
-      <Divider />
+      <Separator />
       <CardFooter justify="flex-end" gap={3}>
         <Button variant="ghost" disabled>
           Back

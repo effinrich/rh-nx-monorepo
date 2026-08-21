@@ -24,12 +24,12 @@ See [`apps/api-server/README.md`](../api-server/README.md) for details on the AP
 
 Create `apps/portal/.env.local` using [`.env.local.example`](.env.local.example) as a template.
 
-| Variable | Example | Required | Description |
-|----------|---------|----------|-------------|
-| `VITE_COMPANY_API_HOSTNAME` | `http://localhost:8080` | Yes | Base URL for the backend API |
-| `VITE_GOOGLE_CLIENT_ID` | `*.apps.googleusercontent.com` | Yes | [Google OAuth client ID](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid) |
-| `VITE_GA4_MEASUREMENT_ID` | `G-XXXXXXXXXX` | No | Google Analytics 4 measurement ID |
-| `VITE_HOTJAR_ID` | `XXXXXXX` | No | Hotjar site ID |
+| Variable                    | Example                        | Required | Description                                                                                             |
+| --------------------------- | ------------------------------ | -------- | ------------------------------------------------------------------------------------------------------- |
+| `VITE_COMPANY_API_HOSTNAME` | `http://localhost:8080`        | Yes      | Base URL for the backend API                                                                            |
+| `VITE_GOOGLE_CLIENT_ID`     | `*.apps.googleusercontent.com` | Yes      | [Google OAuth client ID](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid) |
+| `VITE_GA4_MEASUREMENT_ID`   | `G-XXXXXXXXXX`                 | No       | Google Analytics 4 measurement ID                                                                       |
+| `VITE_HOTJAR_ID`            | `XXXXXXX`                      | No       | Hotjar site ID                                                                                          |
 
 > Variables must be prefixed with `VITE_` to be exposed by Vite at build time.
 

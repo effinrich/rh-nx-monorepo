@@ -16,8 +16,10 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
-interface Props
-  extends Pick<UseNotificationCenter<object>, 'markAsRead' | 'remove'> {
+interface Props extends Pick<
+  UseNotificationCenter<object>,
+  'markAsRead' | 'remove'
+> {
   notification: NotificationCenterItem
 }
 

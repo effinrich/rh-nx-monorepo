@@ -10,21 +10,21 @@ export const mockUseOpcoEngagementsQuery = (
   data: Array<OpcoEngagement> = []
 ) => {
   const mock = vi.fn(
-    () => ({ isPending, data } as QueryObserverSuccessResult<OpcoEngagement[]>)
+    () => ({ isPending, data }) as QueryObserverSuccessResult<OpcoEngagement[]>
   )
   vi.spyOn(hooks, 'useOpcoEngagementsQuery').mockImplementation(mock)
 }
 
 export const mockUseAdvisorQuery = (isPending = false, data: Advisor = {}) => {
   const mock = vi.fn(
-    () => ({ isPending, data } as QueryObserverSuccessResult<Advisor>)
+    () => ({ isPending, data }) as QueryObserverSuccessResult<Advisor>
   )
   vi.spyOn(hooks, 'useAdvisorQuery').mockImplementation(mock)
 }
 
 export const mockUseCurrentUserQuery = (isPending = false, data = {}) => {
   const mock = vi.fn(
-    () => ({ isPending, data } as QueryObserverSuccessResult<object>)
+    () => ({ isPending, data }) as QueryObserverSuccessResult<object>
   )
   vi.spyOn(auth, 'useCurrentUserQuery').mockImplementation(mock)
 }

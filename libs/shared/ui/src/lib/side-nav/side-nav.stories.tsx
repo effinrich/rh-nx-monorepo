@@ -10,15 +10,14 @@ import Dashboard, {
 } from './mock-routes/dashboard/dashboard'
 import OpCos, { loader as opcosLoader } from './mock-routes/op-cos/op-cos'
 import Users, { loader as usersLoader } from './mock-routes/users/users'
+import { DummyApp } from './partials/dummy-app'
 import { SideNav } from './index'
-
-const App = () => <div>I'm a dummy app</div>
 
 const router = createBrowserRouter(
   [
     {
       path: '/',
-      element: <App />,
+      element: <DummyApp />,
       errorElement: <RootBoundary />,
       children: [
         {

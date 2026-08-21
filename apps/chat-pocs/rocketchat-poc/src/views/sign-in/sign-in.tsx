@@ -81,7 +81,7 @@ export const SignIn = () => {
       <Flex direction="column" justify="center">
         <Stack
           maxW="400px"
-          spacing={6}
+          gap={6}
           background="white"
           align="center"
           borderRadius="md"

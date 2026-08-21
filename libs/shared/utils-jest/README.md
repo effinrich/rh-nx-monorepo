@@ -4,13 +4,13 @@ Test utilities for Jest and Vitest used across Redesign Health frontend librarie
 
 ## Exports
 
-| Export | Description |
-|--------|-------------|
-| `render` | Custom render function with all required providers (Chakra, React Query, Router, etc.) pre-wrapped |
-| `focus(element)` / `blur(element)` | Focus / blur helpers for accessibility tests |
-| `act`, `fireEvent`, `screen`, `waitFor` | Re-exported from `@testing-library/react` |
-| Mocks | `mockCookie`, `mockAxios`, `mockMatchMedia`, `mockImage`, `mockLocalStorage` — browser API mocks for use in `beforeEach` / `afterEach` |
-| Hook utilities | Helpers for testing React hooks |
+| Export                                  | Description                                                                                                                            |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `render`                                | Custom render function with all required providers (Chakra, React Query, Router, etc.) pre-wrapped                                     |
+| `focus(element)` / `blur(element)`      | Focus / blur helpers for accessibility tests                                                                                           |
+| `act`, `fireEvent`, `screen`, `waitFor` | Re-exported from `@testing-library/react`                                                                                              |
+| Mocks                                   | `mockCookie`, `mockAxios`, `mockMatchMedia`, `mockImage`, `mockLocalStorage` — browser API mocks for use in `beforeEach` / `afterEach` |
+| Hook utilities                          | Helpers for testing React hooks                                                                                                        |
 
 ## Usage
 

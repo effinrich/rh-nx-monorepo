@@ -4,7 +4,7 @@ import { ResearchSprintCardProps } from '@redesignhealth/portal/data-assets'
 import { formatDate } from '@redesignhealth/portal/utils'
 import {
   AlertRoot,
-  AlertIcon,
+  AlertIndicator,
   AlertTitle,
   Badge,
   Box,
@@ -63,7 +63,7 @@ export const ResearchSprintCard = ({
           <Button
             as="a"
             target="_blank"
-            sx={{
+            css={{
               textDecoration: 'none'
             }}
             href={reportLink}
@@ -83,7 +83,7 @@ export const ResearchSprintCard = ({
             h="40px"
             width={['100%', '100%', 'inherit']}
           >
-            <AlertIcon />
+            <AlertIndicator />
             <AlertTitle>Invalid URL</AlertTitle>
           </AlertRoot>
         )}

@@ -1,0 +1,27 @@
+---
+description: One React component per file. Extract Storybook example components into sibling files or partials/. Do not add stories for story-only helpers.
+globs: "**/*.tsx,**/*.stories.tsx"
+alwaysApply: false
+---
+
+# One component per file
+
+**ONE COMPONENT per file.** When a `.tsx` file (especially Storybook `*.stories.tsx`) contains multiple React components used as examples, extract them. Do not `eslint-disable react/no-multi-comp`.
+
+## Extract story examples
+
+`TransitionHooks`, `BasicUsage`, `Transition` (and similar) go to their own kebab-case files — either sibling files next to the main component (alongside `alert.tsx` / `alert-dialog.tsx`), or a `partials/` directory in that component folder.
+
+## Reusable vs story-only
+
+- Reusable across the design system/app → `libs/shared/ui`. Export from `src/index.ts`. Add `*.stories.tsx` (CI fails if a `type:ui` `.tsx` lacks stories).
+- Story-only helpers → unexported sibling/`partials/` files. **Do not** add `*.stories.tsx`. **Do not** export from `libs/shared/ui/src/index.ts`.
+
+## Hooks
+
+Move hooks to a `hooks/` directory next to the component, the same directory, or `libs/shared/hooks` if reusable.
+
+## Stack
+
+- Portal is Nx React + react-router-dom — no Next.js `"use client"` / App Router.
+- Chakra v3 is a full migrate — no v2-compat shims. Shared UI lives in `libs/shared/ui` (kebab-case).

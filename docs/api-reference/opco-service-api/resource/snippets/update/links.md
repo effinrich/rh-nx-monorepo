@@ -1,3 +1,3 @@
-Relation | Description
--------- | -----------
-`members` | People with access to this OpCo
+| Relation  | Description                     |
+| --------- | ------------------------------- |
+| `members` | People with access to this OpCo |

@@ -4,35 +4,42 @@
 /**
  * Required to load fonts
  */
-@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700';
 /**
  * Import base styles
  */
 @import url(https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css); /* Default asciidoc style framework - important */
 
-:root{
-  --tocTitle: #B9F94E;
-  --link: #9425C9;
+:root {
+  --tocTitle: #b9f94e;
+  --link: #9425c9;
   --linkHover: #a35bcd;
-  --sidebarbackground:#3F1046;
-  --tocLink: #FF7A41;
-  --tocLinkHover: #FC9F77;
-  --heading: #F43D7F;
-  --title: #9425C9;
+  --sidebarbackground: #3f1046;
+  --tocLink: #ff7a41;
+  --tocLinkHover: #fc9f77;
+  --heading: #f43d7f;
+  --title: #9425c9;
 }
 
-#header>h1:first-child {
+#header > h1:first-child {
   color: var(--title);
 }
 
-h1, h2, h3, #toctitle, .sidebarblock>.content>.title, h4, h5, h6 {
+h1,
+h2,
+h3,
+#toctitle,
+.sidebarblock > .content > .title,
+h4,
+h5,
+h6 {
   color: var(--heading);
 }
 
 /* Hack to add Redesign Logo */
 #toc:before {
   content: ' ';
-  background: url("/public/docs/assets/logo.png");
+  background: url('/public/docs/assets/logo.png');
   background-size: contain;
   width: 100px;
   height: 100px;
@@ -44,8 +51,8 @@ h1, h2, h3, #toctitle, .sidebarblock>.content>.title, h4, h5, h6 {
   margin-top: 120px;
 }
 
-#toc.toc2{
-  background-color:var(--sidebarbackground);
+#toc.toc2 {
+  background-color: var(--sidebarbackground);
   /* prevent snapping on differing screen sizes */
   width: initial;
 }
@@ -59,10 +66,9 @@ a:hover {
 }
 
 #toc a {
-  color: var(--tocLink)
+  color: var(--tocLink);
 }
 
 #toc a:hover {
-  color: var(--tocLinkHover)
+  color: var(--tocLinkHover);
 }
-

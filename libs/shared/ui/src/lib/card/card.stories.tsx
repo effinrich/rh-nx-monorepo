@@ -9,13 +9,13 @@ import {
   Box,
   Button,
   ButtonGroup,
-  Divider,
+  Separator,
   Heading,
   HStack,
   IconButton,
   Image,
   Stack,
-  StackDivider,
+  StackSeparator,
   Text
 } from '../../index'
 
@@ -72,7 +72,7 @@ export default {
       include: ['as', 'direction', 'align', 'justify', 'variant', 'size']
     }
   }
-} as Meta<typeof Divider>
+} as Meta<typeof Separator>
 
 export const Variants = () => (
   <Stack gap="4">
@@ -122,7 +122,7 @@ export const WithDivider = () => (
     </CardHeader>
 
     <CardBody>
-      <Stack divider={<StackDivider />} gap="4">
+      <Stack separator={<StackSeparator />} gap="4">
         <Box>
           <Heading size="xs" textTransform="uppercase">
             Summary
@@ -172,7 +172,7 @@ export const WithImage = () => (
         </Text>
       </Stack>
     </CardBody>
-    <Divider />
+    <Separator />
     <CardFooter>
       <ButtonGroup gap="2">
         <Button variant="solid" colorPalette="blue">

@@ -1,3 +1,3 @@
-Relation | Description
--------- | -----------
-`opCo` | Retrieve general OpCo information
+| Relation | Description                       |
+| -------- | --------------------------------- |
+| `opCo`   | Retrieve general OpCo information |

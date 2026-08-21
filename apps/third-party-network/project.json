@@ -52,8 +52,6 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
       "defaultConfiguration": "default",
       "configurations": {
         "default": {

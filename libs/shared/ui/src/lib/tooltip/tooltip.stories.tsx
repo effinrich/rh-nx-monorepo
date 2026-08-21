@@ -3,7 +3,12 @@ import { MdInfoOutline } from 'react-icons/md'
 
 import { Button } from '../button/button'
 import { Icon } from '../icon/icon'
-import { Modal, ModalContent, ModalOverlay } from '../modal/modal'
+import {
+  DialogBackdrop,
+  DialogContent,
+  DialogPositioner,
+  DialogRoot
+} from '../modal/modal'
 import { rh } from '../rh/rh'
 
 import {
@@ -87,10 +92,15 @@ export const WithModal = () => {
   return (
     <div>
       <Button onClick={() => setShowDialog(true)}>Show Dialog</Button>
-      <Modal isOpen={showDialog} onClose={() => setShowDialog(false)}>
-        <ModalOverlay />
-        {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-        <ModalContent height="300px">
+      <DialogRoot
+        open={showDialog}
+        onOpenChange={e => {
+          if (!e.open) setShowDialog(false)
+        }}
+      >
+        <DialogBackdrop />
+        <DialogPositioner>
+          <DialogContent height="300px">
           <div>
             <Button onClick={() => setShowDialog(false)}>Close Dialog</Button>
             <TooltipRoot>
@@ -142,8 +152,9 @@ export const WithModal = () => {
               </TooltipRoot>
             </div>
           </div>
-        </ModalContent>
-      </Modal>
+          </DialogContent>
+        </DialogPositioner>
+      </DialogRoot>
     </div>
   )
 }

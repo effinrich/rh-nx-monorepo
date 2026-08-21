@@ -22,8 +22,6 @@ The following diagram provides a high-level overview of the Vault module within 
 
 ![Diagram of Vault Module](https://assets.redesignhealth.com/czzFlf5FENscHVPFww1pvsW1NI4LAa3SHuoHyc1b/vault.png)
 
-
-
 ## High-Level Process
 
 This section provides a high-level overview of the steps for deploying the Vault module. Review the video and the **tf-modules** and **tf-infrastructure** for more information.
@@ -65,6 +63,6 @@ The **templates/keys.ctmpl** file identifies the secret to use.
 
 ## Related Information
 
-* [Hashicorp Vault](https://www.vaultproject.io/)
-* [Amazon Elastic Container Servide](https://aws.amazon.com/ecs/)
-* [Amazon Elastic Container Registry](https://aws.amazon.com/ecr/)
+- [Hashicorp Vault](https://www.vaultproject.io/)
+- [Amazon Elastic Container Servide](https://aws.amazon.com/ecs/)
+- [Amazon Elastic Container Registry](https://aws.amazon.com/ecr/)

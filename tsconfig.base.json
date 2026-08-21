@@ -68,6 +68,9 @@
       ],
       "@redesignhealth/portal/ui": ["libs/portal/ui/src/index.ts"],
       "@redesignhealth/portal/utils": ["libs/portal/utils/src/index.ts"],
+      "@redesignhealth/markdown-renderer": [
+        "libs/shared/markdown-renderer/src/index.ts"
+      ],
       "@redesignhealth/shared-utils": ["libs/shared/utils/src/index.ts"],
       "@redesignhealth/shared-utils-jest": [
         "libs/shared/utils-jest/src/index.ts"

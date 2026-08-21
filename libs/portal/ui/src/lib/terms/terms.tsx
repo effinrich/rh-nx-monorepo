@@ -1,36 +1,29 @@
 import { useNavigate } from 'react-router-dom'
-import styled from '@emotion/styled'
 import {
   useAcceptConsent,
   useGetTermsHtml
 } from '@redesignhealth/portal/data-assets'
 import { logout } from '@redesignhealth/portal/utils'
 import {
+  Box,
   Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogPositioner,
+  DialogRoot
 } from '@redesignhealth/ui'
 import parse from 'html-react-parser'
 
-const StyledTerms = styled.div`
-  p,
-  span,
-  ol > li {
-    font-family: 'Inter', sans-serif !important;
-  }
-`
-
 interface TermsProps {
   isAskingConsent?: boolean
-  isOpen: boolean
+  open: boolean
   onClose: () => void
 }
 
-const Terms = ({ isAskingConsent = false, isOpen, onClose }: TermsProps) => {
+const Terms = ({ isAskingConsent = false, open, onClose }: TermsProps) => {
   const navigate = useNavigate()
 
   const termsHtml = useGetTermsHtml()
@@ -41,44 +34,57 @@ const Terms = ({ isAskingConsent = false, isOpen, onClose }: TermsProps) => {
   }
 
   return (
-    <Modal
-      open={isOpen}
-      onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
+    <DialogRoot
+      open={open}
+      onOpenChange={(e: { open: boolean }) => {
+        if (!e.open) onClose()
+      }}
       size={{ base: 'full', md: 'xl' }}
       scrollBehavior="inside"
       closeOnInteractOutside={false}
     >
-      <ModalOverlay />
-      {/* @ts-expect-error Chakra v3 DialogContent children typing */}
-      <ModalContent maxHeight="80vh">
-        <ModalHeader>Terms of Service</ModalHeader>
-        <ModalBody id="termsModalBody">
-          <StyledTerms>{termsHtml && parse(termsHtml as string)}</StyledTerms>
-        </ModalBody>
-
-        {isAskingConsent && (
-          <ModalFooter>
-            <Button mr={3} onClick={handleLogout} variant="outline">
-              Decline
-            </Button>
-            <Button
-              colorPalette="primary"
-              loading={isPending}
-              onClick={() => mutate()}
+      <DialogBackdrop />
+      {/* @ts-expect-error Chakra v3 children typing */}
+      <DialogPositioner>
+        {/* @ts-expect-error Chakra v3 children typing */}
+        <DialogContent maxHeight="80vh">
+          <DialogHeader>Terms of Service</DialogHeader>
+          <DialogBody id="termsModalBody">
+            <Box
+              css={{
+                '& p, & span, & ol > li': {
+                  fontFamily: "'Inter', sans-serif !important"
+                }
+              }}
             >
-              Accept
-            </Button>
-          </ModalFooter>
-        )}
-        {!isAskingConsent && (
-          <ModalFooter>
-            <Button colorPalette="primary" onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        )}
-      </ModalContent>
-    </Modal>
+              {termsHtml && parse(termsHtml as string)}
+            </Box>
+          </DialogBody>
+
+          {isAskingConsent && (
+            <DialogFooter>
+              <Button mr={3} onClick={handleLogout} variant="outline">
+                Decline
+              </Button>
+              <Button
+                colorPalette="primary"
+                loading={isPending}
+                onClick={() => mutate()}
+              >
+                Accept
+              </Button>
+            </DialogFooter>
+          )}
+          {!isAskingConsent && (
+            <DialogFooter>
+              <Button colorPalette="primary" onClick={onClose}>
+                Close
+              </Button>
+            </DialogFooter>
+          )}
+        </DialogContent>
+      </DialogPositioner>
+    </DialogRoot>
   )
 }
 

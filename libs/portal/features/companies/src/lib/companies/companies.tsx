@@ -19,13 +19,13 @@ import {
   Loader,
   SectionHeader,
   TableRoot,
-  TableContainer,
-  Tbody,
-  Td,
+  TableScrollArea,
+  TableBody,
+  TableCell,
   Text,
-  Th,
-  Thead,
-  Tr
+  TableColumnHeader,
+  TableHeader,
+  TableRow
 } from '@redesignhealth/ui'
 
 import AddCompanyButton from '../add-company-button/add-company-button'
@@ -100,30 +100,30 @@ const Companies = () => {
           </Badge>
         </Flex>
 
-        <TableContainer borderBottomRadius="md">
+        <TableScrollArea borderBottomRadius="md">
           <TableRoot variant="striped" colorPalette="gray">
-            <Thead>
-              <Tr>
-                <Th>Name</Th>
-                <Th>Status</Th>
-                <Th># of users</Th>
-                <Th>Stage</Th>
-                <Th>Date added</Th>
-                <Th>Date updated</Th>
-                <Th>
+            <TableHeader>
+              <TableRow>
+                <TableColumnHeader>Name</TableColumnHeader>
+                <TableColumnHeader>Status</TableColumnHeader>
+                <TableColumnHeader># of users</TableColumnHeader>
+                <TableColumnHeader>Stage</TableColumnHeader>
+                <TableColumnHeader>Date added</TableColumnHeader>
+                <TableColumnHeader>Date updated</TableColumnHeader>
+                <TableColumnHeader>
                   <VisuallyHidden>Edit Company</VisuallyHidden>
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody
+                </TableColumnHeader>
+              </TableRow>
+            </TableHeader>
+            <TableBody
               fontSize="14px"
               lineHeight="20px"
               fontWeight="normal"
               color="gray.500"
             >
               {filteredCompanyList?.map(company => (
-                <Tr key={company.id}>
-                  <Td>
+                <TableRow key={company.id}>
+                  <TableCell>
                     {company.stage === 'NEW_CO' ||
                     company.stage === 'OP_CO' ||
                     company.isMarketplaceCompany ? (
@@ -144,8 +144,8 @@ const Companies = () => {
                     )}
 
                     <Text>{company.number}</Text>
-                  </Td>
-                  <Td>
+                  </TableCell>
+                  <TableCell>
                     <Badge
                       ml={[0, 1]}
                       colorPalette={
@@ -156,18 +156,18 @@ const Companies = () => {
                     >
                       {company?.status}
                     </Badge>
-                  </Td>
-                  <Td>{company.members?.length ?? 0}</Td>
-                  <Td>{company.stage ? company.stage : 'N/A'}</Td>
-                  <Td>
+                  </TableCell>
+                  <TableCell>{company.members?.length ?? 0}</TableCell>
+                  <TableCell>{company.stage ? company.stage : 'N/A'}</TableCell>
+                  <TableCell>
                     {company.created ? formatDate(company.created) : 'Unknown'}
-                  </Td>
-                  <Td>
+                  </TableCell>
+                  <TableCell>
                     {company.lastModified
                       ? formatDate(company.lastModified)
                       : 'N/A'}
-                  </Td>
-                  <Td width="50px">
+                  </TableCell>
+                  <TableCell width="50px">
                     <HasRole
                       currentRole={currentUser?.role?.authority}
                       allowed={['ROLE_RH_ADMIN', 'ROLE_SUPER_ADMIN']}
@@ -196,12 +196,12 @@ const Companies = () => {
                         </IconButton>
                       )}
                     </HasRole>
-                  </Td>
-                </Tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </Tbody>
+            </TableBody>
           </TableRoot>
-        </TableContainer>
+        </TableScrollArea>
       </Box>
       <Outlet />
     </Page>

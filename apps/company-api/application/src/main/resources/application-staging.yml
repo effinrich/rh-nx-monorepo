@@ -51,4 +51,3 @@ mkdocs-lambda:
 
 prometheus-service:
   instance: company-api.staging.redesignhealth.com:80
-

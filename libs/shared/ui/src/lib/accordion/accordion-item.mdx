@@ -26,9 +26,7 @@ import { AccordionItem } from '@/components/AccordionItem'
 <Canvas of={AccordionItemStories.Default} />
 
 ```tsx
-<AccordionItem>
-  Content
-</AccordionItem>
+<AccordionItem>Content</AccordionItem>
 ```
 
 ## Props
@@ -47,11 +45,11 @@ The `AccordionItem` component follows WAI-ARIA guidelines:
 
 ### Keyboard Interactions
 
-| Key | Description |
-|-----|-------------|
-| `Tab` | Moves focus to the component |
-| `Enter` | Activates the component |
-| `Space` | Activates the component |
+| Key     | Description                  |
+| ------- | ---------------------------- |
+| `Tab`   | Moves focus to the component |
+| `Enter` | Activates the component      |
+| `Space` | Activates the component      |
 
 ## Composition
 
@@ -60,13 +58,9 @@ The `AccordionItem` component follows WAI-ARIA guidelines:
 ```tsx
 import { Stack } from '@chakra-ui/react'
 
-<Stack spacing={4}>
-  <AccordionItem>
-    First item
-  </AccordionItem>
-  <AccordionItem>
-    Second item
-  </AccordionItem>
+;<Stack spacing={4}>
+  <AccordionItem>First item</AccordionItem>
+  <AccordionItem>Second item</AccordionItem>
 </Stack>
 ```
 
@@ -75,10 +69,7 @@ import { Stack } from '@chakra-ui/react'
 Use responsive props for different screen sizes:
 
 ```tsx
-<AccordionItem
-  
-  width={{ base: '100%', md: 'auto' }}
->
+<AccordionItem width={{ base: '100%', md: 'auto' }}>
   Responsive AccordionItem
 </AccordionItem>
 ```
@@ -86,8 +77,8 @@ Use responsive props for different screen sizes:
 ## Best Practices
 
 1. **Accessibility**: Always provide meaningful content or aria-label
-4. **Composition**: Combine with other components using Stack or Flex for layouts
-5. **Performance**: Avoid creating new callback functions on each render
+2. **Composition**: Combine with other components using Stack or Flex for layouts
+3. **Performance**: Avoid creating new callback functions on each render
 
 ## Related Components
 

@@ -4,7 +4,7 @@ import { AvatarRoot, AvatarImage, AvatarFallback } from '../avatar/avatar'
 import { Badge } from '../badge/badge'
 import { Box } from '../box/box'
 import { Button } from '../button/button'
-import { Divider } from '../divider/divider'
+import { Separator } from '../divider/divider'
 import { Heading } from '../heading/heading'
 import { HStack } from '../h-stack/h-stack'
 import { Text } from '../text/text'
@@ -82,7 +82,7 @@ export const WithDifferentSpacing: StoryFn<typeof VStack> = () => (
 
 export const WithDivider: StoryFn<typeof VStack> = () => (
   <VStack
-    divider={<Divider />}
+    separator={<Separator />}
     gap="4"
     align="stretch"
     maxW="md"
@@ -181,7 +181,7 @@ export const UserProfile: StoryFn<typeof VStack> = () => (
         <Badge colorPalette="green">Active</Badge>
       </VStack>
     </HStack>
-    <Divider />
+    <Separator />
     <VStack align="start" gap="2" w="full">
       <Text fontSize="sm" fontWeight="semibold">
         About
@@ -191,7 +191,7 @@ export const UserProfile: StoryFn<typeof VStack> = () => (
         Based in San Francisco.
       </Text>
     </VStack>
-    <Divider />
+    <Separator />
     <HStack gap="3" w="full">
       <Button flex="1" colorPalette="primary" size="sm">
         Follow
@@ -227,7 +227,7 @@ export const NotificationList: StoryFn<typeof VStack> = () => (
         </VStack>
       </HStack>
     </Box>
-    <Divider />
+    <Separator />
     <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
       <HStack gap="3">
         <AvatarRoot size="sm" name="Sarah Johnson">
@@ -243,7 +243,7 @@ export const NotificationList: StoryFn<typeof VStack> = () => (
         </VStack>
       </HStack>
     </Box>
-    <Divider />
+    <Separator />
     <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
       <HStack gap="3">
         <AvatarRoot size="sm" name="Mike Wilson">

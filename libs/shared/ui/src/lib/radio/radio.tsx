@@ -2,6 +2,7 @@ import { RadioGroup as ChakraRadioGroup } from '@chakra-ui/react'
 import { forwardRef } from 'react'
 
 export const RadioGroup = ChakraRadioGroup
+export const RadioGroupRoot = ChakraRadioGroup.Root
 
 export interface RadioProps extends ChakraRadioGroup.ItemProps {
   children?: React.ReactNode
@@ -14,9 +15,7 @@ export const Radio = forwardRef<HTMLDivElement, RadioProps>(function Radio(
   return (
     <ChakraRadioGroup.Item ref={ref} {...props}>
       <ChakraRadioGroup.ItemHiddenInput />
-      <ChakraRadioGroup.ItemControl>
-        <ChakraRadioGroup.ItemIndicator />
-      </ChakraRadioGroup.ItemControl>
+      <ChakraRadioGroup.ItemIndicator />
       {children && (
         <ChakraRadioGroup.ItemText>{children}</ChakraRadioGroup.ItemText>
       )}

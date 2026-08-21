@@ -14,16 +14,16 @@ A creative brief is a document that provides strategic guidance and direction fo
 
 It generally includes the following sections, which can be modified to match project needs:
 
-* Project Overview & Goals
-* Stakeholders
-* Inspiration / Benchmarks
-* Messaging
-* Audience
-* Key Deliverables
-* Timeline
+- Project Overview & Goals
+- Stakeholders
+- Inspiration / Benchmarks
+- Messaging
+- Audience
+- Key Deliverables
+- Timeline
 
 For more expansive projects, consider including the following sections:
 
-* Creative Direction
-* Budget
-* Constraints
+- Creative Direction
+- Budget
+- Constraints

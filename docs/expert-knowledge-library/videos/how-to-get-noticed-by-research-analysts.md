@@ -1,5 +1,5 @@
 ---
-cardTitle: "Video: How to Get Noticed by Research Analysts and Why it Matters"
+cardTitle: 'Video: How to Get Noticed by Research Analysts and Why it Matters'
 description: Marc Albanese, Director of Venture Research at Redesign Health, discusses what research analysts are, why you should care about them and best practices for getting noticed by them. He also dives into a case study of Digital Health 150.
 labels:
   - video

@@ -15,12 +15,12 @@ const Story: Meta<typeof ImageCropper> = {
 export default Story
 
 const Example = ({ imageSrc }: Partial<ImageCropperProps>) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>{' '}
       <ImageCropper
-        isOpen={isOpen}
+        open={open}
         onClose={onClose}
         onSuccess={onClose}
         imageSrc={imageSrc || ''}

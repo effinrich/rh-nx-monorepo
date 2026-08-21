@@ -19,68 +19,68 @@ Natalie Schneider, CEO of Fort Health, and Stephanie Winans, CEO of Iron Health,
 
 They explore topics such as:
 
-* How to measure sales performance
+- How to measure sales performance
 
-* What to expect from business development leaders
+- What to expect from business development leaders
 
-* Ways to attract top sales talent.
+- Ways to attract top sales talent.
 
-* Aligning sales goals with long-term company goals
+- Aligning sales goals with long-term company goals
 
 Danielle Russella also shares examples drawn from her wealth of experience, advocating for dynamic compensation plans that evolve with the business and align incentives to early-stage revenue-generating tactics.
 
 **Key Takeaways**
 
-**Choosing Primary KPIs for Measuring Sales Performance and Building Your Compensation Model** *(01:43)*
+**Choosing Primary KPIs for Measuring Sales Performance and Building Your Compensation Model** _(01:43)_
 
-* Fort’s compensation model is transparent, easy to calculate, and motivates salespeople with uncapped incentives for both new sales and account management.
+- Fort’s compensation model is transparent, easy to calculate, and motivates salespeople with uncapped incentives for both new sales and account management.
 
- * For example, Fort incentivized the salesperson with $125 for each new referring pediatrician, but it must result in a billable event because a lot of their referrals are not successful at this stage of the company. In terms of account management, Fort provides a $50 per month incentive if the practice has referred at least one patient per month.
+- For example, Fort incentivized the salesperson with $125 for each new referring pediatrician, but it must result in a billable event because a lot of their referrals are not successful at this stage of the company. In terms of account management, Fort provides a $50 per month incentive if the practice has referred at least one patient per month.
 
-  * Both of these incentives are uncapped and they’ve seen extraordinary results. Their goal was initially 20 referring pediatricians per month and they are currently exceeding 40.
+- Both of these incentives are uncapped and they’ve seen extraordinary results. Their goal was initially 20 referring pediatricians per month and they are currently exceeding 40.
 
-**Aligning Sales Incentives with Business Milestones** *(7:33)*
+**Aligning Sales Incentives with Business Milestones** _(7:33)_
 
-* Incentive plans should align with annual business milestones and consider timing related to broader business objectives and fundraising timelines.
+- Incentive plans should align with annual business milestones and consider timing related to broader business objectives and fundraising timelines.
 
-* Stephanie suggests that people sometimes get caught up in the logistics of compensating salespeople without considering the underlying behaviors they aim to encourage.
+- Stephanie suggests that people sometimes get caught up in the logistics of compensating salespeople without considering the underlying behaviors they aim to encourage.
 
-**Risk of Incentivizing the Wrong Behaviors** *(11:00)*
+**Risk of Incentivizing the Wrong Behaviors** _(11:00)_
 
-* Careful consideration is needed to avoid unintended consequences, such as closing deals that do not result in good lifetime value customers.
+- Careful consideration is needed to avoid unintended consequences, such as closing deals that do not result in good lifetime value customers.
 
-* Balancing the focus on quantity (number of deals) versus quality (ARR) is crucial to prevent underselling or compromising long-term value.
+- Balancing the focus on quantity (number of deals) versus quality (ARR) is crucial to prevent underselling or compromising long-term value.
 
-**Importance of Trust and Team Engagement** *(12:46)*
+**Importance of Trust and Team Engagement** _(12:46)_
 
-* Trust in the sales team is crucial, especially when there is a mismatch between financial incentives for acquiring new customers and managing existing accounts.
+- Trust in the sales team is crucial, especially when there is a mismatch between financial incentives for acquiring new customers and managing existing accounts.
 
-* Engaging the entire team through sales contests can be an effective strategy to leverage collective efforts and maximize results.
+- Engaging the entire team through sales contests can be an effective strategy to leverage collective efforts and maximize results.
 
-**Choosing KPIs for Sales Performance** *(15:35)*
+**Choosing KPIs for Sales Performance** _(15:35)_
 
-* Consider quantifying Marketing Qualified Leads (MQLs) as a fundamental marketing KPI.
+- Consider quantifying Marketing Qualified Leads (MQLs) as a fundamental marketing KPI.
 
-* Tie marketing efforts to revenue, with a focus on lead generation and acceptable Customer Acquisition Cost (CAC) milestones.
+- Tie marketing efforts to revenue, with a focus on lead generation and acceptable Customer Acquisition Cost (CAC) milestones.
 
-* Define the handoff process from Marketing Qualified Leads (MQL) to Sales Qualified Leads (SQL).
+- Define the handoff process from Marketing Qualified Leads (MQL) to Sales Qualified Leads (SQL).
 
-* Recognize the unique challenges in aligning marketing incentives, especially in varied organizational structures.
+- Recognize the unique challenges in aligning marketing incentives, especially in varied organizational structures.
 
-* Acknowledge the dynamic nature of compensation plans, especially in the early stages of a business.
+- Acknowledge the dynamic nature of compensation plans, especially in the early stages of a business.
 
-**Building a Sales-Enabled Culture** *(24:00)*
+**Building a Sales-Enabled Culture** _(24:00)_
 
-* Danielle emphasizes the importance of building a sales culture within the organization, where the entire organization participates in what ultimately happens to the company.
+- Danielle emphasizes the importance of building a sales culture within the organization, where the entire organization participates in what ultimately happens to the company.
 
- * The incentive doesn’t have to be large. Danielle suggests it could be a $100 bonus or a gift card in the early days of a company.
+- The incentive doesn’t have to be large. Danielle suggests it could be a $100 bonus or a gift card in the early days of a company.
 
-**Handling Revenue Variability** *(26:52)*
+**Handling Revenue Variability** _(26:52)_
 
-* Acknowledge the challenges of handling different grades of revenue and the need for intentional compensation structures. Not all revenue is created equal, and therefore companies must move beyond a one-size-fits-all approach when building compensation plans.
+- Acknowledge the challenges of handling different grades of revenue and the need for intentional compensation structures. Not all revenue is created equal, and therefore companies must move beyond a one-size-fits-all approach when building compensation plans.
 
-**Expectation Setting** *(32:16)*
+**Expectation Setting** _(32:16)_
 
-* Clearly communicate roles, expectations, and potential changes in the future to the team. Stephanie shares that she has conversations with her salespeople about the “end state” of the sales organization and broader vision from the beginning in order to set expectations that the company is in a learning phase so they should expect change and prevent surprises.
+- Clearly communicate roles, expectations, and potential changes in the future to the team. Stephanie shares that she has conversations with her salespeople about the “end state” of the sales organization and broader vision from the beginning in order to set expectations that the company is in a learning phase so they should expect change and prevent surprises.
 
-* Ensure shared expectations between the company and salespeople regarding target earnings and plan adjustments.
+- Ensure shared expectations between the company and salespeople regarding target earnings and plan adjustments.

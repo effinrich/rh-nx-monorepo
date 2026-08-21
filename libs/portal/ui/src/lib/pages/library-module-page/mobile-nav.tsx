@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 import { type LibraryDoc } from '@redesignhealth/portal/data-assets'
-import { type BoxProps, Box, Select, Text } from '@redesignhealth/ui'
+import { type BoxProps, Box, NativeSelectField, NativeSelectRoot, Text } from '@redesignhealth/ui'
 
 interface MobileNavProps extends BoxProps {
   modules: LibraryDoc[]
@@ -26,17 +26,19 @@ export const MobileNav = ({
       <Text fontWeight="medium" fontSize="md" color="gray.500" pb={4}>
         IN THIS COLLECTION
       </Text>
-      <Select
-        placeholder="Select document"
-        onChange={event => handleOnChange(event)}
-        defaultValue={currentModuleId}
-      >
-        {modules.map(module => (
-          <option key={module.id} value={module.id}>
-            {module.title}
-          </option>
-        ))}
-      </Select>
+      <NativeSelectRoot>
+        <NativeSelectField
+          onChange={event => handleOnChange(event)}
+          defaultValue={currentModuleId}
+        >
+          <option value="">Select document</option>
+          {modules.map(module => (
+            <option key={module.id} value={module.id}>
+              {module.title}
+            </option>
+          ))}
+        </NativeSelectField>
+      </NativeSelectRoot>
     </Box>
   )
 }

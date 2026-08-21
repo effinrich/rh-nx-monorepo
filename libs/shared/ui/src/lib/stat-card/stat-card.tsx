@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { type BoxProps } from '../box/box'
 import { Button } from '../button/button'
 import { CardRoot } from '../card/card'
-import { Divider } from '../divider/divider'
+import { Separator } from '../divider/divider'
 import { Flex } from '../flex/flex'
 import { Link } from '../link/link'
 import {
@@ -56,7 +56,7 @@ export const StatCard = ({
       </StatRoot>
       {!noFooter && (
         <div>
-          <Divider />
+          <Separator />
 
           <Flex alignItems="center" justifyContent="flex-end" h="55px" pr={4}>
             {to ? (

@@ -28,7 +28,7 @@ import {
   useCompanies,
   useUserInfo,
   useResearchSprints,
-  useCeos,
+  useCeos
 } from '@redesignhealth/portal/data-assets'
 ```
 

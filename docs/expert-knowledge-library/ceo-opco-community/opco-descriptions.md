@@ -1,10 +1,10 @@
 ---
 cardTitle: 'OpCos One Page Overviews'
-description: "An overview of each OpCo that includes a description of the company and an overview of the opportunity, the solution, and the leadership team."
+description: 'An overview of each OpCo that includes a description of the company and an overview of the opportunity, the solution, and the leadership team.'
 labels:
   - article
-
 ---
+
 # OpCos One Page Overviews
 
 <iframe

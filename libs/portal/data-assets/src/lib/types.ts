@@ -44,7 +44,7 @@ export const RoleAuthorityEnum = {
 } as const
 
 export type RoleAuthorityEnum =
-  typeof RoleAuthorityEnum[keyof typeof RoleAuthorityEnum]
+  (typeof RoleAuthorityEnum)[keyof typeof RoleAuthorityEnum]
 
 export interface Role {
   authority: RoleAuthorityEnum

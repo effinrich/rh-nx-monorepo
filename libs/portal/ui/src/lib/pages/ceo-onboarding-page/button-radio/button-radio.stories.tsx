@@ -24,13 +24,13 @@ export const Default = () => {
           title="Title 1"
           subtitle="Subtitle for option 1"
           value="Option 1"
-          isChecked={selected === 'Option 1'}
+          checked={selected === 'Option 1'}
         />
         <ButtonRadio
           title="Title 2"
           subtitle="Subtitle for option 2"
           value="Option 2"
-          isChecked={selected === 'Option 2'}
+          checked={selected === 'Option 2'}
         />
       </Stack>
     </RadioGroupRoot>

@@ -2,8 +2,9 @@
 cardTitle: 'Channel Partnerships in Healthcare: A Founders Playbook'
 description: Digital health companies face distribution challenges. Selling through channel partners is an effective strategy for market reach and efficiency. Insights from successful companies and startups highlight its importance.
 labels:
-   - third-party
+  - third-party
 ---
+
 # Channel Partnerships in Healthcare: A Founders Playbook
 
 Andreessen Horowitz - Authored by: Jay Rughani, Annie Collins, and Julie Yoo

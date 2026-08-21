@@ -5,5 +5,3 @@ labels:
   - article
 googleDocId: 12HJHCUL-YJb7tp7qjS_Hkg3H-JkUhHnmEfW6XfvKAVI
 ---
-
-

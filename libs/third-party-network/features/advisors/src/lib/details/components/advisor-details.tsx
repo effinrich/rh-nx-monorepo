@@ -194,7 +194,7 @@ export const AdvisorDetails = ({ advisorId }: AdvisorDetailsProps) => {
       </Box>
       <IntroductionRequestForm
         advisorId={advisorId}
-        isOpen={open}
+        open={open}
         onClose={onClose}
         advisorName={advisor.name}
       />

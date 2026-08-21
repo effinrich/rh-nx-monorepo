@@ -24,7 +24,7 @@ import {
 import {
   Avatar,
   Box,
-  Divider,
+  Separator,
   Flex,
   Icon,
   IconButton,
@@ -206,7 +206,7 @@ export const Nav = ({ userInfo, userCompanyId, onClose }: NavProps) => {
             Environment Details
           </NavButton>
         </HasRole>
-        <Divider mt="20px" mb="20px" borderColor="primary.600" />
+        <Separator mt="20px" mb="20px" borderColor="primary.600" />
 
         <Flex justify="space-between" align="center">
           <Flex align="center">

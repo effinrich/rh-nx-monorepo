@@ -87,8 +87,6 @@ If the user previously ran `/monitor-ci` in this session, you may have prior sta
 
 ## MCP Tool Reference
 
-The `ci_information` and `update_self_healing_fix` tools are called via the **ci-monitor-subagent**, not directly from the orchestrator. Calling MCP tools directly wastes main agent context with large response payloads. The field sets below are for composing subagent prompts (see Step 2a).
-
 Three field sets control polling efficiency — use the lightest set that gives you what you need:
 
 ```yaml
@@ -113,7 +111,7 @@ The decision script returns one of the following statuses. This table defines th
 | `cipe_canceled`         | Exit, CI was canceled                                                                                            |
 | `cipe_timed_out`        | Exit, CI timed out                                                                                               |
 | `polling_timeout`       | Exit, polling timeout reached                                                                                    |
-| `circuit_breaker`       | Exit, no progress after 5 consecutive polls                                                                      |
+| `circuit_breaker`       | Exit, no progress after 13 consecutive polls                                                                     |
 | `environment_rerun_cap` | Exit, environment reruns exhausted                                                                               |
 | `fix_auto_applying`     | Self-healing is handling it — just record `last_cipe_url`, enter wait mode. No MCP call or local git ops needed. |
 | `error`                 | Wait 60s and loop                                                                                                |
@@ -145,7 +143,7 @@ The decision script returns one of the following statuses. This table defines th
 
 ```
 cycle_count = 0            # Only incremented for agent-initiated cycles (counted against --max-cycles)
-start_time = now()
+start_time = now()         # Passed to the decision script as --elapsed-seconds on every poll to enforce --timeout across attempts
 no_progress_count = 0
 local_verify_count = 0
 env_rerun_count = 0
@@ -172,16 +170,7 @@ Determine select fields based on mode:
 - **Wait mode**: use WAIT_FIELDS (`cipeUrl,commitSha,cipeStatus`)
 - **Normal mode (first poll or after newCipeDetected)**: use LIGHT_FIELDS
 
-```
-Task(
-  agent: "ci-monitor-subagent",
-  model: haiku,
-  prompt: "FETCH_STATUS for branch '<branch>'.
-           select: '<fields>'"
-)
-```
-
-The subagent calls `ci_information` and returns a JSON object with the requested fields. This is a **foreground** call — wait for the result.
+Call the `ci_information` tool with the determined `select` fields for the current branch. Wait for the result before proceeding.
 
 #### 2b. Run decision script
 
@@ -191,8 +180,9 @@ node <skill_dir>/scripts/ci-poll-decide.mjs '<subagent_result_json>' <poll_count
   [--prev-cipe-url <last_cipe_url>] \
   [--expected-sha <expected_commit_sha>] \
   [--prev-status <prev_status>] \
-  [--timeout <timeout_seconds>] \
-  [--new-cipe-timeout <new_cipe_timeout_seconds>] \
+  [--timeout <timeout_minutes>] \
+  [--new-cipe-timeout <new_cipe_timeout_minutes>] \
+  [--elapsed-seconds <seconds_since_start_time>] \
   [--env-rerun-count <env_rerun_count>] \
   [--no-progress-count <no_progress_count>] \
   [--prev-cipe-status <prev_cipe_status>] \
@@ -200,6 +190,8 @@ node <skill_dir>/scripts/ci-poll-decide.mjs '<subagent_result_json>' <poll_count
   [--prev-verification-status <prev_verification_status>] \
   [--prev-failure-classification <prev_failure_classification>]
 ```
+
+Pass `--timeout` and `--new-cipe-timeout` in **minutes** (the values from Configuration Defaults) — the script converts to seconds internally. Pass `--elapsed-seconds` as the whole seconds elapsed since `start_time` (`now() - start_time`); this is what enforces `--timeout` as a **total** monitor budget across every poll and attempt, so it must be supplied on every call once monitoring has started.
 
 The script outputs a single JSON line: `{ action, code, message, delay?, noProgressCount, envRerunCount, fields?, newCipeDetected?, verifiableTaskIds? }`
 
@@ -235,16 +227,16 @@ When decision script returns `action == "done"`:
 6. **If action expects new CI Attempt**, update tracking (see Step 3a)
 7. If action results in looping, go to Step 2
 
-#### Spawning subagents for actions
+#### Tool calls for actions
 
-Several statuses require fetching heavy data or calling MCP:
+Several statuses require fetching additional data or calling tools:
 
-- **fix_apply_ready**: Spawn UPDATE_FIX subagent with `APPLY`
-- **fix_needs_local_verify**: Spawn FETCH_HEAVY subagent for fix details before local verification
-- **fix_needs_review**: Spawn FETCH_HEAVY subagent → get `suggestedFixDescription`, `suggestedFixSummary`, `taskFailureSummaries`
-- **fix_failed / no_fix**: Spawn FETCH_HEAVY subagent → get `taskFailureSummaries` for local fix context
-- **environment_issue**: Spawn UPDATE_FIX subagent with `RERUN_ENVIRONMENT_STATE`
-- **self_healing_throttled**: Spawn FETCH_HEAVY subagent → get `selfHealingSkipMessage`; then FETCH_THROTTLE_INFO + UPDATE_FIX for each old fix
+- **fix_apply_ready**: Call `update_self_healing_fix` with action `APPLY`
+- **fix_needs_local_verify**: Call `ci_information` with HEAVY_FIELDS for fix details before local verification
+- **fix_needs_review**: Call `ci_information` with HEAVY_FIELDS → get `suggestedFixDescription`, `suggestedFixSummary`, `taskFailureSummaries`
+- **fix_failed / no_fix**: Call `ci_information` with HEAVY_FIELDS → get `taskFailureSummaries` for local fix context
+- **environment_issue**: Call `update_self_healing_fix` with action `RERUN_ENVIRONMENT_STATE`
+- **self_healing_throttled**: Call `ci_information` with HEAVY_FIELDS → get `selfHealingSkipMessage`; then call `update_self_healing_fix` for each old fix
 
 ### Step 3a: Track State for New-CI-Attempt Detection
 
@@ -273,9 +265,10 @@ node <skill_dir>/scripts/ci-state-update.mjs cycle-check \
   --env-rerun-count <env_rerun_count>
 ```
 
-The script returns `{ cycleCount, agentTriggered, envRerunCount, approachingLimit, message }`. Update tracking state from the output.
+The script returns `{ cycleCount, agentTriggered, envRerunCount, approachingLimit, limitReached, message }`. Update tracking state from the output.
 
-- If `approachingLimit` → ask user whether to continue (with 5 or 10 more cycles) or stop monitoring
+- If `limitReached` → the `--max-cycles` budget is exhausted. Print `message` and **stop monitoring** (do not handle the code or start another cycle). This is a hard stop, not advisory.
+- Else if `approachingLimit` → ask user whether to continue (with 5 or 10 more cycles) or stop monitoring
 - If previous cycle was NOT agent-triggered (human pushed), log that human-initiated push was detected
 
 #### Progress Tracking

@@ -19,20 +19,20 @@ describe('Terms', () => {
   const onClose = jest.fn()
   it('should render successfully', () => {
     const { baseElement } = render(
-      <Terms isAskingConsent isOpen onClose={onClose} />
+      <Terms isAskingConsent open onClose={onClose} />
     )
     expect(baseElement).toBeTruthy()
     expect(screen.getByText('Terms of Service')).toBeInTheDocument()
   })
 
   it('should show accept and decline buttons when flag is true', () => {
-    render(<Terms isAskingConsent isOpen onClose={onClose} />)
+    render(<Terms isAskingConsent open onClose={onClose} />)
     expect(screen.getByRole('button', { name: 'Decline' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Accept' })).toBeInTheDocument()
   })
 
   it('should show close button when flag is false', () => {
-    render(<Terms isOpen onClose={onClose} />)
+    render(<Terms open onClose={onClose} />)
     expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument()
   })
 })

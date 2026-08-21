@@ -19,4 +19,5 @@ gives us a way to add type safety to our form results. Libraries such as [JSON F
 We will use the [json-schema-validator](https://github.com/networknt/json-schema-validator) on the backend to validate incoming schemas and results. We chose this library as it had the most Users, Contributors, and most recent release on GitHub.
 
 ## Consequences
+
 We are adding another library we'll need to maintain version upgrade with.

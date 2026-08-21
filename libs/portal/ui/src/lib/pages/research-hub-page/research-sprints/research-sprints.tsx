@@ -15,8 +15,8 @@ import {
   CheckboxHiddenInput,
   ChevronDownIcon,
   Flex,
-  FormControl,
-  FormLabel,
+  FieldRoot,
+  FieldLabel,
   InputProps,
   Loader,
   MenuRoot,
@@ -137,18 +137,21 @@ const ResearchSprints = () => {
           >
             Results: {sprints?.totalResults}
           </Text>
-          <FormControl as={Flex} flexDir="row-reverse" align="center" mt="8px">
-            <FormLabel m="0">Hide conflicted content</FormLabel>
+          <FieldRoot as={Flex} flexDir="row-reverse" align="center" mt="8px">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel m="0">Hide conflicted content</FieldLabel>
             <CheckboxRoot
               mr="12px"
               checked={isHideConflicts}
               disabled={true}
-              onChange={e => setIsHideConflicts(e.target.checked)}
+              onCheckedChange={(e: { checked: boolean | 'indeterminate' }) =>
+                setIsHideConflicts(!!e.checked)
+              }
             >
               <CheckboxHiddenInput />
               <CheckboxControl />
             </CheckboxRoot>
-          </FormControl>
+          </FieldRoot>
         </Box>
 
         <Flex align="center" gap="16px" mt="-30px">

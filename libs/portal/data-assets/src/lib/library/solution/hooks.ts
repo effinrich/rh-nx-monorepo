@@ -14,7 +14,7 @@ export const usePostCopyTemplateMutation = () =>
       postCopyTemplate(args.id, args.token),
     onSuccess: data =>
       window.open(
-        data?.links?.find((link) => link?.rel === 'googleDocs')?.href,
+        data?.links?.find(link => link?.rel === 'googleDocs')?.href,
         '_blank'
       )
   })

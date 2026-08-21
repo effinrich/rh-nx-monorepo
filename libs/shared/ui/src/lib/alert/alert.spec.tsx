@@ -1,11 +1,16 @@
 import { render, screen, testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { AlertRoot, AlertDescription, AlertIcon, AlertTitle } from './alert'
+import {
+  AlertDescription,
+  AlertIndicator,
+  AlertRoot,
+  AlertTitle
+} from './alert'
 
 test('passes a11y test', async () => {
   await testA11y(
     <AlertRoot>
-      <AlertIcon />
+      <AlertIndicator />
       <AlertTitle>Alert title</AlertTitle>
       <AlertDescription>Alert description</AlertDescription>
     </AlertRoot>
@@ -14,8 +19,8 @@ test('passes a11y test', async () => {
 
 test("should have role='alert'", () => {
   render(
-    <AlertRoot>
-      <AlertIcon />
+    <AlertRoot role="alert">
+      <AlertIndicator />
       <AlertTitle>Alert title</AlertTitle>
       <AlertDescription>Alert description</AlertDescription>
     </AlertRoot>

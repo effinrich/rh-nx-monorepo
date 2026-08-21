@@ -37,11 +37,7 @@ try {
  * The generated data has `role` (singular object).
  */
 const normalizeUser = (user: any) => {
-  const roles = user.roles
-    ? user.roles
-    : user.role
-      ? [user.role]
-      : []
+  const roles = user.roles ? user.roles : user.role ? [user.role] : []
   const memberOf = (user.memberOf || []).map((m: any) =>
     typeof m === 'string' ? { id: m, name: m } : m
   )
@@ -201,7 +197,7 @@ app.get('/me/consent/:consentType', (req, res) => {
     const etags: Record<string, string> = {
       TERMS_OF_SERVICE: 'f7170faf8d48561a00ea36adc22efc76',
       BUYER_TERMS_OF_SERVICE: '1',
-      SELLER_TERMS_OF_SERVICE: '1',
+      SELLER_TERMS_OF_SERVICE: '1'
     }
     res.json({
       type: { displayName: 'Terms of service', value: consentType },
@@ -293,12 +289,22 @@ app.get('/ip-marketplace/filters', (req, res) => {
     content: [
       {
         key: 'technologyType',
-        options: [{ keyword: 'MEDICAL_DEVICES', count: 50, displayName: 'Medical Devices' }]
+        options: [
+          {
+            keyword: 'MEDICAL_DEVICES',
+            count: 50,
+            displayName: 'Medical Devices'
+          }
+        ]
       },
       {
         key: 'organizationType',
         options: [
-          { keyword: 'ACADEMIC_MEDICAL_CENTER', count: 20, displayName: 'Academic Medical Center' }
+          {
+            keyword: 'ACADEMIC_MEDICAL_CENTER',
+            count: 20,
+            displayName: 'Academic Medical Center'
+          }
         ]
       }
     ]
@@ -315,7 +321,10 @@ app.get('/ip-marketplace/:id', (req, res) => {
 })
 
 app.post('/ip-marketplace', (req, res) => {
-  const newListing = { ...req.body, id: Math.random().toString(36).substring(7) }
+  const newListing = {
+    ...req.body,
+    id: Math.random().toString(36).substring(7)
+  }
   if (!db.ipListings) db.ipListings = []
   db.ipListings.push(newListing)
   res.json(newListing)
@@ -338,7 +347,10 @@ app.get('/vendor/category', (req, res) => {
 })
 
 app.post('/vendor', (req, res) => {
-  const newVendor = { ...req.body, apiId: Math.random().toString(36).substring(7) }
+  const newVendor = {
+    ...req.body,
+    apiId: Math.random().toString(36).substring(7)
+  }
   if (!db.vendors) db.vendors = []
   db.vendors.push(newVendor)
   res.json(newVendor)
@@ -447,7 +459,9 @@ app.post('/expert-note', (req, res) => {
 
 // Asset upload
 app.post('/asset', (req, res) => {
-  res.json({ content: [{ id: Math.random().toString(36).substring(7), ...req.body }] })
+  res.json({
+    content: [{ id: Math.random().toString(36).substring(7), ...req.body }]
+  })
 })
 
 // Library/Solution docs
@@ -473,7 +487,11 @@ app.put('/ip-marketplace/:id/request-contact', (req, res) => {
 app.all('*', (req, res) => {
   console.log(`Unhandled ${req.method} ${req.path}`)
   if (req.method === 'GET') {
-    res.json({ content: [], page: { size: 20, totalElements: 0, totalPages: 0, number: 0 }, links: [] })
+    res.json({
+      content: [],
+      page: { size: 20, totalElements: 0, totalPages: 0, number: 0 },
+      links: []
+    })
   } else {
     res.json({ success: true })
   }

@@ -3,7 +3,7 @@ import { Form } from 'react-router-dom'
 import {
   Box,
   CloseIcon,
-  Divider,
+  Separator,
   DrawerBackdrop,
   DrawerContent,
   DrawerPositioner,
@@ -92,7 +92,7 @@ export const DrawerForm = (props: {
                   </Text>
                 )}
 
-                <Divider mt="24px" />
+                <Separator mt="24px" />
               </Box>
 
               <Flex

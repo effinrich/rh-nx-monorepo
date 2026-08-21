@@ -1,10 +1,10 @@
 import { render } from '@redesignhealth/shared-utils-jest'
 
-import { Stat } from './stat'
+import { StatRoot } from './stat'
 
-describe('Center', () => {
+describe('Stat', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Stat />)
+    const { baseElement } = render(<StatRoot />)
     expect(baseElement).toBeTruthy()
   })
 })

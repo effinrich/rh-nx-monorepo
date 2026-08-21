@@ -2,7 +2,7 @@ import { MdCheckCircle, MdSettings } from 'react-icons/md'
 
 import { Meta, StoryFn } from '@storybook/react-vite'
 
-import { ListRoot, ListIcon, ListItem, OrderedList, UnorderedList } from './list'
+import { ListIndicator, ListItem, ListRoot } from './list'
 
 export default {
   component: ListRoot,
@@ -10,12 +10,12 @@ export default {
 } as Meta<typeof ListRoot>
 
 const Template: StoryFn<typeof ListRoot> = args => (
-  <UnorderedList {...args}>
+  <ListRoot as="ul" {...args}>
     <ListItem>Lorem ipsum dolor sit amet</ListItem>
     <ListItem>Consectetur adipiscing elit</ListItem>
     <ListItem>Integer molestie lorem at massa</ListItem>
     <ListItem>Facilisis in pretium nisl aliquet</ListItem>
-  </UnorderedList>
+  </ListRoot>
 )
 
 export const Unordered = {
@@ -24,31 +24,38 @@ export const Unordered = {
 }
 
 export const Ordered: StoryFn<typeof ListRoot> = () => (
-  <OrderedList>
+  <ListRoot as="ol">
     <ListItem>Lorem ipsum dolor sit amet</ListItem>
     <ListItem>Consectetur adipiscing elit</ListItem>
     <ListItem>Integer molestie lorem at massa</ListItem>
     <ListItem>Facilisis in pretium nisl aliquet</ListItem>
-  </OrderedList>
+  </ListRoot>
 )
 
 export const WithIcons: StoryFn<typeof ListRoot> = () => (
   <ListRoot gap={3}>
     <ListItem>
-      <ListIcon as={MdCheckCircle} color="primary.500" />
+      <ListIndicator asChild>
+        <MdCheckCircle color="var(--chakra-colors-primary-500)" />
+      </ListIndicator>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit
     </ListItem>
     <ListItem>
-      <ListIcon as={MdCheckCircle} color="primary.500" />
+      <ListIndicator asChild>
+        <MdCheckCircle color="var(--chakra-colors-primary-500)" />
+      </ListIndicator>
       Assumenda, quia temporibus eveniet a libero incidunt suscipit
     </ListItem>
     <ListItem>
-      <ListIcon as={MdCheckCircle} color="primary.500" />
+      <ListIndicator asChild>
+        <MdCheckCircle color="var(--chakra-colors-primary-500)" />
+      </ListIndicator>
       Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
     </ListItem>
-    {/* You can also use custom icons from react-icons */}
     <ListItem>
-      <ListIcon as={MdSettings} color="primary.500" />
+      <ListIndicator asChild>
+        <MdSettings color="var(--chakra-colors-primary-500)" />
+      </ListIndicator>
       Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
     </ListItem>
   </ListRoot>

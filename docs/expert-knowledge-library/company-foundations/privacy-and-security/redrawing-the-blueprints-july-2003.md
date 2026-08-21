@@ -1,5 +1,5 @@
 ---
-cardTitle:  (July 2023) Redrawing the Blueprints for Privacy Compliance in Health Care
+cardTitle: (July 2023) Redrawing the Blueprints for Privacy Compliance in Health Care
 description: In May, we shared an overview of the current health policy privacy landscape. We wanted to highlight recent privacy-related developments that will likely affect RH OpCos, including significant changes to Florida statute that went into effect 7/1/2023.
 labels:
   - article

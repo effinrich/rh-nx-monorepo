@@ -15,15 +15,20 @@ We need a way to document database changes and have them applied automatically t
 We will use [Flyway](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup) moving forward.
 
 ### Migration Directory
+
 Each migration will live in `src/resources/db/migration`
 
 ### File Format
+
 `V<version>__<name>.sql`
-* `version` is a timestamp in the format YYYYMMDDHHMM.
+
+- `version` is a timestamp in the format YYYYMMDDHHMM.
+
 ```bash
 $ date +%Y%m%d%H%M
 ```
-* `name` will be a kabab-case descriptor (ex. `create-doctor-table`)
+
+- `name` will be a kabab-case descriptor (ex. `create-doctor-table`)
 
 Example file: `V202210011654__create-doctor-table.sql`
 

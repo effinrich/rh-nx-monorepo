@@ -34,7 +34,6 @@
     },
     "market_service_area": {
       "type": "keyword"
-
     },
     "healthcare_sector": {
       "type": "keyword"

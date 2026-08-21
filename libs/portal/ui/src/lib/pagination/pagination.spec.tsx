@@ -53,7 +53,7 @@ describe('Pagination', () => {
     screen.getByText('Previous').click()
     expect(handlePageChange.mock.calls[0][0]).toBe(0)
   })
-  
+
   it('hides the component when there is a single page', () => {
     const handlePageChange = jest.fn()
     render(<Pagination totalPages={2} handlePageChange={handlePageChange} />)

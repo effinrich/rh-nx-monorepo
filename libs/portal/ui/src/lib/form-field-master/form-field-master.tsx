@@ -1,14 +1,14 @@
 import { ReactNode } from 'react'
 import { useFormContext } from 'react-hook-form'
-import styled from '@emotion/styled'
 import {
   Box,
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Spacer,
+  Text,
   Tooltip
 } from '@redesignhealth/ui'
 
@@ -21,14 +21,6 @@ interface FormFieldProps {
   testid?: string
   optional?: boolean
 }
-
-const StyledReqInput = styled.span`
-  ::after {
-    content: ' *';
-    color: #fd3131; // this needs to a theme prop
-    white-space: nowrap;
-  }
-`
 
 export const FormFieldMaster = ({
   children,
@@ -49,28 +41,43 @@ export const FormFieldMaster = ({
       placement="top-start"
       disabled={!disabledHelpText}
     >
-      <FormControl data-testid={testid} invalid={isInvalid}>
+      <FieldRoot data-testid={testid} invalid={isInvalid}>
         <Flex direction={['column', 'column', 'row']}>
           <Box w={['100%', '100%', '25%']} mr={4}>
-            {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
-            <FormLabel color="gray.800">
-              {optional ? label : <StyledReqInput>{label}</StyledReqInput>}
-            </FormLabel>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel color="gray.800">
+              {optional ? (
+                label
+              ) : (
+                <Text
+                  as="span"
+                  css={{
+                    '&::after': {
+                      content: '" *"',
+                      color: '#fd3131',
+                      whiteSpace: 'nowrap'
+                    }
+                  }}
+                >
+                  {label}
+                </Text>
+              )}
+            </FieldLabel>
           </Box>
 
           <Spacer />
           <Box w={['100%', '100%', '75%']}>
             {children}
             {isInvalid ? (
-              // @ts-expect-error Chakra v3 FieldErrorText children typing
-              <FormErrorMessage>{errorMessage}</FormErrorMessage>
+              // @ts-expect-error Chakra v3 children typing
+              <FieldErrorText>{errorMessage}</FieldErrorText>
             ) : (
-              // @ts-expect-error Chakra v3 FieldHelperText children typing
-              <FormHelperText>{helper}</FormHelperText>
+              // @ts-expect-error Chakra v3 children typing
+              <FieldHelperText>{helper}</FieldHelperText>
             )}
           </Box>
         </Flex>
-      </FormControl>
+      </FieldRoot>
     </Tooltip>
   )
 }

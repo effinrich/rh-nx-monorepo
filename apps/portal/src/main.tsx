@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client'
 import ReactGA from 'react-ga4'
 import Hotjar from '@hotjar/browser'
 import { GoogleOAuthProvider } from '@react-oauth/google'
-import { RhProvider, theme } from '@redesignhealth/ui'
+import { RhProvider } from '@redesignhealth/ui'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
@@ -32,7 +32,7 @@ root.render(
   <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
     <QueryClientProvider client={directQueryClient()}>
       <ReactQueryDevtools buttonPosition="bottom-right" />
-      <RhProvider value={theme}>
+      <RhProvider>
         <App />
       </RhProvider>
     </QueryClientProvider>

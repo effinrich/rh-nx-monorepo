@@ -10,10 +10,9 @@ CockroachDB is a distributed database with standard SQL for cloud applications. 
 
 **License:** [Multiple License(CockroachDb Community, MIT, BSD-Style)](https://github.com/cockroachdb/cockroach/blob/master/LICENSE)
 
+**Documentation:**
 
-**Documentation:** 
-
-**Repository:** 
+**Repository:**
 
 ## Postgrest
 
@@ -43,9 +42,8 @@ Citus gives you all the greatness of Postgres, plus the superpower of distribute
 
 **Repository:** Github
 
-
 ## Benefits
 
-* Terraform Scripts will allow for a selection of the  the leading Relational DB solutions
-* They all come in varying support model from Managed, to Cloud Native 
-* OpCos can select based on their set of requirements and level of familiarity and comfort 
+- Terraform Scripts will allow for a selection of the the leading Relational DB solutions
+- They all come in varying support model from Managed, to Cloud Native
+- OpCos can select based on their set of requirements and level of familiarity and comfort

@@ -350,7 +350,7 @@ export const InfraRequestCommandStatusEnum = {
 } as const
 
 export type InfraRequestCommandStatusEnum =
-  typeof InfraRequestCommandStatusEnum[keyof typeof InfraRequestCommandStatusEnum]
+  (typeof InfraRequestCommandStatusEnum)[keyof typeof InfraRequestCommandStatusEnum]
 
 /**
  *
@@ -616,7 +616,7 @@ export const PersonRequestCommandRolesEnum = {
 } as const
 
 export type PersonRequestCommandRolesEnum =
-  typeof PersonRequestCommandRolesEnum[keyof typeof PersonRequestCommandRolesEnum]
+  (typeof PersonRequestCommandRolesEnum)[keyof typeof PersonRequestCommandRolesEnum]
 
 /**
  *
@@ -755,7 +755,7 @@ export const RequestFormCommandStatusEnum = {
 } as const
 
 export type RequestFormCommandStatusEnum =
-  typeof RequestFormCommandStatusEnum[keyof typeof RequestFormCommandStatusEnum]
+  (typeof RequestFormCommandStatusEnum)[keyof typeof RequestFormCommandStatusEnum]
 
 /**
  *
@@ -817,7 +817,7 @@ export const RoleAuthorityEnum = {
 } as const
 
 export type RoleAuthorityEnum =
-  typeof RoleAuthorityEnum[keyof typeof RoleAuthorityEnum]
+  (typeof RoleAuthorityEnum)[keyof typeof RoleAuthorityEnum]
 
 /**
  *
@@ -4088,9 +4088,8 @@ export const TestTemplateControllerApiFp = function (
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getTechStack(
-        options
-      )
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getTechStack(options)
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -4111,9 +4110,8 @@ export const TestTemplateControllerApiFp = function (
         basePath?: string
       ) => AxiosPromise<EntityModelMapObjectObject>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getTemplates(
-        options
-      )
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getTemplates(options)
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -4319,9 +4317,8 @@ export const UserInfoApiFp = function (configuration?: Configuration) {
         basePath?: string
       ) => AxiosPromise<UserInfoSummary>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getUserInfo(
-        options
-      )
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getUserInfo(options)
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,

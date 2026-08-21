@@ -14,7 +14,7 @@ import {
   CardRoot,
   CardBody,
   CardFooter,
-  Divider,
+  Separator,
   Loader
 } from '@redesignhealth/ui'
 
@@ -68,7 +68,7 @@ const OptInConfirmation = ({ handleCancel }: OptInConfirmationProps) => {
               <CeoForm isEdit />
             </FormProvider>
           </CardBody>
-          <Divider />
+          <Separator />
           <CardFooter display="flex" justify="end" gap={3}>
             <Button variant="outline" onClick={handleCancel}>
               Back

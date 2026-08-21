@@ -1,4 +1,4 @@
-import { Box, TableRoot, TableContainer } from '@redesignhealth/ui'
+import { Box, TableRoot, TableScrollArea } from '@redesignhealth/ui'
 
 import TableBody from './partials/table-body'
 import TableHeader from './partials/table-header'
@@ -46,7 +46,7 @@ export const UsersTable = ({
       borderRadius="md"
     >
       <TotalCount totalUsers={totalUsers} />
-      <TableContainer borderBottomRadius="8px">
+      <TableScrollArea borderBottomRadius="8px">
         <TableRoot
           variant="striped"
           colorPalette="gray"
@@ -60,7 +60,7 @@ export const UsersTable = ({
             onClickEditUser={onClickEditUser}
           />
         </TableRoot>
-      </TableContainer>
+      </TableScrollArea>
     </Box>
   )
 }

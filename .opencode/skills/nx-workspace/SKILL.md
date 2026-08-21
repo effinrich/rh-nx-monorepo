@@ -60,7 +60,6 @@ nx show project my-app --json | jq '.targets'
 nx show project my-app --json | jq '.targets.build'
 nx show project my-app --json | jq '.targets | keys'
 
-
 # Check project metadata
 nx show project my-app --json | jq '{name, root, sourceRoot, projectType, tags}'
 ```
@@ -245,7 +244,9 @@ Example output:
       }
     },
     "dependencies": {
-      "my-app": [{ "source": "my-app", "target": "shared-ui", "type": "static" }],
+      "my-app": [
+        { "source": "my-app", "target": "shared-ui", "type": "static" }
+      ],
       "shared-ui": []
     }
   }

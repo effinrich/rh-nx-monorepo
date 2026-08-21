@@ -28,9 +28,7 @@ import { AccordionButton } from '@/components/AccordionButton'
 <Canvas of={AccordionButtonStories.Default} />
 
 ```tsx
-<AccordionButton>
-  Content
-</AccordionButton>
+<AccordionButton>Content</AccordionButton>
 ```
 
 ## Props
@@ -49,11 +47,11 @@ The `AccordionButton` component follows WAI-ARIA guidelines:
 
 ### Keyboard Interactions
 
-| Key | Description |
-|-----|-------------|
-| `Tab` | Moves focus to the component |
-| `Enter` | Activates the component |
-| `Space` | Activates the component |
+| Key     | Description                  |
+| ------- | ---------------------------- |
+| `Tab`   | Moves focus to the component |
+| `Enter` | Activates the component      |
+| `Space` | Activates the component      |
 
 ## Composition
 
@@ -62,13 +60,9 @@ The `AccordionButton` component follows WAI-ARIA guidelines:
 ```tsx
 import { Stack } from '@chakra-ui/react'
 
-<Stack gap={4}>
-  <AccordionButton>
-    First item
-  </AccordionButton>
-  <AccordionButton>
-    Second item
-  </AccordionButton>
+;<Stack gap={4}>
+  <AccordionButton>First item</AccordionButton>
+  <AccordionButton>Second item</AccordionButton>
 </Stack>
 ```
 
@@ -77,9 +71,7 @@ import { Stack } from '@chakra-ui/react'
 Use responsive props for different screen sizes:
 
 ```tsx
-<AccordionButton
-  width={{ base: '100%', md: 'auto' }}
->
+<AccordionButton width={{ base: '100%', md: 'auto' }}>
   Responsive AccordionButton
 </AccordionButton>
 ```
@@ -87,8 +79,8 @@ Use responsive props for different screen sizes:
 ## Best Practices
 
 1. **Accessibility**: Always provide meaningful content or aria-label
-4. **Composition**: Combine with other components using Stack or Flex for layouts
-5. **Performance**: Avoid creating new callback functions on each render
+2. **Composition**: Combine with other components using Stack or Flex for layouts
+3. **Performance**: Avoid creating new callback functions on each render
 
 ## Related Components
 

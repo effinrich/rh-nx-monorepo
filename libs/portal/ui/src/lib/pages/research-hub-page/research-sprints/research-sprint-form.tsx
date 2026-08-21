@@ -9,13 +9,13 @@ import {
 import {
   AlertRoot,
   AlertDescription,
-  AlertIcon,
+  AlertIndicator,
   AlertTitle,
   Box,
   Flex,
   Input,
   NumberInputRoot,
-  NumberInputField,
+  NumberInputInput,
   Text,
   Textarea
 } from '@redesignhealth/ui'
@@ -284,12 +284,12 @@ export const ResearchSprintForm = ({
           <>
             <FormField name="sampleSize" label="n=">
               <NumberInputRoot>
-                <NumberInputField {...form.register('sampleSize')} />
+                <NumberInputInput {...form.register('sampleSize')} />
               </NumberInputRoot>
             </FormField>
 
             <AlertRoot status="info">
-              <AlertIcon />
+              <AlertIndicator />
               <AlertTitle>Reminder: Ensure Link Integrity</AlertTitle>
               <AlertDescription>
                 Remember to share the original VI-owned file stored in the

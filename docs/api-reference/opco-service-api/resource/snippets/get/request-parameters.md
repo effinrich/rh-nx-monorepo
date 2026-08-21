@@ -1,3 +1,3 @@
-Parameter | Description
---------- | -----------
-`expand` | Available options: members
+| Parameter | Description                |
+| --------- | -------------------------- |
+| `expand`  | Available options: members |

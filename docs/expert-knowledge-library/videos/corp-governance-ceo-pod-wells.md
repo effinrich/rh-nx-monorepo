@@ -1,6 +1,6 @@
 ---
 cardTitle: 'Video: Donna Wells presents to the Corp Governance CEO Pod'
-description: "Donna Wells is an experienced Board member who recently joined our Board Governance CEO Pod to discuss best practices in Board Management & Governance."
+description: 'Donna Wells is an experienced Board member who recently joined our Board Governance CEO Pod to discuss best practices in Board Management & Governance.'
 labels:
   - video
 ---

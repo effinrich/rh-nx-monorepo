@@ -1,321 +1,77 @@
-import * as React from 'react'
-import { useInterval } from 'react-use'
+import { Meta } from '@storybook/react-vite'
 
-import {
-  DrawerRoot,
-  DrawerBody,
-  DrawerContent,
-  DrawerOverlay
-} from '../drawer/drawer'
 import { rh } from '../rh/rh'
 
-import { Tab, TabIndicator, TabList, TabPanel, TabsRoot } from './tabs'
+import { AutomaticTabs } from './partials/automatic-tabs'
+import { ManualTabs } from './partials/manual-tabs'
+import { SizesTabs } from './partials/sizes-tabs'
+import { VariantsTabs } from './partials/variants-tabs'
+import { WithIndicatorAndLongTabTextTabs } from './partials/with-indicator-and-long-tab-text-tabs'
+import { WithIndicatorTabs } from './partials/with-indicator-tabs'
+import { WithLazyTabs } from './partials/with-lazy-tabs'
+import { WithLazyTabsMounted } from './partials/with-lazy-tabs-mounted'
+import { WithSwappedTabs as WithSwappedTabsExample } from './partials/with-swapped-tabs'
+import { WithTabPanelWrapperTabs } from './partials/with-tab-panel-wrapper-tabs'
+import { WithVerticalTabs } from './partials/with-vertical-tabs'
+import { WithinDrawerTabs } from './partials/within-drawer-tabs'
+import { TabsRoot } from './tabs'
 
 export default {
+  component: TabsRoot,
   title: 'Components / Disclosure / Tabs',
   decorators: [
-    (story: any) => (
+    (story: () => unknown) => (
       <rh.div maxWidth="500px" mt="100px" mx="auto">
         {story()}
       </rh.div>
     )
   ]
+} as Meta<typeof TabsRoot>
+
+export const Variants = {
+  render: () => <VariantsTabs />
 }
 
-const variants = [
-  'line',
-  'enclosed',
-  'enclosed-colored',
-  'soft-rounded',
-  'solid-rounded'
-] as const
-
-export const Variants = () =>
-  variants.map(variant => (
-    <rh.div key={variant} my="10">
-      <pre>variant = {variant}</pre>
-      <TabsRoot variant={variant} mt="3">
-        <TabList>
-          <Tab>Settings</Tab>
-          <Tab>Billings</Tab>
-        </TabList>
-        <TabPanel>Settings</TabPanel>
-        <TabPanel>Billings</TabPanel>
-      </TabsRoot>
-    </rh.div>
-  ))
-
-const sizes = ['sm', 'md', 'lg'] as const
-
-export const Sizes = () =>
-  sizes.map(size => (
-    <rh.div key={size} my="10">
-      <pre>size = {size}</pre>
-      <TabsRoot size={size} mt="3">
-        <TabList>
-          <Tab>Settings</Tab>
-          <Tab>Billings</Tab>
-        </TabList>
-        <TabPanel>Settings</TabPanel>
-        <TabPanel>Billings</TabPanel>
-      </TabsRoot>
-    </rh.div>
-  ))
-
-export const automatic = () => (
-  <>
-    <p>manual</p>
-    <TabsRoot isManual>
-      <TabList>
-        <Tab>Settings</Tab>
-        <Tab disabled>Billings</Tab>
-        <Tab disabled>Preferences</Tab>
-        <Tab>Shut Down</Tab>
-      </TabList>
-      <TabPanel>Settings</TabPanel>
-      <TabPanel>Billings</TabPanel>
-      <TabPanel>Preferences</TabPanel>
-      <TabPanel>Shut Down</TabPanel>
-    </TabsRoot>
-    <br />
-    <p>auto</p>
-    <TabsRoot>
-      <TabList>
-        <Tab>Settings</Tab>
-        <Tab disabled>Billings</Tab>
-        <Tab disabled>Preferences</Tab>
-        <Tab>Shut Down</Tab>
-      </TabList>
-      <TabPanel>Settings</TabPanel>
-      <TabPanel>Billings</TabPanel>
-      <TabPanel>Preferences</TabPanel>
-      <TabPanel>Shut Down</TabPanel>
-    </TabsRoot>
-  </>
-)
-
-export const manual = () => (
-  <TabsRoot isManual>
-    <TabList>
-      <Tab>Settings</Tab>
-      <Tab>Billings</Tab>
-      <Tab disabled>Preferences</Tab>
-      <Tab>Shut Down</Tab>
-    </TabList>
-    <TabPanel>Settings</TabPanel>
-    <TabPanel>Billings</TabPanel>
-    <TabPanel>Preferences</TabPanel>
-    <TabPanel>Shut Down</TabPanel>
-  </TabsRoot>
-)
-
-export const withIndicator = () => (
-  <TabsRoot variant="unstyled" isManual>
-    <TabList>
-      <Tab>Settings</Tab>
-      <Tab _disabled={{ color: 'gray.400' }} disabled>
-        Billings
-      </Tab>
-      <Tab>Preferences</Tab>
-      <Tab>Shut Down</Tab>
-    </TabList>
-
-    <TabIndicator mt="-36px" zIndex={-1} height="34px" bg="green.200" />
-
-    <TabPanel>Settings</TabPanel>
-    <TabPanel>Billings</TabPanel>
-    <TabPanel>Preferences</TabPanel>
-    <TabPanel>Shut Down</TabPanel>
-  </TabsRoot>
-)
-
-export const withIndicatorAndLongTabText = () => (
-  <TabsRoot variant="unstyled" isManual>
-    <TabList>
-      <Tab>Tab with long text</Tab>
-      <Tab>Billings</Tab>
-      <Tab>Preferences</Tab>
-      <Tab>Shut Down</Tab>
-    </TabList>
-    <TabIndicator mt="-36px" zIndex={-1} height="34px" bg="green.200" />
-    <TabPanel>Tab with long text</TabPanel>
-    <TabPanel>Billings</TabPanel>
-    <TabPanel>Preferences</TabPanel>
-    <TabPanel>Shut Down</TabPanel>
-  </TabsRoot>
-)
-
-export const withVerticalTabs = () => (
-  <TabsRoot orientation="vertical">
-    <TabList>
-      <Tab>Settings</Tab>
-      <Tab>Billings</Tab>
-      <Tab disabled>Preferences</Tab>
-      <Tab>Shut Down</Tab>
-    </TabList>
-    <TabPanel>Settings</TabPanel>
-    <TabPanel>Billings</TabPanel>
-    <TabPanel>Preferences</TabPanel>
-    <TabPanel>Shut Down</TabPanel>
-  </TabsRoot>
-)
-
-const Interval = () => {
-  const [value, setValue] = React.useState(0)
-  useInterval(() => setValue(v => v + 1), 1000)
-  return (
-    <span style={{ fontWeight: 'bold', color: 'tomato', padding: 4 }}>
-      {value}
-    </span>
-  )
+export const Sizes = {
+  render: () => <SizesTabs />
 }
 
-export const withLazyTabs = () => (
-  <TabsRoot isLazy>
-    <TabList>
-      <Tab>Interval 1</Tab>
-      <Tab>Interval 2</Tab>
-    </TabList>
-    <TabPanel>
-      Interval 1:
-      <Interval />
-    </TabPanel>
-    <TabPanel>
-      Interval 2:
-      <Interval />
-    </TabPanel>
-  </TabsRoot>
-)
-
-export const withLazyTabsMounted = () => (
-  <TabsRoot isLazy lazyBehavior="keepMounted">
-    <TabList>
-      <Tab>Interval 1</Tab>
-      <Tab>Interval 2</Tab>
-    </TabList>
-    <TabPanel>
-      Interval 1:
-      <Interval />
-    </TabPanel>
-    <TabPanel>
-      Interval 2:
-      <Interval />
-    </TabPanel>
-  </TabsRoot>
-)
-
-export const WithSwappedTabs = () => {
-  const initialData = [
-    { id: 'a', value: 1 },
-    { id: 'b', value: 5 }
-  ]
-
-  const TabView: React.FC<{
-    items: typeof initialData
-    selectedItemId: string
-    setSelectedItemId: (id: string) => void
-  }> = ({ items, selectedItemId, setSelectedItemId }) => {
-    // Derive current tab index from id
-    const tabIndex = React.useMemo(() => {
-      return items.findIndex(x => x.id === selectedItemId)
-    }, [items, selectedItemId])
-
-    // Update current selected item id
-    const onTabChange = (idx: number) => {
-      console.log('onTabChange', idx, items[idx].id)
-      const { id } = items[idx]
-      setSelectedItemId(id)
-    }
-
-    return (
-      <TabsRoot
-        index={tabIndex}
-        onChange={onTabChange}
-        orientation="vertical"
-        variant="enclosed-colored"
-      >
-        <TabList minW="100px">
-          {items.map(x => (
-            <Tab key={x.id}>
-              {x.id}: {x.value}
-            </Tab>
-          ))}
-        </TabList>
-        {items.map(x => (
-          <TabPanel key={x.id}>
-            {x.id}: {x.value}
-          </TabPanel>
-        ))}
-      </TabsRoot>
-    )
-  }
-
-  const [items, setItems] = React.useState(initialData)
-  const [selectedItemId, setSelectedItemId] = React.useState('a')
-
-  const swapData = () => {
-    setItems(items => {
-      const [a, b] = items
-      return [b, a]
-    })
-  }
-
-  console.log(
-    { selectedItemId },
-    items.map(x => x.id)
-  )
-
-  return (
-    <rh.div m={4}>
-      <button onClick={swapData}>Swap tab order</button>
-      <TabView
-        items={items}
-        selectedItemId={selectedItemId}
-        setSelectedItemId={setSelectedItemId}
-      />
-    </rh.div>
-  )
+export const Automatic = {
+  render: () => <AutomaticTabs />
 }
 
-export const withinDrawer = () => (
-  <DrawerRoot open onOpenChange={console.log}>
-    <DrawerOverlay>
-      <DrawerContent>
-        <DrawerBody>
-          <TabsRoot variant="unstyled" isManual>
-            <TabList>
-              <Tab>Settings</Tab>
-              <Tab>Billings</Tab>
-              <Tab>Preferences</Tab>
-            </TabList>
+export const manual = {
+  render: () => <ManualTabs />
+}
 
-            <TabIndicator zIndex={-1} height="4px" bg="green.200" />
+export const withIndicator = {
+  render: () => <WithIndicatorTabs />
+}
 
-            <TabPanel>Settings</TabPanel>
-            <TabPanel>Billings</TabPanel>
-            <TabPanel>Preferences</TabPanel>
-          </TabsRoot>
-        </DrawerBody>
-      </DrawerContent>
-    </DrawerOverlay>
-  </DrawerRoot>
-)
+export const withIndicatorAndLongTabText = {
+  render: () => <WithIndicatorAndLongTabTextTabs />
+}
 
-export const WithTabPanelWrapper = () => (
-  <TabsRoot>
-    <TabList>
-      <Tab>FIrst Tab</Tab>
-      <Tab>Second Tab</Tab>
-      <Tab>Third Tab</Tab>
-    </TabList>
-    <div>
-      <TabPanel>Tab panel 1</TabPanel>
-    </div>
-    <div>
-      <TabPanel>Tab panel 2</TabPanel>
-    </div>
-    <div>
-      <TabPanel>Tab panel 3</TabPanel>
-    </div>
-  </TabsRoot>
-)
+export const withVerticalTabs = {
+  render: () => <WithVerticalTabs />
+}
+
+export const withLazyTabs = {
+  render: () => <WithLazyTabs />
+}
+
+export const withLazyTabsMounted = {
+  render: () => <WithLazyTabsMounted />
+}
+
+export const WithSwappedTabs = {
+  render: () => <WithSwappedTabsExample />
+}
+
+export const withinDrawer = {
+  render: () => <WithinDrawerTabs />
+}
+
+export const WithTabPanelWrapper = {
+  render: () => <WithTabPanelWrapperTabs />
+}

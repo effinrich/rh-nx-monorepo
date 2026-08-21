@@ -4,6 +4,5 @@ description: After completing each OpCo’s first financing round, they typicall
 labels:
   - tool
   - company-foundations
-googleDocId:  1Hc1mV1-foa8GrQO7f5WGo713QER5Y78UtTILdgmjEz8
+googleDocId: 1Hc1mV1-foa8GrQO7f5WGo713QER5Y78UtTILdgmjEz8
 ---
-

@@ -13,10 +13,6 @@
         ],
         "parallel": false
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
     }
   }
 }

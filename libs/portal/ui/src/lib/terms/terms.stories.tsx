@@ -15,7 +15,7 @@ const Story: Meta<typeof Terms> = {
   title: 'components/Terms',
   decorators: [withRouter],
   args: {
-    isOpen: true
+    open: true
   }
 }
 

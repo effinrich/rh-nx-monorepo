@@ -4,5 +4,5 @@ description: Describes the governance of board meetings during the early phases 
 labels:
   - board
   - company-foundations
-googleDocId:  10MP7vrSUtAbnq3_x71E3cY936oYHNeQii66Ukks9Ltc
+googleDocId: 10MP7vrSUtAbnq3_x71E3cY936oYHNeQii66Ukks9Ltc
 ---

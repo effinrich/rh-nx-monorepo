@@ -9,14 +9,14 @@ import {
 
 interface ButtonRadioProps {
   value: string
-  isChecked: boolean
+  checked: boolean
   title: string
   subtitle?: React.ReactNode
 }
 
 const ButtonRadio = ({
   value,
-  isChecked,
+  checked,
   title,
   subtitle
 }: ButtonRadioProps) => {
@@ -27,8 +27,8 @@ const ButtonRadio = ({
         alignItems="baseline"
         gap={4}
         border="1px solid"
-        borderColor={isChecked ? 'brand.600' : 'gray.200'}
-        background={isChecked ? 'brand.100' : undefined}
+        borderColor={checked ? 'brand.600' : 'gray.200'}
+        background={checked ? 'brand.100' : undefined}
         rounded="md"
         py={4}
         px={6}

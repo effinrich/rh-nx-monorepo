@@ -10,11 +10,11 @@ import {
   isSuperAdminRole
 } from '@redesignhealth/portal/utils'
 import {
+  FieldErrorText,
+  FieldHelperText,
+  FieldLabel,
+  FieldRoot,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Input,
   Radio,
   RadioGroupRoot
@@ -125,9 +125,9 @@ export const AddUser = () => {
     >
       <form>
         <Flex direction={['column', 'column', 'row']} gap="6" mb={6}>
-          <FormControl invalid={Boolean(errors.role)} disabled={isPending}>
-            {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
-            <FormLabel htmlFor="role">User Type</FormLabel>
+          <FieldRoot invalid={Boolean(errors.role)} disabled={isPending}>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldLabel htmlFor="role">User Type</FieldLabel>
             <Controller
               name="role"
               control={control}
@@ -154,48 +154,48 @@ export const AddUser = () => {
                 </RadioGroupRoot>
               )}
             />
-            {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-            <FormErrorMessage role="alert">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText role="alert">
               {errors.role?.message}
-            </FormErrorMessage>
-          </FormControl>
+            </FieldErrorText>
+          </FieldRoot>
         </Flex>
         {userType !== undefined && (
           <Flex flexDir="column" mt="24px" gap="24px">
-            <FormControl disabled={isPending}>
-              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
-              <FormLabel htmlFor="email">Email</FormLabel>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="email">Email</FieldLabel>
               <Input
                 placeholder="jane.doe@example.com"
                 {...register('email')}
               />
-              {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.email?.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl disabled={isPending}>
-              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
-              <FormLabel htmlFor="givenName">First Name</FormLabel>
+              </FieldErrorText>
+            </FieldRoot>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="givenName">First Name</FieldLabel>
               <Input placeholder="Jane" {...register('givenName')} />
-              {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.givenName?.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl disabled={isPending}>
-              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
-              <FormLabel htmlFor="familyName">Last name</FormLabel>
+              </FieldErrorText>
+            </FieldRoot>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="familyName">Last name</FieldLabel>
               <Input placeholder="Doe" {...register('familyName')} />
-              {/* @ts-expect-error Chakra v3 FieldErrorText children typing */}
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.familyName?.message}
-              </FormErrorMessage>
-            </FormControl>
+              </FieldErrorText>
+            </FieldRoot>
 
-            <FormControl disabled={isPending}>
-              {/* @ts-expect-error Chakra v3 FieldLabel children typing */}
-              <FormLabel htmlFor="memberOf">Company assignment</FormLabel>
+            <FieldRoot disabled={isPending}>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldLabel htmlFor="memberOf">Company assignment</FieldLabel>
               {isGetSuccess && (
                 <Controller
                   name="memberOf"
@@ -216,13 +216,15 @@ export const AddUser = () => {
                   )}
                 />
               )}
-              <FormErrorMessage role="alert">
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldErrorText role="alert">
                 {errors.memberOf?.message}
-              </FormErrorMessage>
-              <FormHelperText>
+              </FieldErrorText>
+              {/* @ts-expect-error Chakra v3 children typing */}
+              <FieldHelperText>
                 Select the companies this user is assigned to.
-              </FormHelperText>
-            </FormControl>
+              </FieldHelperText>
+            </FieldRoot>
           </Flex>
         )}
       </form>

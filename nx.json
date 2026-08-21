@@ -7,32 +7,17 @@
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     },
     "e2e": {
-      "inputs": [
-        "default",
-        "^production"
-      ]
+      "inputs": ["default", "^production"]
     },
     "test": {
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/jest.preset.js"
-      ]
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
     "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json"
-      ]
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
     },
     "build-storybook": {
       "inputs": [
@@ -54,20 +39,12 @@
     },
     "@nx/vite:test": {
       "cache": true,
-      "inputs": [
-        "default",
-        "^production"
-      ]
+      "inputs": ["default", "^production"]
     },
     "@nx/esbuild:esbuild": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "generators": {
@@ -122,16 +99,48 @@
       "options": {
         "targetName": "eslint:lint"
       }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      },
+      "include": [
+        "apps/oauth-jwt-generator/**/*",
+        "apps/parser-playground/**/*",
+        "apps/portal/**/*",
+        "apps/third-party-network/**/*",
+        "libs/company-api-types/**/*",
+        "libs/portal/data-assets/**/*",
+        "libs/portal/features/admin/**/*",
+        "libs/portal/features/ceo-directory/**/*",
+        "libs/portal/features/companies/**/*",
+        "libs/portal/features/infrastructure/**/*",
+        "libs/portal/features/ip-marketplace/**/*",
+        "libs/portal/features/library/**/*",
+        "libs/portal/features/research-hub/**/*",
+        "libs/portal/features/sign-in/**/*",
+        "libs/portal/features/support/**/*",
+        "libs/portal/features/users/**/*",
+        "libs/portal/features/vendors/**/*",
+        "libs/portal/ui/**/*",
+        "libs/portal/utils/**/*",
+        "libs/shared/analytics/**/*",
+        "libs/shared/hooks/**/*",
+        "libs/shared/ui/**/*",
+        "libs/shared/utils/**/*",
+        "libs/shared/utils-jest/**/*",
+        "libs/third-party-network/data-assets/**/*",
+        "libs/third-party-network/features/advisors/**/*",
+        "libs/third-party-network/features/authentication/**/*",
+        "libs/third-party-network/ui/**/*",
+        "libs/third-party-network/utils/**/*"
+      ]
     }
   ],
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
-    "sharedGlobals": [
-      "{workspaceRoot}/babel.config.json"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",

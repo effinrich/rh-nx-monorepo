@@ -1,5 +1,5 @@
 ---
-cardTitle: "Video: Artificial Intelligence: Considerations for Early-Stage Healthcare Companies Fireside Chat"
+cardTitle: 'Video: Artificial Intelligence: Considerations for Early-Stage Healthcare Companies Fireside Chat'
 description: Members of our legal and policy team provided an overview of the current policy and political landscape, shared real world use cases to demonstrate guardrails for AI usage and then shared a checklist of considerations. We wrapped up with a short Q&A.
 labels:
   - video

@@ -1,6 +1,6 @@
 import { addons } from 'storybook/manager-api'
 
-import { create } from '@storybook/theming'
+import { create } from 'storybook/theming'
 
 import Logo from './RH_Logo_Single_Ultraviolet.png'
 

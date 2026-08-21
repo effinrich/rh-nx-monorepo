@@ -4,4 +4,3 @@ description: Provides a library of user documentation that describes how to use 
 buttonText: Learn more
 buttonLink: /platform-documentation-library/index
 ---
-

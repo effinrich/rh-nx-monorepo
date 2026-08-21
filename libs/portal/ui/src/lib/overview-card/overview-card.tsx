@@ -3,7 +3,7 @@ import {
   type BoxProps,
   Box,
   CardRoot,
-  Divider,
+  Separator,
   SectionHeader
 } from '@redesignhealth/ui'
 
@@ -33,7 +33,7 @@ const OverviewCard = ({
         hTag="h2"
         size="xs"
       />
-      <Divider mt="20px" />
+      <Separator mt="20px" />
       <Box p="24px">{children}</Box>
     </CardRoot>
   )

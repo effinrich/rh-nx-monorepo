@@ -34,7 +34,7 @@ export const SellerReleaseAction = ({
         </Button>
       )}
       <SellerReleaseModal
-        isOpen={open}
+        open={open}
         onClose={onClose}
         buyerEmail={buyerEmail}
         ipListingId={ipListingId}

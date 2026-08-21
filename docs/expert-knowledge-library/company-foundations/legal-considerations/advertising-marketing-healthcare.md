@@ -4,6 +4,5 @@ description: Describes laws and regulations that apply to advertising health car
 labels:
   - board
   - company-foundations
-googleDocId:  1rSG9Q06sXITKusOQ-1zWDbsTYlnFZD2aM8uQdu3nYDY
+googleDocId: 1rSG9Q06sXITKusOQ-1zWDbsTYlnFZD2aM8uQdu3nYDY
 ---
-
