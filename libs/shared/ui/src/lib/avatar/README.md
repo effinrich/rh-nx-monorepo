@@ -68,18 +68,10 @@ The `Avatar` component comes in 7 sizes.
     />{' '}
   </WrapItem>
   <WrapItem>
-    <Avatar
-      size="sm"
-      name="Kent Dodds"
-      src="https://bit.ly/kent-c-dodds"
-    />{' '}
+    <Avatar size="sm" name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />{' '}
   </WrapItem>
   <WrapItem>
-    <Avatar
-      size="md"
-      name="Ryan Florence"
-      src="https://bit.ly/ryan-florence"
-    />{' '}
+    <Avatar size="md" name="Ryan Florence" src="https://bit.ly/ryan-florence" />{' '}
   </WrapItem>
   <WrapItem>
     <Avatar
@@ -89,18 +81,10 @@ The `Avatar` component comes in 7 sizes.
     />{' '}
   </WrapItem>
   <WrapItem>
-    <Avatar
-      size="xl"
-      name="Christian Nwamba"
-      src="https://bit.ly/code-beast"
-    />{' '}
+    <Avatar size="xl" name="Christian Nwamba" src="https://bit.ly/code-beast" />{' '}
   </WrapItem>
   <WrapItem>
-    <Avatar
-      size="2xl"
-      name="Segun Adebayo"
-      src="https://bit.ly/sage-adebayo"
-    />{' '}
+    <Avatar size="2xl" name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />{' '}
   </WrapItem>
 </Wrap>
 ```

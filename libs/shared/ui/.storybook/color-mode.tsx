@@ -1,3 +1,8 @@
+/**
+ * Unused Storybook duplicate of `src/lib/color-mode/`.
+ * `preview.tsx` uses ThemeProvider + ChakraProvider directly; nothing imports this file.
+ * Left in place (not deleted) in case something outside this repo still copies it.
+ */
 'use client'
 
 import * as React from 'react'

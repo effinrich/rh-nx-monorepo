@@ -7,7 +7,10 @@ import { NativeSelectRoot, NativeSelectField } from './select'
 test.skip('should pass a11y check', async () => {
   const { container } = render(
     <NativeSelectRoot>
-      <NativeSelectField aria-label="Select Food" placeholder="Select an option">
+      <NativeSelectField
+        aria-label="Select Food"
+        placeholder="Select an option"
+      >
         <option value="a">A</option>
         <option value="b">B</option>
         <option value="c">C</option>

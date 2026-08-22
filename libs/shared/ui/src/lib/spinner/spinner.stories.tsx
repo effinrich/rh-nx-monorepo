@@ -1,7 +1,9 @@
 import { Meta } from '@storybook/react-vite'
 
-import { Box } from '../box/box'
-
+import { EmptyColorSpinner } from './partials/empty-color-spinner'
+import { SizeSpinner } from './partials/size-spinner'
+import { SpeedSpinner } from './partials/speed-spinner'
+import { WithCustomStyleConfigSpinner } from './partials/with-custom-style-config-spinner'
 import { Spinner } from './spinner'
 
 const Story: Meta<typeof Spinner> = {
@@ -14,26 +16,23 @@ const Story: Meta<typeof Spinner> = {
 export default Story
 
 export const Basic = {
-  render: (args: typeof Spinner) => {
+  render: (args: Record<string, unknown>) => {
     return <Spinner {...args} />
   }
 }
 
-export const Size = () => (
-  <Box>
-    {['xl', 'lg', 'md', 'sm', 'xs'].map(size => (
-      <Spinner key={size} margin={3} color="green.500" size={size} />
-    ))}
-  </Box>
-)
-export const Speed = () => (
-  <Spinner color="blue.500" emptyColor="gray.200" speed="0.8s" />
-)
+export const Size = {
+  render: () => <SizeSpinner />
+}
 
-export const EmptyColor = () => (
-  <Spinner color="red.500" emptyColor="gray.200" />
-)
+export const Speed = {
+  render: () => <SpeedSpinner />
+}
 
-export const WithCustomStyleConfig = () => {
-  return <Spinner color="red.500" />
+export const EmptyColor = {
+  render: () => <EmptyColorSpinner />
+}
+
+export const WithCustomStyleConfig = {
+  render: () => <WithCustomStyleConfigSpinner />
 }

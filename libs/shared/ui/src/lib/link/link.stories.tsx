@@ -1,42 +1,23 @@
-import { BrowserRouter, Link as ReactRouterLink } from 'react-router-dom'
-
-import { LinkBox, LinkOverlay } from '../link-overlay/link-overlay'
+import { Meta } from '@storybook/react-vite'
 
 import { Link } from './link'
+import { DefaultLink } from './partials/default-link'
+import { WithLinkOverlayLink } from './partials/with-link-overlay-link'
+import { WithRoutingLibraryLink } from './partials/with-routing-library-link'
 
 export default {
+  component: Link,
   title: 'Components / Navigation / Link'
+} as Meta<typeof Link>
+
+export const Default = {
+  render: () => <DefaultLink />
 }
 
-export const Default = () => (
-  <Link target="_blank" rel="noopener noreferrer" href="https://google.com">
-    This is a link
-  </Link>
-)
+export const WithRoutingLibrary = {
+  render: () => <WithRoutingLibraryLink />
+}
 
-export const WithRoutingLibrary = () => (
-  <BrowserRouter>
-    <Link as={ReactRouterLink} to="/home" replace>
-      Click me
-    </Link>
-  </BrowserRouter>
-)
-
-export const WithLinkOverlay = () => (
-  <LinkBox
-    borderWidth="1px"
-    bg="white"
-    p="4"
-    rounded="lg"
-    as="article"
-    _hover={{ shadow: 'lg' }}
-  >
-    <h2>
-      <LinkOverlay href="google.com">Some blog post</LinkOverlay>
-    </h2>
-    <p>
-      As a side note, using quotation marks around an attribute value is
-      required only if this value is not a valid identifier.
-    </p>
-  </LinkBox>
-)
+export const WithLinkOverlay = {
+  render: () => <WithLinkOverlayLink />
+}

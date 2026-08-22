@@ -1,8 +1,7 @@
 import { Meta } from '@storybook/react-vite'
 
-import { Stack } from '../../index'
-
 import { Code } from './code'
+import { ColorsCode } from './partials/colors-code'
 
 const Story: Meta<typeof Code> = {
   component: Code,
@@ -16,10 +15,6 @@ export const Default = {
   }
 }
 
-export const Colors = () => (
-  <Stack direction="row">
-    <Code children="console.log(welcome)" />
-    <Code colorPalette="red" children="var chakra = 'awesome!'" />
-    <Code colorPalette="yellow" children="npm install chakra" />
-  </Stack>
-)
+export const Colors = {
+  render: () => <ColorsCode />
+}

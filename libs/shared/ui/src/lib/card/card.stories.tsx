@@ -1,31 +1,21 @@
-import { MdChat, MdMoreHoriz, MdShare, MdThumbUp } from 'react-icons/md'
-
 import { Meta } from '@storybook/react-vite'
 
-import {
-  AvatarRoot,
-  AvatarImage,
-  AvatarFallback,
-  Box,
-  Button,
-  ButtonGroup,
-  Separator,
-  Heading,
-  HStack,
-  IconButton,
-  Image,
-  Stack,
-  StackSeparator,
-  Text
-} from '../../index'
+import { Box, Separator } from '../../index'
 
-import { CardRoot, CardBody, CardFooter, CardHeader } from './card'
+import { CardRoot } from './card'
+import { AdvancedCard } from './partials/advanced-card'
+import { BasicCard } from './partials/basic-card'
+import { HorizontalCard as HorizontalCardExample } from './partials/horizontal-card'
+import { SizesCard } from './partials/sizes-card'
+import { VariantsCard } from './partials/variants-card'
+import { WithDividerCard } from './partials/with-divider-card'
+import { WithImageCard } from './partials/with-image-card'
 
 export default {
   component: CardRoot,
   title: 'Patterns / Layout / Card',
   decorators: [
-    (Story: any) => (
+    (Story: () => unknown) => (
       <Box mx="auto" mt="40px" w="100%" maxW="2xl">
         {Story()}
       </Box>
@@ -74,191 +64,30 @@ export default {
   }
 } as Meta<typeof Separator>
 
-export const Variants = () => (
-  <Stack gap="4">
-    {['elevated', 'outline', 'filled', 'unstyled'].map(variant => (
-      <CardRoot key={variant} variant={variant}>
-        <CardHeader>
-          <Heading size="md"> {variant}</Heading>
-        </CardHeader>
-        <CardBody>
-          <Text>variant = {variant}</Text>
-        </CardBody>
-      </CardRoot>
-    ))}
-  </Stack>
-)
+export const Variants = {
+  render: () => <VariantsCard />
+}
 
-export const Sizes = () => (
-  <Stack gap="4">
-    {['sm', 'md', 'lg'].map(size => (
-      <CardRoot key={size} size={size}>
-        <CardHeader>
-          <Heading size="md"> {size}</Heading>
-        </CardHeader>
-        <CardBody>
-          <Text>size = {size}</Text>
-        </CardBody>
-      </CardRoot>
-    ))}
-  </Stack>
-)
+export const Sizes = {
+  render: () => <SizesCard />
+}
 
-export const Basic = () => (
-  <CardRoot>
-    <CardHeader>
-      <Heading size="md"> Customer dashboard</Heading>
-    </CardHeader>
-    <CardBody>
-      <Text>View a summary of all your customers over the last month.</Text>
-    </CardBody>
-  </CardRoot>
-)
+export const Basic = {
+  render: () => <BasicCard />
+}
 
-export const WithDivider = () => (
-  <CardRoot>
-    <CardHeader>
-      <Heading size="md">Client Report</Heading>
-    </CardHeader>
+export const WithDivider = {
+  render: () => <WithDividerCard />
+}
 
-    <CardBody>
-      <Stack separator={<StackSeparator />} gap="4">
-        <Box>
-          <Heading size="xs" textTransform="uppercase">
-            Summary
-          </Heading>
-          <Text pt="2" fontSize="sm">
-            View a summary of all your clients over the last month.
-          </Text>
-        </Box>
-        <Box>
-          <Heading size="xs" textTransform="uppercase">
-            Overview
-          </Heading>
-          <Text pt="2" fontSize="sm">
-            Check out the overview of your clients.
-          </Text>
-        </Box>
-        <Box>
-          <Heading size="xs" textTransform="uppercase">
-            Analysis
-          </Heading>
-          <Text pt="2" fontSize="sm">
-            See a detailed analysis of all your business clients.
-          </Text>
-        </Box>
-      </Stack>
-    </CardBody>
-  </CardRoot>
-)
+export const WithImage = {
+  render: () => <WithImageCard />
+}
 
-export const WithImage = () => (
-  <CardRoot maxW="sm">
-    <CardBody>
-      <Image
-        src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        alt="Green double couch with wooden legs"
-        borderRadius="lg"
-      />
-      <Stack mt="6" gap="3">
-        <Heading size="md">Living room Sofa</Heading>
-        <Text>
-          This sofa is perfect for modern tropical spaces, baroque inspired
-          spaces, earthy toned spaces and for people who love a chic design with
-          a sprinkle of vintage design.
-        </Text>
-        <Text color="blue.600" fontSize="2xl">
-          $450
-        </Text>
-      </Stack>
-    </CardBody>
-    <Separator />
-    <CardFooter>
-      <ButtonGroup gap="2">
-        <Button variant="solid" colorPalette="blue">
-          Buy now
-        </Button>
-        <Button variant="ghost" colorPalette="blue">
-          Add to cart
-        </Button>
-      </ButtonGroup>
-    </CardFooter>
-  </CardRoot>
-)
+export const HorizontalCard = {
+  render: () => <HorizontalCardExample />
+}
 
-export const HorizontalCard = () => (
-  <CardRoot direction="row" overflow="hidden" variant="outline">
-    <Image
-      objectFit="cover"
-      maxW="200px"
-      src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-      alt="Caffe Latte"
-    />
-    <Stack>
-      <CardBody>
-        <Heading size="md">The perfect latte</Heading>
-        <Text py="2">
-          Caffè latte is a coffee beverage of Italian origin made with espresso
-          and steamed milk.
-        </Text>
-      </CardBody>
-      <CardFooter>
-        <Button variant="solid" colorPalette="blue">
-          Buy Latte
-        </Button>
-      </CardFooter>
-    </Stack>
-  </CardRoot>
-)
-
-export const Advanced = () => (
-  <CardRoot maxW="md">
-    <CardHeader>
-      <HStack gap="4">
-        <AvatarRoot name="Dan Abramov">
-          {/* @ts-expect-error Chakra v3 compound component typing */}
-          <AvatarImage src="https://bit.ly/dan-abramov" />
-          <AvatarFallback />
-        </AvatarRoot>
-
-        <Box flex="1">
-          <Heading size="sm">Platform and Data Team</Heading>
-          <Text>Creator, Redesign UI</Text>
-        </Box>
-        <IconButton
-          variant="ghost"
-          colorPalette="gray"
-          aria-label="See menu"
-          icon={<MdMoreHoriz />}
-        />
-      </HStack>
-    </CardHeader>
-    <CardBody>
-      <Text>
-        With Redesign UI, we wanted to sync the speed of development with the
-        speed of design. we wanted the developer to be just as excited as the
-        designer to create a screen.
-      </Text>
-    </CardBody>
-    <Image
-      objectFit="cover"
-      src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-      alt="Redesign UI"
-    />
-
-    <CardFooter justify="space-between">
-      <Button flex="1" variant="ghost">
-        <MdThumbUp />
-        Like
-      </Button>
-      <Button flex="1" variant="ghost">
-        <MdChat />
-        Comment
-      </Button>
-      <Button flex="1" variant="ghost">
-        <MdShare />
-        Share
-      </Button>
-    </CardFooter>
-  </CardRoot>
-)
+export const Advanced = {
+  render: () => <AdvancedCard />
+}

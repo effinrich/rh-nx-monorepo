@@ -1,21 +1,18 @@
-/* eslint-disable no-console */
+import { Meta } from '@storybook/react-vite'
+
+import { HiddenInput as HiddenInputExample } from './partials/hidden-input'
+import { HiddenSpan as HiddenSpanExample } from './partials/hidden-span'
 import { VisuallyHidden } from './visually-hidden'
 
 export default {
+  component: VisuallyHidden,
   title: 'Components / Disclosure / Visually Hidden'
-}
-export const HiddenSpan = () => (
-  <VisuallyHidden>This is visually hidden</VisuallyHidden>
-)
+} as Meta<typeof VisuallyHidden>
 
-export const HiddenInput = () => (
-  <VisuallyHidden asChild>
-    <input
-      type="checkbox"
-      defaultChecked
-      onChange={event => {
-        console.log(event.target.checked)
-      }}
-    />
-  </VisuallyHidden>
-)
+export const HiddenSpan = {
+  render: () => <HiddenSpanExample />
+}
+
+export const HiddenInput = {
+  render: () => <HiddenInputExample />
+}

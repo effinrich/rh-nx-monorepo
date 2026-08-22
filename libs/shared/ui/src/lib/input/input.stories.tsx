@@ -1,29 +1,26 @@
-/* eslint-disable react/no-children-prop */
-import * as React from 'react'
-import { LuCheck, LuPhone } from 'react-icons/lu'
-import { useDisclosure } from '@chakra-ui/react'
-import {
-  Box,
-  Button,
-  Container,
-  FieldErrorText,
-  FieldHelperText,
-  FieldLabel,
-  FieldRoot,
-  Stack,
-  Text
-} from '@chakra-ui/react'
+import { Container } from '@chakra-ui/react'
 
 import { Meta } from '@storybook/react-vite'
 
-import { FlushedCustomInput } from './partials/flushed-custom-input'
-import { Input, InputGroup } from './input'
+import { Input } from './input'
+import { BasicInput } from './partials/basic-input'
+import { ControlledInput } from './partials/controlled-input'
+import { InputGroupCustomInputPropsInput } from './partials/input-group-custom-input-props-input'
+import { PasswordInputExample } from './partials/password-input-example'
+import { WithFieldInput } from './partials/with-field-input'
+import { WithFocusAndErrorColorsInput } from './partials/with-focus-and-error-colors-input'
+import { WithInputAddonInput } from './partials/with-input-addon-input'
+import { WithInputElementBugInput } from './partials/with-input-element-bug-input'
+import { WithInputElementInput } from './partials/with-input-element-input'
+import { WithSizesInput } from './partials/with-sizes-input'
+import { WithStatesInput } from './partials/with-states-input'
+import { WithVariantsInput } from './partials/with-variants-input'
 
 export default {
   title: 'Components / Forms / Input',
   component: Input,
   decorators: [
-    Story => (
+    (Story: () => unknown) => (
       <Container>
         <Story />
       </Container>
@@ -31,177 +28,50 @@ export default {
   ]
 } as Meta
 
-export const Basic = () => <Input placeholder="Basic input" />
-
-export const Controlled = () => {
-  const [value, setValue] = React.useState('Starting...')
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setValue(event.target.value)
-
-  return (
-    <>
-      <Input
-        value={value}
-        onChange={handleChange}
-        placeholder="Controlled input"
-      />
-      <Text fontSize="13px" pl={4} pt={2}>
-        {value}
-      </Text>
-    </>
-  )
+export const Basic = {
+  render: () => <BasicInput />
 }
 
-export const WithSizes = () => (
-  <Stack align="start">
-    {['xs', 'sm', 'md', 'lg'].map(size => (
-      <Input key={size} size={size} placeholder="This is an input component" />
-    ))}
-  </Stack>
-)
-
-export const WithStates = () => (
-  <Stack align="start">
-    <Input placeholder="Idle" />
-    <Input invalid placeholder="isInvalid" />
-    <Input disabled placeholder="isDisabled" />
-    <Input readOnly placeholder="isReadonly" />
-  </Stack>
-)
-
-export const WithVariants = () => (
-  <Stack align="start">
-    <Input variant="outline" placeholder="Outline" />
-    <Input variant="filled" placeholder="Filled" />
-    <Input variant="flushed" placeholder="Flushed" />
-    <Input variant="unstyled" placeholder="Unstyled" />
-  </Stack>
-)
-
-export const WithInputAddon = () => (
-  <Stack align="start">
-    <InputGroup startAddon="+234">
-      <Input placeholder="Phone number..." />
-    </InputGroup>
-
-    <InputGroup size="sm" startAddon="https://" endAddon=".com">
-      <Input placeholder="website.com" />
-    </InputGroup>
-  </Stack>
-)
-
-export const WithInputElement = () => (
-  <Stack align="start">
-    <InputGroup startElement={<LuPhone color="gray.300" />}>
-      <Input type="tel" placeholder="Phone number" />
-    </InputGroup>
-
-    <InputGroup
-      size="sm"
-      startElement="$"
-      endElement={<LuCheck color="green.500" />}
-    >
-      <Input placeholder="Enter amount" />
-    </InputGroup>
-  </Stack>
-)
-
-export function PasswordInput() {
-  const [show, setShow] = React.useState(false)
-  const handleClick = () => setShow(!show)
-
-  return (
-    <InputGroup
-      size="md"
-      endElement={
-        <Button onClick={handleClick}>{show ? 'Hide' : 'Show'}</Button>
-      }
-    >
-      <Input
-        type={show ? 'text' : 'password'}
-        placeholder="Enter password"
-      />
-    </InputGroup>
-  )
+export const Controlled = {
+  render: () => <ControlledInput />
 }
 
-export const WithFocusAndErrorColors = () => (
-  <Stack align="start" gap="10">
-    <Input focusBorderColor="lime" placeholder="Here is a sample placeholder" />
-
-    <Input
-      focusBorderColor="pink.400"
-      placeholder="Here is a sample placeholder"
-    />
-
-    <Input
-      invalid
-      errorBorderColor="red.300"
-      placeholder="Here is a sample placeholder"
-    />
-
-    <Input
-      invalid
-      errorBorderColor="crimson"
-      placeholder="Here is a sample placeholder"
-    />
-  </Stack>
-)
-
-function FormError(props: any) {
-  return (
-    <FieldErrorText
-      mt="0"
-      bg="red.500"
-      color="white"
-      px="1"
-      lineHeight="1em"
-      borderRadius="sm"
-      {...props}
-    />
-  )
+export const WithSizes = {
+  render: () => <WithSizesInput />
 }
 
-export const WithField = () => {
-  const [isError, setIsError] = React.useState(false)
-  return (
-    <Stack align="start">
-      <FieldRoot id="first-name" invalid={isError}>
-        <Box display="flex" mb="2">
-          <FieldLabel mb="0" lineHeight="1em">
-            Amount
-          </FieldLabel>
-          <FormError>is invalid!</FormError>
-        </Box>
-        <InputGroup size="sm" startElement="$" endAddon=".com">
-          <Input placeholder="Enter amount" />
-        </InputGroup>
-        <FieldHelperText>Keep it very short and sweet!</FieldHelperText>
-      </FieldRoot>
-      <button onClick={() => setIsError(s => !s)}>Toggle Invalid</button>
-    </Stack>
-  )
+export const WithStates = {
+  render: () => <WithStatesInput />
 }
 
-export const WithInputElementBug = () => {
-  const { open, onToggle } = useDisclosure({ defaultOpen: true })
-  return (
-    <>
-      <button onClick={onToggle}>Toggle element</button>
-      <InputGroup startElement={open ? 'O' : undefined}>
-        <Input name="input" placeholder="placeholder" />
-      </InputGroup>
-    </>
-  )
+export const WithVariants = {
+  render: () => <WithVariantsInput />
 }
 
-export const InputGroupCustomInputProps = () => {
-  return (
-    <>
-      <InputGroup>
-        <FlushedCustomInput m="10px" placeholder="should be flushed" />
-      </InputGroup>
-      <FlushedCustomInput m="10px" placeholder="is flushed" />
-    </>
-  )
+export const WithInputAddon = {
+  render: () => <WithInputAddonInput />
+}
+
+export const WithInputElement = {
+  render: () => <WithInputElementInput />
+}
+
+export const PasswordInput = {
+  render: () => <PasswordInputExample />
+}
+
+export const WithFocusAndErrorColors = {
+  render: () => <WithFocusAndErrorColorsInput />
+}
+
+export const WithField = {
+  render: () => <WithFieldInput />
+}
+
+export const WithInputElementBug = {
+  render: () => <WithInputElementBugInput />
+}
+
+export const InputGroupCustomInputProps = {
+  render: () => <InputGroupCustomInputPropsInput />
 }

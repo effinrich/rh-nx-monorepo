@@ -1,19 +1,21 @@
 import { ReactNode } from 'react'
-import { MdBuild, MdCall, MdFacebook } from 'react-icons/md'
-import {
-  LuArrowRight,
-  LuChevronDown,
-  LuMail,
-  LuPhone,
-  LuSearch
-} from 'react-icons/lu'
-import { BeatLoader } from 'react-spinners'
-import { Box, HStack, Stack, Wrap, WrapItem } from '@chakra-ui/react'
 import { Meta, StoryObj } from '@storybook/react-vite'
 
-import { IconButton } from '../icon-button/icon-button'
-
-import { Button, ButtonGroup } from './button'
+import { Button } from './button'
+import { ButtonWithIconButton } from './partials/button-with-icon-button'
+import { CustomCompositionButton } from './partials/custom-composition-button'
+import { WithAttachedButtonsButton } from './partials/with-attached-buttons-button'
+import { WithButtonGroupButton } from './partials/with-button-group-button'
+import { WithColorsButton } from './partials/with-colors-button'
+import { WithCustomLoadingStateButton } from './partials/with-custom-loading-state-button'
+import { WithDisabledButton } from './partials/with-disabled-button'
+import { WithIconButton } from './partials/with-icon-button'
+import { WithLoadingSpinnerPlacementButton } from './partials/with-loading-spinner-placement-button'
+import { WithLoadingStateButton } from './partials/with-loading-state-button'
+import { WithReactIconsButton } from './partials/with-react-icons-button'
+import { WithSizesButton } from './partials/with-sizes-button'
+import { WithSocialButtonButton } from './partials/with-social-button-button'
+import { WithVariantsButton } from './partials/with-variants-button'
 
 export default {
   component: Button,
@@ -26,7 +28,6 @@ export default {
     isDisabled: { type: 'boolean' },
     isLoading: { type: 'boolean' },
     leftIcon: { type: 'function' },
-    // isRound: { type: 'boolean' },
     rightIcon: { type: 'function' },
     'aria-label': { type: 'string' },
     variant: {
@@ -61,13 +62,6 @@ export default {
     size: 'md',
     variant: 'solid'
   }
-  // decorators: [
-  //   Story => (
-  //     <Box display="flex" flexWrap="wrap" gap="4" justifyContent="center">
-  //       {Story()}
-  //     </Box>
-  //   )
-  // ]
 } as Meta<typeof Button>
 
 interface StoryProps {
@@ -113,278 +107,58 @@ export const Outlines: StoryObj<StoryProps> = {
   }
 }
 
-export const WithVariants = () => (
-  <HStack gap="24px">
-    <Button colorPalette="primary">Primary</Button>
-    <Button variant="primary-on-accent">Primary on accent</Button>
-    <Button variant="outline">Secondary</Button>
-    {/* <Button variant="secondary-on-accent">Secondary on accent</Button> */}
-    <Button colorPalette="teal" variant="solid">
-      Solid
-    </Button>
-    <Button colorPalette="teal" variant="outline">
-      Outline
-    </Button>
-    <Button colorPalette="teal" variant="ghost">
-      Ghost
-    </Button>
-    {/* <Button colorPalette="teal" variant="ghost-on-accent">
-      Ghost on accent
-    </Button> */}
-    <Button colorPalette="teal" variant="plain">
-      Link
-    </Button>
-    <Button colorPalette="teal" variant="unstyled">
-      Unstyled
-    </Button>
-  </HStack>
-)
+export const WithVariants = {
+  render: () => <WithVariantsButton />
+}
 
-export const WithColors = () => (
-  <Stack direction="column">
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      width="100%"
-      py={12}
-      bgImage="url('https://bit.ly/2Z4KKcF')"
-      bgPosition="center"
-      bgRepeat="no-repeat"
-      mb={2}
-    >
-      <ButtonGroup gap="4">
-        <Button colorPalette="whiteAlpha">WhiteAlpha</Button>
-        <Button colorPalette="blackAlpha">BlackAlpha</Button>
-      </ButtonGroup>
-    </Box>
+export const WithColors = {
+  render: () => <WithColorsButton />
+}
 
-    <Wrap gap={4}>
-      <WrapItem>
-        <Button colorPalette="gray">Gray</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="primary">Primary</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="zap">Zap</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="red">Red</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="orange">Orange</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="yellow">Yellow</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="green">Green</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="teal">Teal</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="blue">Blue</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="cyan">Cyan</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="purple">Purple</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="pink">Pink</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="linkedin">Linkedin</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="facebook">Facebook</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="messenger">Messenger</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="whatsapp">Whatsapp</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="twitter">Twitter</Button>
-      </WrapItem>
-      <WrapItem>
-        <Button colorPalette="telegram">Telegram</Button>
-      </WrapItem>
-    </Wrap>
-  </Stack>
-)
+export const WithSizes = {
+  render: () => <WithSizesButton />
+}
 
-export const WithSizes = () => (
-  <HStack>
-    <Button colorPalette="blue" size="xs">
-      Button
-    </Button>
-    <Button colorPalette="blue" size="sm">
-      Button
-    </Button>
-    <Button colorPalette="blue" size="md">
-      Button
-    </Button>
-    <Button colorPalette="blue" size="lg">
-      Button
-    </Button>
-  </HStack>
-)
+export const WithIcon = {
+  render: () => <WithIconButton />
+}
 
-export const WithIcon = () => (
-  <Stack direction="row" gap={4}>
-    <Button colorPalette="teal" variant="solid">
-      <LuMail />
-      Email
-    </Button>
-    <Button
-      colorPalette="teal"
-      variant="outline"
-    >
-      Call us
-      <LuArrowRight />
-    </Button>
-  </Stack>
-)
+export const WithReactIcons = {
+  render: () => <WithReactIconsButton />
+}
 
-export const WithReactIcons = () => (
-  <Stack direction="row" gap={4} align="center">
-    <Button colorPalette="pink" variant="solid">
-      <MdBuild />
-      Settings
-    </Button>
-    <Button colorPalette="blue" variant="outline">
-      Call us
-      <MdCall />
-    </Button>
-  </Stack>
-)
+export const WithLoadingState = {
+  render: () => <WithLoadingStateButton />
+}
 
-export const WithLoadingState = () => (
-  <Stack direction="row" gap={4}>
-    <Button loading colorPalette="teal" variant="solid">
-      Email
-    </Button>
-    <Button
-      loading
-      loadingText="Submitting"
-      colorPalette="teal"
-      variant="outline"
-    >
-      Submit
-    </Button>
-  </Stack>
-)
+export const WithCustomLoadingState = {
+  render: () => <WithCustomLoadingStateButton />
+}
 
-export const WithCustomLoadingState = () => (
-  <Button
-    loading
-    colorPalette="blue"
-    spinner={<BeatLoader size={8} color="white" />}
-  >
-    Click me
-  </Button>
-)
+export const WithLoadingSpinnerPlacement = {
+  render: () => <WithLoadingSpinnerPlacementButton />
+}
 
-export const WithLoadingSpinnerPlacement = () => (
-  <Stack direction="row" gap={4} align="center">
-    <Button
-      loading
-      loadingText="Loading"
-      colorPalette="teal"
-      variant="outline"
-      spinnerPlacement="start"
-    >
-      Submit
-    </Button>
-    <Button
-      loading
-      loadingText="Loading"
-      colorPalette="teal"
-      variant="outline"
-      spinnerPlacement="end"
-    >
-      Continue
-    </Button>
-  </Stack>
-)
+export const WithDisabled = {
+  render: () => <WithDisabledButton />
+}
 
-export const WithDisabled = () => (
-  <HStack gap="24px">
-    <Button disabled colorPalette="teal" variant="solid">
-      Button
-    </Button>
-    <Button disabled colorPalette="teal" variant="outline">
-      Button
-    </Button>
-    <Button disabled colorPalette="teal" variant="ghost">
-      Button
-    </Button>
-    <Button disabled colorPalette="teal" variant="plain">
-      Button
-    </Button>
-  </HStack>
-)
+export const CustomComposition = {
+  render: () => <CustomCompositionButton />
+}
 
-export const CustomComposition = () => (
-  <Button
-    size="md"
-    height="48px"
-    width="200px"
-    border="2px solid"
-    borderColor="green.500"
-  >
-    Button
-  </Button>
-)
+export const ButtonWithIcon = {
+  render: () => <ButtonWithIconButton />
+}
 
-export const ButtonWithIcon = () => (
-  <Stack direction="row">
-    <IconButton aria-label="Search database"><LuSearch /></IconButton>
+export const WithButtonGroup = {
+  render: () => <WithButtonGroupButton />
+}
 
-    <IconButton
-      colorPalette="blue"
-      aria-label="Search database"
-    >
-      <LuSearch />
-    </IconButton>
+export const WithAttachedButtons = {
+  render: () => <WithAttachedButtonsButton />
+}
 
-    <IconButton colorPalette="teal" aria-label="Call Segun" size="lg">
-      <LuPhone />
-    </IconButton>
-  </Stack>
-)
-
-export const WithButtonGroup = () => (
-  <ButtonGroup variant="outline">
-    <Button colorPalette="blue">Save</Button>
-    <Button>Cancel</Button>
-  </ButtonGroup>
-)
-
-export const WithAttachedButtons = () => (
-  <ButtonGroup size="sm" attached variant="outline">
-    <Button>Save</Button>
-    <Button>Cancel</Button>
-    <IconButton
-      fontSize="2xl"
-      aria-label="Add to friends"
-    >
-      <LuChevronDown />
-    </IconButton>
-  </ButtonGroup>
-)
-
-export const WithSocialButton = () => (
-  <Stack direction="row">
-    <Button colorPalette="facebook">
-      <MdFacebook />
-      Facebook
-    </Button>
-  </Stack>
-)
-
+export const WithSocialButton = {
+  render: () => <WithSocialButtonButton />
+}

@@ -1,11 +1,15 @@
-/* eslint-disable no-console */
-import { useRef, useState } from 'react'
-
 import { Meta } from '@storybook/react-vite'
 
 import { Box, Stack } from '../../index'
 
 import { Image, ImageProps } from './image'
+import { BugImage } from './partials/bug-image'
+import { FallbackElementExampleImage } from './partials/fallback-element-example-image'
+import { FallbackSrcExampleImage } from './partials/fallback-src-example-image'
+import { FallbackStrategiesImage } from './partials/fallback-strategies-image'
+import { WithFitImage } from './partials/with-fit-image'
+import { WithNativeWidthImage } from './partials/with-native-width-image'
+import { WithSrcSetImage } from './partials/with-src-set-image'
 
 const Story: Meta<typeof Image> = {
   component: Image,
@@ -27,109 +31,32 @@ export const Basic = {
   }
 }
 
-export const FallbackSrcExample = () => (
-  <Image
-    src="https://bit.ly/dan-abramov"
-    fallbackSrc="https://via.placeholder.com/240"
-  />
-)
-
-export const FallbackElementExample = () => (
-  <Image
-    src="https://bit.ly/dan-abramov"
-    fallback={<div style={{ width: 240, height: 240, background: 'red' }} />}
-  />
-)
-
-export const WithFit = () => (
-  <Image
-    src="https://bit.ly/dan-abramov"
-    fallbackSrc="https://via.placeholder.com/240"
-    fit="cover"
-    width="400px"
-    height="300px"
-  />
-)
-
-export const WithNativeWidth = () => (
-  <Image
-    src="https://bit.ly/dan-abramov"
-    fallbackSrc="https://via.placeholder.com/240"
-    htmlWidth="300px"
-    htmlHeight="300px"
-    onLoad={() => {
-      console.log('loaded')
-    }}
-  />
-)
-
-export const Bug = () => {
-  const [src, setSrc] = useState('')
-
-  const onClick = () => {
-    setSrc(
-      'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-    )
-  }
-
-  return (
-    <div>
-      <Image src={src} />
-      <button onClick={onClick}>set image</button>
-      <p>src set to Avatar: {src}</p>
-    </div>
-  )
+export const FallbackSrcExample = {
+  render: () => <FallbackSrcExampleImage />
 }
 
-export const WithSrcSet = () => {
-  const firstRef = useRef<HTMLImageElement>(null)
-  const secondRef = useRef<HTMLImageElement>(null)
-
-  const firstLog = (e: any) => {
-    console.log(1, 'Image', e.type, firstRef.current?.currentSrc)
-  }
-
-  const secondLog = (e: any) => {
-    console.log(2, 'Img', e.type, secondRef.current?.currentSrc)
-  }
-
-  return (
-    <>
-      <Image
-        ref={firstRef}
-        srcSet="//fake.image/ 1x"
-        onError={firstLog}
-        onLoad={firstLog}
-      />
-      <Image
-        ref={secondRef}
-        srcSet="//lorempixel.com/100/100/ 1x"
-        onError={secondLog}
-        onLoad={secondLog}
-      />
-    </>
-  )
+export const FallbackElementExample = {
+  render: () => <FallbackElementExampleImage />
 }
 
-export const FallbackStrategies = () => {
-  return (
-    <>
-      <Image
-        src="https://via.placeholder.com/240"
-        w={240}
-        h={240}
-        fallbackStrategy="onError"
-        fallbackSrc="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-      />
-      <Image
-        w={240}
-        h={240}
-        src="https://via.placeholder.com/240"
-        fallbackStrategy="beforeLoadOrError"
-        fallbackSrc="https://bit.ly/dan-abramov"
-      />
-    </>
-  )
+export const WithFit = {
+  render: () => <WithFitImage />
+}
+
+export const WithNativeWidth = {
+  render: () => <WithNativeWidthImage />
+}
+
+export const Bug = {
+  render: () => <BugImage />
+}
+
+export const WithSrcSet = {
+  render: () => <WithSrcSetImage />
+}
+
+export const FallbackStrategies = {
+  render: () => <FallbackStrategiesImage />
 }
 
 export const Size = {
@@ -145,7 +72,7 @@ export const Size = {
 }
 
 export const WithBorderRadius = {
-  render: (args: ImageProps) => {
+  render: () => {
     return (
       <Image
         borderRadius="full"

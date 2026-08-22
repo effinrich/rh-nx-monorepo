@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-import { type InputProps,Input } from '../input'
+import { type InputProps, Input } from '../input'
 
 export const FlushedCustomInput = forwardRef<HTMLInputElement, InputProps>(
   function FlushedCustomInput(props, ref) {

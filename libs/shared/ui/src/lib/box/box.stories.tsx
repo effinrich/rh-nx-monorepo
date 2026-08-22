@@ -1,45 +1,23 @@
-import { Kbd as ChakraKbd } from '@chakra-ui/react'
-
-import { Flex, Spacer as RhSpacer } from '../flex/flex'
+import { Meta } from '@storybook/react-vite'
 
 import { Box } from './box'
+import { BasicBox } from './partials/basic-box'
+import { KbdBox } from './partials/kbd-box'
+import { SpacerBox } from './partials/spacer-box'
 
 export default {
   title: 'Components / Layout / Box',
   component: Box
+} as Meta<typeof Box>
+
+export const Basic = {
+  render: () => <BasicBox />
 }
 
-export const Basic = () => (
-  <Box>
-    <Box color="tomato" _hover={{ bg: 'red.500', color: 'white' }}>
-      Just a box
-    </Box>
-    <Box
-      position="relative"
-      bg="red.400"
-      _before={{
-        height: 0,
-        content: `""`,
-        display: 'block',
-        paddingBottom: ['40px', '100px']
-      }}
-    />
-  </Box>
-)
+export const Kbd = {
+  render: () => <KbdBox />
+}
 
-export const Kbd = () => <ChakraKbd>Ctrl + L</ChakraKbd>
-
-export const Spacer = () => (
-  <Flex
-    color={['green.400', 'tomato']}
-    direction={{ base: 'column', md: 'row' }}
-  >
-    <Box bg="pink.500" boxSize="100px">
-      Box 1
-    </Box>
-    <RhSpacer />
-    <Box bg="green.500" boxSize="100px">
-      Box 2
-    </Box>
-  </Flex>
-)
+export const Spacer = {
+  render: () => <SpacerBox />
+}

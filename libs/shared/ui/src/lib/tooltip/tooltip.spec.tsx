@@ -19,7 +19,10 @@ const buttonLabel = 'Hover me'
 const tooltipLabel = 'tooltip label'
 
 const DummyComponent = (
-  props: Partial<TooltipRootProps> & { isButtonDisabled?: boolean; shouldWrapChildren?: boolean }
+  props: Partial<TooltipRootProps> & {
+    isButtonDisabled?: boolean
+    shouldWrapChildren?: boolean
+  }
 ) => {
   const { isButtonDisabled, shouldWrapChildren, ...tooltipProps } = props
   return (

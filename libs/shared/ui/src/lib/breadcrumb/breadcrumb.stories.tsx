@@ -1,80 +1,23 @@
-import { BrowserRouter, Link } from 'react-router-dom'
-import { LuChevronRight } from 'react-icons/lu'
+import { Meta } from '@storybook/react-vite'
 
-import {
-  BreadcrumbCurrentLink,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbRoot,
-  BreadcrumbSeparator
-} from './breadcrumb'
+import { BreadcrumbRoot } from './breadcrumb'
+import { BasicBreadcrumb } from './partials/basic-breadcrumb'
+import { WithCustomSeparatorBreadcrumb } from './partials/with-custom-separator-breadcrumb'
+import { WithSeparatorBreadcrumb } from './partials/with-separator-breadcrumb'
 
 export default {
   title: 'Components / Navigation / Breadcrumb',
   component: BreadcrumbRoot
+} as Meta<typeof BreadcrumbRoot>
+
+export const Basic = {
+  render: () => <BasicBreadcrumb />
 }
 
-export const Basic = () => (
-  <BrowserRouter>
-    <BreadcrumbRoot>
-      <BreadcrumbList gap="4">
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link to="/home" replace>
-              Breadcrumb 1
-            </Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="#">Breadcrumb 2</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbCurrentLink>Breadcrumb 3</BreadcrumbCurrentLink>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </BreadcrumbRoot>
-  </BrowserRouter>
-)
+export const WithSeparator = {
+  render: () => <WithSeparatorBreadcrumb />
+}
 
-export const WithSeparator = () => (
-  <BreadcrumbRoot>
-    <BreadcrumbList>
-      <BreadcrumbItem>
-        <BreadcrumbLink href="#">Home</BreadcrumbLink>
-      </BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbItem>
-        <BreadcrumbLink href="#">About</BreadcrumbLink>
-      </BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbItem>
-        <BreadcrumbCurrentLink>Current</BreadcrumbCurrentLink>
-      </BreadcrumbItem>
-    </BreadcrumbList>
-  </BreadcrumbRoot>
-)
-
-export const WithCustomSeparator = () => (
-  <BreadcrumbRoot>
-    <BreadcrumbList gap="8px">
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/">Home</BreadcrumbLink>
-      </BreadcrumbItem>
-      <BreadcrumbSeparator>
-        <LuChevronRight color="gray.300" />
-      </BreadcrumbSeparator>
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/about">About</BreadcrumbLink>
-      </BreadcrumbItem>
-      <BreadcrumbSeparator>
-        <LuChevronRight color="gray.300" />
-      </BreadcrumbSeparator>
-      <BreadcrumbItem>
-        <BreadcrumbCurrentLink>Contact</BreadcrumbCurrentLink>
-      </BreadcrumbItem>
-    </BreadcrumbList>
-  </BreadcrumbRoot>
-)
+export const WithCustomSeparator = {
+  render: () => <WithCustomSeparatorBreadcrumb />
+}

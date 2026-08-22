@@ -1,6 +1,6 @@
 import { render, screen, testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { AvatarFallback, AvatarGroup,AvatarRoot } from './avatar'
+import { AvatarFallback, AvatarGroup, AvatarRoot } from './avatar'
 
 it('passes a11y test', async () => {
   await testA11y(

@@ -14,7 +14,8 @@ import {
   CheckboxGroup,
   CheckboxHiddenInput,
   CheckboxLabel,
-  CheckboxRoot} from './checkbox'
+  CheckboxRoot
+} from './checkbox'
 
 it('passes a11y test', async () => {
   await testA11y(
@@ -258,10 +259,7 @@ test('accepts custom icon', () => {
   )
 
   render(
-    <Checkbox
-      defaultChecked
-      icon={<CustomIcon data-testid="custom-icon" />}
-    >
+    <Checkbox defaultChecked icon={<CustomIcon data-testid="custom-icon" />}>
       hello world
     </Checkbox>
   )

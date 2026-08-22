@@ -1,7 +1,6 @@
-import { ChangeEvent, forwardRef, LegacyRef, useEffect } from 'react'
+import { ChangeEvent, useEffect } from 'react'
 import DatePicker from 'react-datepicker'
 import { Controller, FormProvider, useForm, useWatch } from 'react-hook-form'
-import { MdEditCalendar } from 'react-icons/md'
 import { ErrorMessage } from '@hookform/error-message'
 import { yupResolver } from '@hookform/resolvers/yup'
 import {
@@ -16,15 +15,11 @@ import {
   selectTransformer
 } from '@redesignhealth/portal/utils'
 import {
-  type InputProps,
   Box,
   Flex,
   FieldErrorText,
   FieldLabel,
   FieldRoot,
-  Icon,
-  Input,
-  InputGroup,
   Loader,
   Radio,
   RadioGroupRoot,
@@ -38,6 +33,7 @@ import * as yup from 'yup'
 import FormFieldMaster from '../../../form-field-master/form-field-master'
 import FormMaster from '../../../form-master/form-master'
 
+import { CustomDateInput } from './custom-date-input'
 import { engagementStatuses } from './types'
 
 import 'react-datepicker/dist/react-datepicker.css'
@@ -66,36 +62,6 @@ const formSchema = yup.object().shape({
   subcategories: yup.array().min(1, FORM_ERROR_MESSAGES.SELECT_AT_LEAST_ONE),
   willingToDiscuss: yup.boolean().required(FORM_ERROR_MESSAGES.REQUIRED)
 })
-
-const customDateInput = (
-  { value, onClick, onChange }: InputProps,
-  ref: LegacyRef<HTMLInputElement>
-) => (
-  <InputGroup
-    endElement={
-      <Icon
-        as={MdEditCalendar}
-        boxSize={4}
-        color="gray.600"
-        onClick={onClick}
-        cursor="pointer"
-      />
-    }
-  >
-    <Input
-      autoComplete="off"
-      value={value}
-      ref={ref}
-      onClick={onClick}
-      onChange={onChange}
-      width="100%"
-      maxW="100%"
-      placeholder="MM/DD/YYYY"
-    />
-  </InputGroup>
-)
-customDateInput.displayName = 'DateInput'
-const CustomInput = forwardRef(customDateInput)
 
 export const CompanyVendorForm = ({
   defaultValues,
@@ -277,10 +243,7 @@ export const CompanyVendorForm = ({
             )}
           />
 
-          <FieldRoot
-            invalid={Boolean(errors.startDate)}
-            disabled={isPending}
-          >
+          <FieldRoot invalid={Boolean(errors.startDate)} disabled={isPending}>
             <Flex direction={['column', 'column', 'row']}>
               <Box w={['100%', '100%', '25%']} mr={4}>
                 {/* @ts-expect-error Chakra v3 children typing */}
@@ -299,7 +262,7 @@ export const CompanyVendorForm = ({
                       }
                       placeholderText="MM/DD/YYYY"
                       selected={value as DatePickerCompatible}
-                      customInput={<CustomInput />}
+                      customInput={<CustomDateInput />}
                       peekNextMonth
                       showMonthDropdown
                       showYearDropdown
@@ -341,7 +304,7 @@ export const CompanyVendorForm = ({
                       }
                       placeholderText="MM/DD/YYYY"
                       selected={value as DatePickerCompatible}
-                      customInput={<CustomInput />}
+                      customInput={<CustomDateInput />}
                       peekNextMonth
                       showMonthDropdown
                       showYearDropdown

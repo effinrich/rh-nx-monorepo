@@ -14,12 +14,7 @@ interface ButtonRadioProps {
   subtitle?: React.ReactNode
 }
 
-const ButtonRadio = ({
-  value,
-  checked,
-  title,
-  subtitle
-}: ButtonRadioProps) => {
+const ButtonRadio = ({ value, checked, title, subtitle }: ButtonRadioProps) => {
   return (
     <RadioGroupItem value={value} asChild>
       <rh.label

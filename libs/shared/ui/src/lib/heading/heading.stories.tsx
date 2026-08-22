@@ -1,8 +1,11 @@
-import { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
+import { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Box, Button, Stack, Text } from '../../index'
+import { Stack } from '../../index'
 
 import { Heading } from './heading'
+import { CompositionHeading } from './partials/composition-heading'
+import { OverrideStyleHeading } from './partials/override-style-heading'
+import { TruncateHeadingExample } from './partials/truncate-heading'
 
 export default {
   component: Heading,
@@ -11,7 +14,6 @@ export default {
     as: 'h1',
     size: '4xl',
     noOfLines: 1
-    // fontSize: ''
   }
 } as Meta<typeof Heading>
 
@@ -20,7 +22,7 @@ export const Default: StoryObj<typeof Heading> = {
 }
 
 export const ChangingVisualSize: StoryObj<typeof Heading> = {
-  render: args => (
+  render: () => (
     <Stack gap={6}>
       <Heading as="h1" size="4xl" lineClamp={1}>
         (4xl) In love with React & Next
@@ -50,35 +52,14 @@ export const ChangingVisualSize: StoryObj<typeof Heading> = {
   )
 }
 
-export const TruncateHeading: StoryFn<typeof Heading> = () => (
-  <Box maxW={500}>
-    No Truncation
-    <Heading>
-      Basic text writing, including headings, body text, lists, and more.
-    </Heading>
-    <br />
-    With Truncation
-    <Heading lineClamp={1}>
-      Basic text writing, including headings, body text, lists, and more.
-    </Heading>
-  </Box>
-)
+export const TruncateHeading = {
+  render: () => <TruncateHeadingExample />
+}
 
-export const OverrideStyle: StoryFn<typeof Heading> = () => (
-  <Heading size="lg" fontSize="50px">
-    I'm overriding this heading
-  </Heading>
-)
+export const OverrideStyle = {
+  render: () => <OverrideStyleHeading />
+}
 
-export const Composition: StoryFn<typeof Heading> = () => (
-  <Box maxW="32rem">
-    <Heading mb={4}>Modern online and offline payments for Africa</Heading>
-    <Text fontSize="xl">
-      Paystack helps businesses in Africa get paid by anyone, anywhere in the
-      world
-    </Text>
-    <Button size="lg" colorPalette="primary" mt="24px">
-      Create a free account
-    </Button>
-  </Box>
-)
+export const Composition = {
+  render: () => <CompositionHeading />
+}
