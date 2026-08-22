@@ -348,7 +348,6 @@ npm run affected:check-types
 - DON'T USE for: basic generator syntax (`nx g @nx/react:app`), standard commands, things you already know
 - The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
 
-
 <!-- nx configuration end-->
 
 <!-- user configuration start -->
@@ -468,3 +467,17 @@ npm run affected:check-types
 
 - If complex, explain high-level changes in the PR description [4].
 - If changing architecture, update this `CLAUDE.md`.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and PRDs are tracked in this repository's GitHub Issues. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Use the five default canonical triage labels. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Use a multi-context layout rooted at `CONTEXT-MAP.md`. See `docs/agents/domain.md`.
