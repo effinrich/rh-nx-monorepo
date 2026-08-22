@@ -1,7 +1,7 @@
 import { mockVendor } from '@redesignhealth/portal/data-assets'
 import { getVendorCategories } from '@redesignhealth/portal/data-assets'
 import { http, HttpResponse } from 'msw'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import { withRouter } from 'storybook-addon-remix-react-router'
 
 import type { Meta } from '@storybook/react-vite'
 

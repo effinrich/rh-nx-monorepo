@@ -2,7 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider } from 'next-themes'
 
 import { withThemeByClassName } from '@storybook/addon-themes'
-import type { Preview, ReactRenderer } from '@storybook/react'
+import type { Preview, ReactRenderer } from '@storybook/react-vite'
 
 import { system } from '../src/lib/theme'
 

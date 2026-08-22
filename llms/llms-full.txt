@@ -52847,7 +52847,7 @@ and `withThemeByClassName` helper.
 ```tsx
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
 import { withThemeByClassName } from "@storybook/addon-themes"
-import type { Preview, ReactRenderer } from "@storybook/react"
+import type { Preview, ReactRenderer } from "@storybook/react-vite"
 
 const preview: Preview = {
   decorators: [
@@ -60229,7 +60229,7 @@ Edit the `.storybook/preview.tsx` file to include the Chakra UI provider.
 
 ```tsx
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
-import type { Preview } from "@storybook/react"
+import type { Preview } from "@storybook/react-vite"
 
 const preview: Preview = {
   // ...
@@ -60252,7 +60252,7 @@ color mode toggle to the Storybook toolbar.
 
 ```tsx
 import { withThemeByClassName } from "@storybook/addon-themes"
-import type { Preview, ReactRenderer } from "@storybook/react"
+import type { Preview, ReactRenderer } from "@storybook/react-vite"
 
 const preview: Preview = {
   decorators: [

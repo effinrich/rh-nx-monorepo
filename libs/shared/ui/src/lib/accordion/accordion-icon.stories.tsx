@@ -1,12 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from 'storybook/test'
 
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import {
-  AccordionRoot,
   AccordionItem,
-  AccordionItemTrigger,
+  AccordionItemContent,
   AccordionItemIndicator,
-  AccordionItemContent
+  AccordionItemTrigger,
+  AccordionRoot
 } from './accordion'
 
 const meta: Meta<typeof AccordionItemIndicator> = {

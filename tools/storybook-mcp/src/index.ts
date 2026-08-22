@@ -250,7 +250,7 @@ export const Basic: StoryObj<typeof ComponentName> = {
 ## Portal UI Pattern (with decorators)
 \`\`\`tsx
 import type { Meta } from '@storybook/react-vite'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import { withRouter } from 'storybook-addon-remix-react-router'
 import { ComponentName } from './component-name'
 
 const Story: Meta<typeof ComponentName> = {
@@ -550,8 +550,16 @@ ${story}
 - Review the generated story and adjust prop types as needed
 - Add meaningful default values for props
 - Consider adding more story variants for different use cases
-${usesRouter ? '- This component uses React Router - withRouter decorator included' : ''}
-${usesQuery ? '- This component uses React Query - consider adding MSW handlers' : ''}
+${
+  usesRouter
+    ? '- This component uses React Router - withRouter decorator included'
+    : ''
+}
+${
+  usesQuery
+    ? '- This component uses React Query - consider adding MSW handlers'
+    : ''
+}
 `
       }
     ]
@@ -579,7 +587,9 @@ async function handleGetStoryTemplate(args: {
       content: [
         {
           type: 'text',
-          text: `Unknown template type: ${args.templateType}. Available types: ${Object.keys(templates).join(', ')}`
+          text: `Unknown template type: ${
+            args.templateType
+          }. Available types: ${Object.keys(templates).join(', ')}`
         }
       ]
     }
@@ -853,7 +863,9 @@ function generateStoryContent(options: {
 
   // Add router decorator if needed
   if (usesRouter || library === 'portal-ui') {
-    imports.push("import { withRouter } from 'storybook-addon-react-router-v6'")
+    imports.push(
+      "import { withRouter } from 'storybook-addon-remix-react-router'"
+    )
     decorators.push('withRouter')
   }
 
@@ -868,8 +880,14 @@ function generateStoryContent(options: {
   // Add component import
   const importStatement =
     exportType === 'default'
-      ? `import ${componentName} from './${path.basename(options.componentPath, '.tsx')}'`
-      : `import { ${componentName} } from './${path.basename(options.componentPath, '.tsx')}'`
+      ? `import ${componentName} from './${path.basename(
+          options.componentPath,
+          '.tsx'
+        )}'`
+      : `import { ${componentName} } from './${path.basename(
+          options.componentPath,
+          '.tsx'
+        )}'`
   imports.push('')
   imports.push(importStatement)
 
@@ -900,7 +918,9 @@ function generateStoryContent(options: {
 const Story: Meta<typeof ${componentName}> = {
   component: ${componentName},
   title: '${storyTitle}',
-${decorators.length > 0 ? `  decorators: [${decorators.join(', ')}],\n` : ''}  args: {},
+${
+  decorators.length > 0 ? `  decorators: [${decorators.join(', ')}],\n` : ''
+}  args: {},
 }
 
 export default Story
@@ -908,7 +928,11 @@ export default Story
 export const Default = {
   render: () => <${componentName} />,
 }
-${includeVariants ? generateVariantStories(componentName, props, 'portal-ui') : ''}`
+${
+  includeVariants
+    ? generateVariantStories(componentName, props, 'portal-ui')
+    : ''
+}`
   }
 
   // shared-ui style
@@ -917,7 +941,9 @@ ${includeVariants ? generateVariantStories(componentName, props, 'portal-ui') : 
 export default {
   component: ${componentName},
   title: '${storyTitle}',
-${argTypes.length > 0 ? `  argTypes: {\n${argTypes.join(',\n')}\n  },\n` : ''}  args: {
+${
+  argTypes.length > 0 ? `  argTypes: {\n${argTypes.join(',\n')}\n  },\n` : ''
+}  args: {
     // Default args
   },
 } as Meta<typeof ${componentName}>
@@ -929,7 +955,11 @@ export const Basic: Story = {
     // Story-specific args
   },
 }
-${includeVariants ? generateVariantStories(componentName, props, 'shared-ui') : ''}`
+${
+  includeVariants
+    ? generateVariantStories(componentName, props, 'shared-ui')
+    : ''
+}`
 }
 
 function generateVariantStories(
@@ -1023,7 +1053,7 @@ export const Disabled: Story = {
 function getBasicTemplate(library: LibraryName): string {
   if (library === 'portal-ui') {
     return `import type { Meta } from '@storybook/react-vite'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import { withRouter } from 'storybook-addon-remix-react-router'
 
 import { ComponentName } from './component-name'
 
@@ -1130,7 +1160,7 @@ export const AllVariants: Story = {
 
 function getMswTemplate(): string {
   return `import type { Meta } from '@storybook/react-vite'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import { withRouter } from 'storybook-addon-remix-react-router'
 import { http, HttpResponse } from 'msw'
 
 import { ComponentName } from './component-name'
@@ -1192,7 +1222,7 @@ export const Error = {
 
 function getRouterTemplate(): string {
   return `import type { Meta } from '@storybook/react-vite'
-import { withRouter, reactRouterParameters } from 'storybook-addon-react-router-v6'
+import { withRouter, reactRouterParameters } from 'storybook-addon-remix-react-router'
 
 import { ComponentName } from './component-name'
 
@@ -1234,7 +1264,7 @@ export const WithSearchParams = {
 
 function getPageTemplate(): string {
   return `import type { Meta } from '@storybook/react-vite'
-import { withRouter, reactRouterParameters } from 'storybook-addon-react-router-v6'
+import { withRouter, reactRouterParameters } from 'storybook-addon-remix-react-router'
 import { http, HttpResponse } from 'msw'
 
 import { PageComponent } from './page-component'

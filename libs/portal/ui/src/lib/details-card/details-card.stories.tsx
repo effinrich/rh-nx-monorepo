@@ -1,6 +1,12 @@
 import { MdAlternateEmail } from 'react-icons/md'
-import { Button, TabsList, TabsRoot, TabsTrigger, Text } from '@redesignhealth/ui'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import {
+  Button,
+  TabsList,
+  TabsRoot,
+  TabsTrigger,
+  Text
+} from '@redesignhealth/ui'
+import { withRouter } from 'storybook-addon-remix-react-router'
 
 import type { Meta } from '@storybook/react-vite'
 

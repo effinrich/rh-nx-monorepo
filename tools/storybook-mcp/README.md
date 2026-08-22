@@ -9,20 +9,24 @@ This MCP server provides tools to help with Storybook story generation and manag
 ### Tools
 
 1. **list_components** - List all React components in the design system libraries
+
    - Filter by library (shared-ui, portal-ui, or all)
    - Filter by whether components have stories
 
 2. **analyze_component** - Analyze a React component to extract its structure
+
    - Extracts props, types, and dependencies
    - Identifies if component uses Router, React Query, or Chakra UI
    - Provides suggestions for story generation
 
 3. **generate_story** - Generate a Storybook story file for a component
+
    - Follows established patterns in the RH Design System
    - Auto-detects library style (shared-ui vs portal-ui)
    - Optionally includes variant and interactive stories
 
 4. **get_story_template** - Get templates for different story types
+
    - basic, with-controls, with-variants, with-msw, with-router, page
 
 5. **validate_story** - Validate an existing story file
@@ -99,7 +103,7 @@ export const Basic: StoryObj<typeof ComponentName> = {
 
 ```tsx
 import type { Meta } from '@storybook/react-vite'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import { withRouter } from 'storybook-addon-remix-react-router'
 import { ComponentName } from './component-name'
 
 const Story: Meta<typeof ComponentName> = {

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import { withRouter } from 'storybook-addon-remix-react-router'
 
 import { Meta } from '@storybook/react-vite'
 

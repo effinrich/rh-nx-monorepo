@@ -1,5 +1,5 @@
 import { Button, useDisclosure } from '@redesignhealth/ui'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import { withRouter } from 'storybook-addon-remix-react-router'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 

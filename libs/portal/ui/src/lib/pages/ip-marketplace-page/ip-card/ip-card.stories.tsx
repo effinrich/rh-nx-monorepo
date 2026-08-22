@@ -1,6 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom'
 import { Button } from '@redesignhealth/ui'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import { withRouter } from 'storybook-addon-remix-react-router'
 
 import type { Meta } from '@storybook/react-vite'
 

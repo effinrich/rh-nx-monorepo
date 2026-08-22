@@ -1,6 +1,6 @@
 import React from 'react'
 import { type CardHeaderProps } from '@redesignhealth/ui'
-import { Box, CardHeader, Separator, Flex, Text } from '@redesignhealth/ui'
+import { Box, CardHeader, Flex, Separator, Text } from '@redesignhealth/ui'
 
 interface ListCardHeaderProps extends Omit<CardHeaderProps, 'title'> {
   title?: React.ReactNode
@@ -22,10 +22,10 @@ export const ListCardHeader = ({
       <CardHeader
         {...props}
         as={Flex}
-        justify="space-between"
+        justifyContent="space-between"
         flexDirection={['column', 'column', 'row']}
         gap="4"
-        align="center"
+        alignItems="center"
       >
         <Flex gap="4" align="center" width={['100%', '100%', 'initial']}>
           {leftAddon && leftAddon}

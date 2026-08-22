@@ -4,7 +4,7 @@ import { ColorModeProvider, system } from '@redesignhealth/ui'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 
-import type { Preview, StoryContext } from '@storybook/react'
+import type { Preview, StoryContext } from '@storybook/react-vite'
 
 // Initialize MSW
 initialize()

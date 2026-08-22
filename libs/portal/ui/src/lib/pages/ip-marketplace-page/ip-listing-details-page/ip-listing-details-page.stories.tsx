@@ -10,7 +10,7 @@ import { http, HttpResponse } from 'msw'
 import {
   reactRouterParameters,
   withRouter
-} from 'storybook-addon-react-router-v6'
+} from 'storybook-addon-remix-react-router'
 
 import type { Meta } from '@storybook/react-vite'
 
@@ -53,9 +53,7 @@ export const SellerView = {
         http.get('/ip-marketplace/:id', () => {
           return HttpResponse.json(mockIpListingWithRequests)
         }),
-        http.get('/userinfo', () =>
-          HttpResponse.json(mockEnterpriseSellerUser)
-        )
+        http.get('/userinfo', () => HttpResponse.json(mockEnterpriseSellerUser))
       ]
     }
   }
@@ -69,9 +67,7 @@ export const BuyerView = {
         http.get('/ip-marketplace/:id', () => {
           return HttpResponse.json(mockIpListing)
         }),
-        http.get('/userinfo', () =>
-          HttpResponse.json(mockEnterpriseBuyerUser)
-        ),
+        http.get('/userinfo', () => HttpResponse.json(mockEnterpriseBuyerUser)),
         http.put('/me/ip-marketplace/:id/contact-info', () =>
           HttpResponse.json(mockIpMarketplaceContactInfo)
         )
