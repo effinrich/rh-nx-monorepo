@@ -1,7 +1,5 @@
-import { ReactNode } from 'react'
-import { Meta, StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Button } from './button'
 import { ButtonWithIconButton } from './partials/button-with-icon-button'
 import { CustomCompositionButton } from './partials/custom-composition-button'
 import { WithAttachedButtonsButton } from './partials/with-attached-buttons-button'
@@ -16,26 +14,25 @@ import { WithReactIconsButton } from './partials/with-react-icons-button'
 import { WithSizesButton } from './partials/with-sizes-button'
 import { WithSocialButtonButton } from './partials/with-social-button-button'
 import { WithVariantsButton } from './partials/with-variants-button'
+import { Button } from './button'
 
-export default {
+const meta = {
   component: Button,
   title: 'Components / Forms / Button',
   argTypes: {
-    iconSpacing: { type: 'string' },
-    children: { type: 'string' },
-    loadingText: { type: 'string' },
-    isActive: { type: 'boolean' },
-    isDisabled: { type: 'boolean' },
-    isLoading: { type: 'boolean' },
-    leftIcon: { type: 'function' },
-    rightIcon: { type: 'function' },
-    'aria-label': { type: 'string' },
+    children: { control: 'text' },
+    loadingText: { control: 'text' },
+    disabled: { control: 'boolean' },
+    loading: { control: 'boolean' },
+    unstyled: { control: 'boolean' },
+    spinner: { control: false },
+    'aria-label': { control: 'text' },
     variant: {
-      options: ['solid', 'outline', 'ghost', 'link', 'unstyled'],
+      options: ['solid', 'subtle', 'surface', 'outline', 'ghost', 'plain'],
       control: { type: 'radio' }
     },
     size: {
-      options: ['xs', 'sm', 'md', 'lg'],
+      options: ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
       control: { type: 'radio' }
     },
     spinnerPlacement: {
@@ -62,16 +59,13 @@ export default {
     size: 'md',
     variant: 'solid'
   }
-} as Meta<typeof Button>
+} satisfies Meta<typeof Button>
 
-interface StoryProps {
-  children?: ReactNode
-  colorScheme?: string
-  variant?: string
-  size?: string
-}
+export default meta
 
-export const Basic: StoryObj<StoryProps> = {
+type Story = StoryObj<typeof meta>
+
+export const Basic: Story = {
   args: {
     children: 'Button',
     colorPalette: 'primary',
@@ -79,7 +73,7 @@ export const Basic: StoryObj<StoryProps> = {
   }
 }
 
-export const Outlines: StoryObj<StoryProps> = {
+export const Outlines: Story = {
   render: props => (
     <>
       <Button {...props} variant="outline" colorPalette="red" />
@@ -97,7 +91,7 @@ export const Outlines: StoryObj<StoryProps> = {
 
   argTypes: {
     size: {
-      options: ['xs', 'sm', 'md', 'lg'],
+      options: ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
       control: { type: 'radio' }
     }
   },

@@ -3,8 +3,8 @@ import {
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemHiddenInput,
-  Text,
-  rh
+  rh,
+  Text
 } from '@redesignhealth/ui'
 
 interface ButtonRadioProps {

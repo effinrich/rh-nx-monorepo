@@ -8,7 +8,7 @@ import {
   useGetUserInfo
 } from '@redesignhealth/portal/data-assets'
 import { OverviewCard } from '@redesignhealth/portal/ui'
-import { Button, Card, Flex, Text } from '@redesignhealth/ui'
+import { Button, CardRoot, Flex, Text } from '@redesignhealth/ui'
 
 export const CompanyDetailsOverview = () => {
   const { companyId } = useParams()
@@ -125,7 +125,7 @@ export const CompanyDetailsOverview = () => {
       </Flex>
 
       {company?.dashboardHref && (
-        <Card w="full" position="relative" overflow="hidden" pt="56.25%">
+        <CardRoot w="full" position="relative" overflow="hidden" pt="56.25%">
           <iframe
             title="Onboarding Doc"
             src={company.dashboardHref}
@@ -139,7 +139,7 @@ export const CompanyDetailsOverview = () => {
               height: '100%'
             }}
           />
-        </Card>
+        </CardRoot>
       )}
     </>
   )

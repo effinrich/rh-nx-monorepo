@@ -3,7 +3,6 @@ import { Box } from '../../box/box'
 import { Separator } from '../../divider/divider'
 import { HStack } from '../../h-stack/h-stack'
 import { Text } from '../../text/text'
-
 import { VStack } from '../v-stack'
 
 export function NotificationListVStack() {
@@ -18,8 +17,8 @@ export function NotificationListVStack() {
     >
       <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
         <HStack gap="3">
-          <AvatarRoot size="sm" name="John Smith">
-            <AvatarFallback />
+          <AvatarRoot size="sm">
+            <AvatarFallback name="John Smith" />
           </AvatarRoot>
           <VStack align="start" gap="1" flex="1">
             <Text fontSize="sm" fontWeight="semibold">
@@ -34,8 +33,8 @@ export function NotificationListVStack() {
       <Separator />
       <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
         <HStack gap="3">
-          <AvatarRoot size="sm" name="Sarah Johnson">
-            <AvatarFallback />
+          <AvatarRoot size="sm">
+            <AvatarFallback name="Sarah Johnson" />
           </AvatarRoot>
           <VStack align="start" gap="1" flex="1">
             <Text fontSize="sm" fontWeight="semibold">
@@ -50,8 +49,8 @@ export function NotificationListVStack() {
       <Separator />
       <Box p="4" _hover={{ bg: 'gray.50' }} cursor="pointer">
         <HStack gap="3">
-          <AvatarRoot size="sm" name="Mike Wilson">
-            <AvatarFallback />
+          <AvatarRoot size="sm">
+            <AvatarFallback name="Mike Wilson" />
           </AvatarRoot>
           <VStack align="start" gap="1" flex="1">
             <Text fontSize="sm" fontWeight="semibold">

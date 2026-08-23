@@ -16,7 +16,7 @@ export default {
 
 export const Basic = {
   args: {
-    spacing: '4',
+    gap: '4',
     children: [
       <Box key="1" p="4" bg="primary.100" borderRadius="md">
         Item 1

@@ -10,7 +10,7 @@ export function WithFadeTextSkeleton() {
   }, [])
 
   return (
-    <SkeletonText isLoaded={hasLoaded}>
+    <SkeletonText loading={!hasLoaded}>
       <span>Redesign UI is dope</span>
     </SkeletonText>
   )

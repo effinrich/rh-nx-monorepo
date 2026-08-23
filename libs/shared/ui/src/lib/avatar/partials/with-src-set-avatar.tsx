@@ -11,13 +11,13 @@ export function WithSrcSetAvatar() {
     'https://accelerated.atoms.crystallize.digital/snowball/images/PalmaSpeedJusterteBilder-15/_resized_3200.jpg'
 
   return (
-    <AvatarRoot name="Uchiha Itachi">
+    <AvatarRoot>
       {/* @ts-expect-error Chakra v3 compound component typing */}
       <AvatarImage
         src={small}
         srcSet={`${small} 300w, ${medium} 768w, ${large} 1280w, ${xlarge} 3200w`}
       />
-      <AvatarFallback />
+      <AvatarFallback name="Uchiha Itachi" />
     </AvatarRoot>
   )
 }

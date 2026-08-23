@@ -16,10 +16,10 @@ import {
 } from '@redesignhealth/portal/utils'
 import {
   Box,
-  Flex,
   FieldErrorText,
   FieldLabel,
   FieldRoot,
+  Flex,
   Loader,
   Radio,
   RadioGroupRoot,
@@ -333,11 +333,13 @@ export const CompanyVendorForm = ({
                 label="Are you willing to discuss your engagement with other founders?"
               >
                 <RadioGroupRoot
-                  {...field}
+                  name={field.name}
+                  ref={field.ref}
+                  onBlur={field.onBlur}
                   value={
                     field.value === undefined ? '' : field.value ? 'yes' : 'no'
                   }
-                  onChange={value => field.onChange(value === 'yes')}
+                  onValueChange={({ value }) => field.onChange(value === 'yes')}
                   as={Flex}
                   gap="40px"
                 >

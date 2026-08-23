@@ -7,15 +7,14 @@ import {
   TaxonomySummary
 } from '@redesignhealth/portal/data-assets'
 import {
-  AlertRoot,
   AlertDescription,
   AlertIndicator,
+  AlertRoot,
   AlertTitle,
-  Box,
   Flex,
   Input,
-  NumberInputRoot,
   NumberInputInput,
+  NumberInputRoot,
   Text,
   Textarea
 } from '@redesignhealth/ui'
@@ -116,7 +115,7 @@ export const ResearchSprintForm = ({
                     `${option.givenName} ${option.familyName}`
                   }
                   getOptionValue={(option: PersonSummary) => `${option.email}`}
-                  isInvalid={!!error}
+                  invalid={!!error}
                   isClearable={false}
                 />
               )}
@@ -162,7 +161,7 @@ export const ResearchSprintForm = ({
                 )}
                 getOptionLabel={(option: CompanySummary) => `${option.name}`}
                 getOptionValue={(option: CompanySummary) => `${option.id}`}
-                isInvalid={!!error}
+                invalid={!!error}
                 onBlur={onBlur}
               />
             )}
@@ -224,7 +223,7 @@ export const ResearchSprintForm = ({
                 closeMenuOnSelect={false}
                 placeholder="Select all that apply"
                 onBlur={onBlur}
-                isInvalid={!!error}
+                invalid={!!error}
               />
             )}
           />
@@ -249,7 +248,7 @@ export const ResearchSprintForm = ({
                 closeMenuOnSelect={false}
                 placeholder="Select all that apply"
                 onBlur={onBlur}
-                isInvalid={!!error}
+                invalid={!!error}
               />
             )}
           />
@@ -274,7 +273,7 @@ export const ResearchSprintForm = ({
                 options={transformOptionsFormat(methodOptions)}
                 menuPlacement="top"
                 onBlur={onBlur}
-                isInvalid={!!error}
+                invalid={!!error}
               />
             )}
           />

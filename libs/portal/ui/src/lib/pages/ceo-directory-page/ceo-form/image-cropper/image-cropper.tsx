@@ -4,9 +4,6 @@ import { MdImage } from 'react-icons/md'
 import {
   Box,
   Button,
-  Separator,
-  HStack,
-  Icon,
   DialogBackdrop,
   DialogBody,
   DialogContent,
@@ -14,10 +11,14 @@ import {
   DialogHeader,
   DialogPositioner,
   DialogRoot,
+  DialogTitle,
+  HStack,
+  Icon,
+  Separator,
   SliderControl,
   SliderRange,
   SliderRoot,
-  SliderThumb,
+  SliderThumbs,
   SliderTrack
 } from '@redesignhealth/ui'
 
@@ -53,66 +54,69 @@ const ImageCropper = ({
       <DialogPositioner>
         {/* @ts-expect-error Chakra v3 children typing */}
         <DialogContent maxW="48rem">
-          <DialogHeader>Adjust photo</DialogHeader>
+          <DialogHeader>
+            {/* @ts-expect-error Chakra v3 DialogTitle children typing */}
+            <DialogTitle>Adjust photo</DialogTitle>
+          </DialogHeader>
           <Separator />
           <DialogBody px={10}>
-          <Box position="relative" h={400} my={4}>
-            <Cropper
-              image={imageSrc}
-              crop={crop}
-              showGrid={false}
-              aspect={1}
-              onCropChange={setCrop}
-              onZoomChange={setZoom}
-              onCropComplete={(_, croppedAreaPixels) =>
-                setCroppedAreaPixels(croppedAreaPixels)
-              }
-              zoom={zoom}
-              cropShape="round"
-            />
-          </Box>
-          <HStack gap={6} pt={4} pb={8}>
-            <Icon as={MdImage} boxSize={6} />
-            <SliderRoot
+            <Box position="relative" h={400} my={4}>
+              <Cropper
+                image={imageSrc}
+                crop={crop}
+                showGrid={false}
+                aspect={1}
+                onCropChange={setCrop}
+                onZoomChange={setZoom}
+                onCropComplete={(_, croppedAreaPixels) =>
+                  setCroppedAreaPixels(croppedAreaPixels)
+                }
+                zoom={zoom}
+                cropShape="round"
+              />
+            </Box>
+            <HStack gap={6} pt={4} pb={8}>
+              <Icon as={MdImage} boxSize={6} />
+              <SliderRoot
+                colorPalette="primary"
+                aria-label="slider-ex-1"
+                value={[zoom]}
+                min={1}
+                step={0.1}
+                max={3}
+                onValueChange={({ value }) => setZoom(value[0] ?? zoom)}
+              >
+                <SliderControl>
+                  <SliderTrack>
+                    <SliderRange />
+                  </SliderTrack>
+                  <SliderThumbs />
+                </SliderControl>
+              </SliderRoot>
+              <Icon as={MdImage} boxSize={8} />
+            </HStack>
+          </DialogBody>
+          <Separator />
+          <DialogFooter gap="3">
+            <Button variant="outline" onClick={onClose}>
+              Cancel
+            </Button>
+            <Button
               colorPalette="primary"
-              aria-label="slider-ex-1"
-              value={[zoom]}
-              min={1}
-              step={0.1}
-              max={3}
-              onValueChange={({ value }) => setZoom(value[0] ?? zoom)}
+              onClick={async () => {
+                if (croppedAreaPixels) {
+                  const croppedFile = await getCroppedImg(
+                    imageSrc,
+                    croppedAreaPixels
+                  )
+                  onSuccess(croppedFile)
+                }
+                onClose()
+              }}
             >
-              <SliderControl>
-                <SliderTrack>
-                  <SliderRange />
-                </SliderTrack>
-                <SliderThumb index={0} />
-              </SliderControl>
-            </SliderRoot>
-            <Icon as={MdImage} boxSize={8} />
-          </HStack>
-        </DialogBody>
-        <Separator />
-        <DialogFooter gap="3">
-          <Button variant="outline" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button
-            colorPalette="primary"
-            onClick={async () => {
-              if (croppedAreaPixels) {
-                const croppedFile = await getCroppedImg(
-                  imageSrc,
-                  croppedAreaPixels
-                )
-                onSuccess(croppedFile)
-              }
-              onClose()
-            }}
-          >
-            Save picture
-          </Button>
-        </DialogFooter>
+              Save picture
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </DialogPositioner>
     </DialogRoot>

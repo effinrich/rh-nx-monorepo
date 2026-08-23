@@ -5,8 +5,10 @@ import { GenericAvatar } from './generic-avatar'
 export function WithCustomIconAvatar() {
   return (
     <AvatarGroup>
-      <AvatarRoot icon={<GenericAvatar />}>
-        <AvatarFallback />
+      <AvatarRoot>
+        <AvatarFallback>
+          <GenericAvatar />
+        </AvatarFallback>
       </AvatarRoot>
       <AvatarRoot>
         <AvatarFallback />

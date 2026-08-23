@@ -20,11 +20,7 @@ export function WithinDrawerTabs() {
       <DrawerPositioner>
         <DrawerContent>
           <DrawerBody>
-            <TabsRoot
-              variant="unstyled"
-              activationMode="manual"
-              defaultValue="settings"
-            >
+            <TabsRoot unstyled activationMode="manual" defaultValue="settings">
               <TabsList>
                 <TabsTrigger value="settings">Settings</TabsTrigger>
                 <TabsTrigger value="billings">Billings</TabsTrigger>

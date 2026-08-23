@@ -10,7 +10,7 @@ export function WithFadeSkeleton() {
   }, [])
 
   return (
-    <Skeleton isLoaded={hasLoaded}>
+    <Skeleton loading={!hasLoaded}>
       <span>Redesign UI is dope</span>
     </Skeleton>
   )

@@ -5,7 +5,7 @@ interface DetailsCardProps extends CardProps {
 }
 const DetailsCard = ({ children, ...cardProps }: DetailsCardProps) => {
   return (
-    <CardRoot variant={"unstyled" as any} gap={6} {...cardProps}>
+    <CardRoot bg="transparent" boxShadow="none" gap={6} {...cardProps}>
       {children}
     </CardRoot>
   )

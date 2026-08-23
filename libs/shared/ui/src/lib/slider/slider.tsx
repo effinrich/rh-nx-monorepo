@@ -1,12 +1,13 @@
 export {
-  SliderRoot,
   SliderControl,
-  SliderTrack,
-  SliderRange,
-  SliderThumb,
-  SliderMarkerGroup,
-  SliderMarker,
   SliderLabel,
+  SliderMarker,
+  SliderMarkerGroup,
+  SliderRange,
+  SliderRoot,
+  SliderThumb,
+  SliderThumbs,
+  SliderTrack,
   SliderValueText
 } from '@chakra-ui/react'
 

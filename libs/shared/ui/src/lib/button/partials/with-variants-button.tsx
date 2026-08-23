@@ -20,7 +20,7 @@ export function WithVariantsButton() {
       <Button colorPalette="teal" variant="plain">
         Link
       </Button>
-      <Button colorPalette="teal" variant="unstyled">
+      <Button colorPalette="teal" unstyled>
         Unstyled
       </Button>
     </HStack>

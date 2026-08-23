@@ -12,7 +12,7 @@ export default {
 export const Default = {
   args: {
     columns: 2,
-    spacing: 10,
+    gap: 10,
     children: (
       <>
         <ShadowBox bg="tomato" height="80px" />
@@ -28,7 +28,7 @@ export const Default = {
 export const Responsive = {
   args: {
     columns: [2, null, 3],
-    spacing: '40px',
+    gap: '40px',
     children: (
       <>
         <ShadowBox bg="tomato" height="80px" />
@@ -44,7 +44,7 @@ export const Responsive = {
 export const AutoResponsive = {
   args: {
     minChildWidth: '120px',
-    spacing: '40px',
+    gap: '40px',
     children: (
       <>
         <ShadowBox bg="tomato" height="80px" />
@@ -60,8 +60,8 @@ export const AutoResponsive = {
 export const XAndYSpacing = {
   args: {
     columns: 2,
-    spacingX: '40px',
-    spacingY: '20px',
+    columnGap: '40px',
+    rowGap: '20px',
     children: (
       <>
         <ShadowBox bg="tomato" height="80px" />

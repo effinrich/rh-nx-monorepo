@@ -2,7 +2,13 @@ import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { CompanyCommand } from '@redesignhealth/portal/data-assets'
 import { selectTransformer } from '@redesignhealth/portal/utils'
 import { TEXTAREA_CHARACTER_LIMIT } from '@redesignhealth/portal/utils'
-import { Input, Radio, RadioGroupRoot, Stack, Textarea } from '@redesignhealth/ui'
+import {
+  Input,
+  Radio,
+  RadioGroupRoot,
+  Stack,
+  Textarea
+} from '@redesignhealth/ui'
 import { Select } from 'chakra-react-select'
 
 import Form from '../../../form/form'
@@ -60,9 +66,9 @@ const MarketplaceCompanyForm = ({
                 }
               >
                 <RadioGroupRoot
-                  onChange={onChange}
+                  onValueChange={({ value }) => onChange(value)}
                   name={name}
-                  defaultValue={value}
+                  value={value ?? ''}
                   colorPalette="primary"
                   onBlur={onBlur}
                   disabled={isEdit}

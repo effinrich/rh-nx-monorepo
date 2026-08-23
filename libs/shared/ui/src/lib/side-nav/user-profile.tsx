@@ -19,10 +19,10 @@ export const UserProfile = (props: UserProfileProps) => {
   return (
     <Flex justify="space-between" alignItems="center">
       <Box display="flex" alignItems="center">
-        <AvatarRoot name={name} boxSize="10">
+        <AvatarRoot boxSize="10">
           {/* @ts-expect-error Chakra v3 compound component typing */}
           <AvatarImage src={image} />
-          <AvatarFallback />
+          <AvatarFallback name={name} />
         </AvatarRoot>
         <Box pl={2}>
           <Text color="on-accent" fontWeight="500" fontSize={14}>

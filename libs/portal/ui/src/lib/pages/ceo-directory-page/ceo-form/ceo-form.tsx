@@ -7,11 +7,11 @@ import {
 } from '@redesignhealth/portal/data-assets'
 import { printPersonName } from '@redesignhealth/portal/utils'
 import {
-  CheckboxRoot,
   CheckboxControl,
-  CheckboxLabel,
-  CheckboxHiddenInput,
   CheckboxGroup,
+  CheckboxHiddenInput,
+  CheckboxLabel,
+  CheckboxRoot,
   HStack,
   Input,
   Radio,
@@ -220,10 +220,10 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
               clientErrors={clientErrors}
             >
               <RadioGroupRoot
-                onChange={onChange}
+                onValueChange={({ value }) => onChange(value)}
                 name={name}
                 ref={ref}
-                value={value}
+                value={value ?? ''}
                 colorPalette="primary"
                 onBlur={onBlur}
               >
@@ -253,10 +253,10 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
               clientErrors={clientErrors}
             >
               <RadioGroupRoot
-                onChange={onChange}
+                onValueChange={({ value }) => onChange(value)}
                 name={name}
                 ref={ref}
-                value={value}
+                value={value ?? ''}
                 colorPalette="primary"
                 onBlur={onBlur}
               >

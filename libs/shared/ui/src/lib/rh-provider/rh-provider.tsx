@@ -1,37 +1,23 @@
 import '@fontsource-variable/inter'
 
-import { ReactNode } from 'react'
-import { ChakraProvider, SystemContext } from '@chakra-ui/react'
-import { ThemeProviderProps } from 'next-themes'
+import type { ComponentProps } from 'react'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import { ColorModeProvider } from '../color-mode/color-mode-provider'
 import { system } from '../theme'
 import { Toaster } from '../toaster/toaster'
 
-export interface RhProviderProps
-  extends Pick<
-    ThemeProviderProps,
-    | 'forcedTheme'
-    | 'defaultTheme'
-    | 'attribute'
-    | 'storageKey'
-    | 'enableSystem'
-    | 'enableColorScheme'
-    | 'disableTransitionOnChange'
-    | 'themes'
-    | 'nonce'
-  > {
-  children?: ReactNode
-  value?: SystemContext
+export type RhProviderProps = ComponentProps<typeof ColorModeProvider> & {
+  chakraSystem?: ComponentProps<typeof ChakraProvider>['value']
 }
 
 export function RhProvider({
   children,
-  value = system,
+  chakraSystem = system,
   ...themeProps
 }: RhProviderProps) {
   return (
-    <ChakraProvider value={value}>
+    <ChakraProvider value={chakraSystem}>
       <ColorModeProvider {...themeProps}>
         {children}
         <Toaster />

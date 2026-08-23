@@ -1,6 +1,3 @@
-import { useRef } from 'react'
-import { LoremIpsum } from 'react-lorem-ipsum'
-
 import { Button } from '../../button/button'
 import { useDisclosure } from '../../hooks/use-disclosure/use-disclosure'
 import {
@@ -11,37 +8,41 @@ import {
   DialogFooter,
   DialogHeader,
   DialogPositioner,
-  DialogRoot
-} from '../modal'
+  DialogRoot,
+  DialogTitle
+} from '../dialog'
 
-export function InsideScrollHooks() {
-  const { open, onClose, onOpen } = useDisclosure()
-  const btnRef = useRef(null)
+export function WithCenteredPlacementHooks() {
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Button onClick={onOpen} ref={btnRef} maxW="300px">
+      <Button onClick={onOpen} maxW="300px">
         Open
       </Button>
       <DialogRoot
-        finalFocusEl={() => btnRef.current}
+        open={open}
         onOpenChange={e => {
           if (!e.open) onClose()
         }}
-        open={open}
-        scrollBehavior="inside"
+        placement="center"
       >
         <DialogBackdrop />
         <DialogPositioner>
           <DialogContent>
-            <DialogHeader>Dialog Title</DialogHeader>
             <DialogCloseTrigger />
+            <DialogHeader>
+              <DialogTitle>Welcome Home</DialogTitle>
+            </DialogHeader>
             <DialogBody>
-              <LoremIpsum p={5} />
+              Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
+              ullamco deserunt aute id consequat veniam incididunt duis in sint
+              irure nisi.
             </DialogBody>
             <DialogFooter>
-              <Button colorPalette="red" onClick={onClose}>
-                Close
+              <Button colorPalette="red" onClick={onClose} mr={3}>
+                Cancel
               </Button>
+              <Button colorPalette="primary">Save</Button>
             </DialogFooter>
           </DialogContent>
         </DialogPositioner>

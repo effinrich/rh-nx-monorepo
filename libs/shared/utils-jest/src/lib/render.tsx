@@ -2,12 +2,11 @@ import '@testing-library/jest-dom'
 
 import * as React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { RhProvider } from '@redesignhealth/ui'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render as rtlRender, RenderOptions } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { toHaveNoViolations } from 'jest-axe'
-
-import { RhProvider } from '@redesignhealth/ui'
 
 expect.extend(toHaveNoViolations)
 
@@ -17,9 +16,7 @@ export interface ChakraRenderOptions extends RenderOptions {
 
 export const render = (
   ui: React.ReactElement,
-  { withChakraProvider, ...options }: ChakraRenderOptions = {
-    withChakraProvider: true
-  }
+  { withChakraProvider = true, ...options }: ChakraRenderOptions = {}
 ): ReturnType<typeof rtlRender> & {
   user: ReturnType<typeof userEvent.setup>
 } => {

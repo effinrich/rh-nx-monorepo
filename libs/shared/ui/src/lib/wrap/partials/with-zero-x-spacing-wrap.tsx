@@ -9,7 +9,7 @@ export function WithZeroXSpacingWrap() {
     <Box>
       <Text>Welcome</Text>
       <Box bg="pink">
-        <Wrap maxW="200px" spacingX={20} spacingY={4}>
+        <Wrap maxW="200px" columnGap={20} rowGap={4}>
           <Placeholder />
           <Placeholder />
           <Placeholder />

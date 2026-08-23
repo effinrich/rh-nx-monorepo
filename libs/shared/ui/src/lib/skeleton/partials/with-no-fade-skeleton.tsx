@@ -10,7 +10,7 @@ export function WithNoFadeSkeleton() {
   }, [])
 
   return (
-    <Skeleton fadeDuration={0} isLoaded={hasLoaded}>
+    <Skeleton css={{ '--fade-duration': '0s' }} loading={!hasLoaded}>
       <span>Redesign UI is dope</span>
     </Skeleton>
   )

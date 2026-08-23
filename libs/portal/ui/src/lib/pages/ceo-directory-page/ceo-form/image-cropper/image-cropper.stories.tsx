@@ -18,7 +18,7 @@ const Example = ({ imageSrc }: Partial<ImageCropperProps>) => {
   const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>{' '}
+      <Button onClick={onOpen}>Open Dialog</Button>{' '}
       <ImageCropper
         open={open}
         onClose={onClose}

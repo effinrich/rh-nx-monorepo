@@ -2,16 +2,18 @@ import { forwardRef, useImperativeHandle } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import {
   Button,
-  Flex,
-  FieldLabel,
-  FieldRoot,
   DialogBackdrop,
   DialogBody,
   DialogCloseTrigger,
   DialogContent,
   DialogFooter,
+  DialogHeader,
   DialogPositioner,
   DialogRoot,
+  DialogTitle,
+  FieldLabel,
+  FieldRoot,
+  Flex,
   Radio,
   RadioGroupRoot,
   Textarea,
@@ -112,6 +114,10 @@ export const FeedbackModal = forwardRef(
           {/* @ts-expect-error Chakra v3 children typing */}
           <DialogContent w="400px">
             <DialogCloseTrigger />
+            <DialogHeader>
+              {/* @ts-expect-error Chakra v3 DialogTitle children typing */}
+              <DialogTitle>Share feedback</DialogTitle>
+            </DialogHeader>
             <DialogBody color="gray.500">
               <form>
                 <FieldRoot>
@@ -119,33 +125,33 @@ export const FeedbackModal = forwardRef(
                   <FieldLabel fontSize="18px" mt="24px">
                     How can we improve this article?
                   </FieldLabel>
-                <Controller
-                  name="improvements"
-                  control={control}
-                  render={({ field }) => (
-                    <RadioGroupRoot
-                      onChange={field.onChange}
-                      value={field.value}
-                      name={field.name}
-                      ref={field.ref}
-                      as={Flex}
-                      flexDir="column"
-                      gap="14px"
-                      colorPalette="primary"
-                      mt="14px"
-                    >
-                      {RADIO_OPTIONS.map((option, index) => (
-                        <Radio
-                          key={`${option.value}-${index}`}
-                          value={option.value}
-                          fontSize={12}
-                        >
-                          {option.label}
-                        </Radio>
-                      ))}
-                    </RadioGroupRoot>
-                  )}
-                />
+                  <Controller
+                    name="improvements"
+                    control={control}
+                    render={({ field }) => (
+                      <RadioGroupRoot
+                        onChange={field.onChange}
+                        value={field.value}
+                        name={field.name}
+                        ref={field.ref}
+                        as={Flex}
+                        flexDir="column"
+                        gap="14px"
+                        colorPalette="primary"
+                        mt="14px"
+                      >
+                        {RADIO_OPTIONS.map((option, index) => (
+                          <Radio
+                            key={`${option.value}-${index}`}
+                            value={option.value}
+                            fontSize={12}
+                          >
+                            {option.label}
+                          </Radio>
+                        ))}
+                      </RadioGroupRoot>
+                    )}
+                  />
                 </FieldRoot>
                 <FieldRoot>
                   {/* @ts-expect-error Chakra v3 children typing */}

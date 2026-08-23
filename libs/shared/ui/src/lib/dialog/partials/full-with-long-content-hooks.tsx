@@ -10,8 +10,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogPositioner,
-  DialogRoot
-} from '../modal'
+  DialogRoot,
+  DialogTitle
+} from '../dialog'
 
 export function FullWithLongContentHooks() {
   const { open, onOpen, onClose } = useDisclosure()
@@ -30,7 +31,9 @@ export function FullWithLongContentHooks() {
         <DialogBackdrop />
         <DialogPositioner>
           <DialogContent>
-            <DialogHeader>Dialog Title2</DialogHeader>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+            </DialogHeader>
             <DialogCloseTrigger />
             <DialogBody>
               <LoremIpsum avgWordsPerSentence={30} />

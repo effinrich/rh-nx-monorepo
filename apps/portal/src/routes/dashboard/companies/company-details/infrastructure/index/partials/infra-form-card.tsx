@@ -6,7 +6,7 @@ import {
   RequestFormSummary
 } from '@redesignhealth/company-api-types'
 import { useGetInfraRequest } from '@redesignhealth/portal/data-assets'
-import { Box, Button, Card, Flex, Icon, Text } from '@redesignhealth/ui'
+import { Box, Button, CardRoot, Flex, Icon, Text } from '@redesignhealth/ui'
 
 export const InfraFormCard = ({
   form,
@@ -56,7 +56,7 @@ export const InfraFormCard = ({
   }
 
   return (
-    <Card as="section" mt="20px" p="16px" data-id={restProps['data-id']}>
+    <CardRoot as="section" mt="20px" p="16px" data-id={restProps['data-id']}>
       <Flex flexDir={{ base: 'column', lg: 'row' }} align={{ lg: 'center' }}>
         <Box>
           <Text
@@ -108,6 +108,6 @@ export const InfraFormCard = ({
           {buttonText}
         </Button>
       </Flex>
-    </Card>
+    </CardRoot>
   )
 }

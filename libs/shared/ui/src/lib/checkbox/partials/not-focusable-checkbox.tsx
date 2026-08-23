@@ -1,5 +1,4 @@
 import { Box } from '../../../index'
-
 import {
   CheckboxControl,
   CheckboxHiddenInput,
@@ -10,20 +9,20 @@ import {
 export function NotFocusableCheckbox() {
   return (
     <Box maxW="300px">
-      <CheckboxRoot isFocusable={false}>
-        <CheckboxHiddenInput />
+      <CheckboxRoot>
+        <CheckboxHiddenInput tabIndex={-1} />
         <CheckboxControl />
         <CheckboxLabel>not focusable</CheckboxLabel>
       </CheckboxRoot>
-      <CheckboxRoot isFocusable={false} disabled>
+      <CheckboxRoot disabled>
         <CheckboxHiddenInput />
         <CheckboxControl />
         <CheckboxLabel>
           disabled and not focusable (truly disabled)
         </CheckboxLabel>
       </CheckboxRoot>
-      <CheckboxRoot tabIndex={-1} isFocusable={false}>
-        <CheckboxHiddenInput />
+      <CheckboxRoot>
+        <CheckboxHiddenInput tabIndex={-1} />
         <CheckboxControl />
         <CheckboxLabel>Not Focusable with provided tabIndex</CheckboxLabel>
       </CheckboxRoot>

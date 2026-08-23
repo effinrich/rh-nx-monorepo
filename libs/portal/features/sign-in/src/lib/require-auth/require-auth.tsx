@@ -1,7 +1,6 @@
 import type { ReactElement } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { getUserAccessToken } from '@redesignhealth/portal/utils'
-import type { ReactElement } from 'react'
 
 export const RequireAuth = ({ children }: { children: ReactElement }) => {
   const accessToken = getUserAccessToken()

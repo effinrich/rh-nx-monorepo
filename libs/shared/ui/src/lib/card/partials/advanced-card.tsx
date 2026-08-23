@@ -12,7 +12,6 @@ import {
   Image,
   Text
 } from '../../../index'
-
 import { CardBody, CardFooter, CardHeader, CardRoot } from '../card'
 
 export function AdvancedCard() {
@@ -20,22 +19,19 @@ export function AdvancedCard() {
     <CardRoot maxW="md">
       <CardHeader>
         <HStack gap="4">
-          <AvatarRoot name="Dan Abramov">
+          <AvatarRoot>
             {/* @ts-expect-error Chakra v3 compound component typing */}
             <AvatarImage src="https://bit.ly/dan-abramov" />
-            <AvatarFallback />
+            <AvatarFallback name="Dan Abramov" />
           </AvatarRoot>
 
           <Box flex="1">
             <Heading size="sm">Platform and Data Team</Heading>
             <Text>Creator, Redesign UI</Text>
           </Box>
-          <IconButton
-            variant="ghost"
-            colorPalette="gray"
-            aria-label="See menu"
-            icon={<MdMoreHoriz />}
-          />
+          <IconButton variant="ghost" colorPalette="gray" aria-label="See menu">
+            <MdMoreHoriz />
+          </IconButton>
         </HStack>
       </CardHeader>
       <CardBody>
@@ -51,7 +47,7 @@ export function AdvancedCard() {
         alt="Redesign UI"
       />
 
-      <CardFooter justify="space-between">
+      <CardFooter justifyContent="space-between">
         <Button flex="1" variant="ghost">
           <MdThumbUp />
           Like

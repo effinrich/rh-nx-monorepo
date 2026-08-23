@@ -7,7 +7,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogPositioner,
-  DialogRoot
+  DialogRoot,
+  DialogTitle
 } from '@redesignhealth/ui'
 
 interface SuccessConfirmationProps {
@@ -32,7 +33,10 @@ export const SuccessConfirmation = ({
       <DialogPositioner>
         {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <DialogContent>
-          <DialogHeader>Successful Request</DialogHeader>
+          <DialogHeader>
+            {/* @ts-expect-error Chakra v3 DialogTitle children typing */}
+            <DialogTitle>Successful Request</DialogTitle>
+          </DialogHeader>
           <DialogCloseTrigger />
           <DialogBody>
             Your request for {advisorName ?? 'the advisor'} has been submitted.

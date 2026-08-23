@@ -6,7 +6,10 @@ import ButtonRadio from '../button-radio'
 export function DefaultButtonRadio() {
   const [selected, setSelected] = useState<string>()
   return (
-    <RadioGroupRoot value={selected} onChange={setSelected}>
+    <RadioGroupRoot
+      value={selected}
+      onValueChange={({ value }) => setSelected(value ?? undefined)}
+    >
       <Stack gap={4}>
         <ButtonRadio
           title="Title 1"

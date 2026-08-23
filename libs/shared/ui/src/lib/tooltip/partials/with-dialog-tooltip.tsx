@@ -6,8 +6,7 @@ import {
   DialogContent,
   DialogPositioner,
   DialogRoot
-} from '../../modal/modal'
-
+} from '../../dialog/dialog'
 import {
   TooltipContent,
   TooltipPositioner,
@@ -15,7 +14,7 @@ import {
   TooltipTrigger
 } from '../tooltip'
 
-export function WithModalTooltip() {
+export function WithDialogTooltip() {
   const [showDialog, setShowDialog] = React.useState(false)
   return (
     <div>

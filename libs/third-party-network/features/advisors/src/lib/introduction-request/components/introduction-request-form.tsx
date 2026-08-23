@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogPositioner,
   DialogRoot,
+  DialogTitle,
   Flex,
   UseDisclosureReturn
 } from '@redesignhealth/ui'
@@ -69,7 +70,10 @@ export const IntroductionRequestForm = ({
       <DialogPositioner>
         {/* @ts-expect-error Chakra v3 DialogContent children typing */}
         <DialogContent minH="470px">
-          <DialogHeader>Request Introduction</DialogHeader>
+          <DialogHeader>
+            {/* @ts-expect-error Chakra v3 DialogTitle children typing */}
+            <DialogTitle>Request Introduction</DialogTitle>
+          </DialogHeader>
           <DialogCloseTrigger />
           <DialogBody
             as="form"

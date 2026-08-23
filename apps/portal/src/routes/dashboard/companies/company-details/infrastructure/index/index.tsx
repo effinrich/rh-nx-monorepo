@@ -7,14 +7,11 @@ import {
 } from 'react-router-dom'
 import { useGetInfraRequest } from '@redesignhealth/portal/data-assets'
 import {
-  Alert,
+  AlertRoot,
   Badge,
   Box,
   Button,
-  Card,
-  Flex,
-  Heading,
-  Loader,
+  CardRoot,
   DialogBackdrop,
   DialogBody,
   DialogCloseTrigger,
@@ -23,6 +20,10 @@ import {
   DialogHeader,
   DialogPositioner,
   DialogRoot,
+  DialogTitle,
+  Flex,
+  Heading,
+  Loader,
   Spacer,
   Text,
   useDisclosure
@@ -90,7 +91,7 @@ export const CompanyInfra = () => {
     import.meta.env.VITE_PORTAL_DEVELOPER_LIBRARY_INFRA_LINK || '#'
 
   return (
-    <Card p="24px" ref={cardRef}>
+    <CardRoot p="24px" ref={cardRef}>
       <Box>
         <Heading
           as="h2"
@@ -128,7 +129,7 @@ export const CompanyInfra = () => {
 
         {isInfraRequestSubmitted && (
           <Flex direction="row" justify="space-between" align="center">
-            <Alert
+            <AlertRoot
               status="success"
               borderRadius="12px"
               bg="primary.25"
@@ -161,7 +162,7 @@ export const CompanyInfra = () => {
                   {infraRequestStatus}
                 </Badge>
               </Box>
-            </Alert>
+            </AlertRoot>
           </Flex>
         )}
 
@@ -195,7 +196,7 @@ export const CompanyInfra = () => {
             </Button>
 
             <DialogRoot
-              finalFocusEl={cardRef}
+              finalFocusEl={() => cardRef.current}
               open={isOpen && !actionData?.success}
               onOpenChange={(e: { open: boolean }) => {
                 if (!e.open) onClose()
@@ -207,11 +208,16 @@ export const CompanyInfra = () => {
               <DialogPositioner>
                 {/* @ts-expect-error Chakra v3 children typing */}
                 <DialogContent w="400px">
-                  <DialogHeader>Have you reviewed your selections?</DialogHeader>
+                  <DialogHeader>
+                    {/* @ts-expect-error Chakra v3 DialogTitle children typing */}
+                    <DialogTitle>
+                      Have you reviewed your selections?
+                    </DialogTitle>
+                  </DialogHeader>
                   <DialogCloseTrigger />
                   <DialogBody color="gray.500">
-                    Once you submit you cannot make changes. Are you sure you want
-                    to submit your selections?
+                    Once you submit you cannot make changes. Are you sure you
+                    want to submit your selections?
                   </DialogBody>
 
                   <DialogFooter>
@@ -237,6 +243,6 @@ export const CompanyInfra = () => {
           </>
         )}
       </Box>
-    </Card>
+    </CardRoot>
   )
 }

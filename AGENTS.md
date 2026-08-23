@@ -20,7 +20,6 @@
 - DON'T USE for: basic generator syntax (`nx g @nx/react:app`), standard commands, things you already know
 - The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
 
-
 <!-- nx configuration end-->
 
 <!-- user configuration start -->
@@ -76,4 +75,4 @@
 - Story-only helpers belong in unexported sibling/`partials/` files: do not add `*.stories.tsx` and do not export them from `type:ui` barrels (CI fails if a `type:ui` `.tsx` lacks stories).
 - Hooks go in a `hooks/` directory next to the component, the same directory, or a shared hooks lib if reusable.
 - One-component-per-file convention is encoded in `.cursor/rules/one-component-per-file.mdc` and `.cursor/skills/one-component-per-file/`.
-
+- Never use PNPM. MUST use NPM for package manager.

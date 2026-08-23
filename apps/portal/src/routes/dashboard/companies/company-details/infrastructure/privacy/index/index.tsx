@@ -19,12 +19,16 @@ import {
 import { getErrorsFromValidation } from '@redesignhealth/portal/utils'
 import {
   Button,
-  CheckboxRoot,
+  CheckboxControl,
   CheckboxGroupProps,
-  Separator,
-  Flex,
+  CheckboxHiddenInput,
+  CheckboxIndicator,
+  CheckboxLabel,
+  CheckboxRoot,
   FieldErrorText,
   FieldLabel,
+  Flex,
+  Separator,
   Stack
 } from '@redesignhealth/ui'
 import { QueryClient } from '@tanstack/react-query'
@@ -339,7 +343,13 @@ export const CompanyInfraPrivacy = () => {
                       borderColor: 'primary.600'
                     }}
                   >
-                    {value}
+                    <CheckboxHiddenInput />
+                    {/* @ts-expect-error Chakra v3 children typing */}
+                    <CheckboxControl>
+                      <CheckboxIndicator />
+                    </CheckboxControl>
+                    {/* @ts-expect-error Chakra v3 children typing */}
+                    <CheckboxLabel>{value}</CheckboxLabel>
                   </CheckboxRoot>
                 ))}
               </Stack>
@@ -553,9 +563,6 @@ export const CompanyInfraPrivacy = () => {
                   name={`q7-a${index}`}
                   value={value}
                   readOnly={infraRequestSubmitted}
-                  defaultChecked={Object.keys(privacyForm?.form || {}).includes(
-                    `q7-a${index}`
-                  )}
                   checked={q7checked.includes(value)}
                   onCheckedChange={() => {
                     const wasChecked = q7checked.includes(value)

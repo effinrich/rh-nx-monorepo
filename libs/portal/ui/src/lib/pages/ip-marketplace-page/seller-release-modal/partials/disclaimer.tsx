@@ -6,7 +6,8 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogPositioner
+  DialogPositioner,
+  DialogTitle
 } from '@redesignhealth/ui'
 
 interface DisclaimerProps {
@@ -22,7 +23,10 @@ const Disclaimer = ({ onCancel, onSubmit, isSubmitting }: DisclaimerProps) => {
       <DialogContent>
         <DialogCloseTrigger />
         <DialogHeader>
-          Disclaimer about the release of seller contact information
+          {/* @ts-expect-error Chakra v3 DialogTitle children typing */}
+          <DialogTitle>
+            Disclaimer about the release of seller contact information
+          </DialogTitle>
         </DialogHeader>
         <DialogBody>{SellerDisclaimerHtml}</DialogBody>
         <DialogFooter gap="3">

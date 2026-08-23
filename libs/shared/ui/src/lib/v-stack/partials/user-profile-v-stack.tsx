@@ -2,10 +2,9 @@ import { AvatarFallback, AvatarImage, AvatarRoot } from '../../avatar/avatar'
 import { Badge } from '../../badge/badge'
 import { Button } from '../../button/button'
 import { Separator } from '../../divider/divider'
-import { Heading } from '../../heading/heading'
 import { HStack } from '../../h-stack/h-stack'
+import { Heading } from '../../heading/heading'
 import { Text } from '../../text/text'
-
 import { VStack } from '../v-stack'
 
 export function UserProfileVStack() {
@@ -19,10 +18,10 @@ export function UserProfileVStack() {
       maxW="sm"
     >
       <HStack gap="4">
-        <AvatarRoot size="lg" name="Jane Doe">
+        <AvatarRoot size="lg">
           {/* @ts-expect-error Chakra v3 compound component typing */}
           <AvatarImage src="https://bit.ly/dan-abramov" />
-          <AvatarFallback />
+          <AvatarFallback name="Jane Doe" />
         </AvatarRoot>
         <VStack align="start" gap="1">
           <Heading size="md">Jane Doe</Heading>

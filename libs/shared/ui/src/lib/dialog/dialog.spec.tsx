@@ -6,8 +6,9 @@ import {
   DialogContent,
   DialogHeader,
   DialogPositioner,
-  DialogRoot
-} from './modal'
+  DialogRoot,
+  DialogTitle
+} from './dialog'
 
 describe('Dialog', () => {
   it('should render successfully', () => {
@@ -17,7 +18,9 @@ describe('Dialog', () => {
         <DialogBackdrop />
         <DialogPositioner>
           <DialogContent>
-            <DialogHeader>Dialog header</DialogHeader>
+            <DialogHeader>
+              <DialogTitle>Dialog header</DialogTitle>
+            </DialogHeader>
             <DialogCloseTrigger data-testid="close" />
           </DialogContent>
         </DialogPositioner>

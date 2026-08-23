@@ -14,19 +14,19 @@ import {
 import {
   Box,
   Button,
-  CheckboxRoot,
   CheckboxControl,
   CheckboxHiddenInput,
+  CheckboxIndicator,
+  CheckboxLabel,
+  CheckboxRoot,
   ChevronDownIcon,
   Flex,
-  FieldRoot,
-  FieldLabel,
   InputProps,
   Loader,
+  MenuContent,
+  MenuItem,
   MenuRoot,
   MenuTrigger,
-  MenuItem,
-  MenuContent,
   Text
 } from '@redesignhealth/ui'
 
@@ -154,21 +154,23 @@ const CallNotes = () => {
           >
             Results: {allNotes?.totalResults}
           </Text>
-          <FieldRoot as={Flex} flexDir="row-reverse" align="center" mt="8px">
+          <CheckboxRoot
+            mt="8px"
+            mr="12px"
+            disabled
+            checked={isConflicts}
+            onCheckedChange={(e: { checked: boolean | 'indeterminate' }) =>
+              setIsConflicts(e.checked === true)
+            }
+          >
+            <CheckboxHiddenInput />
             {/* @ts-expect-error Chakra v3 children typing */}
-            <FieldLabel m="0">Hide conflicted content</FieldLabel>
-            <CheckboxRoot
-              disabled={true}
-              mr="12px"
-              checked={isConflicts}
-              onCheckedChange={(e: { checked: boolean | 'indeterminate' }) =>
-                setIsConflicts(!!e.checked)
-              }
-            >
-              <CheckboxHiddenInput />
-              <CheckboxControl />
-            </CheckboxRoot>
-          </FieldRoot>
+            <CheckboxControl>
+              <CheckboxIndicator />
+            </CheckboxControl>
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <CheckboxLabel>Hide conflicted content</CheckboxLabel>
+          </CheckboxRoot>
         </Box>
         <Flex align="center" gap="16px" mt="-30px">
           <Text
@@ -182,11 +184,7 @@ const CallNotes = () => {
 
           <MenuRoot>
             <MenuTrigger asChild>
-              <Button
-                disabled={true}
-                colorPalette="gray"
-                variant="outline"
-              >
+              <Button disabled={true} colorPalette="gray" variant="outline">
                 {sortOrder === 'desc' ? 'Most recent' : 'Oldest'}
                 <ChevronDownIcon />
               </Button>
@@ -195,7 +193,9 @@ const CallNotes = () => {
               <MenuItem value="desc" onClick={() => setSortOrder('desc')}>
                 Most recent
               </MenuItem>
-              <MenuItem value="asc" onClick={() => setSortOrder('asc')}>Oldest</MenuItem>
+              <MenuItem value="asc" onClick={() => setSortOrder('asc')}>
+                Oldest
+              </MenuItem>
             </MenuContent>
           </MenuRoot>
         </Flex>

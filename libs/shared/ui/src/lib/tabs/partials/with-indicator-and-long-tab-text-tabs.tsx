@@ -8,7 +8,7 @@ import {
 
 export function WithIndicatorAndLongTabTextTabs() {
   return (
-    <TabsRoot variant="unstyled" activationMode="manual" defaultValue="long">
+    <TabsRoot unstyled activationMode="manual" defaultValue="long">
       <TabsList>
         <TabsTrigger value="long">Tab with long text</TabsTrigger>
         <TabsTrigger value="billings">Billings</TabsTrigger>

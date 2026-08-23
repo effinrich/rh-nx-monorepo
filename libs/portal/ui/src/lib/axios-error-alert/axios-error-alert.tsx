@@ -1,9 +1,9 @@
 import { type ApiError } from '@redesignhealth/portal/data-assets'
 import {
   type BoxProps,
-  AlertRoot,
   AlertDescription,
   AlertIndicator,
+  AlertRoot,
   AlertTitle,
   Box,
   Text
@@ -17,7 +17,9 @@ export const AxiosErrorAlert = ({ error, ...props }: AxiosErrorAlertProps) => {
   return (
     <AlertRoot
       status="error"
-      variant="left-accent"
+      variant="subtle"
+      borderLeftWidth="4px"
+      borderLeftColor="colorPalette.solid"
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"

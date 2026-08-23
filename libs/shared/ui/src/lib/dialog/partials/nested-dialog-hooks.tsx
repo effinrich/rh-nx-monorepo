@@ -8,8 +8,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogPositioner,
-  DialogRoot
-} from '../modal'
+  DialogRoot,
+  DialogTitle
+} from '../dialog'
 
 export function NestedDialogHooks() {
   const first = useDisclosure()
@@ -29,7 +30,9 @@ export function NestedDialogHooks() {
         <DialogBackdrop />
         <DialogPositioner>
           <DialogContent>
-            <DialogHeader>Dialog Title</DialogHeader>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+            </DialogHeader>
             <DialogBody>
               Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
               ullamco deserunt aute id consequat veniam incididunt duis in sint
@@ -53,7 +56,9 @@ export function NestedDialogHooks() {
               <DialogBackdrop />
               <DialogPositioner>
                 <DialogContent>
-                  <DialogHeader>Dialog 2 Title</DialogHeader>
+                  <DialogHeader>
+                    <DialogTitle>Dialog 2 Title</DialogTitle>
+                  </DialogHeader>
                   <DialogFooter>
                     <rh.div flex="1" />
                     <Button colorPalette="primary" onClick={third.onOpen}>
@@ -70,7 +75,9 @@ export function NestedDialogHooks() {
                     <DialogBackdrop />
                     <DialogPositioner>
                       <DialogContent>
-                        <DialogHeader tabIndex={0}>Dialog 3 Title</DialogHeader>
+                        <DialogHeader>
+                          <DialogTitle tabIndex={0}>Dialog 3 Title</DialogTitle>
+                        </DialogHeader>
                       </DialogContent>
                     </DialogPositioner>
                   </DialogRoot>

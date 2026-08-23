@@ -3,11 +3,11 @@ import { Controller, useFormContext } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
 import {
   Box,
-  Flex,
   FieldErrorText,
   FieldHelperText,
   FieldLabel,
   FieldRoot,
+  Flex,
   Input,
   NativeSelectField,
   NativeSelectRoot,
@@ -89,8 +89,8 @@ export const CompanyForm = ({
                 />
               )}
             />
-        {/* @ts-expect-error Chakra v3 children typing */}
-        <FieldErrorText role="alert">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="name" />
             </FieldErrorText>
           </FieldRoot>
@@ -112,8 +112,8 @@ export const CompanyForm = ({
                 />
               )}
             />
-        {/* @ts-expect-error Chakra v3 children typing */}
-        <FieldErrorText role="alert">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="number" />
             </FieldErrorText>
           </FieldRoot>
@@ -184,8 +184,8 @@ export const CompanyForm = ({
             )}
           />
 
-        {/* @ts-expect-error Chakra v3 children typing */}
-        <FieldErrorText role="alert">
+          {/* @ts-expect-error Chakra v3 children typing */}
+          <FieldErrorText role="alert">
             <ErrorMessage errors={errors} name="stage" />
           </FieldErrorText>
         </FieldRoot>
@@ -213,8 +213,8 @@ export const CompanyForm = ({
                 />
               )}
             />
-        {/* @ts-expect-error Chakra v3 children typing */}
-        <FieldErrorText role="alert">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="concept" />
             </FieldErrorText>
           </FieldRoot>
@@ -241,8 +241,8 @@ export const CompanyForm = ({
                 />
               )}
             />
-        {/* @ts-expect-error Chakra v3 children typing */}
-        <FieldErrorText role="alert">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="theme" />
             </FieldErrorText>
           </FieldRoot>
@@ -274,8 +274,8 @@ export const CompanyForm = ({
                 }}
               />
             )}
-        {/* @ts-expect-error Chakra v3 children typing */}
-        <FieldErrorText role="alert">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="conflicts" />
             </FieldErrorText>
           </FieldRoot>
@@ -299,8 +299,8 @@ export const CompanyForm = ({
                 />
               )}
             />
-        {/* @ts-expect-error Chakra v3 children typing */}
-        <FieldErrorText role="alert">
+            {/* @ts-expect-error Chakra v3 children typing */}
+            <FieldErrorText role="alert">
               <ErrorMessage errors={errors} name="href" />
             </FieldErrorText>
           </FieldRoot>
@@ -343,10 +343,10 @@ export const CompanyForm = ({
             control={control}
             render={({ field: { onChange, name, ref, value } }) => (
               <RadioGroupRoot
-                onChange={onChange}
+                onValueChange={({ value }) => onChange(value)}
                 name={name}
                 ref={ref}
-                value={value}
+                value={value ?? ''}
                 colorPalette="primary"
                 maxW="175px"
               >
@@ -360,8 +360,8 @@ export const CompanyForm = ({
               </RadioGroupRoot>
             )}
           />
-        {/* @ts-expect-error Chakra v3 children typing */}
-        <FieldErrorText role="alert">
+          {/* @ts-expect-error Chakra v3 children typing */}
+          <FieldErrorText role="alert">
             <ErrorMessage errors={errors} name="fundraiseStatus" />
           </FieldErrorText>
         </FieldRoot>
@@ -380,10 +380,10 @@ export const CompanyForm = ({
             control={control}
             render={({ field: { onChange, name, ref, value } }) => (
               <RadioGroupRoot
-                onChange={onChange}
+                onValueChange={({ value }) => onChange(value === 'true')}
                 name={name}
                 ref={ref}
-                value={String(value)}
+                value={value == null ? '' : String(value)}
                 colorPalette="primary"
                 maxW="175px"
               >
@@ -394,8 +394,8 @@ export const CompanyForm = ({
               </RadioGroupRoot>
             )}
           />
-        {/* @ts-expect-error Chakra v3 children typing */}
-        <FieldErrorText role="alert">
+          {/* @ts-expect-error Chakra v3 children typing */}
+          <FieldErrorText role="alert">
             <ErrorMessage errors={errors} name="hasPlatformAgreement" />
           </FieldErrorText>
         </FieldRoot>

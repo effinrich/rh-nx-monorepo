@@ -2,10 +2,10 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Stack } from '../../index'
 
-import { Heading } from './heading'
 import { CompositionHeading } from './partials/composition-heading'
 import { OverrideStyleHeading } from './partials/override-style-heading'
 import { TruncateHeadingExample } from './partials/truncate-heading'
+import { Heading } from './heading'
 
 export default {
   component: Heading,
@@ -13,7 +13,7 @@ export default {
   args: {
     as: 'h1',
     size: '4xl',
-    noOfLines: 1
+    lineClamp: 1
   }
 } as Meta<typeof Heading>
 

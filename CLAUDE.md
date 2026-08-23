@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
+Never use PNPM. MUST use NPM for package manager.
+
 This is the **Redesign Health Design System** monorepo, built with Nx. It contains multiple applications and shared libraries organized by domain.
 
 ### Key Applications

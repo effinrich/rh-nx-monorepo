@@ -1,14 +1,7 @@
-import type { ReactNode } from 'react'
+import type { ThemeProviderProps } from 'next-themes'
 import { ThemeProvider } from 'next-themes'
 
-export interface ColorModeProviderProps {
-  children: ReactNode
-  attribute?: 'class' | 'data-theme'
-  defaultTheme?: string
-  enableSystem?: boolean
-  disableTransitionOnChange?: boolean
-  forcedTheme?: string
-}
+export type ColorModeProviderProps = ThemeProviderProps
 
 export function ColorModeProvider({
   children,

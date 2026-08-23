@@ -1,5 +1,4 @@
 import { FieldLabel, FieldRoot, SimpleGrid } from '../../../index'
-
 import { Switch } from '../switch'
 
 export function StateDependingBehaviorSwitch() {
@@ -11,8 +10,8 @@ export function StateDependingBehaviorSwitch() {
       <FieldLabel htmlFor="isDisabled">isDisabled:</FieldLabel>
       <Switch id="isDisabled" disabled defaultChecked />
 
-      <FieldLabel htmlFor="isFocusable">isFocusable:</FieldLabel>
-      <Switch id="isFocusable" isFocusable disabled />
+      <FieldLabel htmlFor="notFocusable">tabIndex -1:</FieldLabel>
+      <Switch id="notFocusable" inputProps={{ tabIndex: -1 }} />
 
       <FieldLabel htmlFor="isInvalid">isInvalid:</FieldLabel>
       <Switch id="isInvalid" invalid />

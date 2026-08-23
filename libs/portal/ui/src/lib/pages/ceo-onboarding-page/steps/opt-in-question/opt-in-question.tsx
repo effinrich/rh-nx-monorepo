@@ -1,8 +1,8 @@
 import {
   Button,
-  CardRoot,
   CardFooter,
   CardHeader,
+  CardRoot,
   Separator
 } from '@redesignhealth/ui'
 
@@ -28,11 +28,16 @@ const OptInQuestion = ({
       <Separator />
       <OptInForm isOptIn={isOptIn} setIsOptIn={setIsOptIn} />
       <Separator />
-      <CardFooter justify="flex-end" gap={3}>
+      <CardFooter justifyContent="flex-end" gap={3}>
         <Button variant="ghost" disabled>
           Back
         </Button>
-        <Button variant="solid" colorPalette="primary" disabled={!isOptIn} onClick={handleConfirm}>
+        <Button
+          variant="solid"
+          colorPalette="primary"
+          disabled={!isOptIn}
+          onClick={handleConfirm}
+        >
           Continue
         </Button>
       </CardFooter>

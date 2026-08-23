@@ -6,10 +6,10 @@ import {
 } from '@redesignhealth/portal/data-assets'
 import {
   Button,
-  CardRoot,
   CardBody,
   CardFooter,
   CardHeader,
+  CardRoot,
   Separator,
   Text
 } from '@redesignhealth/ui'
@@ -59,12 +59,13 @@ const OptOutConfirmation = ({ handleCancel }: OptOutConfirmationProps) => {
       </CardBody>
       <Separator />
       {ceo && (
-        <CardFooter display="flex" justify="flex-end" gap={3}>
+        <CardFooter display="flex" justifyContent="flex-end" gap={3}>
           <Button variant="outline" onClick={handleCancel}>
             I want to opt-In
           </Button>
           <Button
-            variant="solid" colorPalette="primary"
+            variant="solid"
+            colorPalette="primary"
             onClick={handleContinue}
             loading={optOutCeoIsSaving}
           >

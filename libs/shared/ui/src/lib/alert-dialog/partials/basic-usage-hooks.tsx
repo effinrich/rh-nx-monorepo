@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import { useDisclosure } from '@chakra-ui/react'
 
 import { Button } from '../../button/button'
+import { useDisclosure } from '../../hooks/use-disclosure/use-disclosure'
 import {
   AlertDialogRoot,
   DialogBackdrop,
@@ -9,7 +9,8 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogPositioner
+  DialogPositioner,
+  DialogTitle
 } from '../alert-dialog'
 
 export function BasicUsageHooks(args: Record<string, unknown>) {
@@ -31,8 +32,10 @@ export function BasicUsageHooks(args: Record<string, unknown>) {
         <DialogBackdrop />
         <DialogPositioner>
           <DialogContent>
-            <DialogHeader fontSize="lg" fontWeight="bold">
-              Delete Customer
+            <DialogHeader>
+              <DialogTitle fontSize="lg" fontWeight="bold">
+                Delete Customer
+              </DialogTitle>
             </DialogHeader>
 
             <DialogBody>

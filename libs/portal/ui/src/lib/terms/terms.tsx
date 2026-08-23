@@ -13,7 +13,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogPositioner,
-  DialogRoot
+  DialogRoot,
+  DialogTitle
 } from '@redesignhealth/ui'
 import parse from 'html-react-parser'
 
@@ -48,7 +49,10 @@ const Terms = ({ isAskingConsent = false, open, onClose }: TermsProps) => {
       <DialogPositioner>
         {/* @ts-expect-error Chakra v3 children typing */}
         <DialogContent maxHeight="80vh">
-          <DialogHeader>Terms of Service</DialogHeader>
+          <DialogHeader>
+            {/* @ts-expect-error Chakra v3 DialogTitle children typing */}
+            <DialogTitle>Terms of Service</DialogTitle>
+          </DialogHeader>
           <DialogBody id="termsModalBody">
             <Box
               css={{

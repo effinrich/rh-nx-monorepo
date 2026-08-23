@@ -11,12 +11,11 @@ import {
 } from '@redesignhealth/portal/data-assets'
 import {
   Button,
-  CardRoot,
   CardBody,
   CardFooter,
-  Separator,
-  Loader
-} from '@redesignhealth/ui'
+  CardRoot,
+  Loader,
+  Separator} from '@redesignhealth/ui'
 
 import { CeoForm } from '../../../ceo-directory-page/ceo-form/ceo-form'
 import { ceoFormResolver } from '../../../ceo-directory-page/ceo-form/schema'
@@ -69,12 +68,13 @@ const OptInConfirmation = ({ handleCancel }: OptInConfirmationProps) => {
             </FormProvider>
           </CardBody>
           <Separator />
-          <CardFooter display="flex" justify="end" gap={3}>
+          <CardFooter display="flex" justifyContent="end" gap={3}>
             <Button variant="outline" onClick={handleCancel}>
               Back
             </Button>
             <Button
-              variant="solid" colorPalette="primary"
+              variant="solid"
+              colorPalette="primary"
               onClick={handleContinue}
               loading={updateCeoIsLoading}
             >

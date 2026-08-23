@@ -11,8 +11,7 @@ export default {
   component: ChakraStack,
   title: 'Components / Layout / Stack',
   args: {
-    spacing: 8,
-    isInline: false,
+    gap: 8,
     direction: ['column', 'row']
   }
 } as Meta<typeof ChakraStack>

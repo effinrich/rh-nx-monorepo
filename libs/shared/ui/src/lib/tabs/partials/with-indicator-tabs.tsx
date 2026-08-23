@@ -8,10 +8,14 @@ import {
 
 export function WithIndicatorTabs() {
   return (
-    <TabsRoot variant="unstyled" activationMode="manual" defaultValue="settings">
+    <TabsRoot unstyled activationMode="manual" defaultValue="settings">
       <TabsList>
         <TabsTrigger value="settings">Settings</TabsTrigger>
-        <TabsTrigger value="billings" _disabled={{ color: 'gray.400' }} disabled>
+        <TabsTrigger
+          value="billings"
+          _disabled={{ color: 'gray.400' }}
+          disabled
+        >
           Billings
         </TabsTrigger>
         <TabsTrigger value="preferences">Preferences</TabsTrigger>

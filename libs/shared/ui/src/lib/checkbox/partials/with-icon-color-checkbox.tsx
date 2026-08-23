@@ -1,15 +1,18 @@
 import {
   CheckboxControl,
   CheckboxHiddenInput,
+  CheckboxIndicator,
   CheckboxLabel,
   CheckboxRoot
 } from '../checkbox'
 
 export function WithIconColorCheckbox() {
   return (
-    <CheckboxRoot iconColor="yellow.400">
+    <CheckboxRoot>
       <CheckboxHiddenInput />
-      <CheckboxControl />
+      <CheckboxControl>
+        <CheckboxIndicator color="yellow.400" />
+      </CheckboxControl>
       <CheckboxLabel>I love Redesign Health</CheckboxLabel>
     </CheckboxRoot>
   )

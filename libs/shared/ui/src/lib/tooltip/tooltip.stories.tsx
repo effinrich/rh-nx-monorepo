@@ -4,11 +4,11 @@ import { WithAriaLabelTooltip } from './partials/with-aria-label-tooltip'
 import { WithAutoPlacementTooltip } from './partials/with-auto-placement-tooltip'
 import { WithButtonTooltip } from './partials/with-button-tooltip'
 import { WithDefaultIsOpenPropTooltip } from './partials/with-default-is-open-prop-tooltip'
+import { WithDialogTooltip } from './partials/with-dialog-tooltip'
 import { WithDisabledButtonTooltip } from './partials/with-disabled-button-tooltip'
 import { WithDynamicDisabledTooltip } from './partials/with-dynamic-disabled-tooltip'
 import { WithExternalIconTooltip } from './partials/with-external-icon-tooltip'
 import { WithIsOpenPropTooltip } from './partials/with-is-open-prop-tooltip'
-import { WithModalTooltip } from './partials/with-modal-tooltip'
 import { WithScrollTooltip } from './partials/with-scroll-tooltip'
 import { WithScrollWithinTooltip } from './partials/with-scroll-within-tooltip'
 import { WithStringTooltip } from './partials/with-string-tooltip'
@@ -37,8 +37,8 @@ export const WithinFixedContainer = {
   render: () => <WithinFixedContainerTooltip />
 }
 
-export const WithModal = {
-  render: () => <WithModalTooltip />
+export const WithDialog = {
+  render: () => <WithDialogTooltip />
 }
 
 export const WithDisabledButton = {

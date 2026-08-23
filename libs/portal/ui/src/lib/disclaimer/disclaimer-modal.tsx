@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogPositioner,
   DialogRoot,
+  DialogTitle,
   useDisclosure
 } from '@redesignhealth/ui'
 
@@ -38,7 +39,10 @@ export const DisclaimerModal = forwardRef(
         <DialogPositioner>
           {/* @ts-expect-error Chakra v3 DialogContent children typing */}
           <DialogContent>
-            <DialogHeader>{header}</DialogHeader>
+            <DialogHeader>
+              {/* @ts-expect-error Chakra v3 DialogTitle children typing */}
+              <DialogTitle>{header}</DialogTitle>
+            </DialogHeader>
             <DialogBody color="gray.500">{children}</DialogBody>
             <DialogFooter>
               <Button onClick={onClose} colorPalette="primary">

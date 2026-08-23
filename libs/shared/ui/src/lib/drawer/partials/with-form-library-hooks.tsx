@@ -10,7 +10,7 @@ import {
   Portal,
   Text
 } from '../../index'
-import { type DrawerRootProps,Drawer } from '../drawer'
+import { type DrawerRootProps, Drawer } from '../drawer'
 
 export function WithFormLibraryHooks(args: DrawerRootProps) {
   const [open, setOpen] = useState(false)
@@ -19,10 +19,16 @@ export function WithFormLibraryHooks(args: DrawerRootProps) {
       <Container maxW="600px">
         <Text mb={4}>
           If you need to put a form within the Drawer, you might need to use a
-          form validation library like react-hook-form or formik. Here&apos;s the
-          recommended way to do it:
+          form validation library like react-hook-form or formik. Here&apos;s
+          the recommended way to do it:
         </Text>
-        <AlertRoot status="warning" variant="left-accent" mb={6}>
+        <AlertRoot
+          status="warning"
+          variant="subtle"
+          borderLeftWidth="4px"
+          borderLeftColor="orange.500"
+          mb={6}
+        >
           Because the button is located outside the form, you can leverage its
           native HTML form attribute and refer to the id of the form.
         </AlertRoot>

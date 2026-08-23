@@ -21,19 +21,19 @@ export const SimpleLG = {
 }
 
 export const StripedSM = {
-  render: () => <SimpleTable variant="striped" size="sm" />
+  render: () => <SimpleTable striped size="sm" />
 }
 
 export const StripedMD = {
-  render: () => <SimpleTable variant="striped" size="md" />
+  render: () => <SimpleTable striped size="md" />
 }
 
 export const StripedLG = {
-  render: () => <SimpleTable variant="striped" size="lg" />
+  render: () => <SimpleTable striped size="lg" />
 }
 
 export const Unstyled = {
-  render: () => <SimpleTable variant="unstyled" size="none" />
+  render: () => <SimpleTable unstyled />
 }
 
 export const WithOverflow = {

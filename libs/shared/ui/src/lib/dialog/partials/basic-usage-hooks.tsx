@@ -1,9 +1,7 @@
-import { useRef } from 'react'
-
 import { Button } from '../../button/button'
 import { useDisclosure } from '../../hooks/use-disclosure/use-disclosure'
-import { rh } from '../../rh/rh'
 import {
+  type DialogRootProps,
   DialogBackdrop,
   DialogBody,
   DialogCloseTrigger,
@@ -11,47 +9,42 @@ import {
   DialogFooter,
   DialogHeader,
   DialogPositioner,
-  DialogRoot
-} from '../modal'
+  DialogRoot,
+  DialogTitle
+} from '../dialog'
 
-export function ReturnFocusHooks() {
+export function BasicUsageHooks(props: DialogRootProps) {
   const { open, onOpen, onClose } = useDisclosure()
-  const finalRef = useRef<HTMLDivElement>(null)
 
   return (
     <>
-      <rh.div ref={finalRef} tabIndex={-1} aria-label="Focus moved to this box">
-        Some other content that&apos;ll receive focus on close.
-      </rh.div>
-
-      <Button mt={4} onClick={onOpen} maxW="300px">
-        Open Dialog
+      <Button onClick={onOpen} maxW="300px">
+        Open dialog
       </Button>
-
       <DialogRoot
-        finalFocusEl={() => finalRef.current}
+        {...props}
         open={open}
-        onOpenChange={e => {
-          if (!e.open) onClose()
+        onOpenChange={event => {
+          if (!event.open) onClose()
         }}
       >
         <DialogBackdrop />
         <DialogPositioner>
           <DialogContent>
-            <DialogHeader>Dialog Title</DialogHeader>
             <DialogCloseTrigger />
+            <DialogHeader>
+              <DialogTitle>Welcome Home</DialogTitle>
+            </DialogHeader>
             <DialogBody>
               Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
               ullamco deserunt aute id consequat veniam incididunt duis in sint
-              irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit
-              officia tempor esse quis.
+              irure nisi.
             </DialogBody>
-
             <DialogFooter>
               <Button colorPalette="red" onClick={onClose} mr={3}>
-                Close
+                Cancel
               </Button>
-              <Button colorPalette="primary">Secondary Action</Button>
+              <Button colorPalette="primary">Save</Button>
             </DialogFooter>
           </DialogContent>
         </DialogPositioner>

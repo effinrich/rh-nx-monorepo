@@ -131,9 +131,10 @@ export const AddUser = () => {
             <Controller
               name="role"
               control={control}
-              render={({ field: { onChange, name, ref } }) => (
+              render={({ field: { onChange, name, ref, value } }) => (
                 <RadioGroupRoot
-                  onChange={onChange}
+                  onValueChange={({ value }) => onChange(value)}
+                  value={value ?? ''}
                   as={Flex}
                   name={name}
                   ref={ref}
@@ -155,9 +156,7 @@ export const AddUser = () => {
               )}
             />
             {/* @ts-expect-error Chakra v3 children typing */}
-            <FieldErrorText role="alert">
-              {errors.role?.message}
-            </FieldErrorText>
+            <FieldErrorText role="alert">{errors.role?.message}</FieldErrorText>
           </FieldRoot>
         </Flex>
         {userType !== undefined && (

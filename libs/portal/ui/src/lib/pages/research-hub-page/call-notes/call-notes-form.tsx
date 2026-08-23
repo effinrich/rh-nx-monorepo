@@ -14,6 +14,10 @@ import {
 import {
   Box,
   Button,
+  CheckboxControl,
+  CheckboxHiddenInput,
+  CheckboxIndicator,
+  CheckboxLabel,
   CheckboxRoot,
   Flex,
   HStack,
@@ -114,7 +118,7 @@ export const CallNotesForm = ({
                 placeholder="Select one"
                 options={transformOptionsFormat(NOTE_TYPES)}
                 onBlur={onBlur}
-                isInvalid={!!error}
+                invalid={!!error}
               />
             )}
           />
@@ -141,7 +145,7 @@ export const CallNotesForm = ({
                 placeholder="Select one"
                 options={transformOptionsFormat(INTERVIEW_SOURCES)}
                 onBlur={onBlur}
-                isInvalid={!!error}
+                invalid={!!error}
               />
             )}
           />
@@ -169,7 +173,7 @@ export const CallNotesForm = ({
                 getOptionLabel={(option: CompanySummary) => `${option.name}`}
                 getOptionValue={(option: CompanySummary) => `${option.id}`}
                 onBlur={onBlur}
-                isInvalid={!!error}
+                invalid={!!error}
               />
             )}
           />
@@ -361,11 +365,12 @@ export const CallNotesForm = ({
                       </Box>
                       <Spacer />
                       <IconButton
-                        icon={<MdClose />}
                         onClick={() => handleFileChange(file, 'delete')}
                         id={`${file.name}`}
                         aria-label={`${file.name}`}
-                      />
+                      >
+                        <MdClose />
+                      </IconButton>
                     </Flex>
                   ))}
               </>
@@ -386,14 +391,29 @@ export const CallNotesForm = ({
               upon the intellectual property rights, including but not limited
               to copyrights, trademarks, or patents, of any third party.
             </Text>
-            {/* @ts-expect-error Chakra v3 compound component typing */}
-            <CheckboxRoot
-              {...form.register('isAttachmentDisclaimerAccepted')}
-              mt={1}
-            >
-              {' '}
-              I confirm
-            </CheckboxRoot>
+            <Controller
+              name="isAttachmentDisclaimerAccepted"
+              control={form.control}
+              render={({ field: { name, value, onBlur, onChange, ref } }) => (
+                <CheckboxRoot
+                  checked={!!value}
+                  onCheckedChange={({
+                    checked
+                  }: {
+                    checked: boolean | 'indeterminate'
+                  }) => onChange(checked === true)}
+                  mt={1}
+                >
+                  <CheckboxHiddenInput ref={ref} name={name} onBlur={onBlur} />
+                  {/* @ts-expect-error Chakra v3 children typing */}
+                  <CheckboxControl>
+                    <CheckboxIndicator />
+                  </CheckboxControl>
+                  {/* @ts-expect-error Chakra v3 children typing */}
+                  <CheckboxLabel>I confirm</CheckboxLabel>
+                </CheckboxRoot>
+              )}
+            />
           </FormField>
         )}
       </FormProvider>

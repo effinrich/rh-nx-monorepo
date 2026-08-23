@@ -34,7 +34,7 @@ const SupportPage = () => {
           ctaVariant="link"
           ctaText="platform-support@redesignhealth.com"
           href="mailto:platform-support@redesignhealth.com"
-          variant="filled"
+          variant="subtle"
         />
         <CtaCard
           topVisual={
@@ -46,7 +46,7 @@ const SupportPage = () => {
           ctaVariant="link"
           ctaText="Give feedback"
           href={FEEDBACK_FORM_LINK}
-          variant="filled"
+          variant="subtle"
         />
         {consent?.accepted && (
           <CtaCard
@@ -62,7 +62,7 @@ const SupportPage = () => {
             ctaVariant="link"
             ctaText="Read terms of service"
             onClick={onOpen}
-            variant="filled"
+            variant="subtle"
           />
         )}
         <Terms open={open} onClose={onClose} />

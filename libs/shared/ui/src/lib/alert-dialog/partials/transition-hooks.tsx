@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import { useDisclosure } from '@chakra-ui/react'
 
 import { Button } from '../../button/button'
+import { useDisclosure } from '../../hooks/use-disclosure/use-disclosure'
 import {
   AlertDialogRoot,
   DialogBackdrop,
@@ -10,7 +10,8 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogPositioner
+  DialogPositioner,
+  DialogTitle
 } from '../alert-dialog'
 
 export function TransitionHooks(args: Record<string, unknown>) {
@@ -35,7 +36,9 @@ export function TransitionHooks(args: Record<string, unknown>) {
         <DialogBackdrop />
         <DialogPositioner>
           <DialogContent>
-            <DialogHeader>Discard Changes?</DialogHeader>
+            <DialogHeader>
+              <DialogTitle>Discard Changes?</DialogTitle>
+            </DialogHeader>
             <DialogCloseTrigger />
             <DialogBody>
               Are you sure you want to discard all of your notes? 44 words will

@@ -14,6 +14,10 @@ import {
 } from '@redesignhealth/portal/utils'
 import {
   Box,
+  CheckboxControl,
+  CheckboxHiddenInput,
+  CheckboxIndicator,
+  CheckboxLabel,
   CheckboxRoot,
   Flex,
   HStack,
@@ -94,18 +98,34 @@ export const IPMarketplacePage = () => {
                 <Controller
                   name="isHideIpListings"
                   control={methods.control}
-                  render={({ field: { name, value, onChange } }) => (
-                    // @ts-expect-error Chakra v3 compound component typing
+                  render={({
+                    field: { name, value, onBlur, onChange, ref }
+                  }) => (
                     <CheckboxRoot
                       fontSize="sm"
-                      name={name}
                       checked={value}
-                      onCheckedChange={(e) => onChange(e.checked)}
+                      onCheckedChange={({
+                        checked
+                      }: {
+                        checked: boolean | 'indeterminate'
+                      }) => onChange(checked === true)}
                       gridArea="left"
                     >
-                      {isEnterpriseSeller
-                        ? 'Hide IP listings from other sellers in my organization'
-                        : 'Hide IP listings that I requested info for'}
+                      <CheckboxHiddenInput
+                        ref={ref}
+                        name={name}
+                        onBlur={onBlur}
+                      />
+                      {/* @ts-expect-error Chakra v3 children typing */}
+                      <CheckboxControl>
+                        <CheckboxIndicator />
+                      </CheckboxControl>
+                      {/* @ts-expect-error Chakra v3 children typing */}
+                      <CheckboxLabel>
+                        {isEnterpriseSeller
+                          ? 'Hide IP listings from other sellers in my organization'
+                          : 'Hide IP listings that I requested info for'}
+                      </CheckboxLabel>
                     </CheckboxRoot>
                   )}
                 />

@@ -5,20 +5,20 @@ import { AvatarFallback, AvatarImage, AvatarRoot } from '../avatar'
 export function BasicAvatar() {
   return (
     <Stack direction="row">
-      <AvatarRoot name="Dan Abrahmov">
+      <AvatarRoot>
         {/* @ts-expect-error Chakra v3 compound component typing */}
         <AvatarImage src="https://bit.ly/dan-abramov" />
-        <AvatarFallback />
+        <AvatarFallback name="Dan Abrahmov" />
       </AvatarRoot>
-      <AvatarRoot name="Christian Nwamba">
+      <AvatarRoot>
         {/* @ts-expect-error Chakra v3 compound component typing */}
         <AvatarImage src="https://bit.ly/code-beast" />
-        <AvatarFallback />
+        <AvatarFallback name="Christian Nwamba" />
       </AvatarRoot>
-      <AvatarRoot name="Segun Adebayo">
+      <AvatarRoot>
         {/* @ts-expect-error Chakra v3 compound component typing */}
         <AvatarImage src="https://bit.ly/sage-adebayo" />
-        <AvatarFallback />
+        <AvatarFallback name="Segun Adebayo" />
       </AvatarRoot>
     </Stack>
   )

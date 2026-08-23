@@ -11,7 +11,7 @@ const CompanyCtaCard = ({
 }: CompanyCtaCardProps) => {
   if (companiesExist) {
     const commonProps = {
-      variant: 'filled',
+      variant: 'subtle' as const,
       title: 'Set up services, answer questionnaires, and assign users',
       icon: AddCompanyIcon,
       'data-testid': 'companies-cta'
@@ -25,7 +25,7 @@ const CompanyCtaCard = ({
   }
   return (
     <CtaCard
-      variant="filled"
+      variant="subtle"
       icon={AddCompanyIcon}
       headingWeight="bold"
       title="No companies assigned yet"

@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import { Stack } from '../../../index'
-
 import {
   CheckboxControl,
   CheckboxHiddenInput,
@@ -18,8 +17,7 @@ export function IndeterminateCheckbox() {
   return (
     <>
       <CheckboxRoot
-        checked={allChecked}
-        indeterminate={isIndeterminate}
+        checked={isIndeterminate ? 'indeterminate' : allChecked}
         onCheckedChange={e => {
           const next = e.checked === true
           setCheckedItems([next, next])

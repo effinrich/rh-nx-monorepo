@@ -169,10 +169,11 @@ export const EditUser = () => {
               <Controller
                 name="role"
                 control={control}
-                render={({ field: { onChange, name, ref } }) => (
+                defaultValue={personData.role?.authority}
+                render={({ field: { onChange, name, ref, value } }) => (
                   <RadioGroupRoot
-                    onChange={onChange}
-                    defaultValue={personData.role?.authority}
+                    onValueChange={({ value }) => onChange(value)}
+                    value={value ?? ''}
                     as={Flex}
                     name={name}
                     ref={ref}

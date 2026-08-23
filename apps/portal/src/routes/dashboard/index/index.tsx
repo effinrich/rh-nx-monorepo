@@ -56,7 +56,7 @@ export const Dashboard = () => {
       <SectionHeader title="Welcome" firstName={userInfo?.givenName ?? ''} />
 
       <Box mt={{ base: '20px', md: '60px' }}>
-        <SimpleGrid columns={[1, 1, 2, 2]} spacing="5">
+        <SimpleGrid columns={[1, 1, 2, 2]} gap="5">
           {isCurrentUserAdmin && (
             <>
               <StatCard

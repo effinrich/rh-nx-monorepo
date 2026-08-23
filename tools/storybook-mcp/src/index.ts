@@ -272,7 +272,7 @@ export const Default = {
 - portal-ui uses "components / Name" format (lowercase)
 - Use \`@storybook/react-vite\` for imports
 - Portal UI stories often need router decorators
-- Use Chakra UI theming addon for prop controls
+- Use built-in Storybook Controls for component props
 `
     return {
       contents: [
@@ -847,7 +847,6 @@ function generateStoryContent(options: {
     props,
     exportType,
     usesRouter,
-    usesChakra,
     includeVariants
   } = options
 
@@ -858,7 +857,7 @@ function generateStoryContent(options: {
   if (library === 'portal-ui') {
     imports.push("import type { Meta } from '@storybook/react-vite'")
   } else {
-    imports.push("import { Meta, StoryObj } from '@storybook/react-vite'")
+    imports.push("import type { Meta, StoryObj } from '@storybook/react-vite'")
   }
 
   // Add router decorator if needed
@@ -867,14 +866,6 @@ function generateStoryContent(options: {
       "import { withRouter } from 'storybook-addon-remix-react-router'"
     )
     decorators.push('withRouter')
-  }
-
-  // Add Chakra imports if needed for theming
-  if (usesChakra) {
-    imports.push(
-      "import { getThemingArgTypes } from '@chakra-ui/storybook-addon'"
-    )
-    imports.push("import { theme } from '@chakra-ui/theme'")
   }
 
   // Add component import
@@ -1026,9 +1017,7 @@ export const WithVariants: Story = {
   }
 
   // Look for disabled prop
-  const disabledProp = props.find(
-    p => p.name === 'isDisabled' || p.name === 'disabled'
-  )
+  const disabledProp = props.find(p => p.name === 'disabled')
   if (disabledProp) {
     const propName = disabledProp.name
     if (library === 'portal-ui') {
@@ -1089,9 +1078,7 @@ export const Basic: Story = {
 }
 
 function getControlsTemplate(library: LibraryName): string {
-  return `import { Meta, StoryObj } from '@storybook/react-vite'
-import { getThemingArgTypes } from '@chakra-ui/storybook-addon'
-import { theme } from '@chakra-ui/theme'
+  return `import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { ComponentName } from './component-name'
 
@@ -1107,9 +1094,8 @@ export default {
       options: ['solid', 'outline', 'ghost'],
       control: { type: 'select' },
     },
-    isDisabled: { type: 'boolean' },
+    disabled: { type: 'boolean' },
     children: { type: 'string' },
-    ...getThemingArgTypes(theme, 'ComponentName'),
   },
   args: {
     children: 'Click me',
@@ -1124,7 +1110,7 @@ export const Playground: Story = {}`
 }
 
 function getVariantsTemplate(library: LibraryName): string {
-  return `import { Meta, StoryObj } from '@storybook/react-vite'
+  return `import type { Meta, StoryObj } from '@storybook/react-vite'
 import { HStack, Stack } from '@chakra-ui/react'
 
 import { ComponentName } from './component-name'
@@ -1138,7 +1124,7 @@ type Story = StoryObj<typeof ComponentName>
 
 export const AllSizes: Story = {
   render: () => (
-    <HStack spacing={4}>
+    <HStack gap={4}>
       <ComponentName size="sm">Small</ComponentName>
       <ComponentName size="md">Medium</ComponentName>
       <ComponentName size="lg">Large</ComponentName>
@@ -1148,7 +1134,7 @@ export const AllSizes: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <Stack spacing={4}>
+    <Stack gap={4}>
       <ComponentName variant="solid">Solid</ComponentName>
       <ComponentName variant="outline">Outline</ComponentName>
       <ComponentName variant="ghost">Ghost</ComponentName>

@@ -138,11 +138,11 @@ export const VendorForm = ({
             control={control}
             render={({ field: { name, onChange, value, onBlur, ref } }) => (
               <FormFieldMaster name={name} label="Type">
-                <RadioGroup
+                <RadioGroupRoot
                   ref={ref}
-                  onChange={onChange}
+                  onValueChange={({ value }) => onChange(value)}
                   name={name}
-                  defaultValue={value}
+                  value={value ?? ''}
                   colorPalette="primary"
                   onBlur={onBlur}
                 >
@@ -153,7 +153,7 @@ export const VendorForm = ({
                       </Radio>
                     ))}
                   </Stack>
-                </RadioGroup>
+                </RadioGroupRoot>
               </FormFieldMaster>
             )}
           /> */}
@@ -225,11 +225,11 @@ export const VendorForm = ({
               >
                 <RadioGroupRoot
                   ref={ref}
-                  onChange={nextValue =>
+                  onValueChange={({ value: nextValue }) =>
                     controllerOnChange(nextValue === 'true')
                   }
                   name={name}
-                  defaultValue={value ? 'true' : 'false'}
+                  value={value === undefined ? '' : String(value)}
                   colorPalette="primary"
                   onBlur={onBlur}
                 >

@@ -13,18 +13,17 @@ export const CheckboxIndicator = ChakraCheckbox.Indicator
 export const CheckboxLabel = ChakraCheckbox.Label
 
 export interface CheckboxProps extends ChakraCheckbox.RootProps {
-  icon?: React.ReactNode
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>
   rootRef?: React.Ref<HTMLLabelElement>
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  function Checkbox({ children, icon, inputProps, rootRef, ...props }, ref) {
+  function Checkbox({ children, inputProps, rootRef, ...props }, ref) {
     return (
       <ChakraCheckbox.Root ref={rootRef} {...props}>
         <ChakraCheckbox.HiddenInput ref={ref} {...inputProps} />
         <ChakraCheckbox.Control>
-          {icon || <ChakraCheckbox.Indicator />}
+          <ChakraCheckbox.Indicator />
         </ChakraCheckbox.Control>
         {children != null && (
           <ChakraCheckbox.Label>{children}</ChakraCheckbox.Label>

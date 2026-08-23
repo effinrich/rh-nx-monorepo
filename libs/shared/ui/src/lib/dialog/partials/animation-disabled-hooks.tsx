@@ -10,8 +10,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogPositioner,
-  DialogRoot
-} from '../modal'
+  DialogRoot,
+  DialogTitle
+} from '../dialog'
 
 export function AnimationDisabledHooks() {
   const { open, onOpen, onClose } = useDisclosure()
@@ -29,7 +30,9 @@ export function AnimationDisabledHooks() {
         <DialogBackdrop />
         <DialogPositioner>
           <DialogContent>
-            <DialogHeader>Dialog Title</DialogHeader>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+            </DialogHeader>
             <DialogCloseTrigger />
             <DialogBody>
               <LoremIpsum p={5} />

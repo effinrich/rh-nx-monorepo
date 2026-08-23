@@ -1,5 +1,4 @@
 /// <reference types="vitest" />
-import * as path from 'path'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
@@ -28,17 +27,6 @@ export default defineConfig({
   preview: {
     port: 4300,
     host: 'localhost'
-  },
-
-  resolve: {
-    alias: {
-      // chakra-react-select v4/v5 uses Chakra v2 internals removed in v3.
-      // Redirect to a shim that re-exports the same surface API via react-select.
-      'chakra-react-select': path.resolve(
-        __dirname,
-        'src/shims/chakra-react-select.ts'
-      )
-    }
   },
 
   plugins: [react(), nxViteTsPaths()],

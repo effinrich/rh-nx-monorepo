@@ -5,7 +5,8 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogPositioner
+  DialogPositioner,
+  DialogTitle
 } from '@redesignhealth/ui'
 
 interface SuccessProps {
@@ -19,7 +20,10 @@ const Success = ({ onConfirmation }: SuccessProps) => {
       {/* @ts-expect-error Chakra v3 children typing */}
       <DialogContent>
         <DialogCloseTrigger />
-        <DialogHeader>Information released successfully</DialogHeader>
+        <DialogHeader>
+          {/* @ts-expect-error Chakra v3 DialogTitle children typing */}
+          <DialogTitle>Information released successfully</DialogTitle>
+        </DialogHeader>
         <DialogBody>
           Your contact information was emailed to the interested buyer.
         </DialogBody>

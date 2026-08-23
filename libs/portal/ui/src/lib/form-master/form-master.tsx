@@ -1,9 +1,9 @@
 import {
   Box,
   Button,
-  CardRoot,
   CardBody,
   CardFooter,
+  CardRoot,
   Separator,
   Stack,
   StackSeparator
@@ -31,7 +31,7 @@ const FormMaster = ({
   submitText = 'Save changes'
 }: FormProps) => {
   return (
-    <CardRoot variant={"unstyled" as any}>
+    <CardRoot bg="transparent" boxShadow="none">
       <form onSubmit={onSubmit} name={submitText}>
         <Stack separator={<StackSeparator />} gap={5}>
           <CardBody>{children}</CardBody>
@@ -45,7 +45,7 @@ const FormMaster = ({
           bgColor="white"
         >
           <Separator mt={8} />
-          <CardFooter gap={3} justify="end" my={4}>
+          <CardFooter gap={3} justifyContent="end" my={4}>
             <Button onClick={onCancel} variant="outline">
               Cancel
             </Button>

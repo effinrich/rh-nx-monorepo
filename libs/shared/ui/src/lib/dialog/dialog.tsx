@@ -3,8 +3,10 @@ export type {
   DialogContentProps,
   DialogFooterProps,
   DialogHeaderProps,
-  DialogRootProps} from '@chakra-ui/react'
+  DialogRootProps
+} from '@chakra-ui/react'
 export {
+  Dialog,
   DialogActionTrigger,
   DialogBackdrop,
   DialogBody,
@@ -16,4 +18,5 @@ export {
   DialogPositioner,
   DialogRoot,
   DialogTitle,
-  DialogTrigger} from '@chakra-ui/react'
+  DialogTrigger
+} from '@chakra-ui/react'

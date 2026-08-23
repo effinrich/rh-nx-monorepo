@@ -8,7 +8,7 @@ export default {
   args: {
     as: '',
     fontSize: 'md',
-    noOfLines: 1
+    lineClamp: 1
   },
   argTypes: {
     as: {

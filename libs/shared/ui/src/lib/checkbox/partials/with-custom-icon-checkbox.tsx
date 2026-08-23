@@ -1,10 +1,10 @@
 import * as React from 'react'
 
 import { Heading, Separator, Stack } from '../../../index'
-
 import {
   CheckboxControl,
   CheckboxHiddenInput,
+  CheckboxIndicator,
   CheckboxLabel,
   CheckboxRoot
 } from '../checkbox'
@@ -20,9 +20,11 @@ export function WithCustomIconCheckbox() {
   return (
     <>
       <Heading>Default</Heading>
-      <CheckboxRoot icon={<CustomIcon />} colorPalette="red">
+      <CheckboxRoot colorPalette="red">
         <CheckboxHiddenInput />
-        <CheckboxControl />
+        <CheckboxControl>
+          <CheckboxIndicator checked={<CustomIcon />} />
+        </CheckboxControl>
         <CheckboxLabel>Hello world</CheckboxLabel>
       </CheckboxRoot>
 
@@ -30,16 +32,19 @@ export function WithCustomIconCheckbox() {
 
       <Heading>Indeterminate</Heading>
       <CheckboxRoot
-        checked={allChecked}
-        indeterminate={isIndeterminate}
+        checked={isIndeterminate ? 'indeterminate' : allChecked}
         onCheckedChange={e => {
           const next = e.checked === true
           setCheckedItems([next, next])
         }}
-        icon={<CustomIcon />}
       >
         <CheckboxHiddenInput />
-        <CheckboxControl />
+        <CheckboxControl>
+          <CheckboxIndicator
+            checked={<CustomIcon />}
+            indeterminate={<CustomIcon isIndeterminate />}
+          />
+        </CheckboxControl>
         <CheckboxLabel>Parent Checkbox</CheckboxLabel>
       </CheckboxRoot>
       <Stack ml="6" mt="2" align="start">
