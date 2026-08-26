@@ -8,7 +8,6 @@ import {
 } from '@redesignhealth/portal/data-assets'
 import {
   FORM_ERROR_MESSAGES,
-  selectTransformer,
   TEXTAREA_CHARACTER_LIMIT
 } from '@redesignhealth/portal/utils'
 import {
@@ -20,7 +19,7 @@ import {
   Textarea
 } from '@redesignhealth/ui'
 import { AxiosError } from 'axios'
-import { Select } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 import * as yup from 'yup'
 
 import AxiosErrorAlert from '../../../axios-error-alert/axios-error-alert'
@@ -64,6 +63,7 @@ export const VendorForm = ({
   error
 }: NewVendorFormProps) => {
   const { data } = useGetCategoriesFilters()
+  const subcategoryOptions = data?.subcategoriesForMutation ?? []
 
   const methods = useForm<VendorFormProps>({
     resolver: yupResolver(formSchema),
@@ -117,15 +117,15 @@ export const VendorForm = ({
             control={control}
             render={({ field: { onChange, name, ref, value } }) => (
               <FormFieldMaster name={name} label="Type">
-                <Select
+                <Combobox.Single
                   ref={ref}
-                  value={selectTransformer.input(vendorTypes, value)}
-                  options={vendorTypes}
-                  onChange={newValue =>
-                    onChange(selectTransformer.output(newValue))
+                  value={
+                    vendorTypes.find(option => option.value === value) ?? null
                   }
-                  getOptionLabel={o => o.displayName}
-                  getOptionValue={o => o.value}
+                  source={{ kind: 'local', items: vendorTypes }}
+                  onChange={option => onChange(option?.value ?? '')}
+                  getOptionLabel={option => option.displayName}
+                  getOptionValue={option => option.value}
                   name={name}
                   placeholder="Select type"
                   colorPalette="primary"
@@ -164,25 +164,22 @@ export const VendorForm = ({
               field: { name, onChange: controllerOnChange, value, onBlur, ref }
             }) => (
               <FormFieldMaster name={name} label="Tags">
-                <Select
+                <Combobox.Multiple
                   ref={ref}
-                  onChange={multiValue =>
-                    controllerOnChange(
-                      multiValue.map(selected => selected.value)
-                    )
+                  onChange={options =>
+                    controllerOnChange(options.map(option => option.value))
                   }
-                  options={data?.subcategoriesForMutation}
-                  isMulti
+                  source={{ kind: 'local', items: subcategoryOptions }}
+                  value={(value ?? []).flatMap(subcategory => {
+                    const option = subcategoryOptions.find(
+                      option => option.value.apiId === subcategory.apiId
+                    )
+                    return option ? [option] : []
+                  })}
                   onBlur={onBlur}
                   getOptionLabel={option => option.displayName}
-                  defaultValue={
-                    value
-                      ? value.map(subcategory => ({
-                          displayName: subcategory.name,
-                          value: subcategory
-                        }))
-                      : []
-                  }
+                  getOptionValue={option => option.value.apiId}
+                  name={name}
                   placeholder="Select all that apply"
                 />
               </FormFieldMaster>

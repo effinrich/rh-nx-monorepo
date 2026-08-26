@@ -16,7 +16,7 @@ import {
   Stack,
   Textarea
 } from '@redesignhealth/ui'
-import { Select as ReactSelect } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 
 export interface OptionsProps {
   value: string | undefined
@@ -201,14 +201,17 @@ export const CompanyForm = ({
             <Controller
               name="concept"
               control={control}
-              render={({ field: { onChange, name, ref, value } }) => (
-                <ReactSelect
+              render={({ field: { onBlur, onChange, name, ref, value } }) => (
+                <Combobox.Single
                   ref={ref}
-                  value={value}
-                  options={conceptOptions}
-                  onChange={option => onChange(option)}
+                  value={value ?? null}
+                  source={{ kind: 'local', items: conceptOptions }}
+                  onChange={onChange}
+                  onBlur={onBlur}
                   name={name}
                   placeholder="Select concept"
+                  disabled={isPending || stageField === 'OP_CO'}
+                  invalid={Boolean(errors.concept)}
                   colorPalette="primary"
                 />
               )}
@@ -229,14 +232,17 @@ export const CompanyForm = ({
             <Controller
               name="theme"
               control={control}
-              render={({ field: { onChange, name, ref, value } }) => (
-                <ReactSelect
+              render={({ field: { onBlur, onChange, name, ref, value } }) => (
+                <Combobox.Single
                   ref={ref}
-                  value={value}
-                  options={themeOptions}
-                  onChange={option => onChange(option)}
+                  value={value ?? null}
+                  source={{ kind: 'local', items: themeOptions }}
+                  onChange={onChange}
+                  onBlur={onBlur}
                   name={name}
                   placeholder="Select theme"
+                  disabled={isPending}
+                  invalid={Boolean(errors.theme)}
                   colorPalette="primary"
                 />
               )}
@@ -258,16 +264,18 @@ export const CompanyForm = ({
               <Controller
                 name="conflicts"
                 control={control}
-                render={({ field: { onChange, name, ref, value } }) => {
+                render={({ field: { onBlur, onChange, name, ref, value } }) => {
                   return (
-                    <ReactSelect
+                    <Combobox.Multiple
                       ref={ref}
-                      isMulti
-                      options={options}
-                      value={value}
+                      source={{ kind: 'local', items: options }}
+                      value={value ?? []}
                       name={name}
                       placeholder="Select conflicts"
+                      onBlur={onBlur}
                       onChange={onChange}
+                      disabled={isPending}
+                      invalid={Boolean(errors.conflicts)}
                       colorPalette="primary"
                     />
                   )

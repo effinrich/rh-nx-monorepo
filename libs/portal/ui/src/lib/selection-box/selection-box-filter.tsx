@@ -1,5 +1,5 @@
 import { Box, BoxProps } from '@redesignhealth/ui'
-import { Select } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 
 interface SelectionBoxFilterProps {
   placeholder?: string
@@ -22,11 +22,10 @@ export const SelectionBoxFilter = ({
 
   return (
     <Box w={['full', 'full', '33%', '33%']} pb={3} pr={pr} data-testid={testid}>
-      <Select
+      <Combobox.Multiple
         placeholder={placeholder}
-        options={parsedOptions}
-        isMulti
-        onChange={newValues => onChange?.(newValues?.map(({ value }) => value))}
+        source={{ kind: 'local', items: parsedOptions }}
+        onChange={newValues => onChange?.(newValues.map(({ value }) => value))}
       />
     </Box>
   )

@@ -27,7 +27,7 @@ import {
   Spacer,
   Text
 } from '@redesignhealth/ui'
-import { CreatableSelect, Select } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 
 import { FormField } from '../../../form-field/form-field'
 import {
@@ -67,6 +67,13 @@ export const CallNotesForm = ({
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [showTaxonomyTags, setShowTaxonomyTags] = useState<boolean>(false)
   const [companyName, setCompanyName] = useState<string>()
+  const noteTypeOptions = transformOptionsFormat(NOTE_TYPES) ?? []
+  const interviewSourceOptions = transformOptionsFormat(INTERVIEW_SOURCES) ?? []
+  const companyOptions =
+    sortOptionsAlphabetically(groupOptions as CompanySummary[]) ?? []
+  const stakeholderOptions = transformOptionsFormat(STAKEHOLDERS) ?? []
+  const additionalTagSelectOptions =
+    transformOptionsFormat(additionalTagOptions as string[]) ?? []
 
   const handleGroupChange = (event: CompanySummary) => {
     const company = groupOptions?.filter(co => co.id === event.id)
@@ -109,16 +116,18 @@ export const CallNotesForm = ({
               field: { onChange, name, ref, onBlur, value },
               fieldState: { error }
             }) => (
-              <Select
+              <Combobox.Single
                 ref={ref}
                 name={name}
-                onChange={type => {
-                  onChange(type?.value as string)
-                }}
+                onChange={type => onChange(type?.value ?? '')}
                 placeholder="Select one"
-                options={transformOptionsFormat(NOTE_TYPES)}
+                source={{ kind: 'local', items: noteTypeOptions }}
+                value={
+                  noteTypeOptions.find(option => option.value === value) ?? null
+                }
                 onBlur={onBlur}
                 invalid={!!error}
+                clearable={false}
               />
             )}
           />
@@ -133,19 +142,23 @@ export const CallNotesForm = ({
             name="sourceOfInterview"
             control={form.control}
             render={({
-              field: { onChange, name, ref, onBlur },
+              field: { onChange, name, ref, onBlur, value },
               fieldState: { error }
             }) => (
-              <Select
+              <Combobox.Single
                 ref={ref}
                 name={name}
-                onChange={source => {
-                  onChange(source?.value as string)
-                }}
+                onChange={source => onChange(source?.value ?? '')}
                 placeholder="Select one"
-                options={transformOptionsFormat(INTERVIEW_SOURCES)}
+                source={{ kind: 'local', items: interviewSourceOptions }}
+                value={
+                  interviewSourceOptions.find(
+                    option => option.value === value
+                  ) ?? null
+                }
                 onBlur={onBlur}
                 invalid={!!error}
+                clearable={false}
               />
             )}
           />
@@ -156,24 +169,26 @@ export const CallNotesForm = ({
             name="companyIds"
             control={form.control}
             render={({
-              field: { onChange, name, ref, onBlur },
+              field: { onChange, name, ref, onBlur, value },
               fieldState: { error }
             }) => (
-              <Select
+              <Combobox.Single
                 ref={ref}
                 name={name}
                 onChange={entity => {
-                  handleGroupChange(entity as CompanySummary)
-                  onChange(entity?.id as string)
+                  if (entity) handleGroupChange(entity)
+                  onChange(entity?.id ?? '')
                 }}
                 placeholder="Select one"
-                options={sortOptionsAlphabetically(
-                  groupOptions as CompanySummary[]
-                )}
+                source={{ kind: 'local', items: companyOptions }}
+                value={
+                  companyOptions.find(option => option.id === value) ?? null
+                }
                 getOptionLabel={(option: CompanySummary) => `${option.name}`}
                 getOptionValue={(option: CompanySummary) => `${option.id}`}
                 onBlur={onBlur}
                 invalid={!!error}
+                clearable={false}
               />
             )}
           />
@@ -227,17 +242,21 @@ export const CallNotesForm = ({
           <Controller
             name="stakeholders"
             control={form.control}
-            render={({ field: { onChange, name, ref } }) => (
-              <Select
-                isMulti
+            render={({ field: { onChange, name, ref, onBlur, value } }) => (
+              <Combobox.Multiple
                 ref={ref}
                 name={name}
                 onChange={stakeholders => {
-                  onChange(stakeholders?.map(({ value }) => value))
+                  onChange(stakeholders.map(({ value }) => value))
                 }}
-                options={transformOptionsFormat(STAKEHOLDERS)}
-                closeMenuOnSelect={false}
+                source={{ kind: 'local', items: stakeholderOptions }}
+                value={stakeholderOptions.filter(option =>
+                  value?.includes(option.value)
+                )}
+                closeOnSelect={false}
                 placeholder="Select all that apply"
+                onBlur={onBlur}
+                clearable={false}
               />
             )}
           />
@@ -251,16 +270,25 @@ export const CallNotesForm = ({
           <Controller
             name="additionalTags"
             control={form.control}
-            render={({ field: { onChange, name, ref } }) => (
-              <CreatableSelect
-                isMulti
+            render={({ field: { onChange, name, ref, onBlur, value } }) => (
+              <Combobox.Multiple
                 ref={ref}
                 name={name}
-                onChange={tags => onChange(tags?.map(({ value }) => value))}
+                onChange={tags => onChange(tags.map(({ value }) => value))}
                 placeholder="Select all that apply"
-                options={transformOptionsFormat(
-                  additionalTagOptions as string[]
+                source={{ kind: 'local', items: additionalTagSelectOptions }}
+                value={(value ?? []).map(
+                  tag =>
+                    additionalTagSelectOptions.find(
+                      option => option.value === tag
+                    ) ?? { label: tag, value: tag }
                 )}
+                creatable={{
+                  createOption: input => ({ label: input, value: input })
+                }}
+                closeOnSelect
+                onBlur={onBlur}
+                clearable={false}
               />
             )}
           />

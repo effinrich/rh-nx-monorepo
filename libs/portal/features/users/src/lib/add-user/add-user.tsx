@@ -19,7 +19,7 @@ import {
   Radio,
   RadioGroupRoot
 } from '@redesignhealth/ui'
-import { Select as MultiSelect } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 import * as yup from 'yup'
 
 import { USER_TYPE_OPTIONS } from '../constants'
@@ -199,17 +199,24 @@ export const AddUser = () => {
                 <Controller
                   name="memberOf"
                   control={control}
-                  render={({ field: { onChange, name, ref } }) => (
-                    <MultiSelect
+                  defaultValue={[]}
+                  render={({
+                    field: { onBlur, onChange, name, ref, value }
+                  }) => (
+                    <Combobox.Multiple
                       ref={ref}
-                      isMulti
-                      options={options}
+                      source={{ kind: 'local', items: options ?? [] }}
+                      value={(options ?? []).filter(option =>
+                        (value ?? []).includes(option.value)
+                      )}
                       name={name}
+                      onBlur={onBlur}
                       onChange={companies => {
                         onChange(companies.map(opCo => opCo.value))
                       }}
-                      closeMenuOnSelect={false}
-                      blurInputOnSelect={false}
+                      closeOnSelect={false}
+                      disabled={isPending}
+                      invalid={Boolean(errors.memberOf)}
                       colorPalette="primary"
                     />
                   )}

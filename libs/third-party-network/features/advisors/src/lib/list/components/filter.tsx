@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { FieldLabel, FieldRoot } from '@redesignhealth/ui'
-import { Select } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 
 import { useAllAdvisorsQuery } from '../hooks'
 import { FilterName } from '../types'
@@ -34,15 +34,17 @@ export const Filter = memo(
         >
           {label}
         </FieldLabel>
-        <Select
+        <Combobox.Multiple
           placeholder=""
           colorPalette={badgeColor}
-          isMulti
           loading={isPending}
-          options={[...options].map(option => ({
-            value: option,
-            label: option
-          }))}
+          source={{
+            kind: 'local',
+            items: [...options].map(option => ({
+              value: option,
+              label: option
+            }))
+          }}
           onChange={options => {
             const newValues = options.map(option => option.value)
             onChange(name, newValues)

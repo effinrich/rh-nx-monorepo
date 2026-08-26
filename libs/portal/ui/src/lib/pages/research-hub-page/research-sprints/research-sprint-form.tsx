@@ -18,7 +18,7 @@ import {
   Text,
   Textarea
 } from '@redesignhealth/ui'
-import { Select } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 
 import { FormField } from '../../../form-field/form-field'
 import {
@@ -59,6 +59,16 @@ export const ResearchSprintForm = ({
   const [count, setCount] = useState<number>(0)
   const [showAddtlFields, setShowAddtlFields] = useState<boolean>(false)
   const [chosenMethod, setChosenMethod] = useState<string | undefined>()
+  const roleOptions = transformOptionsFormat(teamRoleOptions) ?? []
+  const companyOptions =
+    sortOptionsAlphabetically(groupOptions as CompanySummary[]) ?? []
+  const serviceOptions = transformOptionsFormat(researchServiceOptions) ?? []
+  const researchSegmentOptions = transformOptionsFormat(segmentOptions) ?? []
+  const researchMethodOptions = transformOptionsFormat(methodOptions) ?? []
+  const patientSegmentOptions =
+    transformOptionsFormat(additionalPatientSegmentOptions) ?? []
+  const specializedResearchMethodOptions =
+    transformOptionsFormat(specializedMethodOptions) ?? []
 
   useEffect(() => {
     if (methodOptions.includes(chosenMethod as string)) setShowAddtlFields(true)
@@ -90,11 +100,10 @@ export const ResearchSprintForm = ({
               name="authors"
               control={form.control}
               render={({
-                field: { onChange, name, ref },
+                field: { onChange, name, ref, onBlur, value },
                 fieldState: { error }
               }) => (
-                <Select
-                  isMulti
+                <Combobox.Multiple
                   ref={ref}
                   name={name}
                   onChange={users => {
@@ -106,17 +115,19 @@ export const ResearchSprintForm = ({
                     } else {
                       form.clearErrors('authors')
                     }
+                    onChange(users)
                   }}
-                  options={authorOptions}
-                  closeMenuOnSelect={false}
+                  source={{ kind: 'local', items: authorOptions ?? [] }}
+                  closeOnSelect={false}
                   placeholder="Select all that apply"
-                  defaultValue={defaultAuthor}
+                  value={value ?? defaultAuthor}
                   getOptionLabel={(option: PersonSummary) =>
                     `${option.givenName} ${option.familyName}`
                   }
                   getOptionValue={(option: PersonSummary) => `${option.email}`}
                   invalid={!!error}
-                  isClearable={false}
+                  clearable={false}
+                  onBlur={onBlur}
                 />
               )}
             />

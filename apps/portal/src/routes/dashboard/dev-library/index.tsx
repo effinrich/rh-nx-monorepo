@@ -20,7 +20,7 @@ import {
   ListRoot,
   VStack
 } from '@redesignhealth/ui'
-import { AsyncSelect, OptionBase } from 'chakra-react-select'
+import { AsyncLoadContext, Combobox } from 'forgekit-chakra-react-select'
 
 import { Results } from '../library/results/results'
 
@@ -34,9 +34,7 @@ export interface Doc {
   description: string
 }
 
-interface Option extends OptionBase {
-  label: string
-  value: string
+interface Option {
   title: string
   id: string
   parentId: string
@@ -130,16 +128,21 @@ export const DevLibrary = ({ libraryId, libraryRoute }: LibraryProps) => {
       })
   }, [selectedDevCategory.id, selectedDevCategory.title])
 
-  const handleAsyncSearch = async (query: string) => {
+  const handleAsyncSearch = async (
+    query: string,
+    { signal }: AsyncLoadContext
+  ): Promise<readonly Option[]> => {
     const { data } = await axiosApi.get(
-      `/library/${libraryId}/content?q=${query}&filter=type%2CTEMPLATE%7C%7CARTICLE%7C%7CVIDEO%7C%7CTOOL`
+      `/library/${libraryId}/content?q=${query}&filter=type%2CTEMPLATE%7C%7CARTICLE%7C%7CVIDEO%7C%7CTOOL`,
+      { signal }
     )
 
     return data.content
   }
 
   const onChange = (option: Option | null) => {
-    navigate(`/${libraryRoute}/${option?.parentId}/module/${option?.id}`)
+    if (!option) return
+    navigate(`/${libraryRoute}/${option.parentId}/module/${option.id}`)
   }
 
   return (
@@ -156,19 +159,20 @@ export const DevLibrary = ({ libraryId, libraryRoute }: LibraryProps) => {
         <ListRoot as="ul" gap={2} listStyleType="none" m={0} pt={3}>
           <ListItem>
             <FieldRoot pb={6}>
-              <AsyncSelect
-                cacheOptions
-                isMulti={false}
+              <Combobox.Single<Option>
+                source={{
+                  kind: 'async',
+                  load: handleAsyncSearch,
+                  cache: true
+                }}
                 name="search"
                 colorPalette="primary"
-                closeMenuOnSelect={true}
+                closeOnSelect
                 size="md"
                 placeholder="Search"
-                loadOptions={handleAsyncSearch}
                 onChange={onChange}
-                blurInputOnSelect={true}
-                getOptionLabel={(option: Option) => `${option.title}`}
-                getOptionValue={(option: Option) => `${option.id}`}
+                getOptionLabel={option => option.title}
+                getOptionValue={option => option.id}
               />
             </FieldRoot>
           </ListItem>

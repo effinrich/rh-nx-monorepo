@@ -1,49 +1,111 @@
-import { AsyncSelect, GroupBase, Props, Select } from 'chakra-react-select'
+import {
+  AsyncLoadContext,
+  Combobox,
+  ComboboxSource,
+  MultipleComboboxProps,
+  SingleComboboxProps
+} from 'forgekit-chakra-react-select'
 
-export interface AutoCompleteProps {
-  isAsync: boolean
+type AutoCompleteSourceProps<Option> = {
+  isAsync?: boolean
+  options?: readonly Option[]
 }
 
-export function AutoComplete<
-  Option,
-  IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
->(props: Props<Option, IsMulti, Group>, { isAsync = true }: AutoCompleteProps) {
-  const { options } = props
+export type SingleAutoCompleteProps<Option> = Omit<
+  SingleComboboxProps<Option>,
+  'source'
+> &
+  AutoCompleteSourceProps<Option> & {
+    isMulti?: false
+  }
 
-  const formattedOptions = options?.map(t => ({
-    value: t,
-    label: t
-  }))
+export type MultipleAutoCompleteProps<Option> = Omit<
+  MultipleComboboxProps<Option>,
+  'source'
+> &
+  AutoCompleteSourceProps<Option> & {
+    isMulti: true
+  }
 
-  const filterColors = (inputValue: string) => {
-    return formattedOptions?.filter((i: any) =>
-      i['label'].toLowerCase().includes(inputValue.toLowerCase())
+export type AutoCompleteProps<Option> =
+  | SingleAutoCompleteProps<Option>
+  | MultipleAutoCompleteProps<Option>
+
+function defaultOptionLabel<Option>(option: Option) {
+  if (typeof option === 'string' || typeof option === 'number') {
+    return String(option)
+  }
+
+  if (option && typeof option === 'object' && 'label' in option) {
+    return String((option as { label: unknown }).label)
+  }
+
+  return String(option)
+}
+
+export function AutoComplete<Option>(props: AutoCompleteProps<Option>) {
+  const { options = [], isAsync = true } = props
+  const getOptionLabel = props.getOptionLabel ?? defaultOptionLabel<Option>
+
+  const source: ComboboxSource<Option> = isAsync
+    ? {
+        kind: 'async',
+        initialItems: options,
+        debounceMs: 0,
+        load: (query: string, { signal }: AsyncLoadContext) =>
+          new Promise<readonly Option[]>(resolve => {
+            const timeout = setTimeout(() => {
+              const normalizedQuery = query.toLocaleLowerCase()
+              resolve(
+                options.filter(option =>
+                  getOptionLabel(option)
+                    .toLocaleLowerCase()
+                    .includes(normalizedQuery)
+                )
+              )
+            }, 1000)
+
+            signal.addEventListener(
+              'abort',
+              () => {
+                clearTimeout(timeout)
+                resolve([])
+              },
+              { once: true }
+            )
+          })
+      }
+    : { kind: 'local', items: options }
+
+  if (props.isMulti) {
+    const {
+      isAsync: _isAsync,
+      isMulti: _isMulti,
+      options: _options,
+      ...comboboxProps
+    } = props
+
+    return (
+      <Combobox.Multiple
+        {...comboboxProps}
+        colorPalette={props.colorPalette ?? 'primary'}
+        source={source}
+      />
     )
   }
 
-  const loadOptions = (
-    inputValue: string,
-    callback: (options: any) => void
-  ) => {
-    setTimeout(() => {
-      callback(filterColors(inputValue))
-    }, 1000)
-  }
+  const {
+    isAsync: _isAsync,
+    isMulti: _isMulti,
+    options: _options,
+    ...comboboxProps
+  } = props
 
-  return isAsync ? (
-    <AsyncSelect
-      tagColorPalette="primary"
-      cacheOptions
-      loadOptions={loadOptions}
-      defaultOptions
-      {...props}
-    />
-  ) : (
-    <Select
-      tagColorPalette="primary"
-      // options={options?.map((t: any) => ({ value: t, label: t }))}
-      {...props}
+  return (
+    <Combobox.Single
+      {...comboboxProps}
+      colorPalette={props.colorPalette ?? 'primary'}
+      source={source}
     />
   )
 }

@@ -10,10 +10,7 @@ import {
   useGetVendorsNames,
   useGetVendorTags
 } from '@redesignhealth/portal/data-assets'
-import {
-  FORM_ERROR_MESSAGES,
-  selectTransformer
-} from '@redesignhealth/portal/utils'
+import { FORM_ERROR_MESSAGES } from '@redesignhealth/portal/utils'
 import {
   Box,
   FieldErrorText,
@@ -27,7 +24,7 @@ import {
   Stack,
   Text
 } from '@redesignhealth/ui'
-import { CreatableSelect, Select } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 import * as yup from 'yup'
 
 import FormFieldMaster from '../../../form-field-master/form-field-master'
@@ -123,6 +120,8 @@ export const CompanyVendorForm = ({
     return <Loader />
   }
 
+  const subcategoryOptions = categoriesData.subcategoriesForMutation
+
   return (
     <FormProvider {...methods}>
       <FormMaster
@@ -139,16 +138,18 @@ export const CompanyVendorForm = ({
             control={control}
             render={({ field: { name, onChange, value, onBlur, ref } }) => (
               <FormFieldMaster name={name} label="Name">
-                <CreatableSelect
+                <Combobox.Single
                   ref={ref}
                   name={name}
                   onBlur={onBlur}
-                  value={selectTransformer.input(vendorsNames, value)}
-                  getNewOptionData={name => ({ label: name, value: name })}
-                  options={vendorsNames}
-                  onChange={newValue => {
-                    onChange(selectTransformer.output(newValue))
+                  value={
+                    vendorsNames.find(option => option.value === value) ?? null
+                  }
+                  source={{ kind: 'local', items: vendorsNames }}
+                  creatable={{
+                    createOption: input => ({ label: input, value: input })
                   }}
+                  onChange={option => onChange(option?.value ?? '')}
                   disabled={isEdit}
                 />
               </FormFieldMaster>
@@ -180,34 +181,35 @@ export const CompanyVendorForm = ({
                   }) => {
                     //console.log(`value is ${JSON.stringify(value)}`)
                     return (
-                      <Select
+                      <Combobox.Multiple
                         ref={ref}
-                        onChange={multiValue => {
+                        onChange={options => {
                           //console.log(
-                          //  `multiValue is ${JSON.stringify(multiValue)}`
+                          //  `multiValue is ${JSON.stringify(options)}`
                           //)
                           controllerOnChange(
-                            multiValue.map(selected => selected.value)
+                            options.map(option => option.value)
                           )
                         }}
-                        options={categoriesData?.subcategoriesForMutation}
-                        isMulti
-                        onBlur={onBlur}
-                        getOptionLabel={option => option.displayName}
-                        placeholder="Select all that apply..."
-                        value={value.map(subcategory => {
+                        source={{ kind: 'local', items: subcategoryOptions }}
+                        value={value.flatMap(subcategory => {
                           //console.log(
                           //  `in a value map operation: ${JSON.stringify(
                           //    subcategory
                           //  )}`
                           //)
-                          const option = {
-                            displayName: subcategory.name,
-                            value: subcategory
-                          }
+                          const option = subcategoryOptions.find(
+                            option => option.value.apiId === subcategory.apiId
+                          )
                           //console.log(`returning ${JSON.stringify(option)}`)
-                          return option
+                          return option ? [option] : []
                         })}
+                        onBlur={onBlur}
+                        getOptionLabel={option => option.displayName}
+                        getOptionValue={option => option.value.apiId}
+                        name={name}
+                        placeholder="Select all that apply..."
+                        disabled={isPending}
                       />
                     )
                   }}
@@ -225,15 +227,16 @@ export const CompanyVendorForm = ({
             control={control}
             render={({ field: { onChange, name, ref, value, onBlur } }) => (
               <FormFieldMaster name={name} label="Engagement status">
-                <Select
+                <Combobox.Single
                   ref={ref}
-                  value={selectTransformer.input(engagementStatuses, value)}
-                  options={engagementStatuses}
-                  onChange={newValue =>
-                    onChange(selectTransformer.output(newValue))
+                  value={
+                    engagementStatuses.find(option => option.value === value) ??
+                    null
                   }
-                  getOptionLabel={o => o.displayName}
-                  getOptionValue={o => o.value}
+                  source={{ kind: 'local', items: engagementStatuses }}
+                  onChange={option => onChange(option?.value ?? '')}
+                  getOptionLabel={option => option.displayName}
+                  getOptionValue={option => option.value}
                   name={name}
                   placeholder="Select engagement status"
                   colorPalette="primary"
