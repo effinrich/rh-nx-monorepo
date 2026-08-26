@@ -258,7 +258,7 @@
     "prettier": "~3.6.2",
     "prop-types": "15.8.1",
     "react-test-renderer": "18.3.1",
-    "storybook": "^10.4.1",
+    "storybook": "10.4.1",
     "storybook-addon-remix-react-router": "^7.0.0",
     "style-loader": "3.3.0",
     "ts-jest": "29.4.5",

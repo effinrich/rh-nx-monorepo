@@ -1,5 +1,5 @@
-import { Combobox } from '@chakra-ui/react'
 import type { ComponentProps, ComponentType, PropsWithChildren } from 'react'
+import { Combobox } from '@chakra-ui/react'
 
 type WithChildren<Component extends ComponentType> = ComponentType<
   PropsWithChildren<ComponentProps<Component>>

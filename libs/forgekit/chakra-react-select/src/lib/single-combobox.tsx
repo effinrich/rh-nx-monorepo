@@ -1,20 +1,19 @@
 import {
+  type ForwardedRef,
+  type ReactElement,
+  type RefAttributes,
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  useState} from 'react'
+import {
   Box,
   Button,
   Combobox as ChakraComboboxOriginal,
   Portal,
   Spinner
 } from '@chakra-ui/react'
-import {
-  forwardRef,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type ForwardedRef,
-  type ReactElement,
-  type RefAttributes
-} from 'react'
 
 import {
   ComboboxContent,

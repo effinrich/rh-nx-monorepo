@@ -58,7 +58,7 @@ describe('Combobox', () => {
   })
 
   it('loads async options with an AbortSignal', async () => {
-    const user = userEvent.setup()
+    const user = userEvent.setup({ delay: 10 })
     const loadedOption = { id: 'remote', name: 'Remote result' }
     const load = jest.fn(
       async (_query: string, context: { signal: AbortSignal }) => {

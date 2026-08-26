@@ -1,9 +1,15 @@
 import '@testing-library/jest-dom'
 
 class ResizeObserverMock implements ResizeObserver {
-  disconnect() {}
-  observe() {}
-  unobserve() {}
+  disconnect() {
+    return undefined
+  }
+  observe() {
+    return undefined
+  }
+  unobserve() {
+    return undefined
+  }
 }
 
 Object.defineProperty(globalThis, 'ResizeObserver', {

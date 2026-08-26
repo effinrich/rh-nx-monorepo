@@ -1,5 +1,5 @@
-import type { ComboboxRootProps } from '@chakra-ui/react'
 import type { ReactNode } from 'react'
+import type { ComboboxRootProps } from '@chakra-ui/react'
 
 export interface DefaultOption {
   label: string
