@@ -25,22 +25,21 @@ export const waitForLoadingToFinish = () => {
 }
 
 /**
- * Helper to change react-select option
- * More info: https://stackoverflow.com/a/56183912
- *
+ * Opens a Chakra Combobox and selects an option by its accessible name.
  */
-export const selectReactSelectOption = async (
-  select: HTMLElement,
+export const selectComboboxOption = async (
+  combobox: HTMLElement,
   optionName: string
 ) => {
-  const ARROW_DOWN = 40
-  fireEvent.focus(select)
-  fireEvent.keyDown(select, {
-    keyCode: ARROW_DOWN
+  fireEvent.focus(combobox)
+  fireEvent.click(combobox)
+  fireEvent.keyDown(combobox, {
+    code: 'ArrowDown',
+    key: 'ArrowDown'
   })
-  const option = await screen.findByText(optionName)
+  const option = await screen.findByRole('option', { name: optionName })
   fireEvent.click(option)
-  fireEvent.blur(select)
+  fireEvent.blur(combobox)
 }
 
 /**

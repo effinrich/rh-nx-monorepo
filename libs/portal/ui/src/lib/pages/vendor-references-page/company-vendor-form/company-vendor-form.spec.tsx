@@ -9,7 +9,7 @@ import {
   mocks,
   render,
   screen,
-  selectReactSelectOption,
+  selectComboboxOption,
   waitFor,
   waitForLoadingToFinish
 } from '@redesignhealth/shared-utils-jest'
@@ -91,9 +91,9 @@ describe('CompanyVendorForm', () => {
     )
     await waitForLoadingToFinish()
 
-    await selectReactSelectOption(screen.getByLabelText('Name'), 'Apple')
-    await selectReactSelectOption(screen.getByLabelText('Tags'), 'Admin Tools')
-    await selectReactSelectOption(
+    await selectComboboxOption(screen.getByLabelText('Name'), 'Apple')
+    await selectComboboxOption(screen.getByLabelText('Tags'), 'Admin Tools')
+    await selectComboboxOption(
       screen.getByLabelText('Engagement status'),
       'Active'
     )

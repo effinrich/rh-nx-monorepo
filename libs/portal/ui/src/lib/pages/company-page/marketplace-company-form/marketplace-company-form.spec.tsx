@@ -5,7 +5,7 @@ import {
   mocks,
   render,
   screen,
-  selectReactSelectOption,
+  selectComboboxOption,
   waitFor
 } from '@redesignhealth/shared-utils-jest'
 
@@ -93,11 +93,11 @@ describe('MarketplaceCompanyForm', () => {
       screen.getByLabelText('Company URL (optional)'),
       'https://example.com'
     )
-    await selectReactSelectOption(
+    await selectComboboxOption(
       screen.getByLabelText('Organization type'),
       'DN/Health System'
     )
-    await selectReactSelectOption(screen.getByLabelText('Region'), 'Northeast')
+    await selectComboboxOption(screen.getByLabelText('Region'), 'Northeast')
 
     await waitFor(() =>
       expect(screen.queryByText('Save changes')).not.toBeDisabled()

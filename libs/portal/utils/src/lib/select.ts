@@ -1,9 +1,8 @@
 type OptionBase = { value: string }
 
 /**
- * Allow us to translate between chakra-react-select's
- * requirement of "options" containing a label/value,
- * while allowing our form to only care about "value."
+ * Allow forms to keep primitive values while Combobox options retain
+ * their complete label/value objects at the component boundary.
  *
  * This allows us to translate between our Summary <-> Command
  * API objects, where our Form state represents a Command.
