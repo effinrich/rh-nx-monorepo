@@ -1,3 +1,4 @@
+export type { AvatarGroupProps, AvatarRootProps } from '@chakra-ui/react'
 export {
   AvatarFallback,
   AvatarGroup,
@@ -6,5 +7,3 @@ export {
   AvatarIndicator,
   AvatarRoot
 } from '@chakra-ui/react'
-
-export type { AvatarGroupProps, AvatarRootProps } from '@chakra-ui/react'

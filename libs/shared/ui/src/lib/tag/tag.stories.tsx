@@ -10,12 +10,11 @@ import {
 } from '../../index'
 
 import {
-  TagRoot,
   TagCloseTrigger,
+  TagEndElement,
   TagLabel,
-  TagStartElement,
-  TagEndElement
-} from './tag'
+  TagRoot,
+  TagStartElement} from './tag'
 
 export default {
   component: TagRoot,

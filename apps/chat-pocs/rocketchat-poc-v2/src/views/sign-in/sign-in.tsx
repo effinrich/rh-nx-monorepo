@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Button, Flex, Image, Stack, Text } from '@redesignhealth/ui'
 import { ErrorCode, useGoogleLogin } from '@react-oauth/google'
+import { Button, Flex, Image, Stack, Text } from '@redesignhealth/ui'
 
 import BackgroundImage from '../../assets/background.jpeg'
 import RedesignHealthPrism from '../../assets/redesign-health-prism.svg'

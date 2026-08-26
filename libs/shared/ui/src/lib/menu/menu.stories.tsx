@@ -13,15 +13,14 @@ import {
 import { Image } from '../image/image'
 
 import {
-  MenuRoot,
-  MenuTrigger,
-  MenuSeparator,
+  MenuContent,
+  MenuItem,
   MenuItemGroup,
   MenuItemGroupLabel,
-  MenuItem,
-  MenuContent,
-  MenuPositioner
-} from './menu'
+  MenuPositioner,
+  MenuRoot,
+  MenuSeparator,
+  MenuTrigger} from './menu'
 
 const Story: Meta<typeof MenuRoot> = {
   component: MenuRoot,

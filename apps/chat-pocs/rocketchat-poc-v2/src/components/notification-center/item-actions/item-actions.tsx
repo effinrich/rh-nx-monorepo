@@ -3,8 +3,8 @@ import type {
   NotificationCenterItem,
   UseNotificationCenter
 } from 'react-toastify/addons/use-notification-center'
-import { Button } from '@redesignhealth/ui'
 import styled from '@emotion/styled'
+import { Button } from '@redesignhealth/ui'
 
 import { PulsatingDot } from './pulsing-dot'
 

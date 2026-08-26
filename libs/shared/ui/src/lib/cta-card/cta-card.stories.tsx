@@ -9,12 +9,11 @@ import {
   Button,
   CheckCircleIcon,
   Icon,
-  MenuRoot,
-  MenuTrigger,
-  MenuItem,
   MenuContent,
-  MenuPositioner
-} from '../../index'
+  MenuItem,
+  MenuPositioner,
+  MenuRoot,
+  MenuTrigger} from '../../index'
 
 import { CtaCard } from './cta-card'
 

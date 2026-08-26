@@ -1,8 +1,8 @@
 import { ReactNode, useState } from 'react'
 import { Icons, toast } from 'react-toastify'
 import { useNotificationCenter } from 'react-toastify/addons/use-notification-center'
-import { Box, Text } from '@redesignhealth/ui'
 import styled from '@emotion/styled'
+import { Box, Text } from '@redesignhealth/ui'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { ItemActions } from './item-actions/item-actions'

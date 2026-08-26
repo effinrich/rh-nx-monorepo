@@ -1,9 +1,9 @@
 import { render, testA11y } from '@redesignhealth/shared-utils-jest'
 
 import {
-  AvatarIndicator,
   AvatarFallback,
   AvatarImage,
+  AvatarIndicator,
   AvatarRoot
 } from './avatar'
 
