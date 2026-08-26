@@ -3,11 +3,11 @@ import { MdMoreHoriz } from 'react-icons/md'
 import { Link as RouterLink } from 'react-router-dom'
 import { useCurrentUserQuery } from '@redesignhealth/third-party-network/features/authentication'
 import {
-  AvatarRoot,
   AvatarFallback,
-  CardRoot,
+  AvatarRoot,
   CardBody,
   CardHeader,
+  CardRoot,
   Flex,
   Grid,
   IconButton,
@@ -18,8 +18,8 @@ import {
   MenuPositioner,
   MenuRoot,
   MenuTrigger,
-  TagRoot,
   TagLabel,
+  TagRoot,
   Text,
   useDisclosure
 } from '@redesignhealth/ui'
@@ -117,6 +117,7 @@ export const AdvisorCard = memo(
                   <a
                     href={`https://5inxi4pt259.typeform.com/to/dIAXUaDn#${contractRequestParams}`}
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Request contract
                   </a>
