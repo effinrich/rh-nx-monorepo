@@ -20,7 +20,7 @@ import {
   Stack,
   Textarea
 } from '@redesignhealth/ui'
-import { Select } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 
 import CeoSummaryCard from './partials/ceo-summary'
 import FormDivider from './partials/form-divider'
@@ -66,7 +66,10 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
           <Controller
             name="email"
             control={control}
-            render={({ field: { onChange, name, value, onBlur } }) => (
+            render={({
+              field: { onChange, name, value, onBlur, ref },
+              fieldState: { invalid }
+            }) => (
               <FormFieldContainer
                 name={name}
                 label="Select a user"
@@ -74,10 +77,17 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
                 clientErrors={clientErrors}
               >
                 <UserSelect
+                  ref={ref}
                   onChange={onChange}
                   name={name}
-                  value={value}
+                  value={value ?? null}
                   onBlur={onBlur}
+                  invalid={
+                    invalid ||
+                    Boolean(
+                      serverFieldErrors?.some(error => error.name === name)
+                    )
+                  }
                 />
               </FormFieldContainer>
             )}
@@ -128,20 +138,28 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
         <Controller
           name="location"
           control={control}
-          render={({ field: { onChange, name, ref, value, onBlur } }) => (
+          render={({
+            field: { onChange, name, ref, value, onBlur },
+            fieldState: { invalid }
+          }) => (
             <FormFieldContainer
               label="Nearest metropolitan area"
               name={name}
               serverErrors={serverFieldErrors}
               clientErrors={clientErrors}
             >
-              <Select
+              <Combobox.Single<Option>
                 ref={ref}
-                onChange={event => onChange(event as Option)}
+                onChange={onChange}
                 name={name}
-                value={value}
-                options={locations}
+                value={value ?? null}
+                source={{ kind: 'local', items: locations }}
                 onBlur={onBlur}
+                invalid={
+                  invalid ||
+                  Boolean(serverFieldErrors?.some(error => error.name === name))
+                }
+                clearable={false}
                 placeholder="Select one"
               />
             </FormFieldContainer>
@@ -308,19 +326,28 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
         <Controller
           name="healthcareSector"
           control={control}
-          render={({ field: { onChange, name, ref, value, onBlur } }) => (
+          render={({
+            field: { onChange, name, ref, value, onBlur },
+            fieldState: { invalid }
+          }) => (
             <FormFieldContainer
               label="Healthcare sector"
               name={name}
               serverErrors={serverFieldErrors}
               clientErrors={clientErrors}
             >
-              <Select
-                value={value}
+              <Combobox.Single<Option>
+                value={value ?? null}
                 ref={ref}
-                onChange={newValue => onChange(newValue as Option)}
-                options={healthcareSector}
+                name={name}
+                onChange={onChange}
+                source={{ kind: 'local', items: healthcareSector }}
                 onBlur={onBlur}
+                invalid={
+                  invalid ||
+                  Boolean(serverFieldErrors?.some(error => error.name === name))
+                }
+                clearable={false}
                 placeholder="Select one"
               />
             </FormFieldContainer>
@@ -329,26 +356,33 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
         <Controller
           name="businessFocusArea"
           control={control}
-          render={({ field: { onChange, name, ref, value, onBlur } }) => (
+          render={({
+            field: { onChange, name, ref, value, onBlur },
+            fieldState: { invalid }
+          }) => (
             <FormFieldContainer
               label="Business focus area"
               name={name}
               serverErrors={serverFieldErrors}
               clientErrors={clientErrors}
             >
-              <Select
-                value={value}
+              <Combobox.Multiple<ReactSelectOption>
+                value={value ?? []}
                 ref={ref}
-                onChange={newValue => onChange(newValue as ReactSelectOption[])}
-                options={businessFocusArea}
-                isMulti
+                name={name}
+                onChange={onChange}
+                source={{ kind: 'local', items: businessFocusArea }}
                 onBlur={onBlur}
-                getOptionLabel={(option: ReactSelectOption) =>
-                  `${option.displayName}`
+                getOptionLabel={option => option.displayName ?? ''}
+                getOptionValue={option =>
+                  option.value ?? option.displayName ?? ''
                 }
-                getOptionValue={(option: ReactSelectOption) =>
-                  `${option.value}`
+                invalid={
+                  invalid ||
+                  Boolean(serverFieldErrors?.some(error => error.name === name))
                 }
+                clearable={false}
+                closeOnSelect
                 placeholder="Select all that apply..."
               />
             </FormFieldContainer>
@@ -357,20 +391,29 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
         <Controller
           name="marketServiceArea"
           control={control}
-          render={({ field: { onChange, name, ref, value, onBlur } }) => (
+          render={({
+            field: { onChange, name, ref, value, onBlur },
+            fieldState: { invalid }
+          }) => (
             <FormFieldContainer
               label="Market/Service area"
               name={name}
               serverErrors={serverFieldErrors}
               clientErrors={clientErrors}
             >
-              <Select
-                value={value}
+              <Combobox.Multiple<Option>
+                value={value ?? []}
                 ref={ref}
-                onChange={newValue => onChange(newValue as Option[])}
-                options={serviceArea}
-                isMulti
+                name={name}
+                onChange={onChange}
+                source={{ kind: 'local', items: serviceArea }}
                 onBlur={onBlur}
+                invalid={
+                  invalid ||
+                  Boolean(serverFieldErrors?.some(error => error.name === name))
+                }
+                clearable={false}
+                closeOnSelect
                 placeholder="Select all that apply..."
               />
             </FormFieldContainer>

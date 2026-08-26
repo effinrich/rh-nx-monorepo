@@ -138,14 +138,20 @@ export const ResearchSprintForm = ({
           <Controller
             name="teamRole"
             control={form.control}
-            render={({ field: { onChange, name, ref } }) => (
-              <Select
+            render={({ field: { onChange, name, ref, onBlur, value } }) => (
+              <Combobox.Single
                 ref={ref}
                 name={name}
-                options={transformOptionsFormat(teamRoleOptions)}
-                onChange={role => onChange(role?.value)}
+                source={{ kind: 'local', items: roleOptions }}
+                onChange={role => onChange(role?.value ?? '')}
                 placeholder="Select one"
-                defaultValue={{ value: 'In-house', label: 'In-house' }}
+                value={
+                  roleOptions.find(
+                    option => option.value === (value ?? 'In-house')
+                  ) ?? null
+                }
+                onBlur={onBlur}
+                clearable={false}
               />
             )}
           />
@@ -156,24 +162,26 @@ export const ResearchSprintForm = ({
             name="companyId"
             control={form.control}
             render={({
-              field: { onChange, name, ref, onBlur },
+              field: { onChange, name, ref, onBlur, value },
               fieldState: { error }
             }) => (
-              <Select
+              <Combobox.Single
                 ref={ref}
                 name={name}
                 onChange={entity => {
-                  handleGroupChange(entity as CompanySummary)
-                  onChange(entity?.id as string)
+                  if (entity) handleGroupChange(entity)
+                  onChange(entity?.id ?? '')
                 }}
                 placeholder="Select one"
-                options={sortOptionsAlphabetically(
-                  groupOptions as CompanySummary[]
-                )}
+                source={{ kind: 'local', items: companyOptions }}
+                value={
+                  companyOptions.find(option => option.id === value) ?? null
+                }
                 getOptionLabel={(option: CompanySummary) => `${option.name}`}
                 getOptionValue={(option: CompanySummary) => `${option.id}`}
                 invalid={!!error}
                 onBlur={onBlur}
+                clearable={false}
               />
             )}
           />
@@ -220,21 +228,24 @@ export const ResearchSprintForm = ({
             name="services"
             control={form.control}
             render={({
-              field: { onChange, name, ref, onBlur },
+              field: { onChange, name, ref, onBlur, value },
               fieldState: { error }
             }) => (
-              <Select
-                isMulti
+              <Combobox.Multiple
                 ref={ref}
                 name={name}
-                options={transformOptionsFormat(researchServiceOptions)}
+                source={{ kind: 'local', items: serviceOptions }}
+                value={serviceOptions.filter(option =>
+                  value?.includes(option.value)
+                )}
                 onChange={services => {
                   onChange(services.map(({ value }) => value))
                 }}
-                closeMenuOnSelect={false}
+                closeOnSelect={false}
                 placeholder="Select all that apply"
                 onBlur={onBlur}
                 invalid={!!error}
+                clearable={false}
               />
             )}
           />
@@ -245,21 +256,24 @@ export const ResearchSprintForm = ({
             name="segments"
             control={form.control}
             render={({
-              field: { onChange, name, ref, onBlur },
+              field: { onChange, name, ref, onBlur, value },
               fieldState: { error }
             }) => (
-              <Select
-                isMulti
+              <Combobox.Multiple
                 ref={ref}
                 name={name}
-                options={transformOptionsFormat(segmentOptions)}
+                source={{ kind: 'local', items: researchSegmentOptions }}
+                value={researchSegmentOptions.filter(option =>
+                  value?.includes(option.value)
+                )}
                 onChange={segments => {
                   onChange(segments.map(({ value }) => value))
                 }}
-                closeMenuOnSelect={false}
+                closeOnSelect={false}
                 placeholder="Select all that apply"
                 onBlur={onBlur}
                 invalid={!!error}
+                clearable={false}
               />
             )}
           />
@@ -270,21 +284,27 @@ export const ResearchSprintForm = ({
             name="methods"
             control={form.control}
             render={({
-              field: { onChange, name, ref, onBlur },
+              field: { onChange, name, ref, onBlur, value },
               fieldState: { error }
             }) => (
-              <Select
+              <Combobox.Single
                 ref={ref}
                 name={name}
                 onChange={method => {
-                  handleMethodChange(method?.value as string)
-                  onChange(method?.value as string)
+                  handleMethodChange(method?.value ?? '')
+                  onChange(method?.value ?? '')
                 }}
                 placeholder="Select one"
-                options={transformOptionsFormat(methodOptions)}
-                menuPlacement="top"
+                source={{ kind: 'local', items: researchMethodOptions }}
+                value={
+                  researchMethodOptions.find(
+                    option => option.value === value
+                  ) ?? null
+                }
+                positioning={{ placement: 'top' }}
                 onBlur={onBlur}
                 invalid={!!error}
+                clearable={false}
               />
             )}
           />
@@ -445,19 +465,21 @@ export const ResearchSprintForm = ({
               <Controller
                 name="additionalSegments"
                 control={form.control}
-                render={({ field: { onChange, name, ref } }) => (
-                  <Select
-                    isMulti
+                render={({ field: { onChange, name, ref, onBlur, value } }) => (
+                  <Combobox.Multiple
                     ref={ref}
                     name={name}
                     onChange={segments => {
                       onChange(segments.map(({ value }) => value))
                     }}
-                    options={transformOptionsFormat(
-                      additionalPatientSegmentOptions
+                    source={{ kind: 'local', items: patientSegmentOptions }}
+                    value={patientSegmentOptions.filter(option =>
+                      value?.includes(option.value)
                     )}
-                    closeMenuOnSelect={false}
+                    closeOnSelect={false}
                     placeholder="Select all that apply"
+                    onBlur={onBlur}
+                    clearable={false}
                   />
                 )}
               />
@@ -470,18 +492,25 @@ export const ResearchSprintForm = ({
               <Controller
                 name="specializedMethods"
                 control={form.control}
-                render={({ field: { onChange, name, ref } }) => (
-                  <Select
-                    isMulti
+                render={({ field: { onChange, name, ref, onBlur, value } }) => (
+                  <Combobox.Multiple
                     ref={ref}
                     name={name}
                     onChange={methods => {
                       onChange(methods.map(({ value }) => value))
                     }}
-                    options={transformOptionsFormat(specializedMethodOptions)}
-                    closeMenuOnSelect={false}
-                    menuPlacement="top"
+                    source={{
+                      kind: 'local',
+                      items: specializedResearchMethodOptions
+                    }}
+                    value={specializedResearchMethodOptions.filter(option =>
+                      value?.includes(option.value)
+                    )}
+                    closeOnSelect={false}
+                    positioning={{ placement: 'top' }}
                     placeholder="Select all that apply"
+                    onBlur={onBlur}
+                    clearable={false}
                   />
                 )}
               />

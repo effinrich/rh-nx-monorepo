@@ -9,7 +9,7 @@ import {
   Stack,
   Textarea
 } from '@redesignhealth/ui'
-import { Select } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 
 import Form from '../../../form/form'
 import { FormField } from '../../../form-field/form-field'
@@ -115,18 +115,26 @@ const MarketplaceCompanyForm = ({
           <Controller
             name="organizationType"
             control={methods.control}
-            render={({ field: { name, onChange, value, onBlur } }) => (
+            render={({
+              field: { name, onChange, value, onBlur, ref },
+              fieldState: { invalid }
+            }) => (
               <FormField name={name} label="Organization type">
-                <Select
+                <Combobox.Single
+                  ref={ref}
                   onBlur={onBlur}
-                  value={selectTransformer.input(organizationTypes, value)}
-                  options={organizationTypes}
-                  getOptionLabel={o => o.displayName}
-                  getOptionValue={o => o.value}
-                  name={name}
-                  onChange={newValue =>
-                    onChange(selectTransformer.output(newValue))
+                  value={
+                    selectTransformer.input(organizationTypes, value) ?? null
                   }
+                  source={{ kind: 'local', items: organizationTypes }}
+                  getOptionLabel={option => option.displayName}
+                  getOptionValue={option => option.value}
+                  name={name}
+                  onChange={option =>
+                    onChange(selectTransformer.output(option))
+                  }
+                  invalid={invalid}
+                  clearable={false}
                   placeholder="Select one"
                 />
               </FormField>
@@ -135,18 +143,24 @@ const MarketplaceCompanyForm = ({
           <Controller
             name="region"
             control={methods.control}
-            render={({ field: { name, onChange, value, onBlur } }) => (
+            render={({
+              field: { name, onChange, value, onBlur, ref },
+              fieldState: { invalid }
+            }) => (
               <FormField name={name} label="Region">
-                <Select
+                <Combobox.Single
+                  ref={ref}
                   onBlur={onBlur}
-                  value={selectTransformer.input(regions, value)}
-                  options={regions}
-                  getOptionLabel={o => o.displayName}
-                  getOptionValue={o => o.value}
+                  value={selectTransformer.input(regions, value) ?? null}
+                  source={{ kind: 'local', items: regions }}
+                  getOptionLabel={option => option.displayName}
+                  getOptionValue={option => option.value}
                   name={name}
-                  onChange={newValue =>
-                    onChange(selectTransformer.output(newValue))
+                  onChange={option =>
+                    onChange(selectTransformer.output(option))
                   }
+                  invalid={invalid}
+                  clearable={false}
                   placeholder="Select one"
                 />
               </FormField>

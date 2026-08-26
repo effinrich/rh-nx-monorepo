@@ -1,38 +1,56 @@
+import { forwardRef } from 'react'
 import { Option, useGetUsersByRole } from '@redesignhealth/portal/data-assets'
 import { printPersonName } from '@redesignhealth/portal/utils'
-import { Select } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 
-interface UserSelectProps {
-  onChange(newValue: Option): void
-  name: string
-  value?: Option
-  onBlur(): void
+interface UserOption extends Option {
+  isDisabled: boolean
 }
 
-const UserSelect = ({ onChange, name, value, onBlur }: UserSelectProps) => {
-  const { data, isPending: isLoadingOptions } = useGetUsersByRole(
-    'ROLE_OP_CO_USER',
-    true,
-    2000
-  )
+interface UserSelectProps {
+  onChange(newValue: Option | null): void
+  name: string
+  value?: Option | null
+  onBlur(): void
+  invalid?: boolean
+}
 
-  return (
-    <Select
-      onChange={newValue => onChange(newValue as Option)}
-      name={name}
-      value={value}
-      onBlur={onBlur}
-      placeholder="Select a user"
-      options={data?.map(p => ({
+const UserSelect = forwardRef<HTMLInputElement, UserSelectProps>(
+  ({ onChange, name, value, onBlur, invalid }, ref) => {
+    const { data, isPending: isLoadingOptions } = useGetUsersByRole(
+      'ROLE_OP_CO_USER',
+      true,
+      2000
+    )
+
+    const options: UserOption[] =
+      data?.map(p => ({
         value: p.email,
         label: `${printPersonName(p)} (${p.email}) ${
           p.ceoInfo.ceo ? 'already has a profile' : ''
         }`,
         isDisabled: p.ceoInfo.ceo
-      }))}
-      loading={isLoadingOptions}
-    />
-  )
-}
+      })) ?? []
+
+    return (
+      <Combobox.Single<UserOption>
+        ref={ref}
+        onChange={onChange}
+        name={name}
+        value={value ?? null}
+        onBlur={onBlur}
+        invalid={invalid}
+        clearable={false}
+        placeholder="Select a user"
+        source={{ kind: 'local', items: options }}
+        getOptionValue={option => option.value}
+        isOptionDisabled={option => option.isDisabled}
+        loading={isLoadingOptions}
+      />
+    )
+  }
+)
+
+UserSelect.displayName = 'UserSelect'
 
 export default UserSelect

@@ -26,7 +26,7 @@ import {
   Text,
   VStack
 } from '@redesignhealth/ui'
-import { Select } from 'chakra-react-select'
+import { Combobox } from 'forgekit-chakra-react-select'
 
 import { NoSearchResults } from '../../no-search-results/no-search-results'
 import Pagination from '../../pagination/pagination'
@@ -137,19 +137,30 @@ export const IPMarketplacePage = () => {
                 <Controller
                   name="sort"
                   control={methods.control}
-                  render={({ field: { onChange, value, name, ref } }) => (
-                    <Select
+                  render={({
+                    field: { onChange, value, name, ref, onBlur },
+                    fieldState: { invalid }
+                  }) => (
+                    <Combobox.Single
                       name={name}
                       ref={ref}
                       size="sm"
-                      onChange={newValue =>
-                        onChange(selectTransformer.output(newValue))
+                      onBlur={onBlur}
+                      onChange={option =>
+                        onChange(selectTransformer.output(option))
                       }
-                      value={selectTransformer.input(
-                        IP_MARKETPLACE_SORT_OPTIONS,
-                        value
-                      )}
-                      options={IP_MARKETPLACE_SORT_OPTIONS}
+                      value={
+                        selectTransformer.input(
+                          IP_MARKETPLACE_SORT_OPTIONS,
+                          value
+                        ) ?? null
+                      }
+                      source={{
+                        kind: 'local',
+                        items: IP_MARKETPLACE_SORT_OPTIONS
+                      }}
+                      invalid={invalid}
+                      clearable={false}
                     />
                   )}
                 />
