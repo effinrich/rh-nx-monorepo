@@ -21,11 +21,34 @@
         }
       }
     },
+    "check-types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm exec -- tsc --noEmit -p libs/forgekit/chakra-react-select/tsconfig.lib.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/forgekit/chakra-react-select/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": ["{workspaceRoot}/coverage/libs/forgekit/chakra-react-select"],
       "options": {
-        "jestConfig": "libs/forgekit/chakra-react-select/jest.config.cts"
+        "jestConfig": "libs/forgekit/chakra-react-select/jest.config.cts",
+        "passWithNoTests": true
+      },
+      "defaultConfiguration": "ci",
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "runInBand": true,
+          "codeCoverage": true
+        }
       }
     },
     "nx-release-publish": {

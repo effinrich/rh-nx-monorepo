@@ -1,12 +1,39 @@
 {
   "name": "forgekit-chakra-react-select",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "Typed single, multiple, async, and creatable selects built on Chakra UI v3 Combobox.",
+  "license": "MIT",
+  "sideEffects": false,
   "main": "./index.js",
+  "module": "./index.mjs",
   "types": "./index.d.ts",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "import": "./index.mjs",
-      "require": "./index.js"
+      "require": "./index.js",
+      "default": "./index.mjs"
     }
-  }
+  },
+  "peerDependencies": {
+    "@chakra-ui/react": ">=3.31.0 <4",
+    "@emotion/react": ">=11",
+    "react": "18.x || 19.x",
+    "react-dom": "18.x || 19.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redesignhealth/rh-design-system",
+    "directory": "libs/forgekit/chakra-react-select"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "chakra-ui",
+    "combobox",
+    "react",
+    "select",
+    "typescript"
+  ]
 }
