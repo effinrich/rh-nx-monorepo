@@ -1,5 +1,12 @@
 import { Spinner } from '../spinner'
 
 export function SpeedSpinner() {
-  return <Spinner color="blue.500" emptyColor="gray.200" speed="0.8s" />
+  return (
+    <Spinner
+      animationDuration="0.8s"
+      borderBottomColor="gray.200"
+      borderInlineStartColor="gray.200"
+      color="blue.500"
+    />
+  )
 }

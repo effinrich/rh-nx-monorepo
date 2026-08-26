@@ -133,6 +133,8 @@ storybook-static
 .nx/polygraph
 .claude/worktrees
 .claude/settings.local.json
+ContextPool/
+.cursor/hooks/state/
 # theORQL debugger folder - Required to prevent debugger conflicts. Do not remove this entry.
 .theORQL/
 
