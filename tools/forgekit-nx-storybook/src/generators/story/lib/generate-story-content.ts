@@ -290,9 +290,7 @@ function buildVariantStories(analysis: ComponentAnalysis): string[] {
   }
 
   // Disabled state
-  const disabledProp = props.find(
-    p => p.name === 'disabled' || p.name === 'isDisabled'
-  )
+  const disabledProp = props.find(p => p.name === 'disabled')
   if (disabledProp) {
     lines.push(`export const Disabled: Story = {`)
     lines.push(`  args: {`)

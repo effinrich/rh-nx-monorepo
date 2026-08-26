@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { MdMoreHoriz } from 'react-icons/md'
 import { Link as RouterLink } from 'react-router-dom'
-import { MenuRoot, MenuTrigger, MenuItem, MenuContent } from '@chakra-ui/react'
 import { useCurrentUserQuery } from '@redesignhealth/third-party-network/features/authentication'
 import {
   AvatarRoot,
@@ -14,6 +13,11 @@ import {
   IconButton,
   Link,
   ListRoot,
+  MenuContent,
+  MenuItem,
+  MenuPositioner,
+  MenuRoot,
+  MenuTrigger,
   TagRoot,
   TagLabel,
   Text,
@@ -72,11 +76,10 @@ export const AdvisorCard = memo(
             <AvatarRoot
               bg="gray.100"
               color="gray.500"
-              name={name}
               height="40px"
               width="40px"
             >
-              <AvatarFallback />
+              <AvatarFallback name={name} />
             </AvatarRoot>
             <Flex align="center" gap="10px">
               <Text
@@ -102,20 +105,24 @@ export const AdvisorCard = memo(
                 <MdMoreHoriz fontSize="24px" />
               </IconButton>
             </MenuTrigger>
-            <MenuContent>
-              <MenuItem value="see-bio" asChild>
-                <RouterLink to={`/${advisorId}`}>See bio</RouterLink>
-              </MenuItem>
-              <MenuItem value="request-intro" onClick={onOpen}>Request introduction</MenuItem>
-              <MenuItem value="request-contract" asChild>
-                <a
-                  href={`https://5inxi4pt259.typeform.com/to/dIAXUaDn#${contractRequestParams}`}
-                  target="_blank"
-                >
-                  Request contract
-                </a>
-              </MenuItem>
-            </MenuContent>
+            <MenuPositioner>
+              <MenuContent>
+                <MenuItem value="see-bio" asChild>
+                  <RouterLink to={`/${advisorId}`}>See bio</RouterLink>
+                </MenuItem>
+                <MenuItem value="request-intro" onClick={onOpen}>
+                  Request introduction
+                </MenuItem>
+                <MenuItem value="request-contract" asChild>
+                  <a
+                    href={`https://5inxi4pt259.typeform.com/to/dIAXUaDn#${contractRequestParams}`}
+                    target="_blank"
+                  >
+                    Request contract
+                  </a>
+                </MenuItem>
+              </MenuContent>
+            </MenuPositioner>
           </MenuRoot>
         </CardHeader>
         <CardBody py="16px" pl="77px">

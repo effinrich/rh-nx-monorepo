@@ -65,10 +65,10 @@ const CeoProfileHeader = ({
       )
     }
     leftAddon={
-      <AvatarRoot name={name}>
+      <AvatarRoot>
         {/* @ts-expect-error Chakra v3 compound component typing */}
         <AvatarImage src={pictureHref} />
-        <AvatarFallback />
+        <AvatarFallback name={name} />
       </AvatarRoot>
     }
     // avatarName={name}

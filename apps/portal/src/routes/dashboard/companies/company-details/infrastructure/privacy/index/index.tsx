@@ -586,7 +586,13 @@ export const CompanyInfraPrivacy = () => {
                     borderColor: 'primary.600'
                   }}
                 >
-                  {value}
+                  <CheckboxHiddenInput />
+                  {/* @ts-expect-error Chakra v3 children typing */}
+                  <CheckboxControl>
+                    <CheckboxIndicator />
+                  </CheckboxControl>
+                  {/* @ts-expect-error Chakra v3 children typing */}
+                  <CheckboxLabel>{value}</CheckboxLabel>
                 </CheckboxRoot>
               ))}
             </Stack>

@@ -10,6 +10,7 @@ import {
   CheckboxControl,
   CheckboxGroup,
   CheckboxHiddenInput,
+  CheckboxIndicator,
   CheckboxLabel,
   CheckboxRoot,
   HStack,
@@ -282,15 +283,20 @@ export const CeoForm = ({ apiError, isEdit = false, user }: CeoFormProps) => {
               clientErrors={clientErrors}
             >
               <CheckboxGroup
-                onChange={newValues => onChange(newValues as string[])}
-                value={value}
-                colorPalette="primary"
+                onValueChange={({ value }) => onChange(value)}
+                value={value ?? []}
               >
                 <Stack gap={4}>
                   {customerSegment.map(type => (
-                    <CheckboxRoot key={type.value} value={type.value}>
+                    <CheckboxRoot
+                      key={type.value}
+                      value={type.value}
+                      colorPalette="primary"
+                    >
                       <CheckboxHiddenInput />
-                      <CheckboxControl />
+                      <CheckboxControl>
+                        <CheckboxIndicator />
+                      </CheckboxControl>
                       <CheckboxLabel>{type.label}</CheckboxLabel>
                     </CheckboxRoot>
                   ))}

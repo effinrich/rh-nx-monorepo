@@ -89,7 +89,7 @@ export default async function storyGenerator(
   if (analysis.props.some((p) => p.name === 'colorPalette' && p.unionValues?.length)) {
     storiesGenerated.push('ColorPalettes');
   }
-  if (analysis.props.some((p) => p.name === 'disabled' || p.name === 'isDisabled')) {
+  if (analysis.props.some((p) => p.name === 'disabled')) {
     storiesGenerated.push('Disabled');
   }
   if (!skipInteractionTests) {

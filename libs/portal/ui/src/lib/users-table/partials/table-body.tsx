@@ -42,15 +42,10 @@ const TableBody = ({
         <TableRow key={user.email}>
           <TableCell>
             <Flex gap="12px">
-              <AvatarRoot
-                name={user.name}
-                boxSize="10"
-                bg="primary.200"
-                color="gray.500"
-              >
+              <AvatarRoot boxSize="10" bg="primary.200" color="gray.500">
                 {/* @ts-expect-error Chakra v3 compound component typing */}
                 <AvatarImage src={user.pictureSrc} />
-                <AvatarFallback />
+                <AvatarFallback name={user.name} />
               </AvatarRoot>
               <Box whiteSpace="normal">
                 <Text color="gray.900">{user.name}</Text>

@@ -1,14 +1,14 @@
 import { MdOutlineInfo } from 'react-icons/md'
 import {
-  PopoverRoot,
+  Box,
   PopoverAnchor,
   PopoverBody,
   PopoverContent,
   PopoverHeader,
   PopoverPositioner,
+  PopoverRoot,
   PopoverTrigger
-} from '@chakra-ui/react'
-import { Box } from '@redesignhealth/ui'
+} from '@redesignhealth/ui'
 
 interface AdvisorBioProps {
   bio?: string

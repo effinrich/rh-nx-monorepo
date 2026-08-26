@@ -12,12 +12,12 @@ export interface DrawerFormItemProps {
   error?: string
   children: JSX.Element
   helperText?: string
-  isInvalid?: boolean
+  invalid?: boolean
 }
 
 export const DrawerFormItem = (props: DrawerFormItemProps) => {
   return (
-    <FieldRoot variant="flex-grid" invalid={props.isInvalid}>
+    <FieldRoot invalid={props.invalid}>
       <DrawerFormHeader as={FieldLabel}>{props.label}</DrawerFormHeader>
       {props.children}
       {/* @ts-expect-error Chakra v3 children typing */}

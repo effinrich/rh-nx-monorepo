@@ -84,10 +84,10 @@ export const CeoCard = ({
     <ListCard>
       <ListCardHeader
         leftAddon={
-          <AvatarRoot name={ceoName}>
+          <AvatarRoot>
             {/* @ts-expect-error Chakra v3 compound component typing */}
             <AvatarImage src={ceoPictureHref} />
-            <AvatarFallback />
+            <AvatarFallback name={ceoName} />
           </AvatarRoot>
         }
         title={

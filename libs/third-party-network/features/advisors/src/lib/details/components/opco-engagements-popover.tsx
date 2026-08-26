@@ -1,13 +1,13 @@
 import { ReactNode } from 'react'
 import {
-  PopoverRoot,
   PopoverArrow,
   PopoverBody,
   PopoverContent,
   PopoverPositioner,
-  PopoverTrigger
-} from '@chakra-ui/react'
-import { Text } from '@redesignhealth/ui'
+  PopoverRoot,
+  PopoverTrigger,
+  Text
+} from '@redesignhealth/ui'
 
 interface OpcoEngagementsPopoverProps {
   opcoName?: string

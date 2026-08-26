@@ -193,7 +193,7 @@ npx nx run shared-ui:watch-stories
 | **Union props** | `'a' \| 'b' \| 'c'` type literals | `select` control + variant stories + screenshot tests |
 | **Callback props** | `on*` naming or arrow function types | `action` argType + interaction tests |
 | **Children prop** | `children` in props interface | Content in Default story |
-| **Disabled prop** | `disabled` / `isDisabled` | Disabled story + disabled screenshot |
+| **Disabled prop** | `disabled` | Disabled story + disabled screenshot |
 
 ## Interactive CLI
 

@@ -294,6 +294,26 @@ describe('generateStoryContent', () => {
     expect(content).toContain('disabled: true')
   })
 
+  it('should not generate Disabled story for legacy isDisabled prop', () => {
+    const content = generateStoryContent(
+      makeOptions({
+        analysis: makeAnalysis({
+          props: [
+            {
+              name: 'isDisabled',
+              type: 'boolean',
+              required: false,
+              isCallback: false
+            }
+          ]
+        })
+      })
+    )
+
+    expect(content).not.toContain('export const Disabled: Story')
+    expect(content).not.toContain('isDisabled: true')
+  })
+
   it('should generate colorPalette variant stories', () => {
     const content = generateStoryContent(
       makeOptions({

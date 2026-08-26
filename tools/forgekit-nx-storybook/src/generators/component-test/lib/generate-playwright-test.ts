@@ -95,9 +95,7 @@ export function generatePlaywrightTest(options: PlaywrightTestOptions): string {
   }
 
   // --- Disabled state ---
-  const disabledProp = props.find(
-    (p) => p.name === 'disabled' || p.name === 'isDisabled'
-  );
+  const disabledProp = props.find((p) => p.name === 'disabled');
   if (disabledProp) {
     lines.push(`  test('renders disabled state correctly', async ({ mount }) => {`);
     lines.push(`    const component = await mount(`);

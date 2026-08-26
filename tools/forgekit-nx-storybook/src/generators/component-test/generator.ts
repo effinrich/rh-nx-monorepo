@@ -104,7 +104,7 @@ export default async function componentTestGenerator(
       'mounts and renders',
       'matches screenshot',
       ...(analysis.props.some((p) => p.isCallback) ? ['handles interactions'] : []),
-      ...(analysis.props.some((p) => p.name === 'disabled' || p.name === 'isDisabled')
+      ...(analysis.props.some((p) => p.name === 'disabled')
         ? ['disabled state']
         : []),
       'meets a11y standards',

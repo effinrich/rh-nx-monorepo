@@ -1,14 +1,16 @@
 import { MdInfoOutline, MdOutlineClose } from 'react-icons/md'
 import {
-  PopoverRoot,
-  PopoverTrigger,
-  PopoverPositioner,
+  Flex,
+  IconButton,
+  PopoverBody,
+  PopoverCloseTrigger,
   PopoverContent,
   PopoverHeader,
-  PopoverBody,
-  PopoverCloseTrigger
-} from '@chakra-ui/react'
-import { Flex, IconButton, Text } from '@redesignhealth/ui'
+  PopoverPositioner,
+  PopoverRoot,
+  PopoverTrigger,
+  Text
+} from '@redesignhealth/ui'
 
 interface GroupPopoverProps {
   description?: string

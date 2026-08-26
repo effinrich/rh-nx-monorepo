@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 import {
   Box,
-  Card,
   CardBody,
   CardHeader,
+  CardRoot,
   Heading,
   Text
 } from '@redesignhealth/ui'
@@ -36,7 +36,7 @@ export const Signin = () => {
 
   return (
     <Box mt={24} mx="auto" maxW="950px">
-      <Card variant="elevated">
+      <CardRoot variant="elevated">
         <CardHeader pb={0}>
           <Heading size="sm">Sign In</Heading>
         </CardHeader>
@@ -62,7 +62,7 @@ export const Signin = () => {
             </Text>
           )}
         </CardBody>
-      </Card>
+      </CardRoot>
     </Box>
   )
 }

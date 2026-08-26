@@ -21,7 +21,7 @@ interface FormItemProps {
   serviceName: string
   learnMoreItems?: DrawerFormAccordionProps['listItems']
   error?: string
-  isReadOnly?: boolean
+  readOnly?: boolean
   radioDefaultValue?: string
   commentDefaultValue?: string
 }
@@ -30,7 +30,7 @@ export const FormItem = ({
   error,
   serviceName,
   categoryName,
-  isReadOnly,
+  readOnly,
   radioDefaultValue,
   commentDefaultValue,
   learnMoreItems
@@ -51,7 +51,7 @@ export const FormItem = ({
           <DrawerFormRadioGroup
             name={getInputName(categoryName, serviceName)}
             options={[{ value: 'Yes' }, { value: 'No' }]}
-            readOnly={isReadOnly}
+            readOnly={readOnly}
             defaultValue={radioDefaultValue}
           />
         </Box>
@@ -65,7 +65,7 @@ export const FormItem = ({
           aria-label="If you answered no to the previous question, please provide an alternative service the company will use."
           placeholder="Enter an alternative service if your response was “No”"
           defaultValue={commentDefaultValue}
-          readOnly={isReadOnly}
+          readOnly={readOnly}
           mt="6px"
         />
       </FieldRoot>

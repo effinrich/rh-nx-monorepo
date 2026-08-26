@@ -130,8 +130,8 @@ export const FeedbackModal = forwardRef(
                     control={control}
                     render={({ field }) => (
                       <RadioGroupRoot
-                        onChange={field.onChange}
-                        value={field.value}
+                        onValueChange={({ value }) => field.onChange(value)}
+                        value={field.value ?? ''}
                         name={field.name}
                         ref={field.ref}
                         as={Flex}

@@ -93,6 +93,26 @@ describe('generatePlaywrightTest', () => {
     expect(result).toContain('button-disabled.png');
   });
 
+  it('should not generate disabled state test for legacy isDisabled prop', () => {
+    const analysis: ComponentAnalysis = {
+      ...baseAnalysis,
+      props: [
+        ...baseAnalysis.props,
+        { name: 'isDisabled', type: 'boolean', required: false, isCallback: false },
+      ],
+    };
+
+    const result = generatePlaywrightTest({
+      analysis,
+      importPath: './button',
+      hasStories: false,
+    });
+
+    expect(result).not.toContain('renders disabled state correctly');
+    expect(result).not.toContain('isDisabled={true}');
+    expect(result).not.toContain('button-disabled.png');
+  });
+
   it('should include story-driven tests when stories exist', () => {
     const result = generatePlaywrightTest({
       analysis: baseAnalysis,
