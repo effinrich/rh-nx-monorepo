@@ -3,7 +3,7 @@ import type {
   NotificationCenterItem,
   UseNotificationCenter
 } from 'react-toastify/addons/use-notification-center'
-import { Button } from '@chakra-ui/react'
+import { Button } from '@redesignhealth/ui'
 import styled from '@emotion/styled'
 
 import { PulsatingDot } from './pulsing-dot'
@@ -16,10 +16,8 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
-interface Props extends Pick<
-  UseNotificationCenter<object>,
-  'markAsRead' | 'remove'
-> {
+interface Props
+  extends Pick<UseNotificationCenter<object>, 'markAsRead' | 'remove'> {
   notification: NotificationCenterItem
 }
 

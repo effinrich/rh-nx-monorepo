@@ -21,6 +21,7 @@ import {
   Loader,
   MenuContent,
   MenuItem,
+  MenuPositioner,
   MenuRoot,
   MenuTrigger,
   Text
@@ -173,14 +174,16 @@ const ResearchSprints = () => {
                 <ChevronDownIcon />
               </Button>
             </MenuTrigger>
-            <MenuContent>
-              <MenuItem value="asc" onClick={() => setSortOrder('asc')}>
-                Most recent
-              </MenuItem>
-              <MenuItem value="desc" onClick={() => setSortOrder('desc')}>
-                Oldest
-              </MenuItem>
-            </MenuContent>
+            <MenuPositioner>
+              <MenuContent>
+                <MenuItem value="asc" onClick={() => setSortOrder('asc')}>
+                  Most recent
+                </MenuItem>
+                <MenuItem value="desc" onClick={() => setSortOrder('desc')}>
+                  Oldest
+                </MenuItem>
+              </MenuContent>
+            </MenuPositioner>
           </MenuRoot>
         </Flex>
       </Flex>

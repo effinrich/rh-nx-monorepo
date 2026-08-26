@@ -1,4 +1,4 @@
-import { Box, Container, Spinner } from '@chakra-ui/react'
+import { Box, Container, Spinner } from '@redesignhealth/ui'
 
 export const FullScreenLoader = () => (
   <Container h="95vh">

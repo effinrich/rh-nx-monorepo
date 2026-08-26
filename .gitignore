@@ -140,3 +140,4 @@ storybook-static
 .omc-cache/
 .omc-workspace/
 .omc
+vite.config.*.timestamp*

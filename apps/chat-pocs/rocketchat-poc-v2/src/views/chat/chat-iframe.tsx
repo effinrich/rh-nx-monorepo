@@ -1,4 +1,4 @@
-import { AspectRatio } from '@chakra-ui/react'
+import { AspectRatio } from '@redesignhealth/ui'
 
 // // const GOOGLE_CLIENT_ID = process.env.NX_GOOGLE_CLIENT_ID
 // const GOOGLE_CLIENT_ID =

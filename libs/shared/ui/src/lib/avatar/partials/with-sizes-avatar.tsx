@@ -1,6 +1,11 @@
 import { Stack } from '@chakra-ui/react'
 
-import { AvatarBadge, AvatarFallback, AvatarImage, AvatarRoot } from '../avatar'
+import {
+  AvatarFallback,
+  AvatarImage,
+  AvatarIndicator,
+  AvatarRoot
+} from '../avatar'
 
 export function WithSizesAvatar() {
   return (
@@ -10,7 +15,7 @@ export function WithSizesAvatar() {
           {/* @ts-expect-error Chakra v3 compound component typing */}
           <AvatarImage src="https://uinames.com/api/photos/female/18.jpg" />
           <AvatarFallback name="Uchiha Itachi" />
-          <AvatarBadge boxSize="1.25em" bg="green.500" />
+          <AvatarIndicator boxSize="1.25em" bg="green.500" />
         </AvatarRoot>
       ))}
     </Stack>

@@ -1,6 +1,11 @@
 import { render, testA11y } from '@redesignhealth/shared-utils-jest'
 
-import { AvatarBadge, AvatarFallback, AvatarImage, AvatarRoot } from './avatar'
+import {
+  AvatarIndicator,
+  AvatarFallback,
+  AvatarImage,
+  AvatarRoot
+} from './avatar'
 
 describe('accessibility', () => {
   test('passes a11y test', async () => {
@@ -18,11 +23,11 @@ describe('accessibility', () => {
     )
   })
 
-  test('passes a11y test with AvatarBadge', async () => {
+  test('passes a11y test with AvatarIndicator', async () => {
     await testA11y(
       <AvatarRoot>
         <AvatarFallback />
-        <AvatarBadge />
+        <AvatarIndicator />
       </AvatarRoot>,
       {
         axeOptions: {

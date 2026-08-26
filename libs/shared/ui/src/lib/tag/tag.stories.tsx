@@ -1,9 +1,21 @@
 import { MdSettings } from 'react-icons/md'
 import { chakra } from '@chakra-ui/react'
 
-import { AddIcon, Avatar, HStack } from '../../index'
+import {
+  AddIcon,
+  AvatarFallback,
+  AvatarImage,
+  AvatarRoot,
+  HStack
+} from '../../index'
 
-import { TagRoot, TagCloseTrigger, TagLabel, TagStartElement, TagEndElement } from './tag'
+import {
+  TagRoot,
+  TagCloseTrigger,
+  TagLabel,
+  TagStartElement,
+  TagEndElement
+} from './tag'
 
 export default {
   component: TagRoot,
@@ -45,7 +57,11 @@ export default {
 }
 
 export const Basic = {
-  render: (args: any) => <TagRoot {...args}><TagLabel>Gray</TagLabel></TagRoot>
+  render: (args: any) => (
+    <TagRoot {...args}>
+      <TagLabel>Gray</TagLabel>
+    </TagRoot>
+  )
 }
 
 export const WithSizes = {
@@ -89,7 +105,9 @@ export const ColorSchemes = {
 export const WithLeftIcon = {
   render: (args: any) => (
     <TagRoot colorPalette="cyan" {...args}>
-      <TagStartElement><AddIcon w="12px" h="12px" /></TagStartElement>
+      <TagStartElement>
+        <AddIcon w="12px" h="12px" />
+      </TagStartElement>
       <TagLabel>Cyan</TagLabel>
     </TagRoot>
   )
@@ -100,12 +118,16 @@ export const WithRightIcon = {
     <HStack gap="3">
       <TagRoot colorPalette="cyan" {...args}>
         <TagLabel>Cyan</TagLabel>
-        <TagEndElement><AddIcon w="12px" h="12px" /></TagEndElement>
+        <TagEndElement>
+          <AddIcon w="12px" h="12px" />
+        </TagEndElement>
       </TagRoot>
 
       <TagRoot variant="solid" colorPalette="teal" {...args}>
         <TagLabel>Teal</TagLabel>
-        <TagEndElement><MdSettings /></TagEndElement>
+        <TagEndElement>
+          <MdSettings />
+        </TagEndElement>
       </TagRoot>
     </HStack>
   )
@@ -135,13 +157,10 @@ export const WithCloseButton = {
 export const WithCustomElement = {
   render: (args: any) => (
     <TagRoot size="lg" colorPalette="red" borderRadius="full" {...args}>
-      <Avatar
-        src="https://bit.ly/dan-abramov"
-        size="xs"
-        name="Dan Abramov"
-        marginLeft={-1}
-        marginRight={2}
-      />
+      <AvatarRoot size="xs" marginLeft={-1} marginRight={2}>
+        <AvatarImage src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+        <AvatarFallback name="Dan Abramov" />
+      </AvatarRoot>
       <TagLabel>Segun</TagLabel>
       <TagCloseTrigger />
     </TagRoot>

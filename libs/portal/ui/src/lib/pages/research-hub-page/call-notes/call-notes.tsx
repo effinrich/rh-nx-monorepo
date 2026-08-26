@@ -25,6 +25,7 @@ import {
   Loader,
   MenuContent,
   MenuItem,
+  MenuPositioner,
   MenuRoot,
   MenuTrigger,
   Text
@@ -189,14 +190,16 @@ const CallNotes = () => {
                 <ChevronDownIcon />
               </Button>
             </MenuTrigger>
-            <MenuContent>
-              <MenuItem value="desc" onClick={() => setSortOrder('desc')}>
-                Most recent
-              </MenuItem>
-              <MenuItem value="asc" onClick={() => setSortOrder('asc')}>
-                Oldest
-              </MenuItem>
-            </MenuContent>
+            <MenuPositioner>
+              <MenuContent>
+                <MenuItem value="desc" onClick={() => setSortOrder('desc')}>
+                  Most recent
+                </MenuItem>
+                <MenuItem value="asc" onClick={() => setSortOrder('asc')}>
+                  Oldest
+                </MenuItem>
+              </MenuContent>
+            </MenuPositioner>
           </MenuRoot>
         </Flex>
       </Flex>

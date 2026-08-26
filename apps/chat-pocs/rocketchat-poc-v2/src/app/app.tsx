@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Button } from '@chakra-ui/react'
+import { Button } from '@redesignhealth/ui'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 
 import FullScreenLoader from '../components/fullscreen-loader'

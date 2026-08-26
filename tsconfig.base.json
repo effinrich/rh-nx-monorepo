@@ -90,7 +90,10 @@
       "@redesignhealth/third-party-network/utils": [
         "libs/third-party-network/utils/src/index.ts"
       ],
-      "@redesignhealth/ui": ["libs/shared/ui/src/index.ts"]
+      "@redesignhealth/ui": ["libs/shared/ui/src/index.ts"],
+      "forgekit-chakra-react-select": [
+        "libs/forgekit/chakra-react-select/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

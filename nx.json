@@ -45,6 +45,11 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
+    },
+    "@nx/vite:build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "generators": {
@@ -153,5 +158,10 @@
       "!{projectRoot}/src/test-setup.[jt]s"
     ]
   },
-  "nxCloudAccessToken": "NmE4NGJkYjAtZGYyNS00NzgyLWIzZTEtYjYxOGZiMjIxMWQyfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "NmE4NGJkYjAtZGYyNS00NzgyLWIzZTEtYjYxOGZiMjIxMWQyfHJlYWQtd3JpdGU=",
+  "release": {
+    "version": {
+      "preVersionCommand": "npx nx run-many -t build"
+    }
+  }
 }

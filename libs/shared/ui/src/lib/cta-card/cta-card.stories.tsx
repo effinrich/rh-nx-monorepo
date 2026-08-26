@@ -12,7 +12,8 @@ import {
   MenuRoot,
   MenuTrigger,
   MenuItem,
-  MenuContent
+  MenuContent,
+  MenuPositioner
 } from '../../index'
 
 import { CtaCard } from './cta-card'
@@ -160,10 +161,12 @@ export const WithCustonCta: StoryObj<typeof CtaCard> = {
               <Icon as={MdExpandMore} />
             </Button>
           </MenuTrigger>
-          <MenuContent>
-            <MenuItem value="option1">Option 1</MenuItem>
-            <MenuItem value="option2">Option 2</MenuItem>
-          </MenuContent>
+          <MenuPositioner>
+            <MenuContent>
+              <MenuItem value="option1">Option 1</MenuItem>
+              <MenuItem value="option2">Option 2</MenuItem>
+            </MenuContent>
+          </MenuPositioner>
         </MenuRoot>
       }
       boxShadow="sm"
