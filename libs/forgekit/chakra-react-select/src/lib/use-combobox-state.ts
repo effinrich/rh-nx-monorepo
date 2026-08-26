@@ -1,4 +1,4 @@
-import { createListCollection } from '@chakra-ui/react'
+import { useListCollection } from '@chakra-ui/react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import type {
@@ -199,20 +199,22 @@ export function useComboboxState<Option>({
     retryToken
   ])
 
-  const sourceItems = source.kind === 'local' ? source.items : asyncItems
+  const localItems = source.kind === 'local' ? source.items : null
+  const localFilter = source.kind === 'local' ? source.filter : undefined
+  const sourceItems = localItems ?? asyncItems
 
   const filteredItems = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase()
-    if (source.kind === 'async' || normalizedQuery.length === 0) {
+    if (!localItems || normalizedQuery.length === 0) {
       return [...sourceItems]
     }
 
     return sourceItems.filter(option =>
-      source.filter
-        ? source.filter(option, query)
+      localFilter
+        ? localFilter(option, query)
         : getOptionLabel(option).toLocaleLowerCase().includes(normalizedQuery)
     )
-  }, [getOptionLabel, query, source, sourceItems])
+  }, [getOptionLabel, localFilter, localItems, query, sourceItems])
 
   const visibleCreatedItems = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase()
@@ -272,16 +274,16 @@ export function useComboboxState<Option>({
     [getOptionValue, selectedItems, visibleItems]
   )
 
-  const collection = useMemo(
-    () =>
-      createListCollection({
-        items: collectionItems,
-        itemToString: getOptionLabel,
-        itemToValue: getOptionValue,
-        isItemDisabled: isOptionDisabled
-      }),
-    [collectionItems, getOptionLabel, getOptionValue, isOptionDisabled]
-  )
+  const { collection, set: setCollectionItems } = useListCollection({
+    initialItems: collectionItems,
+    itemToString: getOptionLabel,
+    itemToValue: getOptionValue,
+    isItemDisabled: isOptionDisabled
+  })
+
+  useEffect(() => {
+    setCollectionItems(collectionItems)
+  }, [collectionItems, setCollectionItems])
 
   const itemByValue = useMemo(
     () =>

@@ -7,6 +7,9 @@ import {
 } from '@chakra-ui/react'
 import {
   forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
   useState,
   type ForwardedRef,
   type ReactElement,
@@ -79,15 +82,29 @@ function SingleComboboxImplementation<Option>(
     getOptionLabel: getOptionLabelProp,
     getOptionValue: getOptionValueProp
   })
+  const selectedItems = useMemo(
+    () => (selectedOption ? [selectedOption] : []),
+    [selectedOption]
+  )
   const state = useComboboxState({
     source,
-    selectedItems: selectedOption ? [selectedOption] : [],
+    selectedItems,
     getOptionLabel,
     getOptionValue,
     isOptionDisabled,
     creatable
   })
   const isLoading = loadingProp || state.loading
+  const selectedValueKey = selectedOption
+    ? getOptionValue(selectedOption)
+    : null
+  const previousSelectedValueKey = useRef<string | null>(null)
+
+  useEffect(() => {
+    if (selectedValueKey === previousSelectedValueKey.current) return
+    previousSelectedValueKey.current = selectedValueKey
+    state.setQuery(selectedOption ? getOptionLabel(selectedOption) : '')
+  }, [getOptionLabel, selectedOption, selectedValueKey, state])
 
   const updateValue = (nextValue: Option | null) => {
     if (value === undefined) setUncontrolledValue(nextValue)
@@ -142,19 +159,31 @@ function SingleComboboxImplementation<Option>(
       colorPalette={colorPalette}
       disabled={disabled}
       ids={id ? { input: id } : undefined}
-      inputBehavior="autohighlight"
       invalid={invalid}
-      onInputValueChange={(details: unknown) =>
-        state.setQuery((details as { inputValue: string }).inputValue)
-      }
+      name={name}
+      onInputValueChange={(details: unknown) => {
+        const inputDetails = details as {
+          inputValue: string
+          reason?: string
+        }
+        if (
+          !inputDetails.reason ||
+          inputDetails.reason === 'input-change' ||
+          inputDetails.reason === 'clear-trigger'
+        ) {
+          state.setQuery(inputDetails.inputValue)
+        }
+      }}
       onInteractOutside={() => onBlur?.()}
       onValueChange={(details: unknown) => {
         const nextValue =
           state.resolveValues((details as { value: string[] }).value)[0] ?? null
         state.commitCreatedOption(nextValue)
+        state.setQuery(nextValue ? getOptionLabel(nextValue) : '')
         updateValue(nextValue)
       }}
       openOnClick={openOnClick}
+      placeholder={placeholder}
       positioning={positioning}
       readOnly={readOnly}
       required={required}
@@ -167,8 +196,6 @@ function SingleComboboxImplementation<Option>(
         <ChakraCombobox.Input
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledBy}
-          name={name}
-          placeholder={placeholder}
           ref={ref}
         />
         <ChakraCombobox.IndicatorGroup>

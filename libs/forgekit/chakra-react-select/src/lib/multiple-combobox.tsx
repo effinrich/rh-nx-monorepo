@@ -143,12 +143,22 @@ function MultipleComboboxImplementation<Option>(
       colorPalette={colorPalette}
       disabled={disabled}
       ids={id ? { input: id } : undefined}
-      inputBehavior="autohighlight"
       invalid={invalid}
       multiple
-      onInputValueChange={(details: unknown) =>
-        state.setQuery((details as { inputValue: string }).inputValue)
-      }
+      name={name}
+      onInputValueChange={(details: unknown) => {
+        const inputDetails = details as {
+          inputValue: string
+          reason?: string
+        }
+        if (
+          !inputDetails.reason ||
+          inputDetails.reason === 'input-change' ||
+          inputDetails.reason === 'clear-trigger'
+        ) {
+          state.setQuery(inputDetails.inputValue)
+        }
+      }}
       onInteractOutside={() => onBlur?.()}
       onValueChange={(details: unknown) => {
         const nextValue = state.resolveValues(
@@ -157,9 +167,11 @@ function MultipleComboboxImplementation<Option>(
         state.commitCreatedOption(
           nextValue.find(option => option === state.createCandidate) ?? null
         )
+        state.setQuery('')
         updateValue(nextValue)
       }}
       openOnClick={openOnClick}
+      placeholder={placeholder}
       positioning={positioning}
       readOnly={readOnly}
       required={required}
@@ -194,8 +206,6 @@ function MultipleComboboxImplementation<Option>(
         <ChakraCombobox.Input
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledBy}
-          name={name}
-          placeholder={placeholder}
           ref={ref}
         />
         <ChakraCombobox.IndicatorGroup>

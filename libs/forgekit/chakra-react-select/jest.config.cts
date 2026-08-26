@@ -6,5 +6,7 @@ module.exports = {
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/react/babel'] }]
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  setupFilesAfterEnv: ['../../../jest.setup.js', '<rootDir>/src/test-setup.ts'],
+  testEnvironment: 'jsdom',
   coverageDirectory: '../../../coverage/libs/forgekit/chakra-react-select'
 }
