@@ -12,6 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Mark workspace as safe for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -20,4 +23,23 @@ jobs:
         run: npm ci
 
       - name: Run shared-ui tests
-        run: npx nx run shared-ui:test-storybook
+        shell: bash
+        run: |
+          npx nx run shared-ui:static:storybook --port=4400 &
+          storybook_pid=$!
+          trap 'kill "$storybook_pid"' EXIT
+
+          for attempt in {1..60}; do
+            if curl --fail --silent http://127.0.0.1:4400 > /dev/null; then
+              break
+            fi
+
+            if [ "$attempt" -eq 60 ]; then
+              echo "Storybook did not become ready on port 4400"
+              exit 1
+            fi
+
+            sleep 1
+          done
+
+          npx nx run shared-ui:test:storybook --coverage --url http://127.0.0.1:4400
