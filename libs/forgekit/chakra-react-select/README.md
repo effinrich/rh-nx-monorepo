@@ -183,7 +183,7 @@ npm exec -- nx run forgekit-chakra-react-select:check-types
 npm exec -- nx run forgekit-chakra-react-select:test
 npm exec -- nx run forgekit-chakra-react-select:lint
 npm exec -- nx run forgekit-chakra-react-select:build
-npm exec -- nx run forgekit-chakra-react-select:build-storybook
+npm exec -- nx run forgekit-chakra-react-select:build:storybook
 ```
 
 Nx release metadata is configured in `project.json`; publishing uses the built manifest under `dist/libs/forgekit/chakra-react-select`.
