@@ -143,7 +143,7 @@
     "@emotion/babel-plugin": "11.13.5",
     "@expo/cli": "^56.1.11",
     "@expo/metro-runtime": "6.1.2",
-    "@faker-js/faker": "^8.4.1",
+    "@faker-js/faker": "^10.5.0",
     "@hookform/devtools": "^4.2.0",
     "@ns3/nx-playwright": "4.2.0",
     "@nx-tools/container-metadata": "^7.2.3",
